@@ -1,0 +1,4 @@
+/opt/clion-2021.3.4/bin/cmake/linux/bin/cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_MAKE_PROGRAM=/opt/clion-2021.3.4/bin/ninja/linux/ninja -G Ninja /home/gogpeep/Dune
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/gogpeep/Dune/cmake-build-debug

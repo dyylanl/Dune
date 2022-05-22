@@ -35,7 +35,7 @@ add_executable(dune ${client_src} Common/includes/Exceptions/ClosedSocketExcepti
 target_link_libraries(dune dune-common SDL2 SDL2_image SDL2_ttf SDL2_mixer)
 
 # Server
-add_executable(dune-server ${server_src} Common/src/Exceptions/Exception.cpp Server/src/main.cpp Server/includes/Server.h)
+add_executable(dune-server ${server_src} Common/src/Exceptions/Exception.cpp Server/src/main.cpp Server/src/Control/Server.cpp Server/includes/Control/Server.h Server/includes/Control/Accepter.h Server/src/Control/Accepter.cpp Server/includes/Control/ClientLogin.h Server/src/Control/ClientLogin.cpp)
 target_link_libraries(dune-server dune-common)
 #------------------------------------------------------------------------------
 
