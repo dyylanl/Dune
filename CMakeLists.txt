@@ -31,11 +31,11 @@ FILE(GLOB_RECURSE server_src "Server/*.cpp")
 add_library(dune-common SHARED ${common_src} Common/includes/Thread.h Common/src/Thread.cpp Common/includes/Socket/Socket.h Common/includes/Exceptions/Exception.h Common/includes/Exceptions/ClosedSocketException.h Common/includes/Exceptions/LoginException.h Common/includes/Socket/SocketWrapper.h Common/src/Socket/SocketWrapper.cpp Common/src/Exceptions/Exception.cpp Common/src/Socket/Socket.cpp)
 
 # Client
-add_executable(dune ${client_src} Common/includes/Exceptions/ClosedSocketException.h Client/src/main.cpp)
+add_executable(dune ${client_src} Common/includes/Exceptions/ClosedSocketException.h Client/src/main.cpp Client/includes/Client.h Client/includes/SDL/Window.h Client/src/SDL/Window.cpp)
 target_link_libraries(dune dune-common SDL2 SDL2_image SDL2_ttf SDL2_mixer)
 
 # Server
-add_executable(dune-server ${server_src} Common/src/Exceptions/Exception.cpp Server/src/main.cpp)
+add_executable(dune-server ${server_src} Common/src/Exceptions/Exception.cpp Server/src/main.cpp Server/includes/Server.h)
 target_link_libraries(dune-server dune-common)
 #------------------------------------------------------------------------------
 

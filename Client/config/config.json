@@ -1,0 +1,8 @@
+{
+  "fps": 30,
+  "window": {
+    "fullscreen": true,
+    "w": 960,
+    "h": 540
+  }
+}
