@@ -1,32 +1,20 @@
-# Prerequisites
-*.d
 
-# Compiled Object files
-*.slo
-*.lo
+*
+!/**/
+!*.*
+
 *.o
-*.obj
-
-# Precompiled Headers
-*.gch
-*.pch
-
-# Compiled Dynamic libraries
-*.so
-*.dylib
-*.dll
-
-# Fortran module files
-*.mod
-*.smod
-
-# Compiled Static libraries
-*.lai
-*.la
-*.a
-*.lib
-
-# Executables
 *.exe
-*.out
-*.app
+*.cfg
+
+.vs
+.vscode
+.idea
+build
+
+cpplint.py
+execute.sh
+filter_options
+
+!convenciones.txt
+!CMakeLists.txt

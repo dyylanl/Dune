@@ -1,0 +1,11 @@
+# ninja log v5
+0	89	1653252030585455969	CMakeFiles/dune-common.dir/Common/src/Exceptions/Exception.cpp.o	4e2bbe46ee1cfe84
+1	318	1653252030813459933	CMakeFiles/dune.dir/Client/src/main.cpp.o	3cfeba1cfbd66db
+0	338	1653252030833460281	CMakeFiles/dune-common.dir/Common/src/Socket/Socket.cpp.o	c1a37af88b323e0a
+0	394	1653252030889461255	CMakeFiles/dune-common.dir/Common/src/Thread.cpp.o	7b5dfbb58ab9b9ea
+1	489	1653252030985462923	CMakeFiles/dune-common.dir/Common/src/Socket/SocketWrapper.cpp.o	5e09b617d2b01c96
+489	549	1653252031045463967	libdune-common.so	988b347559e14eda
+549	611	1653252031105465010	dune	bcb936d0df853ea
+1	52	1653252035045533508	CMakeFiles/dune-server.dir/Common/src/Exceptions/Exception.cpp.o	b60c7566e1a4ce21
+1	212	1653252035205536289	CMakeFiles/dune-server.dir/Server/src/main.cpp.o	e8f21f2fa2b16b86
+212	271	1653252035265537332	dune-server	6615cf3169a617d3
