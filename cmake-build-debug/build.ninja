@@ -117,13 +117,6 @@ build CMakeFiles/dune-common.dir/Common/src/Socket/Socket.cpp.o: CXX_COMPILER__d
   OBJECT_DIR = CMakeFiles/dune-common.dir
   OBJECT_FILE_DIR = CMakeFiles/dune-common.dir/Common/src/Socket
 
-build CMakeFiles/dune-common.dir/Common/src/Socket/SocketWrapper.cpp.o: CXX_COMPILER__dune-common_Debug /home/gogpeep/Dune/Common/src/Socket/SocketWrapper.cpp || cmake_object_order_depends_target_dune-common
-  DEFINES = -Ddune_common_EXPORTS
-  DEP_FILE = CMakeFiles/dune-common.dir/Common/src/Socket/SocketWrapper.cpp.o.d
-  FLAGS = -std=c++11 -pthread -Wall -Werror -pedantic -pedantic-errors -O3 -ggdb -DDEBUG -fno-inline -g -fPIC
-  OBJECT_DIR = CMakeFiles/dune-common.dir
-  OBJECT_FILE_DIR = CMakeFiles/dune-common.dir/Common/src/Socket
-
 build CMakeFiles/dune-common.dir/Common/src/Thread.cpp.o: CXX_COMPILER__dune-common_Debug /home/gogpeep/Dune/Common/src/Thread.cpp || cmake_object_order_depends_target_dune-common
   DEFINES = -Ddune_common_EXPORTS
   DEP_FILE = CMakeFiles/dune-common.dir/Common/src/Thread.cpp.o.d
@@ -139,7 +132,7 @@ build CMakeFiles/dune-common.dir/Common/src/Thread.cpp.o: CXX_COMPILER__dune-com
 #############################################
 # Link the shared library libdune-common.so
 
-build libdune-common.so: CXX_SHARED_LIBRARY_LINKER__dune-common_Debug CMakeFiles/dune-common.dir/Common/src/Exceptions/Exception.cpp.o CMakeFiles/dune-common.dir/Common/src/Socket/Socket.cpp.o CMakeFiles/dune-common.dir/Common/src/Socket/SocketWrapper.cpp.o CMakeFiles/dune-common.dir/Common/src/Thread.cpp.o
+build libdune-common.so: CXX_SHARED_LIBRARY_LINKER__dune-common_Debug CMakeFiles/dune-common.dir/Common/src/Exceptions/Exception.cpp.o CMakeFiles/dune-common.dir/Common/src/Socket/Socket.cpp.o CMakeFiles/dune-common.dir/Common/src/Thread.cpp.o
   LANGUAGE_COMPILE_FLAGS = -std=c++11 -pthread -Wall -Werror -pedantic -pedantic-errors -O3 -ggdb -DDEBUG -fno-inline -g
   OBJECT_DIR = CMakeFiles/dune-common.dir
   POST_BUILD = :
@@ -208,23 +201,47 @@ build dune: CXX_EXECUTABLE_LINKER__dune_Debug CMakeFiles/dune.dir/Client/src/SDL
 
 build cmake_object_order_depends_target_dune-server: phony || cmake_object_order_depends_target_dune-common
 
-build CMakeFiles/dune-server.dir/Server/src/Control/Accepter.cpp.o: CXX_COMPILER__dune-server_Debug /home/gogpeep/Dune/Server/src/Control/Accepter.cpp || cmake_object_order_depends_target_dune-server
-  DEP_FILE = CMakeFiles/dune-server.dir/Server/src/Control/Accepter.cpp.o.d
-  FLAGS = -std=c++11 -pthread -Wall -Werror -pedantic -pedantic-errors -O3 -ggdb -DDEBUG -fno-inline -g
-  OBJECT_DIR = CMakeFiles/dune-server.dir
-  OBJECT_FILE_DIR = CMakeFiles/dune-server.dir/Server/src/Control
-
-build CMakeFiles/dune-server.dir/Server/src/Control/ClientLogin.cpp.o: CXX_COMPILER__dune-server_Debug /home/gogpeep/Dune/Server/src/Control/ClientLogin.cpp || cmake_object_order_depends_target_dune-server
-  DEP_FILE = CMakeFiles/dune-server.dir/Server/src/Control/ClientLogin.cpp.o.d
-  FLAGS = -std=c++11 -pthread -Wall -Werror -pedantic -pedantic-errors -O3 -ggdb -DDEBUG -fno-inline -g
-  OBJECT_DIR = CMakeFiles/dune-server.dir
-  OBJECT_FILE_DIR = CMakeFiles/dune-server.dir/Server/src/Control
-
 build CMakeFiles/dune-server.dir/Server/src/Control/Server.cpp.o: CXX_COMPILER__dune-server_Debug /home/gogpeep/Dune/Server/src/Control/Server.cpp || cmake_object_order_depends_target_dune-server
   DEP_FILE = CMakeFiles/dune-server.dir/Server/src/Control/Server.cpp.o.d
   FLAGS = -std=c++11 -pthread -Wall -Werror -pedantic -pedantic-errors -O3 -ggdb -DDEBUG -fno-inline -g
   OBJECT_DIR = CMakeFiles/dune-server.dir
   OBJECT_FILE_DIR = CMakeFiles/dune-server.dir/Server/src/Control
+
+build CMakeFiles/dune-server.dir/Server/src/Model/AStar.cpp.o: CXX_COMPILER__dune-server_Debug /home/gogpeep/Dune/Server/src/Model/AStar.cpp || cmake_object_order_depends_target_dune-server
+  DEP_FILE = CMakeFiles/dune-server.dir/Server/src/Model/AStar.cpp.o.d
+  FLAGS = -std=c++11 -pthread -Wall -Werror -pedantic -pedantic-errors -O3 -ggdb -DDEBUG -fno-inline -g
+  OBJECT_DIR = CMakeFiles/dune-server.dir
+  OBJECT_FILE_DIR = CMakeFiles/dune-server.dir/Server/src/Model
+
+build CMakeFiles/dune-server.dir/Server/src/Model/AStarNode.cpp.o: CXX_COMPILER__dune-server_Debug /home/gogpeep/Dune/Server/src/Model/AStarNode.cpp || cmake_object_order_depends_target_dune-server
+  DEP_FILE = CMakeFiles/dune-server.dir/Server/src/Model/AStarNode.cpp.o.d
+  FLAGS = -std=c++11 -pthread -Wall -Werror -pedantic -pedantic-errors -O3 -ggdb -DDEBUG -fno-inline -g
+  OBJECT_DIR = CMakeFiles/dune-server.dir
+  OBJECT_FILE_DIR = CMakeFiles/dune-server.dir/Server/src/Model
+
+build CMakeFiles/dune-server.dir/Server/src/Model/Game.cpp.o: CXX_COMPILER__dune-server_Debug /home/gogpeep/Dune/Server/src/Model/Game.cpp || cmake_object_order_depends_target_dune-server
+  DEP_FILE = CMakeFiles/dune-server.dir/Server/src/Model/Game.cpp.o.d
+  FLAGS = -std=c++11 -pthread -Wall -Werror -pedantic -pedantic-errors -O3 -ggdb -DDEBUG -fno-inline -g
+  OBJECT_DIR = CMakeFiles/dune-server.dir
+  OBJECT_FILE_DIR = CMakeFiles/dune-server.dir/Server/src/Model
+
+build CMakeFiles/dune-server.dir/Server/src/Model/Map.cpp.o: CXX_COMPILER__dune-server_Debug /home/gogpeep/Dune/Server/src/Model/Map.cpp || cmake_object_order_depends_target_dune-server
+  DEP_FILE = CMakeFiles/dune-server.dir/Server/src/Model/Map.cpp.o.d
+  FLAGS = -std=c++11 -pthread -Wall -Werror -pedantic -pedantic-errors -O3 -ggdb -DDEBUG -fno-inline -g
+  OBJECT_DIR = CMakeFiles/dune-server.dir
+  OBJECT_FILE_DIR = CMakeFiles/dune-server.dir/Server/src/Model
+
+build CMakeFiles/dune-server.dir/Server/src/Model/Position.cpp.o: CXX_COMPILER__dune-server_Debug /home/gogpeep/Dune/Server/src/Model/Position.cpp || cmake_object_order_depends_target_dune-server
+  DEP_FILE = CMakeFiles/dune-server.dir/Server/src/Model/Position.cpp.o.d
+  FLAGS = -std=c++11 -pthread -Wall -Werror -pedantic -pedantic-errors -O3 -ggdb -DDEBUG -fno-inline -g
+  OBJECT_DIR = CMakeFiles/dune-server.dir
+  OBJECT_FILE_DIR = CMakeFiles/dune-server.dir/Server/src/Model
+
+build CMakeFiles/dune-server.dir/Server/src/Model/Unit/Unit.cpp.o: CXX_COMPILER__dune-server_Debug /home/gogpeep/Dune/Server/src/Model/Unit/Unit.cpp || cmake_object_order_depends_target_dune-server
+  DEP_FILE = CMakeFiles/dune-server.dir/Server/src/Model/Unit/Unit.cpp.o.d
+  FLAGS = -std=c++11 -pthread -Wall -Werror -pedantic -pedantic-errors -O3 -ggdb -DDEBUG -fno-inline -g
+  OBJECT_DIR = CMakeFiles/dune-server.dir
+  OBJECT_FILE_DIR = CMakeFiles/dune-server.dir/Server/src/Model/Unit
 
 build CMakeFiles/dune-server.dir/Server/src/main.cpp.o: CXX_COMPILER__dune-server_Debug /home/gogpeep/Dune/Server/src/main.cpp || cmake_object_order_depends_target_dune-server
   DEP_FILE = CMakeFiles/dune-server.dir/Server/src/main.cpp.o.d
@@ -246,7 +263,7 @@ build CMakeFiles/dune-server.dir/Common/src/Exceptions/Exception.cpp.o: CXX_COMP
 #############################################
 # Link the executable dune-server
 
-build dune-server: CXX_EXECUTABLE_LINKER__dune-server_Debug CMakeFiles/dune-server.dir/Server/src/Control/Accepter.cpp.o CMakeFiles/dune-server.dir/Server/src/Control/ClientLogin.cpp.o CMakeFiles/dune-server.dir/Server/src/Control/Server.cpp.o CMakeFiles/dune-server.dir/Server/src/main.cpp.o CMakeFiles/dune-server.dir/Common/src/Exceptions/Exception.cpp.o | libdune-common.so || libdune-common.so
+build dune-server: CXX_EXECUTABLE_LINKER__dune-server_Debug CMakeFiles/dune-server.dir/Server/src/Control/Server.cpp.o CMakeFiles/dune-server.dir/Server/src/Model/AStar.cpp.o CMakeFiles/dune-server.dir/Server/src/Model/AStarNode.cpp.o CMakeFiles/dune-server.dir/Server/src/Model/Game.cpp.o CMakeFiles/dune-server.dir/Server/src/Model/Map.cpp.o CMakeFiles/dune-server.dir/Server/src/Model/Position.cpp.o CMakeFiles/dune-server.dir/Server/src/Model/Unit/Unit.cpp.o CMakeFiles/dune-server.dir/Server/src/main.cpp.o CMakeFiles/dune-server.dir/Common/src/Exceptions/Exception.cpp.o | libdune-common.so || libdune-common.so
   FLAGS = -std=c++11 -pthread -Wall -Werror -pedantic -pedantic-errors -O3 -ggdb -DDEBUG -fno-inline -g
   LINK_FLAGS = -rdynamic
   LINK_LIBRARIES = -Wl,-rpath,/home/gogpeep/Dune/cmake-build-debug:  libdune-common.so

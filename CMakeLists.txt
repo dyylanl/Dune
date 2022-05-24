@@ -28,14 +28,14 @@ FILE(GLOB_RECURSE server_src "Server/*.cpp")
 # TARGETS
 
 # Common
-add_library(dune-common SHARED ${common_src} Common/includes/Thread.h Common/src/Thread.cpp Common/includes/Socket/Socket.h Common/includes/Exceptions/Exception.h Common/includes/Exceptions/ClosedSocketException.h Common/includes/Exceptions/LoginException.h Common/includes/Socket/SocketWrapper.h Common/src/Socket/SocketWrapper.cpp Common/src/Exceptions/Exception.cpp Common/src/Socket/Socket.cpp)
+add_library(dune-common SHARED ${common_src} Common/includes/Thread.h Common/src/Thread.cpp Common/includes/Socket/Socket.h Common/includes/Exceptions/Exception.h Common/includes/Exceptions/ClosedSocketException.h Common/includes/Exceptions/LoginException.h Common/src/Exceptions/Exception.cpp Common/src/Socket/Socket.cpp)
 
 # Client
 add_executable(dune ${client_src} Common/includes/Exceptions/ClosedSocketException.h Client/src/main.cpp Client/includes/Client.h Client/includes/SDL/Window.h Client/src/SDL/Window.cpp)
 target_link_libraries(dune dune-common SDL2 SDL2_image SDL2_ttf SDL2_mixer)
 
 # Server
-add_executable(dune-server ${server_src} Common/src/Exceptions/Exception.cpp Server/src/main.cpp Server/src/Control/Server.cpp Server/includes/Control/Server.h Server/includes/Control/Accepter.h Server/src/Control/Accepter.cpp Server/includes/Control/ClientLogin.h Server/src/Control/ClientLogin.cpp)
+add_executable(dune-server ${server_src} Common/src/Exceptions/Exception.cpp Server/src/main.cpp Server/src/Control/Server.cpp Server/includes/Control/Server.h Server/includes/Model/Game.h Server/src/Model/Game.cpp Server/includes/Model/Map.h Server/src/Model/Map.cpp Server/src/Model/AStar.cpp Server/includes/Model/AStar.h Server/includes/Model/AStarNode.h Server/includes/Model/Position.h Server/includes/Model/Unit/Unit.h Server/src/Model/AStarNode.cpp Server/src/Model/Position.cpp Server/src/Model/Unit/Unit.cpp)
 target_link_libraries(dune-server dune-common)
 #------------------------------------------------------------------------------
 

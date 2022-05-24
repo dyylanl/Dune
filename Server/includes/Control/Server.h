@@ -5,17 +5,11 @@
 #include <cstdio>
 #include <iostream>
 #include <string>
-#include "Accepter.h"
 
 
 class Server {
 private:
 
-    Accepter accepter;
-
-    //-------------------------------------------------------------------------
-    // Métodos privados
-    //-------------------------------------------------------------------------
 
 public:
     /* Constructor */

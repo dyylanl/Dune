@@ -1,1 +1,1 @@
-solo para subir a git
+config del common
