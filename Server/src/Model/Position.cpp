@@ -35,11 +35,28 @@ bool Position::operator<(const Position &other) const {
     }
 }
 
-int Position::sqrtDistance(const Position &pos) const {
-    return (this->x - pos.x) * (this->x - pos.x) + (this->y - pos.y) * (this->y - pos.y);
+
+bool Position::operator!=(const Position& otra) const {
+    return (this->x != otra.x || this->y != otra.y);
 }
 
-void Position::normalizeToBlock() {
-    x = (x / BLOCK_X) * BLOCK_X + BLOCK_X / 2;
-    y = (y / BLOCK_Y) * BLOCK_Y + BLOCK_Y / 2;
+Position Position::operator+(const Position& otra) const {
+    return Position(this->x + otra.x, this->y + otra.y);
+}
+
+Position::Position(const Position& otra) {
+    this->x = otra.x;
+    this->y = otra.y;
+}
+
+Position& Position::operator=(const Position& other) {
+    if (this == &other)
+        return *this;
+    this->x = other.x;
+    this->y = other.y;
+    return *this;
+}
+
+int Position::sqrtDistance(const Position &pos) const {
+    return (this->x - pos.x) * (this->x - pos.x) + (this->y - pos.y) * (this->y - pos.y);
 }

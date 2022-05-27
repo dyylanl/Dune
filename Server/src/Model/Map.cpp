@@ -1,5 +1,4 @@
 #include "../../includes/Model/Map.h"
-#include "../../../Common/includes/Exceptions/Exception.h"
 
 Map::Map(int x, int y) {
     if (x <= 0 || y <= 0) {
@@ -21,7 +20,7 @@ void Map::showMap() {
     printf("\n");
 }
 
-std::string Map::getPos(int x, int y) {
+std::string Map::getPos(int x, int y) const {
     if (x < 0 || x >= rows || y < 0 || y >= columns) {
         throw Exception("Invalid getPos.\n");
     }
@@ -42,12 +41,16 @@ Map::~Map() {
     std::cout << "Destruyendo mapa..." << std::endl;
 }
 
-
-
 bool Map::canMove(Unit& unit, Position pos) {
+    int posx = pos.getX();
+    int posy = pos.getY();
+    if (world[posx][posy] != ".") {
+        return false;
+    }
     return unit.canMove();
 }
 
-bool Map::isValid(Position &pos) {
-    return pos.getX() >= 0 && pos.getY() >= 0 && pos.getX() < columns * BLOCK_HEIGHT && pos.getY() < rows * BLOCK_WIDTH;
+bool Map::isValid(Position &pos) const {
+    return ((pos.getX() >= 0) && (pos.getY() >= 0) && (pos.getX() < columns)
+    && (pos.getY() < rows) && (getPos(pos.getX(), pos.getY()) == "."));
 }

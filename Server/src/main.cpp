@@ -1,10 +1,8 @@
 #include <cstdio>
 #include <exception>
 #include <string>
-#define MAX_CLIENTS_QUEUED 10
 // ----------------------------------------------------------------------------
 #include "../includes/Control/Server.h"
-#include "../includes/Model/Map.h"
 
 
 int main(int argc, char* argv[]) {
@@ -16,9 +14,8 @@ int main(int argc, char* argv[]) {
     std::string port = argv[1];
 
     try {
-        Map world(10,10);
-        world.setValue(5,5,'D');
-        world.showMap();
+        Server server("8082",10);
+        server.run();
         /*
         Server server(port, MAX_CLIENTS_QUEUED);
         server.run();

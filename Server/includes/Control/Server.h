@@ -1,11 +1,12 @@
 #ifndef __SERVER_H__
 #define __SERVER_H__
 
-//-----------------------------------------------------------------------------
 #include <cstdio>
 #include <iostream>
 #include <string>
 
+#include "../../includes/Model/Map.h"
+#include "../../includes/Model/AStar.h"
 
 class Server {
 private:
