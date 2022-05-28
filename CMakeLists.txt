@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 2.8.12)
+cmake_minimum_required(VERSION 3.21)
 project(dune)
 
 # FLAGS DE COMPILACION
@@ -15,6 +15,19 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3")
 # Debugging
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -ggdb -DDEBUG -fno-inline")
 #------------------------------------------------------------------------------
+
+ADD_DEFINITIONS(-DDATA_PATH="${PROJECT_SOURCE_DIR}/Client")
+
+#------------------------------------------------------------------------------
+#Agrego la libreria SDL2pp habilitando manejo de imagenes y de letras
+SET(SDL2PP_WITH_IMAGE YES)
+SET(SDL2PP_WITH_TTF YES)
+ADD_SUBDIRECTORY(Client/libs/libSDL2pp)
+
+#Agrega la carpeta con los headers autogenerados a los includes
+message("Agregando '${PROJECT_SOURCE_DIR}Client/libs' como directorio de includes")
+include_directories(${PROJECT_SOURCE_DIR}Client/libs)
+include_directories(${SDL2PP_INCLUDE_DIRS})
 
 #------------------------------------------------------------------------------
 # ARCHIVOS FUENTE
@@ -33,6 +46,7 @@ add_library(dune-common SHARED ${common_src} Common/includes/Thread.h Common/src
 # Client
 add_executable(dune ${client_src} Common/includes/Exceptions/ClosedSocketException.h Client/src/main.cpp Client/includes/Client.h Client/includes/SDL/Window.h Client/src/SDL/Window.cpp)
 target_link_libraries(dune dune-common SDL2 SDL2_image SDL2_ttf SDL2_mixer)
+target_link_libraries(dune ${SDL2PP_LIBRARIES})
 
 # Server
 add_executable(dune-server ${server_src} Common/src/Exceptions/Exception.cpp Server/src/main.cpp Server/src/Control/Server.cpp Server/includes/Control/Server.h Server/includes/Model/Game.h Server/src/Model/Game.cpp Server/includes/Model/Map.h Server/src/Model/Map.cpp Server/src/Model/AStar.cpp Server/includes/Model/AStar.h Server/includes/Model/AStarNode.h Server/includes/Model/Position.h Server/includes/Model/Unit/Unit.h Server/src/Model/AStarNode.cpp Server/src/Model/Position.cpp Server/src/Model/Unit/Unit.cpp)

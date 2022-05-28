@@ -1,0 +1,76 @@
+Performing C++ SOURCE FILE Test COMPILER_HAS_DEPRECATED_ATTR failed with the following output:
+Change Dir: /home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/cmake-build-debug/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make -f Makefile cmTC_444b8/fast && /usr/bin/make  -f CMakeFiles/cmTC_444b8.dir/build.make CMakeFiles/cmTC_444b8.dir/build
+make[1]: se entra en el directorio '/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/cmake-build-debug/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_444b8.dir/src.cxx.o
+/usr/bin/c++ -DCOMPILER_HAS_DEPRECATED_ATTR  -std=c++11 -pthread -Wall -Werror -pedantic -pedantic-errors -O3 -ggdb -DDEBUG -fno-inline   -std=c++17 -o CMakeFiles/cmTC_444b8.dir/src.cxx.o -c "/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/cmake-build-debug/CMakeFiles/CMakeTmp/src.cxx"
+/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/cmake-build-debug/CMakeFiles/CMakeTmp/src.cxx: In function ‘int main()’:
+/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/cmake-build-debug/CMakeFiles/CMakeTmp/src.cxx:2:34: error: ‘int somefunc()’ is deprecated [-Werror=deprecated-declarations]
+     int main() { return somefunc();}
+                                  ^
+/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/cmake-build-debug/CMakeFiles/CMakeTmp/src.cxx:1:37: note: declared here
+ __attribute__((__deprecated__)) int somefunc() { return 0; }
+                                     ^~~~~~~~
+/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/cmake-build-debug/CMakeFiles/CMakeTmp/src.cxx:2:34: error: ‘int somefunc()’ is deprecated [-Werror=deprecated-declarations]
+     int main() { return somefunc();}
+                                  ^
+/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/cmake-build-debug/CMakeFiles/CMakeTmp/src.cxx:1:37: note: declared here
+ __attribute__((__deprecated__)) int somefunc() { return 0; }
+                                     ^~~~~~~~
+cc1plus: all warnings being treated as errors
+make[1]: *** [CMakeFiles/cmTC_444b8.dir/build.make:78: CMakeFiles/cmTC_444b8.dir/src.cxx.o] Error 1
+make[1]: se sale del directorio '/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/cmake-build-debug/CMakeFiles/CMakeTmp'
+make: *** [Makefile:127: cmTC_444b8/fast] Error 2
+
+
+Source file was:
+__attribute__((__deprecated__)) int somefunc() { return 0; }
+    int main() { return somefunc();}
+Performing C++ SOURCE FILE Test COMPILER_HAS_DEPRECATED failed with the following output:
+Change Dir: /home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/cmake-build-debug/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make -f Makefile cmTC_91004/fast && /usr/bin/make  -f CMakeFiles/cmTC_91004.dir/build.make CMakeFiles/cmTC_91004.dir/build
+make[1]: se entra en el directorio '/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/cmake-build-debug/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_91004.dir/src.cxx.o
+/usr/bin/c++ -DCOMPILER_HAS_DEPRECATED  -std=c++11 -pthread -Wall -Werror -pedantic -pedantic-errors -O3 -ggdb -DDEBUG -fno-inline   -std=c++17 -o CMakeFiles/cmTC_91004.dir/src.cxx.o -c "/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/cmake-build-debug/CMakeFiles/CMakeTmp/src.cxx"
+/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/cmake-build-debug/CMakeFiles/CMakeTmp/src.cxx:1:11: error: expected constructor, destructor, or type conversion before ‘(’ token
+ __declspec(deprecated) int somefunc() { return 0; }
+           ^
+/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/cmake-build-debug/CMakeFiles/CMakeTmp/src.cxx: In function ‘int main()’:
+/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/cmake-build-debug/CMakeFiles/CMakeTmp/src.cxx:2:25: error: ‘somefunc’ was not declared in this scope
+     int main() { return somefunc();}
+                         ^~~~~~~~
+make[1]: *** [CMakeFiles/cmTC_91004.dir/build.make:78: CMakeFiles/cmTC_91004.dir/src.cxx.o] Error 1
+make[1]: se sale del directorio '/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/cmake-build-debug/CMakeFiles/CMakeTmp'
+make: *** [Makefile:127: cmTC_91004/fast] Error 2
+
+
+Source file was:
+__declspec(deprecated) int somefunc() { return 0; }
+    int main() { return somefunc();}
+Performing C++ SOURCE FILE Test SDL2PP_WITH_EXPERIMENTAL_OPTIONAL failed with the following output:
+Change Dir: /home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/cmake-build-debug/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make -f Makefile cmTC_e7f09/fast && /usr/bin/make  -f CMakeFiles/cmTC_e7f09.dir/build.make CMakeFiles/cmTC_e7f09.dir/build
+make[1]: se entra en el directorio '/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/cmake-build-debug/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_e7f09.dir/src.cxx.o
+/usr/bin/c++ -DSDL2PP_WITH_EXPERIMENTAL_OPTIONAL  -std=c++11 -pthread -Wall -Werror -pedantic -pedantic-errors -O3 -ggdb -DDEBUG -fno-inline -std=c++11  -o CMakeFiles/cmTC_e7f09.dir/src.cxx.o -c "/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/cmake-build-debug/CMakeFiles/CMakeTmp/src.cxx"
+/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/cmake-build-debug/CMakeFiles/CMakeTmp/src.cxx: In function ‘int main()’:
+/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/cmake-build-debug/CMakeFiles/CMakeTmp/src.cxx:2:19: error: ‘std::experimental’ has not been declared
+ int main() { std::experimental::optional<int> o; return !o; }
+                   ^~~~~~~~~~~~
+/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/cmake-build-debug/CMakeFiles/CMakeTmp/src.cxx:2:42: error: expected primary-expression before ‘int’
+ int main() { std::experimental::optional<int> o; return !o; }
+                                          ^~~
+/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/cmake-build-debug/CMakeFiles/CMakeTmp/src.cxx:2:58: error: ‘o’ was not declared in this scope
+ int main() { std::experimental::optional<int> o; return !o; }
+                                                          ^
+make[1]: *** [CMakeFiles/cmTC_e7f09.dir/build.make:78: CMakeFiles/cmTC_e7f09.dir/src.cxx.o] Error 1
+make[1]: se sale del directorio '/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/cmake-build-debug/CMakeFiles/CMakeTmp'
+make: *** [Makefile:127: cmTC_e7f09/fast] Error 2
+
+
+Source file was:
+#include <experimental/optional>
+int main() { std::experimental::optional<int> o; return !o; }
