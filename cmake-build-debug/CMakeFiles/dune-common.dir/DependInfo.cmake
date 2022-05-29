@@ -8,9 +8,9 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/Common/src/Exceptions/Exception.cpp" "CMakeFiles/dune-common.dir/Common/src/Exceptions/Exception.cpp.o" "gcc" "CMakeFiles/dune-common.dir/Common/src/Exceptions/Exception.cpp.o.d"
-  "/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/Common/src/Socket/Socket.cpp" "CMakeFiles/dune-common.dir/Common/src/Socket/Socket.cpp.o" "gcc" "CMakeFiles/dune-common.dir/Common/src/Socket/Socket.cpp.o.d"
-  "/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/Common/src/Thread.cpp" "CMakeFiles/dune-common.dir/Common/src/Thread.cpp.o" "gcc" "CMakeFiles/dune-common.dir/Common/src/Thread.cpp.o.d"
+  "/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/Common/src/Exceptions/Exception.cpp" "CMakeFiles/dune-common.dir/Common/src/Exceptions/Exception.cpp.o" "gcc" "CMakeFiles/dune-common.dir/Common/src/Exceptions/Exception.cpp.o.d"
+  "/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/Common/src/Socket/Socket.cpp" "CMakeFiles/dune-common.dir/Common/src/Socket/Socket.cpp.o" "gcc" "CMakeFiles/dune-common.dir/Common/src/Socket/Socket.cpp.o.d"
+  "/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/Common/src/Thread.cpp" "CMakeFiles/dune-common.dir/Common/src/Thread.cpp.o" "gcc" "CMakeFiles/dune-common.dir/Common/src/Thread.cpp.o.d"
   )
 
 # Targets to which this target links.

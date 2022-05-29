@@ -76,22 +76,22 @@
 			[
 				{
 					"backtrace" : 4,
-					"define" : "DATA_PATH=\"/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/Client\""
+					"define" : "DATA_PATH=\"/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/Client/\""
 				}
 			],
 			"includes" : 
 			[
 				{
 					"backtrace" : 5,
-					"path" : "/home/riclui/Documentos/Fiuba/Taller de programacion I/DuneClient/libs"
+					"path" : "/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/DuneClient/libs"
 				},
 				{
 					"backtrace" : 6,
-					"path" : "/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/Client/libs/libSDL2pp"
+					"path" : "/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/Client/libs/libSDL2pp"
 				},
 				{
 					"backtrace" : 6,
-					"path" : "/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/cmake-build-debug/Client/libs/libSDL2pp"
+					"path" : "/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/cmake-build-debug/Client/libs/libSDL2pp"
 				},
 				{
 					"backtrace" : 6,
@@ -148,7 +148,7 @@
 				"role" : "flags"
 			},
 			{
-				"fragment" : "-Wl,-rpath,\"/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/cmake-build-debug:\"",
+				"fragment" : "-Wl,-rpath,/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/cmake-build-debug:",
 				"role" : "libraries"
 			},
 			{

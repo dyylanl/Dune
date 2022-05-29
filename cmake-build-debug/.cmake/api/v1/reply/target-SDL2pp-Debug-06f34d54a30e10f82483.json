@@ -73,18 +73,18 @@
 			[
 				{
 					"backtrace" : 3,
-					"define" : "DATA_PATH=\"/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/Client\""
+					"define" : "DATA_PATH=\"/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/Client/\""
 				}
 			],
 			"includes" : 
 			[
 				{
 					"backtrace" : 4,
-					"path" : "/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/cmake-build-debug/Client/libs/libSDL2pp"
+					"path" : "/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/cmake-build-debug/Client/libs/libSDL2pp"
 				},
 				{
 					"backtrace" : 5,
-					"path" : "/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/Client/libs/libSDL2pp"
+					"path" : "/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/Client/libs/libSDL2pp"
 				},
 				{
 					"backtrace" : 6,

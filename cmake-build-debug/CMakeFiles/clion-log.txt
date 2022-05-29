@@ -1,4 +1,4 @@
-/home/riclui/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/213.7172.20/bin/cmake/linux/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" "/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune"
+/home/riclui/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/221.5080.224/bin/cmake/linux/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" -S /home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune -B /home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/cmake-build-debug
 CMake Deprecation Warning at Client/libs/libSDL2pp/CMakeLists.txt:4 (CMAKE_MINIMUM_REQUIRED):
   Compatibility with CMake < 2.8.12 will be removed from a future version of
   CMake.
@@ -10,7 +10,7 @@ CMake Deprecation Warning at Client/libs/libSDL2pp/CMakeLists.txt:4 (CMAKE_MINIM
 -- SDL2_mixer support disabled
 -- Checking for experimental/optional header: no
 -- libSDL2pp 0.16.1 bundled build
-Agregando '/home/riclui/Documentos/Fiuba/Taller de programacion I/DuneClient/libs' como directorio de includes
+Agregando '/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/DuneClient/libs' como directorio de includes
 -- Configuring done
 -- Generating done
--- Build files have been written to: /home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/cmake-build-debug
+-- Build files have been written to: /home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/cmake-build-debug

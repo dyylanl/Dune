@@ -16,7 +16,7 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -ggdb -DDEBUG -fno-inline")
 #------------------------------------------------------------------------------
 
-ADD_DEFINITIONS(-DDATA_PATH="${PROJECT_SOURCE_DIR}/Client")
+ADD_DEFINITIONS(-DDATA_PATH="${PROJECT_SOURCE_DIR}/Client/")
 
 #------------------------------------------------------------------------------
 #Agrego la libreria SDL2pp habilitando manejo de imagenes y de letras
@@ -44,7 +44,7 @@ FILE(GLOB_RECURSE server_src "Server/*.cpp")
 add_library(dune-common SHARED ${common_src} Common/includes/Thread.h Common/src/Thread.cpp Common/includes/Socket/Socket.h Common/includes/Exceptions/Exception.h Common/includes/Exceptions/ClosedSocketException.h Common/includes/Exceptions/LoginException.h Common/src/Exceptions/Exception.cpp Common/src/Socket/Socket.cpp)
 
 # Client
-add_executable(dune ${client_src} Common/includes/Exceptions/ClosedSocketException.h Client/src/main.cpp Client/includes/Client.h Client/includes/SDL/Window.h Client/src/SDL/Window.cpp)
+add_executable(dune ${client_src} Common/includes/Exceptions/ClosedSocketException.h Client/src/main.cpp Client/includes/Client.h Client/includes/SDL/Window.h Client/src/SDL/Window.cpp Client/src/Player.cpp Client/src/Player.h Client/src/Animation.cpp Client/src/Animation.h)
 target_link_libraries(dune dune-common SDL2 SDL2_image SDL2_ttf SDL2_mixer)
 target_link_libraries(dune ${SDL2PP_LIBRARIES})
 
