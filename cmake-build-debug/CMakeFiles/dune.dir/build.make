@@ -83,10 +83,24 @@ CMakeFiles/dune.dir/Client/src/Animation.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/dune.dir/Client/src/Animation.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/Client/src/Animation.cpp -o CMakeFiles/dune.dir/Client/src/Animation.cpp.s
 
+CMakeFiles/dune.dir/Client/src/Engine.cpp.o: CMakeFiles/dune.dir/flags.make
+CMakeFiles/dune.dir/Client/src/Engine.cpp.o: ../Client/src/Engine.cpp
+CMakeFiles/dune.dir/Client/src/Engine.cpp.o: CMakeFiles/dune.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/dune.dir/Client/src/Engine.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/dune.dir/Client/src/Engine.cpp.o -MF CMakeFiles/dune.dir/Client/src/Engine.cpp.o.d -o CMakeFiles/dune.dir/Client/src/Engine.cpp.o -c /home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/Client/src/Engine.cpp
+
+CMakeFiles/dune.dir/Client/src/Engine.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/dune.dir/Client/src/Engine.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/Client/src/Engine.cpp > CMakeFiles/dune.dir/Client/src/Engine.cpp.i
+
+CMakeFiles/dune.dir/Client/src/Engine.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/dune.dir/Client/src/Engine.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/Client/src/Engine.cpp -o CMakeFiles/dune.dir/Client/src/Engine.cpp.s
+
 CMakeFiles/dune.dir/Client/src/Player.cpp.o: CMakeFiles/dune.dir/flags.make
 CMakeFiles/dune.dir/Client/src/Player.cpp.o: ../Client/src/Player.cpp
 CMakeFiles/dune.dir/Client/src/Player.cpp.o: CMakeFiles/dune.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/dune.dir/Client/src/Player.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/dune.dir/Client/src/Player.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/dune.dir/Client/src/Player.cpp.o -MF CMakeFiles/dune.dir/Client/src/Player.cpp.o.d -o CMakeFiles/dune.dir/Client/src/Player.cpp.o -c /home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/Client/src/Player.cpp
 
 CMakeFiles/dune.dir/Client/src/Player.cpp.i: cmake_force
@@ -100,7 +114,7 @@ CMakeFiles/dune.dir/Client/src/Player.cpp.s: cmake_force
 CMakeFiles/dune.dir/Client/src/SDL/Window.cpp.o: CMakeFiles/dune.dir/flags.make
 CMakeFiles/dune.dir/Client/src/SDL/Window.cpp.o: ../Client/src/SDL/Window.cpp
 CMakeFiles/dune.dir/Client/src/SDL/Window.cpp.o: CMakeFiles/dune.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/dune.dir/Client/src/SDL/Window.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/dune.dir/Client/src/SDL/Window.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/dune.dir/Client/src/SDL/Window.cpp.o -MF CMakeFiles/dune.dir/Client/src/SDL/Window.cpp.o.d -o CMakeFiles/dune.dir/Client/src/SDL/Window.cpp.o -c /home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/Client/src/SDL/Window.cpp
 
 CMakeFiles/dune.dir/Client/src/SDL/Window.cpp.i: cmake_force
@@ -114,7 +128,7 @@ CMakeFiles/dune.dir/Client/src/SDL/Window.cpp.s: cmake_force
 CMakeFiles/dune.dir/Client/src/main.cpp.o: CMakeFiles/dune.dir/flags.make
 CMakeFiles/dune.dir/Client/src/main.cpp.o: ../Client/src/main.cpp
 CMakeFiles/dune.dir/Client/src/main.cpp.o: CMakeFiles/dune.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/dune.dir/Client/src/main.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/dune.dir/Client/src/main.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/dune.dir/Client/src/main.cpp.o -MF CMakeFiles/dune.dir/Client/src/main.cpp.o.d -o CMakeFiles/dune.dir/Client/src/main.cpp.o -c /home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/Client/src/main.cpp
 
 CMakeFiles/dune.dir/Client/src/main.cpp.i: cmake_force
@@ -128,6 +142,7 @@ CMakeFiles/dune.dir/Client/src/main.cpp.s: cmake_force
 # Object files for target dune
 dune_OBJECTS = \
 "CMakeFiles/dune.dir/Client/src/Animation.cpp.o" \
+"CMakeFiles/dune.dir/Client/src/Engine.cpp.o" \
 "CMakeFiles/dune.dir/Client/src/Player.cpp.o" \
 "CMakeFiles/dune.dir/Client/src/SDL/Window.cpp.o" \
 "CMakeFiles/dune.dir/Client/src/main.cpp.o"
@@ -136,6 +151,7 @@ dune_OBJECTS = \
 dune_EXTERNAL_OBJECTS =
 
 dune: CMakeFiles/dune.dir/Client/src/Animation.cpp.o
+dune: CMakeFiles/dune.dir/Client/src/Engine.cpp.o
 dune: CMakeFiles/dune.dir/Client/src/Player.cpp.o
 dune: CMakeFiles/dune.dir/Client/src/SDL/Window.cpp.o
 dune: CMakeFiles/dune.dir/Client/src/main.cpp.o
@@ -147,7 +163,7 @@ dune: /usr/lib/x86_64-linux-gnu/libSDL2.so
 dune: /usr/lib/x86_64-linux-gnu/libSDL2_image.so
 dune: /usr/lib/x86_64-linux-gnu/libSDL2_ttf.so
 dune: CMakeFiles/dune.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Linking CXX executable dune"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Linking CXX executable dune"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/dune.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

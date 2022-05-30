@@ -421,6 +421,12 @@
 		<Unit filename="/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/Client/src/Animation.h">
 			<Option target="dune"/>
 		</Unit>
+		<Unit filename="/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/Client/src/Engine.cpp">
+			<Option target="dune"/>
+		</Unit>
+		<Unit filename="/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/Client/src/Engine.h">
+			<Option target="dune"/>
+		</Unit>
 		<Unit filename="/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/Client/src/Player.cpp">
 			<Option target="dune"/>
 		</Unit>

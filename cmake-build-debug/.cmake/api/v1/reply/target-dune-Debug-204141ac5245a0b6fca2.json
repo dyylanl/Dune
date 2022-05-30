@@ -110,19 +110,20 @@
 				0,
 				1,
 				2,
-				3
+				3,
+				4
 			]
 		}
 	],
 	"dependencies" : 
 	[
 		{
-			"backtrace" : 3,
-			"id" : "dune-common::@6890427a1f51a3e7e1df"
-		},
-		{
 			"backtrace" : 4,
 			"id" : "SDL2pp::@085defad0a88a36070e2"
+		},
+		{
+			"backtrace" : 3,
+			"id" : "dune-common::@6890427a1f51a3e7e1df"
 		}
 	],
 	"id" : "dune::@6890427a1f51a3e7e1df",
@@ -225,18 +226,20 @@
 				0,
 				1,
 				2,
-				3
+				3,
+				4
 			]
 		},
 		{
 			"name" : "Header Files",
 			"sourceIndexes" : 
 			[
-				4,
 				5,
 				6,
 				7,
-				8
+				8,
+				9,
+				10
 			]
 		}
 	],
@@ -246,6 +249,12 @@
 			"backtrace" : 1,
 			"compileGroupIndex" : 0,
 			"path" : "Client/src/Animation.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "Client/src/Engine.cpp",
 			"sourceGroupIndex" : 0
 		},
 		{
@@ -289,6 +298,11 @@
 		{
 			"backtrace" : 1,
 			"path" : "Client/src/Animation.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "Client/src/Engine.h",
 			"sourceGroupIndex" : 1
 		}
 	],
