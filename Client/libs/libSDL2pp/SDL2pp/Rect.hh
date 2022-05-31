@@ -12,7 +12,7 @@
 
   1. The origin of this software must not be misrepresented; you must not
      claim that you wrote the original software. If you use this software
-     in a product, an acknowledgment in the product documentation would be
+     in a product, m_Animation acknowledgment in the product documentation would be
      appreciated but is not required.
   2. Altered source versions must be plainly marked as such, and must not be
      misrepresented as being the original software.
@@ -500,7 +500,7 @@ public:
 	/// \param[in,out] x2 Ending X-coordinate of the line
 	/// \param[in,out] y2 Ending Y-coordinate of the line
 	///
-	/// \returns True if there is an intersection, false otherwise
+	/// \returns True if there is m_Animation intersection, false otherwise
 	///
 	/// This function is used to clip a line segment to a
 	/// rectangle. A line segment contained entirely within the
@@ -519,7 +519,7 @@ public:
 	/// \param[in,out] p1 Starting coordinates of the line
 	/// \param[in,out] p2 Ending coordinates of the line
 	///
-	/// \returns True if there is an intersection, false otherwise
+	/// \returns True if there is m_Animation intersection, false otherwise
 	///
 	/// This function is used to clip a line segment to a
 	/// rectangle. A line segment contained entirely within the
@@ -534,7 +534,7 @@ public:
 	////////////////////////////////////////////////////////////
 	/// \brief Get rectangle moved by a given offset
 	///
-	/// \param[in] offset Point specifying an offset
+	/// \param[in] offset Point specifying m_Animation offset
 	///
 	/// \returns Moved rectangle
 	///
@@ -544,9 +544,9 @@ public:
 	}
 
 	////////////////////////////////////////////////////////////
-	/// \brief Get rectangle moved by an opposite of given offset
+	/// \brief Get rectangle moved by m_Animation opposite of given offset
 	///
-	/// \param[in] offset Point specifying an offset
+	/// \param[in] offset Point specifying m_Animation offset
 	///
 	/// \returns Moved rectangle
 	///
@@ -558,7 +558,7 @@ public:
 	////////////////////////////////////////////////////////////
 	/// \brief Move by then given offset
 	///
-	/// \param[in] offset Point specifying an offset
+	/// \param[in] offset Point specifying m_Animation offset
 	///
 	/// \returns Reference to self
 	///
@@ -570,9 +570,9 @@ public:
 	}
 
 	////////////////////////////////////////////////////////////
-	/// \brief Move by an opposite of the given offset
+	/// \brief Move by m_Animation opposite of the given offset
 	///
-	/// \param[in] offset Point specifying an offset
+	/// \param[in] offset Point specifying m_Animation offset
 	///
 	/// \returns Reference to self
 	///

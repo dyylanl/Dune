@@ -36,11 +36,11 @@ void Animation::update(float dt) {
  * @param x X coordinate.
  * @param y Y corrdinate.
  */
-void Animation::render(SDL2pp::Renderer &renderer, const SDL2pp::Rect dst, SDL_RendererFlip &flipType) {
+void Animation::draw(SDL2pp::Renderer &renderer, const SDL2pp::Rect dest, SDL_RendererFlip &flipType) {
     renderer.Copy(
             texture,
             SDL2pp::Rect(1 + (1 + this->size) * this->currentFrame, 0, this->size, this->size),
-            dst,
+            dest,
             0.0,                // don't rotate
             SDL2pp::NullOpt,    // rotation center - not needed
             flipType
@@ -50,4 +50,25 @@ void Animation::render(SDL2pp::Renderer &renderer, const SDL2pp::Rect dst, SDL_R
 void Animation::advanceFrame() {
     this->currentFrame += 1;
     this->currentFrame = this->currentFrame % this->numFrames;
+}
+
+Animation::Animation(SDL2pp::Texture &texture, const std::string textureID, SDL_RendererFlip flip) : texture(texture), currentFrame(0),
+numFrames(this->texture.GetWidth() / this->texture.GetHeight()),
+size(this->texture.GetHeight()), elapsed(0.0f), m_textureID(textureID), m_flip(flip){
+
+}
+
+void Animation::setFlip(SDL_RendererFlip &flip) {
+    m_flip = flip;
+}
+
+void Animation::draw(SDL2pp::Renderer &renderer, const SDL2pp::Rect dest) {
+    renderer.Copy(
+            texture,
+            SDL2pp::Rect(1 + (1 + this->size) * this->currentFrame, 0, this->size, this->size),
+            dest,
+            0.0,                // don't rotate
+            SDL2pp::NullOpt,    // rotation center - not needed
+            m_flip
+    );
 }

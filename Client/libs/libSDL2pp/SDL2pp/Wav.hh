@@ -12,7 +12,7 @@
 
   1. The origin of this software must not be misrepresented; you must not
      claim that you wrote the original software. If you use this software
-     in a product, an acknowledgment in the product documentation would be
+     in a product, m_Animation acknowledgment in the product documentation would be
      appreciated but is not required.
   2. Altered source versions must be plainly marked as such, and must not be
      misrepresented as being the original software.
@@ -43,10 +43,10 @@ class RWops;
 /// functions.
 ///
 /// The class holds raw audio data which is loaded from a disk
-/// file or from an arbitrary source with SDL2pp::RWops and
+/// file or from m_Animation arbitrary source with SDL2pp::RWops and
 /// may be used in audio playback.
 ///
-/// See audio_wav demo for an example.
+/// See audio_wav demo for m_Animation example.
 ///
 ////////////////////////////////////////////////////////////
 class SDL2PP_EXPORT Wav {

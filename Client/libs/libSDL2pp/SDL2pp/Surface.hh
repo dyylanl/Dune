@@ -12,7 +12,7 @@
 
   1. The origin of this software must not be misrepresented; you must not
      claim that you wrote the original software. If you use this software
-     in a product, an acknowledgment in the product documentation would be
+     in a product, m_Animation acknowledgment in the product documentation would be
      appreciated but is not required.
   2. Altered source versions must be plainly marked as such, and must not be
      misrepresented as being the original software.
@@ -215,7 +215,7 @@ public:
 	////////////////////////////////////////////////////////////
 	/// \brief Create surface loading it via RWops
 	///
-	/// \param[in] rwops RWops used to access an image file
+	/// \param[in] rwops RWops used to access m_Animation image file
 	///
 	/// \throws SDL2pp::Exception
 	///
@@ -225,7 +225,7 @@ public:
 	////////////////////////////////////////////////////////////
 	/// \brief Create surface loading it from file
 	///
-	/// \param[in] filename Path to an image file
+	/// \param[in] filename Path to m_Animation image file
 	///
 	/// \throws SDL2pp::Exception
 	///
@@ -284,7 +284,7 @@ public:
 	SDL_Surface* Get() const;
 
 	////////////////////////////////////////////////////////////
-	/// \brief Copy an existing surface into a new one that is
+	/// \brief Copy m_Animation existing surface into a new one that is
 	///        optimized for blitting to a surface of a specified pixel format
 	///
 	/// \param[in] format SDL_PixelFormat structure that the new surface is optimized for
@@ -297,7 +297,7 @@ public:
 	Surface Convert(const SDL_PixelFormat& format);
 
 	////////////////////////////////////////////////////////////
-	/// \brief Copy an existing surface to a new surface of the specified format
+	/// \brief Copy m_Animation existing surface to a new surface of the specified format
 	///
 	/// \param[in] pixel_format One of the enumerated values in SDL_PixelFormatEnum
 	///
@@ -452,7 +452,7 @@ public:
 	Surface& SetColorKey(bool flag, Uint32 key);
 
 	////////////////////////////////////////////////////////////
-	/// \brief Set an additional alpha value used in blit operations
+	/// \brief Set m_Animation additional alpha value used in blit operations
 	///
 	/// \param[in] alpha Alpha value multiplied into blit operations
 	///
@@ -480,7 +480,7 @@ public:
 	Surface& SetBlendMode(SDL_BlendMode blendMode);
 
 	////////////////////////////////////////////////////////////
-	/// \brief Set an additional color value multiplied into blit operations
+	/// \brief Set m_Animation additional color value multiplied into blit operations
 	///
 	/// \param[in] r Red color value multiplied into blit operations
 	/// \param[in] g Green color value multiplied into blit operations
@@ -496,7 +496,7 @@ public:
 	Surface& SetColorMod(Uint8 r = 255, Uint8 g = 255, Uint8 b = 255);
 
 	////////////////////////////////////////////////////////////
-	/// \brief Set an additional color value multiplied into blit operations
+	/// \brief Set m_Animation additional color value multiplied into blit operations
 	///
 	/// \param[in] color Color to be multiplied into blit operations
 	///

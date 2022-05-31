@@ -12,7 +12,7 @@
 
   1. The origin of this software must not be misrepresented; you must not
      claim that you wrote the original software. If you use this software
-     in a product, an acknowledgment in the product documentation would be
+     in a product, m_Animation acknowledgment in the product documentation would be
      appreciated but is not required.
   2. Altered source versions must be plainly marked as such, and must not be
      misrepresented as being the original software.
@@ -70,7 +70,7 @@ namespace SDL2pp {
 ////////////////////////////////////////////////////////////
 class SDL2PP_EXPORT Exception : public std::runtime_error {
 private:
-	std::string sdl_function_; ///< SDL function which caused an error
+	std::string sdl_function_; ///< SDL function which caused m_Animation error
 	std::string sdl_error_;    ///< SDL error string
 
 private:
@@ -80,7 +80,7 @@ public:
 	////////////////////////////////////////////////////////////
 	/// \brief Construct exception, storing result of SDL_GetError()
 	///
-	/// \param[in] function Name of SDL function which generated an error
+	/// \param[in] function Name of SDL function which generated m_Animation error
 	///
 	////////////////////////////////////////////////////////////
 	explicit Exception(const char* function);
@@ -98,9 +98,9 @@ public:
 	virtual ~Exception() noexcept;
 
 	////////////////////////////////////////////////////////////
-	/// \brief Get name of SDL function which caused an error
+	/// \brief Get name of SDL function which caused m_Animation error
 	///
-	/// \returns Name of function which caused an error
+	/// \returns Name of function which caused m_Animation error
 	///
 	////////////////////////////////////////////////////////////
 	std::string GetSDLFunction() const;

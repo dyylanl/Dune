@@ -12,7 +12,7 @@
 
   1. The origin of this software must not be misrepresented; you must not
      claim that you wrote the original software. If you use this software
-     in a product, an acknowledgment in the product documentation would be
+     in a product, m_Animation acknowledgment in the product documentation would be
      appreciated but is not required.
   2. Altered source versions must be plainly marked as such, and must not be
      misrepresented as being the original software.
@@ -215,7 +215,7 @@ public:
 	/// \brief Create texture loading it via RWops
 	///
 	/// \param[in] renderer Rendering context to create texture for
-	/// \param[in] rwops RWops used to access an image file
+	/// \param[in] rwops RWops used to access m_Animation image file
 	///
 	/// \throws SDL2pp::Exception
 	///
@@ -226,7 +226,7 @@ public:
 	/// \brief Create texture loading it from file
 	///
 	/// \param[in] renderer Rendering context to create texture for
-	/// \param[in] filename Path to an image file
+	/// \param[in] filename Path to m_Animation image file
 	///
 	/// \throws SDL2pp::Exception
 	///
@@ -393,7 +393,7 @@ public:
 	Texture& SetBlendMode(SDL_BlendMode blendMode = SDL_BLENDMODE_NONE);
 
 	////////////////////////////////////////////////////////////
-	/// \brief Set an additional alpha value multiplied into render copy operations
+	/// \brief Set m_Animation additional alpha value multiplied into draw copy operations
 	///
 	/// \param[in] alpha Source alpha value multiplied into copy operations
 	///
@@ -407,7 +407,7 @@ public:
 	Texture& SetAlphaMod(Uint8 alpha = 255);
 
 	////////////////////////////////////////////////////////////
-	/// \brief Set an additional color value multiplied into render copy operations
+	/// \brief Set m_Animation additional color value multiplied into draw copy operations
 	///
 	/// \param[in] r Red color value multiplied into copy operations
 	/// \param[in] g Green color value multiplied into copy operations
@@ -423,9 +423,9 @@ public:
 	Texture& SetColorMod(Uint8 r = 255, Uint8 g = 255, Uint8 b = 255);
 
 	////////////////////////////////////////////////////////////
-	/// \brief Set an additional color value multiplied into render copy operations
+	/// \brief Set m_Animation additional color value multiplied into draw copy operations
 	///
-	/// \param[in] color Color to be used when multiplied into render copy operations
+	/// \param[in] color Color to be used when multiplied into draw copy operations
 	///
 	/// \returns Reference to self
 	///
@@ -516,7 +516,7 @@ public:
 	Point GetSize() const;
 
 	////////////////////////////////////////////////////////////
-	/// \brief Get the additional alpha value multiplied into render copy operations
+	/// \brief Get the additional alpha value multiplied into draw copy operations
 	///
 	/// \return Current alpha value
 	///
@@ -540,7 +540,7 @@ public:
 	SDL_BlendMode GetBlendMode() const;
 
 	////////////////////////////////////////////////////////////
-	/// \brief Get the additional color value multiplied into render copy operations
+	/// \brief Get the additional color value multiplied into draw copy operations
 	///
 	/// \param[out] r Variable to be filled in with the current red color value
 	/// \param[out] g Variable to be filled in with the current green color value
@@ -554,9 +554,9 @@ public:
 	void GetColorMod(Uint8& r, Uint8& g, Uint8 &b) const;
 
 	////////////////////////////////////////////////////////////
-	/// \brief Get the additional color value multiplied into render copy operations
+	/// \brief Get the additional color value multiplied into draw copy operations
 	///
-	/// \return Color object with the values used to do render copy operations
+	/// \return Color object with the values used to do draw copy operations
 	///
 	/// \throws SDL2pp::Exception
 	///

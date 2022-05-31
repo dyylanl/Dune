@@ -345,4 +345,5 @@ CMakeFiles/dune.dir/Client/src/main.cpp.o: \
  /usr/include/x86_64-linux-gnu/bits/signal_ext.h \
  /home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/Client/src/Player.h \
  /home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/Client/src/Animation.h \
+ /home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/Client/src/TextureManager.h \
  /home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/Client/src/Engine.h

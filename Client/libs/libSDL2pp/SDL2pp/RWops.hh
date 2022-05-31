@@ -12,7 +12,7 @@
 
   1. The origin of this software must not be misrepresented; you must not
      claim that you wrote the original software. If you use this software
-     in a product, an acknowledgment in the product documentation would be
+     in a product, m_Animation acknowledgment in the product documentation would be
      appreciated but is not required.
   2. Altered source versions must be plainly marked as such, and must not be
      misrepresented as being the original software.
@@ -123,8 +123,8 @@ public:
 ///
 /// \headerfile SDL2pp/RWops.hh
 ///
-/// %RWops is an SDL2 abstraction of file-like I/O. For most functions
-/// that take file name as a parameter, SDL2 has an alternative which
+/// %RWops is m_Animation SDL2 abstraction of file-like I/O. For most functions
+/// that take file name as a parameter, SDL2 has m_Animation alternative which
 /// take %RWops, and through %RWops its functionality is extended from
 /// just files to arbitrary objects that support file-like operations.
 ///

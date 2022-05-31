@@ -12,7 +12,7 @@
 
   1. The origin of this software must not be misrepresented; you must not
      claim that you wrote the original software. If you use this software
-     in a product, an acknowledgment in the product documentation would be
+     in a product, m_Animation acknowledgment in the product documentation would be
      appreciated but is not required.
   2. Altered source versions must be plainly marked as such, and must not be
      misrepresented as being the original software.
@@ -40,7 +40,7 @@ namespace SDL2pp {
 /// Likewise, it should be deinitialized before application exits.
 /// SDL2pp::SDL object takes care of this in a RAII way
 /// by initializing the library in constructor and deinitializing
-/// in destructor, with an ability to init/quit specific subsystems
+/// in destructor, with m_Animation ability to init/quit specific subsystems
 /// in between
 ///
 /// Usage example:

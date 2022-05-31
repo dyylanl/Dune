@@ -4,7 +4,7 @@
 
 #include "Player.h"
 
-Player::Player(SDL2pp::Texture &texture): an(texture), facingLeft(false), moving(false), x(300), y(300) {}
+Player::Player(SDL2pp::Texture &texture): m_Animation(texture), facingLeft(false), moving(false), x(300), y(300) {}
 
 Player::~Player() {}
 
@@ -14,7 +14,7 @@ Player::~Player() {}
  */
 void Player::update(float dt) {
     if (moving) {
-        an.update(dt);
+        m_Animation.update(dt);
         if (facingLeft)
             x -= 3;
         else
@@ -22,9 +22,10 @@ void Player::update(float dt) {
     }
 }
 
-void Player::render(SDL2pp::Renderer &renderer) {
+void Player::draw(SDL2pp::Renderer &renderer) {
     SDL_RendererFlip flip = facingLeft ? SDL_FLIP_HORIZONTAL : SDL_FLIP_NONE;
-    an.render(renderer, SDL2pp::Rect(x, y, 200, 200), flip);
+    m_Animation.setFlip(flip);
+    m_Animation.draw(renderer, SDL2pp::Rect(x, y, 200, 200));
 }
 
 void Player::moveRigth() {
@@ -40,3 +41,5 @@ void Player::moveLeft() {
 void Player::stopMoving() {
     moving = false;
 }
+
+Player::Player(const std::string& textureID, SDL2pp::Texture &texture) : m_Animation(texture, textureID, SDL_FLIP_NONE), facingLeft(false), moving(false), x(300), y(300), m_TextureID(textureID){}

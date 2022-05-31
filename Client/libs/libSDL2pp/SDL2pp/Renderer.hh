@@ -12,7 +12,7 @@
 
   1. The origin of this software must not be misrepresented; you must not
      claim that you wrote the original software. If you use this software
-     in a product, an acknowledgment in the product documentation would be
+     in a product, m_Animation acknowledgment in the product documentation would be
      appreciated but is not required.
   2. Altered source versions must be plainly marked as such, and must not be
      misrepresented as being the original software.
@@ -317,7 +317,7 @@ public:
 	Renderer& SetDrawColor(const Color& color);
 
 	////////////////////////////////////////////////////////////
-	/// \brief Set current render target to default
+	/// \brief Set current draw target to default
 	///
 	/// \returns Reference to self
 	///
@@ -329,7 +329,7 @@ public:
 	Renderer& SetTarget();
 
 	////////////////////////////////////////////////////////////
-	/// \brief Set current render target to specified texture
+	/// \brief Set current draw target to specified texture
 	///
 	/// \param[in] texture Target texture, SDL2pp::Texture created with
 	///                    SDL_TEXTUREACCESS_TARGET
@@ -574,7 +574,7 @@ public:
 	////////////////////////////////////////////////////////////
 	/// \brief Read pixels from the current rendering target
 	///
-	/// \param[in] rect Area to read or NullOpt for the entire render
+	/// \param[in] rect Area to read or NullOpt for the entire draw
 	///                 target
 	/// \param[in] format Desired format of the pixel data, or 0 to
 	///                   use the format of the rendering target
@@ -652,9 +652,9 @@ public:
 
 	////////////////////////////////////////////////////////////
 	/// \brief Determine whether a window supports the use of
-	///        render targets
+	///        draw targets
 	///
-	/// \returns True if render targets are supported
+	/// \returns True if draw targets are supported
 	///
 	/// \see http://wiki.libsdl.org/SDL_RenderTargetSupported
 	///
@@ -679,7 +679,7 @@ public:
 	///
 	/// \see http://wiki.libsdl.org/SDL_RenderGetLogicalSize
 	///
-	/// \note If this function is called on an Renderer who never had
+	/// \note If this function is called on m_Animation Renderer who never had
 	///       its logical size set by SetLogicalSize(), this function
 	///       returns {0, 0}
 	///
@@ -693,7 +693,7 @@ public:
 	///
 	/// \see http://wiki.libsdl.org/SDL_RenderGetLogicalSize
 	///
-	/// \note If this function is called on an Renderer who never had
+	/// \note If this function is called on m_Animation Renderer who never had
 	///       its logical size set by SetLogicalSize(), this function
 	///       returns 0
 	///
@@ -707,7 +707,7 @@ public:
 	///
 	/// \see http://wiki.libsdl.org/SDL_RenderGetLogicalSize
 	///
-	/// \note If this function is called on an Renderer who never had
+	/// \note If this function is called on m_Animation Renderer who never had
 	///       its logical size set by SetLogicalSize(), this function
 	///       returns 0
 	///
@@ -768,9 +768,9 @@ public:
 	SDL_BlendMode GetDrawBlendMode() const;
 
 	////////////////////////////////////////////////////////////
-	/// \brief Get the additional color value multiplied into render copy operations
+	/// \brief Get the additional color value multiplied into draw copy operations
 	///
-	/// \return Color object with the value used to do render copy operations
+	/// \return Color object with the value used to do draw copy operations
 	///
 	/// \throws SDL2pp::Exception
 	///
@@ -780,7 +780,7 @@ public:
 	Color GetDrawColor() const;
 
 	////////////////////////////////////////////////////////////
-	/// \brief Get the additional color value multiplied into render copy operations
+	/// \brief Get the additional color value multiplied into draw copy operations
 	///
 	/// \param[out] r Variable to be filled in with red value used to draw on the rendering target
 	/// \param[out] g Variable to be filled in with green value used to draw on the rendering target

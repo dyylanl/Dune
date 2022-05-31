@@ -85,7 +85,7 @@ Copyright FAQ
 
       You must change the name(s) of the fonts. This is to ensure the
       quality of the fonts, both to protect Bitstream and Gnome. We want to
-      ensure that if an application has opened a font specifically of these
+      ensure that if m_Animation application has opened a font specifically of these
       names, it gets what it expects (though of course, using fontconfig,
       substitutions could still could have occurred during font
       opening). You must include the Bitstream copyright. Additional

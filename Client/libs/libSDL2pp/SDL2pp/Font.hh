@@ -12,7 +12,7 @@
 
   1. The origin of this software must not be misrepresented; you must not
      claim that you wrote the original software. If you use this software
-     in a product, an acknowledgment in the product documentation would be
+     in a product, m_Animation acknowledgment in the product documentation would be
      appreciated but is not required.
   2. Altered source versions must be plainly marked as such, and must not be
      misrepresented as being the original software.
@@ -327,7 +327,7 @@ public:
 	/// \returns The maximum pixel ascent of all glyphs in the font
 	///
 	/// This can also be interpreted as the distance from the top of
-	/// the font to the baseline. It could be used when drawing an
+	/// the font to the baseline. It could be used when drawing m_Animation
 	/// individual glyph relative to a top point, by combining it
 	/// with the glyph's maxy metric to resolve the top of the
 	/// rectangle used when blitting the glyph on the screen.
@@ -348,7 +348,7 @@ public:
 	///
 	/// This can also be interpreted as the distance from the
 	/// baseline to the bottom of the font.
-	/// It could be used when drawing an individual glyph relative
+	/// It could be used when drawing m_Animation individual glyph relative
 	/// to a bottom point, by combining it with the glyph's maxy
 	/// metric to resolve the top of the rectangle used when blitting
 	/// the glyph on the screen.
@@ -447,7 +447,7 @@ public:
 	///
 	/// \param[in] ch Unicode character to test glyph availability of
 	///
-	/// \returns The index of the glyph for ch in font, or 0 for an undefined character code
+	/// \returns The index of the glyph for ch in font, or 0 for m_Animation undefined character code
 	///
 	/// \see https://www.libsdl.org/projects/SDL_ttf/docs/SDL_ttf.html#SEC37
 	///
@@ -587,8 +587,8 @@ public:
 	////////////////////////////////////////////////////////////
 	/// \brief Render LATIN1 text using solid mode
 	///
-	/// \param[in] text LATIN1 string to render
-	/// \param[in] fg Color to render the text in
+	/// \param[in] text LATIN1 string to draw
+	/// \param[in] fg Color to draw the text in
 	///
 	/// \returns Surface containing rendered text
 	///
@@ -602,8 +602,8 @@ public:
 	////////////////////////////////////////////////////////////
 	/// \brief Render UTF8 text using solid mode
 	///
-	/// \param[in] text UTF8 string to render
-	/// \param[in] fg Color to render the text in
+	/// \param[in] text UTF8 string to draw
+	/// \param[in] fg Color to draw the text in
 	///
 	/// \returns Surface containing rendered text
 	///
@@ -617,8 +617,8 @@ public:
 	////////////////////////////////////////////////////////////
 	/// \brief Render UNICODE encoded text using solid mode
 	///
-	/// \param[in] text UNICODE encoded string to render
-	/// \param[in] fg Color to render the text in
+	/// \param[in] text UNICODE encoded string to draw
+	/// \param[in] fg Color to draw the text in
 	///
 	/// \returns Surface containing rendered text
 	///
@@ -632,8 +632,8 @@ public:
 	////////////////////////////////////////////////////////////
 	/// \brief Render UNICODE encoded text using solid mode
 	///
-	/// \param[in] text UNICODE encoded string to render
-	/// \param[in] fg Color to render the text in
+	/// \param[in] text UNICODE encoded string to draw
+	/// \param[in] fg Color to draw the text in
 	///
 	/// \returns Surface containing rendered text
 	///
@@ -647,8 +647,8 @@ public:
 	////////////////////////////////////////////////////////////
 	/// \brief Render the glyph for UNICODE character using solid mode
 	///
-	/// \param[in] ch UNICODE character to render
-	/// \param[in] fg Color to render the glyph in
+	/// \param[in] ch UNICODE character to draw
+	/// \param[in] fg Color to draw the glyph in
 	///
 	/// \returns Surface containing rendered text
 	///
@@ -667,9 +667,9 @@ public:
 	////////////////////////////////////////////////////////////
 	/// \brief Render LATIN1 text using shaded mode
 	///
-	/// \param[in] text LATIN1 string to render
-	/// \param[in] fg Color to render the text in
-	/// \param[in] bg Color to render the background box in
+	/// \param[in] text LATIN1 string to draw
+	/// \param[in] fg Color to draw the text in
+	/// \param[in] bg Color to draw the background box in
 	///
 	/// \returns Surface containing rendered text
 	///
@@ -683,9 +683,9 @@ public:
 	////////////////////////////////////////////////////////////
 	/// \brief Render UTF8 text using shaded mode
 	///
-	/// \param[in] text UTF8 string to render
-	/// \param[in] fg Color to render the text in
-	/// \param[in] bg Color to render the background box in
+	/// \param[in] text UTF8 string to draw
+	/// \param[in] fg Color to draw the text in
+	/// \param[in] bg Color to draw the background box in
 	///
 	/// \returns Surface containing rendered text
 	///
@@ -699,9 +699,9 @@ public:
 	////////////////////////////////////////////////////////////
 	/// \brief Render UNICODE encoded text using shaded mode
 	///
-	/// \param[in] text UNICODE encoded string to render
-	/// \param[in] fg Color to render the text in
-	/// \param[in] bg Color to render the background box in
+	/// \param[in] text UNICODE encoded string to draw
+	/// \param[in] fg Color to draw the text in
+	/// \param[in] bg Color to draw the background box in
 	///
 	/// \returns Surface containing rendered text
 	///
@@ -715,9 +715,9 @@ public:
 	////////////////////////////////////////////////////////////
 	/// \brief Render UNICODE encoded text using shaded mode
 	///
-	/// \param[in] text UNICODE encoded string to render
-	/// \param[in] fg Color to render the text in
-	/// \param[in] bg Color to render the background box in
+	/// \param[in] text UNICODE encoded string to draw
+	/// \param[in] fg Color to draw the text in
+	/// \param[in] bg Color to draw the background box in
 	///
 	/// \returns Surface containing rendered text
 	///
@@ -731,9 +731,9 @@ public:
 	////////////////////////////////////////////////////////////
 	/// \brief Render the glyph for UNICODE character using shaded mode
 	///
-	/// \param[in] ch UNICODE character to render
-	/// \param[in] fg Color to render the glyph in
-	/// \param[in] bg Color to render the background box in
+	/// \param[in] ch UNICODE character to draw
+	/// \param[in] fg Color to draw the glyph in
+	/// \param[in] bg Color to draw the background box in
 	///
 	/// \returns Surface containing rendered text
 	///
@@ -752,8 +752,8 @@ public:
 	////////////////////////////////////////////////////////////
 	/// \brief Render LATIN1 text using blended mode
 	///
-	/// \param[in] text LATIN1 string to render
-	/// \param[in] fg Color to render the text in
+	/// \param[in] text LATIN1 string to draw
+	/// \param[in] fg Color to draw the text in
 	///
 	/// \returns Surface containing rendered text
 	///
@@ -767,8 +767,8 @@ public:
 	////////////////////////////////////////////////////////////
 	/// \brief Render UTF8 text using blended mode
 	///
-	/// \param[in] text UTF8 string to render
-	/// \param[in] fg Color to render the text in
+	/// \param[in] text UTF8 string to draw
+	/// \param[in] fg Color to draw the text in
 	///
 	/// \returns Surface containing rendered text
 	///
@@ -782,8 +782,8 @@ public:
 	////////////////////////////////////////////////////////////
 	/// \brief Render UNICODE encoded text using blended mode
 	///
-	/// \param[in] text UNICODE encoded string to render
-	/// \param[in] fg Color to render the text in
+	/// \param[in] text UNICODE encoded string to draw
+	/// \param[in] fg Color to draw the text in
 	///
 	/// \returns Surface containing rendered text
 	///
@@ -797,8 +797,8 @@ public:
 	////////////////////////////////////////////////////////////
 	/// \brief Render UNICODE encoded text using blended mode
 	///
-	/// \param[in] text UNICODE encoded string to render
-	/// \param[in] fg Color to render the text in
+	/// \param[in] text UNICODE encoded string to draw
+	/// \param[in] fg Color to draw the text in
 	///
 	/// \returns Surface containing rendered text
 	///
@@ -812,8 +812,8 @@ public:
 	////////////////////////////////////////////////////////////
 	/// \brief Render the glyph for UNICODE character using blended mode
 	///
-	/// \param[in] ch UNICODE character to render
-	/// \param[in] fg Color to render the glyph in
+	/// \param[in] ch UNICODE character to draw
+	/// \param[in] fg Color to draw the glyph in
 	///
 	/// \returns Surface containing rendered text
 	///

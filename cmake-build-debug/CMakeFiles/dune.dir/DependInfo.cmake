@@ -12,6 +12,7 @@ set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/Client/src/Engine.cpp" "CMakeFiles/dune.dir/Client/src/Engine.cpp.o" "gcc" "CMakeFiles/dune.dir/Client/src/Engine.cpp.o.d"
   "/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/Client/src/Player.cpp" "CMakeFiles/dune.dir/Client/src/Player.cpp.o" "gcc" "CMakeFiles/dune.dir/Client/src/Player.cpp.o.d"
   "/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/Client/src/SDL/Window.cpp" "CMakeFiles/dune.dir/Client/src/SDL/Window.cpp.o" "gcc" "CMakeFiles/dune.dir/Client/src/SDL/Window.cpp.o.d"
+  "/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/Client/src/TextureManager.cpp" "CMakeFiles/dune.dir/Client/src/TextureManager.cpp.o" "gcc" "CMakeFiles/dune.dir/Client/src/TextureManager.cpp.o.d"
   "/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/Client/src/main.cpp" "CMakeFiles/dune.dir/Client/src/main.cpp.o" "gcc" "CMakeFiles/dune.dir/Client/src/main.cpp.o.d"
   )
 

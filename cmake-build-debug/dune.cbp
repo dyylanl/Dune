@@ -436,6 +436,12 @@
 		<Unit filename="/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/Client/src/SDL/Window.cpp">
 			<Option target="dune"/>
 		</Unit>
+		<Unit filename="/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/Client/src/TextureManager.cpp">
+			<Option target="dune"/>
+		</Unit>
+		<Unit filename="/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/Client/src/TextureManager.h">
+			<Option target="dune"/>
+		</Unit>
 		<Unit filename="/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/Client/src/main.cpp">
 			<Option target="dune"/>
 		</Unit>

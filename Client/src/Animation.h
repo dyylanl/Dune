@@ -6,6 +6,7 @@
 #define DUNE_ANIMATION_H
 
 #include <SDL2pp/SDL2pp.hh>
+#include "TextureManager.h"
 
 #define FRAME_RATE 1000000.0f/25.0f
 
@@ -16,10 +17,16 @@ class Area;
 class Animation {
 public:
     Animation(SDL2pp::Texture &texture);
+
+    Animation(SDL2pp::Texture &texture, const std::string textureID, SDL_RendererFlip flip);
+
+    Animation(TextureManager &textureManager, std::string textureID, SDL_RendererFlip flip);
+
     ~Animation();
     void update(float dt);
-    void render(SDL2pp::Renderer &renderer, const SDL2pp::Rect dest, SDL_RendererFlip &flipType);
-
+    void draw(SDL2pp::Renderer &renderer, const SDL2pp::Rect dest, SDL_RendererFlip &flipType);
+    void draw(SDL2pp::Renderer &renderer, const SDL2pp::Rect dest);
+    void setFlip(SDL_RendererFlip &flip);
 
 private:
     void advanceFrame();
@@ -33,6 +40,8 @@ private:
     int size;
     /** Time elapsed since last update. */
     float elapsed;
+    const std::string m_textureID;
+    SDL_RendererFlip m_flip;
 };
 
 

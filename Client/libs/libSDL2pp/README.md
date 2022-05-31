@@ -70,7 +70,7 @@ try {
   // Of course, C SDL2 API is still perfectly valid
   SDL_Delay(2000);
 
-  // All SDL objects are released at this point or if an error occurs
+  // All SDL objects are released at this point or if m_Animation error occurs
 } catch (SDL2pp::Exception& e) {
   // Exception stores SDL_GetError() result and name of function which failed
   std::cerr << "Error in: " << e.GetSDLFunction() << std::endl;
@@ -235,7 +235,7 @@ The library still doesn't cover all aspects of SDL2, and the development
 is generally guided by the author's needs and interest without a goal
 for covering all SDL2 functions as soon as possible. However, if
 you need specific bits which are not yet implemented in the library,
-feel free to drop an issue. Patches are of course more than welcome.
+feel free to drop m_Animation issue. Patches are of course more than welcome.
 
 It should be noted, however, that I currently do not plan to implement
 any wrappers over non object-oriented SDL2 code, as these will not bring

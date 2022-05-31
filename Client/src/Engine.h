@@ -7,12 +7,13 @@
 
 #include <SDL2pp/SDL2pp.hh>
 #include "Player.h"
+#include "TextureManager.h"
 
 class Engine {
 private:
     SDL2pp::Window m_Window;
     SDL2pp::Renderer m_Renderer;
-    SDL2pp::Texture m_im;
+    SDL2pp::Texture m_texture;
     Player m_Player;
     bool m_Running;
 public:

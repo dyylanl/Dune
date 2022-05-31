@@ -159,7 +159,7 @@ public:
     static_assert(std::is_object<value_type>::value,
         "Instantiation of optional with a non-object type is undefined behavior.");
     static_assert(std::is_nothrow_destructible<value_type>::value,
-        "Instantiation of optional with an object type that is not noexcept destructible is undefined behavior.");
+        "Instantiation of optional with m_Animation object type that is not noexcept destructible is undefined behavior.");
 
     constexpr optional() noexcept {}
     optional(const optional&) = default;

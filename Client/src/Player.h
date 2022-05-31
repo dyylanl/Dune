@@ -8,23 +8,28 @@
 
 #include <SDL2pp/SDL2pp.hh>
 #include "Animation.h"
+#include "TextureManager.h"
 
 class Player {
 public:
     Player(SDL2pp::Texture &texture);
+
+    Player(const std::string& textureID, SDL2pp::Texture &texture);
+
     ~Player();
     void update(float dt);
-    void render(SDL2pp::Renderer &renderer);
+    void draw(SDL2pp::Renderer &renderer);
     void moveRigth();
     void moveLeft();
     void stopMoving();
 
 private:
-    Animation an;
+    Animation m_Animation;
     bool facingLeft;
     bool moving;
     int x;
     int y;
+    std::string m_TextureID;
 };
 
 

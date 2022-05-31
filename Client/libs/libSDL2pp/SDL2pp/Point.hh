@@ -12,7 +12,7 @@
 
   1. The origin of this software must not be misrepresented; you must not
      claim that you wrote the original software. If you use this software
-     in a product, an acknowledgment in the product documentation would be
+     in a product, m_Animation acknowledgment in the product documentation would be
      appreciated but is not required.
   2. Altered source versions must be plainly marked as such, and must not be
      misrepresented as being the original software.
@@ -187,12 +187,12 @@ public:
 	}
 
 	////////////////////////////////////////////////////////////
-	/// \brief Get point's memberwise division by an integer
+	/// \brief Get point's memberwise division by m_Animation integer
 	///
 	/// \param[in] value Divisor
 	///
 	/// \returns New Point representing memberwise division of
-	///          point by an integer
+	///          point by m_Animation integer
 	///
 	////////////////////////////////////////////////////////////
 	constexpr Point operator/(int value) const {
@@ -214,12 +214,12 @@ public:
 
 	////////////////////////////////////////////////////////////
 	/// \brief Get point's memberwise remainder from division
-	///        by an integer
+	///        by m_Animation integer
 	///
 	/// \param[in] value Divisor
 	///
 	/// \returns New Point representing memberwise remainder
-	///          from division by an integer
+	///          from division by m_Animation integer
 	///
 	////////////////////////////////////////////////////////////
 	constexpr Point operator%(int value) const {
@@ -241,13 +241,13 @@ public:
 	}
 
 	////////////////////////////////////////////////////////////
-	/// \brief Get point's memberwise multiplication by an
+	/// \brief Get point's memberwise multiplication by m_Animation
 	///        integer
 	///
 	/// \param[in] value Multiplier
 	///
 	/// \returns New Point representing memberwise multiplication
-	///          of point by an integer
+	///          of point by m_Animation integer
 	///
 	////////////////////////////////////////////////////////////
 	constexpr Point operator*(int value) const {
@@ -297,7 +297,7 @@ public:
 	}
 
 	////////////////////////////////////////////////////////////
-	/// \brief Memberwise divide by an integer
+	/// \brief Memberwise divide by m_Animation integer
 	///
 	/// \param[in] value Divisor
 	///
@@ -325,7 +325,7 @@ public:
 	}
 
 	////////////////////////////////////////////////////////////
-	/// \brief Memberwise remainder from division by an integer
+	/// \brief Memberwise remainder from division by m_Animation integer
 	///
 	/// \param[in] value Divisor
 	///
@@ -354,7 +354,7 @@ public:
 	}
 
 	////////////////////////////////////////////////////////////
-	/// \brief Memberwise multiply by an integer
+	/// \brief Memberwise multiply by m_Animation integer
 	///
 	/// \param[in] value Multiplier
 	///

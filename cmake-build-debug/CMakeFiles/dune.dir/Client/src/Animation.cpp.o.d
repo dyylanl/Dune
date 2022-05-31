@@ -312,4 +312,5 @@ CMakeFiles/dune.dir/Client/src/Animation.cpp.o: \
  /usr/include/SDL2/SDL_shape.h /usr/include/SDL2/SDL_system.h \
  /usr/include/SDL2/SDL_timer.h /usr/include/SDL2/SDL_version.h \
  /usr/include/SDL2/SDL_locale.h /usr/include/SDL2/SDL_misc.h \
- /home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/Client/libs/libSDL2pp/SDL2pp/SDLImage.hh
+ /home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/Client/libs/libSDL2pp/SDL2pp/SDLImage.hh \
+ /home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/Client/src/TextureManager.h

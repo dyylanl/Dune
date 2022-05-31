@@ -12,7 +12,7 @@
 
   1. The origin of this software must not be misrepresented; you must not
      claim that you wrote the original software. If you use this software
-     in a product, an acknowledgment in the product documentation would be
+     in a product, m_Animation acknowledgment in the product documentation would be
      appreciated but is not required.
   2. Altered source versions must be plainly marked as such, and must not be
      misrepresented as being the original software.
@@ -33,7 +33,7 @@
 ///
 /// \headerfile SDL2pp/Optional.hh
 ///
-/// This class contains an optional value, i.e. a value that
+/// This class contains m_Animation optional value, i.e. a value that
 /// semantically may not be present.
 ///
 /// \see http://en.cppreference.com/w/cpp/experimental/optional

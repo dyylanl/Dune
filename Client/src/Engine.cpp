@@ -7,9 +7,9 @@
 Engine::Engine() : m_Window("Hello world", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
                             800, 600, SDL_WINDOW_RESIZABLE),
                    m_Renderer(m_Window, -1, SDL_RENDERER_ACCELERATED),
-                   m_im(m_Renderer,
-                        SDL2pp::Surface(DATA_PATH "assets/soldier2.png").SetColorKey(true, 0)),
-                   m_Player(m_im){
+                   m_texture(m_Renderer,
+                             SDL2pp::Surface(DATA_PATH "assets/soldier2.png").SetColorKey(true, 0)),
+                   m_Player("soldier", m_texture){
     m_Running = true;
 }
 
@@ -61,6 +61,6 @@ void Engine::Update() {
 
 void Engine::Render() {
     m_Renderer.Clear();
-    m_Player.render(m_Renderer);
+    m_Player.draw(m_Renderer);
     m_Renderer.Present();
 }
