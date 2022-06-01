@@ -1,1 +1,0 @@
-/usr/bin/c++ -fPIC  -std=c++11 -pthread -Wall -Werror -pedantic -pedantic-errors -O3 -ggdb -DDEBUG -fno-inline -g -shared -Wl,-soname,libdune-common.so -o libdune-common.so CMakeFiles/dune-common.dir/Common/src/Exceptions/Exception.cpp.o CMakeFiles/dune-common.dir/Common/src/Socket/Socket.cpp.o CMakeFiles/dune-common.dir/Common/src/Thread.cpp.o 
