@@ -1,4 +1,4 @@
-# Install script for directory: /home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/Client/libs/libSDL2pp
+# Install script for directory: /home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/Client/libs/libSDL2pp
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)

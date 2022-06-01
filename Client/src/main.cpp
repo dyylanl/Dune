@@ -1,7 +1,7 @@
 #include <iostream>
 #include <exception>
 #include <SDL2pp/SDL2pp.hh>
-#include <csignal>
+#include <unistd.h>
 #include "Player.h"
 #include "Engine.h"
 

@@ -8,533 +8,541 @@
 		<Option virtualFolders="CMake Files\;CMake Files\Client\;CMake Files\Client\libs\;CMake Files\Client\libs\libSDL2pp\;CMake Files\Client\libs\libSDL2pp\cmake\;CMake Files\Client\libs\libSDL2pp\SDL2pp\;"/>
 		<Build>
 			<Target title="all">
-				<Option working_dir="/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/cmake-build-debug"/>
+				<Option working_dir="/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/gmake -j16 -f &quot;/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
-					<CompileFile command="/usr/bin/gmake -j16 -f &quot;/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/gmake -j16 -f &quot;/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/gmake -j16 -f &quot;/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-				</MakeCommands>
-			</Target>
-			<Target title="dune-common">
-				<Option output="/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/cmake-build-debug/libdune-common.so" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/cmake-build-debug"/>
-				<Option object_output="./"/>
-				<Option type="3"/>
-				<Option compiler="gcc"/>
-				<Compiler>
-					<Add option="-DDATA_PATH=&quot;/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/Client/&quot;"/>
-					<Add directory="/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/DuneClient/libs"/>
-					<Add directory="/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/Client/libs/libSDL2pp"/>
-					<Add directory="/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/cmake-build-debug/Client/libs/libSDL2pp"/>
-					<Add directory="/usr/include/SDL2"/>
-					<Add directory="/usr/include/c++/11"/>
-					<Add directory="/usr/include/x86_64-linux-gnu/c++/11"/>
-					<Add directory="/usr/include/c++/11/backward"/>
-					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/11/include"/>
-					<Add directory="/usr/local/include"/>
-					<Add directory="/usr/include/x86_64-linux-gnu"/>
-					<Add directory="/usr/include"/>
-				</Compiler>
-				<MakeCommands>
-					<Build command="/usr/bin/gmake -j16 -f &quot;/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/cmake-build-debug/Makefile&quot;  VERBOSE=1 dune-common"/>
-					<CompileFile command="/usr/bin/gmake -j16 -f &quot;/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/gmake -j16 -f &quot;/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/gmake -j16 -f &quot;/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-				</MakeCommands>
-			</Target>
-			<Target title="dune-common/fast">
-				<Option output="/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/cmake-build-debug/libdune-common.so" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/cmake-build-debug"/>
-				<Option object_output="./"/>
-				<Option type="3"/>
-				<Option compiler="gcc"/>
-				<Compiler>
-					<Add option="-DDATA_PATH=&quot;/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/Client/&quot;"/>
-					<Add directory="/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/DuneClient/libs"/>
-					<Add directory="/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/Client/libs/libSDL2pp"/>
-					<Add directory="/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/cmake-build-debug/Client/libs/libSDL2pp"/>
-					<Add directory="/usr/include/SDL2"/>
-					<Add directory="/usr/include/c++/11"/>
-					<Add directory="/usr/include/x86_64-linux-gnu/c++/11"/>
-					<Add directory="/usr/include/c++/11/backward"/>
-					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/11/include"/>
-					<Add directory="/usr/local/include"/>
-					<Add directory="/usr/include/x86_64-linux-gnu"/>
-					<Add directory="/usr/include"/>
-				</Compiler>
-				<MakeCommands>
-					<Build command="/usr/bin/gmake -j16 -f &quot;/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/cmake-build-debug/Makefile&quot;  VERBOSE=1 dune-common/fast"/>
-					<CompileFile command="/usr/bin/gmake -j16 -f &quot;/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/gmake -j16 -f &quot;/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/gmake -j16 -f &quot;/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-				</MakeCommands>
-			</Target>
-			<Target title="dune">
-				<Option output="/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/cmake-build-debug/dune" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/cmake-build-debug"/>
-				<Option object_output="./"/>
-				<Option type="1"/>
-				<Option compiler="gcc"/>
-				<Compiler>
-					<Add option="-DDATA_PATH=&quot;/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/Client/&quot;"/>
-					<Add directory="/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/DuneClient/libs"/>
-					<Add directory="/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/Client/libs/libSDL2pp"/>
-					<Add directory="/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/cmake-build-debug/Client/libs/libSDL2pp"/>
-					<Add directory="/usr/include/SDL2"/>
-					<Add directory="/usr/include/c++/11"/>
-					<Add directory="/usr/include/x86_64-linux-gnu/c++/11"/>
-					<Add directory="/usr/include/c++/11/backward"/>
-					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/11/include"/>
-					<Add directory="/usr/local/include"/>
-					<Add directory="/usr/include/x86_64-linux-gnu"/>
-					<Add directory="/usr/include"/>
-				</Compiler>
-				<MakeCommands>
-					<Build command="/usr/bin/gmake -j16 -f &quot;/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/cmake-build-debug/Makefile&quot;  VERBOSE=1 dune"/>
-					<CompileFile command="/usr/bin/gmake -j16 -f &quot;/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/gmake -j16 -f &quot;/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/gmake -j16 -f &quot;/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-				</MakeCommands>
-			</Target>
-			<Target title="dune/fast">
-				<Option output="/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/cmake-build-debug/dune" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/cmake-build-debug"/>
-				<Option object_output="./"/>
-				<Option type="1"/>
-				<Option compiler="gcc"/>
-				<Compiler>
-					<Add option="-DDATA_PATH=&quot;/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/Client/&quot;"/>
-					<Add directory="/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/DuneClient/libs"/>
-					<Add directory="/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/Client/libs/libSDL2pp"/>
-					<Add directory="/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/cmake-build-debug/Client/libs/libSDL2pp"/>
-					<Add directory="/usr/include/SDL2"/>
-					<Add directory="/usr/include/c++/11"/>
-					<Add directory="/usr/include/x86_64-linux-gnu/c++/11"/>
-					<Add directory="/usr/include/c++/11/backward"/>
-					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/11/include"/>
-					<Add directory="/usr/local/include"/>
-					<Add directory="/usr/include/x86_64-linux-gnu"/>
-					<Add directory="/usr/include"/>
-				</Compiler>
-				<MakeCommands>
-					<Build command="/usr/bin/gmake -j16 -f &quot;/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/cmake-build-debug/Makefile&quot;  VERBOSE=1 dune/fast"/>
-					<CompileFile command="/usr/bin/gmake -j16 -f &quot;/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/gmake -j16 -f &quot;/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/gmake -j16 -f &quot;/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-				</MakeCommands>
-			</Target>
-			<Target title="dune-server">
-				<Option output="/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/cmake-build-debug/dune-server" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/cmake-build-debug"/>
-				<Option object_output="./"/>
-				<Option type="1"/>
-				<Option compiler="gcc"/>
-				<Compiler>
-					<Add option="-DDATA_PATH=&quot;/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/Client/&quot;"/>
-					<Add directory="/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/DuneClient/libs"/>
-					<Add directory="/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/Client/libs/libSDL2pp"/>
-					<Add directory="/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/cmake-build-debug/Client/libs/libSDL2pp"/>
-					<Add directory="/usr/include/SDL2"/>
-					<Add directory="/usr/include/c++/11"/>
-					<Add directory="/usr/include/x86_64-linux-gnu/c++/11"/>
-					<Add directory="/usr/include/c++/11/backward"/>
-					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/11/include"/>
-					<Add directory="/usr/local/include"/>
-					<Add directory="/usr/include/x86_64-linux-gnu"/>
-					<Add directory="/usr/include"/>
-				</Compiler>
-				<MakeCommands>
-					<Build command="/usr/bin/gmake -j16 -f &quot;/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/cmake-build-debug/Makefile&quot;  VERBOSE=1 dune-server"/>
-					<CompileFile command="/usr/bin/gmake -j16 -f &quot;/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/gmake -j16 -f &quot;/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/gmake -j16 -f &quot;/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-				</MakeCommands>
-			</Target>
-			<Target title="dune-server/fast">
-				<Option output="/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/cmake-build-debug/dune-server" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/cmake-build-debug"/>
-				<Option object_output="./"/>
-				<Option type="1"/>
-				<Option compiler="gcc"/>
-				<Compiler>
-					<Add option="-DDATA_PATH=&quot;/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/Client/&quot;"/>
-					<Add directory="/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/DuneClient/libs"/>
-					<Add directory="/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/Client/libs/libSDL2pp"/>
-					<Add directory="/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/cmake-build-debug/Client/libs/libSDL2pp"/>
-					<Add directory="/usr/include/SDL2"/>
-					<Add directory="/usr/include/c++/11"/>
-					<Add directory="/usr/include/x86_64-linux-gnu/c++/11"/>
-					<Add directory="/usr/include/c++/11/backward"/>
-					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/11/include"/>
-					<Add directory="/usr/local/include"/>
-					<Add directory="/usr/include/x86_64-linux-gnu"/>
-					<Add directory="/usr/include"/>
-				</Compiler>
-				<MakeCommands>
-					<Build command="/usr/bin/gmake -j16 -f &quot;/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/cmake-build-debug/Makefile&quot;  VERBOSE=1 dune-server/fast"/>
-					<CompileFile command="/usr/bin/gmake -j16 -f &quot;/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/gmake -j16 -f &quot;/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/gmake -j16 -f &quot;/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-				</MakeCommands>
-			</Target>
-			<Target title="edit_cache">
-				<Option working_dir="/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/cmake-build-debug"/>
-				<Option type="4"/>
-				<MakeCommands>
-					<Build command="/usr/bin/gmake -j16 -f &quot;/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
-					<CompileFile command="/usr/bin/gmake -j16 -f &quot;/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/gmake -j16 -f &quot;/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/gmake -j16 -f &quot;/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-				</MakeCommands>
-			</Target>
-			<Target title="rebuild_cache">
-				<Option working_dir="/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/cmake-build-debug"/>
-				<Option type="4"/>
-				<MakeCommands>
-					<Build command="/usr/bin/gmake -j16 -f &quot;/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
-					<CompileFile command="/usr/bin/gmake -j16 -f &quot;/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/gmake -j16 -f &quot;/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/gmake -j16 -f &quot;/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-				</MakeCommands>
-			</Target>
-			<Target title="list_install_components">
-				<Option working_dir="/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/cmake-build-debug"/>
-				<Option type="4"/>
-				<MakeCommands>
-					<Build command="/usr/bin/gmake -j16 -f &quot;/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/cmake-build-debug/Makefile&quot;  VERBOSE=1 list_install_components"/>
-					<CompileFile command="/usr/bin/gmake -j16 -f &quot;/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/gmake -j16 -f &quot;/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/gmake -j16 -f &quot;/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-				</MakeCommands>
-			</Target>
-			<Target title="install">
-				<Option working_dir="/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/cmake-build-debug"/>
-				<Option type="4"/>
-				<MakeCommands>
-					<Build command="/usr/bin/gmake -j16 -f &quot;/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/cmake-build-debug/Makefile&quot;  VERBOSE=1 install"/>
-					<CompileFile command="/usr/bin/gmake -j16 -f &quot;/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/gmake -j16 -f &quot;/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/gmake -j16 -f &quot;/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-				</MakeCommands>
-			</Target>
-			<Target title="install/local">
-				<Option working_dir="/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/cmake-build-debug"/>
-				<Option type="4"/>
-				<MakeCommands>
-					<Build command="/usr/bin/gmake -j16 -f &quot;/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/cmake-build-debug/Makefile&quot;  VERBOSE=1 install/local"/>
-					<CompileFile command="/usr/bin/gmake -j16 -f &quot;/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/gmake -j16 -f &quot;/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/gmake -j16 -f &quot;/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/riclui/Documentos/Fiuba/Taller\ de\ programacion\ I/Dune/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/riclui/Documentos/Fiuba/Taller\ de\ programacion\ I/Dune/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/riclui/Documentos/Fiuba/Taller\ de\ programacion\ I/Dune/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/riclui/Documentos/Fiuba/Taller\ de\ programacion\ I/Dune/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="install/strip">
-				<Option working_dir="/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/cmake-build-debug"/>
+				<Option working_dir="/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/gmake -j16 -f &quot;/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/cmake-build-debug/Makefile&quot;  VERBOSE=1 install/strip"/>
-					<CompileFile command="/usr/bin/gmake -j16 -f &quot;/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/gmake -j16 -f &quot;/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/gmake -j16 -f &quot;/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/riclui/Documentos/Fiuba/Taller\ de\ programacion\ I/Dune/cmake-build-debug/Makefile&quot;  VERBOSE=1 install/strip"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/riclui/Documentos/Fiuba/Taller\ de\ programacion\ I/Dune/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/riclui/Documentos/Fiuba/Taller\ de\ programacion\ I/Dune/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/riclui/Documentos/Fiuba/Taller\ de\ programacion\ I/Dune/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="install/local">
+				<Option working_dir="/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/riclui/Documentos/Fiuba/Taller\ de\ programacion\ I/Dune/cmake-build-debug/Makefile&quot;  VERBOSE=1 install/local"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/riclui/Documentos/Fiuba/Taller\ de\ programacion\ I/Dune/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/riclui/Documentos/Fiuba/Taller\ de\ programacion\ I/Dune/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/riclui/Documentos/Fiuba/Taller\ de\ programacion\ I/Dune/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="install">
+				<Option working_dir="/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/riclui/Documentos/Fiuba/Taller\ de\ programacion\ I/Dune/cmake-build-debug/Makefile&quot;  VERBOSE=1 install"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/riclui/Documentos/Fiuba/Taller\ de\ programacion\ I/Dune/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/riclui/Documentos/Fiuba/Taller\ de\ programacion\ I/Dune/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/riclui/Documentos/Fiuba/Taller\ de\ programacion\ I/Dune/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="list_install_components">
+				<Option working_dir="/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/riclui/Documentos/Fiuba/Taller\ de\ programacion\ I/Dune/cmake-build-debug/Makefile&quot;  VERBOSE=1 list_install_components"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/riclui/Documentos/Fiuba/Taller\ de\ programacion\ I/Dune/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/riclui/Documentos/Fiuba/Taller\ de\ programacion\ I/Dune/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/riclui/Documentos/Fiuba/Taller\ de\ programacion\ I/Dune/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/riclui/Documentos/Fiuba/Taller\ de\ programacion\ I/Dune/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/riclui/Documentos/Fiuba/Taller\ de\ programacion\ I/Dune/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/riclui/Documentos/Fiuba/Taller\ de\ programacion\ I/Dune/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/riclui/Documentos/Fiuba/Taller\ de\ programacion\ I/Dune/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="dune-common">
+				<Option output="/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/cmake-build-debug/libdune-common.so" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="3"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add option="-DDATA_PATH=&quot;/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/Client/&quot;"/>
+					<Add directory="/home/riclui/Documentos/Fiuba/Taller de programacion I/DuneClient/libs"/>
+					<Add directory="/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/Client/libs/libSDL2pp"/>
+					<Add directory="/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/cmake-build-debug/Client/libs/libSDL2pp"/>
+					<Add directory="/usr/include/SDL2"/>
+					<Add directory="/usr/include/c++/8"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/8"/>
+					<Add directory="/usr/include/c++/8/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/8/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/8/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/riclui/Documentos/Fiuba/Taller\ de\ programacion\ I/Dune/cmake-build-debug/Makefile&quot;  VERBOSE=1 dune-common"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/riclui/Documentos/Fiuba/Taller\ de\ programacion\ I/Dune/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/riclui/Documentos/Fiuba/Taller\ de\ programacion\ I/Dune/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/riclui/Documentos/Fiuba/Taller\ de\ programacion\ I/Dune/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="dune-common/fast">
+				<Option output="/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/cmake-build-debug/libdune-common.so" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="3"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add option="-DDATA_PATH=&quot;/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/Client/&quot;"/>
+					<Add directory="/home/riclui/Documentos/Fiuba/Taller de programacion I/DuneClient/libs"/>
+					<Add directory="/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/Client/libs/libSDL2pp"/>
+					<Add directory="/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/cmake-build-debug/Client/libs/libSDL2pp"/>
+					<Add directory="/usr/include/SDL2"/>
+					<Add directory="/usr/include/c++/8"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/8"/>
+					<Add directory="/usr/include/c++/8/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/8/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/8/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/riclui/Documentos/Fiuba/Taller\ de\ programacion\ I/Dune/cmake-build-debug/Makefile&quot;  VERBOSE=1 dune-common/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/riclui/Documentos/Fiuba/Taller\ de\ programacion\ I/Dune/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/riclui/Documentos/Fiuba/Taller\ de\ programacion\ I/Dune/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/riclui/Documentos/Fiuba/Taller\ de\ programacion\ I/Dune/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/riclui/Documentos/Fiuba/Taller\ de\ programacion\ I/Dune/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/riclui/Documentos/Fiuba/Taller\ de\ programacion\ I/Dune/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/riclui/Documentos/Fiuba/Taller\ de\ programacion\ I/Dune/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/riclui/Documentos/Fiuba/Taller\ de\ programacion\ I/Dune/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="dune">
+				<Option output="/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/cmake-build-debug/dune" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add option="-DDATA_PATH=&quot;/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/Client/&quot;"/>
+					<Add directory="/home/riclui/Documentos/Fiuba/Taller de programacion I/DuneClient/libs"/>
+					<Add directory="/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/Client/libs/libSDL2pp"/>
+					<Add directory="/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/cmake-build-debug/Client/libs/libSDL2pp"/>
+					<Add directory="/usr/include/SDL2"/>
+					<Add directory="/usr/include/c++/8"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/8"/>
+					<Add directory="/usr/include/c++/8/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/8/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/8/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/riclui/Documentos/Fiuba/Taller\ de\ programacion\ I/Dune/cmake-build-debug/Makefile&quot;  VERBOSE=1 dune"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/riclui/Documentos/Fiuba/Taller\ de\ programacion\ I/Dune/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/riclui/Documentos/Fiuba/Taller\ de\ programacion\ I/Dune/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/riclui/Documentos/Fiuba/Taller\ de\ programacion\ I/Dune/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="dune/fast">
+				<Option output="/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/cmake-build-debug/dune" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add option="-DDATA_PATH=&quot;/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/Client/&quot;"/>
+					<Add directory="/home/riclui/Documentos/Fiuba/Taller de programacion I/DuneClient/libs"/>
+					<Add directory="/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/Client/libs/libSDL2pp"/>
+					<Add directory="/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/cmake-build-debug/Client/libs/libSDL2pp"/>
+					<Add directory="/usr/include/SDL2"/>
+					<Add directory="/usr/include/c++/8"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/8"/>
+					<Add directory="/usr/include/c++/8/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/8/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/8/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/riclui/Documentos/Fiuba/Taller\ de\ programacion\ I/Dune/cmake-build-debug/Makefile&quot;  VERBOSE=1 dune/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/riclui/Documentos/Fiuba/Taller\ de\ programacion\ I/Dune/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/riclui/Documentos/Fiuba/Taller\ de\ programacion\ I/Dune/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/riclui/Documentos/Fiuba/Taller\ de\ programacion\ I/Dune/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="dune-server">
+				<Option output="/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/cmake-build-debug/dune-server" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add option="-DDATA_PATH=&quot;/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/Client/&quot;"/>
+					<Add directory="/home/riclui/Documentos/Fiuba/Taller de programacion I/DuneClient/libs"/>
+					<Add directory="/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/Client/libs/libSDL2pp"/>
+					<Add directory="/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/cmake-build-debug/Client/libs/libSDL2pp"/>
+					<Add directory="/usr/include/SDL2"/>
+					<Add directory="/usr/include/c++/8"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/8"/>
+					<Add directory="/usr/include/c++/8/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/8/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/8/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/riclui/Documentos/Fiuba/Taller\ de\ programacion\ I/Dune/cmake-build-debug/Makefile&quot;  VERBOSE=1 dune-server"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/riclui/Documentos/Fiuba/Taller\ de\ programacion\ I/Dune/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/riclui/Documentos/Fiuba/Taller\ de\ programacion\ I/Dune/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/riclui/Documentos/Fiuba/Taller\ de\ programacion\ I/Dune/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="dune-server/fast">
+				<Option output="/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/cmake-build-debug/dune-server" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add option="-DDATA_PATH=&quot;/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/Client/&quot;"/>
+					<Add directory="/home/riclui/Documentos/Fiuba/Taller de programacion I/DuneClient/libs"/>
+					<Add directory="/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/Client/libs/libSDL2pp"/>
+					<Add directory="/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/cmake-build-debug/Client/libs/libSDL2pp"/>
+					<Add directory="/usr/include/SDL2"/>
+					<Add directory="/usr/include/c++/8"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/8"/>
+					<Add directory="/usr/include/c++/8/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/8/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/8/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/riclui/Documentos/Fiuba/Taller\ de\ programacion\ I/Dune/cmake-build-debug/Makefile&quot;  VERBOSE=1 dune-server/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/riclui/Documentos/Fiuba/Taller\ de\ programacion\ I/Dune/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/riclui/Documentos/Fiuba/Taller\ de\ programacion\ I/Dune/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/riclui/Documentos/Fiuba/Taller\ de\ programacion\ I/Dune/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="SDL2pp">
-				<Option output="/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/cmake-build-debug/Client/libs/libSDL2pp/libSDL2pp.a" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/cmake-build-debug/Client/libs/libSDL2pp"/>
+				<Option output="/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/cmake-build-debug/Client/libs/libSDL2pp/libSDL2pp.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/cmake-build-debug/Client/libs/libSDL2pp"/>
 				<Option object_output="./"/>
 				<Option type="2"/>
 				<Option compiler="gcc"/>
 				<Compiler>
-					<Add option="-DDATA_PATH=&quot;/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/Client/&quot;"/>
-					<Add directory="/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/cmake-build-debug/Client/libs/libSDL2pp"/>
-					<Add directory="/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/Client/libs/libSDL2pp"/>
+					<Add option="-DDATA_PATH=&quot;/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/Client/&quot;"/>
+					<Add directory="/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/cmake-build-debug/Client/libs/libSDL2pp"/>
+					<Add directory="/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/Client/libs/libSDL2pp"/>
 					<Add directory="/usr/include/SDL2"/>
-					<Add directory="/usr/include/c++/11"/>
-					<Add directory="/usr/include/x86_64-linux-gnu/c++/11"/>
-					<Add directory="/usr/include/c++/11/backward"/>
-					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/11/include"/>
+					<Add directory="/usr/include/c++/8"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/8"/>
+					<Add directory="/usr/include/c++/8/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/8/include"/>
 					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/8/include-fixed"/>
 					<Add directory="/usr/include/x86_64-linux-gnu"/>
 					<Add directory="/usr/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/gmake -j16 -f &quot;/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/cmake-build-debug/Client/libs/libSDL2pp/Makefile&quot;  VERBOSE=1 SDL2pp"/>
-					<CompileFile command="/usr/bin/gmake -j16 -f &quot;/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/cmake-build-debug/Client/libs/libSDL2pp/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/gmake -j16 -f &quot;/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/cmake-build-debug/Client/libs/libSDL2pp/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/gmake -j16 -f &quot;/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/cmake-build-debug/Client/libs/libSDL2pp/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/riclui/Documentos/Fiuba/Taller\ de\ programacion\ I/Dune/cmake-build-debug/Client/libs/libSDL2pp/Makefile&quot;  VERBOSE=1 SDL2pp"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/riclui/Documentos/Fiuba/Taller\ de\ programacion\ I/Dune/cmake-build-debug/Client/libs/libSDL2pp/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/riclui/Documentos/Fiuba/Taller\ de\ programacion\ I/Dune/cmake-build-debug/Client/libs/libSDL2pp/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/riclui/Documentos/Fiuba/Taller\ de\ programacion\ I/Dune/cmake-build-debug/Client/libs/libSDL2pp/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="SDL2pp/fast">
-				<Option output="/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/cmake-build-debug/Client/libs/libSDL2pp/libSDL2pp.a" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/cmake-build-debug/Client/libs/libSDL2pp"/>
+				<Option output="/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/cmake-build-debug/Client/libs/libSDL2pp/libSDL2pp.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/cmake-build-debug/Client/libs/libSDL2pp"/>
 				<Option object_output="./"/>
 				<Option type="2"/>
 				<Option compiler="gcc"/>
 				<Compiler>
-					<Add option="-DDATA_PATH=&quot;/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/Client/&quot;"/>
-					<Add directory="/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/cmake-build-debug/Client/libs/libSDL2pp"/>
-					<Add directory="/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/Client/libs/libSDL2pp"/>
+					<Add option="-DDATA_PATH=&quot;/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/Client/&quot;"/>
+					<Add directory="/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/cmake-build-debug/Client/libs/libSDL2pp"/>
+					<Add directory="/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/Client/libs/libSDL2pp"/>
 					<Add directory="/usr/include/SDL2"/>
-					<Add directory="/usr/include/c++/11"/>
-					<Add directory="/usr/include/x86_64-linux-gnu/c++/11"/>
-					<Add directory="/usr/include/c++/11/backward"/>
-					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/11/include"/>
+					<Add directory="/usr/include/c++/8"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/8"/>
+					<Add directory="/usr/include/c++/8/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/8/include"/>
 					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/8/include-fixed"/>
 					<Add directory="/usr/include/x86_64-linux-gnu"/>
 					<Add directory="/usr/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/gmake -j16 -f &quot;/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/cmake-build-debug/Client/libs/libSDL2pp/Makefile&quot;  VERBOSE=1 SDL2pp/fast"/>
-					<CompileFile command="/usr/bin/gmake -j16 -f &quot;/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/cmake-build-debug/Client/libs/libSDL2pp/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/gmake -j16 -f &quot;/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/cmake-build-debug/Client/libs/libSDL2pp/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/gmake -j16 -f &quot;/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/cmake-build-debug/Client/libs/libSDL2pp/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/riclui/Documentos/Fiuba/Taller\ de\ programacion\ I/Dune/cmake-build-debug/Client/libs/libSDL2pp/Makefile&quot;  VERBOSE=1 SDL2pp/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/riclui/Documentos/Fiuba/Taller\ de\ programacion\ I/Dune/cmake-build-debug/Client/libs/libSDL2pp/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/riclui/Documentos/Fiuba/Taller\ de\ programacion\ I/Dune/cmake-build-debug/Client/libs/libSDL2pp/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/riclui/Documentos/Fiuba/Taller\ de\ programacion\ I/Dune/cmake-build-debug/Client/libs/libSDL2pp/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/Client/includes/Client.h">
+		<Unit filename="/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/Client/includes/Client.h">
 			<Option target="dune"/>
 		</Unit>
-		<Unit filename="/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/Client/includes/SDL/Window.h">
+		<Unit filename="/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/Client/includes/SDL/Window.h">
 			<Option target="dune"/>
 		</Unit>
-		<Unit filename="/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/Client/libs/libSDL2pp/SDL2pp/AudioDevice.cc">
+		<Unit filename="/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/Client/libs/libSDL2pp/SDL2pp/AudioDevice.cc">
 			<Option target="SDL2pp"/>
 		</Unit>
-		<Unit filename="/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/Client/libs/libSDL2pp/SDL2pp/AudioDevice.hh">
+		<Unit filename="/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/Client/libs/libSDL2pp/SDL2pp/AudioDevice.hh">
 			<Option target="SDL2pp"/>
 		</Unit>
-		<Unit filename="/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/Client/libs/libSDL2pp/SDL2pp/AudioLock.cc">
+		<Unit filename="/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/Client/libs/libSDL2pp/SDL2pp/AudioLock.cc">
 			<Option target="SDL2pp"/>
 		</Unit>
-		<Unit filename="/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/Client/libs/libSDL2pp/SDL2pp/AudioSpec.cc">
+		<Unit filename="/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/Client/libs/libSDL2pp/SDL2pp/AudioSpec.cc">
 			<Option target="SDL2pp"/>
 		</Unit>
-		<Unit filename="/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/Client/libs/libSDL2pp/SDL2pp/AudioSpec.hh">
+		<Unit filename="/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/Client/libs/libSDL2pp/SDL2pp/AudioSpec.hh">
 			<Option target="SDL2pp"/>
 		</Unit>
-		<Unit filename="/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/Client/libs/libSDL2pp/SDL2pp/Color.cc">
+		<Unit filename="/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/Client/libs/libSDL2pp/SDL2pp/Color.cc">
 			<Option target="SDL2pp"/>
 		</Unit>
-		<Unit filename="/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/Client/libs/libSDL2pp/SDL2pp/Color.hh">
+		<Unit filename="/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/Client/libs/libSDL2pp/SDL2pp/Color.hh">
 			<Option target="SDL2pp"/>
 		</Unit>
-		<Unit filename="/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/Client/libs/libSDL2pp/SDL2pp/ContainerRWops.hh">
+		<Unit filename="/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/Client/libs/libSDL2pp/SDL2pp/ContainerRWops.hh">
 			<Option target="SDL2pp"/>
 		</Unit>
-		<Unit filename="/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/Client/libs/libSDL2pp/SDL2pp/Exception.cc">
+		<Unit filename="/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/Client/libs/libSDL2pp/SDL2pp/Exception.cc">
 			<Option target="SDL2pp"/>
 		</Unit>
-		<Unit filename="/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/Client/libs/libSDL2pp/SDL2pp/Exception.hh">
+		<Unit filename="/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/Client/libs/libSDL2pp/SDL2pp/Exception.hh">
 			<Option target="SDL2pp"/>
 		</Unit>
-		<Unit filename="/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/Client/libs/libSDL2pp/SDL2pp/Font.cc">
+		<Unit filename="/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/Client/libs/libSDL2pp/SDL2pp/Font.cc">
 			<Option target="SDL2pp"/>
 		</Unit>
-		<Unit filename="/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/Client/libs/libSDL2pp/SDL2pp/Font.hh">
+		<Unit filename="/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/Client/libs/libSDL2pp/SDL2pp/Font.hh">
 			<Option target="SDL2pp"/>
 		</Unit>
-		<Unit filename="/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/Client/libs/libSDL2pp/SDL2pp/Optional.hh">
+		<Unit filename="/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/Client/libs/libSDL2pp/SDL2pp/Optional.hh">
 			<Option target="SDL2pp"/>
 		</Unit>
-		<Unit filename="/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/Client/libs/libSDL2pp/SDL2pp/Point.cc">
+		<Unit filename="/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/Client/libs/libSDL2pp/SDL2pp/Point.cc">
 			<Option target="SDL2pp"/>
 		</Unit>
-		<Unit filename="/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/Client/libs/libSDL2pp/SDL2pp/Point.hh">
+		<Unit filename="/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/Client/libs/libSDL2pp/SDL2pp/Point.hh">
 			<Option target="SDL2pp"/>
 		</Unit>
-		<Unit filename="/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/Client/libs/libSDL2pp/SDL2pp/RWops.cc">
+		<Unit filename="/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/Client/libs/libSDL2pp/SDL2pp/RWops.cc">
 			<Option target="SDL2pp"/>
 		</Unit>
-		<Unit filename="/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/Client/libs/libSDL2pp/SDL2pp/RWops.hh">
+		<Unit filename="/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/Client/libs/libSDL2pp/SDL2pp/RWops.hh">
 			<Option target="SDL2pp"/>
 		</Unit>
-		<Unit filename="/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/Client/libs/libSDL2pp/SDL2pp/Rect.cc">
+		<Unit filename="/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/Client/libs/libSDL2pp/SDL2pp/Rect.cc">
 			<Option target="SDL2pp"/>
 		</Unit>
-		<Unit filename="/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/Client/libs/libSDL2pp/SDL2pp/Rect.hh">
+		<Unit filename="/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/Client/libs/libSDL2pp/SDL2pp/Rect.hh">
 			<Option target="SDL2pp"/>
 		</Unit>
-		<Unit filename="/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/Client/libs/libSDL2pp/SDL2pp/Renderer.cc">
+		<Unit filename="/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/Client/libs/libSDL2pp/SDL2pp/Renderer.cc">
 			<Option target="SDL2pp"/>
 		</Unit>
-		<Unit filename="/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/Client/libs/libSDL2pp/SDL2pp/Renderer.hh">
+		<Unit filename="/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/Client/libs/libSDL2pp/SDL2pp/Renderer.hh">
 			<Option target="SDL2pp"/>
 		</Unit>
-		<Unit filename="/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/Client/libs/libSDL2pp/SDL2pp/SDL.cc">
+		<Unit filename="/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/Client/libs/libSDL2pp/SDL2pp/SDL.cc">
 			<Option target="SDL2pp"/>
 		</Unit>
-		<Unit filename="/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/Client/libs/libSDL2pp/SDL2pp/SDL.hh">
+		<Unit filename="/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/Client/libs/libSDL2pp/SDL2pp/SDL.hh">
 			<Option target="SDL2pp"/>
 		</Unit>
-		<Unit filename="/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/Client/libs/libSDL2pp/SDL2pp/SDL2pp.hh">
+		<Unit filename="/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/Client/libs/libSDL2pp/SDL2pp/SDL2pp.hh">
 			<Option target="SDL2pp"/>
 		</Unit>
-		<Unit filename="/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/Client/libs/libSDL2pp/SDL2pp/SDLImage.cc">
+		<Unit filename="/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/Client/libs/libSDL2pp/SDL2pp/SDLImage.cc">
 			<Option target="SDL2pp"/>
 		</Unit>
-		<Unit filename="/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/Client/libs/libSDL2pp/SDL2pp/SDLImage.hh">
+		<Unit filename="/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/Client/libs/libSDL2pp/SDL2pp/SDLImage.hh">
 			<Option target="SDL2pp"/>
 		</Unit>
-		<Unit filename="/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/Client/libs/libSDL2pp/SDL2pp/SDLTTF.cc">
+		<Unit filename="/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/Client/libs/libSDL2pp/SDL2pp/SDLTTF.cc">
 			<Option target="SDL2pp"/>
 		</Unit>
-		<Unit filename="/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/Client/libs/libSDL2pp/SDL2pp/SDLTTF.hh">
+		<Unit filename="/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/Client/libs/libSDL2pp/SDL2pp/SDLTTF.hh">
 			<Option target="SDL2pp"/>
 		</Unit>
-		<Unit filename="/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/Client/libs/libSDL2pp/SDL2pp/StreamRWops.hh">
+		<Unit filename="/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/Client/libs/libSDL2pp/SDL2pp/StreamRWops.hh">
 			<Option target="SDL2pp"/>
 		</Unit>
-		<Unit filename="/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/Client/libs/libSDL2pp/SDL2pp/Surface.cc">
+		<Unit filename="/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/Client/libs/libSDL2pp/SDL2pp/Surface.cc">
 			<Option target="SDL2pp"/>
 		</Unit>
-		<Unit filename="/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/Client/libs/libSDL2pp/SDL2pp/Surface.hh">
+		<Unit filename="/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/Client/libs/libSDL2pp/SDL2pp/Surface.hh">
 			<Option target="SDL2pp"/>
 		</Unit>
-		<Unit filename="/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/Client/libs/libSDL2pp/SDL2pp/SurfaceLock.cc">
+		<Unit filename="/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/Client/libs/libSDL2pp/SDL2pp/SurfaceLock.cc">
 			<Option target="SDL2pp"/>
 		</Unit>
-		<Unit filename="/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/Client/libs/libSDL2pp/SDL2pp/Texture.cc">
+		<Unit filename="/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/Client/libs/libSDL2pp/SDL2pp/Texture.cc">
 			<Option target="SDL2pp"/>
 		</Unit>
-		<Unit filename="/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/Client/libs/libSDL2pp/SDL2pp/Texture.hh">
+		<Unit filename="/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/Client/libs/libSDL2pp/SDL2pp/Texture.hh">
 			<Option target="SDL2pp"/>
 		</Unit>
-		<Unit filename="/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/Client/libs/libSDL2pp/SDL2pp/TextureLock.cc">
+		<Unit filename="/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/Client/libs/libSDL2pp/SDL2pp/TextureLock.cc">
 			<Option target="SDL2pp"/>
 		</Unit>
-		<Unit filename="/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/Client/libs/libSDL2pp/SDL2pp/Wav.cc">
+		<Unit filename="/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/Client/libs/libSDL2pp/SDL2pp/Wav.cc">
 			<Option target="SDL2pp"/>
 		</Unit>
-		<Unit filename="/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/Client/libs/libSDL2pp/SDL2pp/Wav.hh">
+		<Unit filename="/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/Client/libs/libSDL2pp/SDL2pp/Wav.hh">
 			<Option target="SDL2pp"/>
 		</Unit>
-		<Unit filename="/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/Client/libs/libSDL2pp/SDL2pp/Window.cc">
+		<Unit filename="/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/Client/libs/libSDL2pp/SDL2pp/Window.cc">
 			<Option target="SDL2pp"/>
 		</Unit>
-		<Unit filename="/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/Client/libs/libSDL2pp/SDL2pp/Window.hh">
+		<Unit filename="/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/Client/libs/libSDL2pp/SDL2pp/Window.hh">
 			<Option target="SDL2pp"/>
 		</Unit>
-		<Unit filename="/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/Client/src/Animation.cpp">
+		<Unit filename="/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/Client/src/Animation.cpp">
 			<Option target="dune"/>
 		</Unit>
-		<Unit filename="/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/Client/src/Animation.h">
+		<Unit filename="/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/Client/src/Animation.h">
 			<Option target="dune"/>
 		</Unit>
-		<Unit filename="/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/Client/src/Engine.cpp">
+		<Unit filename="/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/Client/src/Engine.cpp">
 			<Option target="dune"/>
 		</Unit>
-		<Unit filename="/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/Client/src/Engine.h">
+		<Unit filename="/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/Client/src/Engine.h">
 			<Option target="dune"/>
 		</Unit>
-		<Unit filename="/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/Client/src/Player.cpp">
+		<Unit filename="/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/Client/src/Player.cpp">
 			<Option target="dune"/>
 		</Unit>
-		<Unit filename="/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/Client/src/Player.h">
+		<Unit filename="/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/Client/src/Player.h">
 			<Option target="dune"/>
 		</Unit>
-		<Unit filename="/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/Client/src/SDL/Window.cpp">
+		<Unit filename="/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/Client/src/SDL/Window.cpp">
 			<Option target="dune"/>
 		</Unit>
-		<Unit filename="/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/Client/src/TextureManager.cpp">
+		<Unit filename="/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/Client/src/TextureManager.cpp">
 			<Option target="dune"/>
 		</Unit>
-		<Unit filename="/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/Client/src/TextureManager.h">
+		<Unit filename="/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/Client/src/TextureManager.h">
 			<Option target="dune"/>
 		</Unit>
-		<Unit filename="/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/Client/src/main.cpp">
+		<Unit filename="/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/Client/src/main.cpp">
 			<Option target="dune"/>
 		</Unit>
-		<Unit filename="/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/Common/includes/Exceptions/ClosedSocketException.h">
+		<Unit filename="/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/Common/includes/Exceptions/ClosedSocketException.h">
 			<Option target="dune-common"/>
 			<Option target="dune"/>
 		</Unit>
-		<Unit filename="/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/Common/includes/Exceptions/Exception.h">
+		<Unit filename="/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/Common/includes/Exceptions/Exception.h">
 			<Option target="dune-common"/>
 		</Unit>
-		<Unit filename="/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/Common/includes/Exceptions/LoginException.h">
+		<Unit filename="/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/Common/includes/Exceptions/LoginException.h">
 			<Option target="dune-common"/>
 		</Unit>
-		<Unit filename="/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/Common/includes/Socket/Socket.h">
+		<Unit filename="/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/Common/includes/Socket/Socket.h">
 			<Option target="dune-common"/>
 		</Unit>
-		<Unit filename="/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/Common/includes/Thread.h">
+		<Unit filename="/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/Common/includes/Thread.h">
 			<Option target="dune-common"/>
 		</Unit>
-		<Unit filename="/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/Common/src/Exceptions/Exception.cpp">
+		<Unit filename="/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/Common/src/Exceptions/Exception.cpp">
 			<Option target="dune-common"/>
 			<Option target="dune-server"/>
 		</Unit>
-		<Unit filename="/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/Common/src/Socket/Socket.cpp">
+		<Unit filename="/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/Common/src/Socket/Socket.cpp">
 			<Option target="dune-common"/>
 		</Unit>
-		<Unit filename="/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/Common/src/Thread.cpp">
+		<Unit filename="/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/Common/src/Thread.cpp">
 			<Option target="dune-common"/>
 		</Unit>
-		<Unit filename="/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/Server/includes/Control/Server.h">
+		<Unit filename="/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/Server/includes/Control/Server.h">
 			<Option target="dune-server"/>
 		</Unit>
-		<Unit filename="/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/Server/includes/Model/AStar.h">
+		<Unit filename="/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/Server/includes/Model/AStar.h">
 			<Option target="dune-server"/>
 		</Unit>
-		<Unit filename="/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/Server/includes/Model/AStarNode.h">
+		<Unit filename="/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/Server/includes/Model/AStarNode.h">
 			<Option target="dune-server"/>
 		</Unit>
-		<Unit filename="/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/Server/includes/Model/Game.h">
+		<Unit filename="/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/Server/includes/Model/Game.h">
 			<Option target="dune-server"/>
 		</Unit>
-		<Unit filename="/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/Server/includes/Model/Map.h">
+		<Unit filename="/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/Server/includes/Model/Map.h">
 			<Option target="dune-server"/>
 		</Unit>
-		<Unit filename="/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/Server/includes/Model/Position.h">
+		<Unit filename="/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/Server/includes/Model/Position.h">
 			<Option target="dune-server"/>
 		</Unit>
-		<Unit filename="/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/Server/includes/Model/Unit/Unit.h">
+		<Unit filename="/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/Server/includes/Model/Unit/Unit.h">
 			<Option target="dune-server"/>
 		</Unit>
-		<Unit filename="/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/Server/src/Control/Server.cpp">
+		<Unit filename="/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/Server/src/Control/Server.cpp">
 			<Option target="dune-server"/>
 		</Unit>
-		<Unit filename="/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/Server/src/Model/AStar.cpp">
+		<Unit filename="/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/Server/src/Model/AStar.cpp">
 			<Option target="dune-server"/>
 		</Unit>
-		<Unit filename="/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/Server/src/Model/AStarNode.cpp">
+		<Unit filename="/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/Server/src/Model/AStarNode.cpp">
 			<Option target="dune-server"/>
 		</Unit>
-		<Unit filename="/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/Server/src/Model/Game.cpp">
+		<Unit filename="/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/Server/src/Model/Game.cpp">
 			<Option target="dune-server"/>
 		</Unit>
-		<Unit filename="/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/Server/src/Model/Map.cpp">
+		<Unit filename="/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/Server/src/Model/Map.cpp">
 			<Option target="dune-server"/>
 		</Unit>
-		<Unit filename="/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/Server/src/Model/Position.cpp">
+		<Unit filename="/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/Server/src/Model/Position.cpp">
 			<Option target="dune-server"/>
 		</Unit>
-		<Unit filename="/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/Server/src/Model/Unit/Unit.cpp">
+		<Unit filename="/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/Server/src/Model/Unit/Unit.cpp">
 			<Option target="dune-server"/>
 		</Unit>
-		<Unit filename="/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/Server/src/main.cpp">
+		<Unit filename="/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/Server/src/main.cpp">
 			<Option target="dune-server"/>
 		</Unit>
-		<Unit filename="/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/CMakeLists.txt">
+		<Unit filename="/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
 		</Unit>
-		<Unit filename="/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/Client/libs/libSDL2pp/CMakeLists.txt">
+		<Unit filename="/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/Client/libs/libSDL2pp/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\Client\libs\libSDL2pp\"/>
 		</Unit>
-		<Unit filename="/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/Client/libs/libSDL2pp/cmake/CheckCompile.cmake">
+		<Unit filename="/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/Client/libs/libSDL2pp/cmake/CheckCompile.cmake">
 			<Option virtualFolder="CMake Files\Client\libs\libSDL2pp\cmake\"/>
 		</Unit>
-		<Unit filename="/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/Client/libs/libSDL2pp/cmake/FindSDL2.cmake">
+		<Unit filename="/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/Client/libs/libSDL2pp/cmake/FindSDL2.cmake">
 			<Option virtualFolder="CMake Files\Client\libs\libSDL2pp\cmake\"/>
 		</Unit>
-		<Unit filename="/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/Client/libs/libSDL2pp/cmake/FindSDL2_image.cmake">
+		<Unit filename="/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/Client/libs/libSDL2pp/cmake/FindSDL2_image.cmake">
 			<Option virtualFolder="CMake Files\Client\libs\libSDL2pp\cmake\"/>
 		</Unit>
-		<Unit filename="/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/Client/libs/libSDL2pp/cmake/FindSDL2_ttf.cmake">
+		<Unit filename="/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/Client/libs/libSDL2pp/cmake/FindSDL2_ttf.cmake">
 			<Option virtualFolder="CMake Files\Client\libs\libSDL2pp\cmake\"/>
 		</Unit>
-		<Unit filename="/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/Client/libs/libSDL2pp/SDL2pp/Config.hh.in">
+		<Unit filename="/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/Client/libs/libSDL2pp/SDL2pp/Config.hh.in">
 			<Option virtualFolder="CMake Files\Client\libs\libSDL2pp\SDL2pp\"/>
 		</Unit>
 	</Project>

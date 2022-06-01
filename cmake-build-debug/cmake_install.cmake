@@ -1,4 +1,4 @@
-# Install script for directory: /home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune
+# Install script for directory: /home/riclui/Documentos/Fiuba/Taller de programacion I/Dune
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -44,7 +44,7 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/cmake-build-debug/Client/libs/libSDL2pp/cmake_install.cmake")
+  include("/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/cmake-build-debug/Client/libs/libSDL2pp/cmake_install.cmake")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
@@ -62,7 +62,7 @@ if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_
   if(CMAKE_ERROR_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(FATAL_ERROR "ABSOLUTE path INSTALL DESTINATION forbidden (by caller): ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   endif()
-  file(INSTALL DESTINATION "/usr/lib" TYPE SHARED_LIBRARY PERMISSIONS WORLD_READ WORLD_WRITE WORLD_EXECUTE FILES "/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/cmake-build-debug/libdune-common.so")
+  file(INSTALL DESTINATION "/usr/lib" TYPE SHARED_LIBRARY PERMISSIONS WORLD_READ WORLD_WRITE WORLD_EXECUTE FILES "/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/cmake-build-debug/libdune-common.so")
   if(EXISTS "$ENV{DESTDIR}/usr/lib/libdune-common.so" AND
      NOT IS_SYMLINK "$ENV{DESTDIR}/usr/lib/libdune-common.so")
     if(CMAKE_INSTALL_DO_STRIP)
@@ -83,7 +83,7 @@ if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_
   if(CMAKE_ERROR_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(FATAL_ERROR "ABSOLUTE path INSTALL DESTINATION forbidden (by caller): ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   endif()
-  file(INSTALL DESTINATION "/etc/dune/common" TYPE DIRECTORY PERMISSIONS WORLD_READ WORLD_WRITE FILES "/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/Common/config")
+  file(INSTALL DESTINATION "/etc/dune/common" TYPE DIRECTORY PERMISSIONS WORLD_READ WORLD_WRITE FILES "/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/Common/config")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
@@ -95,7 +95,7 @@ if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_
   if(CMAKE_ERROR_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(FATAL_ERROR "ABSOLUTE path INSTALL DESTINATION forbidden (by caller): ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   endif()
-  file(INSTALL DESTINATION "/var/dune/common" TYPE DIRECTORY PERMISSIONS WORLD_READ WORLD_WRITE FILES "/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/Common/assets")
+  file(INSTALL DESTINATION "/var/dune/common" TYPE DIRECTORY PERMISSIONS WORLD_READ WORLD_WRITE FILES "/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/Common/assets")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
@@ -113,12 +113,12 @@ if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_
   if(CMAKE_ERROR_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(FATAL_ERROR "ABSOLUTE path INSTALL DESTINATION forbidden (by caller): ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   endif()
-  file(INSTALL DESTINATION "/usr/bin" TYPE EXECUTABLE PERMISSIONS WORLD_READ WORLD_WRITE WORLD_EXECUTE WORLD_EXECUTE FILES "/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/cmake-build-debug/dune")
+  file(INSTALL DESTINATION "/usr/bin" TYPE EXECUTABLE PERMISSIONS WORLD_READ WORLD_WRITE WORLD_EXECUTE WORLD_EXECUTE FILES "/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/cmake-build-debug/dune")
   if(EXISTS "$ENV{DESTDIR}/usr/bin/dune" AND
      NOT IS_SYMLINK "$ENV{DESTDIR}/usr/bin/dune")
     file(RPATH_CHANGE
          FILE "$ENV{DESTDIR}/usr/bin/dune"
-         OLD_RPATH "/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/cmake-build-debug:"
+         OLD_RPATH "/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/cmake-build-debug:"
          NEW_RPATH "")
     if(CMAKE_INSTALL_DO_STRIP)
       execute_process(COMMAND "/usr/bin/strip" "$ENV{DESTDIR}/usr/bin/dune")
@@ -135,7 +135,7 @@ if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_
   if(CMAKE_ERROR_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(FATAL_ERROR "ABSOLUTE path INSTALL DESTINATION forbidden (by caller): ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   endif()
-  file(INSTALL DESTINATION "/etc/dune/client" TYPE DIRECTORY PERMISSIONS WORLD_READ WORLD_WRITE FILES "/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/Client/config")
+  file(INSTALL DESTINATION "/etc/dune/client" TYPE DIRECTORY PERMISSIONS WORLD_READ WORLD_WRITE FILES "/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/Client/config")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
@@ -147,7 +147,7 @@ if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_
   if(CMAKE_ERROR_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(FATAL_ERROR "ABSOLUTE path INSTALL DESTINATION forbidden (by caller): ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   endif()
-  file(INSTALL DESTINATION "/var/dune/client" TYPE DIRECTORY PERMISSIONS WORLD_READ WORLD_WRITE FILES "/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/Client/assets")
+  file(INSTALL DESTINATION "/var/dune/client" TYPE DIRECTORY PERMISSIONS WORLD_READ WORLD_WRITE FILES "/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/Client/assets")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
@@ -165,12 +165,12 @@ if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_
   if(CMAKE_ERROR_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(FATAL_ERROR "ABSOLUTE path INSTALL DESTINATION forbidden (by caller): ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   endif()
-  file(INSTALL DESTINATION "/usr/bin" TYPE EXECUTABLE PERMISSIONS WORLD_READ WORLD_WRITE WORLD_EXECUTE FILES "/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/cmake-build-debug/dune-server")
+  file(INSTALL DESTINATION "/usr/bin" TYPE EXECUTABLE PERMISSIONS WORLD_READ WORLD_WRITE WORLD_EXECUTE FILES "/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/cmake-build-debug/dune-server")
   if(EXISTS "$ENV{DESTDIR}/usr/bin/dune-server" AND
      NOT IS_SYMLINK "$ENV{DESTDIR}/usr/bin/dune-server")
     file(RPATH_CHANGE
          FILE "$ENV{DESTDIR}/usr/bin/dune-server"
-         OLD_RPATH "/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/cmake-build-debug:"
+         OLD_RPATH "/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/cmake-build-debug:"
          NEW_RPATH "")
     if(CMAKE_INSTALL_DO_STRIP)
       execute_process(COMMAND "/usr/bin/strip" "$ENV{DESTDIR}/usr/bin/dune-server")
@@ -187,7 +187,7 @@ if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_
   if(CMAKE_ERROR_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(FATAL_ERROR "ABSOLUTE path INSTALL DESTINATION forbidden (by caller): ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   endif()
-  file(INSTALL DESTINATION "/etc/dune/server" TYPE DIRECTORY PERMISSIONS WORLD_READ WORLD_WRITE FILES "/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/Server/config")
+  file(INSTALL DESTINATION "/etc/dune/server" TYPE DIRECTORY PERMISSIONS WORLD_READ WORLD_WRITE FILES "/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/Server/config")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
@@ -210,5 +210,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

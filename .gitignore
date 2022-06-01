@@ -13,3 +13,4 @@ execute.sh
 filter_options
 !convenciones.txt
 !CMakeLists.txt
+cmake-build-debug

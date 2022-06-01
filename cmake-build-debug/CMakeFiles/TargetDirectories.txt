@@ -1,16 +1,16 @@
-/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/cmake-build-debug/CMakeFiles/dune-common.dir
-/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/cmake-build-debug/CMakeFiles/dune.dir
-/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/cmake-build-debug/CMakeFiles/dune-server.dir
-/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/cmake-build-debug/CMakeFiles/edit_cache.dir
-/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/cmake-build-debug/CMakeFiles/list_install_components.dir
-/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/cmake-build-debug/CMakeFiles/install.dir
-/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/cmake-build-debug/CMakeFiles/install/local.dir
-/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/cmake-build-debug/CMakeFiles/install/strip.dir
-/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/cmake-build-debug/Client/libs/libSDL2pp/CMakeFiles/SDL2pp.dir
-/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/cmake-build-debug/Client/libs/libSDL2pp/CMakeFiles/edit_cache.dir
-/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/cmake-build-debug/Client/libs/libSDL2pp/CMakeFiles/rebuild_cache.dir
-/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/cmake-build-debug/Client/libs/libSDL2pp/CMakeFiles/list_install_components.dir
-/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/cmake-build-debug/Client/libs/libSDL2pp/CMakeFiles/install.dir
-/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/cmake-build-debug/Client/libs/libSDL2pp/CMakeFiles/install/local.dir
-/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/cmake-build-debug/Client/libs/libSDL2pp/CMakeFiles/install/strip.dir
+/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/cmake-build-debug/CMakeFiles/install/strip.dir
+/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/cmake-build-debug/CMakeFiles/install/local.dir
+/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/cmake-build-debug/CMakeFiles/install.dir
+/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/cmake-build-debug/CMakeFiles/list_install_components.dir
+/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/cmake-build-debug/CMakeFiles/dune-common.dir
+/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/cmake-build-debug/CMakeFiles/dune.dir
+/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/cmake-build-debug/CMakeFiles/dune-server.dir
+/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/cmake-build-debug/Client/libs/libSDL2pp/CMakeFiles/install/strip.dir
+/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/cmake-build-debug/Client/libs/libSDL2pp/CMakeFiles/install/local.dir
+/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/cmake-build-debug/Client/libs/libSDL2pp/CMakeFiles/SDL2pp.dir
+/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/cmake-build-debug/Client/libs/libSDL2pp/CMakeFiles/rebuild_cache.dir
+/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/cmake-build-debug/Client/libs/libSDL2pp/CMakeFiles/edit_cache.dir
+/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/cmake-build-debug/Client/libs/libSDL2pp/CMakeFiles/install.dir
+/home/riclui/Documentos/Fiuba/Taller de programacion I/Dune/cmake-build-debug/Client/libs/libSDL2pp/CMakeFiles/list_install_components.dir
