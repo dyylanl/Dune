@@ -12,12 +12,15 @@
 class TextureManager {
 private:
     SDL2pp::Renderer &m_renderer;
-    std::map<std::string, SDL2pp::Texture*> m_TextureMap;
+    std::map<std::string, std::string> m_TextureMap;
 
 public:
     TextureManager(SDL2pp::Renderer &renderer);
 
-    void load(std::string id, std::string filename);
+    void load(std::string &id, std::string &filename);
+
+    void
+    draw(SDL2pp::Renderer &renderer, const std::string id, SDL2pp::Rect orig, const SDL2pp::Rect dest, double rotacion, SDL_RendererFlip flip);
 };
 
 

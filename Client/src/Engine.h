@@ -28,6 +28,8 @@ public:
     void Update();
 
     void Render();
+
+    void load(std::string id, std::string filename);
 };
 
 

@@ -16,22 +16,22 @@ class Area;
 
 class Animation {
 public:
-    Animation(SDL2pp::Texture &texture);
+    //Animation(SDL2pp::Texture &texture);
 
-    Animation(SDL2pp::Texture &texture, const std::string textureID, SDL_RendererFlip flip);
+    //Animation(SDL2pp::Texture &texture, const std::string textureID, SDL_RendererFlip flip);
 
-    Animation(TextureManager &textureManager, std::string textureID, SDL_RendererFlip flip);
+    Animation(TextureManager &manager, std::string &textureID, SDL_RendererFlip flip);
 
     ~Animation();
     void update(float dt);
-    void draw(SDL2pp::Renderer &renderer, const SDL2pp::Rect dest, SDL_RendererFlip &flipType);
+    //void draw(SDL2pp::Renderer &renderer, const SDL2pp::Rect dest, SDL_RendererFlip &flipType);
     void draw(SDL2pp::Renderer &renderer, const SDL2pp::Rect dest);
     void setFlip(SDL_RendererFlip &flip);
 
 private:
     void advanceFrame();
     /** SDL texture of the raw image. */
-    SDL2pp::Texture &texture;
+    //SDL2pp::Texture &texture;
     /** Current animation frame. */
     int currentFrame;
     /** Total number of frames in the sprite. */
@@ -42,6 +42,7 @@ private:
     float elapsed;
     const std::string m_textureID;
     SDL_RendererFlip m_flip;
+    TextureManager &m_TextureManager;
 };
 
 

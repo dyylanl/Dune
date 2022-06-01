@@ -12,9 +12,11 @@
 
 class Player {
 public:
-    Player(SDL2pp::Texture &texture);
+    //Player(SDL2pp::Texture &texture);
 
-    Player(const std::string& textureID, SDL2pp::Texture &texture);
+    //Player(const std::string& textureID, SDL2pp::Texture &texture);
+
+    Player(std::string textureID, TextureManager &manager);
 
     ~Player();
     void update(float dt);
