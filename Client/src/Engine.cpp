@@ -9,8 +9,10 @@ Engine::Engine() : m_Window("Hello world", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPO
                    m_Renderer(m_Window, -1, SDL_RENDERER_ACCELERATED),
                    m_texture(m_Renderer,
                              SDL2pp::Surface(DATA_PATH "assets/soldier2.png").SetColorKey(true, 0)),
+                   m_TextureManager(m_Renderer),
                    m_Player("soldier", m_texture){
     m_Running = true;
+    m_TextureManager.load("soldier", DATA_PATH "assets/soldier2.png");
 }
 
 bool Engine::IsRunning() {

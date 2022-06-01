@@ -314,4 +314,9 @@ CMakeFiles/dune.dir/Client/src/Player.cpp.o: \
  /usr/include/SDL2/SDL_locale.h /usr/include/SDL2/SDL_misc.h \
  /home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/Client/libs/libSDL2pp/SDL2pp/SDLImage.hh \
  /home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/Client/src/Animation.h \
- /home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/Client/src/TextureManager.h
+ /home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/Client/src/TextureManager.h \
+ /usr/include/c++/11/map /usr/include/c++/11/bits/stl_tree.h \
+ /usr/include/c++/11/ext/aligned_buffer.h \
+ /usr/include/c++/11/bits/stl_map.h \
+ /usr/include/c++/11/bits/stl_multimap.h \
+ /usr/include/c++/11/bits/erase_if.h

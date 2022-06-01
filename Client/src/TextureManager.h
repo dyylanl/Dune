@@ -6,10 +6,18 @@
 #define DUNE_TEXTUREMANAGER_H
 
 
-#include "SDL2pp/Texture.hh"
+#include <SDL2pp/SDL2pp.hh>
+#include <map>
 
 class TextureManager {
+private:
+    SDL2pp::Renderer &m_renderer;
+    std::map<std::string, SDL2pp::Texture*> m_TextureMap;
 
+public:
+    TextureManager(SDL2pp::Renderer &renderer);
+
+    void load(std::string id, std::string filename);
 };
 
 

@@ -346,4 +346,9 @@ CMakeFiles/dune.dir/Client/src/main.cpp.o: \
  /home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/Client/src/Player.h \
  /home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/Client/src/Animation.h \
  /home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/Client/src/TextureManager.h \
+ /usr/include/c++/11/map /usr/include/c++/11/bits/stl_tree.h \
+ /usr/include/c++/11/ext/aligned_buffer.h \
+ /usr/include/c++/11/bits/stl_map.h \
+ /usr/include/c++/11/bits/stl_multimap.h \
+ /usr/include/c++/11/bits/erase_if.h \
  /home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/Client/src/Engine.h
