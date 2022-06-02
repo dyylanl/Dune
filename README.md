@@ -31,4 +31,4 @@ del año 1998 ambientado en la novela Dune de Frank Herbert.
 * A representa el terreno Arena
 * B representa posiciones bloqueadas en el mapa
 * C representa el camino que tomo la unidad para llegar a destino
-![](../Imágenes/Captura de pantalla de 2022-06-02 20-23-05.png)
+![](utils/Astar.png)
