@@ -12,18 +12,13 @@
 
 class Player {
 public:
-    Player(std::string textureID, TextureManager &manager);
+    Player(std::string textureID, TextureManager &manager, int X, int Y);
     ~Player();
     void update(float dt);
     void draw(SDL2pp::Renderer &renderer);
-    void moveRigth();
-    void moveLeft();
-    void stopMoving();
 
 private:
     Animation m_Animation;
-    bool facingLeft;
-    bool moving;
     int x;
     int y;
     std::string m_TextureID;

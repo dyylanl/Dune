@@ -5,17 +5,14 @@
 #ifndef DUNE_ENGINE_H
 #define DUNE_ENGINE_H
 
+#include <vector>
 #include "SDL2pp/SDL2pp.hh"
 #include "../Characters/Player.h"
 #include "../Graphics/TextureManager.h"
 
 class Engine {
 private:
-    //SDL2pp::Window m_Window;
-    //SDL2pp::Renderer m_Renderer;
-    //SDL2pp::Texture m_texture;
-    //TextureManager m_TextureManager;
-    Player m_Player;
+    std::vector<Player> &m_players;
     bool m_Running;
 public:
     Engine();
@@ -28,9 +25,7 @@ public:
 
     void Render(SDL2pp::Renderer &m_Renderer);
 
-    void load(std::string id, std::string filename);
-
-    Engine(Player &player);
+    Engine(std::vector<Player> &players);
 };
 
 

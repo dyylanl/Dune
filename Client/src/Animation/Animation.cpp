@@ -40,8 +40,8 @@ void Animation::setFlip(SDL_RendererFlip &flip) {
 }
 
 void Animation::draw(SDL2pp::Renderer &renderer, const SDL2pp::Rect dest) {
-    currentFrame = 0;
-    m_TextureManager.draw(renderer, m_textureID, SDL2pp::Rect(1 + (1 + this->size) * this->currentFrame, 57, this->size, this->size),
+    // orig: selecionamos el frame
+    m_TextureManager.draw(renderer, m_textureID, SDL2pp::Rect(1 , 1, this->size, this->size),
                           dest,
                           0.0,                // don't rotate
                           m_flip );
