@@ -12,12 +12,7 @@
 
 class Player {
 public:
-    //Player(SDL2pp::Texture &texture);
-
-    //Player(const std::string& textureID, SDL2pp::Texture &texture);
-
     Player(std::string textureID, TextureManager &manager);
-
     ~Player();
     void update(float dt);
     void draw(SDL2pp::Renderer &renderer);
@@ -33,6 +28,5 @@ private:
     int y;
     std::string m_TextureID;
 };
-
 
 #endif //DUNE_PLAYER_H

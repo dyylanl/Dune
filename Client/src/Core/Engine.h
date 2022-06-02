@@ -20,7 +20,6 @@ private:
 public:
     Engine();
 
-
     bool IsRunning();
 
     void Events();
