@@ -40,7 +40,8 @@ void Animation::setFlip(SDL_RendererFlip &flip) {
 }
 
 void Animation::draw(SDL2pp::Renderer &renderer, const SDL2pp::Rect dest) {
-    m_TextureManager.draw(renderer, m_textureID, SDL2pp::Rect(1 + (1 + this->size) * this->currentFrame, 0, this->size, this->size),
+    currentFrame = 0;
+    m_TextureManager.draw(renderer, m_textureID, SDL2pp::Rect(1 + (1 + this->size) * this->currentFrame, 57, this->size, this->size),
                           dest,
                           0.0,                // don't rotate
                           m_flip );
@@ -48,4 +49,4 @@ void Animation::draw(SDL2pp::Renderer &renderer, const SDL2pp::Rect dest) {
 
 Animation::Animation(TextureManager &manager, std::string &textureID, SDL_RendererFlip flip) : currentFrame(0),
                                                                                               numFrames(8),
-                                                                                              size(50), elapsed(0.0f), m_textureID(textureID), m_flip(flip), m_TextureManager(manager){}
+                                                                                              size(64), elapsed(0.0f), m_textureID(textureID), m_flip(flip), m_TextureManager(manager){}

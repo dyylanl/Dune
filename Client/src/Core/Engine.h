@@ -13,7 +13,7 @@ class Engine {
 private:
     SDL2pp::Window m_Window;
     SDL2pp::Renderer m_Renderer;
-    SDL2pp::Texture m_texture;
+    //SDL2pp::Texture m_texture;
     TextureManager m_TextureManager;
     Player m_Player;
     bool m_Running;

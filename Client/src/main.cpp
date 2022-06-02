@@ -9,7 +9,7 @@ int main(int argc, char** argv){
     try {
         SDL2pp::SDL sdl(SDL_INIT_VIDEO);
         Engine engine;
-        engine.load("soldier", DATA_PATH "assets/soldier2.png");
+        engine.load("carryall", DATA_PATH "assets/carryall.png");
         while (engine.IsRunning()) {
             engine.Events();
             engine.Update();
