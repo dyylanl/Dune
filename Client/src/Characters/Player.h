@@ -6,9 +6,9 @@
 #define DUNE_PLAYER_H
 
 
-#include <SDL2pp/SDL2pp.hh>
-#include "Animation.h"
-#include "TextureManager.h"
+#include "SDL2pp/SDL2pp.hh"
+#include "../Animation/Animation.h"
+#include "../Graphics/TextureManager.h"
 
 class Player {
 public:

@@ -5,9 +5,9 @@
 #ifndef DUNE_ENGINE_H
 #define DUNE_ENGINE_H
 
-#include <SDL2pp/SDL2pp.hh>
-#include "Player.h"
-#include "TextureManager.h"
+#include "SDL2pp/SDL2pp.hh"
+#include "../Characters/Player.h"
+#include "../Graphics/TextureManager.h"
 
 class Engine {
 private:

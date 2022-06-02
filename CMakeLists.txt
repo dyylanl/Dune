@@ -44,7 +44,7 @@ FILE(GLOB_RECURSE server_src "Server/*.cpp")
 add_library(dune-common SHARED ${common_src} Common/includes/Thread.h Common/src/Thread.cpp Common/includes/Socket/Socket.h Common/includes/Exceptions/Exception.h Common/includes/Exceptions/ClosedSocketException.h Common/includes/Exceptions/LoginException.h Common/src/Exceptions/Exception.cpp Common/src/Socket/Socket.cpp)
 
 # Client
-add_executable(dune ${client_src} Common/includes/Exceptions/ClosedSocketException.h Client/src/main.cpp Client/includes/Client.h Client/includes/SDL/Window.h Client/src/SDL/Window.cpp Client/src/Player.cpp Client/src/Player.h Client/src/Animation.cpp Client/src/Animation.h Client/src/Engine.cpp Client/src/Engine.h)
+add_executable(dune ${client_src} Common/includes/Exceptions/ClosedSocketException.h Client/src/main.cpp Client/includes/Client.h Client/src/Characters/Player.cpp Client/src/Characters/Player.h Client/src/Animation/Animation.cpp Client/src/Animation/Animation.h Client/src/Core/Engine.cpp Client/src/Core/Engine.h)
 target_link_libraries(dune dune-common SDL2 SDL2_image SDL2_ttf SDL2_mixer)
 target_link_libraries(dune ${SDL2PP_LIBRARIES})
 

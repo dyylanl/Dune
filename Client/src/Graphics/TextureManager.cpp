@@ -5,8 +5,6 @@
 #include "TextureManager.h"
 
 void TextureManager::load(std::string &id, std::string &filename) {
-    /*SDL2pp::Texture texture(m_renderer,
-              SDL2pp::Surface(filename).SetColorKey(true, 0));*/
     m_TextureMap[id] = filename;
 }
 

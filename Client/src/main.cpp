@@ -2,8 +2,8 @@
 #include <exception>
 #include <SDL2pp/SDL2pp.hh>
 #include <unistd.h>
-#include "Player.h"
-#include "Engine.h"
+#include "Characters/Player.h"
+#include "Core/Engine.h"
 
 int main(int argc, char** argv){
     try {

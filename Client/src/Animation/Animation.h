@@ -5,8 +5,8 @@
 #ifndef DUNE_ANIMATION_H
 #define DUNE_ANIMATION_H
 
-#include <SDL2pp/SDL2pp.hh>
-#include "TextureManager.h"
+#include "SDL2pp/SDL2pp.hh"
+#include "../Graphics/TextureManager.h"
 
 #define FRAME_RATE 1000000.0f/25.0f
 

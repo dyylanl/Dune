@@ -6,7 +6,7 @@
 #define DUNE_TEXTUREMANAGER_H
 
 
-#include <SDL2pp/SDL2pp.hh>
+#include "SDL2pp/SDL2pp.hh"
 #include <map>
 
 class TextureManager {
