@@ -1,20 +1,21 @@
 #ifndef __SERVER_H__
 #define __SERVER_H__
 
-#include <cstdio>
+//-----------------------------------------------------------------------------
+#include <stdio.h>
 #include <iostream>
 #include <string>
-
-#include "../../includes/Model/Map.h"
-#include "../../includes/Model/AStar.h"
 
 class Server {
 private:
 
+    //-------------------------------------------------------------------------
+    // Métodos privados
+    //-------------------------------------------------------------------------
 
 public:
     /* Constructor */
-    Server(const std::string& port, const int max_clients_queued);
+    Server(const std::string& port);
 
     /* Deshabilitamos el constructor por copia. */
     Server(const Server&) = delete;

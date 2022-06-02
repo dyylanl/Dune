@@ -1,7 +1,6 @@
 #include <cstdio>
 #include <exception>
 #include <string>
-// ----------------------------------------------------------------------------
 #include "../includes/Control/Server.h"
 
 
@@ -14,7 +13,7 @@ int main(int argc, char* argv[]) {
     std::string port = argv[1];
 
     try {
-        Server server("8082",10);
+        Server server("8082");
         server.run();
         /*
         Server server(port, MAX_CLIENTS_QUEUED);
@@ -31,4 +30,4 @@ int main(int argc, char* argv[]) {
     return 0;
 }
 
-// ----------------------------------------------------------------------------
+

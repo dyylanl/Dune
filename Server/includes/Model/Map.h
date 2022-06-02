@@ -1,49 +1,20 @@
 #ifndef __MAP_H__
 #define __MAP_H__
 
-
-#include <iostream>
-#include <vector>
-
-#include "Unit/Unit.h"
-#include "../../../Common/includes/Exceptions/Exception.h"
+#include <string>
+#include "Position.h"
+#include "Units/Unit.h"
 
 class Map {
-
-private:
-    int rows, columns;
-    std::vector<std::vector<std::string>> world;
-     // METODOS PRIVADOS
-    std::string getPos(int x, int y) const;
+    std::vector<std::vector<std::string>> mapa;
+    int rows, cols;
 public:
-    /*
-     * Crea una matriz de x filas por y columnas.
-     */
-    Map(int x, int y);
-    /*
-     * Imprime el mapa por stdin.
-     */
-    void showMap();
-
+    Map(int rows, int cols);
     ~Map();
-
-    /*
-     * Establece el valor value en la posicion x e y del mapa.
-     */
-    void setValue(int x, int y, char value);
-
-
-    bool canMove(Unit& unit, Position pos);
-
-    /*
-     * Retorna true si es una posicion valida del mapa.
-     */
-    bool isValid(Position& pos) const;
-
-    /*
-     *
-     */
+    bool canMove(const Unit& unit, Position postion);
+    bool isValid(Position position);
+    void put(Position position, std::string value);
+    void showMap();
 };
 
-
-#endif
+#endif //__MAP_H__

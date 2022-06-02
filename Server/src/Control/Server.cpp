@@ -1,39 +1,46 @@
 #include "../../includes/Control/Server.h"
+#include "../../includes/Model/Map.h"
+#include "../../includes/Model/AStar.h"
 
+//-----------------------------------------------------------------------------
+// Métodos privados
 
-Server::Server(const std::string& port, const int max_clients_queued) {}
+//-----------------------------------------------------------------------------
+
+//-----------------------------------------------------------------------------
+// API Pública
+
+Server::Server(const std::string& port) {}
 
 void Server::run() {
 
-    // CREO MAPA Y CARGO ALGUNAS POSICIONES BLOQUEADAS.
-    Map map(11,11);
-    map.setValue(7,7,'B');
-    map.setValue(7,8,'B');
-    map.setValue(8,8,'B');
-    map.setValue(8,7,'B');
-    map.setValue(7,6,'B');
+    std::cout << "Comenzando la ejecucion del servidor..." << std::endl;
+    std::cout << std::endl;
+    Map map(15,15);
+    Position start(5,0);
+    Position end(6,11);
+    map.put(Position(1,5), "B");
+    map.put(Position(2,5), "B");
+    map.put(Position(3,5), "B");
+    map.put(Position(4,5), "B");
+    map.put(Position(5,5), "B");
+    map.put(Position(6,5), "B");
+    map.put(Position(7,5), "B");
+    map.put(Position(8,5), "B");
+    map.put(start, "A");
+    map.put(end, "A");
     map.showMap();
-
-    // INICIALIZO EL ALGORITMO DE BUSQUEDA CON EL MAPA CARGADO.
-    AStar aStar(map);
-
-    // CREO LA UNIDAD EN (4,4) QUE SE MOVERA POR EL MAPA HASTA POS_END
-    Unit unit(4,4,1);
-
-    // POSICION DESTINO
-    Position pos_end(10,10);
-
-    // MEJOR RUTA ENCONTRADA POR EL ALGORITMO
-    std::stack<Position> path = aStar.makePath(unit,pos_end);
-
+    AStar astar(map);
+    Unit unit(5,1);
+    std::stack<Position> path = astar.makePath(unit,end);
     while (!path.empty()) {
-        Position pos1 = path.top();
-        map.setValue(pos1.getX(), pos1.getY(), 'P');
+        Position pos = path.top();
+        map.put(pos,"C");
         path.pop();
     }
     map.showMap();
+
+    std::cout << "Finalizando la ejecucion del servidor..." << std::endl;
 }
 
 Server::~Server() {}
-
-//-----------------------------------------------------------------------------

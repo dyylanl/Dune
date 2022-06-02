@@ -2,9 +2,10 @@
 
 AStar::AStar(Map &map) : map(map) {}
 
-std::stack<Position> AStar::reconstructPath(const std::map<Position, Position> &best_path, const Position &start) {
+std::stack<Position> AStar::reconstructPath(std::map<Position, Position> &best_path, Position &start) {
     std::stack<Position> total_path;
     Position current(start);
+    //current.normalizeToBlock();
     total_path.push(current);
     while (best_path.find(current) != best_path.end()) {
         current = best_path.at(current);
@@ -14,22 +15,17 @@ std::stack<Position> AStar::reconstructPath(const std::map<Position, Position> &
     return (total_path);
 }
 
-std::stack<Position> AStar::makePath(Unit &unit, const Position& end) {
+std::stack<Position> AStar::makePath(Unit &unit, Position end) {
     if (!map.canMove(unit, end)) {
-        return {};
+        return (std::stack<Position>());
     }
-    // Creo el camino a retornar.
+
     std::map<Position, Position> best_path;
-    // Fin
     AStarNode n_end(end);
-    // Origen
     AStarNode n_start(unit.getPosition());
-
-    // Cargo en opelist el nodo inicial (donde esta parada la unidad).
     openList.push_back(n_start);
-
     while (!openList.empty()) {
-        // Busco el nodo que tenga el f menor de la openlist
+        // Se obtiene el nodo de menor f
         auto curr_node_itr = openList.begin();
         for (auto itr = openList.begin(); itr != openList.end() ; itr++) {
             if (itr->f < curr_node_itr->f) {
@@ -39,7 +35,7 @@ std::stack<Position> AStar::makePath(Unit &unit, const Position& end) {
 
         // Se chequea si se encuentra en el destino
         if (*curr_node_itr == n_end) {
-            return this->reconstructPath(best_path, end); // Retorno la mejor ruta encontrada.
+            return this->reconstructPath(best_path, end);
         }
 
         // Se quita de la lista de abiertos y se agrega en la lista de cerrados
@@ -56,6 +52,7 @@ std::stack<Position> AStar::makePath(Unit &unit, const Position& end) {
             auto child_cl_itr = std::find(closeList.begin(), closeList.end(), child);
 
             // Si el hijo esta en la lista de cerrados o es una pared, se ignora
+//            if (child_cl_itr != closeList.end() || Map::getInstance()->at(child.pos.getX(), child.pos.getY()).getMovility() == 1) {
             if (child_cl_itr != closeList.end() || !map.canMove(unit, child.pos)) {
                 continue;
             }
@@ -80,6 +77,5 @@ std::stack<Position> AStar::makePath(Unit &unit, const Position& end) {
             best_path[child.pos] = curr_node_itr->pos;
         }
     }
-    return {};
+    return (std::stack<Position>());
 }
-
