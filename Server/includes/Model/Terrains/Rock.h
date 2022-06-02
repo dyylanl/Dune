@@ -5,12 +5,7 @@
 
 #define ROCKS_KEY 'R'
 
-class Building;
-
 class Rocks : public Terrain {
-private:
-    Building* building;
-
 public:
     Rocks();
 

@@ -8,7 +8,6 @@ Server::Server(const std::string& port) {}
 void Server::run() {
 
     std::cout << "Comenzando la ejecucion del servidor..." << std::endl;
-    std::cout << std::endl;
     Map map(15,15);
     Position start(5,0);
     Position end(6,11);
@@ -32,7 +31,6 @@ void Server::run() {
         path.pop();
     }
     map.showMap();
-
     std::cout << "Finalizando la ejecucion del servidor..." << std::endl;
 }
 

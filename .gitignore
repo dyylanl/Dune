@@ -6,6 +6,7 @@
 *.cfg
 .vs
 .vscode
+.idea
 build
 *.idea
 cpplint.py

@@ -24,3 +24,7 @@ bool Terrain::isOccupied(){
 int Terrain::getSpeedFactor() {
     return this->speed_factor;
 }
+
+void Terrain::buildOn(Building building) {
+    occupy();
+}

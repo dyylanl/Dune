@@ -1,6 +1,8 @@
 #ifndef __TERRAIN_H__
 #define __TERRAIN_H__
 
+#include "../Buildings/Building.h"
+
 class Terrain {
 protected:
     char key;
@@ -14,6 +16,8 @@ public:
     int getSpeedFactor();
     bool operator==(const Terrain& terrain);
     virtual char getKey();
+    virtual void buildOn(Building building);
+
 };
 
 #endif	// __TERRAIN_H__

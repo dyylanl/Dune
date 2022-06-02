@@ -1,5 +1,14 @@
 # Dune
-Trabajo practico final
+
+Dune es un juego de estrategia en tiempo real basado en el icónico juego Dune 2000 de Westwood Studios
+del año 1998 ambientado en la novela Dune de Frank Herbert.
+
+| Integrantes        | Padron |
+|--------------------|--------|
+| Ledesma, Dylan     | 102876 |
+| Riluizaga, Ricardo |        |
+| Codino, Federico   |        |
+
 
 ## Como correr el proyecto:
     > mkdir build; cd build
@@ -8,10 +17,18 @@ Trabajo practico final
     > sudo make
     > ./installer.sh
 
-## To Do
+## To do
     
 ### Server
-    1> Establecer varios terrenos
-    2> Unidades con distintas velocidades
-    3> Ataque y Destruccion por parte de la Unidad
-    4> Construccion y Demolicion de edificaciones
+    1> Mapa con distintos terrenos
+    2> Unidades con distintas movilidades
+    4> Ataque y destruccion de unidades y edificaciones
+
+## Evolucion del Proyecto
+
+### Server
+#### Algoritmo A*
+* A representa el terreno Arena
+* B representa posiciones bloqueadas en el mapa
+* C representa el camino que tomo la unidad para llegar a destino
+![](../Imágenes/Captura de pantalla de 2022-06-02 20-23-05.png)
