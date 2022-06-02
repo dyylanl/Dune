@@ -3,15 +3,6 @@
 //
 
 #include "Engine.h"
-
-Engine::Engine() : m_Window("Hello world", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
-                            800, 600, SDL_WINDOW_RESIZABLE),
-                   m_Renderer(m_Window, -1, SDL_RENDERER_ACCELERATED),
-                   m_TextureManager(m_Renderer),
-                   m_Player("carryall", m_TextureManager){
-    m_Running = true;
-}
-
 bool Engine::IsRunning() {
     return m_Running;
 }
@@ -58,12 +49,12 @@ void Engine::Update() {
     m_Player.update(FRAME_RATE);
 }
 
-void Engine::Render() {
+void Engine::Render(SDL2pp::Renderer &m_Renderer) {
     m_Renderer.Clear();
     m_Player.draw(m_Renderer);
     m_Renderer.Present();
 }
 
-void Engine::load(std::string id, std::string filename) {
-    m_TextureManager.load(id,filename);
+Engine::Engine(Player &player) : m_Player(player){
+    m_Running = true;
 }

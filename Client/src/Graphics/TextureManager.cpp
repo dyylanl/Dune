@@ -4,7 +4,7 @@
 
 #include "TextureManager.h"
 
-void TextureManager::load(std::string &id, std::string &filename) {
+void TextureManager::load(std::string id, std::string filename) {
     m_TextureMap[id] = filename;
 }
 

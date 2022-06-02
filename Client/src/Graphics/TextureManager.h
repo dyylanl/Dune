@@ -17,7 +17,7 @@ private:
 public:
     TextureManager(SDL2pp::Renderer &renderer);
 
-    void load(std::string &id, std::string &filename);
+    void load(std::string id, std::string filename);
 
     void
     draw(SDL2pp::Renderer &renderer, const std::string id, SDL2pp::Rect orig, const SDL2pp::Rect dest, double rotacion, SDL_RendererFlip flip);
