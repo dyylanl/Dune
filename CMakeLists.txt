@@ -35,7 +35,7 @@ add_executable(dune ${client_src} Common/includes/Exceptions/ClosedSocketExcepti
 target_link_libraries(dune dune-common SDL2 SDL2_image SDL2_ttf SDL2_mixer)
 
 # Server
-add_executable(dune-server ${server_src} Common/src/Exceptions/Exception.cpp Server/src/main.cpp Server/includes/Control/Server.h Server/src/Control/Server.cpp Server/includes/Model/Position.h Server/src/Model/Position.cpp Server/src/Model/Units/Unit.cpp Server/includes/Model/Units/Unit.h Server/includes/Model/Map.h Server/src/Model/Map.cpp Server/includes/Model/AStarNode.h Server/src/Model/AStarNode.cpp Server/includes/Model/AStar.h Server/src/Model/AStar.cpp)
+add_executable(dune-server ${server_src} Common/src/Exceptions/Exception.cpp Server/src/main.cpp Server/includes/Control/Server.h Server/src/Control/Server.cpp Server/includes/Model/Position.h Server/src/Model/Position.cpp Server/src/Model/Units/Unit.cpp Server/includes/Model/Units/Unit.h Server/includes/Model/Map.h Server/src/Model/Map.cpp Server/includes/Model/AStarNode.h Server/src/Model/AStarNode.cpp Server/includes/Model/AStar.h Server/src/Model/AStar.cpp Server/includes/Model/Terrains/Terrain.h Server/src/Model/Terrains/Terrain.cpp Server/includes/Model/Terrains/Rock.h Server/src/Model/Terrains/Rock.cpp Server/includes/Model/Terrains/Dunes.h Server/src/Model/Terrains/Dunes.cpp)
 # include_directories(${PROJECT_SOURCE_DIR}/Server/includes/Control)
 target_link_libraries(dune-server dune-common)
 #------------------------------------------------------------------------------

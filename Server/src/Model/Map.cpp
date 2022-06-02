@@ -1,4 +1,3 @@
-#include <utility>
 #include "../../includes/Model/Map.h"
 
 Map::Map(int rows1, int cols1) : rows(rows1), cols(cols1){
