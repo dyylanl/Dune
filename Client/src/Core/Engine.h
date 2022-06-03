@@ -9,7 +9,7 @@
 #include "SDL2pp/SDL2pp.hh"
 #include "../Characters/Player.h"
 #include "../Graphics/TextureManager.h"
-#include "../EventManager.h"
+#include "../Events/EventManager.h"
 
 class Engine {
 private:
