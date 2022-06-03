@@ -9,7 +9,7 @@ bool Engine::IsRunning() {
 }
 
 void Engine::Events() {
-    SDL_Event event;
+    /*SDL_Event event;
     while(SDL_PollEvent(&event)){
         switch(event.type) {
             case SDL_MOUSEMOTION:
@@ -19,7 +19,8 @@ void Engine::Events() {
                 std::cout << "Quit :(" << std::endl;
                 m_Running = false;
         }
-    }
+    }*/
+    m_Running = eventManager.listen();
 }
 
 void Engine::Update() {
@@ -36,5 +37,9 @@ void Engine::Render(SDL2pp::Renderer &m_Renderer) {
 
 Engine::Engine(std::vector<Player> &players) : m_players(players){
     m_Running = true;
+}
+
+void Engine::Quit() {
+    m_Running = false;
 }
 

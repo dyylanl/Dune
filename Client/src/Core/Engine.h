@@ -9,10 +9,12 @@
 #include "SDL2pp/SDL2pp.hh"
 #include "../Characters/Player.h"
 #include "../Graphics/TextureManager.h"
+#include "../EventManager.h"
 
 class Engine {
 private:
     std::vector<Player> &m_players;
+    EventManager eventManager;
     bool m_Running;
 public:
     Engine();
@@ -26,6 +28,8 @@ public:
     void Render(SDL2pp::Renderer &m_Renderer);
 
     Engine(std::vector<Player> &players);
+
+    void Quit();
 };
 
 
