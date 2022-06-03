@@ -1,22 +1,24 @@
 #ifndef __TERRAIN_H__
 #define __TERRAIN_H__
 
-#include "../Buildings/Building.h"
+
+#include "../Position.h"
 
 class Terrain {
 protected:
-    char key;
+    Position position;
+    char type;
     bool occupied;
     int speed_factor;
 public:
-    Terrain();
-    explicit Terrain(char key);
+    Terrain(Position pos, char type);
     void occupy();
-    bool isOccupied();
-    int getSpeedFactor();
+    bool isOccupied() const;
+    int getSpeedFactor() const;
     bool operator==(const Terrain& terrain);
-    virtual char getKey();
-    virtual void buildOn(Building building);
+    char getType();
+    Position getPosition();
+    void setType(char type);
 
 };
 

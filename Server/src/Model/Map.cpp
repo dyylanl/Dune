@@ -52,7 +52,7 @@ Terrain& Map::at(Position position) {
 void Map::showTerrain() {
     for (int i = 0; i < rows; ++i) {
         for (int j = 0; j < cols; ++j) {
-            std::cout << matrix.at( i*cols + i)->getKey();
+            std::cout << matrix.at( i*cols + i)->getType();
         }
         printf("\n");
     }
@@ -67,7 +67,7 @@ void Map::put(Building building) {
 void Map::occupy(Building building) {
     for (int i = 0; i < building.height; i++) {
         for (int j = 0; j < building.width; j++) {
-            this->at(Position(building.getPosition().x, building.getPosition().y)) = Terrain(building.key);
+            this->at(Position(building.getPosition().x, building.getPosition().y)) = Terrain(Position(building.getPosition()),building.key);
         }
     }
 }

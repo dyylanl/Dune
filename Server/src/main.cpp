@@ -13,12 +13,8 @@ int main(int argc, char* argv[]) {
     std::string port = argv[1];
 
     try {
-        Server server("8082");
+        Server server;
         server.run();
-        /*
-        Server server(port, MAX_CLIENTS_QUEUED);
-        server.run();
-         */
     } catch (const std::exception& e) {
         fprintf(stderr, "%s\n", e.what());
         return 1;

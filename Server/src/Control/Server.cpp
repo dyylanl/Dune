@@ -3,7 +3,7 @@
 #include "../../includes/Model/AStar.h"
 
 
-Server::Server(const std::string& port) {}
+Server::Server() {}
 
 void Server::run() {
 

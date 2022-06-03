@@ -7,9 +7,8 @@
 
 class Server {
 private:
-
 public:
-    Server(const std::string& port);
+    Server();
     Server(const Server&) = delete;
     Server& operator=(const Server&) = delete;
     Server(Server&& other) = delete;

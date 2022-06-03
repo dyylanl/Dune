@@ -1,30 +1,36 @@
 #include "../../../includes/Model/Terrains/Terrain.h"
 
-Terrain::Terrain() : key('A'), occupied(false), speed_factor(1) {}
-
-Terrain::Terrain(char key) : key(key), occupied(false), speed_factor(1) {}
-
-char Terrain::getKey() {
-    return key;
+char Terrain::getType() {
+    return type;
 }
 
 bool Terrain::operator==(const Terrain &terrain) {
-    return terrain.key == key;
+    return terrain.type == type;
 }
 
 void Terrain::occupy(){
     occupied = true;
 }
 
-bool Terrain::isOccupied(){
+bool Terrain::isOccupied() const{
     return occupied;
 }
 
 
-int Terrain::getSpeedFactor() {
+int Terrain::getSpeedFactor() const {
     return this->speed_factor;
 }
 
-void Terrain::buildOn(Building building) {
-    occupy();
+Terrain::Terrain(Position pos1, char type1) :
+        position(pos1),
+        type(type1),
+        occupied(false),
+        speed_factor(1) {}
+
+Position Terrain::getPosition() {
+    return this->position;
+}
+
+void Terrain::setType(char type1) {
+    this->type = type1;
 }

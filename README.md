@@ -18,7 +18,6 @@ del año 1998 ambientado en la novela Dune de Frank Herbert.
     > ./installer.sh
 
 ## To do
-    
 ### Server
     1> Mapa con distintos terrenos
     2> Unidades con distintas movilidades
