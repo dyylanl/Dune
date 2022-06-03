@@ -11,22 +11,15 @@
 class Map {
     std::vector<std::vector<std::string>> mapa;
     int rows, cols;
-//////////////////////// MATRIZ DE TERRENOS //////////////////////////////
-    std::vector<std::unique_ptr<Terrain> > matrix;
+    bool validPosition(Position position);
 public:
     Map(int rows, int cols);
     ~Map();
     bool canMove(const Unit& unit, Position postion);
-    bool isValid(Position position);
     void put(Position position, std::string value);
     void showMap();
+    bool isValid(Position position);
 
-/////////////////////////// MATRIZ DE TERRENOS //////////////////////////////
-    Terrain& at(Position position);
-    void showTerrain();
-    void put(Building building);
-    void occupy(Building building);
-    Terrain at(int x, int y);
 };
 
 #endif //__MAP_H__

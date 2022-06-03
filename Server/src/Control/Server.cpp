@@ -9,18 +9,16 @@ void Server::run() {
 
     std::cout << "Comenzando la ejecucion del servidor..." << std::endl;
     Map map(15,15);
-    Position start(5,0);
-    Position end(6,11);
-    map.put(Position(1,5), "B");
-    map.put(Position(2,5), "B");
-    map.put(Position(3,5), "B");
-    map.put(Position(4,5), "B");
-    map.put(Position(5,5), "B");
-    map.put(Position(6,5), "B");
-    map.put(Position(7,5), "B");
-    map.put(Position(8,5), "B");
-    map.put(start, "A");
-    map.put(end, "A");
+    Position end(14,14);
+    map.put(Position(0,5), "P");
+    map.put(Position(1,5), "P");
+    map.put(Position(2,5), "P");
+    map.put(Position(3,5), "P");
+    map.put(Position(4,5), "P");
+    map.put(Position(5,5), "P");
+    map.put(Position(6,5), "P");
+    map.put(Position(7,5), "P");
+    map.put(Position(8,5), "P");
     map.showMap();
     AStar astar(map);
     Unit unit(5,1);

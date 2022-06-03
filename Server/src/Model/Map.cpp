@@ -1,31 +1,27 @@
 #include "../../includes/Model/Map.h"
+#include "../../../Common/includes/Exceptions/Exception.h"
 
-Map::Map(int rows1, int cols1) : rows(rows1), cols(cols1), matrix(){
+Map::Map(int rows1, int cols1) : rows(rows1), cols(cols1){
     std::vector <std::vector<std::string>> map_init
             ((uint16_t) rows, std::vector<std::string>((uint16_t) cols, "A"));
     this->mapa = map_init;
 }
 
-bool Map::isValid(Position position) {
-    if (this->mapa[position.getX()][position.getY()] == "A"){
-        return true;
-    }
-    return false;
-}
-
 bool Map::canMove(const Unit& unit, Position position) {
-    return (isValid(position) && Unit::canMove());
+    return (validPosition(position) && Unit::canMove());
 }
 
 void Map::put(Position position, std::string value) {
-    this->mapa[position.getX()][position.getY()] = std::move(value);
+    if (validPosition(position)) {
+        this->mapa[position.getX()][position.getY()] = std::move(value);
+    }
 }
 
 
 void Map::showMap() {
     for (int i = 0; i < this->rows; i++) {
         for (int j = 0; j < this->cols; j++) {
-            if (this->mapa[i][j] == "B") {
+            if (this->mapa[i][j] == "P") {
                 const std::string red("\033[0;31m");
                 std::string reset("\033[0m");
                 std::cout << red << this->mapa[i][j] << reset;
@@ -43,40 +39,20 @@ void Map::showMap() {
 }
 
 
-///////////////////////////// METODOS MATRIX //////////////////////////////////////////////
-
-Terrain& Map::at(Position position) {
-    return *matrix.at(position.getY()*cols + position.getX());
-}
-
-void Map::showTerrain() {
-    for (int i = 0; i < rows; ++i) {
-        for (int j = 0; j < cols; ++j) {
-            std::cout << matrix.at( i*cols + i)->getType();
-        }
-        printf("\n");
+bool Map::validPosition(Position position) {
+    int x = position.getX();
+    int y = position.getY();
+    if ( x < 0 || y < 0 || x >= rows || y >= cols) {
+        return false;
     }
-    printf("\n");
-}
-
-
-void Map::put(Building building) {
-    this->occupy(building);
-}
-
-void Map::occupy(Building building) {
-    for (int i = 0; i < building.height; i++) {
-        for (int j = 0; j < building.width; j++) {
-            this->at(Position(building.getPosition().x, building.getPosition().y)) = Terrain(Position(building.getPosition()),building.key);
-        }
+    if (this->mapa[x][y] == "P") {
+        return false;
     }
+    return true;
 }
 
-Terrain Map::at(int x, int y) {
-    if ((x < 0) || (y < 0)) {
-        throw std::out_of_range("Out of range");
-    }
-    return *matrix.at((y) * cols + (x));
+bool Map::isValid(Position position) {
+    return validPosition(position);
 }
 
 
