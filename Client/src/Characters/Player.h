@@ -17,6 +17,7 @@ private:
     int x;
     int y;
     std::string m_TextureID;
+    bool selectStatus;
 
 public:
     Player(std::string textureID, TextureManager &manager, int X, int Y);
@@ -24,6 +25,8 @@ public:
     void update(EventManager &eventManager, float dt);
     void draw(SDL2pp::Renderer &renderer);
     SDL2pp::Rect getShape();
+
+    void select();
 };
 
 #endif //DUNE_PLAYER_H

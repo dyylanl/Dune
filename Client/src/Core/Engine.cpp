@@ -14,14 +14,17 @@ void Engine::Events() {
 
 void Engine::Update() {
 
-    for(unsigned int i = 0; i != m_players.size(); i++)
+    for(unsigned int i = 0; i != m_players.size(); i++) {
         if (eventManager.getMouseButtonLeftState()) {
             SDL_Rect shape = m_players[i].getShape();
             SDL_Point point = {eventManager.getX(), eventManager.getY()};
             if (SDL_PointInRect(&point, &shape)) {
                 std::cout << "objecto seleccionado" << std::endl;
+                m_players[i].select();
             }
-        };
+        }
+        m_players[i].update(eventManager,FRAME_RATE);
+    }
 }
 
 void Engine::Render(SDL2pp::Renderer &m_Renderer) {
