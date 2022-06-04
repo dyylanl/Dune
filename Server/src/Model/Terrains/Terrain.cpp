@@ -34,3 +34,12 @@ Position Terrain::getPosition() {
 void Terrain::setType(char type1) {
     this->type = type1;
 }
+
+
+Terrain &Terrain::operator=(const Terrain &otro) {
+    this->type = otro.type;
+    this->occupied = otro.occupied;
+    this->position = otro.position;
+    this->speed_factor = otro.speed_factor;
+    return *this;
+}

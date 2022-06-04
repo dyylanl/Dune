@@ -174,7 +174,8 @@
 				30,
 				31,
 				32,
-				33
+				33,
+				34
 			]
 		}
 	],
@@ -366,6 +367,11 @@
 		{
 			"backtrace" : 1,
 			"path" : "Server/includes/Model/Terrains/Sand.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "Server/includes/Model/defs.h",
 			"sourceGroupIndex" : 1
 		}
 	],

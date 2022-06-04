@@ -9,17 +9,17 @@
 #include "Buildings/Building.h"
 
 class Map {
-    std::vector<std::vector<std::string>> mapa;
     int rows, cols;
-    bool validPosition(Position position);
+    ////////////////// IMPLEMENTACION CON TERRENOS //////////////////
+    std::vector<std::vector<Terrain>> terrrains;
 public:
     Map(int rows, int cols);
     ~Map();
     bool canMove(const Unit& unit, Position postion);
-    void put(Position position, std::string value);
-    void showMap();
     bool isValid(Position position);
-
+    ////////////////// IMPLEMENTACION CON TERRENOS //////////////////
+    void putTerrain(Terrain terrain);
+    void showTerrain();
 };
 
 #endif //__MAP_H__

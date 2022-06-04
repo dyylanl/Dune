@@ -19,7 +19,7 @@ public:
     char getType();
     Position getPosition();
     void setType(char type);
-
+    Terrain& operator=(const Terrain& otro);
 };
 
 #endif	// __TERRAIN_H__
