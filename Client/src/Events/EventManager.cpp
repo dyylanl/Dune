@@ -38,3 +38,15 @@ void EventManager::mouseUp(SDL_Event event) {
         m_MouseButtonLeftState = false;
     std::cout << m_MouseButtonLeftState << std::endl;
 }
+
+bool EventManager::getMouseButtonLeftState() {
+    return m_MouseButtonLeftState;
+}
+
+int EventManager::getX() {
+    return x;
+}
+
+int EventManager::getY() {
+    return y;
+}

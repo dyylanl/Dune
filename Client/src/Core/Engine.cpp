@@ -9,23 +9,19 @@ bool Engine::IsRunning() {
 }
 
 void Engine::Events() {
-    /*SDL_Event event;
-    while(SDL_PollEvent(&event)){
-        switch(event.type) {
-            case SDL_MOUSEMOTION:
-                std::cout << "Oh! Mouse" << std::endl;
-                break;
-            case SDL_QUIT:
-                std::cout << "Quit :(" << std::endl;
-                m_Running = false;
-        }
-    }*/
     m_Running = eventManager.listen();
 }
 
 void Engine::Update() {
+
     for(unsigned int i = 0; i != m_players.size(); i++)
-        m_players[i].update(FRAME_RATE);
+        if (eventManager.getMouseButtonLeftState()) {
+            SDL_Rect shape = m_players[i].getShape();
+            SDL_Point point = {eventManager.getX(), eventManager.getY()};
+            if (SDL_PointInRect(&point, &shape)) {
+                std::cout << "objecto seleccionado" << std::endl;
+            }
+        };
 }
 
 void Engine::Render(SDL2pp::Renderer &m_Renderer) {

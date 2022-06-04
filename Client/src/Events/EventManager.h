@@ -24,6 +24,12 @@ public:
     void mouseDown(SDL_Event event);
 
     void mouseUp(SDL_Event event);
+
+    bool getMouseButtonLeftState();
+
+    int getX();
+
+    int getY();
 };
 
 
