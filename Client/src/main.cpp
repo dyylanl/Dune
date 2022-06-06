@@ -15,12 +15,13 @@ int main(int argc, char** argv){
         TextureManager textureManager(renderer);
         textureManager.load("carryall", DATA_PATH "assets/carryall.png");
         textureManager.load("missileTank", DATA_PATH "assets/missileTank.png");
+        textureManager.load("bg", DATA_PATH "assets/bg.png");
         Player player1("carryall", textureManager, SDL2pp::Point(300, 300));
         Player player2("missileTank", textureManager, SDL2pp::Point(0, 0));
         std::vector<Player> gameObjects;
         gameObjects.push_back(player1);
         gameObjects.push_back(player2);
-        Engine engine(gameObjects);
+        Engine engine(gameObjects, textureManager);
         while (engine.IsRunning()) {
             engine.Events();
             engine.Update();

@@ -15,6 +15,7 @@ class Engine {
 private:
     std::vector<Player> &m_players;
     EventManager eventManager;
+    TextureManager &m_TextureManager;
     bool m_Running;
 public:
     Engine();
@@ -27,9 +28,9 @@ public:
 
     void Render(SDL2pp::Renderer &m_Renderer);
 
-    Engine(std::vector<Player> &players);
-
     void Quit();
+
+    Engine(std::vector<Player> &players, TextureManager &manager);
 };
 
 

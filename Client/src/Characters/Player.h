@@ -14,9 +14,8 @@
 class Player {
 private:
     Animation m_Animation;
-    //int x;
-    //int y;
     SDL2pp::Point corner;
+    SDL2pp::Point size;
     std::string m_TextureID;
     bool selectStatus;
 
