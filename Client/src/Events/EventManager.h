@@ -28,6 +28,8 @@ public:
     bool listen();
 
     SDL2pp::Point getMouse();
+
+    bool MouseButtonDown(MouseButton button);
 };
 
 

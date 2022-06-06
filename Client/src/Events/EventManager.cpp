@@ -54,3 +54,7 @@ void EventManager::mouseUp(SDL_Event event) {
 SDL2pp::Point EventManager::getMouse() {
     return m_MouseCurrPosition;
 }
+
+bool EventManager::MouseButtonDown(MouseButton button) {
+    return m_MouseButtonStates[button];
+}
