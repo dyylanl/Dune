@@ -12,9 +12,7 @@ Player::~Player() {}
  */
 void Player::update(EventManager &eventManager, float dt) {
     //m_Animation.update(dt);
-    if(selectStatus && eventManager.getMouseButtonLeftState()){
-        //x = eventManager.getX();
-        //y = eventManager.getY();
+    if(selectStatus && eventManager.MouseButtonDown(LEFT)){
         corner = eventManager.getMouse();
     }
 }
