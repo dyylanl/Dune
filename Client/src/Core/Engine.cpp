@@ -17,7 +17,7 @@ void Engine::Update() {
     for(unsigned int i = 0; i != m_players.size(); i++) {
         if (eventManager.getMouseButtonLeftState()) {
             SDL_Rect shape = m_players[i].getShape();
-            SDL_Point point = {eventManager.getX(), eventManager.getY()};
+            SDL_Point point = eventManager.getMouse();
             if (SDL_PointInRect(&point, &shape)) {
                 std::cout << "objecto seleccionado" << std::endl;
                 m_players[i].select();

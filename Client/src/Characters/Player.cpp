@@ -15,7 +15,7 @@ void Player::update(EventManager &eventManager, float dt) {
     if(selectStatus && eventManager.getMouseButtonLeftState()){
         //x = eventManager.getX();
         //y = eventManager.getY();
-        corner = eventManager.getPoint();
+        corner = eventManager.getMouse();
     }
 }
 

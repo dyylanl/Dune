@@ -8,17 +8,13 @@
 #include <vector>
 #include "SDL2pp/SDL2pp.hh"
 
+enum MouseButton{LEFT, RIGHT};
+
 class EventManager {
 private:
-    //int x;
-    //int y;
-    SDL2pp::Point point;
-    bool m_MouseButtonLeftState;
-
-public:
-    EventManager();
-
-    bool listen();
+    SDL2pp::Point m_MouseCurrPosition;
+    SDL2pp::Point m_MouseLastPosition;
+    std::vector<bool> m_MouseButtonStates;
 
     void mouseMotion(SDL_Event event);
 
@@ -26,13 +22,14 @@ public:
 
     void mouseUp(SDL_Event event);
 
+public:
+    EventManager();
+
+    bool listen();
+
     bool getMouseButtonLeftState();
 
-    int getX();
-
-    int getY();
-
-    SDL2pp::Point getPoint();
+    SDL2pp::Point getMouse();
 };
 
 

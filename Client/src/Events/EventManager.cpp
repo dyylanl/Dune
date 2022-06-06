@@ -4,9 +4,12 @@
 
 #include "EventManager.h"
 
-EventManager::EventManager() : m_MouseButtonLeftState(false){}
+EventManager::EventManager() {
+    m_MouseButtonStates = {false, false};
+}
 
 bool EventManager::listen() {
+    m_MouseLastPosition = m_MouseCurrPosition;
     SDL_Event event;
     while(SDL_PollEvent(&event)){
         switch(event.type) {
@@ -22,37 +25,36 @@ bool EventManager::listen() {
 }
 
 void EventManager::mouseMotion(SDL_Event event) {
-    //x = event.motion.x;
-    //y = event.motion.y;
-    point.SetX(event.motion.x);
-    point.SetY(event.motion.y);
-    std::cout << point << std::endl;
+    m_MouseCurrPosition.SetX(event.motion.x);
+    m_MouseCurrPosition.SetY(event.motion.y);
 }
 
 void EventManager::mouseDown(SDL_Event event) {
     if(event.button.button == SDL_BUTTON_LEFT)
-        m_MouseButtonLeftState = true;
-    std::cout << m_MouseButtonLeftState << std::endl;
+        m_MouseButtonStates[LEFT] = true;
+
+    if(event.button.button == SDL_BUTTON_RIGHT)
+        m_MouseButtonStates[RIGHT] = true;
+    for (int i = 0; i < (int) m_MouseButtonStates.size(); ++i) {
+        std::cout << m_MouseButtonStates[i] << std::endl;
+    }
 }
 
 void EventManager::mouseUp(SDL_Event event) {
     if(event.button.button == SDL_BUTTON_LEFT)
-        m_MouseButtonLeftState = false;
-    std::cout << m_MouseButtonLeftState << std::endl;
+        m_MouseButtonStates[LEFT] = false;;
+
+    if(event.button.button == SDL_BUTTON_RIGHT)
+        m_MouseButtonStates[RIGHT] = false;
+    for (int i = 0; i < (int) m_MouseButtonStates.size(); ++i) {
+        std::cout << m_MouseButtonStates[i] << std::endl;
+    }
 }
 
 bool EventManager::getMouseButtonLeftState() {
-    return m_MouseButtonLeftState;
+    return m_MouseButtonStates[LEFT];
 }
 
-int EventManager::getX() {
-    return point.GetX();
-}
-
-int EventManager::getY() {
-    return point.GetY();
-}
-
-SDL2pp::Point EventManager::getPoint() {
-    return point;
+SDL2pp::Point EventManager::getMouse() {
+    return m_MouseCurrPosition;
 }
