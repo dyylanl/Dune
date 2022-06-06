@@ -15,7 +15,7 @@ void Engine::Events() {
 void Engine::Update() {
 
     for(unsigned int i = 0; i != m_players.size(); i++) {
-        if (eventManager.MouseButtonDown(LEFT)) {
+        if (eventManager.mouseButtonDown(LEFT)) {
             SDL_Rect shape = m_players[i].getShape();
             SDL_Point point = eventManager.getMouse();
             if (SDL_PointInRect(&point, &shape)) {
@@ -29,8 +29,9 @@ void Engine::Update() {
 
 void Engine::Render(SDL2pp::Renderer &m_Renderer) {
     m_Renderer.Clear();
-    for(unsigned int i = 0; i != m_players.size(); i++)
+    for(unsigned int i = 0; i != m_players.size(); i++) {
         m_players[i].draw(m_Renderer);
+    }
     m_Renderer.Present();
 }
 

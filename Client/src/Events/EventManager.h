@@ -29,7 +29,7 @@ public:
 
     SDL2pp::Point getMouse();
 
-    bool MouseButtonDown(MouseButton button);
+    bool mouseButtonDown(MouseButton button);
 };
 
 
