@@ -27,11 +27,7 @@ public:
 
     bool listen();
 
-    //bool getMouseButtonLeftState();
-
     SDL2pp::Point getMouse();
-
-    bool MouseButtonDown(MouseButton button) {return m_MouseButtonStates[button];}
 };
 
 
