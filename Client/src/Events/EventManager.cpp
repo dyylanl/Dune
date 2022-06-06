@@ -4,7 +4,7 @@
 
 #include "EventManager.h"
 
-EventManager::EventManager() :x(0), y(0), m_MouseButtonLeftState(false){}
+EventManager::EventManager() : m_MouseButtonLeftState(false){}
 
 bool EventManager::listen() {
     SDL_Event event;
@@ -22,9 +22,11 @@ bool EventManager::listen() {
 }
 
 void EventManager::mouseMotion(SDL_Event event) {
-    x = event.motion.x;
-    y = event.motion.y;
-    std::cout << x << "," << y << std::endl;
+    //x = event.motion.x;
+    //y = event.motion.y;
+    point.SetX(event.motion.x);
+    point.SetY(event.motion.y);
+    std::cout << point << std::endl;
 }
 
 void EventManager::mouseDown(SDL_Event event) {
@@ -44,9 +46,13 @@ bool EventManager::getMouseButtonLeftState() {
 }
 
 int EventManager::getX() {
-    return x;
+    return point.GetX();
 }
 
 int EventManager::getY() {
-    return y;
+    return point.GetY();
+}
+
+SDL2pp::Point EventManager::getPoint() {
+    return point;
 }

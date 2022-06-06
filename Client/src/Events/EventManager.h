@@ -10,8 +10,9 @@
 
 class EventManager {
 private:
-    int x;
-    int y;
+    //int x;
+    //int y;
+    SDL2pp::Point point;
     bool m_MouseButtonLeftState;
 
 public:
@@ -30,6 +31,8 @@ public:
     int getX();
 
     int getY();
+
+    SDL2pp::Point getPoint();
 };
 
 
