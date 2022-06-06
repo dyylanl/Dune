@@ -14,13 +14,14 @@
 class Player {
 private:
     Animation m_Animation;
-    int x;
-    int y;
+    //int x;
+    //int y;
+    SDL2pp::Point corner;
     std::string m_TextureID;
     bool selectStatus;
 
 public:
-    Player(std::string textureID, TextureManager &manager, int X, int Y);
+    Player(std::string textureID, TextureManager &manager, SDL2pp::Point point);
     ~Player();
     void update(EventManager &eventManager, float dt);
     void draw(SDL2pp::Renderer &renderer);
