@@ -55,9 +55,6 @@ function installDependencies() {
     echo ">> Instalando 'libyaml-cpp-dev'..."
     sudo apt-get install libyaml-cpp-dev
     echo ""
-    echo ">> Instalando 'nlohmann-json-dev'..."
-    sudo apt-get install nlohmann-json-dev
-    echo ""
         echo "Instalación de dependencias finalizada."
     echo ""
 }
