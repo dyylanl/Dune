@@ -11,3 +11,4 @@ cmake-build-debug
 filter_options
 !convenciones.txt
 !CMakeLists.txt
+cmake-build-debug
