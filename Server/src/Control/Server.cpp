@@ -7,12 +7,15 @@ Server::Server(std::string port1, int max_clients_queued1) : port(std::move(port
 
 void Server::run() {
     std::cout << "Comenzando la ejecucion del servidor..." << std::endl;
-
     Socket socket(port,max_clients_queued);
     auto peer = socket.accept();
-    char buf;
-    peer.recv(&buf, 10);
-    std::cout << "Se recibio: " << (buf) << std::endl;
+    char buf[7];
+    peer.recv((buf), sizeof(buf));
+    std::cout << "Se recibio: ";
+    for (int i = 0; i < 7; ++i) {
+        std::cout << buf[i];
+    }
+    std::cout << std::endl;
     /*
     Map map(10,10);
     map.putTerrain(Terrain(Position(9,9),'C'));
