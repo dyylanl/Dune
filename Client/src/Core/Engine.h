@@ -28,8 +28,6 @@ public:
 
     void Render(SDL2pp::Renderer &m_Renderer);
 
-    void Quit();
-
     Engine(std::vector<Player> &players, TextureManager &manager);
 };
 

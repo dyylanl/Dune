@@ -16,13 +16,11 @@ void Player::update(EventManager &eventManager, float dt) {
 }
 
 void Player::draw(SDL2pp::Renderer &renderer) {
-    //m_Animation.draw(renderer, SDL2pp::Rect(corner, SDL2pp::Point(100, 100)));
-    //SDL2pp::Point size(100, 100);
     m_Animation.draw(renderer, corner, size);
 }
 
 SDL2pp::Rect Player::getShape() {
-    return SDL2pp::Rect(corner, SDL2pp::Point(100, 100));
+    return SDL2pp::Rect(corner, size);
 }
 
 void Player::select() {

@@ -35,10 +35,6 @@ void Engine::Render(SDL2pp::Renderer &m_Renderer) {
     m_Renderer.Present();
 }
 
-void Engine::Quit() {
-    m_Running = false;
-}
-
 Engine::Engine(std::vector<Player> &players, TextureManager &textureManager) : m_players(players), m_TextureManager(textureManager){
     m_Running = true;
 }

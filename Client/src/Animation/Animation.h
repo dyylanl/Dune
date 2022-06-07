@@ -19,7 +19,6 @@ public:
     Animation(TextureManager &manager, std::string &textureID, SDL_RendererFlip flip);
     ~Animation();
     void update(float dt);
-    //void draw(SDL2pp::Renderer &renderer, const SDL2pp::Rect dest);
     void draw(SDL2pp::Renderer &renderer, SDL2pp::Point position, SDL2pp::Point spritSize);
     void setFlip(SDL_RendererFlip &flip);
 

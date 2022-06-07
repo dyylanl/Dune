@@ -39,14 +39,6 @@ void Animation::setFlip(SDL_RendererFlip &flip) {
     m_flip = flip;
 }
 
-/*void Animation::draw(SDL2pp::Renderer &renderer, const SDL2pp::Rect dest) {
-    // orig: selecionamos el frame
-    m_TextureManager.draw(renderer, m_textureID, SDL2pp::Rect(1 , 1, this->size, this->size),
-                          dest,
-                          0.0,                // don't rotate
-                          m_flip );
-}*/
-
 void Animation::draw(SDL2pp::Renderer &renderer, SDL2pp::Point position, SDL2pp::Point spritSize) {
     m_TextureManager.draw(renderer, m_textureID, position.GetX(), position.GetY(), spritSize, m_flip);
 }
