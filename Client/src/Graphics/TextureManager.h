@@ -19,7 +19,7 @@ public:
 
     void load(std::string id, std::string filename);
 
-    void draw(SDL2pp::Renderer &renderer, const std::string id, int x, int y, SDL2pp::Point spritSize, SDL_RendererFlip flip);
+    void draw(SDL2pp::Renderer &renderer, const std::string id, SDL2pp::Point position, SDL2pp::Point spritSize, SDL_RendererFlip flip);
 };
 
 

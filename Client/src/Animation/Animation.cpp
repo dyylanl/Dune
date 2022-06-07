@@ -40,7 +40,7 @@ void Animation::setFlip(SDL_RendererFlip &flip) {
 }
 
 void Animation::draw(SDL2pp::Renderer &renderer, SDL2pp::Point position, SDL2pp::Point spritSize) {
-    m_TextureManager.draw(renderer, m_textureID, position.GetX(), position.GetY(), spritSize, m_flip);
+    m_TextureManager.draw(renderer, m_textureID, position, spritSize, m_flip);
 }
 
 Animation::Animation(TextureManager &manager, std::string &textureID, SDL_RendererFlip flip) : currentFrame(0),

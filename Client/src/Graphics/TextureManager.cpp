@@ -11,12 +11,13 @@ void TextureManager::load(std::string id, std::string filename) {
 TextureManager::TextureManager(SDL2pp::Renderer &renderer) : m_renderer(renderer){
 }
 
-void TextureManager::draw(SDL2pp::Renderer &renderer, const std::string id, int x, int y, SDL2pp::Point spritSize,
+void TextureManager::draw(SDL2pp::Renderer &renderer, const std::string id, SDL2pp::Point position, SDL2pp::Point spritSize,
                           SDL_RendererFlip flip) {
     SDL2pp::Texture texture(m_renderer,
                             SDL2pp::Surface(m_TextureMap[id]).SetColorKey(true, 0));
-    SDL2pp::Rect orig(1 , 1, spritSize.GetX(),spritSize.GetY());
-    SDL2pp::Rect dest(x , y, spritSize.GetX(),spritSize.GetY());
+    SDL2pp::Point posFrame(1,1);
+    SDL2pp::Rect orig(posFrame, spritSize);
+    SDL2pp::Rect dest(position, spritSize);
     renderer.Copy(
             texture,
             orig,
