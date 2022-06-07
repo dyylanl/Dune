@@ -18,6 +18,8 @@ void Server::run() {
     map.putTerrain(Terrain(Position(5,6),'P'));
     map.putTerrain(Terrain(Position(5,7),'P'));
     map.putTerrain(Terrain(Position(5,8),'P'));
+    map.putTerrain(Terrain(Position(-2,25),'P'));
+
     map.showTerrain();
     AStar aStar(map);
     Unit unit(0,0);

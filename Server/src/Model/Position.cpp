@@ -2,6 +2,7 @@
 
 Position::Position() : x(0), y(0) {}
 
+// TODO: ESTA BIEN LANZAR EXCEPCION EN EL CONSTRUCTOR SI SE QUIERE CONSTRUIR UNA POSICION CON X E Y NEGATIVOS?
 Position::Position(int x, int y) {
     this->x = x;
     this->y = y;

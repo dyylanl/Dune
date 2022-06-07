@@ -21,7 +21,8 @@ del año 1998 ambientado en la novela Dune de Frank Herbert.
 ### Server
     1> Mapa con distintos terrenos
     2> Unidades con distintas movilidades
-    4> Ataque y destruccion de unidades y edificaciones
+    3> Ataque y destruccion de unidades y edificaciones
+
 
 ## Evolucion del Proyecto
 
