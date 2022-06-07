@@ -27,8 +27,8 @@ void Client::launch() {
         textureManager.load("carryall", DATA_PATH "assets/carryall.png");
         textureManager.load("missileTank", DATA_PATH "assets/missileTank.png");
         textureManager.load("bg", DATA_PATH "assets/bg.png");
-        Player player1("carryall", textureManager, SDL2pp::Point(300, 300), SDL2pp::Point(100, 100));
-        Player player2("missileTank", textureManager, SDL2pp::Point(0, 0), SDL2pp::Point(100, 100));
+        Player player1("carryall", textureManager, SDL2pp::Point(300, 300), SDL2pp::Point(64, 61));
+        Player player2("missileTank", textureManager, SDL2pp::Point(0, 0), SDL2pp::Point(34, 34));
         std::vector<Player> gameObjects;
         gameObjects.push_back(player1);
         gameObjects.push_back(player2);
