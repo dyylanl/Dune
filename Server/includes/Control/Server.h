@@ -1,14 +1,16 @@
 #ifndef __SERVER_H__
 #define __SERVER_H__
 
-#include <stdio.h>
+#include <cstdio>
 #include <iostream>
 #include <string>
 
 class Server {
 private:
+    std::string port;
+    int max_clients_queued;
 public:
-    Server();
+    Server(std::string port, int max_clients_queued);
     Server(const Server&) = delete;
     Server& operator=(const Server&) = delete;
     Server(Server&& other) = delete;
