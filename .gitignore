@@ -3,7 +3,7 @@
 .vs
 .vscode
 .idea
-.dump
+*.dump
 build
 *.idea
 cpplint.py
