@@ -30,8 +30,6 @@ private:
     int currentFrame;
     /** Total number of frames in the sprite. */
     int numFrames;
-    /** Size of the sprite (height and width). */
-    int size;
     /** Time elapsed since last update. */
     float elapsed;
     const std::string m_textureID;

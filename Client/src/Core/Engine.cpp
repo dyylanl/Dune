@@ -29,6 +29,7 @@ void Engine::Update() {
 
 void Engine::Render(SDL2pp::Renderer &m_Renderer) {
     m_Renderer.Clear();
+    m_TextureManager.draw(m_Renderer, "bg", SDL2pp::Point(0, 0), SDL2pp::Point(2100, 1050), SDL_FLIP_NONE);
     for(unsigned int i = 0; i != m_players.size(); i++) {
         m_players[i].draw(m_Renderer);
     }
