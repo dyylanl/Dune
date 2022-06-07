@@ -7,7 +7,7 @@ build
 *.idea
 cpplint.py
 execute.sh
-cmake-build-debug
+/cmake-build-debug
 filter_options
 !convenciones.txt
 !CMakeLists.txt
