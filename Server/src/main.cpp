@@ -2,18 +2,19 @@
 #include <exception>
 #include <string>
 #include "../includes/Control/Server.h"
+#include "../includes/Model/defs.h"
 
 
 int main(int argc, char* argv[]) {
     if (argc != 2) {
-        fprintf(stderr, "Usage: ./server <port>\n");
+        fprintf(stderr, "Usage: ./server <port> \n");
         return 1;
     }
 
     std::string port = argv[1];
 
     try {
-        Server server;
+        Server server(port, MAX_CLIENTS_QUEUED);
         server.run();
     } catch (const std::exception& e) {
         fprintf(stderr, "%s\n", e.what());
