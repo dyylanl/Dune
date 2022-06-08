@@ -5,6 +5,11 @@
 #include "EventManager.h"
 
 EventManager::EventManager() {
+    m_KeyStates = SDL_GetKeyboardState(nullptr);
+    if(m_KeyStates == nullptr){
+        std::cout << "Error loading keyboard state!\n";
+        exit(-1);
+    }
     m_MouseButtonStates = {false, false};
 }
 
@@ -13,6 +18,8 @@ bool EventManager::listen() {
     SDL_Event event;
     while(SDL_PollEvent(&event)){
         switch(event.type) {
+            case SDL_KEYDOWN: KeyDown(); break;
+            case SDL_KEYUP: KeyUp(); break;
             case SDL_MOUSEMOTION: mouseMotion(event); break;
             case SDL_MOUSEBUTTONDOWN: mouseDown(event); break;
             case SDL_MOUSEBUTTONUP: mouseUp(event); break;
@@ -57,4 +64,18 @@ SDL2pp::Point EventManager::getMouse() {
 
 bool EventManager::mouseButtonDown(MouseButton button) {
     return m_MouseButtonStates[button];
+}
+
+void EventManager::KeyDown() {
+    m_KeyStates = SDL_GetKeyboardState(nullptr);
+}
+
+void EventManager::KeyUp() {
+    m_KeyStates = SDL_GetKeyboardState(nullptr);
+}
+
+bool EventManager::GetKeyDown(SDL_Scancode key){
+    if(m_KeyStates[key] == 1)
+        return true;
+    return false;
 }

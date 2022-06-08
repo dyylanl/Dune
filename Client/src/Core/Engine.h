@@ -10,6 +10,7 @@
 #include "../Characters/Player.h"
 #include "../Graphics/TextureManager.h"
 #include "../Events/EventManager.h"
+#include "Camera.h"
 
 class Engine {
 private:

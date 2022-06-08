@@ -15,6 +15,7 @@ private:
     SDL2pp::Point m_MouseCurrPosition;
     SDL2pp::Point m_MouseLastPosition;
     std::vector<bool> m_MouseButtonStates;
+    const Uint8 *m_KeyStates;
 
     void mouseMotion(SDL_Event event);
 
@@ -30,6 +31,12 @@ public:
     SDL2pp::Point getMouse();
 
     bool mouseButtonDown(MouseButton button);
+
+    void KeyDown();
+
+    void KeyUp();
+
+    bool GetKeyDown(SDL_Scancode key);
 };
 
 

@@ -13,7 +13,6 @@ void Engine::Events() {
 }
 
 void Engine::Update() {
-
     for(unsigned int i = 0; i != m_players.size(); i++) {
         if (eventManager.mouseButtonDown(LEFT)) {
             SDL_Rect shape = m_players[i].getShape();
@@ -25,6 +24,7 @@ void Engine::Update() {
         }
         m_players[i].update(eventManager,FRAME_RATE);
     }
+    m_TextureManager.getCamera().update(eventManager);
 }
 
 void Engine::Render(SDL2pp::Renderer &m_Renderer) {
