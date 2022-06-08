@@ -23,7 +23,8 @@ void Client::launch() {
         SDL2pp::Window window("Hello world", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
                               800, 600, SDL_WINDOW_RESIZABLE);
         SDL2pp::Renderer renderer(window, -1, SDL_RENDERER_ACCELERATED);
-        TextureManager textureManager(renderer);
+        Camera camera;
+        TextureManager textureManager(renderer, camera);
         textureManager.load("carryall", DATA_PATH "assets/carryall.png");
         textureManager.load("missileTank", DATA_PATH "assets/missileTank.png");
         textureManager.load("bg", DATA_PATH "assets/bg.png");

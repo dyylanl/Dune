@@ -42,9 +42,6 @@ void EventManager::mouseDown(SDL_Event event) {
 
     if(event.button.button == SDL_BUTTON_RIGHT)
         m_MouseButtonStates[RIGHT] = true;
-    for (int i = 0; i < (int) m_MouseButtonStates.size(); ++i) {
-        std::cout << m_MouseButtonStates[i] << std::endl;
-    }
 }
 
 void EventManager::mouseUp(SDL_Event event) {
@@ -53,9 +50,6 @@ void EventManager::mouseUp(SDL_Event event) {
 
     if(event.button.button == SDL_BUTTON_RIGHT)
         m_MouseButtonStates[RIGHT] = false;
-    for (int i = 0; i < (int) m_MouseButtonStates.size(); ++i) {
-        std::cout << m_MouseButtonStates[i] << std::endl;
-    }
 }
 
 SDL2pp::Point EventManager::getMouse() {
