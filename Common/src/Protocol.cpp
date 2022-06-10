@@ -1,5 +1,3 @@
-
-
 #include "../includes/Protocol.h"
 
 #define JOIN 1
@@ -145,4 +143,29 @@ void Protocol::recvJoin(Socket &socket, std::string &name) {
     recvHouse(socket);
     int game_name_len = recvNameLen(socket);
     name = recvName(socket, game_name_len);
+}
+
+void Protocol::sendUnit(Socket &socket, char type) {
+    socket.send(reinterpret_cast<const char *>(&type), sizeof(uint8_t));
+}
+
+void Protocol::sendPosition(Socket &socket, unsigned int x, unsigned int y) {
+    socket.send(reinterpret_cast<const char *>(&x), sizeof(uint16_t));
+    socket.send(reinterpret_cast<const char *>(&y), sizeof(uint16_t));
+}
+
+std::vector<int> Protocol::recvPosition(Socket &socket) {
+    int x,y=0;
+    std::vector<int> position;
+    socket.recv(reinterpret_cast<char *>(&x), sizeof(uint16_t));
+    socket.recv(reinterpret_cast<char *>(&y), sizeof(uint16_t));
+    position.push_back((int)x);
+    position.push_back((int)y);
+    return position;
+}
+
+char Protocol::recvUnitType(Socket &socket) {
+    char type = 0;
+    socket.recv(reinterpret_cast<char *>(&type), sizeof(uint8_t));
+    return type;
 }

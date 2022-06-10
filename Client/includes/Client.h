@@ -10,13 +10,15 @@
 #include <SDL2/SDL_mixer.h>
 #include <SDL2/SDL_ttf.h>
 #include <string>
+#include "../../Common/includes/Socket/Socket.h"
+#include "../../Common/includes/Protocol.h"
 
 //-----------------------------------------------------------------------------
 
 class Client {
 private:
-    std::string ip;
-    std::string port;
+    Socket socket;
+    Protocol protocol;
 public:
     /* Constructor */
     Client(std::string ip, std::string port);

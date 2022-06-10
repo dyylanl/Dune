@@ -6,7 +6,7 @@
 class YAMLReader {
 public:
     explicit YAMLReader(const std::string& filename);
-    std::string getPort();
+    std::string getPort() const;
     ~YAMLReader() = default;
 
 protected:

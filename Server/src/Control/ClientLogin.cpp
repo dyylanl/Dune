@@ -1,5 +1,6 @@
 #include "../../includes/Control/ClientLogin.h"
 #include "../../../Common/includes/Exceptions/LibError.h"
+#include "../../includes/Model/Position.h"
 
 #define JOIN 1
 #define LIST 2
@@ -48,9 +49,12 @@ ClientLogin::ClientLogin(Socket& peer, Game &game_r)
 void ClientLogin::run() {
     try {
         while (is_running) {
-            uint16_t command = protocol.recvCommand(peer);
+            Position pos(10,500);
             if (is_running) {
+                protocol.sendPosition(this->peer,pos.getX(),pos.getY());
+                /*
                 execute(command);
+                 */
             }
         }
     } catch (const LibError& lib_error) {
@@ -59,16 +63,17 @@ void ClientLogin::run() {
             peer.shutdown(2);
         } catch (const LibError& lib_excep) {
         } catch (const Exception& err) {
-            fprintf(stderr,
+            /*fprintf(stderr,
                     "[ClientLogin]: Error apagando el socket del client.\n");
+                    */
         }
         //peer.close();
     } catch (...) {
         try {
             peer.shutdown(2);
         } catch (const Exception& err1) {
-            fprintf(stderr,
-                    "[ClientLogin]: Error apagando el socket del client.\n");
+            /*fprintf(stderr,
+                    "[ClientLogin]: Error apagando el socket del client.\n"); */
         }
         //peer.close();
         fprintf(stderr,
@@ -88,7 +93,7 @@ void ClientLogin::stop() {
     } catch (const LibError& err2) {
         fprintf(stderr, "[ClientLogin]: %s\n", err2.what());
     } catch (const Exception& err3) {
-        fprintf(stderr, "[ClientLogin]: Error apagando el socket.\n");
+        //fprintf(stderr, "[ClientLogin]: Error apagando el socket.\n");
     }
     peer.close();
 }

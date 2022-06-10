@@ -74,10 +74,31 @@ public:
      * Retorna una lista con el formato (actuales, requeridos, nombre).
      */
     std::vector<std::string> recvGameList(Socket &socket);
-
-
+    /*
+     *
+     */
     void recvCreate(Socket &socket, int &house, int &req, std::string &name);
+    /*
+     *
+     */
     void recvJoin(Socket &socket, std::string &name);
+
+    /*
+     * Envia el tipo de unidad
+     */
+    void sendUnit(Socket &socket, char type);
+    /*
+     * Envia la posicion en orden x y luego y
+     */
+    static void sendPosition(Socket &socket, unsigned x, unsigned y);
+    /*
+     * Retorna el tipo de unidad (char)
+     */
+    char recvUnitType(Socket &skt);
+    /*
+     * Retorna una posicion
+     */
+    static std::vector<int> recvPosition(Socket &skt);
 };
 
 
