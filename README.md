@@ -6,7 +6,7 @@ del año 1998 ambientado en la novela Dune de Frank Herbert.
 | Integrantes        | Padron |
 |--------------------|--------|
 | Ledesma, Dylan     | 102876 |
-| Riluizaga, Ricardo |        |
+| Riluizaga, Ricardo | 87528  |
 | Codino, Federico   |        |
 
 
