@@ -10,6 +10,8 @@
 #include "../Animation/Animation.h"
 #include "../Graphics/TextureManager.h"
 #include "../Events/EventManager.h"
+#include "../../../Common/includes/Socket/Socket.h"
+#include <arpa/inet.h>
 
 class Player {
 private:
@@ -22,7 +24,7 @@ private:
 public:
     Player(std::string textureID, TextureManager &manager, SDL2pp::Point position, SDL2pp::Point size);
     ~Player();
-    void update(EventManager &eventManager, float dt);
+    void update(EventManager &eventManager, float dt, Socket &skt, int &size, std::vector<std::vector<int>> &posiciones);
     void draw(SDL2pp::Renderer &renderer);
     SDL2pp::Rect getShape();
 

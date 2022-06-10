@@ -12,7 +12,7 @@ void Engine::Events() {
     m_Running = eventManager.listen();
 }
 
-void Engine::Update() {
+void Engine::Update(Socket &skt, int &tam, std::vector<std::vector<int>> &posiciones) {
     for(unsigned int i = 0; i != m_players.size(); i++) {
         if (eventManager.mouseButtonDown(LEFT)) {
             SDL_Rect shape = m_players[i].getShape();
@@ -22,7 +22,7 @@ void Engine::Update() {
                 m_players[i].select();
             }
         }
-        m_players[i].update(eventManager,FRAME_RATE);
+        m_players[i].update(eventManager,FRAME_RATE, skt, tam, posiciones);
     }
     m_TextureManager.getCamera().update(eventManager);
 }

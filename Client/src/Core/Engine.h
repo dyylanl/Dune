@@ -11,6 +11,7 @@
 #include "../Graphics/TextureManager.h"
 #include "../Events/EventManager.h"
 #include "Camera.h"
+#include "../../../Common/includes/Socket/Socket.h"
 
 class Engine {
 private:
@@ -19,17 +20,15 @@ private:
     TextureManager &m_TextureManager;
     bool m_Running;
 public:
-    Engine();
+    Engine(std::vector<Player> &players, TextureManager &manager);
 
     bool IsRunning();
 
     void Events();
 
-    void Update();
+    void Update(Socket &skt, int &tam, std::vector<std::vector<int>> &posiciones);
 
     void Render(SDL2pp::Renderer &m_Renderer);
-
-    Engine(std::vector<Player> &players, TextureManager &manager);
 };
 
 
