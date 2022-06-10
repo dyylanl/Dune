@@ -208,7 +208,6 @@ size_t Socket::recv(char* buffer, const size_t len) const {
     while (total_received < len) {
         last_received =
                 ::recv(fd, &buffer[total_received], len - total_received, 0);
-
         if (last_received < 0) {
             throw Exception("Error in function: Socket::recv()");
         } else if (last_received == 0) {

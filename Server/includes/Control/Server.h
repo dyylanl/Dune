@@ -4,13 +4,17 @@
 #include <cstdio>
 #include <iostream>
 #include <string>
+// --------------------------------------------------- //
+#include "YAMLReader.h"
+#include "Accepter.h"
 
 class Server {
 private:
-    std::string port;
-    int max_clients_queued;
+    YAMLReader reader;
+    Accepter accepter;
+
 public:
-    Server(std::string port, int max_clients_queued);
+    explicit Server(const std::string& config_path);
     Server(const Server&) = delete;
     Server& operator=(const Server&) = delete;
     Server(Server&& other) = delete;

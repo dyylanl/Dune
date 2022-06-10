@@ -1,0 +1,55 @@
+port: "8082"
+map_path: "../Dune/mapa.yaml"
+speed_factor: 1
+inital_gold: 50
+inital_energy: 150
+buildings:
+  construction_center:
+    energy: 0
+    cost: 0
+    x: 3
+    y: 3
+    hit_points: 3000
+  light_factory:
+    energy: 500
+    cost: 800
+    x: 3
+    y: 3
+    hit_points: 500
+  air_traps:
+    energy: 500
+    cost: 800
+    x: 3
+    y: 3
+    hit_points: 500
+  heavy_factory:
+    energy: 800
+    cost: 1500
+    x: 4
+    y: 4
+    hit_points: 1500
+  refinery:
+    energy: 400
+    capacity: 5000
+    cost: 500
+    x: 3
+    y: 3
+    hit_points: 1000
+  silo:
+    energy: 100
+    capacity: 1000
+    x: 1
+    y: 1
+    hit_points: 200
+  barrack:
+    energy: 100
+    cost: 300
+    x: 2
+    y: 3
+    hit_points: 300
+  palace:
+    energy: 800
+    cost: 2000
+    x: 3
+    y: 3
+    hit_points: 1000
