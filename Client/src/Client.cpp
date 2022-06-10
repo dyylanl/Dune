@@ -29,13 +29,13 @@ void Client::launch() {
     try {
         SDL2pp::SDL sdl(SDL_INIT_VIDEO);
         SDL2pp::Window window("Hello world", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
-                              800, 600, SDL_WINDOW_RESIZABLE);
+                              1280, 720, SDL_WINDOW_RESIZABLE);
         SDL2pp::Renderer renderer(window, -1, SDL_RENDERER_ACCELERATED);
         Camera camera;
         TextureManager textureManager(renderer, camera);
         textureManager.load("carryall", DATA_PATH "assets/carryall.png");
         textureManager.load("missileTank", DATA_PATH "assets/missileTank.png");
-        textureManager.load("bg", DATA_PATH "assets/bg.png");
+        textureManager.load("menu", DATA_PATH "assets/menu.png");
         //Player player1("carryall", textureManager, SDL2pp::Point(300, 300), SDL2pp::Point(64, 61));
         Player player2("missileTank", textureManager, SDL2pp::Point(posX * 30, posY * 30), SDL2pp::Point(34, 34));
         std::vector<Player> gameObjects;
