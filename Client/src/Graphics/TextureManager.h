@@ -7,7 +7,7 @@
 
 
 #include "SDL2pp/SDL2pp.hh"
-#include "../Core/Camera.h"
+#include "../Camera/Camera.h"
 #include <map>
 
 class TextureManager {

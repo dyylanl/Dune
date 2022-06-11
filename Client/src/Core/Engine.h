@@ -10,7 +10,7 @@
 #include "../Characters/Player.h"
 #include "../Graphics/TextureManager.h"
 #include "../Events/EventManager.h"
-#include "Camera.h"
+#include "../Camera/Camera.h"
 #include "../../../Common/includes/Socket/Socket.h"
 
 class Engine {

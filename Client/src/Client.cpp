@@ -8,7 +8,7 @@
 #include "Graphics/TextureManager.h"
 #include "Characters/Player.h"
 #include "Core/Engine.h"
-#include "ClientThread.h"
+#include "Thread/RecvThread.h"
 #include <arpa/inet.h>
 
 
@@ -40,7 +40,7 @@ void Client::launch() {
         //gameObjects.push_back(player1);
         //gameObjects.push_back(player2);
         EventManager eventManager;
-        ClientThread clientThread(gameObjects, eventManager, textureManager, socket, protocol);
+        RecvThread clientThread(gameObjects, eventManager, textureManager, socket, protocol);
         clientThread.start();
 
         Engine engine(gameObjects, textureManager, eventManager);

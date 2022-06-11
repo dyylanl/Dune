@@ -2,15 +2,15 @@
 // Created by riclui on 11/06/22.
 //
 
-#ifndef DUNE_CLIENTTHREAD_H
-#define DUNE_CLIENTTHREAD_H
+#ifndef DUNE_RECVTHREAD_H
+#define DUNE_RECVTHREAD_H
 
 
-#include "../../Common/includes/Thread.h"
-#include "Characters/Player.h"
-#include "../../Common/includes/Protocol.h"
+#include "../../../Common/includes/Thread.h"
+#include "../Characters/Player.h"
+#include "../../../Common/includes/Protocol.h"
 
-class ClientThread : public Thread {
+class RecvThread : public Thread {
 private:
     std::vector<Player> &m_gameObjects;
     EventManager &m_eventManager;
@@ -18,7 +18,7 @@ private:
     Socket skt;
     Protocol &protocol;
 public:
-    ClientThread(std::vector<Player> &gameObjects, EventManager &eventManager, TextureManager &textureManager, Socket &socket, Protocol &protocol)
+    RecvThread(std::vector<Player> &gameObjects, EventManager &eventManager, TextureManager &textureManager, Socket &socket, Protocol &protocol)
             : m_gameObjects(gameObjects), m_eventManager(eventManager), m_textureManager(textureManager),skt(std::move(socket)), protocol(protocol){}
     void run() override;
 
@@ -26,4 +26,4 @@ public:
 };
 
 
-#endif //DUNE_CLIENTTHREAD_H
+#endif //DUNE_RECVTHREAD_H
