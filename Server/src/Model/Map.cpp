@@ -1,6 +1,6 @@
 #include "../../includes/Model/Map.h"
 #include "../../../Common/includes/Exceptions/Exception.h"
-#include "../../includes/Model/defs.h"
+#include "../../includes/defs.h"
 
 Map::Map(int rows1, int cols1) : rows(rows1), cols(cols1) {
     // EL TERRENO INICIAL SE SETEA CON 'ARENAS'

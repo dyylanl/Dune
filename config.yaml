@@ -6,24 +6,28 @@ inital_energy: 150
 buildings:
   construction_center:
     energy: 0
+    capacity: 0
     cost: 0
     x: 3
     y: 3
     hit_points: 3000
   light_factory:
     energy: 500
+    capacity: 0
     cost: 800
     x: 3
     y: 3
     hit_points: 500
   air_traps:
     energy: 500
+    capacity: 0
     cost: 800
     x: 3
     y: 3
     hit_points: 500
   heavy_factory:
     energy: 800
+    capacity: 0
     cost: 1500
     x: 4
     y: 4
@@ -38,17 +42,20 @@ buildings:
   silo:
     energy: 100
     capacity: 1000
+    cost: 200
     x: 1
     y: 1
     hit_points: 200
   barrack:
     energy: 100
+    capacity: 0
     cost: 300
     x: 2
     y: 3
     hit_points: 300
   palace:
     energy: 800
+    capacity: 0
     cost: 2000
     x: 3
     y: 3

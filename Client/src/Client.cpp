@@ -26,7 +26,7 @@ void Client::launch() {
         }*/
 
         SDL2pp::SDL sdl(SDL_INIT_VIDEO);
-        SDL2pp::Window window("Hello world", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
+        SDL2pp::Window window("DUNE - v0.1", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
                               1280, 720, SDL_WINDOW_RESIZABLE);
         SDL2pp::Renderer renderer(window, -1, SDL_RENDERER_ACCELERATED);
         Camera camera;

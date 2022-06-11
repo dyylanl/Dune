@@ -51,7 +51,7 @@ void Accepter:: run() {
     } catch (const LibError& e) {
         //fprintf(stderr, "[ACCEPTER]: %s\n", e.what());
     } catch (const std::exception& e) {
-        fprintf(stderr, "[ACCEPTER]: %s\n", e.what());
+        //fprintf(stderr, "[ACCEPTER]: %s\n", e.what());
     } catch (...) {
         fprintf(stderr, "[ACCEPTER]: Error desconocido.\n");
     }
