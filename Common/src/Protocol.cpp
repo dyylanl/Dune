@@ -154,13 +154,11 @@ void Protocol::sendPosition(Socket &socket, unsigned int x, unsigned int y) {
     socket.send(reinterpret_cast<const char *>(&y), sizeof(uint16_t));
 }
 
-std::vector<int> Protocol::recvPosition(Socket &socket) {
+Position Protocol::recvPosition(Socket &socket) {
     int x,y=0;
-    std::vector<int> position;
     socket.recv(reinterpret_cast<char *>(&x), sizeof(uint16_t));
     socket.recv(reinterpret_cast<char *>(&y), sizeof(uint16_t));
-    position.push_back((int)x);
-    position.push_back((int)y);
+    Position position(x,y);
     return position;
 }
 

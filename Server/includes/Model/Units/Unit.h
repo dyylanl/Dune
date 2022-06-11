@@ -23,6 +23,8 @@ public:
     char getUnitType();
 
     int getId();
+
+    void setPosition(Position pos);
 };
 
 #endif //__UNIT_H__
