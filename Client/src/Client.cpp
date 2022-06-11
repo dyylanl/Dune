@@ -24,7 +24,7 @@ void Client::launch() {
         while (input != "q") {
             std::cin >> input;
         }*/
-        std::cout << "Comando recibido: " << (char)(protocol.recvUnitType(socket)) << std::endl;
+
         SDL2pp::SDL sdl(SDL_INIT_VIDEO);
         SDL2pp::Window window("DUNE - v0.1", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
                               1280, 720, SDL_WINDOW_RESIZABLE);
@@ -42,7 +42,6 @@ void Client::launch() {
         EventManager eventManager;
         RecvThread clientThread(gameObjects, eventManager, textureManager, socket, protocol);
         clientThread.start();
-
         Engine engine(gameObjects, textureManager, eventManager);
         std::vector<std::vector<int>> posiciones;
         while (engine.IsRunning()) {

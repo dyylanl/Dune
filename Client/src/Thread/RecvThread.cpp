@@ -7,14 +7,11 @@
 void RecvThread::run() {
     char operation = 0;
     while (m_eventManager.isRunnig()) {
-        if(m_eventManager.isRunnig())
-            break;
         protocol.operationRecv(skt, operation);
         if(operation == 4) {
             crearUnidad();
         }
     }
-
     std::cout << "salir" << std::endl;
 }
 

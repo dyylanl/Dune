@@ -8,7 +8,7 @@ void Engine::_processNewConnections() {
     while ((connection = new_connections.pop())) {
         fprintf(stderr, "Se ha conectado un jugador.\n");
         // Envio un tanque para probar...
-        protocol.sendUnit(connection->peer, 'T');
+        protocol.sendUnit(connection->peer,1,'T',15,15);
     }
 }
 
@@ -41,7 +41,7 @@ Engine::Engine(YAMLReader& reader1,
 
 void Engine::run() {
     fprintf(stderr, "ENGINE: Empezando ejecución.\n");
-    // Variables para controlar el frame-rate
+
     auto t1 = std::chrono::steady_clock::now();
     auto t2 = t1;
     std::chrono::duration<float, std::milli> diff{};
@@ -66,6 +66,7 @@ void Engine::run() {
         t1 += std::chrono::milliseconds(rate);
         it += 1;
     }
+
     fprintf(stderr, "ENGINE: Terminando ejecución.\n");
 }
 
