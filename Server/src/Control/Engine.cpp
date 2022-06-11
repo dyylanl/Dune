@@ -10,11 +10,12 @@ void Engine::_processNewConnections() {
 
         // Envio un tanque para probar...
         Unit unit(4,'T', 15, 15);
-        protocol.sendUnit(connection->peer,1,'T',15,15);
+        protocol.sendUnit(connection->peer,1,'o',15,15);
 
         // Recibo la posicion clickeada
-        Position pos_end = protocol.recvPosition(connection->peer);
-
+        /*
+        std::vector<int> pos_end1 = protocol.recvPosition(connection->peer);
+        Position pos_end(pos_end1[0], pos_end1[1]);
         // Creo la ruta respecto de la posicion clickeada
         std::stack<Position> path = this->game.makePath(unit,pos_end);
 
@@ -26,6 +27,7 @@ void Engine::_processNewConnections() {
             path.pop();
         }
         unit.setPosition(pos_end);
+*/
     }
 }
 
@@ -67,6 +69,7 @@ void Engine::run() {
 
     while (keep_executing) {
         _processNewConnections();
+
         it = 0;
         t2 = std::chrono::steady_clock::now();
         diff = t2 - t1;
