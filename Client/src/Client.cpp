@@ -51,7 +51,7 @@ void Client::launch() {
             engine.Render(renderer);
             usleep(FRAME_RATE);
         }
-
+        clientThread.stop();
         clientThread.join();
 
     } catch (std::exception& e) {

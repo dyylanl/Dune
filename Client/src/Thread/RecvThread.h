@@ -23,6 +23,8 @@ public:
     void run() override;
 
     void crearUnidad();
+
+    void stop();
 };
 
 

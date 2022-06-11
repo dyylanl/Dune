@@ -7,11 +7,12 @@
 void RecvThread::run() {
     char operation = 0;
     while (m_eventManager.isRunnig()) {
+        if(m_eventManager.isRunnig())
+            break;
         protocol.operationRecv(skt, operation);
         if(operation == 4) {
             crearUnidad();
         }
-        std::cout << m_eventManager.getMouse() << std::endl;
     }
 
     std::cout << "salir" << std::endl;
@@ -31,4 +32,8 @@ void RecvThread::crearUnidad() {
         Player player1("carryall", m_textureManager, SDL2pp::Point(pos[0] * 30, pos[1] * 30), SDL2pp::Point(64, 61));
         m_gameObjects.push_back(player1);
     }
+}
+
+void RecvThread::stop() {
+
 }
