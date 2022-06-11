@@ -12,15 +12,18 @@
 #include "../Events/EventManager.h"
 #include "../Camera/Camera.h"
 #include "../../../Common/includes/Socket/Socket.h"
+#include "../../../Common/includes/Protocol.h"
 
 class Engine {
 private:
     std::vector<Player> &m_players;
     TextureManager &m_TextureManager;
     EventManager &m_eventManager;
+    Socket &socket;
+    Protocol protocol;
     bool m_Running;
 public:
-    Engine(std::vector<Player> &players, TextureManager &manager, EventManager &eventManager);
+    Engine(std::vector<Player> &players, TextureManager &manager, EventManager &eventManager , Socket &skt);
 
     bool IsRunning();
 

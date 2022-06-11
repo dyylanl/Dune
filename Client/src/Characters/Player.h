@@ -11,6 +11,7 @@
 #include "../Graphics/TextureManager.h"
 #include "../Events/EventManager.h"
 #include "../../../Common/includes/Socket/Socket.h"
+#include "../../../Common/includes/Protocol.h"
 #include <arpa/inet.h>
 
 class Player {
@@ -24,7 +25,7 @@ private:
 public:
     Player(std::string textureID, TextureManager &manager, SDL2pp::Point position, SDL2pp::Point size);
     ~Player();
-    void update(EventManager &eventManager, float dt);
+    void update(EventManager &eventManager, float dt, Socket &skt, Protocol &prot);
     void draw(SDL2pp::Renderer &renderer);
     SDL2pp::Rect getShape();
 

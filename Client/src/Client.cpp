@@ -42,7 +42,7 @@ void Client::launch() {
         EventManager eventManager;
         RecvThread clientThread(gameObjects, eventManager, textureManager, socket, protocol);
         clientThread.start();
-        Engine engine(gameObjects, textureManager, eventManager);
+        Engine engine(gameObjects, textureManager, eventManager, socket);
         std::vector<std::vector<int>> posiciones;
         while (engine.IsRunning()) {
             engine.Events();
