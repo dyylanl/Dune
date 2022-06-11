@@ -24,7 +24,7 @@ private:
 public:
     Player(std::string textureID, TextureManager &manager, SDL2pp::Point position, SDL2pp::Point size);
     ~Player();
-    void update(EventManager &eventManager, float dt, Socket &skt, int &size, std::vector<std::vector<int>> &posiciones);
+    void update(EventManager &eventManager, float dt);
     void draw(SDL2pp::Renderer &renderer);
     SDL2pp::Rect getShape();
 

@@ -9,22 +9,22 @@ bool Engine::IsRunning() {
 }
 
 void Engine::Events() {
-    m_Running = eventManager.listen();
+    m_Running = m_eventManager.listen();
 }
 
-void Engine::Update(Socket &skt, int &tam, std::vector<std::vector<int>> &posiciones) {
+void Engine::Update() {
     for(unsigned int i = 0; i != m_players.size(); i++) {
-        if (eventManager.mouseButtonDown(LEFT)) {
+        if (m_eventManager.mouseButtonDown(LEFT)) {
             SDL_Rect shape = m_players[i].getShape();
-            SDL_Point point = eventManager.getMouse();
+            SDL_Point point = m_eventManager.getMouse();
             if (SDL_PointInRect(&point, &shape)) {
                 std::cout << "objecto seleccionado" << std::endl;
                 m_players[i].select();
             }
         }
-        m_players[i].update(eventManager,FRAME_RATE, skt, tam, posiciones);
+        m_players[i].update(m_eventManager,FRAME_RATE);
     }
-    m_TextureManager.getCamera().update(eventManager);
+    m_TextureManager.getCamera().update(m_eventManager);
 }
 
 void Engine::Render(SDL2pp::Renderer &m_Renderer) {
@@ -36,7 +36,7 @@ void Engine::Render(SDL2pp::Renderer &m_Renderer) {
     m_Renderer.Present();
 }
 
-Engine::Engine(std::vector<Player> &players, TextureManager &textureManager) : m_players(players), m_TextureManager(textureManager){
+Engine::Engine(std::vector<Player> &players, TextureManager &textureManager, EventManager &eventManager) : m_players(players), m_TextureManager(textureManager), m_eventManager(eventManager){
     m_Running = true;
 }
 

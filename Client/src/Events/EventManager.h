@@ -16,6 +16,7 @@ private:
     SDL2pp::Point m_MouseLastPosition;
     std::vector<bool> m_MouseButtonStates;
     const Uint8 *m_KeyStates;
+    bool runnig;
 
     void mouseMotion(SDL_Event event);
 
@@ -37,6 +38,10 @@ public:
     void KeyUp();
 
     bool GetKeyDown(SDL_Scancode key);
+
+    bool isRunnig();
+
+    bool quit();
 };
 
 

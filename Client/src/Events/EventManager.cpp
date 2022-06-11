@@ -11,6 +11,7 @@ EventManager::EventManager() {
         exit(-1);
     }
     m_MouseButtonStates = {false, false};
+    runnig = true;
 }
 
 bool EventManager::listen() {
@@ -23,9 +24,7 @@ bool EventManager::listen() {
             case SDL_MOUSEMOTION: mouseMotion(event); break;
             case SDL_MOUSEBUTTONDOWN: mouseDown(event); break;
             case SDL_MOUSEBUTTONUP: mouseUp(event); break;
-            case SDL_QUIT:
-                std::cout << "Quit :(" << std::endl;
-                return false;
+            case SDL_QUIT: return quit();
         }
     }
     return true;
@@ -71,5 +70,15 @@ void EventManager::KeyUp() {
 bool EventManager::GetKeyDown(SDL_Scancode key){
     if(m_KeyStates[key] == 1)
         return true;
+    return false;
+}
+
+bool EventManager::isRunnig() {
+    return runnig;
+}
+
+bool EventManager::quit() {
+    runnig = false;
+    std::cout << "Quit :(" << std::endl;
     return false;
 }

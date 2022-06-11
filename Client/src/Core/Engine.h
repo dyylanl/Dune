@@ -16,17 +16,17 @@
 class Engine {
 private:
     std::vector<Player> &m_players;
-    EventManager eventManager;
     TextureManager &m_TextureManager;
+    EventManager &m_eventManager;
     bool m_Running;
 public:
-    Engine(std::vector<Player> &players, TextureManager &manager);
+    Engine(std::vector<Player> &players, TextureManager &manager, EventManager &eventManager);
 
     bool IsRunning();
 
     void Events();
 
-    void Update(Socket &skt, int &tam, std::vector<std::vector<int>> &posiciones);
+    void Update();
 
     void Render(SDL2pp::Renderer &m_Renderer);
 };

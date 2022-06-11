@@ -48,7 +48,7 @@ FILE(GLOB_RECURSE server_src "Server/*.cpp")
 add_library(dune-common SHARED ${common_src} Common/src/Exceptions/LibError.cpp)
 
 # Client
-add_executable(dune ${client_src})
+add_executable(dune ${client_src} Client/src/ClientThread.cpp Client/src/ClientThread.h)
 target_link_libraries(dune dune-common SDL2 SDL2_image SDL2_ttf SDL2_mixer)
 target_link_libraries(dune ${SDL2PP_LIBRARIES})
 
