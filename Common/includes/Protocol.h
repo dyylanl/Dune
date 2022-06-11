@@ -8,6 +8,7 @@
 #include <iostream>
 //----------------------------------------//
 #include "Socket/Socket.h"
+#include "../../Server/includes/Model/Units/Unit.h"
 
 class Protocol {
 private:
@@ -99,6 +100,14 @@ public:
      * Retorna una posicion
      */
     static std::vector<int> recvPosition(Socket &skt);
+
+    void createUnit(Socket &socket, int idUnit, char unitType, int posX, int posY);
+
+    void operationRecv(Socket &socket, char &operation);
+
+    char typeUnidRecv(Socket &socket);
+
+    int idUnidRecv(Socket &socket);
 };
 
 

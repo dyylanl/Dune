@@ -17,12 +17,20 @@ Client::Client(std::string ip1, std::string port1) : socket(ip1,port1), protocol
 
 void Client::launch() {
     try {
-        std::vector<int> pos = protocol.recvPosition(this->socket);
+        char operation = 0;
+        while (1) {
+            protocol.operationRecv(socket, operation);
+            if(operation == 4) {
+                crearUnidad();
+            }
+        }
+
+        /*std::vector<int> pos = protocol.recvPosition(this->socket);
         std::cout << pos[0] << "," << pos[1] << std::endl;
         std::string input;
         while (input != "q") {
             std::cin >> input;
-        }
+        }*/
 /*
         SDL2pp::SDL sdl(SDL_INIT_VIDEO);
         SDL2pp::Window window("Hello world", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
@@ -59,6 +67,18 @@ void Client::launch() {
         fprintf(stderr, "Warning: error while shutting-down socket.");
     }
     */
+}
+
+void Client::crearUnidad() {
+    int unitId = protocol.idUnidRecv(socket);
+    char unitType = protocol.typeUnidRecv(socket);
+    std::vector<int> pos = protocol.recvPosition(socket);
+    if (unitType == 't') {
+        std::cout << "crear tank " << unitId << ":" << pos[0] << "," << pos[1] << std::endl;
+    }
+    if (unitType == 'o') {
+        std::cout << "crear otro: " << unitId << ":" << pos[0] << "," << pos[1] << std::endl;
+    }
 }
 
 Client::~Client() = default;

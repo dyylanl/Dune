@@ -10,13 +10,19 @@ class Map;
 
 class Unit {
 private:
+    int id;
+    char unitType;
     Position position;
 public:
-    Unit(int x, int y);
+    Unit(int id, char type, int x, int y);
     ~Unit();
     Position getPosition();
 
     static bool canMove();
+
+    char getUnitType();
+
+    int getId();
 };
 
 #endif //__UNIT_H__

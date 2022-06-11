@@ -169,3 +169,28 @@ char Protocol::recvUnitType(Socket &socket) {
     socket.recv(reinterpret_cast<char *>(&type), sizeof(uint8_t));
     return type;
 }
+
+void Protocol::createUnit(Socket &socket, int idUnit, char unitType, int posX, int posY) {
+    uint8_t operation = 4;
+    socket.send(reinterpret_cast<const char *>(&operation), sizeof(uint8_t));
+    socket.send(reinterpret_cast<const char *>(&idUnit), sizeof(uint16_t));
+    socket.send(reinterpret_cast<const char *>(&unitType), sizeof(uint8_t));
+    socket.send(reinterpret_cast<const char *>(&posX), sizeof(uint16_t));
+    socket.send(reinterpret_cast<const char *>(&posY), sizeof(uint16_t));
+}
+
+void Protocol::operationRecv(Socket &socket, char &operation) {
+    socket.recv(reinterpret_cast<char *>(&operation), sizeof(uint8_t));
+}
+
+char Protocol::typeUnidRecv(Socket &socket) {
+    char typeUnid;
+    socket.recv(reinterpret_cast<char *>(&typeUnid), sizeof(uint8_t));
+    return typeUnid;
+}
+
+int Protocol::idUnidRecv(Socket &socket) {
+    int id;
+    socket.recv(reinterpret_cast<char *>(&id), sizeof(uint16_t));
+    return id;
+}

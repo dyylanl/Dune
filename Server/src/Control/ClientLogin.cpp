@@ -1,6 +1,7 @@
 #include "../../includes/Control/ClientLogin.h"
 #include "../../../Common/includes/Exceptions/LibError.h"
 #include "../../includes/Model/Position.h"
+#include "../../includes/Model/Units/Unit.h"
 
 #define JOIN 1
 #define LIST 2
@@ -48,10 +49,24 @@ ClientLogin::ClientLogin(Socket& peer, Game &game_r)
 
 void ClientLogin::run() {
     try {
+        bool init = true;
         while (is_running) {
-            Position pos(10,500);
+            //Position pos(10,500);
             if (is_running) {
-                protocol.sendPosition(this->peer,pos.getX(),pos.getY());
+                //protocol.sendPosition(this->peer,pos.getX(),pos.getY());
+                if (init) {
+                    Unit tank1(1, 't', 0, 0);
+                    Unit tank2(2, 'o', 4, 4);
+                    //protocol.createUnit(this->peer, tank1);
+                    protocol.createUnit(this->peer, tank1.getId(), tank1.getUnitType(),tank1.getPosition().getX(),tank1.getPosition().getY());
+                    protocol.createUnit(this->peer, tank2.getId(), tank2.getUnitType(),tank2.getPosition().getX(),tank2.getPosition().getY());
+                    init = false;
+                }
+                /*protocol.operationRecv(this->peer, operation);
+                if (operation == 5) {
+
+                }*/
+
                 /*
                 execute(command);
                  */

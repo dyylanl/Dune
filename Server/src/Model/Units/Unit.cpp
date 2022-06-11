@@ -1,6 +1,6 @@
 #include "../../../includes/Model/Units/Unit.h"
 
-Unit::Unit(int x, int y) : position(x, y) {}
+Unit::Unit(int id, char type, int x, int y) : id(id), unitType(type), position(x, y) {}
 
 Position Unit::getPosition() {
     return this->position;
@@ -8,6 +8,14 @@ Position Unit::getPosition() {
 
 bool Unit::canMove() {
     return true;
+}
+
+char Unit::getUnitType() {
+    return unitType;
+}
+
+int Unit::getId() {
+    return id;
 }
 
 Unit::~Unit() = default;
