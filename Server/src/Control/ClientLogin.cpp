@@ -57,9 +57,11 @@ void ClientLogin::run() {
                 if (init) {
                     Unit tank1(1, 't', 0, 0);
                     Unit tank2(2, 'o', 4, 4);
-                    //protocol.createUnit(this->peer, tank1);
-                    protocol.createUnit(this->peer, tank1.getId(), tank1.getUnitType(),tank1.getPosition().getX(),tank1.getPosition().getY());
-                    protocol.createUnit(this->peer, tank2.getId(), tank2.getUnitType(),tank2.getPosition().getX(),tank2.getPosition().getY());
+                    //protocol.sendUnit(this->peer, tank1);
+                    protocol.sendUnit(this->peer, tank1.getId(), tank1.getUnitType(), tank1.getPosition().getX(),
+                                      tank1.getPosition().getY());
+                    protocol.sendUnit(this->peer, tank2.getId(), tank2.getUnitType(), tank2.getPosition().getX(),
+                                      tank2.getPosition().getY());
                     init = false;
                 }
                 /*protocol.operationRecv(this->peer, operation);
