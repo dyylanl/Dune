@@ -5,11 +5,17 @@
 #include <map>
 #include <string>
 #include <mutex>
+#include "../defs.h"
+#include "../Control/NewConnection.h"
+#include "Map.h"
+#include "../Control/YAMLReader.h"
 
 class Game {
 private:
     std::map<std::string, std::vector<int>> games;
     std::mutex mutex;
+    InstanceId next_id;
+    Map map;
     /*
      * Lockea el mutex, retorna true si el name ya existe.
      */
@@ -36,7 +42,7 @@ private:
     // void printStartGame(const std::string &name);
 
 public:
-    Game();
+    Game(int rate, YAMLReader reader);
     /*
      * Crea una partida {name:[1,req]}
      */
@@ -49,6 +55,8 @@ public:
      * Retorna una lista con formato [nombre, actuales, req]
      */
     std::vector<std::string> listGames();
+
+    InstanceId newConnection(NewConnection* connection);
 };
 
 

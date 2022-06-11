@@ -24,7 +24,7 @@ void Client::launch() {
         while (input != "q") {
             std::cin >> input;
         }*/
-
+        std::cout << "Comando recibido: " << (char)(protocol.recvUnitType(socket)) << std::endl;
         SDL2pp::SDL sdl(SDL_INIT_VIDEO);
         SDL2pp::Window window("DUNE - v0.1", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
                               1280, 720, SDL_WINDOW_RESIZABLE);

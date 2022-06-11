@@ -18,3 +18,17 @@ void YAMLReader::getBuild(const std::string& build_name) {
     std::cout << "Hit points: " << this->config["buildings"][build_name]["hit_points"].as<int>() << std::endl;
     std::cout << std::endl;
 }
+
+int YAMLReader::getFPS() {
+    return this->config["ticks_per_sec"].as<int>();
+}
+
+int YAMLReader::getX() {
+    return this->config["rows"].as<int>();
+}
+
+int YAMLReader::getY() {
+    return this->config["cols"].as<int>();
+}
+
+

@@ -22,6 +22,7 @@ public:
     int getInitialGold();
     int getInitialEnergy();
     void getBuild(const std::string& build_name);
+    int getFPS();
     ~YAMLReader() = default;
 
 protected:

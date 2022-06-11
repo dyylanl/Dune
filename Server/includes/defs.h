@@ -12,6 +12,10 @@
 #define PALACE "palace"
 #define SILO "silo"
 
-
 // -------------------------- //
+#ifndef __INSTANCE_ID__
+#define __INSTANCE_ID__
+typedef uint32_t InstanceId;
+#endif  // __INSTANCE_ID__
+
 #endif //DEFS_H

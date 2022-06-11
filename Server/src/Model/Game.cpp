@@ -1,7 +1,6 @@
-
-
 #include "../../includes/Model/Game.h"
 
+#define FIRST_ID 1
 #define SUCCESS 0
 #define ERROR 1
 
@@ -30,7 +29,7 @@ void Game::addPlayer(const std::string& game_name) {
     }
 }
 
-Game::Game() = default;
+Game::Game(int rate, YAMLReader reader) : next_id(FIRST_ID), map(reader.getX(), reader.getY()) {}
 
 uint16_t Game::createGame(int house, int req, const std::string& name) {
     std::lock_guard<std::mutex> lock(mutex);
@@ -81,4 +80,9 @@ std::vector<std::string> Game::listGames() {
         }
     }
     return list;
+}
+
+InstanceId Game::newConnection(NewConnection *connection) {
+    this->next_id++;
+    return this->next_id;
 }
