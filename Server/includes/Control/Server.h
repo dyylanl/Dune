@@ -1,20 +1,38 @@
 #ifndef __SERVER_H__
 #define __SERVER_H__
 
+//-----------------------------------------------------------------------------
 #include <cstdio>
 #include <iostream>
 #include <string>
-// --------------------------------------------------- //
-#include "YAMLReader.h"
+//-----------------------------------------------------------------------------
+
+//-----------------------------------------------------------------------------
 #include "Accepter.h"
+#include "NewConnection.h"
+//-----------------------------------------------------------------------------
+
+//-----------------------------------------------------------------------------
+#include "../../../Common/includes/NonBlockingQueue.h"
+#include "YAMLReader.h"
+//-----------------------------------------------------------------------------
+
+//-----------------------------------------------------------------------------
 
 class Server {
 private:
     YAMLReader reader;
+    NonBlockingQueue<NewConnection*> new_connections;
     Accepter accepter;
+    //Engine engine;
+
+    //-------------------------------------------------------------------------
+    // Métodos privados
+    //-------------------------------------------------------------------------
 
 public:
-    explicit Server(const std::string& config_path);
+    /* Constructor */
+    Server(const std::string& port, const int max_clients_queued);
     Server(const Server&) = delete;
     Server& operator=(const Server&) = delete;
     Server(Server&& other) = delete;
@@ -24,5 +42,6 @@ public:
     ~Server();
 };
 
+//-----------------------------------------------------------------------------
 
 #endif  // __SERVER_H__

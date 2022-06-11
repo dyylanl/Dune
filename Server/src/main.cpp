@@ -2,6 +2,7 @@
 #include <exception>
 #include <string>
 #include "../includes/Control/Server.h"
+#include "../includes/defs.h"
 
 
 int main(int argc, char* argv[]) {
@@ -13,7 +14,7 @@ int main(int argc, char* argv[]) {
     std::string config_path = argv[1];
 
     try {
-        Server server(config_path);
+        Server server(config_path, MAX_CLIENTS_QUEUED);
         server.run();
     } catch (const std::exception& e) {
         fprintf(stderr, "%s\n", e.what());

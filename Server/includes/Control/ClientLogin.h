@@ -1,53 +1,68 @@
-#ifndef CLIENTLOGIN_H
-#define CLIENTLOGIN_H
-#include <string>
-#include <vector>
-#include <iostream>
-#include <utility>
-#include <atomic>
-#include "../../../Common/includes/Thread.h"
-#include "../../../Common/includes/Socket/Socket.h"
-#include "../../../Common/includes/Protocol.h"
-#include "../Model/Game.h"
+#ifndef __CLIENT_LOGIN_H__
+#define __CLIENT_LOGIN_H__
 
+//-----------------------------------------------------------------------------
+#include <cstdio>
+#include <atomic>
+#include <exception>
+//-----------------------------------------------------------------------------
+
+//-----------------------------------------------------------------------------
+#include "../../../Common/includes/Exceptions/Exception.h"
+#include "../../../Common/includes/Exceptions/LoginException.h"
+#include "../../../Common/includes/NonBlockingQueue.h"
+#include "../../../Common/includes/Protocol.h"
+#include "../../../Common/includes/Thread.h"
+//-----------------------------------------------------------------------------
+
+//-----------------------------------------------------------------------------
+#include "NewConnection.h"
+#include "YAMLReader.h"
+//-----------------------------------------------------------------------------
+
+//-----------------------------------------------------------------------------
 
 class ClientLogin : public Thread {
 private:
     std::atomic_bool is_running;
     Socket peer;
-    Protocol protocol;
-    Game& game;
-    /*
-     * Ejecuta el comando que envio el Cliente.
-     */
-    void execute(int command);
-    /*
-     *  Une el cliente a la partida.
-     */
-    void executeJoin();
-    /*
-     * Crea una partida.
-     */
-    void executeCreate();
-    /*
-     * Envia la lista de partidas actuales.
-     */
-    void executeList();
+    YAMLReader& reader;
+    NonBlockingQueue<NewConnection*>& new_connections;
 
 public:
-    explicit ClientLogin(Socket& peer, Game &game_r);
+    /* Constructor */
+    ClientLogin(Socket& peer, YAMLReader& reader,
+                NonBlockingQueue<NewConnection*>& new_connections);
+
+    /* Deshabilitamos el constructor por copia. */
     ClientLogin(const ClientLogin&) = delete;
+
+    /* Deshabilitamos el operador= para copia.*/
     ClientLogin& operator=(const ClientLogin&) = delete;
+
+    /* Deshabilitamos el constructor por movimiento. */
     ClientLogin(ClientLogin&& other) = delete;
+
+    /* Deshabilitamos el operador= para movimiento. */
     ClientLogin& operator=(ClientLogin&& other) = delete;
+
+    //-------------------------------------------------------------------------
+
+    /* Handler para el log-in de un cliente */
     void run() override;
+
+    /* Chequea si el hilo se sigue ejecutando */
     bool isRunning() const;
-    /*
-     * Stop violento, no importa si el cliente sigue corriendo.
-     */
+
+    /* Termina la conexión de manera forzosa */
     void stop();
-    ~ClientLogin() override;
+
+    //-------------------------------------------------------------------------
+
+    /* Destructor */
+    ~ClientLogin();
 };
 
+//-----------------------------------------------------------------------------
 
-#endif  // CLIENTLOGIN_H
+#endif  // __CLIENT_LOGIN_H__

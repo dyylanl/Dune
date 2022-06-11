@@ -1,59 +1,58 @@
 #include "../../includes/Control/Accepter.h"
-#include "../../../Common/includes/Exceptions/LibError.h"
 
-#define MAX_CLIENTS_QUEUED 10
+//-----------------------------------------------------------------------------
+// Métodos privados
 
-// --------- METODOS PRIVADOS --------- //
-void Accepter::_acceptClient(Game &game) {
-    Socket peer = socket.accept();
-    std::cout << "[ACCEPTER]: Cliente aceptado.\n";
-    if (keep_accepting) {
-        auto client = new ClientLogin(peer, game);
-        client_logins.emplace_back(client);
-        client->start();
-    }
+void Accepter::_acceptClient() {
+    Socket peer = (socket.accept());
+    client_logins.emplace_back(peer , reader, new_connections);
+    client_logins.back().start();
 }
 
-void Accepter::_joinClientLogins() {
-    for (auto client = client_logins.begin(); client != client_logins.end();) {
-        if (!((*client)->isRunning())) {
-            (*client)->join();
-            delete (*client);
-            client = client_logins.erase(client);
+void Accepter::_joinFinishedLogins() {
+    for (auto it = client_logins.begin(); it != client_logins.end();) {
+        if (it->isRunning()) {
+            it->join(); /* este join NO es bloqueante */
+            it = client_logins.erase(it);
         } else {
-            client++;
+            it++;
         }
     }
 }
 
 void Accepter::_joinLogins() {
-    for (auto client = client_logins.begin(); client != client_logins.end();) {
-        (*client)->stop();
-        (*client)->join();
-        delete (*client);
-        client = client_logins.erase(client);
+    for (auto it = client_logins.begin(); it != client_logins.end();) {
+        it->stop();
+        it->join();
+        it = client_logins.erase(it);
     }
 }
 
-// --------- METODOS PUBLICOS --------- //
+//-----------------------------------------------------------------------------
 
-Accepter::Accepter(std::string port)
-        : socket(port, MAX_CLIENTS_QUEUED),
+//-----------------------------------------------------------------------------
+// API Pública
+
+Accepter::Accepter(const std::string& port, const int max_clients_queued,
+                   YAMLReader& reader1,
+                   NonBlockingQueue<NewConnection*>& new_connections1)
+        : socket(port, max_clients_queued),
+          reader(reader1),
+          new_connections(new_connections1),
           keep_accepting(true) {}
 
 void Accepter:: run() {
+    // Hilo principal de ejecución del accepter
     try {
-        Game game;
         while (keep_accepting) {
-            _acceptClient(game);
-            _joinClientLogins();
+            _acceptClient();
+            _joinFinishedLogins();
         }
-    } catch (const LibError& e) {
-        //fprintf(stderr, "[ACCEPTER]: %s\n", e.what());
+    } catch (const ClosedSocketException& e) {
     } catch (const std::exception& e) {
-        //fprintf(stderr, "[ACCEPTER]: %s\n", e.what());
+        fprintf(stderr, "%s\n", e.what());
     } catch (...) {
-        fprintf(stderr, "[ACCEPTER]: Error desconocido.\n");
+        fprintf(stderr, "Unknown error.\n");
     }
     _joinLogins();
 }
@@ -61,17 +60,17 @@ void Accepter:: run() {
 void Accepter::stop() {
     keep_accepting = false;
     try {
-        socket.shutdown(2);
+        socket.shutdown();
     } catch (const Exception& e) {
         fprintf(stderr,
-                "[ACCEPTER]: Error apagando el socket aceptador.\n");
+                "Warning: error while shutting-down accepter. Aborting.\n");
     }
     socket.close();
 }
 
 Accepter::~Accepter() {
-    /* No hace falta ya que todos los hilos fueron joineados antes de que el ::run
-     * termine su ejecucion, pero por las dudas.
-     */
+    /* just in case */
     _joinLogins();
 }
+
+//-----------------------------------------------------------------------------

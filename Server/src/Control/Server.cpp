@@ -1,16 +1,15 @@
 #include "../../includes/Control/Server.h"
-#include "../../includes/defs.h"
 
 
-Server::Server(const std::string& path) : reader(path), accepter(reader.getPort()) {}
+Server::Server(const std::string& config_path, const int max_clients_queued)
+        : reader(config_path),
+          new_connections(),
+          accepter(reader.getPort(), max_clients_queued, reader, new_connections) {}
 
 void Server::run() {
     std::cout << "Comenzando la ejecucion del servidor..." << std::endl;
-    reader.getBuild(PALACE);
-    reader.getBuild(SILO);
     // Se lanza el hilo aceptador de conexiones.
     accepter.start();
-
     /*
      * Presionando la tecla 'q' por stdin cerramos el servidor.
      */
@@ -18,10 +17,8 @@ void Server::run() {
     while (input != "q") {
         std::cin >> input;
     }
-
     accepter.stop();
     accepter.join();
-
     std::cout << "Finalizando la ejecucion del servidor..." << std::endl;
 }
 
