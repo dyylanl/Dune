@@ -99,7 +99,7 @@ public:
     /*
      * Retorna una posicion
      */
-    static std::vector<int> recvPosition(Socket &skt);
+    static Position recvPosition(Socket &skt);
 
     void sendUnit(Socket &socket, int idUnit, char unitType, int posX, int posY);
 

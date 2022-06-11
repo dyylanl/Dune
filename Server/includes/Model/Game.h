@@ -9,6 +9,7 @@
 #include "../Control/NewConnection.h"
 #include "Map.h"
 #include "../Control/YAMLReader.h"
+#include "AStar.h"
 
 class Game {
 private:
@@ -16,6 +17,7 @@ private:
     std::mutex mutex;
     InstanceId next_id;
     Map map;
+    AStar aStar;
     /*
      * Lockea el mutex, retorna true si el name ya existe.
      */
@@ -57,6 +59,8 @@ public:
     std::vector<std::string> listGames();
 
     InstanceId newConnection(NewConnection* connection);
+
+    std::stack<Position> makePath(Unit unit, Position pos_end);
 };
 
 

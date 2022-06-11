@@ -6,9 +6,26 @@
 void Engine::_processNewConnections() {
     NewConnection* connection = nullptr;
     while ((connection = new_connections.pop())) {
-        fprintf(stderr, "Se ha conectado un jugador.\n");
+        fprintf(stderr, "[ENGINE]: Se ha conectado un jugador.\n");
+
         // Envio un tanque para probar...
+        Unit unit(4,'T', 15, 15);
         protocol.sendUnit(connection->peer,1,'T',15,15);
+
+        // Recibo la posicion clickeada
+        Position pos_end = protocol.recvPosition(connection->peer);
+
+        // Creo la ruta respecto de la posicion clickeada
+        std::stack<Position> path = this->game.makePath(unit,pos_end);
+
+        // Envio la cantidad de posiciones
+        protocol.sendResponse(connection->peer,path.size());
+        while (!path.empty()) {
+            Position pos = path.top();
+            protocol.sendPosition(connection->peer,pos.getX(),pos.getY());
+            path.pop();
+        }
+        unit.setPosition(pos_end);
     }
 }
 

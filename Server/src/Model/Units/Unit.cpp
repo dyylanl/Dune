@@ -18,4 +18,8 @@ int Unit::getId() {
     return id;
 }
 
+void Unit::setPosition(Position pos) {
+    this->position = pos;
+}
+
 Unit::~Unit() = default;
