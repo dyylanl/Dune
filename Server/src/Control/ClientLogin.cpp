@@ -11,6 +11,7 @@ void ClientLogin::run() {
     is_running = true;
     try {
         fprintf(stderr, "[ClientLogin]: Nuevo jugador en el lobby.\n");
+
         new_connections.push(new NewConnection(peer));
     } catch (const std::exception& e) {
         try {

@@ -110,7 +110,13 @@ public:
 
     int idUnidRecv(Socket &socket);
 
+    /*
+     * Se envia una sola vez, con cada cliente nuevo.
+     * Envia filas y columnas del mapa y luego cada terreno del mapa.
+     */
     static void sendMap(Socket &socket, std::vector<std::vector<char>> map) ;
+
+    static std::vector<std::vector<char>> recvMap(Socket &socket);
 
 };
 

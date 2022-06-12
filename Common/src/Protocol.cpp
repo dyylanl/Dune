@@ -199,12 +199,27 @@ void Protocol::sendMap(Socket &socket, std::vector<std::vector<char>> map) {
     int rows = map[0].size();
     int cols = map.size();
     std::cout << "rows: " << rows << "\ncols: " << cols << std::endl;
-    socket.send(reinterpret_cast<const char *>(rows), sizeof(uint16_t));
-    socket.send(reinterpret_cast<const char *>(cols), sizeof(uint16_t));
+    socket.send(reinterpret_cast<const char *>(&rows), sizeof(uint16_t));
+    socket.send(reinterpret_cast<const char *>(&cols), sizeof(uint16_t));
     for (int i = 0; i < rows; ++i) {
         for (int j = 0; j < cols; ++j) {
             char type = map[i][j];
-            socket.send(reinterpret_cast<const char *>(type), sizeof(uint8_t));
+            socket.send(reinterpret_cast<const char *>(&type), sizeof(uint8_t));
         }
     }
+}
+
+std::vector<std::vector<char>> Protocol::recvMap(Socket &socket) {
+    int rows, cols = 0;
+    socket.recv(reinterpret_cast<char *>(&rows), sizeof(uint16_t));
+    socket.recv(reinterpret_cast<char *>(&cols), sizeof(uint16_t));
+    std::vector<std::vector<char>> mapa;
+    for (int i = 0; i < rows; ++i) {
+        for (int j = 0; j < cols; ++j) {
+            char type;
+            socket.recv(reinterpret_cast<char *>(&type), sizeof(uint8_t));
+            mapa[i][j] = type;
+        }
+    }
+    return mapa;
 }
