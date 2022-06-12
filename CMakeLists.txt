@@ -36,8 +36,8 @@ include_directories(${SDL2PP_INCLUDE_DIRS})
 
 #------------------------------------------------------------------------------
 # ARCHIVOS FUENTE
-FILE(GLOB_RECURSE common_src "Common/src/*.cpp")
-FILE(GLOB_RECURSE client_src "Client/src/*.cpp")
+FILE(GLOB_RECURSE common_src "Common/*.cpp")
+FILE(GLOB_RECURSE client_src "Client/*.cpp")
 FILE(GLOB_RECURSE server_src "Server/*.cpp")
 #------------------------------------------------------------------------------
 
@@ -47,6 +47,7 @@ FILE(GLOB_RECURSE server_src "Server/*.cpp")
 # Common
 add_library(dune-common SHARED ${common_src})
 target_link_libraries(dune-common)
+
 # Client
 add_executable(dune ${client_src})
 target_link_libraries(dune dune-common SDL2 SDL2_image SDL2_ttf SDL2_mixer ${SDL2PP_LIBRARIES})
