@@ -15,7 +15,7 @@
 //-----------------------------------------------------------------------------
 #include "../../../Common/includes/NonBlockingQueue.h"
 #include "YAMLReader.h"
-//#include "Engine.h"
+#include "Engine.h"
 //-----------------------------------------------------------------------------
 
 //-----------------------------------------------------------------------------
@@ -25,7 +25,7 @@ private:
     YAMLReader reader;
     NonBlockingQueue<NewConnection*> new_connections;
     Accepter accepter;
-    //Engine engine;
+    Engine engine;
 
 public:
     /* Constructor */

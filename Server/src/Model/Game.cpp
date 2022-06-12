@@ -29,7 +29,7 @@ void Game::addPlayer(const std::string& game_name) {
     }
 }
 
-Game::Game(int rate, YAMLReader reader) : next_id(FIRST_ID), attackables(), map(reader.getX(), reader.getY()), aStar(map) {}
+Game::Game(int rate, YAMLReader reader) : next_id(FIRST_ID), map(reader.getX(), reader.getY()), aStar(map) {}
 
 uint16_t Game::createGame(int house, int req, const std::string& name) {
     std::lock_guard<std::mutex> lock(mutex);

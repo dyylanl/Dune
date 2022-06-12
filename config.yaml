@@ -1,8 +1,8 @@
 port: "8082"
 ticks_per_sec: 60
 map_path: "../Dune/mapa.yaml"
-rows: 100
-cols: 100
+rows: 10
+cols: 15
 speed_factor: 1
 inital_gold: 50
 inital_energy: 150

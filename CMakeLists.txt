@@ -53,7 +53,7 @@ add_executable(dune ${client_src})
 target_link_libraries(dune dune-common SDL2 SDL2_image SDL2_ttf SDL2_mixer ${SDL2PP_LIBRARIES})
 
 # Server
-add_executable(dune-server ${server_src})
+add_executable(dune-server ${server_src} Server/includes/Control/Engine.h Server/src/Control/Engine.cpp)
 target_link_libraries(dune-server dune-common ${YAML_CPP_LIBRARIES})
 #------------------------------------------------------------------------------
 

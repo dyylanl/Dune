@@ -10,6 +10,7 @@ int main(int argc, char** argv){
         fprintf(stderr, "Usage: <ip> <port>\n");
         return ERROR;
     }
+
     std::string ip = argv[1];
     std::string port = argv[2];
     try {

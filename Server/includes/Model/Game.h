@@ -16,7 +16,6 @@ private:
     std::map<std::string, std::vector<int>> games;
     std::mutex mutex;
     InstanceId next_id;
-    std::list<Attackable> attackables;
     Map map;
     AStar aStar;
     /*
