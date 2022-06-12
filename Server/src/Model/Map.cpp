@@ -6,7 +6,12 @@ Map::Map(int rows1, int cols1) : rows(rows1), cols(cols1) {
     // EL TERRENO INICIAL SE SETEA CON 'ARENAS'
     std::vector <std::vector<Terrain>> terrain_init
             ((uint16_t) rows, std::vector<Terrain>((uint16_t) cols, Terrain(Position(),'A')));
+
+    std::vector <std::vector<char>> map_init
+            ((uint16_t) rows, std::vector<char>((uint16_t) cols, 'A'));
+
     this->terrrains = terrain_init;
+    this->mapa = map_init;
 }
 
 bool Map::canMove(const Unit& unit, Position position) {
@@ -31,6 +36,7 @@ bool Map::isValid(Position position) {
 void Map::putTerrain(Terrain terrain) {
     if (isValid(terrain.getPosition())) {
         this->terrrains[terrain.getPosition().getX()][terrain.getPosition().getY()] = terrain;
+        this->mapa[terrain.getPosition().getX()][terrain.getPosition().getY()] = terrain.getType();
     }
 }
 
@@ -53,6 +59,10 @@ void Map::showTerrain() {
         printf("\n");
     }
     printf("\n");
+}
+
+char Map::getTypeTerrain(int posX, int posY) {
+    return this->terrrains[posX][posY].getType();
 }
 
 Map::~Map() = default;

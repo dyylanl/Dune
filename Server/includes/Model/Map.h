@@ -12,6 +12,7 @@ class Map {
     int rows, cols;
     ////////////////// IMPLEMENTACION CON TERRENOS //////////////////
     std::vector<std::vector<Terrain>> terrrains;
+    std::vector<std::vector<char>> mapa;
 public:
     Map(int rows, int cols);
     ~Map();
@@ -20,6 +21,11 @@ public:
     ////////////////// IMPLEMENTACION CON TERRENOS //////////////////
     void putTerrain(Terrain terrain);
     void showTerrain();
+    int getRows() {return rows;}
+    int getCols() {return cols;}
+    std::vector<std::vector<char>> getMap() {return this->mapa;}
+    char getTypeTerrain(int posX, int posY);
+
 };
 
 #endif //__MAP_H__

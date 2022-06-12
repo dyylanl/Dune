@@ -9,6 +9,7 @@
 //----------------------------------------//
 #include "Socket/Socket.h"
 #include "../../Server/includes/Model/Units/Unit.h"
+#include "../../Server/includes/Model/Map.h"
 
 class Protocol {
 private:
@@ -108,6 +109,9 @@ public:
     char typeUnidRecv(Socket &socket);
 
     int idUnidRecv(Socket &socket);
+
+    static void sendMap(Socket &socket, std::vector<std::vector<char>> map) ;
+
 };
 
 

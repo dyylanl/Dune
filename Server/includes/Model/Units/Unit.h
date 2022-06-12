@@ -6,8 +6,6 @@
 #include <iostream>
 #include "../Position.h"
 
-class Map;
-
 class Unit {
 private:
     int id;

@@ -61,6 +61,10 @@ public:
     InstanceId newConnection(NewConnection* connection);
 
     std::stack<Position> makePath(Unit unit, Position pos_end);
+
+
+    std::vector<std::vector<char>> getMap() {return this->map.getMap();}
+
 };
 
 

@@ -1,25 +1,18 @@
 #ifndef __ACCEPTER_H__
 #define __ACCEPTER_H__
 
-//-----------------------------------------------------------------------------
 #include <atomic>
 #include <exception>
 #include <list>
 #include <string>
 //-----------------------------------------------------------------------------
-
-//-----------------------------------------------------------------------------
 #include "../../../Common/includes/Exceptions/ClosedSocketException.h"
 #include "../../../Common/includes/NonBlockingQueue.h"
 #include "../../../Common/includes/Thread.h"
 //-----------------------------------------------------------------------------
-
-//-----------------------------------------------------------------------------
 #include "ClientLogin.h"
 #include "NewConnection.h"
 #include "YAMLReader.h"
-//-----------------------------------------------------------------------------
-
 //-----------------------------------------------------------------------------
 
 class Accepter : public Thread {
@@ -28,54 +21,24 @@ private:
     YAMLReader& reader;
     NonBlockingQueue<NewConnection*>& new_connections;
     std::atomic_bool keep_accepting;
-    std::list<ClientLogin> client_logins;
+    std::list<ClientLogin*> client_logins;
 
-    //-------------------------------------------------------------------------
-    // Métodos privados
-
-    /* Acepta una conexión entrante */
     void _acceptClient();
-
-    /* Joinea y libera los ClientLogin finalizados */
     void _joinFinishedLogins();
-
-    /* Joinea los ClientLogin forzosamente (hayan o no terminado) */
     void _joinLogins();
 
-    //-------------------------------------------------------------------------
-
 public:
-    /* Constructor */
     Accepter(const std::string& port, const int max_clients_queued,
              YAMLReader& reader,
              NonBlockingQueue<NewConnection*>& new_connections);
-
-    /* Deshabilitamos el constructor por copia. */
     Accepter(const Accepter&) = delete;
-
-    /* Deshabilitamos el operador= para copia.*/
     Accepter& operator=(const Accepter&) = delete;
-
-    /* Deshabilitamos el constructor por movimiento. */
     Accepter(Accepter&& other) = delete;
-
-    /* Deshabilitamos el operador= para movimiento. */
     Accepter& operator=(Accepter&& other) = delete;
-
-    //-------------------------------------------------------------------------
-
-    /* Hilo principal de ejecución */
     void run() override;
-
-    /* Deja de aceptar clientes */
     void stop();
-
-    //-------------------------------------------------------------------------
-
-    /* Destructor */
     ~Accepter();
 };
 
-//-----------------------------------------------------------------------------
 
 #endif  // __ACCEPTER_H__
