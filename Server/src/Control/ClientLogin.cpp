@@ -1,8 +1,5 @@
 #include "../../includes/Control/ClientLogin.h"
 
-//-----------------------------------------------------------------------------
-// API Pública
-
 ClientLogin::ClientLogin(Socket& peer, YAMLReader& reader1,
                          NonBlockingQueue<NewConnection*>& new_connections)
         : is_running(false),
@@ -13,15 +10,10 @@ ClientLogin::ClientLogin(Socket& peer, YAMLReader& reader1,
 void ClientLogin::run() {
     is_running = true;
     try {
-        // Comienza la ejecución del clientlogin
-        fprintf(stderr, "Inicia la ejecución del clientlogin.\n");
-        // Si llegamos acá, el cliente ya se loggeo y podemos transferir
-        // el socket con seguridad.
+        fprintf(stderr, "[ClientLogin]: Nuevo jugador en el lobby.\n");
+
         new_connections.push(new NewConnection(peer));
-        // Finaliza la ejecución
-        fprintf(stderr, "Finaliza la ejecución del clientlogin.\n");
     } catch (const std::exception& e) {
-        // Error grave
         try {
             peer.shutdown();
         } catch (const Exception& e) {
@@ -30,7 +22,6 @@ void ClientLogin::run() {
         peer.close();
         fprintf(stderr, "%s\n", e.what());
     } catch (...) {
-        // Error desconocido
         try {
             peer.shutdown();
         } catch (const Exception& e) {
@@ -57,6 +48,4 @@ void ClientLogin::stop() {
     }
 }
 
-ClientLogin::~ClientLogin() {}
-
-//-----------------------------------------------------------------------------
+ClientLogin::~ClientLogin() = default;

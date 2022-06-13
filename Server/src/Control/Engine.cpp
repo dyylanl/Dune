@@ -1,40 +1,25 @@
 #include "../../includes/Control/Engine.h"
 
-//-----------------------------------------------------------------------------
-// Métodos privados
 
+/*
+ * A cada nueva conexion le envia el mapa de terrenos correspondiente
+ */
 void Engine::_processNewConnections() {
-    NewConnection* connection = nullptr;
-    while ((connection = new_connections.pop())) {
-        fprintf(stderr, "[ENGINE]: Se ha conectado un jugador.\n");
-
-        // Envio un tanque para probar...
-        Unit unit(4,'T', 15, 15);
-        protocol.sendUnit(connection->peer,1,'o',15,15);
-
-        // Recibo la posicion clickeada
-        /*
-        std::vector<int> pos_end1 = protocol.recvPosition(connection->peer);
-        Position pos_end(pos_end1[0], pos_end1[1]);
-        // Creo la ruta respecto de la posicion clickeada
-        std::stack<Position> path = this->game.makePath(unit,pos_end);
-
-        // Envio la cantidad de posiciones
-        protocol.sendResponse(connection->peer,path.size());
-        while (!path.empty()) {
-            Position pos = path.top();
-            protocol.sendPosition(connection->peer,pos.getX(),pos.getY());
-            path.pop();
-        }
-        unit.setPosition(pos_end);
-*/
+    NewConnection* new_connection = nullptr;
+    while ((new_connection = new_connections.pop())) {
+        protocol.sendMap(new_connection->peer, this->game.getMap());
+        //protocol.recvCommand(new_connection->peer);
+        delete new_connection;
+        fprintf(stderr, "Se ha conectado un jugador.\n");
     }
 }
+
 
 void Engine::_processCommands() {
     fprintf(stderr, "Se ha procesado un comando.\n");
 
 }
+
 
 void Engine::_processFinishedConnections() {
     fprintf(stderr, "Se ha desconectado un jugador.\n");
@@ -42,12 +27,8 @@ void Engine::_processFinishedConnections() {
 
 
 void Engine::_loopIteration(int it) {
+    _processNewConnections();
 }
-
-//-----------------------------------------------------------------------------
-
-//-----------------------------------------------------------------------------
-// API Pública
 
 Engine::Engine(YAMLReader& reader1,
                NonBlockingQueue<NewConnection*>& new_connections)
@@ -60,16 +41,13 @@ Engine::Engine(YAMLReader& reader1,
 
 void Engine::run() {
     fprintf(stderr, "ENGINE: Empezando ejecución.\n");
-
     auto t1 = std::chrono::steady_clock::now();
     auto t2 = t1;
-    std::chrono::duration<float, std::milli> diff{};
+    std::chrono::duration<float, std::milli> diff;
     int rest = 0, behind = 0, lost = 0;
     int it = 1;
-
     while (keep_executing) {
-        _processNewConnections();
-
+        _loopIteration(it);
         it = 0;
         t2 = std::chrono::steady_clock::now();
         diff = t2 - t1;
@@ -86,7 +64,6 @@ void Engine::run() {
         t1 += std::chrono::milliseconds(rate);
         it += 1;
     }
-
     fprintf(stderr, "ENGINE: Terminando ejecución.\n");
 }
 

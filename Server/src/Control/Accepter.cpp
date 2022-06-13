@@ -1,37 +1,36 @@
 #include "../../includes/Control/Accepter.h"
 
-//-----------------------------------------------------------------------------
-// Métodos privados
+// --------- METODOS PRIVADOS --------- //
 
 void Accepter::_acceptClient() {
-    Socket peer = (socket.accept());
-    client_logins.emplace_back(peer , reader, new_connections);
-    client_logins.back().start();
+    Socket peer = socket.accept();
+    if (keep_accepting) {
+        auto client = new ClientLogin(peer, reader, new_connections);
+        client_logins.emplace_back(client);
+        client->start();
+    }
 }
 
 void Accepter::_joinFinishedLogins() {
-    for (auto it = client_logins.begin(); it != client_logins.end();) {
-        if (it->isRunning()) {
-            it->join(); /* este join NO es bloqueante */
-            it = client_logins.erase(it);
+    for (auto client = client_logins.begin(); client != client_logins.end();) {
+        if (!((*client)->isRunning())) {
+            (*client)->join();
+            delete (*client);
+            client = client_logins.erase(client);
         } else {
-            it++;
+            client++;
         }
     }
 }
 
 void Accepter::_joinLogins() {
-    for (auto it = client_logins.begin(); it != client_logins.end();) {
-        it->stop();
-        it->join();
-        it = client_logins.erase(it);
+    for (auto client = client_logins.begin(); client != client_logins.end();) {
+        (*client)->stop();
+        (*client)->join();
+        delete (*client);
+        client = client_logins.erase(client);
     }
 }
-
-//-----------------------------------------------------------------------------
-
-//-----------------------------------------------------------------------------
-// API Pública
 
 Accepter::Accepter(const std::string& port, const int max_clients_queued,
                    YAMLReader& reader1,
@@ -42,7 +41,6 @@ Accepter::Accepter(const std::string& port, const int max_clients_queued,
           keep_accepting(true) {}
 
 void Accepter:: run() {
-    // Hilo principal de ejecución del accepter
     try {
         while (keep_accepting) {
             _acceptClient();
@@ -69,8 +67,5 @@ void Accepter::stop() {
 }
 
 Accepter::~Accepter() {
-    /* just in case */
     _joinLogins();
 }
-
-//-----------------------------------------------------------------------------

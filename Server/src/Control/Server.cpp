@@ -10,6 +10,7 @@ Server::Server(const std::string& config_path, const int max_clients_queued)
 void Server::run() {
     // Se lanza el hilo aceptador de conexiones.
     accepter.start();
+
     // Se lanza el hilo engine
     engine.start();
     /*
@@ -24,6 +25,7 @@ void Server::run() {
 
     engine.stop();
     engine.join();
+
 }
 
 Server::~Server() {}
