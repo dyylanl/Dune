@@ -1,0 +1,33 @@
+Tablero:
+  Filas: 5
+  Columnas: 3
+  0,0:
+    Tipo: Vacio
+  0,1:
+    Tipo: Arena
+  0,2:
+    Tipo: Vacio
+  1,0:
+    Tipo: Vacio
+  1,1:
+    Tipo: Arena
+  1,2:
+    Tipo: Vacio
+  2,0:
+    Tipo: Roca
+  2,1:
+    Tipo: Roca
+  2,2:
+    Tipo: Roca
+  3,0:
+    Tipo: Vacio
+  3,1:
+    Tipo: Vacio
+  3,2:
+    Tipo: Vacio
+  4,0:
+    Tipo: Vacio
+  4,1:
+    Tipo: Vacio
+  4,2:
+    Tipo: Vacio
