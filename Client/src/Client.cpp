@@ -21,34 +21,15 @@ Client::Client(std::string ip1, std::string port1) : socket(ip1,port1), protocol
 
 void Client::launch() {
     try {
-        // ESTE CLIENTE PERTENECE A LA CASA HARKONNEN
-        protocol.sendResponse(socket, HARKONNEN);
-
-
-        std::vector<std::vector<char>> mapa;
-        mapa = protocol.recvMap(socket);
-        int rows = mapa.size();
-        int cols = mapa[0].size();
-        for (int i = 0; i < rows; i++) {
-            for (int j = 0; j < cols; j++) {
-                char key = mapa[i][j];
-                if (key == 'P') {
-                    const std::string red("\033[0;31m");
-                    std::string reset("\033[0m");
-                    std::cout << red << key << reset;
-                } else if (key == 'C') {
-                    const std::string green("\033[0;32m");
-                    std::string reset("\033[0m");
-                    std::cout << green << key << reset;
-                } else {
-                    std::cout << key;
-                }
-            }
-            printf("\n");
+        int send;
+        while (send != 0) {
+            std::cout << "Enviando: ";
+            std::cin >> send;
+            protocol.sendResponse(socket, send);
         }
-        printf("\n");
 
 
+/*
         SDL2pp::SDL sdl(SDL_INIT_VIDEO);
         SDL2pp::Window window("DUNE - v0.1", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
                               1280, 720, SDL_WINDOW_RESIZABLE);
@@ -68,7 +49,7 @@ void Client::launch() {
             engine.Update();
             engine.Render(renderer);
             usleep(FRAME_RATE);
-        }
+        }*/
     } catch (std::exception& e) {
         std::cout << e.what() << std::endl;
         return;
