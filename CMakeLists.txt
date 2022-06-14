@@ -45,7 +45,7 @@ FILE(GLOB_RECURSE server_src "Server/*.cpp")
 # TARGETS
 
 # Common
-add_library(dune-common SHARED ${common_src})
+add_library(dune-common SHARED ${common_src} Common/includes/BlockingQueue.h)
 target_link_libraries(dune-common)
 
 # Client

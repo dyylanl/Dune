@@ -37,11 +37,9 @@ public:
     /* Pop. En caso de estar vacía, devuelve NULL. */
     T pop() {
         std::unique_lock<std::mutex> l(m);
-
         if (queue.empty()) {
             return NULL;
         }
-
         T t = queue.front();
         queue.pop();
         return t;
