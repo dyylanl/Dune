@@ -1,53 +1,82 @@
 #include "../../includes/Control/Engine.h"
 
+//-----------------------------------------------------------------------------
+// Métodos privados
 
-/*
- * A cada nueva conexion le envia el mapa de terrenos correspondiente
- */
 void Engine::_processNewConnections() {
     NewConnection* new_connection = nullptr;
     while ((new_connection = new_connections.pop())) {
-        protocol.sendMap(new_connection->peer, this->game.getMap());
-        //protocol.recvCommand(new_connection->peer);
+        protocol.recvCommand(new_connection->peer);
         delete new_connection;
-        fprintf(stderr, "Se ha conectado un jugador.\n");
+        fprintf(stderr, "[ENGINE]: Se ha conectado un jugador.\n");
     }
 }
 
-
 void Engine::_processCommands() {
-    fprintf(stderr, "Se ha procesado un comando.\n");
-
+    fprintf(stderr, "[ENGINE]: Procesando comando...\n");
 }
-
 
 void Engine::_processFinishedConnections() {
-    fprintf(stderr, "Se ha desconectado un jugador.\n");
+    InstanceId* finished_connection = nullptr;
+    while ((finished_connection = finished_connections.pop())) {
+
+        delete finished_connection;
+        fprintf(stderr, "[ENGINE]: Se ha desconectado un jugador.\n");
+    }
 }
 
+void Engine::_freeQueues() {
+    {
+        InstanceId* p = nullptr;
+        while ((p = finished_connections.pop())) {
+            delete p;
+        }
+    }
+
+    {
+        InstanceId* p = nullptr;
+        while ((p = finished_connections.pop())) {
+            delete p;
+        }
+    }
+}
 
 void Engine::_loopIteration(int it) {
     _processNewConnections();
+    //_processCommands();
+    //_processFinishedConnections();
 }
+
+//-----------------------------------------------------------------------------
+// API Pública
 
 Engine::Engine(YAMLReader& reader1,
                NonBlockingQueue<NewConnection*>& new_connections)
         : keep_executing(true),
           reader(reader1),
-          rate(30),  // default value
+          protocol(),
+          rate(30),
           new_connections(new_connections),
-          game(rate, reader1),
-          protocol(){}
+          finished_connections(),
+          game(rate, reader1) {
+    int fps = reader.getFPS();
+    this->rate = 1000 / fps;
+}
 
 void Engine::run() {
-    fprintf(stderr, "ENGINE: Empezando ejecución.\n");
+    fprintf(stderr, "[ENGINE]: Empezando ejecución.\n");
+
+    // Variables para controlar el frame-rate
     auto t1 = std::chrono::steady_clock::now();
     auto t2 = t1;
-    std::chrono::duration<float, std::milli> diff;
+    std::chrono::duration<float, std::milli> diff{};
     int rest = 0, behind = 0, lost = 0;
     int it = 1;
+
+    // LOP GAME = OJO CON LO Q TOCAN ACÁ
     while (keep_executing) {
         _loopIteration(it);
+
         it = 0;
         t2 = std::chrono::steady_clock::now();
         diff = t2 - t1;
@@ -64,7 +93,8 @@ void Engine::run() {
         t1 += std::chrono::milliseconds(rate);
         it += 1;
     }
-    fprintf(stderr, "ENGINE: Terminando ejecución.\n");
+    _freeQueues();
+    fprintf(stderr, "[ENGINE]: Terminando ejecución.\n");
 }
 
 void Engine::stop() {
@@ -73,8 +103,3 @@ void Engine::stop() {
 
 Engine::~Engine() = default;
 
-void Engine::_sendDifferentialBroadcasts() {
-
-}
-
-//-----------------------------------------------------------------------------

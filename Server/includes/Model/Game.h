@@ -5,11 +5,12 @@
 #include <map>
 #include <string>
 #include <mutex>
+////////////////////////////////////////
 #include "../defs.h"
-#include "../Control/NewConnection.h"
 #include "Map.h"
 #include "../Control/YAMLReader.h"
 #include "AStar.h"
+#include "../Control/NewConnection.h"
 
 class Game {
 private:

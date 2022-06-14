@@ -11,6 +11,7 @@
 #include "Thread/RecvThread.h"
 #include <arpa/inet.h>
 
+#define HARKONNEN 1
 
 //-----------------------------------------------------------------------------
 
@@ -20,9 +21,10 @@ Client::Client(std::string ip1, std::string port1) : socket(ip1,port1), protocol
 
 void Client::launch() {
     try {
+        // ESTE CLIENTE PERTENECE A LA CASA HARKONNEN
+        protocol.sendResponse(socket, HARKONNEN);
 
-        // Se recibe el mapa desde el servidor.
-        std::cout << "recibiendo mapa..." << std::endl;
+
         std::vector<std::vector<char>> mapa;
         mapa = protocol.recvMap(socket);
         int rows = mapa.size();

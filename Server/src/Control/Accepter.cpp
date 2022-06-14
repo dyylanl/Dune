@@ -41,6 +41,7 @@ Accepter::Accepter(const std::string& port, const int max_clients_queued,
           keep_accepting(true) {}
 
 void Accepter:: run() {
+    fprintf(stderr, "[ACCEPTER]: Comenzando ejecucion.\n");
     try {
         while (keep_accepting) {
             _acceptClient();
@@ -53,6 +54,7 @@ void Accepter:: run() {
         fprintf(stderr, "Unknown error.\n");
     }
     _joinLogins();
+    fprintf(stderr, "[ACCEPTER]: Terminando ejecucion.\n");
 }
 
 void Accepter::stop() {

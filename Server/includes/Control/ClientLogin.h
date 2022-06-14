@@ -13,15 +13,16 @@
 //-----------------------------------------------------------------------------
 #include "NewConnection.h"
 #include "YAMLReader.h"
-
 //-----------------------------------------------------------------------------
 
 class ClientLogin : public Thread {
 private:
     std::atomic_bool is_running;
     Socket peer;
+    Protocol protocol;
     YAMLReader& reader;
     NonBlockingQueue<NewConnection*>& new_connections;
+
 
 public:
     ClientLogin(Socket& peer, YAMLReader& reader,
@@ -31,16 +32,14 @@ public:
     ClientLogin(ClientLogin&& other) = delete;
     ClientLogin& operator=(ClientLogin&& other) = delete;
 
-    /* Handler para el log-in de un cliente */
+    /*
+     * Utilizada para la carga de configuracion del nuevo cliente.
+     */
     void run() override;
-
-    /* Chequea si el hilo se sigue ejecutando */
     bool isRunning() const;
-
-    /* Termina la conexión de manera forzosa */
     void stop();
 
-    ~ClientLogin();
+    ~ClientLogin() override;
 };
 
 
