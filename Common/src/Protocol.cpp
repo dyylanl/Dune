@@ -224,3 +224,10 @@ std::vector<std::vector<char>> Protocol::recvMap(Socket &socket) {
     }
     return mapa;
 }
+
+void Protocol::sendName(Socket &socket, std::string name) {
+    uint16_t len_name = name.size();
+    socket.send(reinterpret_cast<const char *>(&len_name), sizeof(uint8_t));
+    socket.send(name.c_str(), name.size());
+
+}

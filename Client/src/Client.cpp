@@ -16,10 +16,25 @@
 //-----------------------------------------------------------------------------
 
 Client::Client(std::string ip1, std::string port1) : socket(ip1,port1), protocol() {
-    std::cout << "constructor cliente" << std::endl;
 }
 
 void Client::launch() {
+
+    std::string name_player;
+    uint16_t house_player;
+    std::cout << "Nombre: ";
+    std::cin >> name_player;
+    std::cout << "House: ";
+    std::cin >> house_player;
+    protocol.sendName(socket, name_player);
+    protocol.sendResponse(socket, house_player);
+
+    uint16_t command;
+    std::cout << "Comando: ";
+    std::cin >> command;
+    protocol.sendResponse(socket,command);
+
+    /*
     try {
         int send;
         while (send != 0) {
@@ -29,7 +44,6 @@ void Client::launch() {
         }
 
 
-/*
         SDL2pp::SDL sdl(SDL_INIT_VIDEO);
         SDL2pp::Window window("DUNE - v0.1", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
                               1280, 720, SDL_WINDOW_RESIZABLE);
@@ -49,11 +63,11 @@ void Client::launch() {
             engine.Update();
             engine.Render(renderer);
             usleep(FRAME_RATE);
-        }*/
+        }
     } catch (std::exception& e) {
         std::cout << e.what() << std::endl;
         return;
-    }
+    }*/
 }
 
 Client::~Client() = default;

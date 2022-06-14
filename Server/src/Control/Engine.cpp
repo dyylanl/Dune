@@ -7,15 +7,9 @@ void Engine::_processNewConnections() {
     NewConnection* new_connection = nullptr;
     while ((new_connection = new_connections.pop())) {
         fprintf(stderr, "[ENGINE]: Se ha conectado un jugador.\n");
-        int command_type = 1;
-        while (command_type != 0) {
-            command_type = protocol.recvCommand(new_connection->peer);
-            std::cout << "Comando recibido: " << command_type << std::endl;
-            if (command_type == 0) {
-                delete new_connection;
-                fprintf(stderr, "[ENGINE]: Se ha desconectado un jugador.\n");
-            }
-        }
+        uint16_t command_type = protocol.recvCommand(new_connection->peer);
+        std::cout << "Comando recibido: " << command_type << std::endl;
+
     }
 }
 

@@ -13,6 +13,12 @@ void ClientLogin::run() {
     is_running = true;
     try {
         fprintf(stderr, "[ClientLogin]: Nuevo jugador en el lobby.\n");
+        std::string name;
+        uint16_t len_name = protocol.recvCommand(peer);
+        name = protocol.recvName(peer, len_name);
+        std::cout << "Nombre: " << name << std::endl;
+        uint16_t house = protocol.recvCommand(peer);
+        std::cout << "Casa elegida: " << house << std::endl;
         new_connections.push(new NewConnection(peer));
     } catch (const std::exception& e) {
         try {

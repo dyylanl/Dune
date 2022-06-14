@@ -117,6 +117,7 @@ public:
     static void sendMap(Socket &socket, std::vector<std::vector<char>> map) ;
 
     static std::vector<std::vector<char>> recvMap(Socket &socket);
+    void sendName(Socket &socket, std::string name);
 
 };
 
