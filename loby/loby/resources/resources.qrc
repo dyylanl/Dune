@@ -1,0 +1,10 @@
+<RCC>
+    <qresource prefix="/resources">
+        <file>atreides.jpg</file>
+        <file>atreides.png</file>
+        <file>harkonnen.jpg</file>
+        <file>harkonnen.png</file>
+        <file>ordos.jpg</file>
+        <file>ordos.png</file>
+    </qresource>
+</RCC>
