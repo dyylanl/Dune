@@ -7,8 +7,10 @@ void Engine::_processNewConnections() {
     NewConnection* new_connection = nullptr;
     while ((new_connection = new_connections.pop())) {
         fprintf(stderr, "[ENGINE]: Se ha conectado un jugador.\n");
+        std::cout << "Nombre del jugador: " << new_connection->name << std::endl;
+        std::cout << "Casa elegida: " << new_connection->house << std::endl;
         uint16_t command_type = protocol.recvCommand(new_connection->peer);
-        std::cout << "Comando recibido: " << command_type << std::endl;
+        std::cout << "Comando a ejecutar: " << command_type << std::endl;
 
     }
 }
