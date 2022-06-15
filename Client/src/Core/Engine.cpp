@@ -22,7 +22,7 @@ void Engine::Update() {
                 m_players[i].select();
             }
         }
-        m_players[i].update(m_eventManager, FRAME_RATE, socket, protocol);
+        m_players[i].update(m_eventManager, FRAME_RATE);
     }
     m_TextureManager.getCamera().update(m_eventManager);
 }
@@ -36,7 +36,7 @@ void Engine::Render(SDL2pp::Renderer &m_Renderer) {
     m_Renderer.Present();
 }
 
-Engine::Engine(std::vector<Player> &players, TextureManager &textureManager, EventManager &eventManager,  Socket &skt) : m_players(players), m_TextureManager(textureManager), m_eventManager(eventManager), socket(skt), protocol(){
+Engine::Engine(std::vector<Player> &players, TextureManager &textureManager, EventManager &eventManager) : m_players(players), m_TextureManager(textureManager), m_eventManager(eventManager){
     m_Running = true;
 }
 

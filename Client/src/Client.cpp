@@ -9,6 +9,7 @@
 #include "Characters/Player.h"
 #include "Core/Engine.h"
 #include "Thread/RecvThread.h"
+#include "../../Common/includes/NonBlockingQueue.h"
 #include <arpa/inet.h>
 
 #define HARKONNEN 1
@@ -19,30 +20,10 @@ Client::Client(std::string ip1, std::string port1) : socket(ip1,port1), protocol
 }
 
 void Client::launch() {
-
-    std::string name_player;
-    uint16_t house_player;
-    std::cout << "Nombre: ";
-    std::cin >> name_player;
-    std::cout << "House: ";
-    std::cin >> house_player;
-    protocol.sendName(socket, name_player);
-    protocol.sendResponse(socket, house_player);
-
-    uint16_t command;
-    std::cout << "Comando: ";
-    std::cin >> command;
-    protocol.sendResponse(socket,command);
-
-    /*
     try {
-        int send;
-        while (send != 0) {
-            std::cout << "Enviando: ";
-            std::cin >> send;
-            protocol.sendResponse(socket, send);
-        }
-
+        NonBlockingQueue<Unidad*> queue_nb;
+        RecvThread recvThread(queue_nb, socket, protocol);
+        recvThread.start();
 
         SDL2pp::SDL sdl(SDL_INIT_VIDEO);
         SDL2pp::Window window("DUNE - v0.1", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
@@ -53,10 +34,11 @@ void Client::launch() {
         textureManager.load("carryall", DATA_PATH "assets/carryall.png");
         textureManager.load("missileTank", DATA_PATH "assets/missileTank.png");
         textureManager.load("menu", DATA_PATH "assets/menu.png");
+        Player tank("missileTank",textureManager,SDL2pp::Point(0,0),SDL2pp::Point(30,30));
         std::vector<Player> gameObjects;
+        gameObjects.push_back(tank);
         EventManager eventManager;
-        Engine engine(gameObjects, textureManager, eventManager, socket);
-
+        Engine engine(gameObjects, textureManager, eventManager);
 
         while (engine.IsRunning()) {
             engine.Events();
@@ -67,7 +49,7 @@ void Client::launch() {
     } catch (std::exception& e) {
         std::cout << e.what() << std::endl;
         return;
-    }*/
+    }
 }
 
 Client::~Client() = default;

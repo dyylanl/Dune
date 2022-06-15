@@ -19,11 +19,9 @@ private:
     std::vector<Player> &m_players;
     TextureManager &m_TextureManager;
     EventManager &m_eventManager;
-    Socket &socket;
-    Protocol protocol;
     bool m_Running;
 public:
-    Engine(std::vector<Player> &players, TextureManager &manager, EventManager &eventManager , Socket &skt);
+    Engine(std::vector<Player> &players, TextureManager &manager, EventManager &eventManager);
 
     bool IsRunning();
 

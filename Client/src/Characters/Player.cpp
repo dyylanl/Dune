@@ -9,12 +9,11 @@ Player::Player(std::string textureID, TextureManager &manager, SDL2pp::Point pos
 
 Player::~Player() {}
 
-void Player::update(EventManager &eventManager, float dt, Socket &skt, Protocol &prot) {
+void Player::update(EventManager &eventManager, float dt) {
     //m_Animation.update(dt);
     if(selectStatus && eventManager.mouseButtonDown(RIGHT)){
 
-        //corner = eventManager.getMouse();
-        prot.sendPosition(skt, eventManager.getMouse().GetX(),eventManager.getMouse().GetY());
+        corner = eventManager.getMouse();
         selectStatus = false;
     }
 }
