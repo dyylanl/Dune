@@ -13,6 +13,8 @@
 #include "../Camera/Camera.h"
 #include "../../../Common/includes/Socket/Socket.h"
 #include "../../../Common/includes/Protocol.h"
+#include "../Thread/Unidad.h"
+#include "../../../Common/includes/NonBlockingQueue.h"
 
 class Engine {
 private:
@@ -20,8 +22,9 @@ private:
     TextureManager &m_TextureManager;
     EventManager &m_eventManager;
     bool m_Running;
+    NonBlockingQueue<Unidad*> &m_queueNb;
 public:
-    Engine(std::vector<Player> &players, TextureManager &manager, EventManager &eventManager);
+    Engine(std::vector<Player> &players, TextureManager &manager, EventManager &eventManager, NonBlockingQueue<Unidad*> &queue_nb);
 
     bool IsRunning();
 

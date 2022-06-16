@@ -231,3 +231,58 @@ void Protocol::sendName(Socket &socket, std::string name) {
     socket.send(name.c_str(), name.size());
 
 }
+
+void
+Protocol::recvUnit(Socket &socket, std::string &unit, int &player, int &posX, int &posY, int &posActX, int &posActY, int &life,
+                   bool &action) {
+    int unitType = 0;
+    uint8_t act;
+    socket.recv(reinterpret_cast<char *>(&unitType), sizeof(uint8_t));
+    if(unitType == 1) {
+        unit = "Infantería Ligera";
+    }
+    if(unitType == 2) {
+        unit = "Infantería Pesada";
+    }
+    if(unitType == 3) {
+        unit = "Fremen";
+    }
+    if(unitType == 4) {
+        unit = "Sardaukar";
+    }
+    if(unitType == 5) {
+        unit = "Trike";
+    }
+    if(unitType == 6) {
+        unit = "Tanque Sonico";
+    }
+    if(unitType == 7) {
+        unit = "Raider";
+    }
+    if(unitType == 8) {
+        unit = "Desviador";
+    }
+    if(unitType == 6) {
+        unit = "Tanque";
+    }
+    if(unitType == 7) {
+        unit = "Devastador";
+    }
+    if(unitType == 8) {
+        unit = "Cosechadora";
+    }
+    socket.recv(reinterpret_cast<char *>(&player), sizeof(uint8_t));
+    socket.recv(reinterpret_cast<char *>(&posX), sizeof(uint16_t));
+    socket.recv(reinterpret_cast<char *>(&posY), sizeof(uint16_t));
+    socket.recv(reinterpret_cast<char *>(&posActX), sizeof(uint16_t));
+    socket.recv(reinterpret_cast<char *>(&posActY), sizeof(uint16_t));
+    socket.recv(reinterpret_cast<char *>(&life), sizeof(uint16_t));
+    socket.recv(reinterpret_cast<char *>(&act), sizeof(uint8_t));
+    if (act == 1) action = true;
+    else action = false;
+    std::cout << "Se recibe: " << "(" << posX << "," << posY << ")" << std::endl;
+}
+
+void Protocol::recvType(Socket &socket, int &type) {
+    socket.recv(reinterpret_cast<char *>(&type), sizeof(uint8_t));
+}
