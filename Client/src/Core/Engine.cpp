@@ -10,6 +10,9 @@ bool Engine::IsRunning() {
 
 void Engine::Events() {
     m_Running = m_eventManager.listen();
+    if(!m_Running) {
+
+    }
 }
 
 void Engine::Update() {

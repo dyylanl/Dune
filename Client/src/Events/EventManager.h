@@ -38,10 +38,6 @@ public:
     void KeyUp();
 
     bool GetKeyDown(SDL_Scancode key);
-
-    bool isRunnig();
-
-    bool quit();
 };
 
 
