@@ -23,7 +23,7 @@ Client::Client(std::string ip1, std::string port1) : socket(ip1,port1), protocol
 
 void Client::launch() {
     try {
-        NonBlockingQueue<Unidad*> queueNb;
+        /*NonBlockingQueue<Unidad*> queueNb;
         BlockingQueue<Action*> queueB;
         RecvThread recvThread(queueNb, socket, protocol);
         SendThread sendThread(queueB, socket, protocol);
@@ -40,12 +40,15 @@ void Client::launch() {
                 std::cout << " " << list[i] << "/" << list[i+1] << std::endl;
             }
         }
-        protocol.recvCommand(socket);
-        /*
+        protocol.recvCommand(socket);*/
+
+
+        NonBlockingQueue<Unidad*> queueNb;
+        BlockingQueue<Action*> queueB;
+        RecvThread recvThread(queueNb, socket, protocol);
+        SendThread sendThread(queueB, socket, protocol);
         recvThread.start();
         sendThread.start();
-
-
 
         SDL2pp::SDL sdl(SDL_INIT_VIDEO);
         SDL2pp::Window window("DUNE - v0.1", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
@@ -57,9 +60,7 @@ void Client::launch() {
         textureManager.load("carryall", DATA_PATH "assets/carryall.png");
         textureManager.load("Tanque", DATA_PATH "assets/missileTank.png");
         textureManager.load("menu", DATA_PATH "assets/menu.png");
-        //Player tank("missileTank",textureManager,SDL2pp::Point(0,0),SDL2pp::Point(30,30));
         std::vector<Player> gameObjects;
-        //gameObjects.push_back(tank);
         EventManager eventManager;
         Engine engine(gameObjects, textureManager, eventManager, queueNb, queueB);
 
@@ -69,8 +70,13 @@ void Client::launch() {
             engine.Render(renderer);
             usleep(FRAME_RATE);
         }
+
+        sendThread.stop();
         recvThread.stop();
-        recvThread.join();*/
+        sendThread.join();
+        recvThread.join();
+         
+
     } catch (std::exception& e) {
         std::cout << e.what() << std::endl;
         return;
