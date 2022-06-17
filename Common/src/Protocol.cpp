@@ -150,7 +150,7 @@ void Protocol::recvJoin(Socket &socket, std::string &name) {
     name = recvName(socket, game_name_len);
 }
 
-void Protocol::sendUnit(Socket &socket, int &type) {
+void Protocol::sendUnit(Socket &socket, int type) {
     uint8_t aux = type;
     socket.send(reinterpret_cast<const char *>(&aux), sizeof(uint8_t));
 }
@@ -177,7 +177,7 @@ char Protocol::recvUnitType(Socket &socket) {
     return type;
 }
 
-void Protocol::sendBuild(Socket &socket, int &build, int &posX, int &posY) {
+void Protocol::sendBuild(Socket &socket, int build, int posX, int posY) {
     uint8_t aux = build;
     socket.send(reinterpret_cast<const char *>(&aux), sizeof(uint8_t));
     socket.send(reinterpret_cast<const char *>(&posX), sizeof(uint16_t));

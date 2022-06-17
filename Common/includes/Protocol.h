@@ -88,11 +88,11 @@ public:
     /*
      * Envia el tipo de unidad
      */
-    void sendUnit(Socket &socket, int &type);
+    void sendUnit(Socket &socket, int type);
     /*
      * Envia la posicion en orden x y luego y
      */
-    static void sendPosition(Socket &socket, unsigned x, unsigned y);
+    void sendPosition(Socket &socket, unsigned x, unsigned y);
     /*
      * Retorna el tipo de unidad (char)
      */
@@ -102,7 +102,7 @@ public:
      */
     static std::vector<int> recvPosition(Socket &skt);
 
-    void sendBuild(Socket &socket, int &build, int &posX, int &posY);
+    void sendBuild(Socket &socket, int build, int posX, int posY);
 
     void operationRecv(Socket &socket, char &operation);
 

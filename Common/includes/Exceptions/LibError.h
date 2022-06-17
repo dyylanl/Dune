@@ -28,7 +28,7 @@ public:
      *
      * int ret = foo();
      * if (ret == -1)
-     *      throw LibError(errno, "La funcion %s ha fallado: ", "foo");
+     *      throw LibError(errno, "La funcion %s ha fallado: ", "actionProcess");
      *  */
     LibError(int error_code, const char* fmt, ...) noexcept;
 
