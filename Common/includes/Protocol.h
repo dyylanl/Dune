@@ -43,7 +43,7 @@ public:
     /*
      * Envia la respuesta al comando (0 exito, 1 error)
      */
-    void sendResponse(Socket &socket, int resp);
+    bool sendResponse(Socket &socket, int resp);
     /*
      * Retorna un string de longitud name_long.
      */

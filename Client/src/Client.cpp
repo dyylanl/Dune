@@ -27,8 +27,25 @@ void Client::launch() {
         BlockingQueue<Action*> queueB;
         RecvThread recvThread(queueNb, socket, protocol);
         SendThread sendThread(queueB, socket, protocol);
+
+        std::string name = "jugador";
+        protocol.sendName(socket, name);
+        protocol.sendResponse(socket, HARKONNEN);
+        std::vector<std::string> list = this->protocol.recvGameList(socket);
+        protocol.sendResponse(socket,1); // le manda al server que quiere jugar en el mapa 1
+        if (!list.empty()) {
+            int n = (int)list.size();
+            for (int i = 0; i <= (n-2); i = i+3) {
+                std::cout << (list[i+2]);
+                std::cout << " " << list[i] << "/" << list[i+1] << std::endl;
+            }
+        }
+        protocol.recvCommand(socket);
+        /*
         recvThread.start();
         sendThread.start();
+
+
 
         SDL2pp::SDL sdl(SDL_INIT_VIDEO);
         SDL2pp::Window window("DUNE - v0.1", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
@@ -53,11 +70,12 @@ void Client::launch() {
             usleep(FRAME_RATE);
         }
         recvThread.stop();
-        recvThread.join();
+        recvThread.join();*/
     } catch (std::exception& e) {
         std::cout << e.what() << std::endl;
         return;
     }
+
 }
 
 Client::~Client() = default;
