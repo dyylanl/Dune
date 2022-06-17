@@ -9,7 +9,9 @@
 #include "Characters/Player.h"
 #include "Core/Engine.h"
 #include "Thread/RecvThread.h"
+#include "../../Common/includes/BlockingQueue.h"
 #include "../../Common/includes/NonBlockingQueue.h"
+#include "Thread/SendThread.h"
 #include <arpa/inet.h>
 
 #define HARKONNEN 1
@@ -21,9 +23,12 @@ Client::Client(std::string ip1, std::string port1) : socket(ip1,port1), protocol
 
 void Client::launch() {
     try {
-        NonBlockingQueue<Unidad*> queue_nb;
-        RecvThread recvThread(queue_nb, socket, protocol);
+        NonBlockingQueue<Unidad*> queueNb;
+        BlockingQueue<Action*> queueB;
+        RecvThread recvThread(queueNb, socket, protocol);
+        SendThread sendThread(queueB, socket, protocol);
         recvThread.start();
+        sendThread.start();
 
         SDL2pp::SDL sdl(SDL_INIT_VIDEO);
         SDL2pp::Window window("DUNE - v0.1", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
@@ -31,6 +36,7 @@ void Client::launch() {
         SDL2pp::Renderer renderer(window, -1, SDL_RENDERER_ACCELERATED);
         Camera camera;
         TextureManager textureManager(renderer, camera);
+
         textureManager.load("carryall", DATA_PATH "assets/carryall.png");
         textureManager.load("Tanque", DATA_PATH "assets/missileTank.png");
         textureManager.load("menu", DATA_PATH "assets/menu.png");
@@ -38,7 +44,7 @@ void Client::launch() {
         std::vector<Player> gameObjects;
         //gameObjects.push_back(tank);
         EventManager eventManager;
-        Engine engine(gameObjects, textureManager, eventManager, queue_nb);
+        Engine engine(gameObjects, textureManager, eventManager, queueNb, queueB);
 
         while (engine.IsRunning()) {
             engine.Events();

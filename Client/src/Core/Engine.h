@@ -14,7 +14,9 @@
 #include "../../../Common/includes/Socket/Socket.h"
 #include "../../../Common/includes/Protocol.h"
 #include "../Thread/Unidad.h"
+#include "../../../Common/includes/BlockingQueue.h"
 #include "../../../Common/includes/NonBlockingQueue.h"
+#include "../Thread/Action.h"
 
 class Engine {
 private:
@@ -23,8 +25,9 @@ private:
     EventManager &m_eventManager;
     bool m_Running;
     NonBlockingQueue<Unidad*> &m_queueNb;
+    BlockingQueue<Action*> &m_queueB;
 public:
-    Engine(std::vector<Player> &players, TextureManager &manager, EventManager &eventManager, NonBlockingQueue<Unidad*> &queue_nb);
+    Engine(std::vector<Player> &players, TextureManager &manager, EventManager &eventManager, NonBlockingQueue<Unidad*> &queue_nb, BlockingQueue<Action*> &queueB);
 
     bool IsRunning();
 

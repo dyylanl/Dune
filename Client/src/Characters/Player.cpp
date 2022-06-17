@@ -4,15 +4,14 @@
 
 #include "Player.h"
 
-Player::Player(std::string textureID, TextureManager &manager, SDL2pp::Point position, SDL2pp::Point size)
-        : m_Animation(manager, textureID, SDL_FLIP_NONE), corner(position), size(size) ,m_TextureID(textureID), selectStatus(false){}
+Player::Player(int id, std::string textureID, TextureManager &manager, SDL2pp::Point position, SDL2pp::Point size)
+        : m_id(id), m_Animation(manager, textureID, SDL_FLIP_NONE), corner(position), size(size) ,m_TextureID(textureID), selectStatus(false){}
 
 Player::~Player() {}
 
 void Player::update(EventManager &eventManager, float dt) {
     //m_Animation.update(dt);
     if(selectStatus && eventManager.mouseButtonDown(RIGHT)){
-
         corner = eventManager.getMouse();
         selectStatus = false;
     }
@@ -28,5 +27,9 @@ SDL2pp::Rect Player::getShape() {
 
 void Player::select() {
     selectStatus = true;
+}
+
+int Player::getId() {
+    return m_id;
 }
 

@@ -145,8 +145,9 @@ void Protocol::recvJoin(Socket &socket, std::string &name) {
     name = recvName(socket, game_name_len);
 }
 
-void Protocol::sendUnit(Socket &socket, char type) {
-    socket.send(reinterpret_cast<const char *>(&type), sizeof(uint8_t));
+void Protocol::sendUnit(Socket &socket, int &type) {
+    uint8_t aux = type;
+    socket.send(reinterpret_cast<const char *>(&aux), sizeof(uint8_t));
 }
 
 void Protocol::sendPosition(Socket &socket, unsigned int x, unsigned int y) {
@@ -170,11 +171,9 @@ char Protocol::recvUnitType(Socket &socket) {
     return type;
 }
 
-void Protocol::sendUnit(Socket &socket, int idUnit, char unitType, int posX, int posY) {
-    uint8_t operation = 4;
-    socket.send(reinterpret_cast<const char *>(&operation), sizeof(uint8_t));
-    socket.send(reinterpret_cast<const char *>(&idUnit), sizeof(uint16_t));
-    socket.send(reinterpret_cast<const char *>(&unitType), sizeof(uint8_t));
+void Protocol::sendBuild(Socket &socket, int &build, int &posX, int &posY) {
+    uint8_t aux = build;
+    socket.send(reinterpret_cast<const char *>(&aux), sizeof(uint8_t));
     socket.send(reinterpret_cast<const char *>(&posX), sizeof(uint16_t));
     socket.send(reinterpret_cast<const char *>(&posY), sizeof(uint16_t));
 }
@@ -233,10 +232,11 @@ void Protocol::sendName(Socket &socket, std::string name) {
 }
 
 void
-Protocol::recvUnit(Socket &socket, std::string &unit, int &player, int &posX, int &posY, int &posActX, int &posActY, int &life,
+Protocol::recvUnit(Socket &socket,int &id, std::string &unit, int &player, int &posX, int &posY, int &posActX, int &posActY, int &life,
                    bool &action) {
     int unitType = 0;
     uint8_t act;
+    socket.recv(reinterpret_cast<char *>(&id), sizeof(uint16_t));
     socket.recv(reinterpret_cast<char *>(&unitType), sizeof(uint8_t));
     if(unitType == 1) {
         unit = "Infantería Ligera";
@@ -285,4 +285,22 @@ Protocol::recvUnit(Socket &socket, std::string &unit, int &player, int &posX, in
 
 void Protocol::recvType(Socket &socket, int &type) {
     socket.recv(reinterpret_cast<char *>(&type), sizeof(uint8_t));
+}
+
+void Protocol::sendType(Socket &socket, int &actionType) {
+    uint8_t aux = actionType;
+    socket.send(reinterpret_cast<char *>(&aux), sizeof(uint8_t));
+    std::cout << "Se envia: " << (int)aux << std::endl;
+}
+
+void Protocol::sendAction(Socket &socket, int &id, int &posX, int &posY) {
+    socket.send(reinterpret_cast<char *>(&id), sizeof(uint16_t));
+    socket.send(reinterpret_cast<char *>(&posX), sizeof(uint16_t));
+    socket.send(reinterpret_cast<char *>(&posY), sizeof(uint16_t));
+    std::cout << "Se envia: " << id << "," << posX << "," << posY << std::endl;
+}
+
+void Protocol::sendId(Socket &socket, int &id) {
+    socket.send(reinterpret_cast<char *>(&id), sizeof(uint16_t));
+    std::cout << "Se envia: " << id << std::endl;
 }

@@ -88,7 +88,7 @@ public:
     /*
      * Envia el tipo de unidad
      */
-    void sendUnit(Socket &socket, char type);
+    void sendUnit(Socket &socket, int &type);
     /*
      * Envia la posicion en orden x y luego y
      */
@@ -102,7 +102,7 @@ public:
      */
     static std::vector<int> recvPosition(Socket &skt);
 
-    void sendUnit(Socket &socket, int idUnit, char unitType, int posX, int posY);
+    void sendBuild(Socket &socket, int &build, int &posX, int &posY);
 
     void operationRecv(Socket &socket, char &operation);
 
@@ -119,10 +119,16 @@ public:
     static std::vector<std::vector<char>> recvMap(Socket &socket);
     void sendName(Socket &socket, std::string name);
 
-    void recvUnit(Socket &socket, std::string &unit, int &player, int &posX, int &posY, int &posActX, int &posActY, int &life,
+    void recvUnit(Socket &socket,int &id, std::string &unit, int &player, int &posX, int &posY, int &posActX, int &posActY, int &life,
                   bool &action);
 
     void recvType(Socket &socket, int &type);
+
+    void sendType(Socket &socket, int &actionType);
+
+    void sendAction(Socket &socket, int &id, int &posX, int &posY);
+
+    void sendId(Socket &socket, int &id);
 };
 
 

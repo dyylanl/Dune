@@ -19,7 +19,7 @@ void Engine::Update() {
     Unidad *unit;
     unit = m_queueNb.pop();
     if (unit != nullptr) {
-        Player tank(unit->getUnitType(),m_TextureManager,unit->getPosition(),SDL2pp::Point(30,30));
+        Player tank(unit->getID(),unit->getUnitType(),m_TextureManager,unit->getPosition(),SDL2pp::Point(30,30));
         m_players.push_back(tank);
     }
     for(unsigned int i = 0; i != m_players.size(); i++) {
@@ -29,9 +29,13 @@ void Engine::Update() {
             if (SDL_PointInRect(&point, &shape)) {
                 std::cout << "objecto seleccionado" << std::endl;
                 m_players[i].select();
+                m_queueB.push(new Action(5,m_players[i].getId(),0,SDL2pp::Point(0,0)));
             }
         }
-        m_players[i].update(m_eventManager, FRAME_RATE);
+        //m_players[i].update(m_eventManager, FRAME_RATE);
+    }
+    if (m_eventManager.mouseButtonDown(RIGHT)) {
+        m_queueB.push(new Action(6,0,0,m_eventManager.getMouse()));
     }
     m_TextureManager.getCamera().update(m_eventManager);
 }
@@ -46,7 +50,10 @@ void Engine::Render(SDL2pp::Renderer &m_Renderer) {
     m_players.clear();
 }
 
-Engine::Engine(std::vector<Player> &players, TextureManager &textureManager, EventManager &eventManager, NonBlockingQueue<Unidad*> &queueNb) : m_players(players), m_TextureManager(textureManager), m_eventManager(eventManager), m_queueNb(queueNb){
+Engine::Engine(std::vector<Player> &players, TextureManager &textureManager, EventManager &eventManager,
+               NonBlockingQueue<Unidad*> &queueNb, BlockingQueue<Action*> &queueB)
+               : m_players(players), m_TextureManager(textureManager), m_eventManager(eventManager),
+               m_queueNb(queueNb), m_queueB(queueB){
     m_Running = true;
 }
 

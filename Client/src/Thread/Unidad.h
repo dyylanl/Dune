@@ -11,6 +11,7 @@
 
 class Unidad {
 private:
+    int m_id;
     std::string m_unitType;
     int m_player;
     SDL2pp::Point m_position;
@@ -19,10 +20,10 @@ private:
     bool m_action;
 
 public:
-    Unidad() : m_player(0), m_life(0), m_action(false) {}
+    Unidad() : m_id(0), m_player(0), m_life(0), m_action(false) {}
 
-    Unidad(std::string &type, int &player,SDL2pp::Point &position, SDL2pp::Point &posAction,int &life, bool &action)
-    : m_unitType(type), m_player(player), m_position(position), m_posAction(posAction), m_life(life), m_action(action) {}
+    Unidad(int id, std::string &type, int &player,SDL2pp::Point &position, SDL2pp::Point &posAction,int &life, bool &action)
+    : m_id(id), m_unitType(type), m_player(player), m_position(position), m_posAction(posAction), m_life(life), m_action(action) {}
 
     void set(std::string &type, int &player, int &posX, int &posY, int &posActX, int &posActY ,int &life, bool &action) {
         m_unitType = type;
@@ -41,6 +42,10 @@ public:
 
     SDL2pp::Point getPosition() {
         return m_position;
+    }
+
+    int getID() {
+        return 0;
     }
 };
 

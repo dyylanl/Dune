@@ -16,6 +16,7 @@
 
 class Player {
 private:
+    int m_id;
     Animation m_Animation;
     SDL2pp::Point corner;
     SDL2pp::Point size;
@@ -23,12 +24,12 @@ private:
     bool selectStatus;
 
 public:
-    Player(std::string textureID, TextureManager &manager, SDL2pp::Point position, SDL2pp::Point size);
+    Player(int id, std::string textureID, TextureManager &manager, SDL2pp::Point position, SDL2pp::Point size);
     ~Player();
     void update(EventManager &eventManager, float dt);
     void draw(SDL2pp::Renderer &renderer);
     SDL2pp::Rect getShape();
-
+    int getId();
     void select();
 };
 
