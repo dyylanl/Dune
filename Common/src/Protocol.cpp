@@ -151,6 +151,7 @@ void Protocol::sendUnit(Socket &socket, int &type) {
 }
 
 void Protocol::sendPosition(Socket &socket, unsigned int x, unsigned int y) {
+    std::cout << "Se envia Posicion: " << x << "," << y << std::endl;
     socket.send(reinterpret_cast<const char *>(&x), sizeof(uint16_t));
     socket.send(reinterpret_cast<const char *>(&y), sizeof(uint16_t));
 }
@@ -232,11 +233,10 @@ void Protocol::sendName(Socket &socket, std::string name) {
 }
 
 void
-Protocol::recvUnit(Socket &socket,int &id, std::string &unit, int &player, int &posX, int &posY, int &posActX, int &posActY, int &life,
+Protocol::recvUnit(Socket &socket, std::string &unit, int &player, int &posX, int &posY, int &posActX, int &posActY, int &life,
                    bool &action) {
     int unitType = 0;
     uint8_t act;
-    socket.recv(reinterpret_cast<char *>(&id), sizeof(uint16_t));
     socket.recv(reinterpret_cast<char *>(&unitType), sizeof(uint8_t));
     if(unitType == 1) {
         unit = "Infantería Ligera";
@@ -290,7 +290,7 @@ void Protocol::recvType(Socket &socket, int &type) {
 void Protocol::sendType(Socket &socket, int &actionType) {
     uint8_t aux = actionType;
     socket.send(reinterpret_cast<char *>(&aux), sizeof(uint8_t));
-    std::cout << "Se envia: " << (int)aux << std::endl;
+    std::cout << "Se envia Tipo Op: " << (int)aux << std::endl;
 }
 
 void Protocol::sendAction(Socket &socket, int &id, int &posX, int &posY) {

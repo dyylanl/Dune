@@ -3,7 +3,6 @@
 void RecvThread::run() {
     Unidad *unit = new Unidad();
     while (running) {
-        int id;
         int type;
         std::string unitType;
         int player;
@@ -15,7 +14,7 @@ void RecvThread::run() {
         bool action;
         m_protocol.recvType(m_socket, type);
         if (type == 1) {
-            m_protocol.recvUnit(m_socket, id, unitType, player, posX, posY, posActX, posActY, life, action);
+            m_protocol.recvUnit(m_socket, unitType, player, posX, posY, posActX, posActY, life, action);
         } else if (type == 2) {
             std::cout << "Se recibe un Edificio" << std::endl;
         } else if (type == 3) {

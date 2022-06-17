@@ -4,8 +4,8 @@
 
 #include "Player.h"
 
-Player::Player(int id, std::string textureID, TextureManager &manager, SDL2pp::Point position, SDL2pp::Point size)
-        : m_id(id), m_Animation(manager, textureID, SDL_FLIP_NONE), corner(position), size(size) ,m_TextureID(textureID), selectStatus(false){}
+Player::Player(std::string textureID, TextureManager &manager, SDL2pp::Point position, SDL2pp::Point size)
+        : m_Animation(manager, textureID, SDL_FLIP_NONE), corner(position), size(size) ,m_TextureID(textureID), selectStatus(false){}
 
 Player::~Player() {}
 
@@ -28,8 +28,3 @@ SDL2pp::Rect Player::getShape() {
 void Player::select() {
     selectStatus = true;
 }
-
-int Player::getId() {
-    return m_id;
-}
-

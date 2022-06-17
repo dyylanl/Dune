@@ -10,8 +10,11 @@ bool Engine::IsRunning() {
 
 void Engine::Events() {
     m_Running = m_eventManager.listen();
-    if(!m_Running) {
-
+    if (m_eventManager.mouseButtonDown(LEFT)) {
+        m_queueB.push(new Action(5, 0, m_eventManager.getMouse()));
+    }
+    if (m_eventManager.mouseButtonDown(RIGHT)) {
+        m_queueB.push(new Action(6,0,m_eventManager.getMouse()));
     }
 }
 
@@ -19,24 +22,24 @@ void Engine::Update() {
     Unidad *unit;
     unit = m_queueNb.pop();
     if (unit != nullptr) {
-        Player tank(unit->getID(),unit->getUnitType(),m_TextureManager,unit->getPosition(),SDL2pp::Point(30,30));
+        Player tank(unit->getUnitType(),m_TextureManager,unit->getPosition(),SDL2pp::Point(30,30));
         m_players.push_back(tank);
     }
-    for(unsigned int i = 0; i != m_players.size(); i++) {
+    /*for(unsigned int i = 0; i != m_players.size(); i++) {
         if (m_eventManager.mouseButtonDown(LEFT)) {
             SDL_Rect shape = m_players[i].getShape();
             SDL_Point point = m_eventManager.getMouse();
             if (SDL_PointInRect(&point, &shape)) {
                 std::cout << "objecto seleccionado" << std::endl;
                 m_players[i].select();
-                m_queueB.push(new Action(5,m_players[i].getId(),0,SDL2pp::Point(0,0)));
+                m_queueB.push(new Action(5,0,SDL2pp::Point(0,0)));
             }
         }
         //m_players[i].update(m_eventManager, FRAME_RATE);
     }
     if (m_eventManager.mouseButtonDown(RIGHT)) {
-        m_queueB.push(new Action(6,0,0,m_eventManager.getMouse()));
-    }
+        m_queueB.push(new Action(6,0,m_eventManager.getMouse()));
+    }*/
     m_TextureManager.getCamera().update(m_eventManager);
 }
 
