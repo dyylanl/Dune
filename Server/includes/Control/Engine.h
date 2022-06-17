@@ -22,6 +22,7 @@
 #include "../paths.h"
 #include "NewConnection.h"
 #include "../../../Common/includes/Protocol.h"
+#include "ClientConnection.h"
 //-----------------------------------------------------------------------------
 
 
@@ -33,7 +34,9 @@ private:
     int rate;
     NonBlockingQueue<NewConnection*>& new_connections;
     NonBlockingQueue<InstanceId*> finished_connections;
+    std::list<ClientConnection*> established_connections;
     Game game;
+    NonBlockingQueue<int*> commands;
 
     void _processFinishedConnections();
     void _processCommands();

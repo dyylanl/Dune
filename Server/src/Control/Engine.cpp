@@ -6,23 +6,27 @@
 void Engine::_processNewConnections() {
     NewConnection* new_connection = nullptr;
     while ((new_connection = new_connections.pop())) {
-        fprintf(stderr, "[ENGINE]: Se ha conectado un jugador.\n");
-        std::cout << "Nombre del jugador: " << new_connection->name << std::endl;
-        std::cout << "Casa elegida: " << new_connection->house << std::endl;
-        uint16_t command_type = protocol.recvCommand(new_connection->peer);
-        std::cout << "Comando a ejecutar: " << command_type << std::endl;
-
+        protocol.sendGameList(new_connection->peer, this->game.listGames());
+        int map_id = protocol.recvCommand(new_connection->peer); // el cliente le envia con q mapa va a jugar
+        auto id = this->game.getConnectionId();
+        ClientConnection connection(id, this->game.getMapId(map_id),new_connection->peer,finished_connections,commands);
+        established_connections.push_back(&connection);
+        //established_connections.back()->start();
+        delete new_connection;
     }
 }
 
 void Engine::_processCommands() {
-    fprintf(stderr, "[ENGINE]: Procesando comando...\n");
+    int* command_process = nullptr;
+    while ((command_process = commands.pop())) {
+        fprintf(stderr, "[ENGINE]: Procesando comando...\n");
+        std::cout << "Ejecutando comando: " << command_process << std::endl;
+    }
 }
 
 void Engine::_processFinishedConnections() {
     InstanceId* finished_connection = nullptr;
     while ((finished_connection = finished_connections.pop())) {
-
         delete finished_connection;
         fprintf(stderr, "[ENGINE]: Se ha desconectado un jugador.\n");
     }
@@ -46,8 +50,8 @@ void Engine::_freeQueues() {
 
 void Engine::_loopIteration(int it) {
     _processNewConnections();
-    //_processCommands();
-    //_processFinishedConnections();
+    _processCommands();
+    _processFinishedConnections();
 }
 
 //-----------------------------------------------------------------------------
@@ -61,6 +65,7 @@ Engine::Engine(YAMLReader& reader1,
           rate(30),
           new_connections(new_connections),
           finished_connections(),
+          established_connections(),
           game(rate, reader1) {
     int fps = reader.getFPS();
     this->rate = 1000 / fps;

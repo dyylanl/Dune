@@ -63,9 +63,10 @@ public:
 
     std::stack<Position> makePath(Unit unit, Position pos_end);
 
-
+    InstanceId getConnectionId() {return next_id++;}
     std::vector<std::vector<char>> getMap() {return this->map.getMap();}
-
+    // TODO: TERMINAR ID's de mapa
+    Id getMapId(int map_id) {return 1;};
 };
 
 

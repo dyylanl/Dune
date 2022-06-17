@@ -45,15 +45,15 @@ FILE(GLOB_RECURSE server_src "Server/*.cpp")
 # TARGETS
 
 # Common
-add_library(dune-common SHARED ${common_src} Common/includes/BlockingQueue.h)
+add_library(dune-common SHARED ${common_src})
 target_link_libraries(dune-common)
 
 # Client
-add_executable(dune ${client_src} Client/src/Thread/Unidad.cpp Client/src/Thread/Unidad.h Client/src/Thread/SendThread.cpp Client/src/Thread/SendThread.h Client/src/Thread/Action.cpp Client/src/Thread/Action.h)
+add_executable(dune ${client_src})
 target_link_libraries(dune dune-common SDL2 SDL2_image SDL2_ttf SDL2_mixer ${SDL2PP_LIBRARIES})
 
 # Server
-add_executable(dune-server ${server_src} )
+add_executable(dune-server ${server_src} Server/includes/Control/ClientConnection.h Server/src/Control/ClientConnection.cpp)
 target_link_libraries(dune-server dune-common ${YAML_CPP_LIBRARIES})
 #------------------------------------------------------------------------------
 

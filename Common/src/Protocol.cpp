@@ -55,9 +55,14 @@ uint16_t Protocol::recvCommand(Socket &skt) {
     skt.recv(reinterpret_cast<char *>(&command), sizeof(uint8_t));
     return command;
 }
-
-void Protocol::sendResponse(Socket &skt, int resp) {
-    skt.send(reinterpret_cast<const char *>(&resp), sizeof(uint8_t));
+// devuelve true si pudo enviar todos los bytes sino devuelve false aka esta cerrado
+bool Protocol::sendResponse(Socket &skt, int resp) {
+    int bytes = skt.send(reinterpret_cast<const char *>(&resp), sizeof(uint8_t));
+    if (bytes == sizeof(uint8_t)){
+        return true;
+    } else {
+        return false;
+    }
 }
 
 uint16_t Protocol::recvHouse(Socket &skt) {
