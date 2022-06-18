@@ -41,6 +41,9 @@ public:
     /* Ejecuta el cliente */
     void launch();
 
+    void crear_partida( const std::string&  house,const std::string& name, const std::string&  req);
+
+    int obtener_numero_casa(const std::string& casa);
     //-----------------------------------------------------------------------------
 
     /* Destructor */

@@ -23,7 +23,10 @@
       <height>551</height>
      </rect>
     </property>
-    <widget class="QWidget" name="page">
+    <property name="currentIndex">
+     <number>3</number>
+    </property>
+    <widget class="QWidget" name="page_inicio">
      <widget class="QLabel" name="titulo_label">
       <property name="geometry">
        <rect>
@@ -58,7 +61,7 @@
        <string>Confirmar</string>
       </property>
      </widget>
-     <widget class="QWidget" name="">
+     <widget class="QWidget" name="layoutWidget">
       <property name="geometry">
        <rect>
         <x>130</x>
@@ -110,7 +113,88 @@
       </layout>
      </widget>
     </widget>
-    <widget class="QWidget" name="page_2">
+    <widget class="QWidget" name="page_crear_unirse">
+     <widget class="QPushButton" name="button_crear_partida">
+      <property name="geometry">
+       <rect>
+        <x>270</x>
+        <y>100</y>
+        <width>181</width>
+        <height>71</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Crear Partida</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="button_unirse_partida">
+      <property name="geometry">
+       <rect>
+        <x>270</x>
+        <y>220</y>
+        <width>181</width>
+        <height>71</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Unirse a Partida</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="page_crear">
+     <widget class="QPushButton" name="button_cofirmar_cant_nombre">
+      <property name="geometry">
+       <rect>
+        <x>538</x>
+        <y>300</y>
+        <width>121</width>
+        <height>71</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Confirmar</string>
+      </property>
+     </widget>
+     <widget class="QWidget" name="">
+      <property name="geometry">
+       <rect>
+        <x>200</x>
+        <y>60</y>
+        <width>471</width>
+        <height>111</height>
+       </rect>
+      </property>
+      <layout class="QGridLayout" name="gridLayout_2">
+       <item row="0" column="0">
+        <widget class="QLabel" name="nombre_partida_label">
+         <property name="text">
+          <string>Ingresar nombre de la partida</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="QLineEdit" name="nombre_partida_input"/>
+       </item>
+       <item row="1" column="0">
+        <widget class="QLabel" name="cantidad_jugadores_label">
+         <property name="text">
+          <string>Ingresar cantidad de jugadores</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1">
+        <widget class="QLineEdit" name="cantidad_jugadores_input"/>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="page_casas">
      <widget class="QLabel" name="bienvenida_label">
       <property name="geometry">
        <rect>
@@ -156,7 +240,7 @@
        <string>Volver</string>
       </property>
      </widget>
-     <widget class="QWidget" name="">
+     <widget class="QWidget" name="layoutWidget">
       <property name="geometry">
        <rect>
         <x>130</x>
@@ -197,7 +281,7 @@
         </widget>
        </item>
        <item row="1" column="0">
-        <widget class="QPushButton" name="pushButton">
+        <widget class="QPushButton" name="button_atreides">
          <property name="text">
           <string>Atreides</string>
          </property>
@@ -217,14 +301,14 @@
         </spacer>
        </item>
        <item row="1" column="2">
-        <widget class="QPushButton" name="pushButton_2">
+        <widget class="QPushButton" name="button_harkonnen">
          <property name="text">
           <string>Harkonnen</string>
          </property>
         </widget>
        </item>
        <item row="1" column="4">
-        <widget class="QPushButton" name="pushButton_3">
+        <widget class="QPushButton" name="button_ordos">
          <property name="text">
           <string>Ordos</string>
          </property>

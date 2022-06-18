@@ -21,6 +21,29 @@
 Client::Client(std::string ip1, std::string port1) : socket(ip1,port1), protocol() {
 }
 
+void Client::crear_partida( const std::string&  house,const std::string& name, const std::string&  req){
+    int cantidad = stoi(req);
+    uint16_t casa = (uint16_t) obtener_numero_casa(house);
+    this->protocol.createGame(this->socket,casa,name,cantidad);
+}
+
+int Client::obtener_numero_casa(const std::string& casa) {
+  std::string Harkonnen = "Harkonnen";
+  std::string Atreides = "Atreides";
+  std::string Ordos = "Ordos";
+  if (casa == Harkonnen) {
+    return 0;
+  }
+  if (casa == Atreides) {
+    return 1;
+  }
+  if (casa == Ordos) {
+    return 2;
+  }
+  return -1;
+}
+
+
 void Client::launch() {
     try {
         /*NonBlockingQueue<Unidad*> queueNb;
