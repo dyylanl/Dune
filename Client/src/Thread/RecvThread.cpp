@@ -1,10 +1,11 @@
 #include "RecvThread.h"
+#include "../Characters/UnitType.h"
 
 void RecvThread::run() {
-    Unidad *unit = new Unidad();
+    Object *unit = new Object();
     while (running) {
         int type;
-        std::string objectType;
+        int objectType;
         int player;
         bool selectStatus;
         int posX;
@@ -20,8 +21,41 @@ void RecvThread::run() {
             m_protocol.recvType(m_socket, type);
             if (type == 1) {
                 m_protocol.recvUnit(m_socket, objectType, player, selectStatus , posX, posY, posActX, posActY, life, action);
-                unit = new Unidad(objectType, player, selectStatus , posX, posY, posActX, posActY, life, action);
-                //unit->set(objectType, player, posX, posY, posActX, posActY, life, action);
+                if(objectType == 1) {
+                    //unitType = "Infantería Ligera";
+                }
+                if(objectType == 2) {
+                    //unitType = "Infantería Pesada";
+                }
+                if(objectType == 3) {
+                    //unitType = "Fremen";
+                }
+                if(objectType == 4) {
+                    //unitType = "Sardaukar";
+                }
+                if(objectType == 5) {
+                    //unitType = "Trike";
+                }
+                if(objectType == 6) {
+                    //unitType = "Tanque Sonico";
+                }
+                if(objectType == 7) {
+                    //unitType = "Raider";
+                }
+                if(objectType == 8) {
+                    //unitType = "Desviador";
+                }
+                if(objectType == 6) {
+                    //unitType = "Tanque";
+                    unit = new UnitType(player, selectStatus , posX, posY, posActX, posActY, life, action);
+                    //unit->set(objectType, player, posX, posY, posActX, posActY, life, action);
+                }
+                if(objectType == 7) {
+                    //unitType = "Devastador";
+                }
+                if(objectType == 8) {
+                    //unitType = "Cosechadora";
+                }
             } else if (type == 2) {
                 std::cout << "Se recibe un Edificio" << std::endl;
             } else if (type == 3) {

@@ -7,19 +7,19 @@
 
 
 #include "../../../Common/includes/Thread.h"
-#include "../Characters/Player.h"
+#include "../Characters/ObjectGame.h"
 #include "../../../Common/includes/Protocol.h"
 #include "../../../Common/includes/NonBlockingQueue.h"
-#include "Unidad.h"
+#include "../Characters/Object.h"
 
 class RecvThread : public Thread {
 private:
-    NonBlockingQueue<Unidad*> &m_quene;
+    NonBlockingQueue<Object*> &m_quene;
     Socket &m_socket;
     Protocol &m_protocol;
     std::atomic<bool> running;
 public:
-    RecvThread(NonBlockingQueue<Unidad*> &quene, Socket &socket, Protocol &protocol)
+    RecvThread(NonBlockingQueue<Object*> &quene, Socket &socket, Protocol &protocol)
             : m_quene(quene), m_socket(socket), m_protocol(protocol), running(true){}
 
     void run() override;

@@ -7,27 +7,27 @@
 
 #include <vector>
 #include "SDL2pp/SDL2pp.hh"
-#include "../Characters/Player.h"
+#include "../Characters/ObjectGame.h"
 #include "../Graphics/TextureManager.h"
 #include "../Events/EventManager.h"
 #include "../Camera/Camera.h"
 #include "../../../Common/includes/Socket/Socket.h"
 #include "../../../Common/includes/Protocol.h"
-#include "../Thread/Unidad.h"
+#include "../Characters/Object.h"
 #include "../../../Common/includes/BlockingQueue.h"
 #include "../../../Common/includes/NonBlockingQueue.h"
 #include "../Thread/Action.h"
 
 class Engine {
 private:
-    std::vector<Player> &m_players;
+    std::vector<ObjectGame> &m_players;
     TextureManager &m_TextureManager;
     EventManager &m_eventManager;
     bool m_Running;
-    NonBlockingQueue<Unidad*> &m_queueNb;
+    NonBlockingQueue<Object*> &m_queueNb;
     BlockingQueue<Action*> &m_queueB;
 public:
-    Engine(std::vector<Player> &players, TextureManager &manager, EventManager &eventManager, NonBlockingQueue<Unidad*> &queue_nb, BlockingQueue<Action*> &queueB);
+    Engine(std::vector<ObjectGame> &players, TextureManager &manager, EventManager &eventManager, NonBlockingQueue<Object*> &queue_nb, BlockingQueue<Action*> &queueB);
 
     bool IsRunning();
 

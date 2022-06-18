@@ -6,7 +6,7 @@
 #include "SDL2pp/Window.hh"
 #include "SDL2pp/Renderer.hh"
 #include "Graphics/TextureManager.h"
-#include "Characters/Player.h"
+#include "Characters/ObjectGame.h"
 #include "Core/Engine.h"
 #include "Thread/RecvThread.h"
 #include "../../Common/includes/BlockingQueue.h"
@@ -23,7 +23,7 @@ Client::Client(std::string ip1, std::string port1) : socket(ip1,port1), protocol
 
 void Client::launch() {
     try {
-        /*NonBlockingQueue<Unidad*> queueNb;
+        /*NonBlockingQueue<Object*> queueNb;
         BlockingQueue<Action*> queueB;
         RecvThread recvThread(queueNb, socket, protocol);
         SendThread sendThread(queueB, socket, protocol);
@@ -43,7 +43,7 @@ void Client::launch() {
         protocol.recvCommand(socket);*/
 
 
-        NonBlockingQueue<Unidad*> queueNb;
+        NonBlockingQueue<Object*> queueNb;
         BlockingQueue<Action*> queueB;
         RecvThread recvThread(queueNb, socket, protocol);
         SendThread sendThread(queueB, socket, protocol);
@@ -60,7 +60,7 @@ void Client::launch() {
         textureManager.load("carryall", DATA_PATH "assets/carryall.png");
         textureManager.load("Tanque", DATA_PATH "assets/missileTank.png");
         textureManager.load("menu", DATA_PATH "assets/menu.png");
-        std::vector<Player> gameObjects;
+        std::vector<ObjectGame> gameObjects;
         EventManager eventManager;
         Engine engine(gameObjects, textureManager, eventManager, queueNb, queueB);
 
