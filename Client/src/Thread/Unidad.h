@@ -13,6 +13,7 @@ class Unidad {
 private:
     std::string m_unitType;
     int m_player;
+    bool m_selectStatus;
     SDL2pp::Point m_position;
     SDL2pp::Point m_posAction;
     int m_life;
@@ -42,6 +43,10 @@ public:
     SDL2pp::Point getPosition() {
         return m_position;
     }
+
+    Unidad(std::string objectType, int player, bool selectStatus, int posX, int posY, int posActX, int posActY,
+           int life, bool action) :
+           m_unitType(objectType), m_player(player), m_selectStatus(selectStatus), m_position(posX, posY), m_posAction(posActX, posActY), m_life(life), m_action(action){}
 };
 
 

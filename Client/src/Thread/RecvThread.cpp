@@ -6,24 +6,31 @@ void RecvThread::run() {
         int type;
         std::string objectType;
         int player;
+        bool selectStatus;
         int posX;
         int posY;
         int posActX;
         int posActY;
         int life;
         bool action;
-        m_protocol.recvType(m_socket, type);
-        if (type == 1) {
-            m_protocol.recvUnit(m_socket, objectType, player, posX, posY, posActX, posActY, life, action);
-        } else if (type == 2) {
-            std::cout << "Se recibe un Edificio" << std::endl;
-        } else if (type == 3) {
-            std::cout << "Se recibe un gusano de arena" << std::endl;
-        } else {
-            std::cout << "Error se recibio otro" << std::endl;
+
+        int size;
+        m_protocol.recvCountObject(m_socket, size);
+        for (int i = 0; i < size; ++i) {
+            m_protocol.recvType(m_socket, type);
+            if (type == 1) {
+                m_protocol.recvUnit(m_socket, objectType, player, selectStatus , posX, posY, posActX, posActY, life, action);
+                unit = new Unidad(objectType, player, selectStatus , posX, posY, posActX, posActY, life, action);
+                //unit->set(objectType, player, posX, posY, posActX, posActY, life, action);
+            } else if (type == 2) {
+                std::cout << "Se recibe un Edificio" << std::endl;
+            } else if (type == 3) {
+                std::cout << "Se recibe un gusano de arena" << std::endl;
+            } else {
+                std::cout << "Error se recibio otro" << std::endl;
+            }
+            m_quene.push(unit);
         }
-        unit->set(objectType, player, posX, posY, posActX, posActY, life, action);
-        m_quene.push(unit);
     }
     delete unit;
 }
