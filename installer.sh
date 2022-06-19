@@ -54,8 +54,13 @@ function installDependencies() {
     echo ""
     echo ">> Instalando 'libyaml-cpp-dev'..."
     sudo apt-get install libyaml-cpp-dev
+    echo ">> Instalando 'qtbase5-dev'..."
+    sudo apt-get install qtbase5-dev
+    echo ">> Instalando 'qtdeclarative5-dev'..."
+    sudo apt-get install qtmultimedia5-dev
+    sudo apt-get install qtdeclarative5-dev
     echo ""
-        echo "Instalación de dependencias finalizada."
+        echo "Instalación de librerias finalizada."
     echo ""
 }
 

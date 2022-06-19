@@ -9,20 +9,19 @@
 class Unit {
 private:
     int id;
+    static int counter;
     char unitType;
     Position position;
 public:
     Unit(int id, char type, int x, int y);
     ~Unit();
+
     Position getPosition();
-
     static bool canMove();
-
     char getUnitType();
-
     int getId();
-
     void setPosition(Position pos);
+
 };
 
 #endif //__UNIT_H__

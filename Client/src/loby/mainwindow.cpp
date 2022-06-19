@@ -28,7 +28,7 @@ void MainWindow::on_button_confirmar_clicked()
     this->text_nombre = this->ui->nombre_text_input->text();
 
     this->cliente = new Client(this->text_IP.toStdString(),this->text_puerto.toStdString());    
-
+// TODO: LANZAR EXCEPCION SI NO SE CONECTA
     this->ui->stackedWidget->setCurrentIndex(1);
     QString mensaje_bienvenida = "Bienvenido a Dune " + this->text_nombre;
     this->ui->bienvenida_label->setText(mensaje_bienvenida);

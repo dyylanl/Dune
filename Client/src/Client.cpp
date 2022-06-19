@@ -15,6 +15,9 @@
 #include <arpa/inet.h>
 
 #define HARKONNEN 1
+#define ATREIDES 2
+#define ORDOS 3
+
 
 //-----------------------------------------------------------------------------
 
@@ -45,6 +48,16 @@ int Client::obtener_numero_casa(const std::string& casa) {
 
 
 void Client::launch() {
+    /*
+    std::string name = "dylan";
+    protocol.sendName(socket,name);
+    protocol.sendResponse(socket,HARKONNEN);
+    std::vector<std::string> partidas = protocol.recvGameList(socket);
+    int mapa_elegido = 1;
+    protocol.sendResponse(socket,mapa_elegido);
+    int resp = protocol.recvResponse(socket);
+    resp = resp + 1;
+*/
     try {
         NonBlockingQueue<Object*> queueNb;
         BlockingQueue<Action*> queueB;
@@ -78,7 +91,7 @@ void Client::launch() {
         recvThread.stop();
         sendThread.join();
         recvThread.join();
-         
+
 
     } catch (std::exception& e) {
         std::cout << e.what() << std::endl;

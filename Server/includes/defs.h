@@ -27,4 +27,11 @@ typedef uint32_t InstanceId;
 typedef uint32_t Id;
 #endif  // __ID__
 
+
+// COMANDOS CLIENTE-SERVER
+#define SELECT_UNIT_COMMAND 5
+#define MOVE_UNIT_COMMAND 6
+#define BUILD_BUILDING_COMMAND 7
+#define CREATE_UNIT_COMMAND 8
+
 #endif //DEFS_H

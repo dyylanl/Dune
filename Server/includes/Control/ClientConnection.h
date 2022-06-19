@@ -46,7 +46,11 @@ class ClientConnection {
     void _finishThread();
 
 public:
-    ClientConnection(InstanceId id, Id map, Socket& peer, NonBlockingQueue<InstanceId*>& finished_connections, NonBlockingQueue<int*>& commands);
+    ClientConnection(InstanceId id,
+                     Id map,
+                     Socket& peer,
+                     NonBlockingQueue<InstanceId*>& finished_connections,
+                     NonBlockingQueue<int*>& commands);
 
     ClientConnection(const ClientConnection&) = delete;
     ClientConnection& operator=(const ClientConnection&) = delete;

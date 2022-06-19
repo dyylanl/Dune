@@ -19,6 +19,10 @@ private:
     InstanceId next_id;
     Map map;
     AStar aStar;
+    // comandos
+    std::list<Unit*> units_selected;
+    YAMLReader reader;
+
     /*
      * Lockea el mutex, retorna true si el name ya existe.
      */
@@ -48,6 +52,7 @@ public:
     Game(int rate, YAMLReader reader);
     /*
      * Crea una partida {name:[1,req]}
+     * ToDo: indicar con que mapa jugara
      */
     uint16_t createGame(int house, int req, const std::string& name);
     /*
@@ -59,14 +64,30 @@ public:
      */
     std::vector<std::string> listGames();
 
+    /*
+     * Retorna un id de instancia nuevo
+     */
     InstanceId newConnection(NewConnection* connection);
 
     std::stack<Position> makePath(Unit unit, Position pos_end);
 
     InstanceId getConnectionId() {return next_id++;}
     std::vector<std::vector<char>> getMap() {return this->map.getMap();}
+
     // TODO: TERMINAR ID's de mapa
     Id getMapId(int map_id) {return 1;};
+
+
+    ///////////// comandos ////////////
+    /*
+     * si hay una unidad en pos_x pos_y entonces la agrega a la lista de unidades selecteds
+     */
+    void selectUnitInPos(int pos_x, int pos_y);
+
+    /*
+     * construye un edificio del tipo type en la posicion indicada si es que se puede
+     */
+    void build(char build_type, int pos_x, int pos_y);
 };
 
 

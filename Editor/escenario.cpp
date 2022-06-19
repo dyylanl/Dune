@@ -13,7 +13,7 @@ Escenario::Escenario():tableroQT(10)
 for (int i = 0; i < this->filas; i++){
     for(int j = 0;j < this->columnas ;j ++){
         //this->tableroQT.resize(100);
-        Celda *celda = new Celda(this,"Vacio",this->last_clicked,i,j);
+        Celda *celda = new Celda(this,"Arena",this->last_clicked,i,j);
         //celda->setEscenario(this);
         celda->setPos(j*32,i*32);
         this->addItem(celda);
@@ -36,7 +36,7 @@ Escenario::Escenario(int new_filas, int new_columnas):tableroQT(new_filas)
 for (int i = 0; i < this->filas; i++){
     for(int j = 0;j < this->columnas ;j ++){
         //this->tableroQT.resize(100);
-        Celda *celda = new Celda(this,"Vacio",this->last_clicked,i,j);
+        Celda *celda = new Celda(this,"Arena",this->last_clicked,i,j);
         //celda->setEscenario(this);
         celda->setPos(j*32,i*32);
         this->addItem(celda);
@@ -64,7 +64,7 @@ void Escenario::agregar_fila()
     this->tableroQT.resize(this->filas);
     this->tableroQT[this->filas - 1].resize(this->columnas);
     for(int j = 0; j < this->columnas; j++){
-        Celda *celda = new Celda(this,"Vacio",this->last_clicked,this->filas -1,j);
+        Celda *celda = new Celda(this,"Arena",this->last_clicked,this->filas -1,j);
         //celda->setEscenario(this);
         celda->setPos(j*32,(this->filas -1)*32);
         this->addItem(celda);
@@ -80,7 +80,7 @@ void Escenario::agregar_columna()
     this->tableroQT[this->filas - 1].resize(this->columnas);
     for(int i = 0; i < this->filas; i++){
         this->tableroQT[i].resize(this->columnas);
-        Celda *celda = new Celda(this,"Vacio",this->last_clicked,i,this->columnas -1);
+        Celda *celda = new Celda(this,"Arena",this->last_clicked,i,this->columnas -1);
         //celda->setEscenario(this);
         celda->setPos((this->columnas -1) *32, i *32);
         this->addItem(celda);

@@ -26,9 +26,10 @@ public:
     bool is(BuildingType type);
     Position& getClosestPosition(Position& position) override;
 
+    int getId() {return id;}
     void demolish();
 
-
+    //static BuildingType getBuildingType(char type);
 
     const int id;
     const int width, height;

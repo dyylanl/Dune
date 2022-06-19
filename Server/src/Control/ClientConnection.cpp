@@ -4,9 +4,11 @@ void ClientConnection::_finishThread() {
     std::unique_lock<std::mutex> l(m);
     if ((++finished_threads) == 2) {
         finished_connections.push(new InstanceId(this->connection_id));
+        join();
     }
+    std::cout << "Se llamo al finishThread ahora el contador es: " << finished_threads << std::endl;
 }
-
+// todo: implementar clase Comando
 void ClientConnection::_sender() {
     try {
         Protocol protocol;
@@ -65,9 +67,14 @@ ClientConnection::ClientConnection(const InstanceId id,
                                    commands(commands1) {}
 
 void ClientConnection::start() {
-    std::cout << "Comunicacion de cliente" << std::endl;
-    this->sender = std::thread(&ClientConnection::_receiver, this);
-    this->receiver = std::thread(&ClientConnection::_sender, this);
+    try {
+        std::cout << "[ClientConnection]: Lanzo hilos enviadores y recibidores." << std::endl;
+        this->sender = std::thread(&ClientConnection::_receiver, this);
+        this->receiver = std::thread(&ClientConnection::_sender, this);
+    } catch (...) {
+        std::cout << "Error desconocido" << std::endl;
+    }
+
 }
 
 void ClientConnection::push(int command) {

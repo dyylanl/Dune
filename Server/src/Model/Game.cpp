@@ -29,8 +29,15 @@ void Game::addPlayer(const std::string& game_name) {
     }
 }
 
-Game::Game(int rate, YAMLReader reader) : next_id(FIRST_ID), map(reader.getX(), reader.getY()), aStar(map) {
+Game::Game(int rate, YAMLReader reader1) :
+next_id(FIRST_ID),
+map(reader1.getMapPath()),
+aStar(map),
+units_selected(),
+reader(reader1){
     createGame(1,100, "DEFAULT");
+    std::cout << this->reader.getMapPath() << std::endl;
+
 }
 
 uint16_t Game::createGame(int house, int req, const std::string& name) {
@@ -91,4 +98,17 @@ InstanceId Game::newConnection(NewConnection *connection) {
 
 std::stack<Position> Game::makePath(Unit unit, Position pos_end) {
     return aStar.makePath(unit, pos_end);
+}
+
+
+void Game::selectUnitInPos(int pos_x, int pos_y) {
+    Unit* unit = this->map.selectUnit(pos_x, pos_y);
+    if (unit != nullptr) {
+        units_selected.push_back(unit);
+    }
+}
+
+void Game::build(char build_type, int pos_x, int pos_y) {
+    std::cout << "La funcion de construir no anda todavia" << std::endl;
+    //this->map.build(build_type,pos_x,pos_y);
 }

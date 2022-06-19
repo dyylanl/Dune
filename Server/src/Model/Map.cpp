@@ -2,7 +2,7 @@
 #include "../../../Common/includes/Exceptions/Exception.h"
 #include "../../includes/defs.h"
 
-Map::Map(int rows1, int cols1) : rows(rows1), cols(cols1) {
+Map::Map(std::string map_path) : load_map(map_path), rows(load_map.getRows()), cols(load_map.getCols()) {
     // EL TERRENO INICIAL SE SETEA CON 'ARENAS'
     std::vector <std::vector<Terrain>> terrain_init
             ((uint16_t) rows, std::vector<Terrain>((uint16_t) cols, Terrain(Position(),'A')));
@@ -12,6 +12,10 @@ Map::Map(int rows1, int cols1) : rows(rows1), cols(cols1) {
 
     this->terrrains = terrain_init;
     this->mapa = map_init;
+
+    std::cout << "Se jugara con un mapa de " << load_map.getRows() << " x " << load_map.getCols() << std::endl;
+
+    load_map.getMap();
 }
 
 bool Map::canMove(const Unit& unit, Position position) {
@@ -65,4 +69,35 @@ char Map::getTypeTerrain(int posX, int posY) {
     return this->terrrains[posX][posY].getType();
 }
 
+Unit *Map::selectUnit(int pos_x, int pos_y) {
+    Unit* unit = new Unit(1,'T',pos_x,pos_y);
+    if (this->mapa[pos_x][pos_y] == 'U') {
+        return unit;
+    }
+    return nullptr;
+}
+
+
+/*
+void Map::build(char build_type, int pos_x, int pos_y) {
+    Building::BuildingType _build = Building::getBuildingType(build_type);
+    int delta_x = _build.heigt;
+    int delta_y = _build.width;
+    bool flag = true;
+    for (int i = pos_x; i < (pos_x+delta_x); ++i) {
+        for (int j = pos_y; j < (pos_y+delta_y); ++j) {
+            if (this->mapa[i][j] == 'P') {
+                flag = false;
+            }
+        }
+    }
+    if (flag) {
+        for (int i = pos_x; i < (pos_x+delta_x); ++i) {
+            for (int j = pos_y; j < (pos_y+delta_y); ++j) {
+                this->mapa[i][j] = build_type;
+            }
+        }
+    }
+}
+*/
 Map::~Map() = default;

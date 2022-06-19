@@ -16,17 +16,24 @@ class YAMLReader {
 public:
     explicit YAMLReader(const std::string& filename);
     std::string getPort() const;
+    std::string getMapPath() const;
+
     int getX();
     int getY();
     int getSpeedFactor();
     int getInitialGold();
     int getInitialEnergy();
+    int getRows();
+    int getCols();
+    std::vector<std::vector<char>> getMap();
+    int getPos(int x, int y);
     void getBuild(const std::string& build_name);
     int getFPS();
     ~YAMLReader() = default;
 
 protected:
     YAML::Node config;
+
 };
 
 #endif  // YAML_READER_H__

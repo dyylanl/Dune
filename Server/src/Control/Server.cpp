@@ -11,7 +11,7 @@ void Server::run() {
     // Se lanza el hilo aceptador de conexiones.
     accepter.start();
 
-    // Se lanza el hilo engine
+    // Se lanza el hilo motor del juego
     engine.start();
     /*
      * Presionando la tecla 'q' por stdin cerramos el servidor.
@@ -20,10 +20,11 @@ void Server::run() {
     while (input != "q") {
         std::cin >> input;
     }
-    accepter.stop();
-    accepter.join();
 
+    accepter.stop();
     engine.stop();
+
+    accepter.join();
     engine.join();
 
 }
