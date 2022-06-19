@@ -1,6 +1,6 @@
 port: "8082"
 ticks_per_sec: 60
-map_path: "/home/dypa/dune/Dune/mapa1.yaml"
+map_path: "/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/Client/assets/mapa.yaml"
 speed_factor: 1
 inital_gold: 50
 inital_energy: 150

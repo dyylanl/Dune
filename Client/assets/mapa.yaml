@@ -1,0 +1,203 @@
+Tablero:
+  Filas: 10
+  Columnas: 10
+  0,0:
+    Tipo: Roca
+  0,1:
+    Tipo: Roca
+  0,2:
+    Tipo: Roca
+  0,3:
+    Tipo: Arena
+  0,4:
+    Tipo: Arena
+  0,5:
+    Tipo: Arena
+  0,6:
+    Tipo: Cimas
+  0,7:
+    Tipo: Cimas
+  0,8:
+    Tipo: Cimas
+  0,9:
+    Tipo: Cimas
+  1,0:
+    Tipo: Roca
+  1,1:
+    Tipo: Roca
+  1,2:
+    Tipo: Roca
+  1,3:
+    Tipo: Arena
+  1,4:
+    Tipo: Arena
+  1,5:
+    Tipo: Arena
+  1,6:
+    Tipo: Cimas
+  1,7:
+    Tipo: Cimas
+  1,8:
+    Tipo: Cimas
+  1,9:
+    Tipo: Cimas
+  2,0:
+    Tipo: Arena
+  2,1:
+    Tipo: Arena
+  2,2:
+    Tipo: Arena
+  2,3:
+    Tipo: Arena
+  2,4:
+    Tipo: Arena
+  2,5:
+    Tipo: Arena
+  2,6:
+    Tipo: Arena
+  2,7:
+    Tipo: Arena
+  2,8:
+    Tipo: Arena
+  2,9:
+    Tipo: Arena
+  3,0:
+    Tipo: Arena
+  3,1:
+    Tipo: Arena
+  3,2:
+    Tipo: Arena
+  3,3:
+    Tipo: Arena
+  3,4:
+    Tipo: Arena
+  3,5:
+    Tipo: Arena
+  3,6:
+    Tipo: Arena
+  3,7:
+    Tipo: Arena
+  3,8:
+    Tipo: Arena
+  3,9:
+    Tipo: Arena
+  4,0:
+    Tipo: Precipicio
+  4,1:
+    Tipo: Precipicio
+  4,2:
+    Tipo: Precipicio
+  4,3:
+    Tipo: Arena
+  4,4:
+    Tipo: Arena
+  4,5:
+    Tipo: Arena
+  4,6:
+    Tipo: Dunas
+  4,7:
+    Tipo: Dunas
+  4,8:
+    Tipo: Dunas
+  4,9:
+    Tipo: Dunas
+  5,0:
+    Tipo: Precipicio
+  5,1:
+    Tipo: Precipicio
+  5,2:
+    Tipo: Precipicio
+  5,3:
+    Tipo: Arena
+  5,4:
+    Tipo: Arena
+  5,5:
+    Tipo: Arena
+  5,6:
+    Tipo: Dunas
+  5,7:
+    Tipo: Dunas
+  5,8:
+    Tipo: Dunas
+  5,9:
+    Tipo: Dunas
+  6,0:
+    Tipo: Arena
+  6,1:
+    Tipo: Arena
+  6,2:
+    Tipo: Arena
+  6,3:
+    Tipo: Arena
+  6,4:
+    Tipo: Arena
+  6,5:
+    Tipo: Arena
+  6,6:
+    Tipo: Arena
+  6,7:
+    Tipo: Arena
+  6,8:
+    Tipo: Arena
+  6,9:
+    Tipo: Arena
+  7,0:
+    Tipo: Arena
+  7,1:
+    Tipo: Arena
+  7,2:
+    Tipo: Arena
+  7,3:
+    Tipo: Arena
+  7,4:
+    Tipo: Arena
+  7,5:
+    Tipo: Arena
+  7,6:
+    Tipo: Arena
+  7,7:
+    Tipo: Arena
+  7,8:
+    Tipo: Arena
+  7,9:
+    Tipo: Arena
+  8,0:
+    Tipo: Arena
+  8,1:
+    Tipo: Arena
+  8,2:
+    Tipo: Arena
+  8,3:
+    Tipo: Arena
+  8,4:
+    Tipo: Arena
+  8,5:
+    Tipo: Arena
+  8,6:
+    Tipo: Arena
+  8,7:
+    Tipo: Arena
+  8,8:
+    Tipo: Arena
+  8,9:
+    Tipo: Arena
+  9,0:
+    Tipo: Arena
+  9,1:
+    Tipo: Arena
+  9,2:
+    Tipo: Arena
+  9,3:
+    Tipo: Arena
+  9,4:
+    Tipo: Arena
+  9,5:
+    Tipo: Arena
+  9,6:
+    Tipo: Arena
+  9,7:
+    Tipo: Arena
+  9,8:
+    Tipo: Arena
+  9,9:
+    Tipo: Arena
