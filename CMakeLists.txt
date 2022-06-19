@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.18)
+cmake_minimum_required(VERSION 3.16)
 project(dune)
 
 # FLAGS DE COMPILACION
@@ -14,6 +14,21 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3")
 
 # Debugging
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -ggdb -DDEBUG -fno-inline")
+
+
+
+#QT
+set(CMAKE_AUTOMOC ON)
+set(CMAKE_AUTOUIC ON)
+set(CMAKE_AUTORCC ON)
+
+find_package(Qt5 COMPONENTS
+        Core
+        Gui
+        Widgets
+        Multimedia
+        REQUIRED)
+
 
 # YAML
 FIND_PACKAGE(yaml-cpp REQUIRED)
@@ -49,8 +64,13 @@ add_library(dune-common SHARED ${common_src})
 target_link_libraries(dune-common)
 
 # Client
-add_executable(dune ${client_src} Client/src/Core/UnitType.cpp Client/src/Characters/UnitType.h)
-target_link_libraries(dune dune-common SDL2 SDL2_image SDL2_ttf SDL2_mixer ${SDL2PP_LIBRARIES})
+# <<<<<<< HEAD
+# add_executable(dune ${client_src} Client/src/Core/UnitType.cpp Client/src/Characters/UnitType.h)
+# target_link_libraries(dune dune-common SDL2 SDL2_image SDL2_ttf SDL2_mixer ${SDL2PP_LIBRARIES})
+#=======
+add_executable(dune ${client_src})
+target_link_libraries(dune dune-common SDL2 SDL2_image SDL2_ttf SDL2_mixer ${SDL2PP_LIBRARIES} Qt5::Core Qt5::Gui Qt5::Widgets Qt5::Multimedia)
+# >>>>>>> b38a09028bed847a2579ec53ab1d5ecbbd2b6dfb
 
 # Server
 add_executable(dune-server ${server_src} Server/includes/Control/ClientConnection.h Server/src/Control/ClientConnection.cpp)
