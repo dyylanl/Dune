@@ -7,7 +7,7 @@
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
-    , ui(new Ui::MainWindow), escenario(new Escenario()), music_player(new QMediaPlayer()), dialogo_forma_tablero(new Dialog_forma_tablero())
+    , ui(new Ui::MainWindow), escenario(new Escenario()), music_player(new QMediaPlayer()), dialogo_forma_tablero(new Dialog_forma_tablero()), file_manager(new QFileDialog())
 {
     ui->setupUi(this);
     this->ui->graphicsView->setScene(this->escenario);
@@ -26,6 +26,7 @@ MainWindow::~MainWindow()
     delete ui;
     delete(this->music_player);
     delete(this->escenario);
+    delete(this->file_manager);
 }
 
 
@@ -90,16 +91,20 @@ void MainWindow::on_button_mute_clicked()
 
 void MainWindow::on_actionSave_triggered()
 {
-    this->escenario->guardar();
+    QString extension = ".yaml";
+    QString save_name = file_manager->getSaveFileName(this,"Sava a File",QDir::homePath());
+    QString full_path = save_name + extension;
+    std::cout << full_path.toStdString() << std::endl;
+    this->escenario->guardar(full_path);
 }
 
 
 void MainWindow::on_actionLoadd_triggered()
 {
     QString filter = "All files (*.*) ;; yaml (*.yaml)";
-    QString file_name = QFileDialog::getOpenFileName(this,"Open a file",QDir::homePath(),filter);
+    QString file_name = this->file_manager->getOpenFileName(this,"Open a file",QDir::homePath(),filter);
 
-    this->escenario->cargar();
+    this->escenario->cargar(file_name);
 }
 
 
@@ -127,11 +132,19 @@ void MainWindow::on_button_cambiar_forma_clicked()
 }
 
 void MainWindow::cambiar_forma_tablero_acepted(int new_filas,int new_columnas){
-    std::cout << new_filas <<std::endl;
-    std::cout << new_columnas<< std::endl;
+    //std::cout << new_filas <<std::endl;
+    //std::cout << new_columnas<< std::endl;
     //checquear que sea removido de la escena
     delete(this->escenario);
     this->escenario = new Escenario(new_filas,new_columnas);
     this->ui->graphicsView->setScene(this->escenario);
+}
+
+
+void MainWindow::on_button_const_ordos_clicked()
+{
+    this->escenario->change_last_clicked("CC_Ordos");
+
+
 }
 

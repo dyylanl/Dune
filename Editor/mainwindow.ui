@@ -20,7 +20,7 @@
       <x>120</x>
       <y>0</y>
       <width>531</width>
-      <height>192</height>
+      <height>241</height>
      </rect>
     </property>
    </widget>
@@ -29,8 +29,8 @@
      <rect>
       <x>0</x>
       <y>110</y>
-      <width>111</width>
-      <height>71</height>
+      <width>91</width>
+      <height>51</height>
      </rect>
     </property>
     <property name="text">
@@ -51,155 +51,133 @@
     <property name="geometry">
      <rect>
       <x>0</x>
-      <y>290</y>
+      <y>350</y>
       <width>811</width>
-      <height>301</height>
+      <height>241</height>
      </rect>
     </property>
     <widget class="QWidget" name="page_tiles">
-     <widget class="QPushButton" name="button_roca">
+     <widget class="QWidget" name="">
       <property name="geometry">
        <rect>
-        <x>220</x>
+        <x>120</x>
         <y>40</y>
-        <width>121</width>
-        <height>71</height>
+        <width>511</width>
+        <height>151</height>
        </rect>
       </property>
-      <property name="text">
-       <string>Roca</string>
-      </property>
-      <property name="icon">
-       <iconset resource="resources/my_resources.qrc">
-        <normaloff>:/resources/tile_roca.png</normaloff>:/resources/tile_roca.png</iconset>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="button_arena">
-      <property name="geometry">
-       <rect>
-        <x>50</x>
-        <y>40</y>
-        <width>121</width>
-        <height>71</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Arena</string>
-      </property>
-      <property name="icon">
-       <iconset resource="resources/my_resources.qrc">
-        <normaloff>:/resources/tile_arena.png</normaloff>:/resources/tile_arena.png</iconset>
-      </property>
-      <property name="iconSize">
-       <size>
-        <width>16</width>
-        <height>16</height>
-       </size>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="button_cimas">
-      <property name="geometry">
-       <rect>
-        <x>400</x>
-        <y>40</y>
-        <width>121</width>
-        <height>71</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Cimas</string>
-      </property>
-      <property name="icon">
-       <iconset resource="resources/my_resources.qrc">
-        <normaloff>:/resources/tile_cimas.png</normaloff>:/resources/tile_cimas.png</iconset>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="button_dunas">
-      <property name="geometry">
-       <rect>
-        <x>50</x>
-        <y>170</y>
-        <width>121</width>
-        <height>71</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Dunas</string>
-      </property>
-      <property name="icon">
-       <iconset resource="resources/my_resources.qrc">
-        <normaloff>:/resources/tile_dunas.png</normaloff>:/resources/tile_dunas.png</iconset>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="button_precipicio">
-      <property name="geometry">
-       <rect>
-        <x>230</x>
-        <y>170</y>
-        <width>121</width>
-        <height>71</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Precipicio</string>
-      </property>
-      <property name="icon">
-       <iconset resource="resources/my_resources.qrc">
-        <normaloff>:/resources/tile_precipicio.png</normaloff>:/resources/tile_precipicio.png</iconset>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="button_vacio">
-      <property name="geometry">
-       <rect>
-        <x>390</x>
-        <y>170</y>
-        <width>121</width>
-        <height>71</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Vacio</string>
-      </property>
-      <property name="icon">
-       <iconset resource="resources/my_resources.qrc">
-        <normaloff>:/resources/tile_vacio.jpg</normaloff>:/resources/tile_vacio.jpg</iconset>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="button_columna">
-      <property name="geometry">
-       <rect>
-        <x>590</x>
-        <y>170</y>
-        <width>121</width>
-        <height>71</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Agregar Columna</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="button_agregar_fila">
-      <property name="geometry">
-       <rect>
-        <x>590</x>
-        <y>50</y>
-        <width>121</width>
-        <height>71</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Agregar Fila</string>
-      </property>
+      <layout class="QGridLayout" name="gridLayout">
+       <item row="0" column="0">
+        <widget class="QPushButton" name="button_arena">
+         <property name="text">
+          <string>Arena</string>
+         </property>
+         <property name="icon">
+          <iconset resource="resources/my_resources.qrc">
+           <normaloff>:/resources/tile_arena.png</normaloff>:/resources/tile_arena.png</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>16</width>
+           <height>16</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="QPushButton" name="button_roca">
+         <property name="text">
+          <string>Roca</string>
+         </property>
+         <property name="icon">
+          <iconset resource="resources/my_resources.qrc">
+           <normaloff>:/resources/tile_roca.png</normaloff>:/resources/tile_roca.png</iconset>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="2">
+        <widget class="QPushButton" name="button_cimas">
+         <property name="text">
+          <string>Cimas</string>
+         </property>
+         <property name="icon">
+          <iconset resource="resources/my_resources.qrc">
+           <normaloff>:/resources/tile_cimas.png</normaloff>:/resources/tile_cimas.png</iconset>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="3">
+        <widget class="QPushButton" name="button_agregar_fila">
+         <property name="text">
+          <string>Agregar Fila</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0">
+        <widget class="QPushButton" name="button_dunas">
+         <property name="text">
+          <string>Dunas</string>
+         </property>
+         <property name="icon">
+          <iconset resource="resources/my_resources.qrc">
+           <normaloff>:/resources/tile_dunas.png</normaloff>:/resources/tile_dunas.png</iconset>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1">
+        <widget class="QPushButton" name="button_precipicio">
+         <property name="text">
+          <string>Precipicio</string>
+         </property>
+         <property name="icon">
+          <iconset resource="resources/my_resources.qrc">
+           <normaloff>:/resources/tile_precipicio.png</normaloff>:/resources/tile_precipicio.png</iconset>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="2">
+        <widget class="QPushButton" name="button_vacio">
+         <property name="text">
+          <string>Vacio</string>
+         </property>
+         <property name="icon">
+          <iconset resource="resources/my_resources.qrc">
+           <normaloff>:/resources/tile_vacio.jpg</normaloff>:/resources/tile_vacio.jpg</iconset>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="3">
+        <widget class="QPushButton" name="button_columna">
+         <property name="text">
+          <string>Agregar Columna</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
      </widget>
     </widget>
     <widget class="QWidget" name="page_unidades"/>
-    <widget class="QWidget" name="page_construcciones"/>
+    <widget class="QWidget" name="page_construcciones">
+     <widget class="QPushButton" name="button_const_ordos">
+      <property name="geometry">
+       <rect>
+        <x>260</x>
+        <y>40</y>
+        <width>141</width>
+        <height>61</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>centro de construccion Ordos</string>
+      </property>
+     </widget>
+    </widget>
    </widget>
    <widget class="QPushButton" name="button_tiles">
     <property name="geometry">
      <rect>
-      <x>118</x>
-      <y>214</y>
+      <x>120</x>
+      <y>250</y>
       <width>111</width>
       <height>51</height>
      </rect>
@@ -212,7 +190,7 @@
     <property name="geometry">
      <rect>
       <x>320</x>
-      <y>220</y>
+      <y>250</y>
       <width>111</width>
       <height>51</height>
      </rect>
@@ -224,8 +202,8 @@
    <widget class="QPushButton" name="button_construcciones">
     <property name="geometry">
      <rect>
-      <x>500</x>
-      <y>220</y>
+      <x>490</x>
+      <y>250</y>
       <width>111</width>
       <height>51</height>
      </rect>

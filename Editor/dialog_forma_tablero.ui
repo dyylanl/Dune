@@ -40,10 +40,18 @@
    </property>
    <layout class="QVBoxLayout" name="verticalLayout">
     <item>
-     <widget class="QSpinBox" name="spinbox_filas"/>
+     <widget class="QSpinBox" name="spinbox_filas">
+      <property name="maximum">
+       <number>1000</number>
+      </property>
+     </widget>
     </item>
     <item>
-     <widget class="QSpinBox" name="spinbox_columnas"/>
+     <widget class="QSpinBox" name="spinbox_columnas">
+      <property name="maximum">
+       <number>1000</number>
+      </property>
+     </widget>
     </item>
    </layout>
   </widget>

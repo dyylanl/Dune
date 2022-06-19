@@ -24,9 +24,11 @@ public:
     void mousePressEvent(QGraphicsSceneMouseEvent *event) override;
     void agregar_fila();
     void agregar_columna();
-    void guardar();
-    void cargar();
+    void guardar(QString file_name);
+    void cargar(QString file_name);
     void eliminar_celdas_actuales();
+    void colocar_estructura(int x ,int y);
+    bool verificar_celdas(int x, int y);
     ~Escenario();
 };
 

@@ -10,5 +10,7 @@
         <file>tile_vacio.jpg</file>
         <file>music.ogg</file>
         <file>mute_icon.png</file>
+        <file>centros_construccion.png</file>
+        <file>centro_1.png</file>
     </qresource>
 </RCC>

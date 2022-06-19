@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include "escenario.h"
 #include <QMediaPlayer>
+#include "qfiledialog.h"
 #include "yaml-cpp/yaml.h"
 #include "dialog_forma_tablero.h"
 
@@ -55,10 +56,13 @@ private slots:
 
 
 
+    void on_button_const_ordos_clicked();
+
 private:
     Ui::MainWindow *ui;
     Escenario* escenario;
     QMediaPlayer *music_player;
     Dialog_forma_tablero dialogo_forma_tablero;
+    QFileDialog* file_manager;
 };
 #endif // MAINWINDOW_H
