@@ -131,6 +131,8 @@ public:
     void sendId(Socket &socket, int &id);
 
     void recvCountObject(Socket &socket, int &size);
+
+    void recvBuild(Socket &socket, int &buildType, int &player, int &posX, int &posY, int &life);
 };
 
 

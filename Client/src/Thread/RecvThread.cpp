@@ -21,43 +21,9 @@ void RecvThread::run() {
             m_protocol.recvType(m_socket, type);
             if (type == 1) {
                 m_protocol.recvUnit(m_socket, objectType, player, selectStatus , posX, posY, posActX, posActY, life, action);
-                if(objectType == 1) {
-                    //unitType = "Infantería Ligera";
-                }
-                if(objectType == 2) {
-                    //unitType = "Infantería Pesada";
-                }
-                if(objectType == 3) {
-                    //unitType = "Fremen";
-                }
-                if(objectType == 4) {
-                    //unitType = "Sardaukar";
-                }
-                if(objectType == 5) {
-                    //unitType = "Trike";
-                }
-                if(objectType == 6) {
-                    //unitType = "Tanque Sonico";
-                }
-                if(objectType == 7) {
-                    //unitType = "Raider";
-                }
-                if(objectType == 8) {
-                    //unitType = "Desviador";
-                }
-                if(objectType == 6) {
-                    //unitType = "Tanque";
-                    unit = new UnitType(player, selectStatus , posX, posY, posActX, posActY, life, action);
-                    //unit->set(objectType, player, posX, posY, posActX, posActY, life, action);
-                }
-                if(objectType == 7) {
-                    //unitType = "Devastador";
-                }
-                if(objectType == 8) {
-                    //unitType = "Cosechadora";
-                }
+                unit = createUnit(objectType, player, selectStatus, posX, posY, posActX, posActY, life, action);
             } else if (type == 2) {
-                std::cout << "Se recibe un Edificio" << std::endl;
+                m_protocol.recvBuild(m_socket, objectType, player, posX, posY, life);
             } else if (type == 3) {
                 std::cout << "Se recibe un gusano de arena" << std::endl;
             } else {
@@ -67,6 +33,38 @@ void RecvThread::run() {
         }
     }
     delete unit;
+}
+
+Object *
+RecvThread::createUnit(int objectType, int player, bool selectStatus, int posX, int posY, int posActX, int posActY,
+                       int life, bool action) const {
+    Object *unit = new Object();
+    if (objectType == 1) {
+        unit = new UnitType("InfanteríaLigera", player, selectStatus , posX, posY, posActX, posActY, life, action);
+    } else if (objectType == 2) {
+        unit = new UnitType("InfanteríaPesada", player, selectStatus , posX, posY, posActX, posActY, life, action);
+    } else if (objectType == 3) {
+        unit = new UnitType("Fremen", player, selectStatus , posX, posY, posActX, posActY, life, action);
+    } else if (objectType == 4) {
+        unit = new UnitType("Sardaukar", player, selectStatus , posX, posY, posActX, posActY, life, action);
+    } else if (objectType == 5) {
+        unit = new UnitType("Trike", player, selectStatus , posX, posY, posActX, posActY, life, action);
+    } else if (objectType == 6) {
+        unit = new UnitType("TanqueSonico", player, selectStatus , posX, posY, posActX, posActY, life, action);
+    } else if (objectType == 7) {
+        unit = new UnitType("Raider", player, selectStatus , posX, posY, posActX, posActY, life, action);
+    } else if (objectType == 8) {
+        unit = new UnitType("Desviador", player, selectStatus , posX, posY, posActX, posActY, life, action);
+    } else if (objectType == 9) {
+        unit = new UnitType("Tanque", player, selectStatus , posX, posY, posActX, posActY, life, action);
+    } else if (objectType == 10) {
+        unit = new UnitType("Devastador", player, selectStatus , posX, posY, posActX, posActY, life, action);
+    } else if (objectType == 11) {
+        unit = new UnitType("Cosechadora", player, selectStatus , posX, posY, posActX, posActY, life, action);
+    } else {
+        std::cout << "Invalid type unit";
+    }
+    return unit;
 }
 
 void RecvThread::stop() {

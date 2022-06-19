@@ -11,7 +11,7 @@
 class UnitType : public Object{
 
 public:
-    UnitType(int player, bool selectStatus, int posX, int posY, int posActX, int posActY, int life, bool action);
+    UnitType(std::string unitType, int player, bool selectStatus, int posX, int posY, int posActX, int posActY, int life, bool action);
 };
 
 

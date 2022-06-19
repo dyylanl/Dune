@@ -4,6 +4,6 @@
 
 #include "../Characters/UnitType.h"
 
-UnitType::UnitType(int player, bool selectStatus, int posX, int posY, int posActX, int posActY, int life,
+UnitType::UnitType(std::string unitType,int player, bool selectStatus, int posX, int posY, int posActX, int posActY, int life,
                    bool action) :
-        Object("Tanque", player, selectStatus, posX, posY, posActX, posActY, life, action){}
+        Object(unitType, player, selectStatus, posX, posY, posActX, posActY, life, action){}

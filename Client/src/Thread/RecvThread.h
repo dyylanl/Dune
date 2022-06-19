@@ -25,6 +25,10 @@ public:
     void run() override;
 
     void stop();
+
+    Object *
+    createUnit(int objectType, int player, bool selectStatus, int posX, int posY, int posActX, int posActY, int life,
+               bool action) const;
 };
 
 
