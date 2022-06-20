@@ -22,7 +22,6 @@ for (int i = 0; i < this->filas; i++){
     }
 
 }
-this->agregar_columna();
 }
 
 
