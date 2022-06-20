@@ -6,7 +6,6 @@
 #define DUNE_PLAYER_H
 
 #include <string>
-#include "../Control/YAMLReader.h"
 #include "Buildings/Building.h"
 #include "../defs.h"
 

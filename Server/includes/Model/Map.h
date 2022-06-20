@@ -7,24 +7,24 @@
 #include "Units/Unit.h"
 #include "Terrains/Terrain.h"
 #include "Buildings/Building.h"
-#include "../Control/YAMLReader.h"
+#include "../../config/MapReader.h"
 
 class Map {
-    YAMLReader load_map;
+    MapReader map_reader;
     int rows, cols;
     ////////////////// IMPLEMENTACION CON TERRENOS //////////////////
     std::vector<std::vector<Terrain>> terrrains;
     std::vector<std::vector<char>> mapa;
 public:
-    Map(std::string map_path);
+    explicit Map(std::string map_path);
     ~Map();
     bool canMove(const Unit& unit, Position postion);
     bool isValid(Position position);
     ////////////////// IMPLEMENTACION CON TERRENOS //////////////////
     void putTerrain(Terrain terrain);
     void showTerrain();
-    int getRows() {return rows;}
-    int getCols() {return cols;}
+    int getRows() const {return rows;}
+    int getCols() const {return cols;}
     std::vector<std::vector<char>> getMap() {return this->mapa;}
     char getTypeTerrain(int posX, int posY);
 

@@ -2,20 +2,20 @@
 #include "../../../Common/includes/Exceptions/Exception.h"
 #include "../../includes/defs.h"
 
-Map::Map(std::string map_path) : load_map(map_path), rows(load_map.getRows()), cols(load_map.getCols()) {
+Map::Map(std::string map_path) : map_reader(map_path), rows(map_reader.getRows()), cols(map_reader.getCols()) {
     // EL TERRENO INICIAL SE SETEA CON 'ARENAS'
     std::vector <std::vector<Terrain>> terrain_init
             ((uint16_t) rows, std::vector<Terrain>((uint16_t) cols, Terrain(Position(),'A')));
 
     this->terrrains = terrain_init;
-    this->mapa = load_map.getMap();
+    this->mapa = map_reader.getMap();
 }
 
 bool Map::canMove(const Unit& unit, Position position) {
     return (isValid(position) && Unit::canMove());
 }
 
-// este metodo devuelve falso si la posicion tiene un precipicio
+// este metodo devuelve falso si la posicion tiene un precipicio o si esta fuera de rango
 bool Map::isValid(Position position) {
     int x = position.getX();
     int y = position.getY();
@@ -68,6 +68,11 @@ Unit *Map::selectUnit(int pos_x, int pos_y) {
         return unit;
     }
     return nullptr;
+}
+
+void Map::build(char type, int x, int y) {
+    //Building::BuildingType build = Building::getBuildType(type);
+    std::cout << "Construyendo un " << "build" << " en la posicion: " << x << "," << y << std::endl;
 }
 
 

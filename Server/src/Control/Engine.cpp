@@ -58,7 +58,7 @@ void Engine::_loopIteration(int it) {
 //-----------------------------------------------------------------------------
 // API Pública
 
-Engine::Engine(YAMLReader& reader1,
+Engine::Engine(ConfigurationReader& reader1,
                NonBlockingQueue<NewConnection*>& new_connections)
         : keep_executing(true),
           reader(reader1),

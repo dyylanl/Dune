@@ -8,9 +8,9 @@
 ////////////////////////////////////////
 #include "../defs.h"
 #include "Map.h"
-#include "../Control/YAMLReader.h"
 #include "AStar.h"
 #include "../Control/NewConnection.h"
+#include "../../config/GameConfig.h"
 
 class Game {
 private:
@@ -21,7 +21,7 @@ private:
     AStar aStar;
     // comandos
     std::list<Unit*> units_selected;
-    YAMLReader reader;
+    ConfigurationReader game_config;
 
     /*
      * Lockea el mutex, retorna true si el name ya existe.
@@ -49,7 +49,7 @@ private:
     // void printStartGame(const std::string &name);
 
 public:
-    Game(int rate, YAMLReader reader);
+    Game(int rate, ConfigurationReader reader);
     /*
      * Crea una partida {name:[1,req]}
      * ToDo: indicar con que mapa jugara

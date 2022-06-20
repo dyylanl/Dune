@@ -29,7 +29,7 @@
 class Engine : public Thread {
 private:
     std::atomic_bool keep_executing;
-    YAMLReader& reader;
+    ConfigurationReader& reader;
     Protocol protocol;
     int rate;
     NonBlockingQueue<NewConnection*>& new_connections;
@@ -44,7 +44,7 @@ private:
     void _freeQueues();
     void _loopIteration(int it);
 public:
-    Engine(YAMLReader& reader,
+    Engine(ConfigurationReader& reader,
            NonBlockingQueue<NewConnection*>& new_connections);
     Engine(const Engine&) = delete;
     Engine& operator=(const Engine&) = delete;

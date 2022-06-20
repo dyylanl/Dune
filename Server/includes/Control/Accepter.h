@@ -12,7 +12,6 @@
 //-----------------------------------------------------------------------------
 #include "ClientLogin.h"
 #include "NewConnection.h"
-#include "YAMLReader.h"
 //-----------------------------------------------------------------------------
 
 class Accepter : public Thread {

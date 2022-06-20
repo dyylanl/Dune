@@ -14,7 +14,6 @@
 
 //-----------------------------------------------------------------------------
 #include "../../../Common/includes/NonBlockingQueue.h"
-#include "YAMLReader.h"
 #include "Engine.h"
 //-----------------------------------------------------------------------------
 
@@ -22,7 +21,7 @@
 
 class Server {
 private:
-    YAMLReader reader;
+    ConfigurationReader reader;
     NonBlockingQueue<NewConnection*> new_connections;
     Accepter accepter;
     Engine engine;

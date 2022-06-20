@@ -22,6 +22,14 @@ public:
     int getId();
     void setPosition(Position pos);
 
+    enum UnitType {
+        HARVESTER,
+        LIGHT_INFANTRY,
+        HEAVY_INFANTRY,
+        RAIDER,
+        TANK,
+        TRIKE,
+    };
 };
 
 #endif //__UNIT_H__

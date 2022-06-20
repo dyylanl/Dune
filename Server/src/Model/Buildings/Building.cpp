@@ -1,4 +1,5 @@
 #include "../../../includes/Model/Buildings/Building.h"
+#include "../../../../Common/includes/Exceptions/Exception.h"
 
 int Building::counter = 0;
 
@@ -54,3 +55,18 @@ int Building::getCapacity() {
 bool Building::operator==(const Building &other) {
     return this->id == other.id;
 }
+
+/*
+Building::BuildingType Building::getBuildType(char build_type) {
+    switch (build_type) {
+        case 'B': return Building::BARRACKS;
+        case 'Y': return Building::CONSTRUCTION_YARD;
+        case 'H': return Building::HEAVY_FACTORY;
+        case 'L': return Building::LIGHT_FACTORY;
+        case 'R': return Building::SPICE_REFINERY;
+        case 'S': return Building::SPICE_SILO;
+        case 'W': return Building::WIND_TRAP;
+        default: throw Exception("Tipo de edificio invalido.\n");
+    }
+}
+*/

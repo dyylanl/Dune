@@ -12,7 +12,6 @@
 #include "../../../Common/includes/Thread.h"
 //-----------------------------------------------------------------------------
 #include "NewConnection.h"
-#include "YAMLReader.h"
 //-----------------------------------------------------------------------------
 
 class ClientLogin : public Thread {

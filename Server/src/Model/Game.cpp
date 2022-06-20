@@ -29,14 +29,18 @@ void Game::addPlayer(const std::string& game_name) {
     }
 }
 
-Game::Game(int rate, YAMLReader reader1) :
+Game::Game(int rate, ConfigurationReader reader1) :
 next_id(FIRST_ID),
 map(reader1.getMapPath()),
 aStar(map),
 units_selected(),
-reader(reader1)
+game_config(reader1)
 {
+    // creo una partida por default...
     createGame(1,100, "DEFAULT");
+
+    // pruebo en construir un Barrack en la pos 5,5
+    map.build('W', 5, 5);
 }
 
 uint16_t Game::createGame(int house, int req, const std::string& name) {
