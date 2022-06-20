@@ -34,10 +34,9 @@ next_id(FIRST_ID),
 map(reader1.getMapPath()),
 aStar(map),
 units_selected(),
-reader(reader1){
+reader(reader1)
+{
     createGame(1,100, "DEFAULT");
-    std::cout << this->reader.getMapPath() << std::endl;
-
 }
 
 uint16_t Game::createGame(int house, int req, const std::string& name) {

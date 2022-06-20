@@ -7,14 +7,7 @@ Map::Map(std::string map_path) : load_map(map_path), rows(load_map.getRows()), c
     std::vector <std::vector<Terrain>> terrain_init
             ((uint16_t) rows, std::vector<Terrain>((uint16_t) cols, Terrain(Position(),'A')));
 
-    std::vector <std::vector<char>> map_init
-            ((uint16_t) rows, std::vector<char>((uint16_t) cols, 'A'));
-
     this->terrrains = terrain_init;
-    this->mapa = map_init;
-
-    std::cout << "Se jugara con un mapa de " << load_map.getRows() << " x " << load_map.getCols() << std::endl;
-
     this->mapa = load_map.getMap();
 }
 

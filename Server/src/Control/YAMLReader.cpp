@@ -45,32 +45,25 @@ std::vector<std::vector<char>> YAMLReader::getMap() {
             key_i_j << i << "," << j;
             std::string tipo = config["Tablero"][key_i_j.str()]["Tipo"].as<std::string>();
             if (tipo == "Arena") {
-                std::cout << "A";
                 map[i][j] = 'A';
             }
             if (tipo == "Roca") {
-                std::cout << "R";
                 map[i][j] = 'R';
 
             }
             if (tipo == "Duna") {
-                std::cout << "D";
                 map[i][j] = 'D';
 
             }
             if (tipo == "Precipicio") {
-                std::cout << "P";
                 map[i][j] = 'P';
 
             }
             if (tipo == "Cimas") {
-                std::cout << "C";
                 map[i][j] = 'C';
 
             }
         }
-        std::cout << std::endl;
     }
-    std::cout << std::endl;
     return map;
 }
