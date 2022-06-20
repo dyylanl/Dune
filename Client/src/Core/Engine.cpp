@@ -25,6 +25,7 @@ void Engine::Update() {
     Object *unit;
     unit = m_queueNb.pop();
     if (unit != nullptr) {
+        m_players.clear();
         ObjectGame object(unit, m_TextureManager);
         m_players.push_back(object);
     }
@@ -33,31 +34,13 @@ void Engine::Update() {
 
 void Engine::Render(SDL2pp::Renderer &m_Renderer) {
     m_Renderer.Clear();
-
-    for (int i = 0; i < (int) m_mapa.size(); ++i) {
-        for (int j = 0; j < (int) m_mapa[0].size(); ++j) {
-            char key = m_mapa[i][j];
-            switch (key) {
-                case 'A': m_TextureManager.drawMap(m_Renderer,"arena",SDL2pp::Point(j*X, i*X), SDL2pp::Point(X, X), SDL_FLIP_NONE);
-                    break;
-                case 'P': m_TextureManager.drawMap(m_Renderer,"precipicio",SDL2pp::Point(j*X, i*X), SDL2pp::Point(X, X), SDL_FLIP_NONE);
-                    break;
-                case 'R': m_TextureManager.drawMap(m_Renderer,"roca",SDL2pp::Point(j*X, i*X), SDL2pp::Point(X, X), SDL_FLIP_NONE);
-                    break;
-                case 'D': m_TextureManager.drawMap(m_Renderer,"duna",SDL2pp::Point(j*X, i*X), SDL2pp::Point(X, X), SDL_FLIP_NONE);
-                    break;
-                case 'C': m_TextureManager.drawMap(m_Renderer,"cima",SDL2pp::Point(j*X, i*X), SDL2pp::Point(X, X), SDL_FLIP_NONE);
-                    break;
-            }
-        }
-    }
-
+    m_TextureManager.drawMap(m_Renderer, m_mapa);
     m_TextureManager.draw(m_Renderer, "menu", SDL2pp::Point(1089, 0), SDL2pp::Point(191, 720), SDL_FLIP_NONE);
     for(unsigned int i = 0; i != m_players.size(); i++) {
         m_players[i].draw(m_Renderer);
     }
     m_Renderer.Present();
-    m_players.clear();
+    //m_players.clear();
 }
 
 Engine::Engine(std::vector<std::vector<char>> &mapa, std::vector<ObjectGame> &players, TextureManager &textureManager, EventManager &eventManager,
