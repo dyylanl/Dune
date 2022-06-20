@@ -2,15 +2,15 @@ Tablero:
   Filas: 30
   Columnas: 30
   0,0:
-    Tipo: Arena
+    Tipo: Duna
   0,1:
     Tipo: Arena
   0,2:
-    Tipo: Arena
+    Tipo: Roca
   0,3:
-    Tipo: Arena
+    Tipo: Cima
   0,4:
-    Tipo: Arena
+    Tipo: Precipicio
   0,5:
     Tipo: Arena
   0,6:
