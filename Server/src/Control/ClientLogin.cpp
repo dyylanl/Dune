@@ -12,12 +12,13 @@ ClientLogin::ClientLogin(Socket& peer, YAMLReader& reader1,
 void ClientLogin::run() {
     is_running = true;
     try {
-        fprintf(stderr, "[ClientLogin]: Nuevo jugador en el lobby.\n");
         std::string name;
         uint16_t len_name = protocol.recvCommand(peer);
         name = protocol.recvName(peer, len_name);
-        uint16_t house = protocol.recvCommand(peer);
-        new_connections.push(new NewConnection(peer, name, house));
+        std::cout << "[ClientLogin]: Se conecto " << name << std::endl;
+        uint16_t command = protocol.recvCommand(peer);
+        execute(command);
+        //new_connections.push(new NewConnection(peer, name, house));
     } catch (const std::exception& e) {
         try {
             peer.shutdown();
@@ -50,6 +51,18 @@ void ClientLogin::stop() {
             fprintf(stderr, "Warning: error while shutting-down client_login.");
         }
         peer.close();
+    }
+}
+
+void ClientLogin::execute(uint16_t command) {
+    if (command == 1) {
+        std::cout << "El jugador creara una partida" << std::endl;
+    }
+    if (command == 2) {
+        std::cout << "El jugador se unira una partida existente" << std::endl;
+    }
+    if (command == 3) {
+        std::cout << "El jugador desea listar las partidas" << std::endl;
     }
 }
 

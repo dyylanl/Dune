@@ -1,4 +1,5 @@
 #include "../../includes/Control/Accepter.h"
+#include "../../includes/Model/Game.h"
 
 // --------- METODOS PRIVADOS --------- //
 
@@ -32,13 +33,14 @@ void Accepter::_joinLogins() {
     }
 }
 
-Accepter::Accepter(const std::string& port, const int max_clients_queued,
+Accepter::Accepter(Game& game1, const std::string& port, const int max_clients_queued,
                    YAMLReader& reader1,
                    NonBlockingQueue<NewConnection*>& new_connections1)
         : socket(port, max_clients_queued),
           reader(reader1),
           new_connections(new_connections1),
-          keep_accepting(true) {}
+          keep_accepting(true),
+          game(game1) {}
 
 void Accepter:: run() {
     fprintf(stderr, "[ACCEPTER]: Comenzando ejecucion.\n");

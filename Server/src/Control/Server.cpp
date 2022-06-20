@@ -3,9 +3,10 @@
 
 Server::Server(const std::string& config_path, const int max_clients_queued)
         : reader(config_path),
+          game(reader.getFPS(), reader),
           new_connections(),
-          accepter(reader.getPort(), max_clients_queued, reader, new_connections),
-          engine(reader, new_connections) {}
+          accepter(game, reader.getPort(), max_clients_queued, reader, new_connections),
+          engine(game, reader, new_connections) {}
 
 void Server::run() {
     // Se lanza el hilo aceptador de conexiones.

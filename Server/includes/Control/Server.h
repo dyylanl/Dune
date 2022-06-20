@@ -22,6 +22,7 @@
 class Server {
 private:
     ConfigurationReader reader;
+    Game game;
     NonBlockingQueue<NewConnection*> new_connections;
     Accepter accepter;
     Engine engine;

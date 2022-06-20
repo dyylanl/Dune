@@ -35,6 +35,7 @@ public:
      * Utilizada para la carga de configuracion del nuevo cliente.
      */
     void run() override;
+    void execute(uint16_t command);
     bool isRunning() const;
     void stop();
 

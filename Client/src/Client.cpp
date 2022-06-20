@@ -50,8 +50,11 @@ int Client::obtener_numero_casa(const std::string& casa) {
 void Client::launch() {
     std::string name = "dylan";
     protocol.sendName(socket,name);
-    protocol.sendResponse(socket,HARKONNEN);
+    int comando_listar_partidas = 3;
+    protocol.sendResponse(socket,comando_listar_partidas);
     std::vector<std::string> partidas = protocol.recvGameList(socket);
+
+/*
     std::vector<std::vector<char>> mapa = protocol.recvMap(socket);
     int size = mapa.size();
     int size2 = mapa[0].size();
@@ -110,7 +113,7 @@ void Client::launch() {
         std::cout << e.what() << std::endl;
         return;
     }
-
+*/
 }
 
 Client::~Client() = default;

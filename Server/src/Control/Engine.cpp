@@ -6,13 +6,14 @@
 void Engine::_processNewConnections() {
     NewConnection* new_connection = nullptr;
     while ((new_connection = new_connections.pop())) {
-        protocol.sendGameList(new_connection->peer,game.listGames());
-        protocol.sendMap(new_connection->peer,game.getMap());
+        std::cout << "[ENGINE]: Procesando nueva conexion" << std::endl;
+        //protocol.sendGameList(new_connection->peer,game.listGames());
+        /*protocol.sendMap(new_connection->peer,game.getMap());
         int map_id = protocol.recvCommand(new_connection->peer); // el cliente le envia con q partida va a jugar
         auto id = this->game.getConnectionId();
         ClientConnection connection(id, this->game.getMapId(map_id),new_connection->peer,finished_connections,commands);
         established_connections.push_back(&connection);
-        //connection.start();
+        //connection.start();*/
         delete new_connection;
     }
 }
@@ -40,13 +41,6 @@ void Engine::_freeQueues() {
             delete p;
         }
     }
-
-    {
-        InstanceId* p = nullptr;
-        while ((p = finished_connections.pop())) {
-            delete p;
-        }
-    }
 }
 
 void Engine::_loopIteration(int it) {
@@ -58,7 +52,7 @@ void Engine::_loopIteration(int it) {
 //-----------------------------------------------------------------------------
 // API Pública
 
-Engine::Engine(ConfigurationReader& reader1,
+Engine::Engine(Game& game1, ConfigurationReader& reader1,
                NonBlockingQueue<NewConnection*>& new_connections)
         : keep_executing(true),
           reader(reader1),
@@ -67,7 +61,7 @@ Engine::Engine(ConfigurationReader& reader1,
           new_connections(new_connections),
           finished_connections(),
           established_connections(),
-          game(rate, reader1) {
+          game(game1) {
     int fps = reader.getFPS();
     this->rate = 1000 / fps;
 }

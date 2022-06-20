@@ -12,6 +12,7 @@
 //-----------------------------------------------------------------------------
 #include "ClientLogin.h"
 #include "NewConnection.h"
+#include "../Model/Game.h"
 //-----------------------------------------------------------------------------
 
 class Accepter : public Thread {
@@ -21,13 +22,14 @@ private:
     NonBlockingQueue<NewConnection*>& new_connections;
     std::atomic_bool keep_accepting;
     std::list<ClientLogin*> client_logins;
+    Game& game;
 
     void _acceptClient();
     void _joinFinishedLogins();
     void _joinLogins();
 
 public:
-    Accepter(const std::string& port, const int max_clients_queued,
+    Accepter(Game& game, const std::string& port, const int max_clients_queued,
              YAMLReader& reader,
              NonBlockingQueue<NewConnection*>& new_connections);
     Accepter(const Accepter&) = delete;

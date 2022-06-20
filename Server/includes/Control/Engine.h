@@ -35,7 +35,7 @@ private:
     NonBlockingQueue<NewConnection*>& new_connections;
     NonBlockingQueue<InstanceId*> finished_connections;
     std::list<ClientConnection*> established_connections;
-    Game game;
+    Game& game;
     NonBlockingQueue<int*> commands;
 
     void _processFinishedConnections();
@@ -44,7 +44,7 @@ private:
     void _freeQueues();
     void _loopIteration(int it);
 public:
-    Engine(ConfigurationReader& reader,
+    Engine(Game& game1, ConfigurationReader& reader,
            NonBlockingQueue<NewConnection*>& new_connections);
     Engine(const Engine&) = delete;
     Engine& operator=(const Engine&) = delete;
