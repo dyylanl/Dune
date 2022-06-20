@@ -15,7 +15,7 @@ Map::Map(std::string map_path) : load_map(map_path), rows(load_map.getRows()), c
 
     std::cout << "Se jugara con un mapa de " << load_map.getRows() << " x " << load_map.getCols() << std::endl;
 
-    load_map.getMap();
+    this->mapa = load_map.getMap();
 }
 
 bool Map::canMove(const Unit& unit, Position position) {
