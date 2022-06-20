@@ -109,7 +109,7 @@ void Client::launch() {
         textureManager.load("menuWidtrap", DATA_PATH "assets/windtrap.gif");
         std::vector<ObjectGame> gameObjects;
         EventManager eventManager;
-        Button button("menuWidtrap", SDL2pp::Point(1115, 220), SDL2pp::Point(65, 50));
+        Button button(textureManager, "menuWidtrap", SDL2pp::Point(1115, 220), SDL2pp::Point(65, 50));
         //mapa de prueba
         std::vector<std::vector<char>> map(50, std::vector<char> (50, 'A') );
 

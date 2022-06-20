@@ -7,15 +7,16 @@
 
 
 #include "SDL2pp/SDL2pp.hh"
+#include "Graphics/TextureManager.h"
 
 class Button {
 private:
+    TextureManager m_textureManager;
     std::string m_name;
     SDL2pp::Point m_position;
     SDL2pp::Point m_size;
-    bool m_select;
 public:
-    Button(std::string name, SDL2pp::Point position, SDL2pp::Point size) : m_name(name), m_position(position), m_size(size), m_select(false){}
+    Button(TextureManager &textureManager, std::string name, SDL2pp::Point position, SDL2pp::Point size) : m_textureManager(textureManager), m_name(name), m_position(position), m_size(size){}
 
     SDL2pp::Rect getShape() {
         return SDL2pp::Rect(m_position, m_size);

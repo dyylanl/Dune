@@ -43,7 +43,7 @@ void Engine::Render(SDL2pp::Renderer &m_Renderer) {
     m_Renderer.Clear();
     m_TextureManager.drawMap(m_Renderer, m_mapa);
     m_TextureManager.draw(m_Renderer, "menu", SDL2pp::Point(1089, 0), SDL2pp::Point(191, 720), SDL_FLIP_NONE);
-    m_TextureManager.draw(m_Renderer, "menuWidtrap", SDL2pp::Point(1115, 220), SDL2pp::Point(65, 50), SDL_FLIP_NONE);
+    m_button.draw(m_Renderer);
     for(unsigned int i = 0; i != m_players.size(); i++) {
         m_players[i].draw(m_Renderer);
     }
