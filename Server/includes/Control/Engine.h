@@ -36,7 +36,12 @@ private:
     NonBlockingQueue<NewConnection*>& new_connections;
     NonBlockingQueue<InstanceId*> finished_connections;
     Game& game;
+
+    // las que recibe el server
     NonBlockingQueue<Command*> commands;
+    // la que envia el server
+    NonBlockingQueue<Command*> snapshot;
+
     ClientsConnected established_connections;
 
     void _processFinishedConnections();

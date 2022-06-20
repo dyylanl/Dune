@@ -1,7 +1,5 @@
 #include "../../includes/Control/Engine.h"
 
-//-----------------------------------------------------------------------------
-// Métodos privados
 
 void Engine::_processNewConnections() {
     NewConnection* new_connection = nullptr;
@@ -15,11 +13,18 @@ void Engine::_processNewConnections() {
     }
 }
 
+/*
+ * 1° Popea un comando
+ * 2° Ejecuta ese comando
+ * 3° Pushea el resultado de ese comando en snapshot
+ * 4° Vuelve a 1°
+ */
 void Engine::_processCommands() {
     Command* command_process = nullptr;
     while ((command_process = commands.pop())) {
         fprintf(stderr, "[ENGINE]: Procesando comando...\n");
         std::cout << "Ejecutando comando: " << command_process << std::endl;
+        std::cout << "Pusheando snapshot" << std::endl;
     }
 }
 
@@ -59,6 +64,7 @@ Engine::Engine(Game& game1, ConfigurationReader& reader1,
           finished_connections(),
           game(game1),
           commands(),
+          snapshot(),
           established_connections(commands, finished_connections) {
     int fps = reader.getFPS();
     this->rate = 1000 / fps;

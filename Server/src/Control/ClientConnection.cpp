@@ -16,6 +16,7 @@ void ClientConnection::_freeNotifications() {
     }
 }
 
+// hilo sender -- envia respuesta al cliente
 void ClientConnection::_sender() {
     try {
         Protocol protocol;
@@ -23,6 +24,8 @@ void ClientConnection::_sender() {
         bool socket_valid = true;
         while ((notification = notifications.pop())) {
             // TODO SIEMPRE ENVIA 1 DE RESPUESTA
+            // aca hay que ejecutar una logica
+            // aca se mandaria el snapshot
             socket_valid = protocol.sendResponse(peer, 1);
             delete notification;
             if (!socket_valid) {
@@ -44,6 +47,7 @@ void ClientConnection::_receiver() {
         uint8_t opcode = 0;
         while (peer.recv(reinterpret_cast<char *>(opcode), sizeof(uint16_t))) {
             if (opcode != 0) {
+                // lo unico que hace el hilo receiver es pushear a la cola de comandos
                 _receiveCommand();
             } else {
                 break;
