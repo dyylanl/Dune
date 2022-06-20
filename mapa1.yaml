@@ -2,17 +2,17 @@ Tablero:
   Filas: 15
   Columnas: 10
   0,0:
-    Tipo: Arena
+    Tipo: Roca
   0,1:
-    Tipo: Arena
+    Tipo: Precipicio
   0,2:
-    Tipo: Arena
+    Tipo: Precipicio
   0,3:
-    Tipo: Arena
+    Tipo: Precipicio
   0,4:
-    Tipo: Arena
+    Tipo: Precipicio
   0,5:
-    Tipo: Arena
+    Tipo: Precipicio
   0,6:
     Tipo: Arena
   0,7:
@@ -46,7 +46,7 @@ Tablero:
   2,1:
     Tipo: Arena
   2,2:
-    Tipo: Arena
+    Tipo: Precipicio
   2,3:
     Tipo: Arena
   2,4:
@@ -104,7 +104,7 @@ Tablero:
   5,0:
     Tipo: Arena
   5,1:
-    Tipo: Arena
+    Tipo: Precipicio
   5,2:
     Tipo: Arena
   5,3:
@@ -288,16 +288,16 @@ Tablero:
   14,2:
     Tipo: Arena
   14,3:
-    Tipo: Arena
+    Tipo: Roca
   14,4:
-    Tipo: Arena
+    Tipo: Roca
   14,5:
-    Tipo: Arena
+    Tipo: Roca
   14,6:
-    Tipo: Arena
+    Tipo: Precipicio
   14,7:
-    Tipo: Arena
+    Tipo: Precipicio
   14,8:
-    Tipo: Arena
+    Tipo: Precipicio
   14,9:
-    Tipo: Arena
+    Tipo: Roca
