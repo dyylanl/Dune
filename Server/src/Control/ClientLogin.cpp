@@ -1,13 +1,15 @@
 #include "../../includes/Control/ClientLogin.h"
 #include "../../includes/defs.h"
+#include "../../includes/Model/Game.h"
 
-ClientLogin::ClientLogin(Socket& peer, YAMLReader& reader1,
+ClientLogin::ClientLogin(Game& game1,Socket& peer, YAMLReader& reader1,
                          NonBlockingQueue<NewConnection*>& new_connections)
         : is_running(false),
           peer(std::move(peer)),
           protocol(),
           reader(reader1),
-          new_connections(new_connections) {}
+          new_connections(new_connections),
+          game(game1){}
 
 void ClientLogin::run() {
     is_running = true;
@@ -18,7 +20,8 @@ void ClientLogin::run() {
         std::cout << "[ClientLogin]: Se conecto " << name << std::endl;
         uint16_t command = protocol.recvCommand(peer);
         execute(command);
-        //new_connections.push(new NewConnection(peer, name, house));
+        // TODO: tiene harcodeada la casa con la q jugara
+        new_connections.push(new NewConnection(peer, name, 1));
     } catch (const std::exception& e) {
         try {
             peer.shutdown();
@@ -56,7 +59,13 @@ void ClientLogin::stop() {
 
 void ClientLogin::execute(uint16_t command) {
     if (command == 1) {
-        std::cout << "El jugador creara una partida" << std::endl;
+        std::string name;
+        uint16_t len_name = protocol.recvCommand(peer);
+        name = protocol.recvName(peer, len_name);
+        std::cout << "Nombre de la partida: " << name << std::endl;
+        uint16_t req = protocol.recvCommand(peer);
+        std::cout << "Cantidad de jugadores: " << req << std::endl;
+        game.createGame(req, name);
     }
     if (command == 2) {
         std::cout << "El jugador se unira una partida existente" << std::endl;

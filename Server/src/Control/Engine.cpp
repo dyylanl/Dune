@@ -6,8 +6,7 @@
 void Engine::_processNewConnections() {
     NewConnection* new_connection = nullptr;
     while ((new_connection = new_connections.pop())) {
-        std::cout << "[ENGINE]: Procesando nueva conexion" << std::endl;
-        //protocol.sendGameList(new_connection->peer,game.listGames());
+        protocol.sendGameList(new_connection->peer,game.listGames());
         /*protocol.sendMap(new_connection->peer,game.getMap());
         int map_id = protocol.recvCommand(new_connection->peer); // el cliente le envia con q partida va a jugar
         auto id = this->game.getConnectionId();

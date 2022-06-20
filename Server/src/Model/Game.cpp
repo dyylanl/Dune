@@ -37,16 +37,19 @@ units_selected(),
 game_config(reader1)
 {
     // creo una partida por default...
-    createGame(1,100, "DEFAULT");
+    createGame(100, "DEFAULT");
 
     // pruebo en construir un Barrack en la pos 5,5
     map.build('W', 5, 5);
 }
 
-uint16_t Game::createGame(int house, int req, const std::string& name) {
+uint16_t Game::createGame(int req, const std::string& name) {
     std::lock_guard<std::mutex> lock(mutex);
     if (!contains(name)) {
         put(name, 1, req);
+        if (req == 1) {
+            std::cout << "Comenzando partida " << name << "..." << std::endl;
+        }
         return SUCCESS;
     }
     return ERROR;

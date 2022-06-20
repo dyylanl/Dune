@@ -54,7 +54,7 @@ public:
      * Crea una partida {name:[1,req]}
      * ToDo: indicar con que mapa jugara
      */
-    uint16_t createGame(int house, int req, const std::string& name);
+    uint16_t createGame(int req, const std::string& name);
     /*
      * Inserta un jugador a la partida name.
      */

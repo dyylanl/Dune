@@ -12,6 +12,7 @@
 #include "../../../Common/includes/Thread.h"
 //-----------------------------------------------------------------------------
 #include "NewConnection.h"
+#include "../Model/Game.h"
 //-----------------------------------------------------------------------------
 
 class ClientLogin : public Thread {
@@ -21,10 +22,10 @@ private:
     Protocol protocol;
     YAMLReader& reader;
     NonBlockingQueue<NewConnection*>& new_connections;
-
+    Game& game;
 
 public:
-    ClientLogin(Socket& peer, YAMLReader& reader,
+    ClientLogin(Game& game,Socket& peer, YAMLReader& reader,
                 NonBlockingQueue<NewConnection*>& new_connections);
     ClientLogin(const ClientLogin&) = delete;
     ClientLogin& operator=(const ClientLogin&) = delete;

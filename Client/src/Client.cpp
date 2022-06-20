@@ -48,28 +48,38 @@ int Client::obtener_numero_casa(const std::string& casa) {
 
 
 void Client::launch() {
-    /*std::string name = "dylan";
-    protocol.sendName(socket,name);
-    int comando_listar_partidas = 3;
-    protocol.sendResponse(socket,comando_listar_partidas);
-    std::vector<std::string> partidas = protocol.recvGameList(socket);
+
+
+        // envio el nombre del jugador
+        std::string nombre = "dylan";
+        protocol.sendName(socket, nombre);
+
+        // comando de partida (1: crear, 2: unirse, 3: listar)
+        uint16_t comando = 1;
+        protocol.sendResponse(socket, comando);
+
+        // nombre de la partida
+        std::string nombre_partida = "duelo";
+        protocol.sendName(socket, nombre_partida);
+
+        // cantidad de jugadores de la partida
+        uint16_t cant_jugadores = 1;
+        protocol.sendResponse(socket, cant_jugadores);
+
+        // -------- a partir de este punto el servidor ya creo la partida ----------
+
+        // muestro las partidas que hay creadas (para ver que se haya creado bien)
+        std::vector<std::string> list = this->protocol.recvGameList(socket);
+        if (!list.empty()) {
+        int n = (int)list.size();
+        for (int i = 0; i <= (n-2); i = i+3) {
+            std::cout << (list[i+2]);
+            std::cout << " " << list[i] << "/" << list[i+1] << std::endl;
+        }
+    }
 
 /*
-    std::vector<std::vector<char>> mapa = protocol.recvMap(socket);
-    int size = mapa.size();
-    int size2 = mapa[0].size();
-    for (int i = 0; i < size; ++i) {
-        for (int j = 0; j < size2; ++j) {
-            std::cout << mapa[i][j];
-        }
-        std::cout << std::endl;
-    }
-    int mapa_elegido = 1;
-    protocol.sendResponse(socket,mapa_elegido);
-    int resp = protocol.recvResponse(socket);
-    resp = resp + 1;*/
-
-    try {
+     try {
         NonBlockingQueue<Object*> queueNb;
         BlockingQueue<Action*> queueB;
         RecvThread recvThread(queueNb, socket, protocol);
@@ -98,6 +108,7 @@ void Client::launch() {
         // Para hacer pruebas creo un mapa
         std::vector<std::vector<char>> mapa(50, std::vector<char> (50, 'A'));
 
+
         Engine engine(mapa, gameObjects, textureManager, eventManager, queueNb, queueB);
 
         while (engine.IsRunning()) {
@@ -118,6 +129,7 @@ void Client::launch() {
         return;
     }
 */
+
 }
 
 Client::~Client() = default;
