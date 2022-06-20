@@ -87,8 +87,8 @@ void Client::launch() {
         BlockingQueue<Action*> queueB;
         RecvThread recvThread(queueNb, socket, protocol);
         SendThread sendThread(queueB, socket, protocol);
-        /*recvThread.start();
-        sendThread.start();*/
+        recvThread.start();
+        sendThread.start();
 
         SDL2pp::SDL sdl(SDL_INIT_VIDEO);
         SDL2pp::Window window("DUNE - v0.1", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
@@ -108,9 +108,6 @@ void Client::launch() {
         std::vector<ObjectGame> gameObjects;
         EventManager eventManager;
 
-        // Para hacer pruebas creo un mapa
-
-
         Engine engine(mapa, gameObjects, textureManager, eventManager, queueNb, queueB);
 
         while (engine.IsRunning()) {
@@ -120,10 +117,10 @@ void Client::launch() {
             usleep(FRAME_RATE);
         }
 
-        /*sendThread.stop();
+        sendThread.stop();
         recvThread.stop();
         sendThread.join();
-        recvThread.join();*/
+        recvThread.join();
 
     } catch (std::exception& e) {
         std::cout << e.what() << std::endl;
