@@ -33,11 +33,7 @@ void Engine::Update() {
 
 void Engine::Render(SDL2pp::Renderer &m_Renderer) {
     m_Renderer.Clear();
-    m_TextureManager.draw(m_Renderer, "menu", SDL2pp::Point(1089, 0), SDL2pp::Point(191, 720), SDL_FLIP_NONE);
 
-
-
-    m_TextureManager.draw(m_Renderer, "menu", SDL2pp::Point(1089, 0), SDL2pp::Point(191, 720), SDL_FLIP_NONE);
     for (int i = 0; i < (int) m_mapa.size(); ++i) {
         for (int j = 0; j < (int) m_mapa[0].size(); ++j) {
             char key = m_mapa[i][j];
@@ -56,8 +52,7 @@ void Engine::Render(SDL2pp::Renderer &m_Renderer) {
         }
     }
 
-
-
+    m_TextureManager.draw(m_Renderer, "menu", SDL2pp::Point(1089, 0), SDL2pp::Point(191, 720), SDL_FLIP_NONE);
     for(unsigned int i = 0; i != m_players.size(); i++) {
         m_players[i].draw(m_Renderer);
     }
