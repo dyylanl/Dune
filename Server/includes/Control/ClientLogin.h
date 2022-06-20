@@ -23,9 +23,10 @@ private:
     YAMLReader& reader;
     NonBlockingQueue<NewConnection*>& new_connections;
     Game& game;
+    Id id;
 
 public:
-    ClientLogin(Game& game,Socket& peer, YAMLReader& reader,
+    ClientLogin(Id id,Game& game,Socket& peer, YAMLReader& reader,
                 NonBlockingQueue<NewConnection*>& new_connections);
     ClientLogin(const ClientLogin&) = delete;
     ClientLogin& operator=(const ClientLogin&) = delete;
@@ -36,7 +37,7 @@ public:
      * Utilizada para la carga de configuracion del nuevo cliente.
      */
     void run() override;
-    void execute(uint16_t command);
+    void execute(uint16_t command, std::string name_player);
     bool isRunning() const;
     void stop();
 

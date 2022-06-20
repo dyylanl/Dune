@@ -1,12 +1,11 @@
 
-// #include "../../../includes/Control/Commands/MoveUnitCommand.h"
+#include "../../../includes/Control/Commands/MoveUnitCommand.h"
 
 //
 // Created by dypa on 19/06/22.
 //
 
 
-/*
 
 MoveUnitCommand::MoveUnitCommand(const InstanceId caller,
                                      const uint16_t pos_x,
@@ -19,6 +18,5 @@ MoveUnitCommand::MoveUnitCommand(const InstanceId caller,
 MoveUnitCommand::~MoveUnitCommand() = default;
 
 void MoveUnitCommand::exec(Game &game) {
-    game.selectUnitInPos(pos_x, pos_y);
+    game.moveUnitSelecteds(pos_x, pos_y);
 }
-*/

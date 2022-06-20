@@ -8,17 +8,15 @@ void Engine::_processNewConnections() {
     while ((new_connection = new_connections.pop())) {
         protocol.sendGameList(new_connection->peer,game.listGames());
         protocol.sendMap(new_connection->peer,game.getMap());
-        /*int map_id = protocol.recvCommand(new_connection->peer); // el cliente le envia con q partida va a jugar
-        auto id = this->game.getConnectionId();
-        ClientConnection connection(id, this->game.getMapId(map_id),new_connection->peer,finished_connections,commands);
-        established_connections.push_back(&connection);
-        //connection.start();*/
+        Id id = new_connection->getId();
+        auto map_id = this->game.getMapId(id);
+        established_connections.add(id, map_id, (*new_connection).peer);
         delete new_connection;
     }
 }
 
 void Engine::_processCommands() {
-    int* command_process = nullptr;
+    Command* command_process = nullptr;
     while ((command_process = commands.pop())) {
         fprintf(stderr, "[ENGINE]: Procesando comando...\n");
         std::cout << "Ejecutando comando: " << command_process << std::endl;
@@ -59,8 +57,9 @@ Engine::Engine(Game& game1, ConfigurationReader& reader1,
           rate(30),
           new_connections(new_connections),
           finished_connections(),
-          established_connections(),
-          game(game1) {
+          game(game1),
+          commands(),
+          established_connections(commands, finished_connections) {
     int fps = reader.getFPS();
     this->rate = 1000 / fps;
 }

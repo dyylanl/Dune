@@ -75,7 +75,7 @@ public:
     std::vector<std::vector<char>> getMap() {return this->map.getMap();}
 
     // TODO: TERMINAR ID's de mapa
-    Id getMapId(int map_id) {return 1;};
+    static Id getMapId(int map_id) {return 1;};
 
 
     ///////////// comandos ////////////
@@ -88,6 +88,10 @@ public:
      * construye un edificio del tipo type en la posicion indicada si es que se puede
      */
     void build(char build_type, int pos_x, int pos_y);
+
+    void moveUnitSelecteds(const uint16_t i, const uint16_t i1);
+
+    void createUnit(char unit_type);
 };
 
 

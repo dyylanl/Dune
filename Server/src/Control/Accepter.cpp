@@ -3,10 +3,10 @@
 
 // --------- METODOS PRIVADOS --------- //
 
-void Accepter::_acceptClient() {
+void Accepter::_acceptClient(int next_id) {
     Socket peer = socket.accept();
     if (keep_accepting) {
-        auto client = new ClientLogin(game,peer, reader, new_connections);
+        auto client = new ClientLogin(next_id,game,peer, reader, new_connections);
         client_logins.emplace_back(client);
         client->start();
     }
@@ -43,11 +43,13 @@ Accepter::Accepter(Game& game1, const std::string& port, const int max_clients_q
           game(game1) {}
 
 void Accepter:: run() {
+    int next_id = 1;
     fprintf(stderr, "[ACCEPTER]: Comenzando ejecucion.\n");
     try {
         while (keep_accepting) {
-            _acceptClient();
+            _acceptClient(next_id);
             _joinFinishedLogins();
+            next_id++;
         }
     } catch (const ClosedSocketException& e) {
     } catch (const std::exception& e) {

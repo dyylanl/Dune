@@ -1,19 +1,19 @@
-//#include <vector>
+#include <vector>
 //-----------------------------------------------------------------------------
-//#include "../../../includes/Control/Commands/Command.h"
+#include "../../../includes/Control/Commands/Command.h"
 //-----------------------------------------------------------------------------
-/*
+
 #include "../../../../Common/includes/Exceptions/Exception.h"
 #include "../../../../Common/includes/Protocol.h"
 #include "../../../includes/Control/Commands/SelectUnitCommand.h"
 #include "../../../includes/Control/Commands/MoveUnitCommand.h"
 #include "../../../includes/Control/Commands/BuildBuildingCommand.h"
 #include "../../../includes/Control/Commands/CreateUnitCommand.h"
-*/
+
 
 //-----------------------------------------------------------------------------
 
-/*
+
 Command::Command(const InstanceId caller) : caller(caller) {}
 Command::~Command() {}
 
@@ -58,4 +58,3 @@ Command* CommandFactory::newCommand(InstanceId caller, uint8_t opcode,
 const char* UnknownCommandException::what() const noexcept {
     return "Unknown command received.\n";
 }
-*/

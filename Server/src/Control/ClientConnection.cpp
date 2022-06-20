@@ -1,110 +1,128 @@
 #include "../../includes/Control/ClientConnection.h"
 
+
 void ClientConnection::_finishThread() {
     std::unique_lock<std::mutex> l(m);
     if ((++finished_threads) == 2) {
-        finished_connections.push(new InstanceId(this->connection_id));
-        join();
+        finished_connections.push(new InstanceId(id));
     }
-    std::cout << "Se llamo al finishThread ahora el contador es: " << finished_threads << std::endl;
 }
-// todo: implementar clase Comando
+
+void ClientConnection::_freeNotifications() {
+    notifications.close();
+    Command* notification = nullptr;
+    while ((notification = notifications.pop())) {
+        delete notification;
+    }
+}
+
 void ClientConnection::_sender() {
     try {
         Protocol protocol;
-        int* snapshot_send = nullptr;
+        Command* notification = nullptr;
         bool socket_valid = true;
-        // loop del sender: envia tldo crudo asi como viene al cliente (por ahora nomas)
-        while ((snapshot_send = this->snapshot.pop())) {
-            socket_valid = protocol.sendResponse(peer, *snapshot_send);
-            delete snapshot_send;
+        while ((notification = notifications.pop())) {
+            // TODO SIEMPRE ENVIA 1 DE RESPUESTA
+            socket_valid = protocol.sendResponse(peer, 1);
+            delete notification;
             if (!socket_valid) {
                 break;
             }
         }
     } catch (const std::exception& e) {
         stop();
-        fprintf(stderr, "[ClientConnection]|[_sender]: %s\n", e.what());
+        fprintf(stderr, "ClientConnection // _sender: %s\n", e.what());
     } catch (...) {
         stop();
-        fprintf(stderr, "\"[ClientConnection]|[_sender]: ERROR");
+        fprintf(stderr, "ClientConnection // _sender: Unknown error.\n");
     }
-    _finishThread(); // de esta manera aviso que el hilo sender finaliza
+    _finishThread();
 }
 
 void ClientConnection::_receiver() {
     try {
-        Protocol protocol;
-        uint8_t command_recv;
-        while ((command_recv = protocol.recvCommand(peer))) {
-            if (command_recv != 0) {
-                this->commands.push(reinterpret_cast<int *>(&command_recv)); // pusheo el comando q recibio a la cola de comandos
-            } else { // si recibio 0 es pq el cliente finalizo la comunicacion, entonces cierro todo
-                _finishThread(); // fin hilo receiver
+        uint8_t opcode = 0;
+        while (peer.recv(reinterpret_cast<char *>(opcode), sizeof(uint16_t))) {
+            if (opcode != 0) {
+                _receiveCommand();
+            } else {
                 break;
             }
         }
-    } catch (const Exception& e) {
-        fprintf(stderr, "\"[ClientConnection]|[_receiver]: %s\n", e.what());
+    } catch (const std::exception& e) {
+        stop();
+        fprintf(stderr, "ClientConnection::_receiver: %s\n", e.what());
+    } catch (...) {
+        // Error desconocido
+        stop();
+        fprintf(stderr, "ClientConnection::_receiver: Unknown error.\n");
     }
-    this->snapshot.close();
-    _finishThread(); // fin hilo receiver
+    this->notifications.close();
+    _finishThread();
 }
 
-// --------------------- API PUBLICA --------------------- //
+void ClientConnection::_receiveCommand() {
+    uint8_t opcode_cmd = 0;
+    peer.recv(reinterpret_cast<char *>(opcode_cmd), sizeof(uint16_t));
+    try {
+        Command* cmd = CommandFactory::newCommand(id, opcode_cmd, peer);
+        commands.push(cmd);
+    } catch (const UnknownCommandException& e) {
+    }
+}
 
-ClientConnection::ClientConnection(const InstanceId id,
-                                   const Id map1,
-                                   Socket& peer1,
-                                   NonBlockingQueue<InstanceId*>& finished_connections1,
-                                   NonBlockingQueue<int*>& commands1) :
-
-                                   connection_id(id),
-                                   peer(std::move(peer1)),
-                                   finished_connections(finished_connections1),
-                                   map(map1),
-                                   finished_threads(0),
-                                   commands(commands1) {}
+ClientConnection::ClientConnection(
+        const InstanceId id, const Id map, Socket& peer,
+        NonBlockingQueue<InstanceId*>& finished_connections,
+        NonBlockingQueue<Command*>& commands)
+        : id(id),
+          map(map),
+          peer(std::move(peer)),
+          finished_connections(finished_connections),
+          finished_threads(0),
+          commands(commands) {}
 
 void ClientConnection::start() {
-    try {
-        std::cout << "[ClientConnection]: Lanzo hilos enviadores y recibidores." << std::endl;
-        this->sender = std::thread(&ClientConnection::_receiver, this);
-        this->receiver = std::thread(&ClientConnection::_sender, this);
-    } catch (...) {
-        std::cout << "Error desconocido" << std::endl;
-    }
-
+    std::cout << "Iniciando hilos sender/receiver del cliente" << std::endl;
+    sender = std::thread(&ClientConnection::_receiver, this);
+    receiver = std::thread(&ClientConnection::_sender, this);
 }
 
-void ClientConnection::push(int command) {
-    snapshot.push(&command);
-}
-
-void ClientConnection::stop() {
-    // detengo el sender
-    snapshot.close();
-    try {
-        // detengo el receiver
-        peer.shutdown();
-    } catch (const Exception &e) {
-        fprintf(stderr, "[ClientConnection]: Ocurrio un error apagando el socket del cliente.\n");
-    }
+void ClientConnection::push(Command* notification) {
+    notifications.push(notification);
 }
 
 void ClientConnection::join() {
     if (sender.joinable()) {
         sender.join();
     }
+
     if (receiver.joinable()) {
         receiver.join();
     }
+
     try {
-        // no tiene sentido joinear el sender y receiver y dejar el socket en marcha
         peer.shutdown();
-    } catch (const Exception &e) {
-        fprintf(stderr, "[ClientConnection]: Ocurrio un error apagando el socket del cliente.\n");
+    } catch (const Exception& e) {
+        fprintf(stderr, "CLIENTE %i: error in socket::shutdown. Aborting.\n",
+                id);
     }
 }
 
-ClientConnection::~ClientConnection() = default;
+void ClientConnection::changeMap(Id map_id) {
+    this->map = map_id;
+}
+
+void ClientConnection::stop() {
+    notifications.close();
+    try {
+        peer.shutdown();
+    } catch (const Exception& e) {
+        fprintf(stderr, "CLIENTE %i: error in socket::shutdown. Aborting.\n",
+                id);
+    }
+}
+
+ClientConnection::~ClientConnection() {
+    _freeNotifications();
+}

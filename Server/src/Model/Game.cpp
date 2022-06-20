@@ -27,26 +27,22 @@ void Game::addPlayer(const std::string& game_name) {
     if (contains(game_name)) {
         put(game_name, (get(game_name)[0]+1), get(game_name)[1]);
     }
+    std::cout << "Se unio un jugador a la partida " << game_name << std::endl;
 }
 
 Game::Game(int rate, ConfigurationReader reader1) :
-next_id(FIRST_ID),
-map(reader1.getMapPath()),
-aStar(map),
-units_selected(),
-game_config(reader1)
-{
-    // creo una partida por default...
-    createGame(100, "DEFAULT");
-
-    // pruebo en construir un Barrack en la pos 5,5
-    map.build('W', 5, 5);
-}
+            next_id(FIRST_ID),
+            map(reader1.getMapPath()),
+            aStar(map),
+            units_selected(),
+            game_config(reader1)
+{}
 
 uint16_t Game::createGame(int req, const std::string& name) {
     std::lock_guard<std::mutex> lock(mutex);
     if (!contains(name)) {
         put(name, 1, req);
+        std::cout << "Se creo la partida " << name << std::endl;
         if (req == 1) {
             std::cout << "Comenzando partida " << name << "..." << std::endl;
         }
@@ -60,6 +56,7 @@ uint16_t Game::acceptPlayer(const std::string& name) {
     if (contains(name)) {
         if ((get(name))[0] < (get(name))[1]) {
             addPlayer(name);
+            std::cout << "Se unio un jugador a la partida " << name << std::endl;
             if (get(name)[0] == get(name)[1]) {
                 std::cout << "Comenzando partida " << name << "..." << std::endl;
             }
@@ -112,9 +109,18 @@ void Game::selectUnitInPos(int pos_x, int pos_y) {
     if (unit != nullptr) {
         units_selected.push_back(unit);
     }
+    std::cout << "Unidad en la posicion " << pos_x << "," << pos_y << " seleccionada." << std::endl;
 }
 
 void Game::build(char build_type, int pos_x, int pos_y) {
-    std::cout << "La funcion de construir no anda todavia" << std::endl;
+    std::cout << "Construyendo " << build_type << "en la posicion " << pos_x << "," << pos_y << std::endl;
     //this->map.build(build_type,pos_x,pos_y);
+}
+
+void Game::moveUnitSelecteds(const uint16_t i, const uint16_t i1) {
+    std::cout << "Moviendo las unidades seleccionadas" << std::endl;
+}
+
+void Game::createUnit(char unit_type) {
+    std::cout << "Creando unidades del tipo" << unit_type << std::endl;
 }
