@@ -278,6 +278,7 @@ Protocol::recvUnit(Socket &socket, int &unitType, int &player, bool &selectStatu
     socket.recv(reinterpret_cast<char *>(&posActY), sizeof(uint16_t));
     socket.recv(reinterpret_cast<char *>(&life), sizeof(uint16_t));
     socket.recv(reinterpret_cast<char *>(&action), sizeof(uint8_t));
+    std::cout << "tipo: " << unitType << std::endl;
     std::cout << "Se recibe: " << "(" << posX << "," << posY << ")" << std::endl;
 }
 

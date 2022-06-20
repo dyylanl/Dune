@@ -48,7 +48,7 @@ int Client::obtener_numero_casa(const std::string& casa) {
 
 
 void Client::launch() {
-    std::string name = "dylan";
+    /*std::string name = "dylan";
     protocol.sendName(socket,name);
     protocol.sendResponse(socket,HARKONNEN);
     std::vector<std::string> partidas = protocol.recvGameList(socket);
@@ -64,15 +64,15 @@ void Client::launch() {
     int mapa_elegido = 1;
     protocol.sendResponse(socket,mapa_elegido);
     int resp = protocol.recvResponse(socket);
-    resp = resp + 1;
+    resp = resp + 1;*/
 
     try {
         NonBlockingQueue<Object*> queueNb;
         BlockingQueue<Action*> queueB;
         RecvThread recvThread(queueNb, socket, protocol);
         SendThread sendThread(queueB, socket, protocol);
-        //recvThread.start();
-        //sendThread.start();
+        recvThread.start();
+        sendThread.start();
 
         SDL2pp::SDL sdl(SDL_INIT_VIDEO);
         SDL2pp::Window window("DUNE - v0.1", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
@@ -91,6 +91,10 @@ void Client::launch() {
         textureManager.load("roca", DATA_PATH "assets/tile_roca.png");
         std::vector<ObjectGame> gameObjects;
         EventManager eventManager;
+
+        // Para hacer pruebas creo un mapa
+        std::vector<std::vector<char>> mapa(50, std::vector<char> (50, 'A'));
+
         Engine engine(mapa, gameObjects, textureManager, eventManager, queueNb, queueB);
 
         while (engine.IsRunning()) {

@@ -25,6 +25,7 @@ void Engine::Update() {
     Object *unit;
     unit = m_queueNb.pop();
     if (unit != nullptr) {
+        m_players.clear();
         ObjectGame object(unit, m_TextureManager);
         m_players.push_back(object);
     }
@@ -57,7 +58,7 @@ void Engine::Render(SDL2pp::Renderer &m_Renderer) {
         m_players[i].draw(m_Renderer);
     }
     m_Renderer.Present();
-    m_players.clear();
+    //m_players.clear();
 }
 
 Engine::Engine(std::vector<std::vector<char>> &mapa, std::vector<ObjectGame> &players, TextureManager &textureManager, EventManager &eventManager,
