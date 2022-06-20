@@ -49,6 +49,7 @@ int Client::obtener_numero_casa(const std::string& casa) {
 
 void Client::launch() {
 
+    try {
 
         // envio el nombre del jugador
         std::string nombre = "dylan";
@@ -66,7 +67,9 @@ void Client::launch() {
         uint16_t cant_jugadores = 1;
         protocol.sendResponse(socket, cant_jugadores);
 
-        // -------- a partir de este punto el servidor ya creo la partida ----------
+        // -------- a partir de este punto el servidor ya creo la partida y lo une al jugador ----------
+
+
 
         // muestro las partidas que hay creadas (para ver que se haya creado bien)
         std::vector<std::string> list = this->protocol.recvGameList(socket);
@@ -75,17 +78,17 @@ void Client::launch() {
         for (int i = 0; i <= (n-2); i = i+3) {
             std::cout << (list[i+2]);
             std::cout << " " << list[i] << "/" << list[i+1] << std::endl;
+            }
         }
-    }
+        // como la partida creada es de 1 solo entonces el servidor le envia el mapa
+        std::vector<std::vector<char>> mapa = protocol.recvMap(socket);
 
-/*
-     try {
-        NonBlockingQueue<Object*> queueNb;
+       NonBlockingQueue<Object*> queueNb;
         BlockingQueue<Action*> queueB;
         RecvThread recvThread(queueNb, socket, protocol);
         SendThread sendThread(queueB, socket, protocol);
-        recvThread.start();
-        sendThread.start();
+        /*recvThread.start();
+        sendThread.start();*/
 
         SDL2pp::SDL sdl(SDL_INIT_VIDEO);
         SDL2pp::Window window("DUNE - v0.1", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
@@ -106,7 +109,6 @@ void Client::launch() {
         EventManager eventManager;
 
         // Para hacer pruebas creo un mapa
-        std::vector<std::vector<char>> mapa(50, std::vector<char> (50, 'A'));
 
 
         Engine engine(mapa, gameObjects, textureManager, eventManager, queueNb, queueB);
@@ -118,17 +120,15 @@ void Client::launch() {
             usleep(FRAME_RATE);
         }
 
-        sendThread.stop();
+        /*sendThread.stop();
         recvThread.stop();
         sendThread.join();
-        recvThread.join();
-
+        recvThread.join();*/
 
     } catch (std::exception& e) {
         std::cout << e.what() << std::endl;
         return;
     }
-*/
 
 }
 

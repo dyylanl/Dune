@@ -7,8 +7,8 @@ void Engine::_processNewConnections() {
     NewConnection* new_connection = nullptr;
     while ((new_connection = new_connections.pop())) {
         protocol.sendGameList(new_connection->peer,game.listGames());
-        /*protocol.sendMap(new_connection->peer,game.getMap());
-        int map_id = protocol.recvCommand(new_connection->peer); // el cliente le envia con q partida va a jugar
+        protocol.sendMap(new_connection->peer,game.getMap());
+        /*int map_id = protocol.recvCommand(new_connection->peer); // el cliente le envia con q partida va a jugar
         auto id = this->game.getConnectionId();
         ClientConnection connection(id, this->game.getMapId(map_id),new_connection->peer,finished_connections,commands);
         established_connections.push_back(&connection);
