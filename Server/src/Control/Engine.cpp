@@ -12,7 +12,7 @@ void Engine::_processNewConnections() {
         auto id = this->game.getConnectionId();
         ClientConnection connection(id, this->game.getMapId(map_id),new_connection->peer,finished_connections,commands);
         established_connections.push_back(&connection);
-        connection.start();
+        //connection.start();
         delete new_connection;
     }
 }

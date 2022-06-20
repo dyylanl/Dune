@@ -48,23 +48,31 @@ int Client::obtener_numero_casa(const std::string& casa) {
 
 
 void Client::launch() {
-    /*
     std::string name = "dylan";
     protocol.sendName(socket,name);
     protocol.sendResponse(socket,HARKONNEN);
     std::vector<std::string> partidas = protocol.recvGameList(socket);
+    std::vector<std::vector<char>> mapa = protocol.recvMap(socket);
+    int size = mapa.size();
+    int size2 = mapa[0].size();
+    for (int i = 0; i < size; ++i) {
+        for (int j = 0; j < size2; ++j) {
+            std::cout << mapa[i][j];
+        }
+        std::cout << std::endl;
+    }
     int mapa_elegido = 1;
     protocol.sendResponse(socket,mapa_elegido);
     int resp = protocol.recvResponse(socket);
     resp = resp + 1;
-*/
+
     try {
         NonBlockingQueue<Object*> queueNb;
         BlockingQueue<Action*> queueB;
         RecvThread recvThread(queueNb, socket, protocol);
         SendThread sendThread(queueB, socket, protocol);
-        recvThread.start();
-        sendThread.start();
+        //recvThread.start();
+        //sendThread.start();
 
         SDL2pp::SDL sdl(SDL_INIT_VIDEO);
         SDL2pp::Window window("DUNE - v0.1", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
@@ -76,9 +84,14 @@ void Client::launch() {
         textureManager.load("carryall", DATA_PATH "assets/carryall.png");
         textureManager.load("Tanque", DATA_PATH "assets/missileTank.png");
         textureManager.load("menu", DATA_PATH "assets/menu.png");
+        textureManager.load("arena", DATA_PATH "assets/tile_arena.png");
+        textureManager.load("cima", DATA_PATH "assets/tile_cimas.png");
+        textureManager.load("duna", DATA_PATH "assets/tile_dunas.png");
+        textureManager.load("precipicio", DATA_PATH "assets/tile_precipicio.png");
+        textureManager.load("roca", DATA_PATH "assets/tile_roca.png");
         std::vector<ObjectGame> gameObjects;
         EventManager eventManager;
-        Engine engine(gameObjects, textureManager, eventManager, queueNb, queueB);
+        Engine engine(mapa, gameObjects, textureManager, eventManager, queueNb, queueB);
 
         while (engine.IsRunning()) {
             engine.Events();

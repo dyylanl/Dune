@@ -4,6 +4,9 @@
 
 #include "Engine.h"
 
+#define X 100
+#define Y 100
+
 bool Engine::IsRunning() {
     return m_Running;
 }
@@ -31,6 +34,30 @@ void Engine::Update() {
 void Engine::Render(SDL2pp::Renderer &m_Renderer) {
     m_Renderer.Clear();
     m_TextureManager.draw(m_Renderer, "menu", SDL2pp::Point(1089, 0), SDL2pp::Point(191, 720), SDL_FLIP_NONE);
+
+
+
+    m_TextureManager.draw(m_Renderer, "menu", SDL2pp::Point(1089, 0), SDL2pp::Point(191, 720), SDL_FLIP_NONE);
+    for (int i = 0; i < (int) m_mapa.size(); ++i) {
+        for (int j = 0; j < (int) m_mapa[0].size(); ++j) {
+            char key = m_mapa[i][j];
+            switch (key) {
+                case 'A': m_TextureManager.drawMap(m_Renderer,"arena",SDL2pp::Point(j*X, i*X), SDL2pp::Point(X, X), SDL_FLIP_NONE);
+                    break;
+                case 'P': m_TextureManager.drawMap(m_Renderer,"precipicio",SDL2pp::Point(j*X, i*X), SDL2pp::Point(X, X), SDL_FLIP_NONE);
+                    break;
+                case 'R': m_TextureManager.drawMap(m_Renderer,"roca",SDL2pp::Point(j*X, i*X), SDL2pp::Point(X, X), SDL_FLIP_NONE);
+                    break;
+                case 'D': m_TextureManager.drawMap(m_Renderer,"duna",SDL2pp::Point(j*X, i*X), SDL2pp::Point(X, X), SDL_FLIP_NONE);
+                    break;
+                case 'C': m_TextureManager.drawMap(m_Renderer,"cima",SDL2pp::Point(j*X, i*X), SDL2pp::Point(X, X), SDL_FLIP_NONE);
+                    break;
+            }
+        }
+    }
+
+
+
     for(unsigned int i = 0; i != m_players.size(); i++) {
         m_players[i].draw(m_Renderer);
     }
@@ -38,9 +65,9 @@ void Engine::Render(SDL2pp::Renderer &m_Renderer) {
     m_players.clear();
 }
 
-Engine::Engine(std::vector<ObjectGame> &players, TextureManager &textureManager, EventManager &eventManager,
+Engine::Engine(std::vector<std::vector<char>> &mapa, std::vector<ObjectGame> &players, TextureManager &textureManager, EventManager &eventManager,
                NonBlockingQueue<Object*> &queueNb, BlockingQueue<Action*> &queueB)
-               : m_players(players), m_TextureManager(textureManager), m_eventManager(eventManager),
+               : m_mapa (mapa), m_players(players), m_TextureManager(textureManager), m_eventManager(eventManager),
                m_queueNb(queueNb), m_queueB(queueB){
     m_Running = true;
 }

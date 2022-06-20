@@ -10,6 +10,7 @@
 int main(int argc, char** argv){
 
 //codigo para lanzar qt
+/*
 QApplication a(argc, argv);
     MainWindow w(nullptr);
     //w.set_parser(parser_texto);
@@ -22,6 +23,7 @@ QApplication a(argc, argv);
         fprintf(stderr, "Usage: <ip> <port>\n");
         return ERROR;
     }
+*/
 
     std::string ip = argv[1];
     std::string port = argv[2];

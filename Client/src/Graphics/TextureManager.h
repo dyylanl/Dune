@@ -25,6 +25,8 @@ public:
 
     void draw(SDL2pp::Renderer &renderer, const std::string id, SDL2pp::Point position, SDL2pp::Point size, SDL_RendererFlip flip);
 
+    void drawMap(SDL2pp::Renderer &renderer, const std::string id, SDL2pp::Point position, SDL2pp::Point size, SDL_RendererFlip flip);
+
     Camera& getCamera();
 };
 
