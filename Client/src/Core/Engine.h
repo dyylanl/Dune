@@ -17,10 +17,12 @@
 #include "../../../Common/includes/BlockingQueue.h"
 #include "../../../Common/includes/NonBlockingQueue.h"
 #include "../Thread/Action.h"
+#include "../Button.h"
 
 class Engine {
 private:
     std::vector<std::vector<char>> m_mapa;
+    Button m_button;
     std::vector<ObjectGame> &m_players;
     TextureManager &m_TextureManager;
     EventManager &m_eventManager;
@@ -28,7 +30,7 @@ private:
     NonBlockingQueue<Object*> &m_queueNb;
     BlockingQueue<Action*> &m_queueB;
 public:
-    Engine(std::vector<std::vector<char>>& mapa, std::vector<ObjectGame> &players, TextureManager &manager, EventManager &eventManager, NonBlockingQueue<Object*> &queue_nb, BlockingQueue<Action*> &queueB);
+    Engine(std::vector<std::vector<char>>& mapa, Button &button, std::vector<ObjectGame> &players, TextureManager &manager, EventManager &eventManager, NonBlockingQueue<Object*> &queue_nb, BlockingQueue<Action*> &queueB);
 
     bool IsRunning();
 

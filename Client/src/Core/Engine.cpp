@@ -29,6 +29,13 @@ void Engine::Update() {
         ObjectGame object(unit, m_TextureManager);
         m_players.push_back(object);
     }
+    if (m_eventManager.mouseButtonDown(LEFT)) {
+        SDL_Rect shape = m_button.getShape();
+        SDL_Point point = m_eventManager.getMouse();
+        if (SDL_PointInRect(&point, &shape)) {
+            std::cout << "click button" << std::endl;
+        }
+    }
     m_TextureManager.getCamera().update(m_eventManager);
 }
 
@@ -36,6 +43,7 @@ void Engine::Render(SDL2pp::Renderer &m_Renderer) {
     m_Renderer.Clear();
     m_TextureManager.drawMap(m_Renderer, m_mapa);
     m_TextureManager.draw(m_Renderer, "menu", SDL2pp::Point(1089, 0), SDL2pp::Point(191, 720), SDL_FLIP_NONE);
+    m_TextureManager.draw(m_Renderer, "menuWidtrap", SDL2pp::Point(1115, 220), SDL2pp::Point(65, 50), SDL_FLIP_NONE);
     for(unsigned int i = 0; i != m_players.size(); i++) {
         m_players[i].draw(m_Renderer);
     }
@@ -43,9 +51,9 @@ void Engine::Render(SDL2pp::Renderer &m_Renderer) {
     //m_players.clear();
 }
 
-Engine::Engine(std::vector<std::vector<char>> &mapa, std::vector<ObjectGame> &players, TextureManager &textureManager, EventManager &eventManager,
+Engine::Engine(std::vector<std::vector<char>> &mapa, Button &button, std::vector<ObjectGame> &players, TextureManager &textureManager, EventManager &eventManager,
                NonBlockingQueue<Object*> &queueNb, BlockingQueue<Action*> &queueB)
-               : m_mapa (mapa), m_players(players), m_TextureManager(textureManager), m_eventManager(eventManager),
+               : m_mapa (mapa), m_button(button), m_players(players), m_TextureManager(textureManager), m_eventManager(eventManager),
                m_queueNb(queueNb), m_queueB(queueB){
     m_Running = true;
 }

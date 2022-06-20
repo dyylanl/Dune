@@ -12,6 +12,7 @@
 #include "../../Common/includes/BlockingQueue.h"
 #include "../../Common/includes/NonBlockingQueue.h"
 #include "Thread/SendThread.h"
+#include "Button.h"
 #include <arpa/inet.h>
 
 #define HARKONNEN 1
@@ -51,7 +52,7 @@ void Client::launch() {
 
     try {
 
-        // envio el nombre del jugador
+       /* // envio el nombre del jugador
         std::string nombre = "dylan";
         protocol.sendName(socket, nombre);
 
@@ -81,7 +82,7 @@ void Client::launch() {
             }
         }
         // como la partida creada es de 1 solo entonces el servidor le envia el mapa
-        std::vector<std::vector<char>> mapa = protocol.recvMap(socket);
+        std::vector<std::vector<char>> mapa = protocol.recvMap(socket);*/
 
        NonBlockingQueue<Object*> queueNb;
         BlockingQueue<Action*> queueB;
@@ -105,10 +106,14 @@ void Client::launch() {
         textureManager.load("duna", DATA_PATH "assets/tile_dunas.png");
         textureManager.load("precipicio", DATA_PATH "assets/tile_precipicio.png");
         textureManager.load("roca", DATA_PATH "assets/tile_roca.png");
+        textureManager.load("menuWidtrap", DATA_PATH "assets/windtrap.gif");
         std::vector<ObjectGame> gameObjects;
         EventManager eventManager;
+        Button button("menuWidtrap", SDL2pp::Point(1115, 220), SDL2pp::Point(65, 50));
+        //mapa de prueba
+        std::vector<std::vector<char>> map(50, std::vector<char> (50, 'A') );
 
-        Engine engine(mapa, gameObjects, textureManager, eventManager, queueNb, queueB);
+        Engine engine(map, button, gameObjects, textureManager, eventManager, queueNb, queueB);
 
         while (engine.IsRunning()) {
             engine.Events();
