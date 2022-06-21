@@ -266,10 +266,8 @@ void Protocol::recvCountObject(Socket &socket, int &size) {
 }
 
 void
-Protocol::recvUnit(Socket &socket, int &unitType, int &player, bool &selectStatus, int &posX, int &posY, int &posActX, int &posActY, int &life,
+Protocol::recvUnit(Socket &socket, int &player, bool &selectStatus, int &posX, int &posY, int &posActX, int &posActY, int &life,
                    bool &action) {
-    //int unitType = 0;
-    socket.recv(reinterpret_cast<char *>(&unitType), sizeof(uint8_t));
     socket.recv(reinterpret_cast<char *>(&player), sizeof(uint8_t));
     socket.recv(reinterpret_cast<char *>(&selectStatus), sizeof(uint8_t));
     socket.recv(reinterpret_cast<char *>(&posX), sizeof(uint16_t));
@@ -278,7 +276,6 @@ Protocol::recvUnit(Socket &socket, int &unitType, int &player, bool &selectStatu
     socket.recv(reinterpret_cast<char *>(&posActY), sizeof(uint16_t));
     socket.recv(reinterpret_cast<char *>(&life), sizeof(uint16_t));
     socket.recv(reinterpret_cast<char *>(&action), sizeof(uint8_t));
-    std::cout << "tipo: " << unitType << std::endl;
     std::cout << "Se recibe: " << "(" << posX << "," << posY << ")" << std::endl;
 }
 
@@ -317,4 +314,8 @@ void Protocol::enviar(Socket &socket) {
     socket.send(reinterpret_cast<char *>(&posActY), sizeof(uint16_t));
     socket.send(reinterpret_cast<char *>(&life), sizeof(uint16_t));
     socket.send(reinterpret_cast<char *>(&act), sizeof(uint8_t));
+}
+
+void Protocol::recvObjectType(Socket &socket, int &unitType) {
+    socket.recv(reinterpret_cast<char *>(&unitType), sizeof(uint8_t));
 }

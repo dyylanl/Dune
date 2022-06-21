@@ -91,7 +91,7 @@ void Client::launch() {
 
     try {
 
-        // envio el nombre del jugador
+        /*// envio el nombre del jugador
         std::string nombre = "dylan";
         protocol.sendName(socket, nombre);
 
@@ -122,12 +122,12 @@ void Client::launch() {
         }
         // como la partida creada es de 1 solo entonces el servidor le envia el mapa
         std::vector<std::vector<char>> map = protocol.recvMap(socket);
-
-        NonBlockingQueue<Object*> queueNb;
+*/
+        NonBlockingQueue<std::vector<GameObject*>> queueNb;
         BlockingQueue<Action*> queueB;
         RecvThread recvThread(queueNb, socket, protocol);
-        SendThread sendThread(queueB, socket, protocol);
-        //recvThread.start();
+        //SendThread sendThread(queueB, socket, protocol);
+        recvThread.start();
         //sendThread.start();
 
         SDL2pp::SDL sdl(SDL_INIT_VIDEO);
@@ -156,7 +156,7 @@ void Client::launch() {
         //buttons.push_back(buttonRefinery);
 
         //mapa de prueba
-        //std::vector<std::vector<char>> map(50, std::vector<char> (50, 'A') );
+        std::vector<std::vector<char>> map(50, std::vector<char> (50, 'A') );
 
         Engine engine(map, buttons, gameObjects, textureManager, eventManager, queueNb, queueB);
 
@@ -168,9 +168,9 @@ void Client::launch() {
         }
 
         //sendThread.stop();
-        //recvThread.stop();
+        recvThread.stop();
         //sendThread.join();
-        //recvThread.join();
+        recvThread.join();
 
     } catch (std::exception& e) {
         std::cout << e.what() << std::endl;
