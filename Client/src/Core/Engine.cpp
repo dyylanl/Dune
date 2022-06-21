@@ -3,6 +3,7 @@
 //
 
 #include "Engine.h"
+#include "../ButtonRefinery.h"
 
 #define X 100
 #define Y 100
@@ -24,6 +25,10 @@ void Engine::Events() {
 void Engine::Update() {
     Object *unit;
     unit = m_queueNb.pop();
+    auto *buttonWidtrap = new ButtonWidtrap(SDL2pp::Point(1115, 220), SDL2pp::Point(65, 50));
+    auto *buttonRefinery = new ButtonRefinery(SDL2pp::Point(1115, 280), SDL2pp::Point(65, 50));
+    m_buttons.push_back(buttonWidtrap);
+    m_buttons.push_back(buttonRefinery);
     if (unit != nullptr) {
         m_players.clear();
         ObjectGame object(unit, m_TextureManager);
@@ -46,12 +51,13 @@ void Engine::Render(SDL2pp::Renderer &m_Renderer) {
     m_TextureManager.drawMap(m_Renderer, m_mapa);
     m_TextureManager.draw(m_Renderer, "menu", SDL2pp::Point(1089, 0), SDL2pp::Point(191, 720));
     for (int i = 0; i < (int) m_buttons.size(); ++i) {
-        m_buttons[i]->draw(m_Renderer);
+        m_buttons[i]->draw(m_Renderer, m_TextureManager);
     }
     for(unsigned int i = 0; i != m_players.size(); i++) {
         m_players[i].draw(m_Renderer);
     }
     m_Renderer.Present();
+    m_buttons.clear();
     //m_players.clear();
 }
 

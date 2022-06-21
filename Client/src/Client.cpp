@@ -145,13 +145,16 @@ void Client::launch() {
         textureManager.load("duna", DATA_PATH "assets/tile_dunas.png");
         textureManager.load("precipicio", DATA_PATH "assets/tile_precipicio.png");
         textureManager.load("roca", DATA_PATH "assets/tile_roca.png");
+        textureManager.load("menuWidtrap", DATA_PATH "assets/windtrap.gif");
+        textureManager.load("buttonRefinery", DATA_PATH "assets/refinery.gif");
         std::vector<ObjectGame> gameObjects;
         EventManager eventManager;
-        auto *buttonWidtrap = new ButtonWidtrap(textureManager, SDL2pp::Point(1115, 220), SDL2pp::Point(65, 50));
-        auto *buttonRefinery = new ButtonRefinery(textureManager, SDL2pp::Point(1115, 280), SDL2pp::Point(65, 50));
         std::vector<Button*> buttons;
-        buttons.push_back(buttonWidtrap);
-        buttons.push_back(buttonRefinery);
+        //auto *buttonWidtrap = new ButtonWidtrap(textureManager, SDL2pp::Point(1115, 220), SDL2pp::Point(65, 50));
+        //auto *buttonRefinery = new ButtonRefinery(textureManager, SDL2pp::Point(1115, 280), SDL2pp::Point(65, 50));
+        //buttons.push_back(buttonWidtrap);
+        //buttons.push_back(buttonRefinery);
+
         //mapa de prueba
         //std::vector<std::vector<char>> map(50, std::vector<char> (50, 'A') );
 

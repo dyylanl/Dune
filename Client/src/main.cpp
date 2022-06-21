@@ -11,13 +11,13 @@ int main(int argc, char** argv){
 
 //codigo para lanzar qt
 
-    QApplication a(argc, argv);
+    /*QApplication a(argc, argv);
     MainWindow w(nullptr);
     //w.set_parser(parser_texto);
     w.show();
     a.exec();
     Client* cliente = w.get_cliente();
-    cliente->launch();
+    cliente->launch();*/
 
 
     if (argc != EXPECTED_ARGC) {

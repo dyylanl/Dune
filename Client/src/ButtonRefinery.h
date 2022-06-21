@@ -11,16 +11,16 @@
 
 class ButtonRefinery : public Button {
 private:
-    TextureManager m_textureManager;
+    //TextureManager m_textureManager;
     std::string m_name;
     SDL2pp::Point m_position;
     SDL2pp::Point m_size;
 public:
-    ButtonRefinery(TextureManager &textureManager, SDL2pp::Point position, SDL2pp::Point size);
+    ButtonRefinery(SDL2pp::Point position, SDL2pp::Point size);
 
     SDL2pp::Rect getShape();
 
-    void draw(SDL2pp::Renderer &renderer);
+    void draw(SDL2pp::Renderer &renderer, TextureManager &textureManager);
 };
 
 

@@ -12,7 +12,7 @@
 class Button {
 public:
     Button(){}
-    virtual void draw(SDL2pp::Renderer &renderer) = 0;
+    virtual void draw(SDL2pp::Renderer &renderer, TextureManager &textureManager) = 0;
     virtual SDL2pp::Rect getShape() = 0;
 };
 
