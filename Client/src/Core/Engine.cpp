@@ -23,17 +23,17 @@ void Engine::Events() {
 }
 
 void Engine::Update() {
-    Object *unit;
-    unit = m_queueNb.pop();
+    //Object *unit;
+    //unit = m_queueNb.pop();
     auto *buttonWidtrap = new ButtonWidtrap(SDL2pp::Point(1115, 220), SDL2pp::Point(65, 50));
     auto *buttonRefinery = new ButtonRefinery(SDL2pp::Point(1115, 280), SDL2pp::Point(65, 50));
     m_buttons.push_back(buttonWidtrap);
     m_buttons.push_back(buttonRefinery);
-    if (unit != nullptr) {
+    /*if (unit != nullptr) {
         m_players.clear();
         ObjectGame object(unit, m_TextureManager);
         m_players.push_back(object);
-    }
+    }*/
     if (m_eventManager.mouseButtonDown(LEFT)) {
         for (int i = 0; i < (int) m_buttons.size(); ++i) {
             SDL_Rect shape = m_buttons[i]->getShape();
@@ -61,7 +61,7 @@ void Engine::Render(SDL2pp::Renderer &m_Renderer) {
     //m_players.clear();
 }
 
-Engine::Engine(std::vector<std::vector<char>> &mapa, std::vector<Button*> &buttons, std::vector<ObjectGame> &players, TextureManager &textureManager, EventManager &eventManager,
+Engine::Engine(std::vector<std::vector<char>> &mapa, std::vector<GameObject*> &buttons, std::vector<ObjectGame> &players, TextureManager &textureManager, EventManager &eventManager,
                NonBlockingQueue<Object*> &queueNb, BlockingQueue<Action*> &queueB)
                : m_mapa (mapa), m_buttons(buttons), m_players(players), m_TextureManager(textureManager), m_eventManager(eventManager),
                m_queueNb(queueNb), m_queueB(queueB){

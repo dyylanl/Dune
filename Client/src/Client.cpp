@@ -149,7 +149,7 @@ void Client::launch() {
         textureManager.load("ButtonRefinery", DATA_PATH "assets/refinery.gif");
         std::vector<ObjectGame> gameObjects;
         EventManager eventManager;
-        std::vector<Button*> buttons;
+        std::vector<GameObject*> buttons;
         //auto *buttonWidtrap = new ButtonWidtrap(textureManager, SDL2pp::Point(1115, 220), SDL2pp::Point(65, 50));
         //auto *buttonRefinery = new ButtonRefinery(textureManager, SDL2pp::Point(1115, 280), SDL2pp::Point(65, 50));
         //buttons.push_back(buttonWidtrap);

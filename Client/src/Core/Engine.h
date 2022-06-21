@@ -22,7 +22,7 @@
 class Engine {
 private:
     std::vector<std::vector<char>> m_mapa;
-    std::vector<Button*> m_buttons;
+    std::vector<GameObject*> m_buttons;
     std::vector<ObjectGame> &m_players;
     TextureManager &m_TextureManager;
     EventManager &m_eventManager;
@@ -30,7 +30,7 @@ private:
     NonBlockingQueue<Object*> &m_queueNb;
     BlockingQueue<Action*> &m_queueB;
 public:
-    Engine(std::vector<std::vector<char>>& mapa, std::vector<Button*> &buttons, std::vector<ObjectGame> &players, TextureManager &manager, EventManager &eventManager, NonBlockingQueue<Object*> &queue_nb, BlockingQueue<Action*> &queueB);
+    Engine(std::vector<std::vector<char>>& mapa, std::vector<GameObject*> &buttons, std::vector<ObjectGame> &players, TextureManager &manager, EventManager &eventManager, NonBlockingQueue<Object*> &queue_nb, BlockingQueue<Action*> &queueB);
 
     bool IsRunning();
 
