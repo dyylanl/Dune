@@ -1,6 +1,6 @@
 port: "8082"
 ticks_per_sec: 60
-map_path: "/home/fede/Desktop/Taller_1/tp_final_8/Dune/mapa_default_1.yaml"
+map_path: "/home/dypa/Dune/mapa_default_1.yaml"
 speedFactor: 50
 blockMovement: 2
 rangeFactor: 2000
@@ -8,7 +8,7 @@ timeFactor: 1
 initialGold: 10000
 initialEnergy: 2500
 initialMaxEnergy: 5000
-
+// esta en /Dune/utils/Enunciado.pdf
 buildings:
   constructionTime: 100
   constructionYard:

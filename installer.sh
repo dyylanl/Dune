@@ -1,8 +1,5 @@
 #!/bin/bash
 
-#------------------------------------------------------------------------------
-# Mensajes
-
 function waitingInputMessage() {
     printf "> Ingrese una opción: "
 }
@@ -13,19 +10,16 @@ function initialMessage () {
 
 function helpMessage() {
     echo "Opciones:"
-    echo "  d: instala dependencias necesarias."
-    echo "  u: desinstalador."
-    echo "  q: cerrar."
+    echo "  d: instalador."
+    echo "  q: salir."
     echo ""
 }
 
 function unknownInput() {
-    echo "Opción desconocida (ingrese 'h' para ayuda, 'q' para salir)."
+    echo " >'q' para salir."
+    echo " >'d' para instalar librerias"
     echo ""
 }
-
-#------------------------------------------------------------------------------
-# Compilación e instalación
 
 function build() {
     sudo rm -rf build
@@ -35,7 +29,7 @@ function build() {
 }
 
 function installDependencies() {
-    echo "=== INSTALACIÓN DE DEPENDENCIAS ==="
+    echo "=== INSTALANDO LIBRERIAS ==="
     echo ""
     echo ">> Instalando 'cmake'..."
     sudo apt-get install cmake
@@ -74,32 +68,7 @@ function installGame() {
     echo ""
 }
 
-function all() {
-    installDependencies
-    installGame
-}
-
-function uninstall() {
-    echo "=== DESINSTALADOR ==="
-    sudo rm -rf build
-    sudo rm -rf /etc/dune
-    sudo rm -rf /var/dune
-    sudo rm -rf /usr/bin/dune-server
-    sudo rm -rf /usr/bin/dune
-    sudo rm -rf /usr/lib/libdune-common.so
-    echo ""
-    echo "Se ha desinstalado el juego con éxito."
-    echo ""
-}
-
-#------------------------------------------------------------------------------
-
-#------------------------------------------------------------------------------
-# Loop ppal
-
-# exit when any command fails
 set -e
-
 initialMessage
 helpMessage
 waitingInputMessage
@@ -111,31 +80,8 @@ do
         d)
             echo ""
             installDependencies
-            waitingInputMessage
-        ;;
-        i)
-            echo ""
+            build
             installGame
-            waitingInputMessage
-        ;;
-        a)
-            echo ""
-            installDependencies
-            installGame
-            waitingInputMessage
-        ;;
-        u)
-            echo ""
-            uninstall
-            waitingInputMessage
-        ;;
-        h)
-            echo ""
-            helpMessage
-            waitingInputMessage
-        ;;
-        m)
-            echo ""
             waitingInputMessage
         ;;
         q)
@@ -148,5 +94,3 @@ do
         ;;
     esac
 done
-
-#------------------------------------------------------------------------------
