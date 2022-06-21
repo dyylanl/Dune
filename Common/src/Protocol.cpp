@@ -289,3 +289,32 @@ void Protocol::recvBuild(Socket &socket, int &buildType, int &player, int &posX,
     socket.recv(reinterpret_cast<char *>(&posY), sizeof(uint16_t));
     socket.recv(reinterpret_cast<char *>(&life), sizeof(uint16_t));
 }
+
+void Protocol::sendCountObject(Socket &socket, int &countObject) {
+    socket.send(reinterpret_cast<char *>(&countObject), sizeof(uint16_t));
+    std::cout << "Se envia countObject: " << countObject << std::endl;
+}
+
+void Protocol::enviar(Socket &socket) {
+    uint8_t type = 1;
+    uint8_t unitType = 9;
+    uint8_t player = 1;
+    uint8_t selectStatus = 1;
+    uint16_t posX = 30;
+    uint16_t posY = 30;
+    uint16_t posActX = 0;
+    uint16_t posActY = 0;
+    uint16_t life = 0;
+    uint8_t act = 0;
+    std::cout << "Se envia: " << "(" << posX << "," << posY << ")" << std::endl;
+    socket.send(reinterpret_cast<char *>(&type), sizeof(uint8_t));
+    socket.send(reinterpret_cast<char *>(&unitType), sizeof(uint8_t));
+    socket.send(reinterpret_cast<char *>(&player), sizeof(uint8_t));
+    socket.send(reinterpret_cast<char *>(&selectStatus), sizeof(uint8_t));
+    socket.send(reinterpret_cast<char *>(&posX), sizeof(uint16_t));
+    socket.send(reinterpret_cast<char *>(&posY), sizeof(uint16_t));
+    socket.send(reinterpret_cast<char *>(&posActX), sizeof(uint16_t));
+    socket.send(reinterpret_cast<char *>(&posActY), sizeof(uint16_t));
+    socket.send(reinterpret_cast<char *>(&life), sizeof(uint16_t));
+    socket.send(reinterpret_cast<char *>(&act), sizeof(uint8_t));
+}

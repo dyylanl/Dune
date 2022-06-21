@@ -17,7 +17,7 @@ void RecvThread::run() {
 
         int size;
         m_protocol.recvCountObject(m_socket, size);
-        for (int i = 0; i < size; ++i) {
+        //for (int i = 0; i < size; ++i) {
             m_protocol.recvType(m_socket, type);
             if (type == 1) {
                 m_protocol.recvUnit(m_socket, objectType, player, selectStatus , posX, posY, posActX, posActY, life, action);
@@ -30,7 +30,7 @@ void RecvThread::run() {
                 std::cout << "Error se recibio otro" << std::endl;
             }
             m_quene.push(unit);
-        }
+        //}
     }
     delete unit;
 }

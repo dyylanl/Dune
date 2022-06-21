@@ -20,9 +20,9 @@ void ClientConnection::_freeNotifications() {
 void ClientConnection::_sender() {
     try {
         Protocol protocol;
-        Command* notification = nullptr;
-        bool socket_valid = true;
-        while ((notification = notifications.pop())) {
+        //Command* notification = nullptr;
+        //bool socket_valid = true;
+        /*while ((notification = notifications.pop())) {
             // TODO SIEMPRE ENVIA 1 DE RESPUESTA
             // aca hay que ejecutar una logica
             // aca se mandaria el snapshot
@@ -31,7 +31,13 @@ void ClientConnection::_sender() {
             if (!socket_valid) {
                 break;
             }
-        }
+        }*/
+        int countObject = 1;
+        protocol.sendCountObject(peer, countObject);
+
+        protocol.enviar(peer);
+
+
     } catch (const std::exception& e) {
         stop();
         fprintf(stderr, "ClientConnection // _sender: %s\n", e.what());
