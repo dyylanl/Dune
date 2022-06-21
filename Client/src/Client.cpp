@@ -13,6 +13,7 @@
 #include "../../Common/includes/NonBlockingQueue.h"
 #include "Thread/SendThread.h"
 #include "ButtonWidtrap.h"
+#include "ButtonRefinery.h"
 #include <arpa/inet.h>
 
 #define HARKONNEN 1
@@ -109,11 +110,15 @@ void Client::launch() {
         //textureManager.load("menuWidtrap", DATA_PATH "assets/windtrap.gif");
         std::vector<ObjectGame> gameObjects;
         EventManager eventManager;
-        ButtonWidtrap buttonWidtrap(textureManager, SDL2pp::Point(1115, 220), SDL2pp::Point(65, 50));
+        auto *buttonWidtrap = new ButtonWidtrap(textureManager, SDL2pp::Point(1115, 220), SDL2pp::Point(65, 50));
+        auto *buttonRefinery = new ButtonRefinery(textureManager, SDL2pp::Point(1115, 280), SDL2pp::Point(65, 50));
+        std::vector<Button*> buttons;
+        buttons.push_back(buttonWidtrap);
+        buttons.push_back(buttonRefinery);
         //mapa de prueba
         std::vector<std::vector<char>> map(50, std::vector<char> (50, 'A') );
 
-        Engine engine(map, buttonWidtrap, gameObjects, textureManager, eventManager, queueNb, queueB);
+        Engine engine(map, buttons, gameObjects, textureManager, eventManager, queueNb, queueB);
 
         while (engine.IsRunning()) {
             engine.Events();

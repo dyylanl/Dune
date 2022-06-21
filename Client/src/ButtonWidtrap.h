@@ -10,7 +10,7 @@
 #include "Graphics/TextureManager.h"
 #include "Button.h"
 
-class ButtonWidtrap : Button{
+class ButtonWidtrap : public Button{
 private:
     TextureManager m_textureManager;
     std::string m_name;
