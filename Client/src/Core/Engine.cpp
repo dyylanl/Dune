@@ -51,7 +51,7 @@ void Engine::Render(SDL2pp::Renderer &m_Renderer) {
     //m_players.clear();
 }
 
-Engine::Engine(std::vector<std::vector<char>> &mapa, Button &button, std::vector<ObjectGame> &players, TextureManager &textureManager, EventManager &eventManager,
+Engine::Engine(std::vector<std::vector<char>> &mapa, ButtonWidtrap &button, std::vector<ObjectGame> &players, TextureManager &textureManager, EventManager &eventManager,
                NonBlockingQueue<Object*> &queueNb, BlockingQueue<Action*> &queueB)
                : m_mapa (mapa), m_button(button), m_players(players), m_TextureManager(textureManager), m_eventManager(eventManager),
                m_queueNb(queueNb), m_queueB(queueB){

@@ -12,7 +12,7 @@
 #include "../../Common/includes/BlockingQueue.h"
 #include "../../Common/includes/NonBlockingQueue.h"
 #include "Thread/SendThread.h"
-#include "Button.h"
+#include "ButtonWidtrap.h"
 #include <arpa/inet.h>
 
 #define HARKONNEN 1
@@ -106,14 +106,14 @@ void Client::launch() {
         textureManager.load("duna", DATA_PATH "assets/tile_dunas.png");
         textureManager.load("precipicio", DATA_PATH "assets/tile_precipicio.png");
         textureManager.load("roca", DATA_PATH "assets/tile_roca.png");
-        textureManager.load("menuWidtrap", DATA_PATH "assets/windtrap.gif");
+        //textureManager.load("menuWidtrap", DATA_PATH "assets/windtrap.gif");
         std::vector<ObjectGame> gameObjects;
         EventManager eventManager;
-        Button button(textureManager, "menuWidtrap", SDL2pp::Point(1115, 220), SDL2pp::Point(65, 50));
+        ButtonWidtrap buttonWidtrap(textureManager, SDL2pp::Point(1115, 220), SDL2pp::Point(65, 50));
         //mapa de prueba
         std::vector<std::vector<char>> map(50, std::vector<char> (50, 'A') );
 
-        Engine engine(map, button, gameObjects, textureManager, eventManager, queueNb, queueB);
+        Engine engine(map, buttonWidtrap, gameObjects, textureManager, eventManager, queueNb, queueB);
 
         while (engine.IsRunning()) {
             engine.Events();
