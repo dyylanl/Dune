@@ -107,7 +107,6 @@ void Client::launch() {
         textureManager.load("duna", DATA_PATH "assets/tile_dunas.png");
         textureManager.load("precipicio", DATA_PATH "assets/tile_precipicio.png");
         textureManager.load("roca", DATA_PATH "assets/tile_roca.png");
-        //textureManager.load("menuWidtrap", DATA_PATH "assets/windtrap.gif");
         std::vector<ObjectGame> gameObjects;
         EventManager eventManager;
         auto *buttonWidtrap = new ButtonWidtrap(textureManager, SDL2pp::Point(1115, 220), SDL2pp::Point(65, 50));
