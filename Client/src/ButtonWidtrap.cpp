@@ -5,7 +5,7 @@
 #include "ButtonWidtrap.h"
 
 void ButtonWidtrap::draw(SDL2pp::Renderer &renderer) {
-    m_textureManager.draw(renderer, m_name, m_position, m_size, SDL_FLIP_NONE);
+    m_textureManager.draw(renderer, m_name, m_position, m_size);
 }
 
 ButtonWidtrap::ButtonWidtrap(TextureManager &textureManager, SDL2pp::Point position, SDL2pp::Point size)

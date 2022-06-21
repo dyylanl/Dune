@@ -21,9 +21,10 @@ public:
 
     void load(std::string id, std::string filename);
 
-    void drawFrame(SDL2pp::Renderer &renderer, const std::string id, SDL2pp::Point position, SDL2pp::Point spritSize, SDL_RendererFlip flip);
+    void drawFrame(SDL2pp::Renderer &renderer, const std::string id, SDL2pp::Point position, SDL2pp::Point spritSize,
+                   SDL2pp::Point posFrame);
 
-    void draw(SDL2pp::Renderer &renderer, const std::string id, SDL2pp::Point position, SDL2pp::Point size, SDL_RendererFlip flip);
+    void draw(SDL2pp::Renderer &renderer, const std::string id, SDL2pp::Point position, SDL2pp::Point size);
 
     void drawTile(SDL2pp::Renderer &renderer, const std::string id, SDL2pp::Point position, SDL2pp::Point size);
 

@@ -16,7 +16,7 @@ class Area;
 
 class Animation {
 public:
-    Animation(TextureManager &manager, std::string &textureID, SDL_RendererFlip flip);
+    Animation(TextureManager &manager, std::string &textureID);
     ~Animation();
     void update(float dt);
     void draw(SDL2pp::Renderer &renderer, SDL2pp::Point position, SDL2pp::Point spritSize);

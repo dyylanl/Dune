@@ -30,6 +30,6 @@ void ObjectGame::select() {
     selectStatus = true;
 }*/
 
-ObjectGame::ObjectGame(Object *pUnidad, TextureManager &textureManager) : m_ObjectType(pUnidad), m_Animation(textureManager, pUnidad->getUnitType(), SDL_FLIP_NONE){
+ObjectGame::ObjectGame(Object *pUnidad, TextureManager &textureManager) : m_ObjectType(pUnidad), m_Animation(textureManager, pUnidad->getUnitType()){
 
 }

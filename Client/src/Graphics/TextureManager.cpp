@@ -14,20 +14,22 @@ TextureManager::TextureManager(SDL2pp::Renderer &renderer, Camera &camera) : m_r
 }
 
 void
-TextureManager::drawFrame(SDL2pp::Renderer &renderer, const std::string id, SDL2pp::Point position, SDL2pp::Point spritSize, SDL_RendererFlip flip) {
+TextureManager::drawFrame(SDL2pp::Renderer &renderer, const std::string id, SDL2pp::Point position,
+                          SDL2pp::Point spritSize,
+                          SDL2pp::Point posFrame) {
     SDL2pp::Texture texture(m_renderer,SDL2pp::Surface(m_TextureMap[id]).SetColorKey(true, 0));
-    SDL2pp::Point posFrame(0,0);
+    //SDL2pp::Point posFrame(0,0);
     SDL2pp::Rect orig(posFrame, spritSize);
     SDL2pp::Rect dest(position - camera.getPosicion(), spritSize);
-    renderer.Copy(texture,orig,dest,0,SDL2pp::NullOpt,flip);
+    renderer.Copy(texture,orig,dest,0,SDL2pp::NullOpt,SDL_FLIP_NONE);
 }
 
 void
-TextureManager::draw(SDL2pp::Renderer &renderer, const std::string id, SDL2pp::Point position, SDL2pp::Point size, SDL_RendererFlip flip) {
+TextureManager::draw(SDL2pp::Renderer &renderer, const std::string id, SDL2pp::Point position, SDL2pp::Point size) {
     SDL2pp::Texture texture(m_renderer,SDL2pp::Surface(m_TextureMap[id]).SetColorKey(true, 0));
     SDL2pp::Rect orig(SDL2pp::Point(0,0), size);
     SDL2pp::Rect dest(position, size);
-    renderer.Copy(texture,orig,dest,0,SDL2pp::NullOpt,flip);
+    renderer.Copy(texture,orig,dest,0,SDL2pp::NullOpt);
 }
 
 Camera &TextureManager::getCamera() {

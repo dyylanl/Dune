@@ -10,7 +10,7 @@ ButtonRefinery::ButtonRefinery(TextureManager &textureManager, SDL2pp::Point pos
 }
 
 void ButtonRefinery::draw(SDL2pp::Renderer &renderer) {
-    m_textureManager.draw(renderer, m_name, m_position, m_size, SDL_FLIP_NONE);
+    m_textureManager.draw(renderer, m_name, m_position, m_size);
 }
 
 SDL2pp::Rect ButtonRefinery::getShape() {

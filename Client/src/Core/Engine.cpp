@@ -44,7 +44,7 @@ void Engine::Update() {
 void Engine::Render(SDL2pp::Renderer &m_Renderer) {
     m_Renderer.Clear();
     m_TextureManager.drawMap(m_Renderer, m_mapa);
-    m_TextureManager.draw(m_Renderer, "menu", SDL2pp::Point(1089, 0), SDL2pp::Point(191, 720), SDL_FLIP_NONE);
+    m_TextureManager.draw(m_Renderer, "menu", SDL2pp::Point(1089, 0), SDL2pp::Point(191, 720));
     for (int i = 0; i < (int) m_buttons.size(); ++i) {
         m_buttons[i]->draw(m_Renderer);
     }

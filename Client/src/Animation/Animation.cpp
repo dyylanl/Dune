@@ -40,10 +40,10 @@ void Animation::setFlip(SDL_RendererFlip &flip) {
 }
 
 void Animation::draw(SDL2pp::Renderer &renderer, SDL2pp::Point position, SDL2pp::Point spritSize) {
-    m_TextureManager.drawFrame(renderer, m_textureID, position, spritSize, m_flip);
+    m_TextureManager.drawFrame(renderer, m_textureID, position, spritSize, SDL2pp::Point(0, 30));
 }
 
-Animation::Animation(TextureManager &manager, std::string &textureID, SDL_RendererFlip flip)
-: currentFrame(0), numFrames(8), elapsed(0.0f), m_textureID(textureID), m_flip(flip), m_TextureManager(manager){}
+Animation::Animation(TextureManager &manager, std::string &textureID)
+: currentFrame(0), numFrames(8), elapsed(0.0f), m_textureID(textureID), m_TextureManager(manager){}
 
 
