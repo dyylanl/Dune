@@ -90,6 +90,7 @@ void Client::enviar_nombre_partida(std::string nombre_partida){
 void Client::launch() {
 
     try {
+      //DESCOMENTAR ESTO PARA PROBAR SIN QT
 /*
        // envio el nombre del jugador
         std::string nombre = "dylan";

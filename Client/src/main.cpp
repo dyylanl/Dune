@@ -10,10 +10,9 @@
 int main(int argc, char** argv){
 
 //codigo para lanzar qt
-
+//COMENTAR HASTA cliente->launc PARA PROBAR SIN QT
     QApplication a(argc, argv);
     MainWindow w(nullptr);
-    //w.set_parser(parser_texto);
     w.show();
     a.exec();
     Client* cliente = w.get_cliente();
