@@ -13,9 +13,9 @@
 class ButtonWidtrap : public Button{
 private:
     //TextureManager m_textureManager;
-    std::string m_name;
+    /*std::string m_name;
     SDL2pp::Point m_position;
-    SDL2pp::Point m_size;
+    SDL2pp::Point m_size;*/
 public:
     ButtonWidtrap(SDL2pp::Point position, SDL2pp::Point size);
 

@@ -145,8 +145,8 @@ void Client::launch() {
         textureManager.load("duna", DATA_PATH "assets/tile_dunas.png");
         textureManager.load("precipicio", DATA_PATH "assets/tile_precipicio.png");
         textureManager.load("roca", DATA_PATH "assets/tile_roca.png");
-        textureManager.load("menuWidtrap", DATA_PATH "assets/windtrap.gif");
-        textureManager.load("buttonRefinery", DATA_PATH "assets/refinery.gif");
+        textureManager.load("ButtonWidtrap", DATA_PATH "assets/windtrap.gif");
+        textureManager.load("ButtonRefinery", DATA_PATH "assets/refinery.gif");
         std::vector<ObjectGame> gameObjects;
         EventManager eventManager;
         std::vector<Button*> buttons;

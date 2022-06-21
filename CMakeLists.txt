@@ -66,7 +66,7 @@ target_link_libraries(dune-common)
 # add_executable(dune ${client_src} Client/src/Core/UnitType.cpp Client/src/Characters/UnitType.h)
 # target_link_libraries(dune dune-common SDL2 SDL2_image SDL2_ttf SDL2_mixer ${SDL2PP_LIBRARIES})
 #=======
-add_executable(dune ${client_src} )
+add_executable(dune ${client_src} Client/src/Object/IObject.h Client/src/Object/GameObject.h)
 target_link_libraries(dune dune-common SDL2 SDL2_image SDL2_ttf SDL2_mixer ${SDL2PP_LIBRARIES} Qt5::Core Qt5::Gui Qt5::Widgets Qt5::Multimedia)
 # >>>>>>> b38a09028bed847a2579ec53ab1d5ecbbd2b6dfb
 

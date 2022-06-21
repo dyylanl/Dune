@@ -7,11 +7,12 @@
 
 #include "SDL2pp/SDL2pp.hh"
 #include "Graphics/TextureManager.h"
+#include "Object/GameObject.h"
 
 
-class Button {
+class Button : public GameObject{
 public:
-    Button(){}
+    Button(std::string textureID, SDL2pp::Point position, SDL2pp::Point size) : GameObject(textureID, position, size){}
     virtual void draw(SDL2pp::Renderer &renderer, TextureManager &textureManager) = 0;
     virtual SDL2pp::Rect getShape() = 0;
 };
