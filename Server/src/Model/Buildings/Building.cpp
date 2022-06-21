@@ -1,5 +1,4 @@
 #include "../../../includes/Model/Buildings/Building.h"
-#include "../../../../Common/includes/Exceptions/Exception.h"
 
 int Building::counter = 0;
 
@@ -12,8 +11,10 @@ Building::Building(const int x, const int y, int blockWidth, int blockHeight,
         height(height),
         energy(energy),
         cost(cost),
+        player(nullptr),
         key(type),
-        all_positions() {
+        all_positions(),
+        news(true) {
     for (int i = 0 ; i < height ; i++) {
         for (int j = 0 ; j < width ; j++) {
             all_positions.emplace_back(x + j * blockWidth, y + i * blockHeight);
@@ -32,6 +33,14 @@ bool Building::is(Building::BuildingType type) {
     return this->key == type;
 }
 
+void Building::setPlayer(Player* player1) {
+    this->player = player1;
+}
+
+Player* Building::getPlayer() {
+    return this->player;
+}
+
 void Building::demolish() {
     this->life = 0;
 }
@@ -48,6 +57,10 @@ Position& Building::getClosestPosition(Position& position) {
     return closest;
 }
 
+bool Building::hasNews() {
+    return this->news;
+}
+
 int Building::getCapacity() {
     return 0;
 }
@@ -55,18 +68,3 @@ int Building::getCapacity() {
 bool Building::operator==(const Building &other) {
     return this->id == other.id;
 }
-
-/*
-Building::BuildingType Building::getBuildType(char build_type) {
-    switch (build_type) {
-        case 'B': return Building::BARRACKS;
-        case 'Y': return Building::CONSTRUCTION_YARD;
-        case 'H': return Building::HEAVY_FACTORY;
-        case 'L': return Building::LIGHT_FACTORY;
-        case 'R': return Building::SPICE_REFINERY;
-        case 'S': return Building::SPICE_SILO;
-        case 'W': return Building::WIND_TRAP;
-        default: throw Exception("Tipo de edificio invalido.\n");
-    }
-}
-*/

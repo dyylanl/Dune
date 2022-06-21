@@ -3,12 +3,19 @@
 
 #include "Terrain.h"
 
-#define ROCKS_KEY 'R'
 
-class Rocks : public Terrain {
+class Rock : public Terrain {
+private:
+    Building* building;
+
 public:
-    Rocks();
+    Rock();
 
+    virtual void buildOn(Building* building) override;
+
+    virtual Building* getBuilding() override;
+
+    virtual void free() override;
 };
 
 #endif //__ROCKS_H__

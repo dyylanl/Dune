@@ -18,6 +18,7 @@ void ClientLogin::run() {
         std::string name;
         uint16_t len_name = protocol.recvCommand(peer);
         name = protocol.recvName(peer, len_name);
+        std::cout << "Nuevo player: " << name << std::endl;
         uint16_t command = protocol.recvCommand(peer);
         execute(command, name);
     } catch (const std::exception& e) {
@@ -66,9 +67,14 @@ void ClientLogin::execute(uint16_t command, std::string name_player) {
     }
     else if (command == 2) {
         std::cout << "El jugador se unira una partida existente" << std::endl;
+        std::string name_game;
+        uint16_t len_name = protocol.recvCommand(peer);
+        name_game = protocol.recvName(peer, len_name);
+        game.acceptPlayer(name_game);
     }
     else if (command == 3) {
         std::cout << "El jugador desea listar las partidas" << std::endl;
+        protocol.sendGameList(peer, game.listGames());
     }
 }
 

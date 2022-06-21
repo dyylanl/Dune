@@ -7,15 +7,13 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++17 -pthread")
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
 # Flags para el manejo de errores
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Werror -pedantic -pedantic-errors")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Werror -pedantic -pedantic-errors -Wno-dev")
 
 # Optimizaciones
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3")
 
 # Debugging
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -ggdb -DDEBUG -fno-inline")
-
-
 
 #QT
 set(CMAKE_AUTOMOC ON)
@@ -60,7 +58,7 @@ FILE(GLOB_RECURSE server_src "Server/*.cpp")
 # TARGETS
 
 # Common
-add_library(dune-common SHARED ${common_src})
+add_library(dune-common SHARED ${common_src} )
 target_link_libraries(dune-common)
 
 # Client
@@ -68,12 +66,12 @@ target_link_libraries(dune-common)
 # add_executable(dune ${client_src} Client/src/Core/UnitType.cpp Client/src/Characters/UnitType.h)
 # target_link_libraries(dune dune-common SDL2 SDL2_image SDL2_ttf SDL2_mixer ${SDL2PP_LIBRARIES})
 #=======
-add_executable(dune ${client_src} Client/src/ButtonWidtrap.cpp Client/src/ButtonWidtrap.h Client/src/Button.cpp Client/src/Button.h Client/src/ButtonRefinery.cpp Client/src/ButtonRefinery.h)
+add_executable(dune ${client_src} )
 target_link_libraries(dune dune-common SDL2 SDL2_image SDL2_ttf SDL2_mixer ${SDL2PP_LIBRARIES} Qt5::Core Qt5::Gui Qt5::Widgets Qt5::Multimedia)
 # >>>>>>> b38a09028bed847a2579ec53ab1d5ecbbd2b6dfb
 
 # Server
-add_executable(dune-server ${server_src} Server/includes/Control/ClientConnection.h Server/src/Control/ClientConnection.cpp Server/includes/Control/Commands/Command.h Server/src/Control/Command/Command.cpp Server/includes/Control/Commands/SelectUnitCommand.h Server/includes/Control/Commands/MoveUnitCommand.h Server/includes/Control/Commands/BuildBuildingCommand.h Server/includes/Control/Commands/CreateUnitCommand.h Server/src/Control/Command/SelectUnitCommand.cpp Server/src/Control/Command/BuildBuildingCommand.cpp Server/src/Control/Command/MoveUnitCommand.cpp Server/includes/Model/Player.h Server/src/Model/Player.cpp Server/includes/Model/Buildings/Barracks.h Server/src/Model/Buildings/Barracks.cpp Server/config/YAMLReader.cpp Server/config/YAMLReader.h Server/config/ConfigReader.cpp Server/config/ConfigReader.h Server/config/GameConfig.cpp Server/config/GameConfig.h Server/config/MapReader.cpp Server/config/MapReader.h Server/includes/Control/ClientsConnected.h Server/src/Control/ClientsConnected.cpp Server/src/Control/Command/CreateUnitCommand.cpp)
+add_executable(dune-server ${server_src} Server/includes/Model/Weapons/Cannon.h Server/src/Model/Weapons/Cannon.cpp Server/includes/Model/Weapons/Rocket.h Server/src/Model/Weapons/Rocket.cpp Server/includes/Model/Weapons/RocketLauncher.h Server/includes/Model/Weapons/SmallCannon.h Server/src/Model/Weapons/RocketLauncher.cpp Server/src/Model/Weapons/SmallCannon.cpp)
 target_link_libraries(dune-server dune-common ${YAML_CPP_LIBRARIES})
 #------------------------------------------------------------------------------
 

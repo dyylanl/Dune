@@ -3,8 +3,6 @@
 
 #include "Terrain.h"
 
-#define PRECIPICE_KEY 'P'
-
 class Precipice : public Terrain {
 public:
     Precipice();

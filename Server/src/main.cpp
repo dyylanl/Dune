@@ -2,7 +2,6 @@
 #include <exception>
 #include <string>
 #include "../includes/Control/Server.h"
-#include "../includes/defs.h"
 
 
 int main(int argc, char* argv[]) {

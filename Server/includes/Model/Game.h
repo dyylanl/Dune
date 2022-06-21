@@ -11,6 +11,7 @@
 #include "AStar.h"
 #include "../Control/NewConnection.h"
 #include "../../config/GameConfig.h"
+#include "../../config/ConfigReader.h"
 
 class Game {
 private:
@@ -69,7 +70,7 @@ public:
      */
     InstanceId newConnection(NewConnection* connection);
 
-    std::stack<Position> makePath(Unit unit, Position pos_end);
+    std::stack<Position> makePath(Unit& unit, Position pos_end);
 
     InstanceId getConnectionId() {return next_id++;}
     std::vector<std::vector<char>> getMap() {return this->map.getMap();}

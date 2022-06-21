@@ -1,6 +1,8 @@
 #ifndef __WEAPON_H__
 #define __WEAPON_H__
 
+#include "../../../config/GameConfig.h"
+
 enum class WeaponType { ASSAULT_RIFLE, CANNON, ROCKET_LAUNCHER, SMALL_CANNON };
 
 class Weapon {

@@ -4,23 +4,14 @@
 #include <stack>
 #include <memory>
 #include <iostream>
-#include "../Position.h"
+#include "../Attackable.h"
+#include "../Terrains/Terrain.h"
+#include "../Player.h"
 
-class Unit {
-private:
-    int id;
-    static int counter;
-    char unitType;
-    Position position;
+class Map;
+
+class Unit : public Attackable {
 public:
-    Unit(int id, char type, int x, int y);
-    ~Unit();
-
-    Position getPosition();
-    static bool canMove();
-    char getUnitType();
-    int getId();
-    void setPosition(Position pos);
 
     enum UnitType {
         HARVESTER,
@@ -30,6 +21,34 @@ public:
         TANK,
         TRIKE,
     };
+
+    Unit(const int x, const int y, const int hitPoints, const int speed, const int cost);
+    ~Unit();
+    bool operator==(const Unit& other);
+    void setPath(std::stack<Position> path, Position destiny);
+    bool move(Map &map);
+    void follow(Attackable* other, Map& map);
+    bool isAttacking();
+    void setPlayer(Player &player);
+    Player& getPlayer();
+    void checkForDeadVictim();
+    bool hasNews();
+
+public:
+    const int id;
+
+protected:
+    static int counter;
+    const int speed;
+    const int cost;
+    int actual_speed;
+    std::stack<Position> pathToDestiny;
+    Attackable* foll_unit;
+    Position destiny;
+    Position prev_foll_unit_pos;
+    Position next_pos;
+    Player* player;
+    bool news;
 };
 
 #endif //__UNIT_H__

@@ -19,7 +19,7 @@ public:
     virtual int getLife();
     virtual int getInitialLife();
     virtual void reciveAttack(const Weapon &weapon);
-    virtual void reciveBonusDammage(const Weapon &weapon) = 0;
+    virtual void reciveBonusDammage(const Weapon &weapon);
     static bool isDead(const Attackable *unit);
 };
 

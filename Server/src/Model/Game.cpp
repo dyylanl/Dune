@@ -99,7 +99,7 @@ InstanceId Game::newConnection(NewConnection *connection) {
     return this->next_id;
 }
 
-std::stack<Position> Game::makePath(Unit unit, Position pos_end) {
+std::stack<Position> Game::makePath(Unit& unit, Position pos_end) {
     return aStar.makePath(unit, pos_end);
 }
 
