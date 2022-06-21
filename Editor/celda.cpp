@@ -52,7 +52,14 @@ void Celda::setImagen(QString tipo){
     QString cimas = "Cimas";
     QString precipicio = "Precipicio";
     QString vacio = "Vacio";
+    QString especia = "Especia";
 
+    if(tipo == especia && this->estado_actual == arena){
+        this->estado_actual = tipo;
+        this->imagen.load(":/resources/tile_especia.png");
+        this->imagen = this->imagen.scaled(32, 32);
+        this->setPixmap(imagen);
+    }
 
     if (tipo == arena){
         this->estado_actual = tipo;
@@ -90,7 +97,7 @@ void Celda::setImagen(QString tipo){
         this->imagen = this->imagen.scaled(32, 32);
         this->setPixmap(imagen);
     }
-    if(tipo == "CC_Ordos"){
+    if(tipo == "Construccion"){
         this->escenario->colocar_estructura(this->pos_x, this->pos_y);
 
     }
@@ -102,6 +109,15 @@ void Celda::setEscenario(Escenario* new_escenario){
 bool Celda::get_ocupacion()
 {
     return this->ocupada;
+}
+
+void Celda::ocupar(){
+    this->ocupada = true;
+}
+
+void Celda::desocupar()
+{
+ this->ocupada = false;
 }
 
 Celda::~Celda()

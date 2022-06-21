@@ -27,6 +27,8 @@ public:
     void setImagen(QString tipo);
     void setEscenario(Escenario* new_escenario);
     bool get_ocupacion();
+    void ocupar();
+    void desocupar();
     ~Celda();
 };
 
