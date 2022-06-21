@@ -8,7 +8,7 @@ timeFactor: 1
 initialGold: 10000
 initialEnergy: 2500
 initialMaxEnergy: 5000
-// esta en /Dune/utils/Enunciado.pdf
+# esta en /Dune/utils/Enunciado.pdf
 buildings:
   constructionTime: 100
   constructionYard:

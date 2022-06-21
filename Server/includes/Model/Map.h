@@ -14,8 +14,8 @@ class Map {
     MapReader map_reader;
     int rows, cols;
     ////////////////// IMPLEMENTACION CON TERRENOS //////////////////
-    std::vector<std::vector<Terrain>> terrrains;
-    std::vector<std::vector<char>> mapa;
+    std::vector<std::vector<Terrain>> terrrains; // contiene el tipo de terreno en esa pos
+    std::vector<std::vector<char>> mapa; // contiene el tipo de unidad en esa posicion
     std::vector<Unit*> units;
 public:
     explicit Map(std::string map_path);

@@ -26,7 +26,7 @@ public:
     virtual int getSpice();
     virtual bool hasFarm();
     virtual Building* getBuilding();
-    int getSpeedFactor();
+    int getSpeedFactor() const;
 
     bool operator==(const Terrain& terrain);
 

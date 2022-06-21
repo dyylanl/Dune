@@ -6,9 +6,17 @@ Map::Map(std::string map_path) : map_reader(map_path), rows(map_reader.getRows()
     // EL TERRENO INICIAL SE SETEA CON 'ARENAS'
     std::vector <std::vector<Terrain>> terrain_init
             ((uint16_t) rows, std::vector<Terrain>((uint16_t) cols, Terrain('A')));
-
     this->terrrains = terrain_init;
     this->mapa = map_reader.getMap();
+    int rows_ = mapa.size();
+    int cols_ = mapa[0].size();
+    for (int i = 0; i < rows_; ++i) {
+        for (int j = 0; j < cols_; ++j) {
+            char type = this->mapa[i][j];
+            terrrains[i][j] = Terrain(type);
+        }
+    }
+
 }
 
 bool Map::canMove(const Unit& unit, Position position) {
@@ -44,7 +52,7 @@ char Map::getTypeTerrain(int posX, int posY) {
 
 Unit* Map::selectUnit(int pos_x, int pos_y) {
     std::cout << "Seleccionando unidad en posicion " << pos_x << "," << pos_y << std::endl;
-    Unit* unit = new Unit(5,9,10,2,1);
+    Unit* unit = new Unit(pos_x,pos_y,10,2,1);
     return unit;
 }
 

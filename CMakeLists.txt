@@ -7,15 +7,13 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++17 -pthread")
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
 # Flags para el manejo de errores
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Werror -pedantic -pedantic-errors")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Werror -pedantic -pedantic-errors -Wno-dev")
 
 # Optimizaciones
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3")
 
 # Debugging
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -ggdb -DDEBUG -fno-inline")
-
-
 
 #QT
 set(CMAKE_AUTOMOC ON)
@@ -73,7 +71,7 @@ target_link_libraries(dune dune-common SDL2 SDL2_image SDL2_ttf SDL2_mixer ${SDL
 # >>>>>>> b38a09028bed847a2579ec53ab1d5ecbbd2b6dfb
 
 # Server
-add_executable(dune-server ${server_src} Server/includes/Model/Units/Harvester.h Server/src/Model/Units/Harvester.cpp)
+add_executable(dune-server ${server_src} Server/includes/Model/Weapons/Cannon.h Server/src/Model/Weapons/Cannon.cpp Server/includes/Model/Weapons/Rocket.h Server/src/Model/Weapons/Rocket.cpp Server/includes/Model/Weapons/RocketLauncher.h Server/includes/Model/Weapons/SmallCannon.h Server/src/Model/Weapons/RocketLauncher.cpp Server/src/Model/Weapons/SmallCannon.cpp)
 target_link_libraries(dune-server dune-common ${YAML_CPP_LIBRARIES})
 #------------------------------------------------------------------------------
 

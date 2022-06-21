@@ -47,6 +47,6 @@ bool Terrain::hasFarm() {
     return false;
 }
 
-int Terrain::getSpeedFactor() {
+int Terrain::getSpeedFactor() const {
     return this->speed_factor;
 }
