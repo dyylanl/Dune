@@ -10,11 +10,6 @@
 #include "Button.h"
 
 class ButtonRefinery : public Button {
-private:
-    //TextureManager m_textureManager;
-    /*std::string m_name;
-    SDL2pp::Point m_position;
-    SDL2pp::Point m_size;*/
 public:
     ButtonRefinery(SDL2pp::Point position, SDL2pp::Point size);
 

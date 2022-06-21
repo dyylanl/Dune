@@ -4,6 +4,7 @@
 
 #include "Engine.h"
 #include "../Button/ButtonRefinery.h"
+#include "../Characters/Desviator.h"
 
 #define X 100
 #define Y 100
@@ -27,8 +28,10 @@ void Engine::Update() {
     //unit = m_queueNb.pop();
     auto *buttonWidtrap = new ButtonWidtrap(SDL2pp::Point(1115, 220), SDL2pp::Point(65, 50));
     auto *buttonRefinery = new ButtonRefinery(SDL2pp::Point(1115, 280), SDL2pp::Point(65, 50));
+    auto *desviator = new Desviator(SDL2pp::Point(0,0), 1, 1, false, SDL2pp::Point(30,30), 100, true);
     m_buttons.push_back(buttonWidtrap);
     m_buttons.push_back(buttonRefinery);
+    m_buttons.push_back(desviator);
     /*if (unit != nullptr) {
         m_players.clear();
         ObjectGame object(unit, m_TextureManager);

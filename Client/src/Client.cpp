@@ -127,7 +127,7 @@ void Client::launch() {
         BlockingQueue<Action*> queueB;
         RecvThread recvThread(queueNb, socket, protocol);
         SendThread sendThread(queueB, socket, protocol);
-        recvThread.start();
+        //recvThread.start();
         //sendThread.start();
 
         SDL2pp::SDL sdl(SDL_INIT_VIDEO);
@@ -138,7 +138,7 @@ void Client::launch() {
         TextureManager textureManager(renderer, camera);
 
         textureManager.load("carryall", DATA_PATH "assets/carryall.png");
-        textureManager.load("Tanque", DATA_PATH "assets/missileTank.png");
+        textureManager.load("Desviator", DATA_PATH "assets/missileTank.png");
         textureManager.load("menu", DATA_PATH "assets/menu.png");
         textureManager.load("arena", DATA_PATH "assets/tile_arena.png");
         textureManager.load("cima", DATA_PATH "assets/tile_cimas.png");
@@ -168,9 +168,9 @@ void Client::launch() {
         }
 
         //sendThread.stop();
-        recvThread.stop();
+        //recvThread.stop();
         //sendThread.join();
-        recvThread.join();
+        //recvThread.join();
 
     } catch (std::exception& e) {
         std::cout << e.what() << std::endl;

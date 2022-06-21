@@ -204,7 +204,7 @@ std::string ConfigurationReader::parseType(const Unit::UnitType unitType) const 
             unitName = "raider";
             break;
         case Unit::UnitType::TANK:
-            unitName = "tank";
+            unitName = "Desviator";
             break;
         case Unit::UnitType::TRIKE:
             unitName = "trike";
