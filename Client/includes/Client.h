@@ -41,9 +41,20 @@ public:
     /* Ejecuta el cliente */
     void launch();
 
-    void crear_partida( const std::string&  house,const std::string& name, const std::string&  req);
+    void crear_partida(const std::string& nombre_jugador, const std::string&  nombre_partida, int cantidad_jugadores);
 
     int obtener_numero_casa(const std::string& casa);
+
+    void enviar_cant_jugadores(int cantidad);
+
+    void enviar_accion(std::string comando);
+
+    void enviar_nombre_jugador(std::string nombre_jugadar);
+
+    void enviar_nombre_partida(std::string nombre_partida);
+
+    std::vector<std::string> listar_partidas();
+
     //-----------------------------------------------------------------------------
 
     /* Destructor */

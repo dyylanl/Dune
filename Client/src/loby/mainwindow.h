@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include <QString>
 #include <string>
+#include <QListWidget>
 #include "../../includes/Client.h"
 
 QT_BEGIN_NAMESPACE
@@ -18,12 +19,13 @@ public:
     MainWindow(QWidget *parent = nullptr);
     std::string get_nombre();
     ~MainWindow();
-    Client* get_cliente();
+    Client* get_cliente()const;
 
 private slots:
     void on_button_confirmar_clicked();
 
     void on_button_volver_clicked();
+
 
 
     void on_button_cofirmar_cant_nombre_clicked();
@@ -36,6 +38,8 @@ private slots:
 
     void on_button_ordos_clicked();
 
+    void on_button_unirse_partida_clicked();
+
 private:
     Ui::MainWindow *ui;
     QString text_IP;
@@ -46,6 +50,5 @@ private:
     QString text_cantidad_jugadores;
     QString casa;
     Client* cliente;
-
 };
 #endif // MAINWINDOW_H

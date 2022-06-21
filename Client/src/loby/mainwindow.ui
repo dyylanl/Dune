@@ -155,7 +155,7 @@
        <string>Confirmar</string>
       </property>
      </widget>
-     <widget class="QWidget" name="">
+     <widget class="QWidget" name="layoutWidget">
       <property name="geometry">
        <rect>
         <x>200</x>
@@ -192,6 +192,18 @@
         <widget class="QLineEdit" name="cantidad_jugadores_input"/>
        </item>
       </layout>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="page_lista_patidas">
+     <widget class="QListWidget" name="lista_partidas">
+      <property name="geometry">
+       <rect>
+        <x>260</x>
+        <y>60</y>
+        <width>291</width>
+        <height>221</height>
+       </rect>
+      </property>
      </widget>
     </widget>
     <widget class="QWidget" name="page_casas">

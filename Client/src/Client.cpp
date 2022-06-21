@@ -26,10 +26,11 @@
 Client::Client(std::string ip1, std::string port1) : socket(ip1,port1), protocol() {
 }
 
-void Client::crear_partida( const std::string&  house,const std::string& name, const std::string&  req){
-    int cantidad = stoi(req);
-    uint16_t casa = (uint16_t) obtener_numero_casa(house);
-    this->protocol.createGame(this->socket,casa,name,cantidad);
+void Client::crear_partida(const std::string& nombre_jugador, const std::string&  nombre_partida, int cantidad_jugadores){
+  this->enviar_nombre_jugador(nombre_jugador);
+  this->enviar_accion("crear");
+  this->enviar_nombre_partida(nombre_partida);
+  this->enviar_cant_jugadores(cantidad_jugadores);
 }
 
 int Client::obtener_numero_casa(const std::string& casa) {
@@ -48,11 +49,48 @@ int Client::obtener_numero_casa(const std::string& casa) {
   return -1;
 }
 
+void Client::enviar_nombre_jugador(std::string nombre_jugador){
+ protocol.sendName(socket, nombre_jugador); 
+}
+
+void Client::enviar_accion(std::string comando){
+  std::string crear = "crear";
+  std::string unirse = "unirse";
+  std::string listar = "listar";
+
+  if(comando == crear){
+    uint16_t comando_num = 1;
+    protocol.sendResponse(socket, comando_num);
+  }
+  if(comando == unirse){
+    uint16_t comando_num = 2;
+    protocol.sendResponse(socket, comando_num);
+  }
+  if(comando == listar){
+    uint16_t comando_num = 3;
+    protocol.sendResponse(socket, comando_num);
+  }
+}
+
+std::vector<std::string> Client::listar_partidas(){
+  std::vector<std::string> list = this->protocol.recvGameList(socket);
+  return list;
+}
+
+
+void Client::enviar_cant_jugadores(int cantidad){
+ uint16_t cant_jugadores = cantidad;
+  protocol.sendResponse(socket, cant_jugadores); 
+}
+
+void Client::enviar_nombre_partida(std::string nombre_partida){
+  protocol.sendName(socket, nombre_partida);
+}
 
 void Client::launch() {
 
     try {
-
+/*
        // envio el nombre del jugador
         std::string nombre = "dylan";
         protocol.sendName(socket, nombre);
@@ -84,7 +122,7 @@ void Client::launch() {
         }
         // como la partida creada es de 1 solo entonces el servidor le envia el mapa
         std::vector<std::vector<char>> mapa = protocol.recvMap(socket);
-
+*/
        NonBlockingQueue<Object*> queueNb;
         BlockingQueue<Action*> queueB;
         RecvThread recvThread(queueNb, socket, protocol);
