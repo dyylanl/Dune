@@ -12,8 +12,8 @@
 #include "../../Common/includes/BlockingQueue.h"
 #include "../../Common/includes/NonBlockingQueue.h"
 #include "Thread/SendThread.h"
-#include "ButtonWidtrap.h"
-#include "ButtonRefinery.h"
+#include "Button/ButtonWidtrap.h"
+#include "Button/ButtonRefinery.h"
 #include <arpa/inet.h>
 
 #define HARKONNEN 1

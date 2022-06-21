@@ -6,7 +6,7 @@
 #define DUNE_BUTTONREFINERY_H
 
 
-#include "Graphics/TextureManager.h"
+#include "../Graphics/TextureManager.h"
 #include "Button.h"
 
 class ButtonRefinery : public Button {

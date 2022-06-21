@@ -6,8 +6,8 @@
 #define DUNE_BUTTON_H
 
 #include "SDL2pp/SDL2pp.hh"
-#include "Graphics/TextureManager.h"
-#include "Object/GameObject.h"
+#include "../Graphics/TextureManager.h"
+#include "../Object/GameObject.h"
 
 
 class Button : public GameObject{
