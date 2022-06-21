@@ -3,8 +3,6 @@
 
 #include "Terrain.h"
 
-#define DUNES_KEY 'D'
-
 class Dunes : public Terrain {
 public:
     Dunes();

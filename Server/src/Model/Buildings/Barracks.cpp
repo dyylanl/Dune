@@ -1,5 +1,4 @@
 #include "../../../includes/Model/Buildings/Barracks.h"
-#include "../../../config/GameConfig.h"
 
 Barracks::Barracks(const int x, const int y, int blockWidth, int blockHeight) :
         Building(x, y, blockWidth, blockHeight,

@@ -2,9 +2,8 @@
 #define __BUILDING_H__
 
 #include <vector>
-#include "../Position.h"
-#include "../Weapons/Weapon.h"
 #include "../Attackable.h"
+#include "../../../config/GameConfig.h"
 
 class Player;
 
@@ -28,18 +27,16 @@ public:
 
     bool operator==(const Building& other);
 
-    virtual void reciveBonusDammage(const Weapon &weapon);
+    virtual void reciveBonusDammage(const Weapon &weapon) override;
     virtual int getCapacity();
 
     bool is(BuildingType type);
     void setPlayer(Player* player);
     Player* getPlayer();
 
-    Position& getClosestPosition(Position& position);
+    Position& getClosestPosition(Position& position) override;
 
     void demolish();
-
-
     bool hasNews();
 
     const int id;

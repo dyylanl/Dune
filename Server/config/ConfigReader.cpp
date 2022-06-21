@@ -2,11 +2,6 @@
 #include "../../Common/includes/Exceptions/Exception.h"
 #include <string>
 
-ConfigurationReader::ConfigurationReader(const std::string filename) :
-        YAMLReader(filename) {}
-
-ConfigurationReader::~ConfigurationReader() = default;
-
 std::string ConfigurationReader::getMapPath() const{
     return this->config["map_path"].as<std::string>();
 }
@@ -18,6 +13,11 @@ std::string ConfigurationReader::getPort() const{
 int ConfigurationReader::getFPS() const{
     return this->config["ticks_per_sec"].as<int>();
 }
+
+ConfigurationReader::ConfigurationReader(const std::string filename) :
+        YAMLReader(filename) {}
+
+ConfigurationReader::~ConfigurationReader() = default;
 
 unsigned ConfigurationReader::getSpeedFactor() const {
     return this->config["speedFactor"].as<unsigned>();

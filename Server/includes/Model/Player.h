@@ -9,6 +9,8 @@
 #include "Buildings/Building.h"
 #include "../defs.h"
 
+class Building;
+
 class Player {
 private:
     InstanceId id;

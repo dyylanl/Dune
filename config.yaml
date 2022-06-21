@@ -2,64 +2,113 @@ port: "8082"
 ticks_per_sec: 60
 map_path: "/home/dypa/Dune/mapa_default_1.yaml"
 
-speedFactor: 1
-initialGold: 50
-initialEnergy: 150
+speedFactor: 50
+blockMovement: 2
+rangeFactor: 2000
+timeFactor: 1
+initialGold: 10000
+initialEnergy: 2500
+initialMaxEnergy: 5000
 
 buildings:
-  construction_center:
+  constructionTime: 100
+  constructionYard:
     energy: 0
-    capacity: 0
     cost: 0
-    x: 3
-    y: 3
-    hit_points: 3000
-  light_factory:
+    hitPoints: 3000
+    width: 3
+    height: 3
+  windTrap:
     energy: 500
-    capacity: 0
     cost: 800
-    x: 3
-    y: 3
-    hit_points: 500
-  air_traps:
+    hitPoints: 500
+    width: 3
+    height: 3
+  lightFactory:
     energy: 500
-    capacity: 0
     cost: 800
-    x: 3
-    y: 3
-    hit_points: 500
-  heavy_factory:
+    hitPoints: 500
+    width: 3
+    height: 3
+  heavyFactory:
     energy: 800
-    capacity: 0
     cost: 1500
-    x: 4
-    y: 4
-    hit_points: 1500
-  refinery:
+    hitPoints: 1500
+    width: 4
+    height: 4
+  spiceRefinery:
     energy: 400
-    capacity: 5000
     cost: 500
-    x: 3
-    y: 3
-    hit_points: 1000
-  silo:
+    hitPoints: 500
+    spiceCapacity: 5000
+    width: 3
+    height: 3
+  spiceSilo:
     energy: 100
-    capacity: 1000
     cost: 200
-    x: 1
-    y: 1
-    hit_points: 200
-  barrack:
+    hitPoints: 200
+    spiceCapacity: 1000
+    width: 1
+    height: 1
+  barracks:
     energy: 100
-    capacity: 0
     cost: 300
-    x: 2
-    y: 3
-    hit_points: 300
-  palace:
-    energy: 800
-    capacity: 0
-    cost: 2000
-    x: 3
-    y: 3
-    hit_points: 1000
+    hitPoints: 300
+    width: 3
+    height: 2
+weaponry:
+  assaultRifle:
+    damage: 2
+    shootingRate: 6
+    bonus: 1
+  cannon:
+    damage: 7
+    shootingRate: 1
+    bonus: 0
+  rocketLauncher:
+    damage: 8
+    shootingRate: 1
+    bonus: 0
+  smallCannon:
+    damage: 6
+    shootingRate: 6
+    bonus: 2
+units:
+  lightInfantry:
+    hitPoints: 50
+    range: 3
+    speed: 16
+    trainingTime: 60
+    cost: 50
+  heavyInfantry:
+    hitPoints: 80
+    range: 3
+    speed: 14
+    trainingTime: 78
+    cost: 70
+  harvester:
+    hitPoints: 600
+    speed: 12
+    trainingTime: 180
+    cost: 300
+    spiceCapacity: 200
+    farmSpeed: 20
+    loadSpeed: 5
+  trike:
+    hitPoints: 80
+    range: 4
+    speed: 64
+    trainingTime: 120
+    cost: 100
+  raider:
+    hitPoints: 80
+    range: 4
+    speed: 84
+    trainingTime: 120
+    cost: 100
+  tank:
+    hitPoints: 30
+    range: 4
+    speed: 40
+    trainingTime: 240
+    cost: 300
