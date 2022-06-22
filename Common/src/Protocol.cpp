@@ -296,7 +296,8 @@ void Protocol::sendCountObject(Socket &socket, int &countObject) {
 
 void Protocol::enviar(Socket &socket) {
     uint8_t type = 1;
-    uint8_t unitType = 9;
+    uint8_t unitType = 2;
+    uint16_t id = 0;
     uint8_t player = 1;
     uint8_t selectStatus = 1;
     uint16_t posX = 30;
@@ -308,6 +309,7 @@ void Protocol::enviar(Socket &socket) {
     std::cout << "Se envia: " << "(" << posX << "," << posY << ")" << std::endl;
     socket.send(reinterpret_cast<char *>(&type), sizeof(uint8_t));
     socket.send(reinterpret_cast<char *>(&unitType), sizeof(uint8_t));
+    socket.send(reinterpret_cast<char *>(&id), sizeof(uint16_t));
     socket.send(reinterpret_cast<char *>(&player), sizeof(uint8_t));
     socket.send(reinterpret_cast<char *>(&selectStatus), sizeof(uint8_t));
     socket.send(reinterpret_cast<char *>(&posX), sizeof(uint16_t));

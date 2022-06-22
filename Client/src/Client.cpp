@@ -91,7 +91,7 @@ void Client::launch() {
 
     try {
 
-        /*// envio el nombre del jugador
+        // envio el nombre del jugador
         std::string nombre = "dylan";
         protocol.sendName(socket, nombre);
 
@@ -122,7 +122,7 @@ void Client::launch() {
         }
         // como la partida creada es de 1 solo entonces el servidor le envia el mapa
         std::vector<std::vector<char>> map = protocol.recvMap(socket);
-*/
+
         NonBlockingQueue<std::vector<GameObject*>> queueNb;
         BlockingQueue<Action*> queueB;
         RecvThread recvThread(queueNb, socket, protocol);
@@ -142,7 +142,7 @@ void Client::launch() {
         std::vector<GameObject*> objects;
 
         //mapa de prueba
-        std::vector<std::vector<char>> map(50, std::vector<char> (50, 'A') );
+        //std::vector<std::vector<char>> map(50, std::vector<char> (50, 'A') );
 
         Engine engine(map, objects, textureManager, eventManager, queueNb, queueB);
 
