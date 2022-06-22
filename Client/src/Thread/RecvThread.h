@@ -11,7 +11,8 @@
 #include "../../../Common/includes/NonBlockingQueue.h"
 #include "../Object/GameObject.h"
 
-enum VehicleType{TRIKE, SONIC_TANK, RAIDER, DESVIATOR, TANK, DEVASTATOR, HARVESTER};
+enum VehicleType {TRIKE, SONIC_TANK, RAIDER, DESVIATOR, TANK, DEVASTATOR, HARVESTER};
+enum BuilType {CONSTRUCTION_YARD};
 
 class RecvThread : public Thread {
 private:

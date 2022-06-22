@@ -5,6 +5,7 @@
 #include "../GameObject/Vehicles/TankCL.h"
 #include "../GameObject/Vehicles/DevastatorCL.h"
 #include "../GameObject/Vehicles/HarvesterCL.h"
+#include "../GameObject/Builds/ConstructionYardCL.h"
 
 void RecvThread::run() {
     while (running) {
@@ -67,7 +68,15 @@ void RecvThread::run() {
                     default: std::cout << "Tipo de unidad invalido" << std::endl;
                 }
             } else if (type == 2) {
-                m_protocol.recvBuild(m_socket, objectType, player, posX, posY, life);
+                m_protocol.recvObjectType(m_socket, objectType);
+                switch (objectType) {
+                    case CONSTRUCTION_YARD:
+                        m_protocol.recvBuild(m_socket, id, player, posX, posY, life);
+                        gameObjects.push_back(new ConstructionYardCL(SDL2pp::Point(posX, posY), id, player, life));
+                        break;
+                    default: std::cout << "Tipo de edificio invalido" << std::endl;
+                }
+
             } else if (type == 3) {
                 std::cout << "Se recibe un gusano de arena" << std::endl;
             } else {

@@ -133,7 +133,7 @@ public:
 
     void recvCountObject(Socket &socket, int &size);
 
-    void recvBuild(Socket &socket, int &buildType, int &player, int &posX, int &posY, int &life);
+    void recvBuild(Socket &socket, int &id, int &player, int &posX, int &posY, int &life);
 
     void sendCountObject(Socket &socket, int &countObject);
 

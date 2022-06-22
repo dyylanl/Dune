@@ -241,6 +241,7 @@ void Protocol::sendName(Socket &socket, std::string name) {
 
 void Protocol::recvType(Socket &socket, int &type) {
     socket.recv(reinterpret_cast<char *>(&type), sizeof(uint8_t));
+    std::cout << "Se recibe objeto tipo: " << type << std::endl;
 }
 
 void Protocol::sendType(Socket &socket, int &actionType) {
@@ -280,8 +281,8 @@ Protocol::recvUnit(Socket &socket, int &id, int &player, bool &selectStatus, int
     std::cout << "Se recibe: " << "(" << posX << "," << posY << ")" << std::endl;
 }
 
-void Protocol::recvBuild(Socket &socket, int &buildType, int &player, int &posX, int &posY, int &life) {
-    socket.recv(reinterpret_cast<char *>(&buildType), sizeof(uint8_t));
+void Protocol::recvBuild(Socket &socket, int &id, int &player, int &posX, int &posY, int &life) {
+    socket.recv(reinterpret_cast<char *>(&id), sizeof(uint16_t));
     socket.recv(reinterpret_cast<char *>(&player), sizeof(uint8_t));
     socket.recv(reinterpret_cast<char *>(&posX), sizeof(uint16_t));
     socket.recv(reinterpret_cast<char *>(&posY), sizeof(uint16_t));

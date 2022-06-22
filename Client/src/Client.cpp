@@ -173,6 +173,8 @@ void Client::loadTextures(TextureManager &textureManager) const {
     textureManager.load("Devastator", DATA_PATH "assets/Vehicles/Devastator.png");
     textureManager.load("Harvester", DATA_PATH "assets/Vehicles/Harvester.png");
 
+    textureManager.load("ConstructionYard", DATA_PATH "assets/Builds/ConstructionYard.png");
+
     textureManager.load("menu", DATA_PATH "assets/menu.png");
     textureManager.load("arena", DATA_PATH "assets/Terrain/tile_arena.png");
     textureManager.load("cima", DATA_PATH "assets/Terrain/tile_cimas.png");
