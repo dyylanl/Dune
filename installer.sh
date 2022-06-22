@@ -1,5 +1,23 @@
 #!/bin/bash
 
+# Author: dypa
+
+greenColour="\e[0;32m\033[1m"
+endColour="\033[0m\e[0m"
+redColour="\e[0;31m\033[1m"
+blueColour="\e[0;34m\033[1m"
+yellowColour="\e[0;33m\033[1m"
+purpleColour="\e[0;35m\033[1m"
+turquoiseColour="\e[0;36m\033[1m"
+grayColour="\e[0;37m\033[1m"
+
+trap ctrl_c INT
+
+function ctrl_c() {
+	echo -e "\n${redColour}[*] ABORTANDO ${endColour}\n"
+	exit 0
+}
+
 function waitingInputMessage() {
     printf "> Ingrese una opción: "
 }
@@ -10,18 +28,19 @@ function initialMessage () {
 
 function helpMessage() {
     echo "Opciones:"
-    echo "  d: instalador."
+    echo "  d: instalar DUNE"
     echo "  q: salir."
     echo ""
 }
 
 function unknownInput() {
     echo " >'q' para salir."
-    echo " >'d' para instalar librerias"
+    echo " >'d' para instalar DUNE"
     echo ""
 }
 
 function build() {
+    sudo mkdir /home/"$USER"/Dune
     sudo rm -rf build
     mkdir build
     cd build
@@ -61,36 +80,64 @@ function installDependencies() {
 
 function installGame() {
     echo "=== INSTALACIÓN DEL JUEGO ==="
-    build
-    sudo make install -j4
+    cd "/home/$"USER"/Dune"
+    sudo make install -j6
     echo ""
-    echo "Instalación del juego finalizada."
+    echo -e "\n${greenColour}[*] DUNE instalado en /home/"$USER"/Dune/build ${endColour}\n"
     echo ""
+    return
 }
 
-set -e
-initialMessage
-helpMessage
-waitingInputMessage
+function post_installation() {
+	echo "	c) Ir a la carpeta donde se instalo DUNE."
+	echo " 	q) Salir."
+	waitingInputMessage
+	read OPTION
+	case $OPTION in
+		c) 
+			cd "/home/"$USER"/Dune/build"
+			exit 0
+			;;
+		q) 
+			echo "Adios!"
+			;;
+		*)
+			exit 0
+	esac
+}
 
-while :
-do
-    read OPTION
-    case $OPTION in
-        d)
-            echo ""
-            installDependencies
-            build
-            installGame
-            waitingInputMessage
-        ;;
-        q)
-            exit 0
-        ;;
-        *)
-            echo ""
-            unknownInput
-            waitingInputMessage
-        ;;
-    esac
-done
+function init_installer() {
+	initialMessage
+	helpMessage
+	waitingInputMessage
+	while :
+	do
+		read OPTION
+		case $OPTION in
+			d)
+				echo ""
+				installDependencies
+            			build
+            			installGame
+            			post_installation
+        			;;
+        		q)
+            			exit 0
+        			;;
+        		*)
+            			echo ""
+            			unknownInput
+            			waitingInputMessage
+        			;;
+		esac
+	done
+}
+
+if [ "$(id -u)" == "0" ]; then
+	echo -e "\n${greenColour}[*] Ejecutando en modo root${endColour}\n"
+	init_installer
+else
+	echo -e "\n${redColour}[*] Ejecute el installer como root${endColour}\n"
+	exit 0
+fi
+

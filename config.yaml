@@ -1,6 +1,6 @@
 port: "8082"
 ticks_per_sec: 60
-map_path: "/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/mapa_default_1.yaml"
+map_path: "/home/dypa/Dune/mapa_default_1.yaml"
 speedFactor: 50
 blockMovement: 2
 rangeFactor: 2000

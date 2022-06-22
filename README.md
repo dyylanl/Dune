@@ -10,12 +10,8 @@ del año 1998 ambientado en la novela Dune de Frank Herbert.
 | Codino, Federico   |        |
 
 
-## Como correr el proyecto:
-    > mkdir build; cd build
-    > cmake ..
-    > sudo make install
-    > sudo make
-    > ./installer.sh
+## Compilar el proyecto:
+    > sudo ./installer.sh
 
 ## To do
 ### Server
