@@ -7,7 +7,10 @@
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
-    , ui(new Ui::MainWindow), escenario(new Escenario()), music_player(new QMediaPlayer()), dialogo_forma_tablero(new Dialog_forma_tablero()), file_manager(new QFileDialog())
+    , ui(new Ui::MainWindow), escenario(new Escenario(10,10)), music_player(new QMediaPlayer()),
+      dialogo_forma_tablero(new Dialog_forma_tablero()), file_manager(new QFileDialog()),
+      dialogo_cant_jugadores(new Dialog_cant_jugadores())
+
 {
     ui->setupUi(this);
     this->ui->graphicsView->setScene(this->escenario);
@@ -17,6 +20,8 @@ MainWindow::MainWindow(QWidget *parent)
     ui->stackedWidget->setCurrentIndex(0);
 
     connect(&this->dialogo_forma_tablero,SIGNAL(nuevos_valores(int,int)),this,SLOT(cambiar_forma_tablero_acepted(int,int)));
+
+    connect(&this->dialogo_cant_jugadores,SIGNAL(nueva_cantidad_jugadores(int)),this,SLOT(cambiar_cantidad_jugadores(int)));
 
 
    }
@@ -91,6 +96,20 @@ void MainWindow::on_button_mute_clicked()
 
 void MainWindow::on_actionSave_triggered()
 {
+    int cant_construcciones = this->escenario->get_cantidad_construcciones();
+    int cant_jugadores = this->escenario->get_cantidad_jugadores();
+    if(cant_construcciones < cant_jugadores){
+        QMessageBox msgBox;
+        msgBox.setText("La cantidad de construcciones es Menor a la cantidad de jugadores");
+        msgBox.exec();
+        return;
+    }
+    if(cant_construcciones > cant_jugadores){
+        QMessageBox msgBox;
+        msgBox.setText("La cantidad de construcciones es Mayor a la cantidad de jugadores");
+        msgBox.exec();
+        return;
+    }
     QString extension = ".yaml";
     QString save_name = file_manager->getSaveFileName(this,"Sava a File",QDir::homePath());
     QString full_path = save_name + extension;
@@ -101,7 +120,7 @@ void MainWindow::on_actionSave_triggered()
 
 void MainWindow::on_actionLoadd_triggered()
 {
-    QString filter = "All files (*.*) ;; yaml (*.yaml)";
+    QString filter = "yaml (*.yaml)";
     QString file_name = this->file_manager->getOpenFileName(this,"Open a file",QDir::homePath(),filter);
 
     this->escenario->cargar(file_name);
@@ -140,11 +159,50 @@ void MainWindow::cambiar_forma_tablero_acepted(int new_filas,int new_columnas){
     this->ui->graphicsView->setScene(this->escenario);
 }
 
+void MainWindow::mostrar_dialog_asignar_jugador()
+{
+ this->dialog_asignar_jugadores.show();
+}
+
 
 void MainWindow::on_button_const_ordos_clicked()
 {
     this->escenario->change_last_clicked("CC_Ordos");
 
 
+}
+
+
+void MainWindow::on_button_cant_jugadores_clicked()
+{
+ this->dialogo_cant_jugadores.show();
+}
+
+
+void MainWindow::cambiar_cantidad_jugadores(int cant){
+ this->escenario->cambiar_cantidad_jugadores(cant);
+}
+
+void MainWindow::on_button_centro_construccion_clicked()
+{
+    this->escenario->change_last_clicked("Construccion");
+}
+
+
+void MainWindow::on_button_eliminar_construccion_clicked()
+{
+    this->escenario->change_last_clicked("Eliminar");
+}
+
+
+void MainWindow::on_button_asignar_jugador_clicked()
+{
+    this->escenario->change_last_clicked("Asignar Jugador");
+}
+
+
+void MainWindow::on_button_especia_clicked()
+{
+    this->escenario->change_last_clicked("Especia");
 }
 

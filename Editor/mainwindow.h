@@ -7,6 +7,8 @@
 #include "qfiledialog.h"
 #include "yaml-cpp/yaml.h"
 #include "dialog_forma_tablero.h"
+#include "dialog_cant_jugadores.h"
+#include "dialog_asignar_jugadoro.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -23,6 +25,9 @@ public:
 
 public slots:
      void cambiar_forma_tablero_acepted(int new_filas,int new_columnas);
+
+     void mostrar_dialog_asignar_jugador();
+
 private slots:
     void on_button_arena_clicked();
 
@@ -58,11 +63,25 @@ private slots:
 
     void on_button_const_ordos_clicked();
 
+    void on_button_cant_jugadores_clicked();
+
+    void cambiar_cantidad_jugadores(int cant);
+
+    void on_button_centro_construccion_clicked();
+
+    void on_button_eliminar_construccion_clicked();
+
+    void on_button_asignar_jugador_clicked();
+
+    void on_button_especia_clicked();
+
 private:
     Ui::MainWindow *ui;
     Escenario* escenario;
     QMediaPlayer *music_player;
     Dialog_forma_tablero dialogo_forma_tablero;
     QFileDialog* file_manager;
+    Dialog_cant_jugadores dialogo_cant_jugadores;
+    Dialog_asignar_jugadoro dialog_asignar_jugadores;
 };
 #endif // MAINWINDOW_H

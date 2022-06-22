@@ -91,7 +91,8 @@ void Client::launch() {
 
     try {
 
-        // envio el nombre del jugador
+      //DESCOMENTAR ESTO PARA PROBAR SIN QT
+       // envio el nombre del jugador
         std::string nombre = "dylan";
         protocol.sendName(socket, nombre);
 

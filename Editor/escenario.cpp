@@ -1,28 +1,9 @@
-#include "escenario.h"
+
 #include <iostream>
 #include <fstream>
 #include <iostream>
-
-Escenario::Escenario():tableroQT(10)
-{
-    this->filas = 10;
-    this->columnas = 10;
-    for(int outer = 0; outer < tableroQT.size(); ++outer)
-        tableroQT[outer].resize(10);
-    this->last_clicked = new Estado_last_clicked();
-for (int i = 0; i < this->filas; i++){
-    for(int j = 0;j < this->columnas ;j ++){
-        //this->tableroQT.resize(100);
-        Celda *celda = new Celda(this,"Arena",this->last_clicked,i,j);
-        //celda->setEscenario(this);
-        celda->setPos(j*32,i*32);
-        this->addItem(celda);
-        this->tableroQT [i][j] = celda;
-
-    }
-
-}
-}
+#include <algorithm>
+#include "escenario.h"
 
 
 Escenario::Escenario(int new_filas, int new_columnas):tableroQT(new_filas)
@@ -43,6 +24,7 @@ for (int i = 0; i < this->filas; i++){
 
     }
 }
+this->cant_jugadores = 1;
 }
 
 
@@ -55,6 +37,7 @@ void Escenario::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
     QGraphicsScene::mousePressEvent(event);
 
+
 }
 
 void Escenario::agregar_fila()
@@ -63,7 +46,7 @@ void Escenario::agregar_fila()
     this->tableroQT.resize(this->filas);
     this->tableroQT[this->filas - 1].resize(this->columnas);
     for(int j = 0; j < this->columnas; j++){
-        Celda *celda = new Celda(this,"Arena",this->last_clicked,this->filas -1,j);
+        Celda *celda = new Celda(this,"Vacio",this->last_clicked,this->filas -1,j);
         //celda->setEscenario(this);
         celda->setPos(j*32,(this->filas -1)*32);
         this->addItem(celda);
@@ -79,15 +62,17 @@ void Escenario::agregar_columna()
     this->tableroQT[this->filas - 1].resize(this->columnas);
     for(int i = 0; i < this->filas; i++){
         this->tableroQT[i].resize(this->columnas);
-        Celda *celda = new Celda(this,"Arena",this->last_clicked,i,this->columnas -1);
+        Celda *celda = new Celda(this,"Vacio",this->last_clicked,i,this->columnas -1);
         //celda->setEscenario(this);
         celda->setPos((this->columnas -1) *32, i *32);
         this->addItem(celda);
         this->tableroQT[i][this->columnas - 1]   = celda;
+
     }
 }
 
 void Escenario::guardar(QString file_name){
+
     YAML::Emitter out;
     out << YAML::BeginMap;
     out << YAML::Key << "Tablero";
@@ -99,17 +84,41 @@ void Escenario::guardar(QString file_name){
 
     for(int i = 0; i < this->filas; i++){
         for(int j = 0; j < this->columnas;j++){
+            Celda* celda = this->tableroQT[i][j];
              std::stringstream key_i_j;
              key_i_j << i << "," << j;
              out << YAML::Key << key_i_j.str();
              out << YAML::BeginMap;
              out << YAML::Key << "Tipo";
-             std::string tipo = this->tableroQT[i][j]->get_tipo_suelo().toStdString();
+             std::string tipo = celda->get_tipo_suelo().toStdString();
              out << YAML::Value << tipo;
+             out << YAML::Key << "Ocupada";
+             out << YAML::Value << celda->get_ocupacion();
              out << YAML::EndMap;
 
 
         }
+    }
+    out << YAML::EndMap;
+    out<< YAML::Key << "Estructuras";
+    out << YAML::BeginMap;
+    out << YAML::Key << "Cantidad";
+    out << YAML::Value << this->cant_construcciones;
+    std::cout << this->cant_construcciones << std::endl;
+    for(int i = 0; i < this->cant_construcciones;i++){
+        std::cout << i << std::endl;
+        Construccion* constr = this->construcciones[i];
+        std::stringstream key_constr;
+        key_constr << i;
+        out << YAML::Key << key_constr.str();
+        out << YAML::BeginMap;
+        out << YAML::Key << "Pos_x";
+        int pos_x = constr->get_pos_x();
+        out << YAML::Value << pos_x;
+        out << YAML::Key << "Pos_y";
+        int pos_y = constr->get_pos_y();
+        out << YAML::Value << pos_y;
+        out << YAML::EndMap;
     }
     out << YAML::EndMap;
     //const char *path="/home/fede/Desktop/Taller_1/qt/prueba_9/test.yaml";
@@ -157,16 +166,19 @@ void Escenario::colocar_estructura(int x, int y){
     if(colocar == false){
         return;
     }
+    this->ocupar_celdas(x,y);
+
     std::cout << "llego a colocar en x:"<<x<<"en y:"<<y << std::endl;
-    QGraphicsPixmapItem* cc_ordos = new QGraphicsPixmapItem();
+    //QGraphicsPixmapItem* cc_ordos = new QGraphicsPixmapItem();
+    Construccion* estructura = new Construccion(x,y,this->last_clicked,this);
     std::cout << "Rompo 1" << std::endl;
-    QPixmap imagen;
-    imagen.load(":/resources/centro_1.png");
-    cc_ordos->setPixmap(imagen);
-    cc_ordos ->setPos(y*32,x*32);
-    cc_ordos->setOffset(-32,-32);
-    cc_ordos->setZValue(1);
-    this->addItem(cc_ordos);
+    this->construcciones.append(estructura);
+    //->setPixmap(imagen);
+    estructura ->setPos(y*32,x*32);
+    estructura->setOffset(-32,-32);
+    estructura->setZValue(1);
+    this->addItem(estructura);
+    this->cant_construcciones += 1;
 }
 
 bool Escenario::verificar_celdas(int x, int y)
@@ -175,6 +187,10 @@ bool Escenario::verificar_celdas(int x, int y)
     for(int i = x - 1; i < x + 2; i++){
         for(int j = y -1; j < y+ 2;j++){
             if((i > this->filas) ||( j > this->columnas)){
+                return false;
+
+            }
+            if((i < 0) ||( j < 0)){
                 return false;
 
             }
@@ -195,7 +211,75 @@ bool Escenario::verificar_celdas(int x, int y)
     return true;
 }
 
+
+void Escenario::ocupar_celdas(int x, int y){
+    for(int i = x - 1; i < x + 2; i++){
+        for(int j = y -1; j < y+ 2;j++){
+            this->tableroQT[i][j]->ocupar();
+        }
+    }
+}
+
+int Escenario::get_cantidad_construcciones()
+{
+    return this->cant_construcciones;
+}
+
+int Escenario::get_cantidad_jugadores()
+{
+    return this->cant_jugadores;
+}
+
+void Escenario::eliminar_estructura(Construccion *estructura,int x, int y)
+{
+    this->removeItem(estructura);
+    this->desocupar_celdas(x,y);
+
+}
+
+void Escenario::desocupar_celdas(int x, int y){
+    for(int i = x - 1; i < x + 2; i++){
+        for(int j = y -1; j < y+ 2;j++){
+            Celda* celda = this->tableroQT[i][j];
+            celda->desocupar();
+        }
+       }
+}
+
+void Escenario::eliminar_todas_estructuras()
+{
+ for(int i = 0; i < this->cant_construcciones; i++){
+     delete(this->construcciones[i]);
+ }
+}
+
+bool Escenario::verificar_jugador(int jugador)
+{
+    if ( std::find(this->jugadores.begin(), this->jugadores.end(), jugador) != this->jugadores.end()){
+        return true;
+    }else{
+
+        return false;
+    }
+
+}
+
+void Escenario::agregar_jugador(int jugador){
+    this->jugadores.push_back(jugador);
+}
+
+void Escenario::cambiar_cantidad_jugadores(int cantidad)
+{
+    this->cant_jugadores = cantidad;
+    std::cout << this->cant_jugadores << std::endl;
+}
+
+void Escenario::mostrar_dialog_asignar_jugador(){
+
+}
+
 Escenario::~Escenario(){
     this->eliminar_celdas_actuales();
     delete(this->last_clicked);
+    this->eliminar_todas_estructuras();
 }

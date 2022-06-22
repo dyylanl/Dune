@@ -84,16 +84,7 @@ void MainWindow::on_button_ordos_clicked()
 
 
 void MainWindow::on_button_unirse_partida_clicked()
-{   std::cout << "LLEGO A UNIRME"<< std::endl;
-    //this->cliente->enviar_nombre_jugador(this->text_nombre.toStdString());
-    std::cout << "LLEGO A UNIRME 2"<< std::endl;
-    //this->cliente->crear_partida(this->text_nombre.toStdString(),"duelo",2);
-    /*std::vector<std::string> partidas = this->cliente->listar_partidas();
-    for(size_t i = 0; i< partidas.size(); i ++){
-      std::string nombre_partida = partidas[i]; 
-      std::cout << nombre_partida << std::endl;
-      
-    }*/
+{   
     std::vector<std::string> list = this->cliente->listar_partidas();
         if (!list.empty()) {
         int n = (int)list.size();
