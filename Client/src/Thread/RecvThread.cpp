@@ -1,10 +1,10 @@
 #include "RecvThread.h"
-#include "../Characters/Vehicles/DeviatorCL.h"
-#include "../Characters/Vehicles/TrikeCL.h"
-#include "../Characters/Vehicles/SonicTankCL.h"
-#include "../Characters/Vehicles/TankCL.h"
-#include "../Characters/Vehicles/DevastatorCL.h"
-#include "../Characters/Vehicles/HarvesterCL.h"
+#include "../GameObject/Vehicles/DeviatorCL.h"
+#include "../GameObject/Vehicles/TrikeCL.h"
+#include "../GameObject/Vehicles/SonicTankCL.h"
+#include "../GameObject/Vehicles/TankCL.h"
+#include "../GameObject/Vehicles/DevastatorCL.h"
+#include "../GameObject/Vehicles/HarvesterCL.h"
 
 void RecvThread::run() {
     while (running) {

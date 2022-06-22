@@ -11,8 +11,8 @@
 #include "../../Common/includes/BlockingQueue.h"
 #include "../../Common/includes/NonBlockingQueue.h"
 #include "Thread/SendThread.h"
-#include "Button/ButtonWidtrap.h"
-#include "Button/ButtonRefinery.h"
+#include "GameObject/Button/ButtonWidtrap.h"
+#include "GameObject/Button/ButtonRefinery.h"
 #include "Animation/Animation.h"
 #include <arpa/inet.h>
 
