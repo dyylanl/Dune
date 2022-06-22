@@ -35,10 +35,6 @@ void Animation::advanceFrame() {
     this->currentFrame = this->currentFrame % this->numFrames;
 }
 
-void Animation::setFlip(SDL_RendererFlip &flip) {
-    m_flip = flip;
-}
-
 void Animation::draw(SDL2pp::Renderer &renderer, SDL2pp::Point position, SDL2pp::Point spritSize) {
     m_TextureManager.drawFrame(renderer, m_textureID, position, spritSize, SDL2pp::Point(0, 30));
 }

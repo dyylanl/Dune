@@ -6,7 +6,6 @@
 #include "SDL2pp/Window.hh"
 #include "SDL2pp/Renderer.hh"
 #include "Graphics/TextureManager.h"
-#include "Characters/ObjectGame.h"
 #include "Core/Engine.h"
 #include "Thread/RecvThread.h"
 #include "../../Common/includes/BlockingQueue.h"
@@ -14,6 +13,7 @@
 #include "Thread/SendThread.h"
 #include "Button/ButtonWidtrap.h"
 #include "Button/ButtonRefinery.h"
+#include "Animation/Animation.h"
 #include <arpa/inet.h>
 
 #define HARKONNEN 1
@@ -137,28 +137,14 @@ void Client::launch() {
         Camera camera;
         TextureManager textureManager(renderer, camera);
 
-        textureManager.load("carryall", DATA_PATH "assets/carryall.png");
-        textureManager.load("Desviator", DATA_PATH "assets/missileTank.png");
-        textureManager.load("menu", DATA_PATH "assets/menu.png");
-        textureManager.load("arena", DATA_PATH "assets/tile_arena.png");
-        textureManager.load("cima", DATA_PATH "assets/tile_cimas.png");
-        textureManager.load("duna", DATA_PATH "assets/tile_dunas.png");
-        textureManager.load("precipicio", DATA_PATH "assets/tile_precipicio.png");
-        textureManager.load("roca", DATA_PATH "assets/tile_roca.png");
-        textureManager.load("ButtonWidtrap", DATA_PATH "assets/windtrap.gif");
-        textureManager.load("ButtonRefinery", DATA_PATH "assets/refinery.gif");
-        std::vector<ObjectGame> gameObjects;
+        loadTextures(textureManager);
         EventManager eventManager;
-        std::vector<GameObject*> buttons;
-        //auto *buttonWidtrap = new ButtonWidtrap(textureManager, SDL2pp::Point(1115, 220), SDL2pp::Point(65, 50));
-        //auto *buttonRefinery = new ButtonRefinery(textureManager, SDL2pp::Point(1115, 280), SDL2pp::Point(65, 50));
-        //buttons.push_back(buttonWidtrap);
-        //buttons.push_back(buttonRefinery);
+        std::vector<GameObject*> objects;
 
         //mapa de prueba
         std::vector<std::vector<char>> map(50, std::vector<char> (50, 'A') );
 
-        Engine engine(map, buttons, gameObjects, textureManager, eventManager, queueNb, queueB);
+        Engine engine(map, objects, textureManager, eventManager, queueNb, queueB);
 
         while (engine.IsRunning()) {
             engine.Events();
@@ -177,6 +163,19 @@ void Client::launch() {
         return;
     }
 
+}
+
+void Client::loadTextures(TextureManager &textureManager) const {
+    textureManager.load("carryall", DATA_PATH "assets/carryall.png");
+    textureManager.load("Desviator", DATA_PATH "assets/missileTank.png");
+    textureManager.load("menu", DATA_PATH "assets/menu.png");
+    textureManager.load("arena", DATA_PATH "assets/tile_arena.png");
+    textureManager.load("cima", DATA_PATH "assets/tile_cimas.png");
+    textureManager.load("duna", DATA_PATH "assets/tile_dunas.png");
+    textureManager.load("precipicio", DATA_PATH "assets/tile_precipicio.png");
+    textureManager.load("roca", DATA_PATH "assets/tile_roca.png");
+    textureManager.load("ButtonWidtrap", DATA_PATH "assets/windtrap.gif");
+    textureManager.load("ButtonRefinery", DATA_PATH "assets/refinery.gif");
 }
 
 Client::~Client() = default;

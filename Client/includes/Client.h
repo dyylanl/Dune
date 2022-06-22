@@ -12,6 +12,7 @@
 #include <string>
 #include "../../Common/includes/Socket/Socket.h"
 #include "../../Common/includes/Protocol.h"
+#include "../src/Graphics/TextureManager.h"
 
 //-----------------------------------------------------------------------------
 
@@ -61,6 +62,8 @@ public:
     ~Client();
 
     void crearUnidad();
+
+    void loadTextures(TextureManager &textureManager) const;
 };
 
 //-----------------------------------------------------------------------------

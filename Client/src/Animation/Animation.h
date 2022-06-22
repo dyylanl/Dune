@@ -20,7 +20,6 @@ public:
     ~Animation();
     void update(float dt);
     void draw(SDL2pp::Renderer &renderer, SDL2pp::Point position, SDL2pp::Point spritSize);
-    void setFlip(SDL_RendererFlip &flip);
 
 private:
     void advanceFrame();

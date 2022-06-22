@@ -6,9 +6,9 @@
 #define DUNE_DESVIATOR_H
 
 
-#include "UnitNew.h"
+#include "Vehicle.h"
 
-class Desviator : public UnitNew{
+class Desviator : public Vehicle{
 public:
     Desviator(SDL2pp::Point position, int id, int player, bool selecStatus, SDL2pp::Point posAction, int life, bool action);
 

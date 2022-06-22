@@ -7,10 +7,8 @@
 
 
 #include "../../../Common/includes/Thread.h"
-#include "../Characters/ObjectGame.h"
 #include "../../../Common/includes/Protocol.h"
 #include "../../../Common/includes/NonBlockingQueue.h"
-#include "../Characters/Object.h"
 #include "../Object/GameObject.h"
 
 enum UnitType{INFANTERIA_LIGERA, INFANTERIA_PESADA, FREMEN, SARDAUKAR, TRIKE, TANQUE_SONICO, RAIDER, DESVIADOR, TANQUE, DEVASTADOR, COSECHADORA};

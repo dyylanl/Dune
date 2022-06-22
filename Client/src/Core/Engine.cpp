@@ -3,11 +3,6 @@
 //
 
 #include "Engine.h"
-#include "../Button/ButtonRefinery.h"
-#include "../Characters/Desviator.h"
-
-#define X 100
-#define Y 100
 
 bool Engine::IsRunning() {
     return m_Running;
@@ -27,22 +22,11 @@ void Engine::Update() {
     std::vector<GameObject*> aux;
     aux = m_queueNb.pop();
     if(!aux.empty()) {
-        m_buttons = aux;
+        m_objects = aux;
     }
-    /*auto *buttonWidtrap = new ButtonWidtrap(SDL2pp::Point(1115, 220), SDL2pp::Point(65, 50));
-    auto *buttonRefinery = new ButtonRefinery(SDL2pp::Point(1115, 280), SDL2pp::Point(65, 50));
-    auto *desviator = new Desviator(SDL2pp::Point(0,0), 1, 1, false, SDL2pp::Point(30,30), 100, true);
-    m_buttons.push_back(buttonWidtrap);
-    m_buttons.push_back(buttonRefinery);
-    m_buttons.push_back(desviator);*/
-    /*if (unit != nullptr) {
-        m_players.clear();
-        ObjectGame object(unit, m_TextureManager);
-        m_players.push_back(object);
-    }*/
     if (m_eventManager.mouseButtonDown(LEFT)) {
-        for (int i = 0; i < (int) m_buttons.size(); ++i) {
-            SDL_Rect shape = m_buttons[i]->getShape();
+        for (int i = 0; i < (int) m_objects.size(); ++i) {
+            SDL_Rect shape = m_objects[i]->getShape();
             SDL_Point point = m_eventManager.getMouse();
             if (SDL_PointInRect(&point, &shape)) {
                 std::cout << "click button" << std::endl;
@@ -56,21 +40,18 @@ void Engine::Render(SDL2pp::Renderer &m_Renderer) {
     m_Renderer.Clear();
     m_TextureManager.drawMap(m_Renderer, m_mapa);
     m_TextureManager.draw(m_Renderer, "menu", SDL2pp::Point(1089, 0), SDL2pp::Point(191, 720));
-    for (int i = 0; i < (int) m_buttons.size(); ++i) {
-        m_buttons[i]->draw(m_Renderer, m_TextureManager);
-    }
-    for(unsigned int i = 0; i != m_players.size(); i++) {
-        m_players[i].draw(m_Renderer);
+    for (int i = 0; i < (int) m_objects.size(); ++i) {
+        m_objects[i]->draw(m_Renderer, m_TextureManager);
     }
     m_Renderer.Present();
-    //m_buttons.clear();
+    //m_objects.clear();
     //m_players.clear();
 }
 
-Engine::Engine(std::vector<std::vector<char>> &mapa, std::vector<GameObject*> &buttons, std::vector<ObjectGame> &players, TextureManager &textureManager, EventManager &eventManager,
+Engine::Engine(std::vector<std::vector<char>> &mapa, std::vector<GameObject*> &objects, TextureManager &textureManager, EventManager &eventManager,
                NonBlockingQueue<std::vector<GameObject*>> &queueNb, BlockingQueue<Action*> &queueB)
-               : m_mapa (mapa), m_buttons(buttons), m_players(players), m_TextureManager(textureManager), m_eventManager(eventManager),
-               m_queueNb(queueNb), m_queueB(queueB){
+               : m_mapa (mapa), m_objects(objects), m_TextureManager(textureManager), m_eventManager(eventManager),
+                 m_queueNb(queueNb), m_queueB(queueB){
     m_Running = true;
 }
 
