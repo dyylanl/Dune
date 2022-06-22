@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# Author: dypa
+
 greenColour="\e[0;32m\033[1m"
 endColour="\033[0m\e[0m"
 redColour="\e[0;31m\033[1m"
@@ -38,6 +40,7 @@ function unknownInput() {
 }
 
 function build() {
+    sudo mkdir /home/"$USER"/Dune
     sudo rm -rf build
     mkdir build
     cd build
@@ -77,11 +80,30 @@ function installDependencies() {
 
 function installGame() {
     echo "=== INSTALACIÓN DEL JUEGO ==="
-    build
+    cd "/home/$"USER"/Dune"
     sudo make install -j6
     echo ""
     echo -e "\n${greenColour}[*] DUNE instalado en /home/"$USER"/Dune/build ${endColour}\n"
     echo ""
+    return
+}
+
+function post_installation() {
+	echo "	c) Ir a la carpeta donde se instalo DUNE."
+	echo " 	q) Salir."
+	waitingInputMessage
+	read OPTION
+	case $OPTION in
+		c) 
+			cd "/home/"$USER"/Dune/build"
+			exit 0
+			;;
+		q) 
+			echo "Adios!"
+			;;
+		*)
+			exit 0
+	esac
 }
 
 function init_installer() {
@@ -97,7 +119,7 @@ function init_installer() {
 				installDependencies
             			build
             			installGame
-            			waitingInputMessage
+            			post_installation
         			;;
         		q)
             			exit 0

@@ -5,6 +5,7 @@ project(dune)
 # Estándar a utilizar
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++17 -pthread")
 set(CMAKE_CXX_STANDARD_REQUIRED True)
+set_property(SOURCE file.hh PROPERTY SKIP_AUTOGEN ON)
 
 # Flags para el manejo de errores
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Werror -pedantic -pedantic-errors -Wno-dev")
