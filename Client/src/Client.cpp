@@ -166,16 +166,22 @@ void Client::launch() {
 }
 
 void Client::loadTextures(TextureManager &textureManager) const {
-    textureManager.load("carryall", DATA_PATH "assets/carryall.png");
-    textureManager.load("Desviator", DATA_PATH "assets/missileTank.png");
+    textureManager.load("Trike", DATA_PATH "assets/Vehicles/Trike.png");
+    textureManager.load("SonicTank", DATA_PATH "assets/Vehicles/SonicTank.png");
+    textureManager.load("Deviator", DATA_PATH "assets/Vehicles/Deviator.png");
+    textureManager.load("Tank", DATA_PATH "assets/Vehicles/Tank.png");
+    textureManager.load("Devastator", DATA_PATH "assets/Vehicles/Devastator.png");
+    textureManager.load("Harvester", DATA_PATH "assets/Vehicles/Harvester.png");
+
     textureManager.load("menu", DATA_PATH "assets/menu.png");
-    textureManager.load("arena", DATA_PATH "assets/tile_arena.png");
-    textureManager.load("cima", DATA_PATH "assets/tile_cimas.png");
-    textureManager.load("duna", DATA_PATH "assets/tile_dunas.png");
-    textureManager.load("precipicio", DATA_PATH "assets/tile_precipicio.png");
-    textureManager.load("roca", DATA_PATH "assets/tile_roca.png");
-    textureManager.load("ButtonWidtrap", DATA_PATH "assets/windtrap.gif");
-    textureManager.load("ButtonRefinery", DATA_PATH "assets/refinery.gif");
+    textureManager.load("arena", DATA_PATH "assets/Terrain/tile_arena.png");
+    textureManager.load("cima", DATA_PATH "assets/Terrain/tile_cimas.png");
+    textureManager.load("duna", DATA_PATH "assets/Terrain/tile_dunas.png");
+    textureManager.load("precipicio", DATA_PATH "assets/Terrain/tile_precipicio.png");
+    textureManager.load("roca", DATA_PATH "assets/Terrain/tile_roca.png");
+
+    textureManager.load("ButtonWidtrap", DATA_PATH "assets/Button/windtrap.gif");
+    textureManager.load("ButtonRefinery", DATA_PATH "assets/Button/refinery.gif");
 }
 
 Client::~Client() = default;

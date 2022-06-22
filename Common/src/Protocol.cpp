@@ -266,8 +266,9 @@ void Protocol::recvCountObject(Socket &socket, int &size) {
 }
 
 void
-Protocol::recvUnit(Socket &socket, int &player, bool &selectStatus, int &posX, int &posY, int &posActX, int &posActY, int &life,
-                   bool &action) {
+Protocol::recvUnit(Socket &socket, int &id, int &player, bool &selectStatus, int &posX, int &posY, int &posActX,
+                   int &posActY, int &life, bool &action) {
+    socket.recv(reinterpret_cast<char *>(&id), sizeof(uint16_t));
     socket.recv(reinterpret_cast<char *>(&player), sizeof(uint8_t));
     socket.recv(reinterpret_cast<char *>(&selectStatus), sizeof(uint8_t));
     socket.recv(reinterpret_cast<char *>(&posX), sizeof(uint16_t));

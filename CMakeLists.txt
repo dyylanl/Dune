@@ -66,7 +66,7 @@ target_link_libraries(dune-common)
 # add_executable(dune ${client_src} Client/src/Core/UnitType.cpp Client/src/Characters/UnitType.h)
 # target_link_libraries(dune dune-common SDL2 SDL2_image SDL2_ttf SDL2_mixer ${SDL2PP_LIBRARIES})
 #=======
-add_executable(dune ${client_src} Client/src/Object/IObject.h Client/src/Object/GameObject.h Client/src/Characters/Vehicle.h Client/src/Characters/Desviator.cpp Client/src/Characters/Desviator.h)
+add_executable(dune ${client_src} Client/src/Object/IObject.h Client/src/Object/GameObject.h Client/src/Characters/Vehicle.h Client/src/Characters/Vehicles/DeviatorCL.cpp Client/src/Characters/Vehicles/DeviatorCL.h Client/src/Characters/Vehicles/TrikeCL.cpp Client/src/Characters/Vehicles/TrikeCL.h Client/src/Characters/Vehicles/SonicTankCL.cpp Client/src/Characters/Vehicles/SonicTankCL.h Client/src/Characters/Vehicles/TankCL.cpp Client/src/Characters/Vehicles/TankCL.h Client/src/Characters/Vehicles/DevastatorCL.cpp Client/src/Characters/Vehicles/DevastatorCL.h Client/src/Characters/Vehicles/HarvesterCL.cpp Client/src/Characters/Vehicles/HarvesterCL.h)
 target_link_libraries(dune dune-common SDL2 SDL2_image SDL2_ttf SDL2_mixer ${SDL2PP_LIBRARIES} Qt5::Core Qt5::Gui Qt5::Widgets Qt5::Multimedia)
 # >>>>>>> b38a09028bed847a2579ec53ab1d5ecbbd2b6dfb
 

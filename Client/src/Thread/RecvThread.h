@@ -11,7 +11,7 @@
 #include "../../../Common/includes/NonBlockingQueue.h"
 #include "../Object/GameObject.h"
 
-enum UnitType{INFANTERIA_LIGERA, INFANTERIA_PESADA, FREMEN, SARDAUKAR, TRIKE, TANQUE_SONICO, RAIDER, DESVIADOR, TANQUE, DEVASTADOR, COSECHADORA};
+enum VehicleType{TRIKE, SONIC_TANK, RAIDER, DESVIATOR, TANK, DEVASTATOR, HARVESTER};
 
 class RecvThread : public Thread {
 private:

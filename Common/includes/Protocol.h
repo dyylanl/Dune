@@ -119,8 +119,9 @@ public:
     static std::vector<std::vector<char>> recvMap(Socket &socket);
     void sendName(Socket &socket, std::string name);
 
-    void recvUnit(Socket &socket, int &player, bool &selectStatus, int &posX, int &posY, int &posActX, int &posActY, int &life,
-                  bool &action);
+    void
+    recvUnit(Socket &socket, int &id, int &player, bool &selectStatus, int &posX, int &posY, int &posActX,
+             int &posActY, int &life, bool &action);
 
     void recvType(Socket &socket, int &type);
 
