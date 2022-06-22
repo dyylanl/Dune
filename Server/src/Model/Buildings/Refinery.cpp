@@ -8,7 +8,7 @@ Refinery::Refinery(const int x, const int y,
                  GameConfiguration::getConfig().spiceRefineryHitPoints,
                  GameConfiguration::getConfig().spiceRefineryWidth,
                  GameConfiguration::getConfig().spiceRefineryHeight,
-                 SPICE_REFINERY),
+                 REFINERY),
         capacity(GameConfiguration::getConfig().spiceRefinerySpiceCapacity) {}
 
 Refinery::~Refinery() {}

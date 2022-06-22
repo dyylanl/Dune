@@ -1,4 +1,11 @@
 #include "../../../includes/Model/Buildings/Building.h"
+#include "../../../includes/Model/Buildings/Barracks.h"
+#include "../../../includes/Model/Buildings/HeavyFactory.h"
+#include "../../../includes/Model/Buildings/Refinery.h"
+#include "../../../includes/Model/Buildings/LightFactory.h"
+#include "../../../includes/Model/Buildings/ConstructionCenter.h"
+#include "../../../includes/types.h"
+#include "../../../../Common/includes/Exceptions/Exception.h"
 
 int Building::counter = 0;
 
@@ -67,4 +74,17 @@ int Building::getCapacity() {
 
 bool Building::operator==(const Building &other) {
     return this->id == other.id;
+}
+
+
+// TODO: terminar silo y trampa de aire
+Building Building::getBuildType(char type, int pos_x, int pos_y) {
+    switch (type) {
+        case BARRACKS_KEY: return Barracks(pos_x, pos_y, BLOCK_WIDTH, BLOCK_HEIGHT);
+        case CONSTRUCTION_CENTER_KEY: return ConstructionCenter(pos_x,pos_y,BLOCK_WIDTH,BLOCK_HEIGHT);
+        case HEAVY_FACTORY_KEY: return HeavyFactory(pos_x,pos_y,BLOCK_WIDTH,BLOCK_HEIGHT);
+        case LIGHT_FACTORY_KEY: return LightFactory(pos_x,pos_y,BLOCK_WIDTH,BLOCK_HEIGHT);
+        case REFINERY_KEY: return Refinery(pos_x,pos_y,BLOCK_WIDTH,BLOCK_HEIGHT);
+        default: throw Exception("Tipo de edificio invalido.\n");
+    }
 }

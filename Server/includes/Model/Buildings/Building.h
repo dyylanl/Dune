@@ -11,11 +11,11 @@ class Building : public Attackable {
 public:
     enum BuildingType {
         BARRACKS,
-        CONSTRUCTION_YARD,
+        CONSTRUCTION_CENTER,
         HEAVY_FACTORY,
         LIGHT_FACTORY,
-        SPICE_REFINERY,
-        SPICE_SILO,
+        REFINERY,
+        SILO,
         WIND_TRAP
     };
 
@@ -23,21 +23,18 @@ public:
              const int hitPoints, const int width,
              const int height, BuildingType type);
 
+    static Building getBuildType(char type, int pos_x, int pos_y);
     virtual ~Building();
-
     bool operator==(const Building& other);
-
     virtual void reciveBonusDammage(const Weapon &weapon) override;
     virtual int getCapacity();
-
     bool is(BuildingType type);
     void setPlayer(Player* player);
     Player* getPlayer();
-
     Position& getClosestPosition(Position& position) override;
-
     void demolish();
     bool hasNews();
+
 
     const int id;
     const int width, height;

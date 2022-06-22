@@ -17,6 +17,7 @@ class Map {
     std::vector<std::vector<Terrain>> terrrains; // contiene el tipo de terreno en esa pos
     std::vector<std::vector<char>> mapa; // contiene el tipo de unidad en esa posicion
     std::vector<Unit*> units;
+    std::vector<Building*> builds;
 public:
     explicit Map(std::string map_path);
     ~Map();
@@ -51,6 +52,9 @@ public:
     void put(Unit& unit);
     void put(Building* building);
     void occupy(Building* building);
+    /*
+     * limpio la construccion del terreno
+     */
     void free(Building& building);
     int getHeight();
     int getWidth();
@@ -58,11 +62,23 @@ public:
     int getHeightInBlocks();
     int getBlockWidth();
     int getBlockHeight();
-    bool canWeBuild(Position& pos, int width, int height, Player& player);
+    /*
+     * retorna true si en esa pos se puede construir con tal alto y ancho
+     */
+    bool canWeBuild(Position& pos, int width, int height);
+    /*
+     * devuelve la posicion libre mas cercana al build
+     */
     Position getClosestFreePosition(Building* building);
-    Position getCornerPosition(Position& pos);
-    Position getClosestSpeciaPosition(Position pos, int radius);
+    /*
+     * retorna la posicion de la esquina segun el ancho y alto seteados
+     */
+    static Position getCornerPosition(Position& pos);
+    /*
+     * devuelve el tipo de terreno que hay en la pos x,y
+     */
     Terrain& at(int x, int y);
+
     Terrain& blockAt(int x, int y);
     Terrain& at(const Position& pos);
     int getSpeedFactorAt(Position& pos);

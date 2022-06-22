@@ -7,7 +7,7 @@ ConstructionCenter::ConstructionCenter(const int x, const int y, int blockWidth,
                  GameConfiguration::getConfig().constructionYardHitPoints,
                  GameConfiguration::getConfig().constructionYardWidth,
                  GameConfiguration::getConfig().constructionYardHeight,
-                 CONSTRUCTION_YARD)
+                 CONSTRUCTION_CENTER)
 {}
 
 ConstructionCenter::~ConstructionCenter() {}

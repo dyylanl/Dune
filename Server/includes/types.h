@@ -16,9 +16,14 @@
 // -------- PLAYER -------------- //
 #define PLAYER_KEY 'C'
 
-// -------------BUILD------------- //
-#define PALACE "palace"
-#define SILO "silo"
+// -------------BUILDS------------- //
+#define BARRACKS_KEY 'b'
+#define CONSTRUCTION_CENTER_KEY 'c'
+#define HEAVY_FACTORY_KEY 'h'
+#define LIGHT_FACTORY_KEY 'l'
+#define REFINERY_KEY 'r'
+#define SILO_KEY 's'
+#define WIND_TRAP_KEY 's'
 
 // --------------HOUSES------------ //
 #define HARKONNEN_HOUSE 1
