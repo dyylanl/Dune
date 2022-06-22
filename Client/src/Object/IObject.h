@@ -7,11 +7,15 @@
 
 
 #include "../Graphics/TextureManager.h"
+#include "../Thread/Action.h"
+#include "../../../Common/includes/BlockingQueue.h"
 
 class IObject {
 public:
+    virtual void update(EventManager &eventManager, BlockingQueue<Action *> &queue) = 0;
+
     virtual void draw(SDL2pp::Renderer &renderer, TextureManager &textureManager) = 0;
-    virtual SDL2pp::Rect getShape() = 0;
+
 };
 
 

@@ -14,10 +14,6 @@ class ButtonWidtrap : public Button{
 public:
     ButtonWidtrap(SDL2pp::Point position, SDL2pp::Point size);
 
-    SDL2pp::Rect getShape() {
-        return SDL2pp::Rect(m_position, m_size);
-    }
-
     void draw(SDL2pp::Renderer &renderer, TextureManager &textureManager);
 };
 

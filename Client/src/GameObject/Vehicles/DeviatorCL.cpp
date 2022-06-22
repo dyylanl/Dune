@@ -16,7 +16,3 @@ void DeviatorCL::draw(SDL2pp::Renderer &renderer, TextureManager &textureManager
     SDL2pp::Point posFrame(0,0);
     textureManager.drawFrame(renderer, m_textureID, m_position, m_size, posFrame);
 }
-
-SDL2pp::Rect DeviatorCL::getShape() {
-    return SDL2pp::Rect(m_position, m_size);
-}

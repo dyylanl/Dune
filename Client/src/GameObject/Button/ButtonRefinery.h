@@ -13,8 +13,6 @@ class ButtonRefinery : public Button {
 public:
     ButtonRefinery(SDL2pp::Point position, SDL2pp::Point size);
 
-    SDL2pp::Rect getShape();
-
     void draw(SDL2pp::Renderer &renderer, TextureManager &textureManager);
 };
 

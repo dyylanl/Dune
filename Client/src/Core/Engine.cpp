@@ -21,19 +21,13 @@ void Engine::Events() {
 void Engine::Update() {
     std::vector<GameObject*> aux;
     aux = m_queueNb.pop();
-    if(!aux.empty()) {
-        m_objects = aux;
+    if(!aux.empty()) m_objects = aux;
+
+    int size = m_objects.size();
+    for (int i = 0; i < size; ++i) {
+        m_objects[i]->update(m_eventManager, m_queueB);
     }
-    if (m_eventManager.mouseButtonDown(LEFT)) {
-        for (int i = 0; i < (int) m_objects.size(); ++i) {
-            SDL_Rect shape = m_objects[i]->getShape();
-            SDL_Point point = m_eventManager.getMouse();
-            if (SDL_PointInRect(&point, &shape)) {
-                std::cout << "click button" << std::endl;
-            }
-        }
-    }
-    m_TextureManager.getCamera().update(m_eventManager);
+    //m_TextureManager.getCamera().update(m_eventManager);
 }
 
 void Engine::Render(SDL2pp::Renderer &m_Renderer) {

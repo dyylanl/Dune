@@ -12,8 +12,6 @@ class HarvesterCL : public Vehicle {
 public:
     HarvesterCL(SDL2pp::Point position, int id, int player, bool selecStatus, SDL2pp::Point posAction, int life, bool action);
 
-    SDL2pp::Rect getShape();
-
     void draw(SDL2pp::Renderer &renderer, TextureManager &textureManager);
 
 };

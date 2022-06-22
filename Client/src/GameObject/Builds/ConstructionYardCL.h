@@ -12,8 +12,6 @@ class ConstructionYardCL : public BuildCL {
 public:
     ConstructionYardCL(SDL2pp::Point position, int id, int player, int life);
 
-    SDL2pp::Rect getShape();
-
     void draw(SDL2pp::Renderer &renderer, TextureManager &textureManager);
 };
 

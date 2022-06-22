@@ -10,10 +10,6 @@ DevastatorCL::DevastatorCL(SDL2pp::Point position, int id, int player, bool sele
                                               selecStatus, posAction,
                                               life, action) {}
 
-SDL2pp::Rect DevastatorCL::getShape() {
-    return SDL2pp::Rect(m_position, m_size);
-}
-
 void DevastatorCL::draw(SDL2pp::Renderer &renderer, TextureManager &textureManager) {
     SDL2pp::Point posFrame(0,0);
     textureManager.drawFrame(renderer, m_textureID, m_position, m_size, posFrame);
