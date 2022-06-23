@@ -105,10 +105,7 @@ std::stack<Position> Game::makePath(Unit& unit, Position pos_end) {
 
 
 void Game::selectUnitInPos(int pos_x, int pos_y) {
-    Unit* unit = this->map.selectUnit(pos_x, pos_y);
-    if (unit != nullptr) {
-        units_selected.push_back(unit);
-    }
+    this->map.selectUnit(pos_x, pos_y);
     std::cout << "Unidad en la posicion " << pos_x << "," << pos_y << " seleccionada." << std::endl;
 }
 

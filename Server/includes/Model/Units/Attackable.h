@@ -1,8 +1,8 @@
 #ifndef __ATTACKABLE_H__
 #define __ATTACKABLE_H__
 
-#include "Position.h"
-#include "Weapons/Weapon.h"
+#include "../Position.h"
+#include "../Weapons/Weapon.h"
 
 class Attackable {
 protected:
@@ -19,7 +19,7 @@ public:
     virtual int getLife();
     virtual int getInitialLife();
     virtual void reciveAttack(const Weapon &weapon);
-    virtual void reciveBonusDammage(const Weapon &weapon);
+    virtual void reciveBonusDammage(const Weapon &weapon) = 0;
     static bool isDead(const Attackable *unit);
 };
 

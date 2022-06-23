@@ -20,9 +20,9 @@ void ClientConnection::_freeNotifications() {
 void ClientConnection::_sender() {
     try {
         Protocol protocol;
-        //Command* notification = nullptr;
+        //Command* command = nullptr;
         //bool socket_valid = true;
-        /*while ((notification = notifications.pop())) {
+        /*while ((command = notifications.pop())) {
             // TODO SIEMPRE ENVIA 1 DE RESPUESTA
             // aca hay que ejecutar una logica
             // aca se mandaria el snapshot
@@ -36,14 +36,12 @@ void ClientConnection::_sender() {
         protocol.sendCountObject(peer, countObject);
 
         protocol.enviar(peer);
-
-
     } catch (const std::exception& e) {
         stop();
-        fprintf(stderr, "ClientConnection // _sender: %s\n", e.what());
+        fprintf(stderr, "[ClientConnection]: %s\n", e.what());
     } catch (...) {
         stop();
-        fprintf(stderr, "ClientConnection // _sender: Unknown error.\n");
+        fprintf(stderr, "[ClientConnection]: Ocurrio un error en el hilo sender.\n");
     }
     _finishThread();
 }
@@ -61,11 +59,10 @@ void ClientConnection::_receiver() {
         }
     } catch (const std::exception& e) {
         stop();
-        fprintf(stderr, "ClientConnection::_receiver: %s\n", e.what());
+        fprintf(stderr, "[ClientConnection]: %s\n", e.what());
     } catch (...) {
-        // Error desconocido
         stop();
-        fprintf(stderr, "ClientConnection::_receiver: Unknown error.\n");
+        fprintf(stderr, "[ClientConnection]: Ocurrio un error en el hilo receiver.\n");
     }
     this->notifications.close();
     _finishThread();
@@ -114,8 +111,7 @@ void ClientConnection::join() {
     try {
         peer.shutdown();
     } catch (const Exception& e) {
-        fprintf(stderr, "CLIENTE %i: error in socket::shutdown. Aborting.\n",
-                id);
+        fprintf(stderr, "[ClientConnection]: Ocurrio un erro en el join del player: %i (id)\n",id);
     }
 }
 
@@ -128,8 +124,7 @@ void ClientConnection::stop() {
     try {
         peer.shutdown();
     } catch (const Exception& e) {
-        fprintf(stderr, "CLIENTE %i: error in socket::shutdown. Aborting.\n",
-                id);
+        fprintf(stderr, "[ClientConnection]: Error en el stop del player: %i (id)\n",id);
     }
 }
 

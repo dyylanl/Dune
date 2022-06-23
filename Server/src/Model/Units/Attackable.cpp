@@ -1,5 +1,6 @@
 #include <iostream>
-#include "../../includes/Model/Attackable.h"
+#include "../../../includes/Model/Units/Attackable.h"
+
 
 Attackable::Attackable(const int life, const int x, const int y) :
         initial_life(life),
@@ -36,8 +37,4 @@ void Attackable::setPosition(Position pos1) {
 
 Position& Attackable::getClosestPosition(Position& position) {
     return this->pos;
-}
-
-void Attackable::reciveBonusDammage(const Weapon &weapon) {
-    std::cout << "Se recibio daño" << std::endl;
 }

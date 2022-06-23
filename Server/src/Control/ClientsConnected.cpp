@@ -9,7 +9,7 @@ ClientsConnected::ClientsConnected(
 
 void ClientsConnected::add(const InstanceId id, const Id map_id, Socket& peer) {
     if (clients.count(id) > 0) {
-        throw Exception("ActiveClients::add: repeated client id.");
+        throw Exception("[ClientsConnected]: Este jugador ya existe.\n");
     }
     clients.emplace(
             std::piecewise_construct, std::forward_as_tuple(id),
@@ -19,10 +19,9 @@ void ClientsConnected::add(const InstanceId id, const Id map_id, Socket& peer) {
 
 void ClientsConnected::remove(const InstanceId id) {
     if (clients.count(id) == 0) {
-        throw Exception("ActiveClients::remove: invalid client id.");
-    }  // considerar tambien el caso en que su conexión no haya terminado
-
-    clients.at(id).join(); /* join NO bloqueante, pues la conexión terminó */
+        throw Exception("[ClientsConnected]: Se intenta remover una conexion que no existe.\n");
+    }
+    clients.at(id).join();
     clients.erase(id);
 }
 

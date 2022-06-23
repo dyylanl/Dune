@@ -2,6 +2,7 @@
 
 #include <utility>
 #include "../../../Common/includes/Exceptions/Exception.h"
+#include "../../includes/Model/AStar.h"
 
 Map::Map(std::string map_path) : map_reader(std::move(map_path)),
 rows(map_reader.getRows()),
@@ -58,16 +59,16 @@ char Map::getTypeTerrain(int posX, int posY) {
     return this->terrrains[posX][posY].getKey();
 }
 
-Unit* Map::selectUnit(int pos_x, int pos_y) {
+// TODO: TREMENDO
+void Map::selectUnit(int pos_x, int pos_y) {
     std::cout << "Seleccionando unidad en posicion " << pos_x << "," << pos_y << std::endl;
-    Unit* unit = new Unit(pos_x,pos_y,10,2,1);
-    return unit;
 }
 
 void Map::build(char type, int x, int y) {
     auto build1 = Building::getBuildType(type, x, y);
     std::cout << "Construyendo un edificio en la posicion: " << x << "," << y << std::endl;
-    if (canWeBuild(build1.getPosition(), BLOCK_WIDTH, BLOCK_HEIGHT)) {
+    Position pos = build1.getPosition();
+    if (canWeBuild(pos, BLOCK_WIDTH, BLOCK_HEIGHT)) {
         builds.push_back(&build1);
 
     }
@@ -198,7 +199,7 @@ bool Map::canWeBuild(Position& pos, int width, int height) {
 Position Map::getClosestFreePosition(Building* building) {
     int dist = 1;
     bool found = false;
-    Position& pos = building->getPosition();
+    auto pos = building->getPosition();
     while (!found) {
         for (int i = - dist; i <= building->height+dist+BLOCK_HEIGHT; i++) {
             for (int j =  - dist; j <= building->width+dist+BLOCK_WIDTH; j++) {
@@ -218,4 +219,14 @@ Position Map::getClosestFreePosition(Building* building) {
 
 int Map::getSpeedFactorAt(Position &pos) {
     return this->at(pos).getSpeedFactor();
+}
+
+void Map::setDestiny(Unit &unit, int x_dest, int y_dest) {
+    AStar algorithm(*this);
+    Position p_destiny(x_dest, y_dest);
+    std::stack<Position> path = algorithm.makePath(unit, p_destiny);
+    if (!path.empty()) {
+        this->at(unit.getPosition()).free();
+    }
+    unit.setPath(path, p_destiny);
 }
