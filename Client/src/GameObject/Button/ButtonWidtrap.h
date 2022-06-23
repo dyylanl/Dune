@@ -12,7 +12,7 @@
 
 class ButtonWidtrap : public Button{
 public:
-    ButtonWidtrap(SDL2pp::Point position, SDL2pp::Point size);
+    ButtonWidtrap(int id, char player, int constructionTime);
 
     void draw(SDL2pp::Renderer &renderer, TextureManager &textureManager);
 };

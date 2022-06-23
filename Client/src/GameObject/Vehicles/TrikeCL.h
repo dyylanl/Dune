@@ -10,7 +10,8 @@
 
 class TrikeCL : public Vehicle{
 public:
-    TrikeCL(SDL2pp::Point position, int id, int player, bool selecStatus, SDL2pp::Point posAction, int life, bool action);
+    TrikeCL(int id, int player, bool selecStatus, SDL2pp::Point position, SDL2pp::Point posAction, int life,
+            bool action);
 
     void draw(SDL2pp::Renderer &renderer, TextureManager &textureManager);
 };

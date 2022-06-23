@@ -4,7 +4,7 @@
 
 #include "ConstructionYardCL.h"
 
-ConstructionYardCL::ConstructionYardCL(SDL2pp::Point position, int id, int player, int life)
+ConstructionYardCL::ConstructionYardCL(int id, int player, SDL2pp::Point position, int life)
 : BuildCL("ConstructionYard",position, SDL2pp::Point(99,89), id, player, life) {}
 
 void ConstructionYardCL::draw(SDL2pp::Renderer &renderer, TextureManager &textureManager) {

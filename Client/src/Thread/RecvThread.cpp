@@ -7,6 +7,7 @@
 #include "../GameObject/Vehicles/HarvesterCL.h"
 #include "../GameObject/Builds/ConstructionYardCL.h"
 #include "../GameObject/Button/ButtonWidtrap.h"
+#include "../GameObject/Button/ButtonYardCL.h"
 
 void RecvThread::run() {
     while (running) {
@@ -54,43 +55,43 @@ void RecvThread::addVehicle(std::vector<GameObject*> &gameObjects) {
         case TRIKE:
             m_protocol.recvUnit(m_socket, id, player, selectStatus, posX, posY, posActX,
                                 posActY, life, action);
-            gameObjects.push_back(new TrikeCL(SDL2pp::Point(posX, posY), 0, player, selectStatus,
+            gameObjects.push_back(new TrikeCL(0, player, selectStatus, SDL2pp::Point(posX, posY),
                                               SDL2pp::Point(posActX, posActY), life, action));
             break;
         case SONIC_TANK:
             m_protocol.recvUnit(m_socket, id, player, selectStatus, posX, posY, posActX,
                                 posActY, life, action);
-            gameObjects.push_back(new SonicTankCL(SDL2pp::Point(posX, posY), 0, player, selectStatus,
+            gameObjects.push_back(new SonicTankCL(0, player, selectStatus, SDL2pp::Point(posX, posY),
                                                   SDL2pp::Point(posActX, posActY), life, action));
             break;
         case RAIDER:
             m_protocol.recvUnit(m_socket, id, player, selectStatus, posX, posY, posActX,
                                 posActY, life, action);
-            gameObjects.push_back(new TrikeCL(SDL2pp::Point(posX, posY), 0, player, selectStatus,
+            gameObjects.push_back(new TrikeCL(0, player, selectStatus, SDL2pp::Point(posX, posY),
                                               SDL2pp::Point(posActX, posActY), life, action));
             break;
         case DESVIATOR:
             m_protocol.recvUnit(m_socket, id, player, selectStatus, posX, posY, posActX,
                                 posActY, life, action);
-            gameObjects.push_back(new DeviatorCL(SDL2pp::Point(posX, posY), 0, player, selectStatus,
+            gameObjects.push_back(new DeviatorCL(0, player, selectStatus, SDL2pp::Point(posX, posY),
                                                  SDL2pp::Point(posActX, posActY), life, action));
             break;
         case TANK:
             m_protocol.recvUnit(m_socket, id, player, selectStatus, posX, posY, posActX,
                                 posActY, life, action);
-            gameObjects.push_back(new TankCL(SDL2pp::Point(posX, posY), 0, player, selectStatus,
+            gameObjects.push_back(new TankCL(0, player, selectStatus, SDL2pp::Point(posX, posY),
                                              SDL2pp::Point(posActX, posActY), life, action));
             break;
         case DEVASTATOR:
             m_protocol.recvUnit(m_socket, id, player, selectStatus, posX, posY, posActX,
                                 posActY, life, action);
-            gameObjects.push_back(new DevastatorCL(SDL2pp::Point(posX, posY), 0, player, selectStatus,
+            gameObjects.push_back(new DevastatorCL(0, player, selectStatus, SDL2pp::Point(posX, posY),
                                                    SDL2pp::Point(posActX, posActY), life, action));
             break;
         case HARVESTER:
             m_protocol.recvUnit(m_socket, id, player, selectStatus, posX, posY, posActX,
                                 posActY, life, action);
-            gameObjects.push_back(new HarvesterCL(SDL2pp::Point(posX, posY), 0, player, selectStatus,
+            gameObjects.push_back(new HarvesterCL(0, player, selectStatus, SDL2pp::Point(posX, posY),
                                                   SDL2pp::Point(posActX, posActY), life, action));
             break;
         default:
@@ -110,7 +111,7 @@ void RecvThread::addBuild(std::vector<GameObject *> &gameObjects) {
     switch (objectType) {
         case CONSTRUCTION_YARD:
             m_protocol.recvBuild(m_socket, id, player, posX, posY, life);
-            gameObjects.push_back(new ConstructionYardCL(SDL2pp::Point(posX, posY), id, player, life));
+            gameObjects.push_back(new ConstructionYardCL(id, player, SDL2pp::Point(posX, posY), life));
             break;
         case LIGHT_FACTORY: //Hacer Factory
             break;
@@ -134,9 +135,7 @@ void RecvThread::addButton(std::vector<GameObject *> &gameObjects) {
     char objectType = 0;
     int id = 0;
     char player = 0;
-    int posX = 0;
-    int posY = 0;
-    int life = 0;
+    int constructionTime = 0;
 
     m_protocol.recvObjectType(m_socket, objectType);
     switch (objectType) {
@@ -147,8 +146,8 @@ void RecvThread::addButton(std::vector<GameObject *> &gameObjects) {
         case HEAVY_FACTORY: //Hacer la clase HeavyFactory
             break;
         case WIND_TRAP:
-            m_protocol.recvBuild(m_socket, id, player, posX, posY, life);
-            //gameObjects.push_back(new ButtonWidtrap(SDL2pp::Point(posX, posY), id, player, life));
+            m_protocol.recvBotton(m_socket, id, player, constructionTime);
+            gameObjects.push_back(new ButtonYardCL(id, player, constructionTime));
             break;
         case SPICE_REFINERY: //Hacer la clase SpiceRefinery
             break;

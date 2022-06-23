@@ -326,3 +326,9 @@ void Protocol::recvObjectType(Socket &socket, char &unitType) {
     socket.recv(reinterpret_cast<char *>(&unitType), sizeof(uint8_t));
     std::cout << "Tipo: " << (int)unitType << std::endl;
 }
+
+void Protocol::recvBotton(Socket &socket, int &id, char &player, int &constructionTime) {
+    socket.recv(reinterpret_cast<char *>(&id), sizeof(uint16_t));
+    socket.recv(reinterpret_cast<char *>(&player), sizeof(uint8_t));
+    socket.recv(reinterpret_cast<char *>(&constructionTime), sizeof(uint16_t));
+}
