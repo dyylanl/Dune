@@ -50,6 +50,7 @@ public:
     void mostrar_dialog_asignar_jugador();
     void agregar_jugador(int jugador);
 
+    bool verificar_jugadores_asignados();
 private:
     void desocupar_celdas(int x, int y);
 };

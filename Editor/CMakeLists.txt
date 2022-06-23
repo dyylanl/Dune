@@ -24,7 +24,8 @@ add_executable(editor dialog_cant_jugadores.cpp dialog_cant_jugadores.h dialog_c
     dialog_forma_tablero.cpp dialog_forma_tablero.h dialog_forma_tablero.ui
     estado_last_clicked.cpp estado_last_clicked.h celda.cpp celda.h escenario.h escenario.cpp mainwindow.h mainwindow.cpp main.cpp
     mainwindow.ui resources/my_resources.qrc construccion.h construccion.cpp
-    dialog_asignar_jugadoro.h dialog_asignar_jugadoro.cpp dialog_asignar_jugadoro.ui)
+    dialog_asignar_jugadoro.h dialog_asignar_jugadoro.cpp dialog_asignar_jugadoro.ui
+    dialog_asignar_especia.h dialog_asignar_especia.cpp dialog_asignar_especia.ui)
 
 # el ${UIS_HEADERS} son los paths autogenerados a los .ui compilados
 target_include_directories(editor PRIVATE ${UIS_HEADERS})

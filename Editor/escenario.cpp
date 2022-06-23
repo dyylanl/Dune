@@ -25,6 +25,7 @@ for (int i = 0; i < this->filas; i++){
     }
 }
 this->cant_jugadores = 1;
+this->cant_construcciones = 0;
 }
 
 
@@ -46,7 +47,7 @@ void Escenario::agregar_fila()
     this->tableroQT.resize(this->filas);
     this->tableroQT[this->filas - 1].resize(this->columnas);
     for(int j = 0; j < this->columnas; j++){
-        Celda *celda = new Celda(this,"Vacio",this->last_clicked,this->filas -1,j);
+        Celda *celda = new Celda(this,"Arena",this->last_clicked,this->filas -1,j);
         //celda->setEscenario(this);
         celda->setPos(j*32,(this->filas -1)*32);
         this->addItem(celda);
@@ -62,7 +63,7 @@ void Escenario::agregar_columna()
     this->tableroQT[this->filas - 1].resize(this->columnas);
     for(int i = 0; i < this->filas; i++){
         this->tableroQT[i].resize(this->columnas);
-        Celda *celda = new Celda(this,"Vacio",this->last_clicked,i,this->columnas -1);
+        Celda *celda = new Celda(this,"Arena",this->last_clicked,i,this->columnas -1);
         //celda->setEscenario(this);
         celda->setPos((this->columnas -1) *32, i *32);
         this->addItem(celda);
@@ -94,12 +95,16 @@ void Escenario::guardar(QString file_name){
              out << YAML::Value << tipo;
              out << YAML::Key << "Ocupada";
              out << YAML::Value << celda->get_ocupacion();
+             out << YAML::Key << "Cantidad Especia";
+             out << YAML::Value << celda->get_cant_especia();
              out << YAML::EndMap;
 
 
         }
     }
     out << YAML::EndMap;
+    out<< YAML::Key << "Cantidad Jugadores";
+    out<< YAML::Value << this->get_cantidad_jugadores();
     out<< YAML::Key << "Estructuras";
     out << YAML::BeginMap;
     out << YAML::Key << "Cantidad";
@@ -118,6 +123,9 @@ void Escenario::guardar(QString file_name){
         out << YAML::Key << "Pos_y";
         int pos_y = constr->get_pos_y();
         out << YAML::Value << pos_y;
+        out << YAML::Key << "ID_jugador";
+        int id_jugador = constr->get_jugador();
+        out << YAML::Value << id_jugador;
         out << YAML::EndMap;
     }
     out << YAML::EndMap;
@@ -128,6 +136,8 @@ void Escenario::guardar(QString file_name){
 
 void Escenario::cargar(QString file_name)
 {
+    //this->eliminar_celdas_actuales();
+    this->eliminar_todas_estructuras();
     YAML::Node node = YAML::LoadFile(file_name.toStdString());
     int filas = node["Tablero"]["Filas"].as<int>();
     int columnas= node["Tablero"]["Columnas"].as<int>();
@@ -142,12 +152,32 @@ void Escenario::cargar(QString file_name)
                  std::stringstream key_i_j;
                  key_i_j << i << "," << j;
                  std::string tipo = node["Tablero"][key_i_j.str()]["Tipo"].as<std::string>();
+                 int cant_especia = node["Tablero"][key_i_j.str()]["Cantidad Especia"].as<int>();
                  Celda *celda_cargada = new Celda(this,tipo,this->last_clicked,i,j);
+                 celda_cargada->set_cant_especia(cant_especia);
                  celda_cargada->setPos(j*32,i*32);
                  this->addItem(celda_cargada);
                  this->tableroQT [i][j] = celda_cargada;
                  std::cout <<tipo << std::endl;
                 }
+    }
+    this->jugadores.erase(this->jugadores.begin(),this->jugadores.end());
+    int cantidad_jugadores = node["Cantidad Jugadores"].as<int>();
+    this->cant_jugadores = cantidad_jugadores;
+    int cant_estructuras = node["Estructuras"]["Cantidad"].as<int>();
+    for(int i = 0; i< cant_estructuras; i ++){
+        std::stringstream key_constr;
+        key_constr << i;
+        int pos_x = node["Estructuras"][key_constr.str()]["Pos_x"].as<int>();
+        int pos_y = node["Estructuras"][key_constr.str()]["Pos_y"].as<int>();
+        int id_jugador = node["Estructuras"][key_constr.str()]["ID_jugador"].as<int>();
+        this->jugadores.push_back(id_jugador);
+        Construccion* construccion = new Construccion(pos_x,pos_y,this->last_clicked,this);
+        construccion->asignar_jugador(id_jugador);
+        construccion ->setPos(pos_y*32,pos_x*32);
+        construccion->setOffset(-32,-32);
+        this->addItem(construccion);
+        this->construcciones.push_back(construccion);
     }
 }
 
@@ -234,6 +264,7 @@ void Escenario::eliminar_estructura(Construccion *estructura,int x, int y)
 {
     this->removeItem(estructura);
     this->desocupar_celdas(x,y);
+    this->cant_construcciones -= 1;
 
 }
 
@@ -251,6 +282,16 @@ void Escenario::eliminar_todas_estructuras()
  for(int i = 0; i < this->cant_construcciones; i++){
      delete(this->construcciones[i]);
  }
+}
+
+bool Escenario::verificar_jugadores_asignados(){
+    for(int i = 0; i < this->cant_construcciones; i++){
+        int id_jugador = this->construcciones[i]->get_jugador();
+        if(id_jugador == 0){
+            return false;
+        }
+    }
+    return true;
 }
 
 bool Escenario::verificar_jugador(int jugador)

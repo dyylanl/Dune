@@ -110,6 +110,13 @@ void MainWindow::on_actionSave_triggered()
         msgBox.exec();
         return;
     }
+    bool todos_jugadores_asignados = this->escenario->verificar_jugadores_asignados();
+    if(todos_jugadores_asignados == false){
+        QMessageBox msgBox;
+        msgBox.setText("Asignele un jugador a cada construccion");
+        msgBox.exec();
+        return;
+    }
     QString extension = ".yaml";
     QString save_name = file_manager->getSaveFileName(this,"Sava a File",QDir::homePath());
     QString full_path = save_name + extension;
@@ -204,5 +211,11 @@ void MainWindow::on_button_asignar_jugador_clicked()
 void MainWindow::on_button_especia_clicked()
 {
     this->escenario->change_last_clicked("Especia");
+}
+
+
+void MainWindow::on_button_asignar_especia_clicked()
+{
+    this->escenario->change_last_clicked("Asignar Especia");
 }
 

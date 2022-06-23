@@ -75,6 +75,8 @@ private slots:
 
     void on_button_especia_clicked();
 
+    void on_button_asignar_especia_clicked();
+
 private:
     Ui::MainWindow *ui;
     Escenario* escenario;

@@ -18,6 +18,7 @@ public:
     int get_pos_y();
     void asignar_jugador(int jugador);
     void mousePressEvent(QGraphicsSceneMouseEvent *event);
+    int get_jugador();
 
 public slots:
     void verifcar_jugador(int jugador);
@@ -25,7 +26,7 @@ public slots:
 private:
     int pos_x;
     int pos_y;
-    int jugador;
+    int jugador = 0;
     QPixmap imagen;
     Estado_last_clicked* last_button_clicked;
     Escenario* escenario;
