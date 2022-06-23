@@ -7,7 +7,7 @@
 #include "../GameObject/Vehicles/HarvesterCL.h"
 #include "../GameObject/Builds/ConstructionYardCL.h"
 #include "../GameObject/Button/ButtonWidtrap.h"
-#include "../GameObject/Button/ButtonYardCL.h"
+#include "../GameObject/Button/ButtonConstructionYardCL.h"
 #include "../GameObject/Button/ButtonRefinery.h"
 
 void RecvThread::run() {
@@ -140,7 +140,7 @@ void RecvThread::addButton(std::vector<GameObject *> &gameObjects) {
     switch (objectType) {
         case CONSTRUCTION_YARD:
             m_protocol.recvBotton(m_socket, id, player, constructionTime);
-            gameObjects.push_back(new ButtonYardCL(id, player, constructionTime));
+            gameObjects.push_back(new ButtonConstructionYardCL(id, player, constructionTime));
             break;
         case LIGHT_FACTORY: //Hacer Factory
             break;

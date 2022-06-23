@@ -21,7 +21,7 @@ public:
 
     void update(EventManager &eventManager, BlockingQueue<Action *> &queue);
 
-    virtual void draw(SDL2pp::Renderer &renderer, TextureManager &textureManager) = 0;
+    virtual void draw(SDL2pp::Renderer &renderer, TextureManager &textureManager);
 
 };
 

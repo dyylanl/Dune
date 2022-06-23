@@ -13,8 +13,6 @@
 class ButtonWidtrap : public Button{
 public:
     ButtonWidtrap(int id, char player, int constructionTime);
-
-    void draw(SDL2pp::Renderer &renderer, TextureManager &textureManager);
 };
 
 
