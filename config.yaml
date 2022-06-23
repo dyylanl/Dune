@@ -11,7 +11,7 @@ initialMaxEnergy: 5000
 # esta en /Dune/utils/Enunciado.pdf
 buildings:
   constructionTime: 100
-  constructionYard:
+  constructionCenter:
     energy: 0
     cost: 0
     hitPoints: 3000
@@ -82,7 +82,7 @@ units:
   heavyInfantry:
     hitPoints: 80
     range: 3
-    speed: 14
+    speed: 12
     trainingTime: 78
     cost: 70
   harvester:

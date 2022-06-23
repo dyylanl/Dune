@@ -1,10 +1,11 @@
+#include "../../../includes/Model/Units/Unit.h"
+#include "../../../includes/Model/Weapons/Rocket.h"
+#include "../../../includes/Model/Map.h"
+#include "../../../includes/Model/Player.h"
 #include <iostream>
 #include <stack>
-#include "../../../includes/Model/Units/Unit.h"
-#include "../../../includes/Model/Map.h"
 
 int Unit::counter = 0;
-
 Unit::Unit(const int x, const int y, const int hitPoints, const int speed, const int cost) :
         Attackable(hitPoints, x, y),
         id(counter),
@@ -20,11 +21,10 @@ Unit::Unit(const int x, const int y, const int hitPoints, const int speed, const
     counter += 1;
 }
 
-Unit::~Unit() {}
 
 bool Unit::move(Map &map) {
     bool moved = true;
-    int terrain_factor = 1;
+    int terrain_factor = map.getSpeedFactorAt(pos);
     int counter_limit = terrain_factor * GameConfiguration::getConfig().speedFactor;
     int speed_counter = actual_speed;
     actual_speed += speed;
@@ -32,7 +32,7 @@ bool Unit::move(Map &map) {
         if (pos == next_pos && !pathToDestiny.empty()) {
             next_pos = pathToDestiny.top();
             if ( map.at(next_pos).isOccupied() ) {
-                std::cout << "Moviendo unidad" << std::endl;
+                map.setDestiny(*this, destiny.x, destiny.y);
             } else {
                 pathToDestiny.pop();
             }
@@ -53,26 +53,38 @@ bool Unit::move(Map &map) {
     return moved;
 }
 
-void Unit::setPath(std::stack<Position> path, Position destiny1) {
-    pathToDestiny = path;
+void Unit::setPath(std::stack<Position> path1, Position destiny1) {
+    pathToDestiny = path1;
     this->destiny = destiny1;
-    if (!path.empty()) {
+    if (!path1.empty()) {
         next_pos = pathToDestiny.top();
         pathToDestiny.pop();
+//        state = (UnitState*)&Unit::moving;
     } else {
         next_pos = pos;
+//        state = (UnitState*)&Unit::stopped;
     }
 }
+
+//bool Unit::isDead(const Attackable *unit) {
+//    if (!unit) {
+//        return true;
+//    }
+//    return unit->getLife() <= 0;
+//}
 
 void Unit::follow(Attackable* other, Map& map) {
     foll_unit = other;
     prev_foll_unit_pos = foll_unit->getClosestPosition(pos);
     bool occupied_pos = map.at(prev_foll_unit_pos).isOccupied();
+    // Se libera la posicion objetivo para que el algoritmo pueda calcular el camino.
+    // Luego se vuelve a ocupar
     if (occupied_pos)
         map.at(prev_foll_unit_pos).free();
-    std::cout << "Seteando destino" << std::endl;
+    map.setDestiny(*this, foll_unit->getClosestPosition(pos).x, foll_unit->getClosestPosition(pos).y);
     if (occupied_pos)
         map.at(prev_foll_unit_pos).occupy();
+    std::cout << "La unidad esta moviendose..." << std::endl;
 }
 
 void Unit::setPlayer(Player &player1) {
@@ -80,17 +92,17 @@ void Unit::setPlayer(Player &player1) {
     this->player->subGold(this->cost);
 }
 
-Player& Unit::getPlayer() {
+Player &Unit::getPlayer() {
     return *player;
 }
 
-
-//todo terminar estados
-bool Unit::isAttacking() {
+bool Unit::shotARocket() {
     return false;
 }
 
-
+Rocket* Unit::getRocket() {
+    return nullptr;
+}
 void Unit::checkForDeadVictim() {
     if (foll_unit != nullptr) {
         if (Unit::isDead(foll_unit)) {
@@ -98,6 +110,7 @@ void Unit::checkForDeadVictim() {
         }
     }
 }
+
 
 bool Unit::hasNews() {
     return (news);

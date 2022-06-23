@@ -2,8 +2,10 @@
 #define __BUILDING_H__
 
 #include <vector>
-#include "../Attackable.h"
 #include "../../../config/GameConfig.h"
+#include "../Position.h"
+#include "../Weapons/Weapon.h"
+#include "../Units/Attackable.h"
 
 class Player;
 
@@ -34,6 +36,8 @@ public:
     Position& getClosestPosition(Position& position) override;
     void demolish();
     bool hasNews();
+
+    Position getPosition() {return all_positions[0];}
 
 
     const int id;

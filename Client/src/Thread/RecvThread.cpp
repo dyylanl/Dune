@@ -8,6 +8,7 @@
 #include "../GameObject/Builds/ConstructionYardCL.h"
 #include "../GameObject/Button/ButtonWidtrap.h"
 #include "../GameObject/Button/ButtonYardCL.h"
+#include "../GameObject/Button/ButtonRefinery.h"
 
 void RecvThread::run() {
     while (running) {
@@ -139,7 +140,9 @@ void RecvThread::addButton(std::vector<GameObject *> &gameObjects) {
 
     m_protocol.recvObjectType(m_socket, objectType);
     switch (objectType) {
-        case CONSTRUCTION_YARD: //Hacer la clase Yard
+        case CONSTRUCTION_YARD:
+            m_protocol.recvBotton(m_socket, id, player, constructionTime);
+            gameObjects.push_back(new ButtonYardCL(id, player, constructionTime));
             break;
         case LIGHT_FACTORY: //Hacer Factory
             break;
@@ -147,9 +150,11 @@ void RecvThread::addButton(std::vector<GameObject *> &gameObjects) {
             break;
         case WIND_TRAP:
             m_protocol.recvBotton(m_socket, id, player, constructionTime);
-            gameObjects.push_back(new ButtonYardCL(id, player, constructionTime));
+            gameObjects.push_back(new ButtonWidtrap(id, player, constructionTime));
             break;
-        case SPICE_REFINERY: //Hacer la clase SpiceRefinery
+        case SPICE_REFINERY:
+            m_protocol.recvBotton(m_socket, id, player, constructionTime);
+            gameObjects.push_back(new ButtonRefinery(id, player, constructionTime));
             break;
         case SPICE_SILO: //Hacer la clase SpiceSilo
             break;

@@ -72,18 +72,14 @@ Engine::Engine(Game& game1, ConfigurationReader& reader1,
 
 void Engine::run() {
     fprintf(stderr, "[ENGINE]: Empezando ejecución.\n");
-
-    // Variables para controlar el frame-rate
     auto t1 = std::chrono::steady_clock::now();
     auto t2 = t1;
     std::chrono::duration<float, std::milli> diff{};
     int rest = 0, behind = 0, lost = 0;
     int it = 1;
-
     // LOP GAME = OJO CON LO Q TOCAN ACÁ
     while (keep_executing) {
         _loopIteration(it);
-
         it = 0;
         t2 = std::chrono::steady_clock::now();
         diff = t2 - t1;

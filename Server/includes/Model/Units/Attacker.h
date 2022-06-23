@@ -2,9 +2,10 @@
 #define __ATTACKER_H__
 
 
-#include "Weapons/Weapon.h"
+#include "../Weapons/Weapon.h"
 #include "Attackable.h"
 
+class Attackable;
 
 class Attacker {
 protected:
@@ -14,7 +15,7 @@ protected:
     bool shooting;
 public:
     Attacker(const Weapon& weapon, const int range);
-    //virtual void shoot(Attackable &defender);
+    virtual void shoot(Attackable &defender);
     const Weapon& getWeapon();
     virtual void attack(Attackable &defender);
     bool isShooting();

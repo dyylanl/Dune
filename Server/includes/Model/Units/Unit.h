@@ -4,11 +4,10 @@
 #include <stack>
 #include <memory>
 #include <iostream>
-#include "../Attackable.h"
+#include "Attackable.h"
 #include "../Terrains/Terrain.h"
-#include "../Player.h"
+#include "../Weapons/Rocket.h"
 
-class Map;
 
 class Unit : public Attackable {
 public:
@@ -23,20 +22,21 @@ public:
     };
 
     Unit(const int x, const int y, const int hitPoints, const int speed, const int cost);
-    ~Unit();
     bool operator==(const Unit& other);
     void setPath(std::stack<Position> path, Position destiny);
     bool move(Map &map);
     void follow(Attackable* other, Map& map);
-    bool isAttacking();
+    virtual bool canMoveAboveTerrain(Terrain& terrain) = 0;
     void setPlayer(Player &player);
     Player& getPlayer();
+    virtual bool shotARocket();
+    virtual Rocket* getRocket();
     void checkForDeadVictim();
-    bool hasNews();
+    virtual bool hasNews();
+
 
 public:
     const int id;
-
 protected:
     static int counter;
     const int speed;
@@ -47,7 +47,7 @@ protected:
     Position destiny;
     Position prev_foll_unit_pos;
     Position next_pos;
-    Player* player;
+    Player* player{};
     bool news;
 };
 

@@ -1,7 +1,4 @@
 #include "../../includes/Control/Accepter.h"
-#include "../../includes/Model/Game.h"
-
-// --------- METODOS PRIVADOS --------- //
 
 void Accepter::_acceptClient(int next_id) {
     Socket peer = socket.accept();
@@ -33,6 +30,8 @@ void Accepter::_joinLogins() {
     }
 }
 
+// --------------------- // ---------------- //
+
 Accepter::Accepter(Game& game1, const std::string& port, const int max_clients_queued,
                    YAMLReader& reader1,
                    NonBlockingQueue<NewConnection*>& new_connections1)
@@ -44,7 +43,7 @@ Accepter::Accepter(Game& game1, const std::string& port, const int max_clients_q
 
 void Accepter:: run() {
     int next_id = 1;
-    fprintf(stderr, "[ACCEPTER]: Comenzando ejecucion.\n");
+    fprintf(stderr, "[Accepter]: Comenzando ejecucion.\n");
     try {
         while (keep_accepting) {
             _acceptClient(next_id);
@@ -55,10 +54,10 @@ void Accepter:: run() {
     } catch (const std::exception& e) {
         fprintf(stderr, "%s\n", e.what());
     } catch (...) {
-        fprintf(stderr, "Unknown error.\n");
+        fprintf(stderr, "[Accepter]Ocurrio un error en ejecucion.\n");
     }
     _joinLogins();
-    fprintf(stderr, "[ACCEPTER]: Terminando ejecucion.\n");
+    fprintf(stderr, "[Accepter]: Terminando ejecucion.\n");
 }
 
 void Accepter::stop() {
@@ -67,7 +66,7 @@ void Accepter::stop() {
         socket.shutdown();
     } catch (const Exception& e) {
         fprintf(stderr,
-                "Warning: error while shutting-down accepter. Aborting.\n");
+                "[Accepter]: Error apagando el socket.\n");
     }
     socket.close();
 }

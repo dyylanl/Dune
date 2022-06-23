@@ -35,9 +35,9 @@ public:
 
     // comandos
     /*
-     * FALTA TERMINAR: retorna la unidad si en el mapa de char hay una 'U'.
+     * FALTA TERMINAR: selecciona la unidad si en el mapa de char hay una 'U'.
      */
-    Unit* selectUnit(int pos_x, int pos_y);
+    void selectUnit(int pos_x, int pos_y);
 
     /*
      * FALTA TERMINAR: construye un edificio en la pos indicada si no hay nada
@@ -82,6 +82,10 @@ public:
     Terrain& blockAt(int x, int y);
     Terrain& at(const Position& pos);
     int getSpeedFactorAt(Position& pos);
+
+
+    void setDestiny(Unit &unit, int x_dest, int y_dest);
+
 
 
 };

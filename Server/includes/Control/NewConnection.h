@@ -6,7 +6,14 @@
 #include "../defs.h"
 
 
-// Basicamente contiene el socket, proyecta a cargarle mas info a la nueva conexion...
+/*
+*   Contiene la informacion de una nueva conexion
+    * Nombre
+    * Mapa en el que jugara
+    * Id de conexion
+    * Socket para el envio/recibo de paquetes
+    *  +++
+*/
 struct NewConnection {
 
     Socket peer;

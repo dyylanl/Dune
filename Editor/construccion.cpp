@@ -48,7 +48,18 @@ void Construccion::mousePressEvent(QGraphicsSceneMouseEvent *event)
 
 }
 
+int Construccion::get_jugador()
+{
+ return this->jugador;
+}
+
 void Construccion::verifcar_jugador(int jugador){
+    if(jugador == 0){
+        QMessageBox msgBox;
+        msgBox.setText("El ID del jugador no pude ser 0. Elija otro");
+        msgBox.exec();
+        return;
+    }
     bool jugador_asignado = this->escenario->verificar_jugador(jugador);
     if(jugador_asignado == true){
         QMessageBox msgBox;
@@ -57,5 +68,5 @@ void Construccion::verifcar_jugador(int jugador){
     }
     else{
         this->escenario->agregar_jugador(jugador);
-    }
+        this->jugador = jugador;    }
 }

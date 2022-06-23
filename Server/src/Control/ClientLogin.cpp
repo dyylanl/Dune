@@ -25,18 +25,18 @@ void ClientLogin::run() {
         try {
             peer.shutdown();
         } catch (const Exception& e) {
-            fprintf(stderr, "Warning: error while shutting-down client_login.");
+            fprintf(stderr, "[ClientLogin]: Error apagando el socket.\n");
         }
         peer.close();
-        fprintf(stderr, "%s\n", e.what());
+        fprintf(stderr, "[ClientLogin]: %s\n", e.what());
     } catch (...) {
         try {
             peer.shutdown();
         } catch (const Exception& e) {
-            fprintf(stderr, "Warning: error while shutting-down client_login.");
+            fprintf(stderr, "[ClientLogin]: Error apagando el peer.\n");
         }
         peer.close();
-        fprintf(stderr, "Unknown error.\n");
+        fprintf(stderr, "[ClientLogin]: Error en el run.\n");
     }
     is_running = false;
 }
@@ -50,7 +50,7 @@ void ClientLogin::stop() {
         try {
             peer.shutdown();
         } catch (const Exception& e) {
-            fprintf(stderr, "Warning: error while shutting-down client_login.");
+            fprintf(stderr, "[ClientLogin]: Error en el stop.\n");
         }
         peer.close();
     }

@@ -3,11 +3,12 @@
 
 #include "Unit.h"
 #include "../Map.h"
+
 class Harvester : public Unit {
 public:
     Harvester(int x, int y);
     ~Harvester();
-    virtual bool canMoveAboveTerrain(Terrain &terrain);
+    virtual bool canMoveAboveTerrain(Terrain &terrain) override;
     virtual void reciveBonusDammage(const Weapon &weapon) override;
 
 

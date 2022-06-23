@@ -12,7 +12,7 @@
     this->setPixmap(imagen);
     this->pos_x = x;
     this->pos_y = y;
-}*/
+}
 
 Celda::Celda(std::string tipo,Estado_last_clicked* last_clicked, int x, int y)
 {
@@ -21,18 +21,20 @@ Celda::Celda(std::string tipo,Estado_last_clicked* last_clicked, int x, int y)
     this->estado_last_clicked = last_clicked;
     this->pos_x = x;
     this->pos_y = y;
-}
 
 
-Celda::Celda(Escenario* escenario, std::string tipo,Estado_last_clicked* last_clicked, int x, int y)
+}*/
+
+
+Celda::Celda(Escenario* escenario, std::string tipo,Estado_last_clicked* last_clicked, int x, int y): dialogo_asignar_especia(new Dialog_asignar_especia)
 {
     this->escenario = escenario;
-    this->estado_actual = QString::fromStdString(tipo);
     this->setImagen(QString::fromStdString(tipo));
     this->estado_last_clicked = last_clicked;
     this->pos_x = x;
     this->pos_y = y;
     this->ocupada = false;
+    connect(&this->dialogo_asignar_especia,SIGNAL(especia_asignada(int)),this,SLOT(cambiar_cantidad_especia(int)));
 }
 
 void Celda::mousePressEvent(QGraphicsSceneMouseEvent *event)
@@ -53,6 +55,18 @@ void Celda::setImagen(QString tipo){
     QString precipicio = "Precipicio";
     QString vacio = "Vacio";
     QString especia = "Especia";
+    QString asignar_especia = "Asignar Especia";
+
+    if(tipo == especia && this->estado_actual == "Vacio"){
+        this->estado_actual = tipo;
+        this->imagen.load(":/resources/tile_especia.png");
+        this->imagen = this->imagen.scaled(32, 32);
+        this->setPixmap(imagen);
+    }
+
+    if(tipo == asignar_especia && this->estado_actual == especia){
+        this->dialogo_asignar_especia.show();
+    }
 
     if(tipo == especia && this->estado_actual == arena){
         this->estado_actual = tipo;
@@ -117,12 +131,27 @@ void Celda::ocupar(){
 
 void Celda::desocupar()
 {
- this->ocupada = false;
+    this->ocupada = false;
+}
+
+int Celda::get_cant_especia()
+{
+    return this->cant_especia;
+}
+
+void Celda::set_cant_especia(int cantidad)
+{
+    this->cant_especia = cantidad;
 }
 
 Celda::~Celda()
 {
 
+}
+
+void Celda::cambiar_cantidad_especia(int cantidad)
+{
+    this->cant_especia = cantidad;
 }
 
 QString Celda::get_tipo_suelo()
