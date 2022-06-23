@@ -11,8 +11,10 @@
 #include "../../../Common/includes/NonBlockingQueue.h"
 #include "../Object/GameObject.h"
 
+enum Type{VEHICLE, BUILD, BUTTON};
 enum VehicleType {TRIKE, SONIC_TANK, RAIDER, DESVIATOR, TANK, DEVASTATOR, HARVESTER};
-enum BuilType {CONSTRUCTION_YARD};
+enum BuilType {CONSTRUCTION_YARD, LIGHT_FACTORY, HEAVY_FACTORY,WIND_TRAP, SPICE_REFINERY,
+    SPICE_SILO, BARRACKS, PALACE};
 
 class RecvThread : public Thread {
 private:
@@ -26,7 +28,13 @@ public:
 
     void run() override;
 
+    void addVehicle(std::vector<GameObject*> &gameObjects);
+
     void stop();
+
+    void addBuild(std::vector<GameObject *> &gameObjects);
+
+    void addButton(std::vector<GameObject *> &gameObjects);
 };
 
 

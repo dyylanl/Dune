@@ -239,9 +239,9 @@ void Protocol::sendName(Socket &socket, std::string name) {
 
 }
 
-void Protocol::recvType(Socket &socket, int &type) {
+void Protocol::recvType(Socket &socket, char &type) {
     socket.recv(reinterpret_cast<char *>(&type), sizeof(uint8_t));
-    std::cout << "Se recibe objeto tipo: " << type << std::endl;
+    std::cout << "tipo de Objecto: " << (int)type << std::endl;
 }
 
 void Protocol::sendType(Socket &socket, int &actionType) {
@@ -264,10 +264,11 @@ void Protocol::sendId(Socket &socket, int &id) {
 
 void Protocol::recvCountObject(Socket &socket, int &size) {
     socket.recv(reinterpret_cast<char *>(&size), sizeof(uint16_t));
+    std::cout << "cant de objetos: " << size << std::endl;
 }
 
 void
-Protocol::recvUnit(Socket &socket, int &id, int &player, bool &selectStatus, int &posX, int &posY, int &posActX,
+Protocol::recvUnit(Socket &socket, int &id, char &player, bool &selectStatus, int &posX, int &posY, int &posActX,
                    int &posActY, int &life, bool &action) {
     socket.recv(reinterpret_cast<char *>(&id), sizeof(uint16_t));
     socket.recv(reinterpret_cast<char *>(&player), sizeof(uint8_t));
@@ -278,10 +279,11 @@ Protocol::recvUnit(Socket &socket, int &id, int &player, bool &selectStatus, int
     socket.recv(reinterpret_cast<char *>(&posActY), sizeof(uint16_t));
     socket.recv(reinterpret_cast<char *>(&life), sizeof(uint16_t));
     socket.recv(reinterpret_cast<char *>(&action), sizeof(uint8_t));
+    std::cout << "id: " << id << " player: " << (int)player << " select: " << selectStatus << std::endl;
     std::cout << "Se recibe: " << "(" << posX << "," << posY << ")" << std::endl;
 }
 
-void Protocol::recvBuild(Socket &socket, int &id, int &player, int &posX, int &posY, int &life) {
+void Protocol::recvBuild(Socket &socket, int &id, char &player, int &posX, int &posY, int &life) {
     socket.recv(reinterpret_cast<char *>(&id), sizeof(uint16_t));
     socket.recv(reinterpret_cast<char *>(&player), sizeof(uint8_t));
     socket.recv(reinterpret_cast<char *>(&posX), sizeof(uint16_t));
@@ -320,6 +322,7 @@ void Protocol::enviar(Socket &socket) {
     socket.send(reinterpret_cast<char *>(&act), sizeof(uint8_t));
 }
 
-void Protocol::recvObjectType(Socket &socket, int &unitType) {
+void Protocol::recvObjectType(Socket &socket, char &unitType) {
     socket.recv(reinterpret_cast<char *>(&unitType), sizeof(uint8_t));
+    std::cout << "Tipo: " << (int)unitType << std::endl;
 }
