@@ -30,8 +30,6 @@ void RecvThread::run() {
             }
         }
         m_quene.push(gameObjects);
-        int aux;
-        std::cin >> aux;
     }
 }
 
@@ -162,7 +160,7 @@ void RecvThread::addButton(std::vector<GameObject *> &gameObjects) {
             break;
         case PALACE: //Hacer la clase Palace
             break;
-        default: std::cout << "Tipo de edificio invalido" << std::endl;
+        default: std::cout << "Tipo de button edificio invalido" << std::endl;
     }
 }
 

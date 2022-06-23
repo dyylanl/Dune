@@ -183,6 +183,7 @@ void Client::loadTextures(TextureManager &textureManager) const {
     textureManager.load("precipicio", DATA_PATH "assets/Terrain/tile_precipicio.png");
     textureManager.load("roca", DATA_PATH "assets/Terrain/tile_roca.png");
 
+    textureManager.load("ButtonConstructionYard", DATA_PATH "assets/Button/ConstructionYard.gif");
     textureManager.load("ButtonWidtrap", DATA_PATH "assets/Button/windtrap.gif");
     textureManager.load("ButtonRefinery", DATA_PATH "assets/Button/refinery.gif");
 }
