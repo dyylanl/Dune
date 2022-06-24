@@ -12,6 +12,8 @@ public:
     explicit ConfigurationReader(const std::string filename);
     ~ConfigurationReader();
     //map
+    int getTotalMaps();
+    std::list<std::string> getAllPaths();
     std::string getMapPath() const;
     std::string getPort() const;
     int getFPS() const;

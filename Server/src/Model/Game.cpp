@@ -33,16 +33,25 @@ void Game::addPlayer(const std::string& game_name) {
 // ---------- METODOS PUBLICOS ------------ //
 
 Game::Game(int rate, ConfigurationReader reader1) :
+            maps(),
+            games(),
+            players(),
             next_id(FIRST_ID),
-            map(reader1.getMapPath()),
-            aStar(map),
+            /*map(reader1.getMapPath()),*/
+            /*aStar(map),*/
             game_config(reader1)
-{}
+{
+    std::cout << "Cargando mapas..." << std::endl;
+    int total_maps = game_config.getTotalMaps();
+    std::cout << "Cantidad de mapas cargados en el servidor: " << total_maps << std::endl;
+}
 
 uint16_t Game::createGame(int req, Id id_map, const std::string& name_game) {
     std::lock_guard<std::mutex> lock(mutex);
+    std::cout << "DESPUES DE ESTA LINEA EXPLOTA TODO A LPM" << std::endl;
     if (!contains(name_game)) {
         put(name_game, 1, req);
+
         std::cout << "Se creo la partida " << name_game << std::endl;
         return SUCCESS;
     }
@@ -95,14 +104,18 @@ InstanceId Game::newConnection(NewConnection *connection) {
     this->next_id++;
     return this->next_id;
 }
-
+// todo: uf
 std::stack<Position> Game::makePath(Unit& unit, Position pos_end) {
-    return aStar.makePath(unit, pos_end);
+    /*AStar aStar(this->maps_init[unit.getPlayer().getId()]);
+    return aStar.makePath(unit, pos_end);*/
+    std::stack<Position> pos;
+    pos.push(Position(5,5));
+    return pos;
 }
 
 
 void Game::selectUnitInPos(int pos_x, int pos_y) {
-    this->map.selectUnit(pos_x, pos_y);
+    //this->map.selectUnit(pos_x, pos_y);
     std::cout << "Unidad en la posicion " << pos_x << "," << pos_y << " seleccionada." << std::endl;
 }
 
@@ -119,8 +132,9 @@ void Game::createUnit(char unit_type) {
     std::cout << "Creando unidades del tipo" << unit_type << std::endl;
 }
 
-std::vector<std::vector<char>> Game::getMap(std::string name_game) {
+std::vector<std::vector<char>>& Game::getMap(std::string name_game) {
     if (contains(name_game)){
+        std::cout << "[GAME]: el mapa existe" << std::endl;
         return this->maps.at(name_game).getMap();
     } else {
         throw Exception("Se quiere obtener un mapa que no existe.\n");

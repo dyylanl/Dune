@@ -4,7 +4,7 @@
 // --------------------------- //
 #define MAX_CLIENTS_QUEUED 10
 
-#define MAP_PATH "/home/dypa/Dune/mapa_default_1.yaml"
+#define MAP_PATH "/home/dypa/Dune/mapa5.yaml"
 
 // ------------
 #ifndef __INSTANCE_ID__

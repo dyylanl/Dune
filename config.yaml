@@ -1,6 +1,12 @@
 port: "8082"
 ticks_per_sec: 60
-map_path: "/home/dypa/Dune/mapa_prueba_2_jugadores_grande.yaml"
+total_maps: 5
+maps:
+  0: "/home/dypa/Dune/mapa1.yaml"
+  1: "/home/dypa/Dune/mapa2.yaml"
+  2: "/home/dypa/Dune/mapa3.yaml"
+  3: "/home/dypa/Dune/mapa4.yaml"
+  4: "/home/dypa/Dune/mapa5.yaml"
 speedFactor: 50
 blockMovement: 2
 rangeFactor: 2000

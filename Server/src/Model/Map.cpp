@@ -14,7 +14,7 @@ Map::Map(std::string map_path) : map_reader(std::move(map_path)),
                                  buildings(),
                                  req_players(map_reader.getReqPlayers()) {
     std::vector <std::vector<Terrain>> terrain_init
-            ((uint16_t) rows*BLOCK_HEIGHT, std::vector<Terrain>((uint16_t) cols*BLOCK_WIDTH, Terrain('A')));
+            ((uint16_t) rows, std::vector<Terrain>((uint16_t) cols, Terrain('A')));
     this->terrrains = terrain_init;
     this->mapa = map_reader.getMap();
     int rows_ = mapa.size();
@@ -22,11 +22,7 @@ Map::Map(std::string map_path) : map_reader(std::move(map_path)),
     for (int i = 0; i < rows_; ++i) {
         for (int j = 0; j < cols_; ++j) {
             char type = this->mapa[i][j];
-            for (int k = 0; k < BLOCK_HEIGHT; ++k) {
-                for (int l = 0; l < BLOCK_WIDTH; ++l) {
-                    this->terrrains[k][l] = Terrain(type);
-                }
-            }
+            terrrains[i][j] = Terrain(type);
         }
     }
 
@@ -59,11 +55,11 @@ void Map::getInitialPositions() {
 }
 
 int Map::getWidth() {
-    return cols * BLOCK_WIDTH;
+    return cols;
 }
 
 int Map::getHeight() {
-    return rows * BLOCK_HEIGHT;
+    return rows;
 }
 
 int Map::getBlockWidth() {
@@ -86,20 +82,19 @@ Terrain& Map::at(int x, int y) {
     if ((x < 0) || (y < 0)) {
         throw std::out_of_range("Out of range");
     }
-    return reinterpret_cast<Terrain &>(this->terrrains.at((y / BLOCK_HEIGHT) * cols + (x / BLOCK_WIDTH)));
+    return reinterpret_cast<Terrain &>(this->terrrains[x][y]);
 }
 
 Terrain& Map::blockAt(int x, int y) {
-    return reinterpret_cast<Terrain &>(this->terrrains.at(y * cols + x));
+    return reinterpret_cast<Terrain &>(this->terrrains[x][y]);
 }
 
 Terrain& Map::at(const Position& pos) {
-    return reinterpret_cast<Terrain &>(this->terrrains.at(
-            (pos.getY() / BLOCK_HEIGHT) * cols + (pos.getX() / BLOCK_WIDTH)));
+    return reinterpret_cast<Terrain &>(this->terrrains[pos.getX()][pos.getY()]);
 }
 
 bool Map::isValid(Position &pos) {
-    return pos.getX() >= 0 && pos.getY() >= 0 && pos.getX() < cols * BLOCK_HEIGHT && pos.getY() < rows * BLOCK_WIDTH;
+    return pos.getX() >= 0 && pos.getY() >= 0 && pos.getX() < rows && pos.getY() < cols;
 }
 
 void Map::put(Unit &unit) {
@@ -115,7 +110,7 @@ void Map::put(Building* building) {
 void Map::occupy(Building* building) {
     for (int i = 0; i < building->height; i++) {
         for (int j = 0; j < building->width; j++) {
-            this->at(building->getPosition().x + j * BLOCK_WIDTH, building->getPosition().y + i * BLOCK_HEIGHT).buildOn(building);
+            this->terrrains[building->getPosition().x+i][building->getPosition().y+j].buildOn(building);
         }
     }
 }
@@ -180,11 +175,11 @@ std::vector<Building*> Map::getBuildingsInArea(Area& area, Player& player) {
     std::vector<Building*> answer;
     Position pos(area.getX() + area.getWidth(), area.getY() + area.getHeight());
     for (auto& building : buildings) {
-        if ( (building->getPosition().x > area.getX()) &&(building->getPosition().x + building->width * BLOCK_WIDTH < area.getX() + area.getWidth()) &&(building->getPosition().y > area.getY()) &&(building->getPosition().y + building->height * BLOCK_HEIGHT < area.getY() + area.getHeight())) {
+        if ( (building->getPosition().x > area.getX()) &&(building->getPosition().x + building->width < area.getX() + area.getWidth()) &&(building->getPosition().y > area.getY()) &&(building->getPosition().y + building->height < area.getY() + area.getHeight())) {
                 answer.emplace_back(building);
             } else {
-                if ((pos.x > building->getPosition().x) && (pos.x < building->getPosition().x + building->width * BLOCK_WIDTH) &&
-                    (pos.y > building->getPosition().y) && (pos.y < building->getPosition().y + building->height * BLOCK_HEIGHT)) {
+                if ((pos.x > building->getPosition().x) && (pos.x < building->getPosition().x + building->width) &&
+                    (pos.y > building->getPosition().y) && (pos.y < building->getPosition().y + building->height)) {
                     answer.emplace_back(building);
                 }
             }
@@ -198,13 +193,13 @@ std::vector<Building*> Map::getBuildingsInArea(Area& area) {
     Position areaCenter(area.getX() + area.getWidth() / 2, area.getY() + area.getHeight() / 2);
     for (auto& building : buildings) {
         if ( (building->getClosestPosition(areaCenter).x > area.getX()) &&
-             (building->getClosestPosition(areaCenter).x + building->width * BLOCK_WIDTH < area.getX() + area.getWidth()) &&
+             (building->getClosestPosition(areaCenter).x + building->width < area.getX() + area.getWidth()) &&
              (building->getClosestPosition(areaCenter).y > area.getY()) &&
-             (building->getClosestPosition(areaCenter).y + building->height * BLOCK_HEIGHT < area.getY() + area.getHeight())) {
+             (building->getClosestPosition(areaCenter).y + building->height < area.getY() + area.getHeight())) {
             answer.emplace_back(building);
         } else {
-            if ((pos.x > building->getClosestPosition(areaCenter).x) && (pos.x < building->getClosestPosition(areaCenter).x + building->width * BLOCK_WIDTH) &&
-                (pos.y > building->getClosestPosition(areaCenter).y) && (pos.y < building->getClosestPosition(areaCenter).y + building->height * BLOCK_HEIGHT)) {
+            if ((pos.x > building->getClosestPosition(areaCenter).x) && (pos.x < building->getClosestPosition(areaCenter).x + building->width) &&
+                (pos.y > building->getClosestPosition(areaCenter).y) && (pos.y < building->getClosestPosition(areaCenter).y + building->height)) {
                 answer.emplace_back(building);
             }
         }
@@ -225,7 +220,7 @@ void Map::cleanBuilding(Building *building) {
 void Map::free(Building &building) {
     for (int i = 0; i < building.height; i++) {
         for (int j = 0; j < building.width; j++) {
-            this->at(building.getPosition().x + j * BLOCK_WIDTH, building.getPosition().y + i * BLOCK_HEIGHT).free();
+            this->at(building.getPosition().x + i, building.getPosition().y + j).free();
         }
     }
 }
@@ -233,7 +228,7 @@ void Map::free(Building &building) {
 bool Map::canWeBuild(Position& pos, int width, int height, Player& player) {
     for (int i = 0; i < height; i++) {
         for (int j = 0; j < width; j++) {
-            Position aux(pos.getX() + j * BLOCK_WIDTH, pos.getY() + i * BLOCK_HEIGHT);
+            Position aux(pos.getX() + i, pos.getY() + j);
             if (isValid(aux)) {
                 if ((this->at(aux).getKey() != Rock().getKey()) || this->at(aux).isOccupied()) {
                     return false;
@@ -246,7 +241,7 @@ bool Map::canWeBuild(Position& pos, int width, int height, Player& player) {
 
     for (int i = -5; i <= height + 5; i++) {
         for (int j = -5; j <= width + 5; j++) {
-            Position aux(pos.getX() + j * BLOCK_WIDTH, pos.getY() + i * BLOCK_HEIGHT);
+            Position aux(pos.getX() + i, pos.getY() + j);
             if (isValid(aux)) {
                 if (this->at(aux).isBuiltOn()) {
                 }
@@ -265,8 +260,8 @@ Position Map::getClosestFreePosition(Building* building) {
         for (int i = - dist; i <= building->height + dist; i++) {
             for (int j =  - dist; j <= building->width + dist; j++) {
                 try {
-                    if (!(this->at(pos.x + j * BLOCK_WIDTH, pos.y + i * BLOCK_HEIGHT).isOccupied())) {
-                        return {pos.x + j * BLOCK_WIDTH, pos.y + i * BLOCK_HEIGHT};
+                    if (!(this->at(pos.x + i, pos.y + j).isOccupied())) {
+                        return {pos.x + i, pos.y + j};
                     }
                 }
                 catch (std::out_of_range& e) {}
@@ -298,28 +293,28 @@ Attackable *Map::getClosestAttackable(Position &position, int limitRadius, Playe
     }
     return closest_attackable;
 }
-
+/*
 Position Map::getCornerPosition(Position& pos) {
     return {(pos.x / BLOCK_WIDTH) * BLOCK_WIDTH, (pos.y / BLOCK_HEIGHT) * BLOCK_HEIGHT};
-}
+}*/
 
 Position Map::getClosestSpeciaPosition(Position pos, int radius) {
-    int block_x = (pos.x / BLOCK_HEIGHT);
-    int block_y = (pos.y / BLOCK_WIDTH);
+    int block_x = (pos.x);
+    int block_y = (pos.y);
     int min_distance = radius + 1;
     Position min_position = pos;
     for (int i = -radius; i <= +radius; ++i) {
         for (int j = -(radius - abs(i)); j <= +(radius - abs(i)); ++j) {
             int cur_pos_x = (block_x + j);
             int cur_pos_y = (block_y + i);
-            if ((cur_pos_y + i) >= 0 &&
-                (cur_pos_y + i) < cols &&
-                (cur_pos_x + j) >= 0 &&
-                (cur_pos_x + j) < rows) {
+            if ((cur_pos_y + j) >= 0 &&
+                (cur_pos_y + j) < cols &&
+                (cur_pos_x + i) >= 0 &&
+                (cur_pos_x + i) < rows) {
                 if ( abs(i) + abs(j) < min_distance
                      && this->blockAt(cur_pos_x, cur_pos_y).hasFarm()) {
                     min_distance = abs(i) + abs(j);
-                    min_position = Position(cur_pos_x * BLOCK_HEIGHT, cur_pos_y * BLOCK_WIDTH);
+                    min_position = Position(cur_pos_x, cur_pos_y);
                 }
             }
         }
@@ -330,5 +325,10 @@ Position Map::getClosestSpeciaPosition(Position pos, int radius) {
 
 int Map::getSpeedFactorAt(Position &pos) {
     return this->at(pos).getSpeedFactor();
+}
+
+std::vector<std::vector<char>> &Map::getMap() {
+    std::cout << "retorno mapa" << std::endl;
+    return this->mapa;
 }
 

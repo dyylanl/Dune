@@ -15,6 +15,7 @@
 
 class Game {
 private:
+    std::map<Id,Map> maps_init;
     /*
      * Contiene todas las partidas creadas por los users
      * clave: nombre del mapa
@@ -32,10 +33,12 @@ private:
      * {duelo 3vs3: [dylan,ricardo,fede,fede,mateo,pepe], solo: [alone], ...}
      */
     std::map<std::string,std::vector<Player*>> players;
+
+    // --------------------------------------------------- //
     std::mutex mutex;
     InstanceId next_id;
-    Map map;
-    AStar aStar;
+    //Map map;
+    //AStar aStar;
     // comandos
     ConfigurationReader game_config;
 
@@ -90,7 +93,7 @@ public:
 
     InstanceId getConnectionId() {return next_id++;}
 
-    std::vector<std::vector<char>> getMap(std::string name_game);
+    std::vector<std::vector<char>>& getMap(std::string name_game);
 
     // TODO: TERMINAR ID's de mapa
     static Id getMapId(std::string name_game) {return 1;};

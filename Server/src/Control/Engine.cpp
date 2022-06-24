@@ -12,7 +12,7 @@ void Engine::_processNewConnections() {
     std::string name_game;
     while ((new_connection = new_connections.pop())) {
         name_game = new_connection->name_game;
-        std::vector<std::vector<char>> map = game.getMap(name_game);
+        std::vector<std::vector<char>>& map = game.getMap(name_game);
         Id map_id = game.getMapId(name_game);
         protocol.sendMap(new_connection->peer,map);
         established_connections.add(game.getConnectionId(),map_id,new_connection->peer);

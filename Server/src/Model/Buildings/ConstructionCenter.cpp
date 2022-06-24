@@ -2,11 +2,11 @@
 
 ConstructionCenter::ConstructionCenter(const int x, const int y, int blockWidth, int blockHeight) :
         Building(x, y, blockWidth, blockHeight,
-                 GameConfiguration::getConfig().constructionYardEnergy,
-                 GameConfiguration::getConfig().constructionYardCost,
-                 GameConfiguration::getConfig().constructionYardHitPoints,
-                 GameConfiguration::getConfig().constructionYardWidth,
-                 GameConfiguration::getConfig().constructionYardHeight,
+                 GameConfiguration::getConfig().constructionCenterEnergy,
+                 GameConfiguration::getConfig().constructionCenterCost,
+                 GameConfiguration::getConfig().constructionCenterHitPoints,
+                 GameConfiguration::getConfig().constructionCenterWidth,
+                 GameConfiguration::getConfig().constructionCenterHeight,
                  CONSTRUCTION_CENTER)
 {}
 

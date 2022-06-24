@@ -9,7 +9,6 @@ class ConfigurationReader;
 class GameConfiguration {
 private:
     static std::unique_ptr<GameConfiguration> instance;
-    explicit GameConfiguration(const ConfigurationReader& config);
 
 public:
     ~GameConfiguration() = default;
@@ -26,11 +25,11 @@ public:
     const int initialMaxEnergy;
     //building
     const int buildingConstructionTime;
-    const int constructionYardEnergy;
-    const int constructionYardCost;
-    const int constructionYardHitPoints;
-    const int constructionYardWidth;
-    const int constructionYardHeight;
+    const int constructionCenterEnergy;
+    const int constructionCenterCost;
+    const int constructionCenterHitPoints;
+    const int constructionCenterWidth;
+    const int constructionCenterHeight;
     const int windTrapEnergy;
     const int windTrapCost;
     const int windTrapHitPoints;
@@ -109,6 +108,8 @@ public:
     const int tankSpeed;
     const int tankConstructionTime;
     const int tankCost;
+
+    explicit GameConfiguration(const ConfigurationReader& config);
 };
 
 #endif	// __GAME_CONFIGURATION_H__

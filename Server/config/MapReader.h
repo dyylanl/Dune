@@ -3,6 +3,7 @@
 
 #include "YAMLReader.h"
 #include "../includes/Model/Buildings/Building.h"
+#include "../includes/defs.h"
 
 class MapReader : public YAMLReader {
 public:

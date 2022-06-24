@@ -20,7 +20,7 @@ function ctrl_c() {
 }
 
 function waitingInputMessage() {
-    printf "> Ingrese una opción: "
+    printf "${turquoiseColour}> Ingrese una opción: ${endColour}"
 }
 
 function initialMessage () {

@@ -15,11 +15,11 @@ GameConfiguration::GameConfiguration(const ConfigurationReader& config) :
 
         buildingConstructionTime(config.getBuildingConstructionTime() * timeFactor),
 
-        constructionYardEnergy(config.getEnergyFor(Building::BuildingType::CONSTRUCTION_CENTER)),
-        constructionYardCost(config.getCostFor(Building::BuildingType::CONSTRUCTION_CENTER)),
-        constructionYardHitPoints(config.getHitPointsFor(Building::BuildingType::CONSTRUCTION_CENTER)),
-        constructionYardWidth(config.getWidthFor(Building::BuildingType::CONSTRUCTION_CENTER)),
-        constructionYardHeight(config.getHeightFor(Building::BuildingType::CONSTRUCTION_CENTER)),
+        constructionCenterEnergy(config.getEnergyFor(Building::BuildingType::CONSTRUCTION_CENTER)),
+        constructionCenterCost(config.getCostFor(Building::BuildingType::CONSTRUCTION_CENTER)),
+        constructionCenterHitPoints(config.getHitPointsFor(Building::BuildingType::CONSTRUCTION_CENTER)),
+        constructionCenterWidth(config.getWidthFor(Building::BuildingType::CONSTRUCTION_CENTER)),
+        constructionCenterHeight(config.getHeightFor(Building::BuildingType::CONSTRUCTION_CENTER)),
 
         windTrapEnergy(config.getEnergyFor(Building::BuildingType::WIND_TRAP)),
         windTrapCost(config.getCostFor(Building::BuildingType::WIND_TRAP)),

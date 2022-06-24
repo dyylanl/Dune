@@ -214,3 +214,19 @@ std::string ConfigurationReader::parseType(const Unit::UnitType unitType) const 
     }
     return unitName;
 }
+
+
+int ConfigurationReader::getTotalMaps() {
+    return this->config["total_maps"].as<int>();
+}
+
+
+std::list<std::string> ConfigurationReader::getAllPaths() {
+    std::list<std::string> paths;
+    int total = this->getTotalMaps();
+    for (int i = 0; i < total; ++i) {
+        std::string map_path = this->config["maps"][i].as<std::string>();
+        paths.push_back(map_path);
+    }
+    return paths;
+}

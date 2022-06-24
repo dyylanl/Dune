@@ -108,6 +108,15 @@ void Client::launch() {
         uint16_t cant_jugadores = 1;
         protocol.sendResponse(socket, cant_jugadores);
 
+        uint16_t map_id = 1;
+        protocol.sendResponse(socket, map_id);
+
+        uint16_t response = protocol.recvResponse(socket);
+
+        if (response == 0) {
+            std::cout << "se creo la partida" << std::endl;
+        }
+
         // -------- a partir de este punto el servidor ya creo la partida y lo une al jugador ----------
 
 

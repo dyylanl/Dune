@@ -200,7 +200,7 @@ int Protocol::idUnidRecv(Socket &socket) {
     return id;
 }
 
-void Protocol::sendMap(Socket &socket, std::vector<std::vector<char>> map) {
+void Protocol::sendMap(Socket &socket, std::vector<std::vector<char>>& map) {
     int rows = map.size();
     int cols = map[0].size();
     //std::cout << "rows: " << rows << "\ncols: " << cols << std::endl;
@@ -210,7 +210,7 @@ void Protocol::sendMap(Socket &socket, std::vector<std::vector<char>> map) {
         for (int j = 0; j < cols; ++j) {
             char type = map[i][j];
             socket.send(reinterpret_cast<const char *>(&type), sizeof(uint8_t));
-            //std::cout << "Se envia: " << type << std::endl;
+            std::cout << "Se envia: " << type << std::endl;
         }
     }
 }

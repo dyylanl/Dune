@@ -27,7 +27,7 @@ public:
     bool canMove(const Unit& unit, Position postion);
     int getRows() const {return rows;}
     int getCols() const {return cols;}
-    std::vector<std::vector<char>> getMap() {return this->mapa;}
+    std::vector<std::vector<char>>& getMap();
     int getReqPlayers() const {return req_players;}
     char getTypeTerrain(int posX, int posY);
     // comandos
@@ -70,7 +70,7 @@ public:
     /*
      * retorna la posicion de la esquina segun el ancho y alto seteados
      */
-    static Position getCornerPosition(Position& pos);
+    //static Position getCornerPosition(Position& pos);
     /*
      * devuelve el tipo de terreno que hay en la pos x,y
      */
@@ -103,6 +103,7 @@ public:
     std::vector<Building *> getBuildingsInArea(Area &area, Player &player);
     void updateSpice(int x, int y);
     Attackable *getClosestAttackable(Position &position, int limitRadius, Player &player);
+
 };
 
 #endif //__MAP_H__
