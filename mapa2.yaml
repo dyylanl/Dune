@@ -1,6 +1,6 @@
 Tablero:
-  Filas: 12
-  Columnas: 12
+  Filas: 11
+  Columnas: 11
   0,0:
     Tipo: Arena
     Ocupada: false
@@ -18,19 +18,19 @@ Tablero:
     Ocupada: false
     Cantidad Especia: 0
   0,4:
-    Tipo: Cimas
+    Tipo: Arena
     Ocupada: false
     Cantidad Especia: 0
   0,5:
-    Tipo: Cimas
+    Tipo: Arena
     Ocupada: false
     Cantidad Especia: 0
   0,6:
-    Tipo: Cimas
+    Tipo: Arena
     Ocupada: false
     Cantidad Especia: 0
   0,7:
-    Tipo: Cimas
+    Tipo: Arena
     Ocupada: false
     Cantidad Especia: 0
   0,8:
@@ -42,10 +42,6 @@ Tablero:
     Ocupada: false
     Cantidad Especia: 0
   0,10:
-    Tipo: Arena
-    Ocupada: false
-    Cantidad Especia: 0
-  0,11:
     Tipo: Arena
     Ocupada: false
     Cantidad Especia: 0
@@ -93,10 +89,6 @@ Tablero:
     Tipo: Arena
     Ocupada: false
     Cantidad Especia: 0
-  1,11:
-    Tipo: Arena
-    Ocupada: false
-    Cantidad Especia: 0
   2,0:
     Tipo: Arena
     Ocupada: false
@@ -114,15 +106,15 @@ Tablero:
     Ocupada: false
     Cantidad Especia: 0
   2,4:
-    Tipo: Arena
+    Tipo: Cimas
     Ocupada: false
     Cantidad Especia: 0
   2,5:
-    Tipo: Arena
+    Tipo: Cimas
     Ocupada: false
     Cantidad Especia: 0
   2,6:
-    Tipo: Arena
+    Tipo: Cimas
     Ocupada: false
     Cantidad Especia: 0
   2,7:
@@ -141,36 +133,32 @@ Tablero:
     Tipo: Arena
     Ocupada: false
     Cantidad Especia: 0
-  2,11:
+  3,0:
     Tipo: Arena
     Ocupada: false
     Cantidad Especia: 0
-  3,0:
-    Tipo: Roca
-    Ocupada: true
-    Cantidad Especia: 0
   3,1:
-    Tipo: Roca
-    Ocupada: true
+    Tipo: Arena
+    Ocupada: false
     Cantidad Especia: 0
   3,2:
-    Tipo: Roca
-    Ocupada: true
+    Tipo: Arena
+    Ocupada: false
     Cantidad Especia: 0
   3,3:
-    Tipo: Roca
+    Tipo: Arena
     Ocupada: false
     Cantidad Especia: 0
   3,4:
-    Tipo: Roca
+    Tipo: Precipicio
     Ocupada: false
     Cantidad Especia: 0
   3,5:
-    Tipo: Roca
+    Tipo: Precipicio
     Ocupada: false
     Cantidad Especia: 0
   3,6:
-    Tipo: Arena
+    Tipo: Precipicio
     Ocupada: false
     Cantidad Especia: 0
   3,7:
@@ -182,14 +170,10 @@ Tablero:
     Ocupada: false
     Cantidad Especia: 0
   3,9:
-    Tipo: Especia
+    Tipo: Arena
     Ocupada: false
-    Cantidad Especia: 50
+    Cantidad Especia: 0
   3,10:
-    Tipo: Especia
-    Ocupada: false
-    Cantidad Especia: 50
-  3,11:
     Tipo: Arena
     Ocupada: false
     Cantidad Especia: 0
@@ -206,15 +190,15 @@ Tablero:
     Ocupada: true
     Cantidad Especia: 0
   4,3:
-    Tipo: Roca
+    Tipo: Arena
     Ocupada: false
     Cantidad Especia: 0
   4,4:
-    Tipo: Roca
+    Tipo: Arena
     Ocupada: false
     Cantidad Especia: 0
   4,5:
-    Tipo: Roca
+    Tipo: Arena
     Ocupada: false
     Cantidad Especia: 0
   4,6:
@@ -222,24 +206,20 @@ Tablero:
     Ocupada: false
     Cantidad Especia: 0
   4,7:
-    Tipo: Arena
+    Tipo: Roca
     Ocupada: false
     Cantidad Especia: 0
   4,8:
-    Tipo: Arena
-    Ocupada: false
+    Tipo: Roca
+    Ocupada: true
     Cantidad Especia: 0
   4,9:
-    Tipo: Especia
-    Ocupada: false
-    Cantidad Especia: 50
+    Tipo: Roca
+    Ocupada: true
+    Cantidad Especia: 0
   4,10:
-    Tipo: Especia
-    Ocupada: false
-    Cantidad Especia: 50
-  4,11:
-    Tipo: Arena
-    Ocupada: false
+    Tipo: Roca
+    Ocupada: true
     Cantidad Especia: 0
   5,0:
     Tipo: Roca
@@ -254,15 +234,15 @@ Tablero:
     Ocupada: true
     Cantidad Especia: 0
   5,3:
-    Tipo: Roca
+    Tipo: Arena
     Ocupada: false
     Cantidad Especia: 0
   5,4:
-    Tipo: Roca
+    Tipo: Arena
     Ocupada: false
     Cantidad Especia: 0
   5,5:
-    Tipo: Roca
+    Tipo: Arena
     Ocupada: false
     Cantidad Especia: 0
   5,6:
@@ -274,143 +254,131 @@ Tablero:
     Ocupada: false
     Cantidad Especia: 0
   5,8:
-    Tipo: Arena
-    Ocupada: false
+    Tipo: Roca
+    Ocupada: true
     Cantidad Especia: 0
   5,9:
-    Tipo: Arena
-    Ocupada: false
+    Tipo: Roca
+    Ocupada: true
     Cantidad Especia: 0
   5,10:
-    Tipo: Arena
-    Ocupada: false
-    Cantidad Especia: 0
-  5,11:
-    Tipo: Arena
-    Ocupada: false
+    Tipo: Roca
+    Ocupada: true
     Cantidad Especia: 0
   6,0:
     Tipo: Roca
-    Ocupada: false
+    Ocupada: true
     Cantidad Especia: 0
   6,1:
     Tipo: Roca
-    Ocupada: false
+    Ocupada: true
     Cantidad Especia: 0
   6,2:
     Tipo: Roca
-    Ocupada: false
+    Ocupada: true
     Cantidad Especia: 0
   6,3:
-    Tipo: Roca
+    Tipo: Arena
     Ocupada: false
     Cantidad Especia: 0
   6,4:
-    Tipo: Roca
+    Tipo: Arena
     Ocupada: false
     Cantidad Especia: 0
   6,5:
-    Tipo: Roca
+    Tipo: Arena
     Ocupada: false
     Cantidad Especia: 0
   6,6:
-    Tipo: Precipicio
+    Tipo: Arena
     Ocupada: false
     Cantidad Especia: 0
   6,7:
-    Tipo: Precipicio
+    Tipo: Arena
     Ocupada: false
     Cantidad Especia: 0
   6,8:
-    Tipo: Precipicio
-    Ocupada: false
+    Tipo: Roca
+    Ocupada: true
     Cantidad Especia: 0
   6,9:
-    Tipo: Arena
-    Ocupada: false
+    Tipo: Roca
+    Ocupada: true
     Cantidad Especia: 0
   6,10:
-    Tipo: Arena
-    Ocupada: false
-    Cantidad Especia: 0
-  6,11:
-    Tipo: Arena
-    Ocupada: false
+    Tipo: Roca
+    Ocupada: true
     Cantidad Especia: 0
   7,0:
-    Tipo: Roca
+    Tipo: Arena
     Ocupada: false
     Cantidad Especia: 0
   7,1:
-    Tipo: Roca
-    Ocupada: false
-    Cantidad Especia: 0
-  7,2:
-    Tipo: Roca
-    Ocupada: false
-    Cantidad Especia: 0
-  7,3:
-    Tipo: Roca
-    Ocupada: false
-    Cantidad Especia: 0
-  7,4:
-    Tipo: Roca
-    Ocupada: false
-    Cantidad Especia: 0
-  7,5:
-    Tipo: Roca
-    Ocupada: false
-    Cantidad Especia: 0
-  7,6:
     Tipo: Arena
     Ocupada: false
     Cantidad Especia: 0
+  7,2:
+    Tipo: Arena
+    Ocupada: false
+    Cantidad Especia: 0
+  7,3:
+    Tipo: Arena
+    Ocupada: false
+    Cantidad Especia: 0
+  7,4:
+    Tipo: Especia
+    Ocupada: false
+    Cantidad Especia: 50
+  7,5:
+    Tipo: Especia
+    Ocupada: false
+    Cantidad Especia: 50
+  7,6:
+    Tipo: Especia
+    Ocupada: false
+    Cantidad Especia: 50
   7,7:
     Tipo: Arena
     Ocupada: false
     Cantidad Especia: 0
   7,8:
-    Tipo: Dunas
+    Tipo: Arena
     Ocupada: false
     Cantidad Especia: 0
   7,9:
-    Tipo: Precipicio
+    Tipo: Arena
     Ocupada: false
     Cantidad Especia: 0
   7,10:
-    Tipo: Arena
-    Ocupada: false
-    Cantidad Especia: 0
-  7,11:
-    Tipo: Arena
+    Tipo: Roca
     Ocupada: false
     Cantidad Especia: 0
   8,0:
-    Tipo: Roca
+    Tipo: Arena
     Ocupada: false
     Cantidad Especia: 0
   8,1:
-    Tipo: Roca
+    Tipo: Arena
     Ocupada: false
     Cantidad Especia: 0
   8,2:
-    Tipo: Roca
+    Tipo: Arena
     Ocupada: false
     Cantidad Especia: 0
   8,3:
-    Tipo: Roca
+    Tipo: Arena
     Ocupada: false
     Cantidad Especia: 0
   8,4:
-    Tipo: Roca
+    Tipo: Arena
     Ocupada: false
     Cantidad Especia: 0
   8,5:
-    Tipo: Roca
+    Tipo: Arena
     Ocupada: false
     Cantidad Especia: 0
   8,6:
-    Tipo: Roca
+    Tipo: Arena
     Ocupada: false
     Cantidad Especia: 0
   8,7:
@@ -418,18 +386,14 @@ Tablero:
     Ocupada: false
     Cantidad Especia: 0
   8,8:
-    Tipo: Dunas
-    Ocupada: false
-    Cantidad Especia: 0
-  8,9:
-    Tipo: Dunas
-    Ocupada: false
-    Cantidad Especia: 0
-  8,10:
     Tipo: Arena
     Ocupada: false
     Cantidad Especia: 0
-  8,11:
+  8,9:
+    Tipo: Arena
+    Ocupada: false
+    Cantidad Especia: 0
+  8,10:
     Tipo: Arena
     Ocupada: false
     Cantidad Especia: 0
@@ -442,19 +406,19 @@ Tablero:
     Ocupada: false
     Cantidad Especia: 0
   9,2:
-    Tipo: Arena
+    Tipo: Dunas
     Ocupada: false
     Cantidad Especia: 0
   9,3:
-    Tipo: Arena
+    Tipo: Dunas
     Ocupada: false
     Cantidad Especia: 0
   9,4:
-    Tipo: Arena
+    Tipo: Dunas
     Ocupada: false
     Cantidad Especia: 0
   9,5:
-    Tipo: Arena
+    Tipo: Dunas
     Ocupada: false
     Cantidad Especia: 0
   9,6:
@@ -462,22 +426,18 @@ Tablero:
     Ocupada: false
     Cantidad Especia: 0
   9,7:
+    Tipo: Especia
+    Ocupada: false
+    Cantidad Especia: 50
+  9,8:
     Tipo: Arena
     Ocupada: false
     Cantidad Especia: 0
-  9,8:
-    Tipo: Dunas
-    Ocupada: false
-    Cantidad Especia: 0
   9,9:
-    Tipo: Dunas
+    Tipo: Arena
     Ocupada: false
     Cantidad Especia: 0
   9,10:
-    Tipo: Dunas
-    Ocupada: false
-    Cantidad Especia: 0
-  9,11:
     Tipo: Arena
     Ocupada: false
     Cantidad Especia: 0
@@ -525,62 +485,14 @@ Tablero:
     Tipo: Arena
     Ocupada: false
     Cantidad Especia: 0
-  10,11:
-    Tipo: Arena
-    Ocupada: false
-    Cantidad Especia: 0
-  11,0:
-    Tipo: Arena
-    Ocupada: false
-    Cantidad Especia: 0
-  11,1:
-    Tipo: Arena
-    Ocupada: false
-    Cantidad Especia: 0
-  11,2:
-    Tipo: Arena
-    Ocupada: false
-    Cantidad Especia: 0
-  11,3:
-    Tipo: Arena
-    Ocupada: false
-    Cantidad Especia: 0
-  11,4:
-    Tipo: Arena
-    Ocupada: false
-    Cantidad Especia: 0
-  11,5:
-    Tipo: Arena
-    Ocupada: false
-    Cantidad Especia: 0
-  11,6:
-    Tipo: Arena
-    Ocupada: false
-    Cantidad Especia: 0
-  11,7:
-    Tipo: Arena
-    Ocupada: false
-    Cantidad Especia: 0
-  11,8:
-    Tipo: Arena
-    Ocupada: false
-    Cantidad Especia: 0
-  11,9:
-    Tipo: Arena
-    Ocupada: false
-    Cantidad Especia: 0
-  11,10:
-    Tipo: Arena
-    Ocupada: false
-    Cantidad Especia: 0
-  11,11:
-    Tipo: Arena
-    Ocupada: false
-    Cantidad Especia: 0
-Cantidad Jugadores: 1
+Cantidad Jugadores: 2
 Estructuras:
-  Cantidad: 1
+  Cantidad: 2
   0:
-    Pos_x: 4
+    Pos_x: 5
     Pos_y: 1
     ID_jugador: 1
+  1:
+    Pos_x: 5
+    Pos_y: 9
+    ID_jugador: 2
