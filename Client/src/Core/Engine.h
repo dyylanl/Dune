@@ -14,7 +14,7 @@
 #include "../../../Common/includes/Protocol.h"
 #include "../../../Common/includes/BlockingQueue.h"
 #include "../../../Common/includes/NonBlockingQueue.h"
-#include "../Thread/Action.h"
+#include "../Action/CommandCL.h"
 #include "../GameObject/Button/ButtonWidtrap.h"
 
 class Engine {
@@ -25,9 +25,9 @@ private:
     EventManager &m_eventManager;
     bool m_Running;
     NonBlockingQueue<std::vector<GameObject*>> &m_queueNb;
-    BlockingQueue<Action*> &m_queueB;
+    BlockingQueue<CommandCL*> &m_queueB;
 public:
-    Engine(std::vector<std::vector<char>>& mapa, std::vector<GameObject*> &objects, TextureManager &manager, EventManager &eventManager, NonBlockingQueue<std::vector<GameObject*>> &queue_nb, BlockingQueue<Action*> &queueB);
+    Engine(std::vector<std::vector<char>>& mapa, std::vector<GameObject*> &objects, TextureManager &manager, EventManager &eventManager, NonBlockingQueue<std::vector<GameObject*>> &queue_nb, BlockingQueue<CommandCL*> &queueB);
 
     bool IsRunning();
 

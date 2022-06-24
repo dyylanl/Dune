@@ -7,12 +7,12 @@
 
 
 #include "../Graphics/TextureManager.h"
-#include "../Thread/Action.h"
+#include "../Action/CommandCL.h"
 #include "../../../Common/includes/BlockingQueue.h"
 
 class IObject {
 public:
-    virtual void update(EventManager &eventManager, BlockingQueue<Action *> &queue) = 0;
+    virtual void update(EventManager &eventManager, BlockingQueue<CommandCL *> &queue) = 0;
 
     virtual void draw(SDL2pp::Renderer &renderer, TextureManager &textureManager) = 0;
 

@@ -19,7 +19,7 @@ public:
     GameObject(std::string textureID, SDL2pp::Point position, SDL2pp::Point size)
     : m_textureID(textureID), m_position(position), m_size(size) {}
 
-    virtual void update(EventManager &eventManager, BlockingQueue<Action *> &queue) = 0;
+    virtual void update(EventManager &eventManager, BlockingQueue<CommandCL *> &queue) = 0;
 
     virtual void draw(SDL2pp::Renderer &renderer, TextureManager &textureManager) = 0;
 

@@ -4,7 +4,7 @@
 
 #include "BuildCL.h"
 
-void BuildCL::update(EventManager &eventManager, BlockingQueue<Action *> &queue) {
+void BuildCL::update(EventManager &eventManager, BlockingQueue<CommandCL *> &queue) {
     if (eventManager.mouseButtonDown(LEFT)) {
         SDL_Rect shape = SDL2pp::Rect(m_position, m_size);
         SDL_Point point = eventManager.getMouse();

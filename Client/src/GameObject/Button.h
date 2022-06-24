@@ -19,7 +19,7 @@ protected:
 public:
     Button(std::string textureID, SDL2pp::Point position, int id, char player, int constructionTime) : GameObject(textureID, position, SDL2pp::Point(66, 66)){}
 
-    void update(EventManager &eventManager, BlockingQueue<Action *> &queue);
+    void update(EventManager &eventManager, BlockingQueue<CommandCL *> &queue);
 
     virtual void draw(SDL2pp::Renderer &renderer, TextureManager &textureManager);
 

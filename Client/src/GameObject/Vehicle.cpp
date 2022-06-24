@@ -3,13 +3,21 @@
 //
 
 #include "Vehicle.h"
+#include "../Action/SelectCL.h"
+#include "../Action/MoveCL.h"
 
-void Vehicle::update(EventManager &eventManager, BlockingQueue<Action *> &queue) {
+void Vehicle::update(EventManager &eventManager, BlockingQueue<CommandCL *> &queue) {
     if (eventManager.mouseButtonDown(LEFT)) {
         SDL_Rect shape = SDL2pp::Rect(m_position, m_size);
         SDL_Point point = eventManager.getMouse();
         if (SDL_PointInRect(&point, &shape)) {
-            std::cout << "click button" << std::endl;
+            CommandCL *command = new SelectCL(m_id);
+            queue.push(command);
         }
+    }
+
+    if (eventManager.mouseButtonDown(RIGHT) && m_selectStatus) {
+        CommandCL *command = new MoveCL(m_id, eventManager.getMouse());
+        queue.push(command);
     }
 }

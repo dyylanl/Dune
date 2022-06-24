@@ -241,7 +241,6 @@ void Protocol::sendName(Socket &socket, std::string name) {
 
 void Protocol::recvType(Socket &socket, char &type) {
     socket.recv(reinterpret_cast<char *>(&type), sizeof(uint8_t));
-    std::cout << "tipo de Objecto: " << (int)type << std::endl;
 }
 
 void Protocol::sendType(Socket &socket, int &actionType) {
@@ -264,7 +263,6 @@ void Protocol::sendId(Socket &socket, int &id) {
 
 void Protocol::recvCountObject(Socket &socket, int &size) {
     socket.recv(reinterpret_cast<char *>(&size), sizeof(uint16_t));
-    std::cout << "cant de objetos: " << size << std::endl;
 }
 
 void
@@ -279,8 +277,6 @@ Protocol::recvUnit(Socket &socket, int &id, char &player, bool &selectStatus, in
     socket.recv(reinterpret_cast<char *>(&posActY), sizeof(uint16_t));
     socket.recv(reinterpret_cast<char *>(&life), sizeof(uint16_t));
     socket.recv(reinterpret_cast<char *>(&action), sizeof(uint8_t));
-    std::cout << "id: " << id << " player: " << (int)player << " select: " << selectStatus << std::endl;
-    std::cout << "Se recibe: " << "(" << posX << "," << posY << ")" << std::endl;
 }
 
 void Protocol::recvBuild(Socket &socket, int &id, char &player, int &posX, int &posY, int &life) {
@@ -293,7 +289,6 @@ void Protocol::recvBuild(Socket &socket, int &id, char &player, int &posX, int &
 
 void Protocol::sendCountObject(Socket &socket, int &countObject) {
     socket.send(reinterpret_cast<char *>(&countObject), sizeof(uint16_t));
-    std::cout << "Se envia countObject: " << countObject << std::endl;
 }
 
 void Protocol::enviar(Socket &socket) {
@@ -308,7 +303,6 @@ void Protocol::enviar(Socket &socket) {
     uint16_t posActY = 0;
     uint16_t life = 0;
     uint8_t act = 0;
-    std::cout << "Se envia: " << "(" << posX << "," << posY << ")" << std::endl;
     socket.send(reinterpret_cast<char *>(&type), sizeof(uint8_t));
     socket.send(reinterpret_cast<char *>(&unitType), sizeof(uint8_t));
     socket.send(reinterpret_cast<char *>(&id), sizeof(uint16_t));
@@ -324,11 +318,24 @@ void Protocol::enviar(Socket &socket) {
 
 void Protocol::recvObjectType(Socket &socket, char &unitType) {
     socket.recv(reinterpret_cast<char *>(&unitType), sizeof(uint8_t));
-    std::cout << "Tipo: " << (int)unitType << std::endl;
 }
 
 void Protocol::recvBotton(Socket &socket, int &id, char &player, int &constructionTime) {
     socket.recv(reinterpret_cast<char *>(&id), sizeof(uint16_t));
     socket.recv(reinterpret_cast<char *>(&player), sizeof(uint8_t));
     socket.recv(reinterpret_cast<char *>(&constructionTime), sizeof(uint16_t));
+}
+
+void Protocol::sendCommandSelect(Socket &socket, char &action, int &id) {
+    socket.send(reinterpret_cast<char *>(&action), sizeof(uint8_t));
+    socket.send(reinterpret_cast<char *>(&id), sizeof(uint16_t));
+    std::cout << "Se envia Seleccionar id: " << id << std::endl;
+}
+
+void Protocol::sendCommandMove(Socket &socket, char &action, int &id, int &posX, int &posY) {
+    socket.send(reinterpret_cast<char *>(&action), sizeof(uint8_t));
+    socket.send(reinterpret_cast<char *>(&id), sizeof(uint16_t));
+    socket.send(reinterpret_cast<char *>(&posX), sizeof(uint16_t));
+    socket.send(reinterpret_cast<char *>(&posY), sizeof(uint16_t));
+    std::cout << "Se envia mover id: " << id << " a la posicion " << posX << "," << posY << std::endl;
 }

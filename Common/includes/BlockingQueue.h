@@ -53,13 +53,13 @@ public:
     }
 
     // si T es pointer
-    ~BlockingQueue() {
+    /*~BlockingQueue() {
         while (!queue.empty()) {
             T t = queue.front();
             queue.pop();
             delete t;
         }
-    }
+    }*/
 };
 
 #endif  // __BLOCKING_QUEUE_H__

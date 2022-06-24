@@ -6,15 +6,15 @@
 
 void SendThread::run() {
     while (running) {
-        Action *action;
+        CommandCL *action;
         action = m_quene.pop();
         if(action != nullptr) {
-            actionProcess(action);
+            action->execute(m_protocol, m_socket);
         }
     }
 }
 
-void SendThread::actionProcess(const Action *action) {
+/*void SendThread::actionProcess(const CommandCL *action) {
     int actionType = 0;
     actionType = action->getAction();
     m_protocol.sendType(m_socket, actionType);
@@ -27,7 +27,7 @@ void SendThread::actionProcess(const Action *action) {
     } else {
         std::cout << "Error actionType no valido" << std::endl;
     }
-}
+}*/
 
 void SendThread::stop() {
     m_quene.close();

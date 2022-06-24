@@ -125,11 +125,11 @@ void Client::launch() {
         std::vector<std::vector<char>> map = protocol.recvMap(socket);*/
 
         NonBlockingQueue<std::vector<GameObject*>> queueNb;
-        BlockingQueue<Action*> queueB;
+        BlockingQueue<CommandCL*> queueB;
         RecvThread recvThread(queueNb, socket, protocol);
-        //SendThread sendThread(queueB, socket, protocol);
+        SendThread sendThread(queueB, socket, protocol);
         recvThread.start();
-        //sendThread.start();
+        sendThread.start();
 
         SDL2pp::SDL sdl(SDL_INIT_VIDEO);
         SDL2pp::Window window("DUNE - v0.1", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
@@ -154,9 +154,9 @@ void Client::launch() {
             usleep(FRAME_RATE);
         }
 
-        //sendThread.stop();
+        sendThread.stop();
         recvThread.stop();
-        //sendThread.join();
+        sendThread.join();
         recvThread.join();
 
     } catch (std::exception& e) {
