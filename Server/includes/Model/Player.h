@@ -33,6 +33,7 @@ public:
     void addGold(int gold);
     void subGold(int gold);
     float getEnergyFactor();
+    bool operator==(const Player& other) const;
 
     // agrega a la lista de edificaciones del jugador la nueva construccion
     void addBuilding(Building* building);

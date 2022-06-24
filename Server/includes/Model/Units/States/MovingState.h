@@ -1,8 +1,12 @@
-//
-// Created by dypa on 23/06/22.
-//
+#ifndef __MOVINGSTATE_H__
+#define __MOVINGSTATE_H__
 
-#ifndef DUNE_MOVINGSTATE_H
-#define DUNE_MOVINGSTATE_H
+#include "UnitState.h"
+#include "../Unit.h"
 
-#endif //DUNE_MOVINGSTATE_H
+class MovingState : public UnitState {
+public:
+    virtual UnitState *makeAction(Map &map, Unit &unit) override;
+};
+
+#endif //__MOVINGSTATE_H__

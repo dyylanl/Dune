@@ -1,8 +1,13 @@
-//
-// Created by dypa on 23/06/22.
-//
+#ifndef __ATTACKINGSTATE_H__
+#define __ATTACKINGSTATE_H__
 
-#ifndef DUNE_ATTACKINGSTATE_H
-#define DUNE_ATTACKINGSTATE_H
+#include "UnitState.h"
+#include "../Unit.h"
 
-#endif //DUNE_ATTACKINGSTATE_H
+class AttackingState : public UnitState {
+public:
+    virtual UnitState *makeAction(Map &map, Unit &unit) override;
+    virtual bool isAttacking() override;
+};
+
+#endif //__ATTACKINGSTATE_H__

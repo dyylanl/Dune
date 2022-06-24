@@ -37,3 +37,7 @@ bool Player::hasNews() {
     this->news = false;
     return ret;
 }
+
+bool Player::operator==(const Player &other) const {
+    return this->id == other.id;
+}

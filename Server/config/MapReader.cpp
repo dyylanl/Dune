@@ -1,4 +1,6 @@
 #include "MapReader.h"
+#include "../includes/Model/Buildings/ConstructionCenter.h"
+#include "../includes/types.h"
 
 MapReader::MapReader(std::string filename) :
     YAMLReader(filename) {}
@@ -42,6 +44,18 @@ std::vector<std::vector<char>> MapReader::getMap() {
         }
     }
     return map;
+}
+
+std::vector<Building> MapReader::getBuildings() {
+    std::vector<Building> builds;
+    int total = this->config["Estructuras"]["Cantidad"].as<unsigned>();
+    for (int i = 0; i < total; ++i) {
+        const int pos_x = this->config["Estructuras"][i]["Pos_x"].as<int>();
+        const int pos_y = this->config["Estructuras"][i]["Pos_y"].as<int>();
+        ConstructionCenter center(pos_x,pos_y,BLOCK_HEIGHT,BLOCK_WIDTH);
+        builds.push_back(center);
+    }
+    return builds;
 }
 
 MapReader::~MapReader() = default;
