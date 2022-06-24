@@ -328,7 +328,6 @@ int Map::getSpeedFactorAt(Position &pos) {
 }
 
 std::vector<std::vector<char>> &Map::getMap() {
-    std::cout << "retorno mapa" << std::endl;
     return this->mapa;
 }
 
