@@ -11,6 +11,8 @@
 class ButtonConstructionYardCL : public Button {
 public:
     ButtonConstructionYardCL(int id, char player, int constructionTime);
+
+    void buildBuilding(BlockingQueue<CommandCL *> &queue, SDL2pp::Point point);
 };
 
 

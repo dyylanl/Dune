@@ -15,14 +15,17 @@ protected:
     int m_id;
     char m_player;
     int m_constructionTime;
+    bool m_selectStatus;
+    bool m_ready;
 
 public:
-    Button(std::string textureID, SDL2pp::Point position, int id, char player, int constructionTime) : GameObject(textureID, position, SDL2pp::Point(66, 66)){}
+    Button(std::string textureID, SDL2pp::Point position, int id, char player, int constructionTime);
 
     void update(EventManager &eventManager, BlockingQueue<CommandCL *> &queue);
 
     virtual void draw(SDL2pp::Renderer &renderer, TextureManager &textureManager);
 
+    virtual void buildBuilding(BlockingQueue<CommandCL *> &queue, SDL2pp::Point point) = 0;
 };
 
 

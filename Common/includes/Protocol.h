@@ -146,6 +146,8 @@ public:
     void sendCommandSelect(Socket &socket, char &action, int &id);
 
     void sendCommandMove(Socket &socket, char &action, int &id, int &posX, int &posY);
+
+    void sendCommandBuildBuilding(Socket &socket, char &action, char &build, int &posX, int &posY);
 };
 
 

@@ -339,3 +339,10 @@ void Protocol::sendCommandMove(Socket &socket, char &action, int &id, int &posX,
     socket.send(reinterpret_cast<char *>(&posY), sizeof(uint16_t));
     std::cout << "Se envia mover id: " << id << " a la posicion " << posX << "," << posY << std::endl;
 }
+
+void Protocol::sendCommandBuildBuilding(Socket &socket, char &action, char &build, int &posX, int &posY) {
+    socket.send(reinterpret_cast<char *>(&action), sizeof(uint8_t));
+    socket.send(reinterpret_cast<char *>(&build), sizeof(uint8_t));
+    socket.send(reinterpret_cast<char *>(&posX), sizeof(uint16_t));
+    socket.send(reinterpret_cast<char *>(&posY), sizeof(uint16_t));
+}

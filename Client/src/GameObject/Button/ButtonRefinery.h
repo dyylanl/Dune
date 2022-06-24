@@ -12,6 +12,8 @@
 class ButtonRefinery : public Button {
 public:
     ButtonRefinery(int id, char player, int constructionTime);
+
+    void buildBuilding(BlockingQueue<CommandCL *> &queue, SDL2pp::Point point);
 };
 
 
