@@ -102,15 +102,11 @@ void Client::launch() {
         protocol.sendResponse(socket, comando);
 
         if (comando == 1) {
+
             std::cout << "\nNombre de la partida: ";
             std::string nombre_partida;
             std::cin >> nombre_partida;
             protocol.sendName(socket, nombre_partida);
-
-            std::cout << "\nCantidad de jugadores de la partida: ";
-            uint16_t cant_jugadores;
-            std::cin >> cant_jugadores;
-            protocol.sendResponse(socket, cant_jugadores);
 
             std::cout << "\nMapa de la partida (1: mapa1, 2: mapa2, 3: mapa3): " << std::endl;
             uint16_t map_id;
@@ -127,7 +123,12 @@ void Client::launch() {
             std::string name_game;
             std::cin >> name_game;
             protocol.sendName(socket,name_game);
+            int resp = protocol.recvResponse(socket);
+            if (resp == 0) {
+                std::cout << "me uni a la partida correctamente" << std::endl;
+            }
         } else if (comando == 3) {
+            std::cout << "Partidas creadas: " << std::endl;
             std::vector<std::string> list = this->protocol.recvGameList(socket);
             if (!list.empty()) {
                 int n = (int)list.size();
@@ -135,6 +136,7 @@ void Client::launch() {
                     std::cout << (list[i+2]);
                     std::cout << " " << list[i] << "/" << list[i+1] << std::endl;
                 }
+                protocol.recvResponse(socket);
             } else {
                 std::cout << "No hay partidas creadas..." << std::endl;
             }

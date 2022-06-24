@@ -75,7 +75,7 @@ public:
      * Return: 0 exito 1 error
      *
      */
-    uint16_t createGame(int req,Id id_map, const std::string& name);
+    uint16_t createGame(Id id_map, const std::string& name);
     /*
      * Inserta un jugador a la partida name.
      */

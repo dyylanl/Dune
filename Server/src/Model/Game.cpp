@@ -43,22 +43,20 @@ Game::Game(int rate, ConfigurationReader reader1) :
             game_config(reader1)
 {
     std::list<std::string> map_paths = game_config.getAllPaths();
-    int map_id = 0;
-    std::cout << "Mapas cargados: " << std::endl;
+    int map_id = 1;
     for (auto path : map_paths) {
         this->maps_init[map_id] = new Map(path);
         map_id++;
-        std::cout << "map_id: " << map_id << "\nRuta: " << path << std::endl;
     }
 }
 
-uint16_t Game::createGame(int req, Id id_map, const std::string& name_game) {
+uint16_t Game::createGame(Id id_map, const std::string& name_game) {
     std::lock_guard<std::mutex> lock(mutex);
-    std::cout << "DESPUES DE ESTA LINEA EXPLOTA TODO A LPM" << std::endl;
     if (!contains(name_game)) {
+        int req = maps_init[id_map]->getReqPlayers();
         put(name_game, 1, req);
         this->maps_created[name_game] = maps_init[id_map];
-        std::cout << "Se creo la partida " << name_game << std::endl;
+        std::cout << "Se creo la partida " << name_game << " de " << req << " jugadores."<< std::endl;
         return SUCCESS;
     }
     return ERROR;
@@ -140,7 +138,6 @@ void Game::createUnit(char unit_type) {
 
 std::vector<std::vector<char>>& Game::getMap(std::string name_game) {
     if (contains(name_game)){
-        std::cout << "[GAME]: la partida " << name_game << " existe" << std::endl;
         return this->maps_created.at(name_game)->getMap();
     } else {
         std::cout << "[GAME]: la partida " << name_game << " NO existe" << std::endl;
