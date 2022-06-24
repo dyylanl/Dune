@@ -13,3 +13,7 @@ void Button::update(EventManager &eventManager, BlockingQueue<Action *> &queue) 
         }
     }
 }
+
+void Button::draw(SDL2pp::Renderer &renderer, TextureManager &textureManager) {
+    textureManager.draw(renderer, m_textureID, m_position, m_size);
+}

@@ -4,7 +4,8 @@
 
 #include "DevastatorCL.h"
 
-DevastatorCL::DevastatorCL(SDL2pp::Point position, int id, int player, bool selecStatus, SDL2pp::Point posAction, int life,
+DevastatorCL::DevastatorCL(int id, int player, bool selecStatus, SDL2pp::Point position, SDL2pp::Point posAction,
+                           int life,
                            bool action) : Vehicle("Devastator", position,
                                               SDL2pp::Point(32,25), id, player,
                                               selecStatus, posAction,

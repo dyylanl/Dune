@@ -11,9 +11,7 @@
 
 class ButtonRefinery : public Button {
 public:
-    ButtonRefinery(SDL2pp::Point position, SDL2pp::Point size);
-
-    void draw(SDL2pp::Renderer &renderer, TextureManager &textureManager);
+    ButtonRefinery(int id, char player, int constructionTime);
 };
 
 

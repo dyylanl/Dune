@@ -10,7 +10,7 @@
 
 class ConstructionYardCL : public BuildCL {
 public:
-    ConstructionYardCL(SDL2pp::Point position, int id, int player, int life);
+    ConstructionYardCL(int id, int player, SDL2pp::Point position, int life);
 
     void draw(SDL2pp::Renderer &renderer, TextureManager &textureManager);
 };

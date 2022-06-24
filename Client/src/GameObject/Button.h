@@ -11,12 +11,17 @@
 
 
 class Button : public GameObject{
+protected:
+    int m_id;
+    char m_player;
+    int m_constructionTime;
+
 public:
-    Button(std::string textureID, SDL2pp::Point position, SDL2pp::Point size) : GameObject(textureID, position, size){}
+    Button(std::string textureID, SDL2pp::Point position, int id, char player, int constructionTime) : GameObject(textureID, position, SDL2pp::Point(66, 66)){}
 
     void update(EventManager &eventManager, BlockingQueue<Action *> &queue);
 
-    virtual void draw(SDL2pp::Renderer &renderer, TextureManager &textureManager) = 0;
+    virtual void draw(SDL2pp::Renderer &renderer, TextureManager &textureManager);
 
 };
 

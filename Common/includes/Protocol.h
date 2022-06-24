@@ -120,10 +120,10 @@ public:
     void sendName(Socket &socket, std::string name);
 
     void
-    recvUnit(Socket &socket, int &id, int &player, bool &selectStatus, int &posX, int &posY, int &posActX,
+    recvUnit(Socket &socket, int &id, char &player, bool &selectStatus, int &posX, int &posY, int &posActX,
              int &posActY, int &life, bool &action);
 
-    void recvType(Socket &socket, int &type);
+    void recvType(Socket &socket, char &type);
 
     void sendType(Socket &socket, int &actionType);
 
@@ -133,13 +133,15 @@ public:
 
     void recvCountObject(Socket &socket, int &size);
 
-    void recvBuild(Socket &socket, int &id, int &player, int &posX, int &posY, int &life);
+    void recvBuild(Socket &socket, int &id, char &player, int &posX, int &posY, int &life);
 
     void sendCountObject(Socket &socket, int &countObject);
 
     void enviar(Socket &socket);
 
-    void recvObjectType(Socket &socket, int &i);
+    void recvObjectType(Socket &socket, char &i);
+
+    void recvBotton(Socket &socket, int &id, char &player, int &constructionTime);
 };
 
 

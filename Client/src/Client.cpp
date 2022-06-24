@@ -174,6 +174,22 @@ void Client::loadTextures(TextureManager &textureManager) const {
     textureManager.load("Harvester", DATA_PATH "assets/Vehicles/Harvester.png");
 
     textureManager.load("ConstructionYard", DATA_PATH "assets/Builds/ConstructionYard.png");
+    textureManager.load("LightFactory", DATA_PATH "assets/Builds/LightFactory.png");
+    textureManager.load("HeavyFactory", DATA_PATH "assets/Builds/HeavyFactory.png");
+    textureManager.load("WindTrap", DATA_PATH "assets/Builds/WindTrap.png");
+    textureManager.load("Refinery", DATA_PATH "assets/Builds/Refinery.png");
+    textureManager.load("Silo", DATA_PATH "assets/Builds/Silo.png");
+    textureManager.load("Barrack", DATA_PATH "assets/Builds/Barrack.png");
+    textureManager.load("Palace", DATA_PATH "assets/Builds/Palace.png");
+
+    textureManager.load("ButtonConstructionYard", DATA_PATH "assets/Button/ConstructionYard.gif");
+    textureManager.load("ButtonLightFactory", DATA_PATH "assets/Button/LightFactory.png");
+    textureManager.load("ButtonHeavyFactory", DATA_PATH "assets/Button/HeavyFactory.png");
+    textureManager.load("ButtonWindTrap", DATA_PATH "assets/Button/WindTrap.png");
+    textureManager.load("ButtonRefinery", DATA_PATH "assets/Button/Refinery.png");
+    textureManager.load("ButtonSilo", DATA_PATH "assets/Button/Silo.png");
+    textureManager.load("ButtonBarrack", DATA_PATH "assets/Button/Barrack.png");
+    textureManager.load("ButtonPalace", DATA_PATH "assets/Button/Palace.png");
 
     textureManager.load("menu", DATA_PATH "assets/menu.png");
     textureManager.load("arena", DATA_PATH "assets/Terrain/tile_arena.png");
@@ -182,8 +198,6 @@ void Client::loadTextures(TextureManager &textureManager) const {
     textureManager.load("precipicio", DATA_PATH "assets/Terrain/tile_precipicio.png");
     textureManager.load("roca", DATA_PATH "assets/Terrain/tile_roca.png");
 
-    textureManager.load("ButtonWidtrap", DATA_PATH "assets/Button/windtrap.gif");
-    textureManager.load("ButtonRefinery", DATA_PATH "assets/Button/refinery.gif");
 }
 
 Client::~Client() = default;
