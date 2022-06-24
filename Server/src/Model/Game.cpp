@@ -140,10 +140,11 @@ void Game::createUnit(char unit_type) {
 
 std::vector<std::vector<char>>& Game::getMap(std::string name_game) {
     if (contains(name_game)){
-        std::cout << "[GAME]: el mapa existe" << std::endl;
+        std::cout << "[GAME]: la partida " << name_game << " existe" << std::endl;
         return this->maps_created.at(name_game)->getMap();
     } else {
-        throw Exception("Se quiere obtener un mapa que no existe.\n");
+        std::cout << "[GAME]: la partida " << name_game << " NO existe" << std::endl;
+        throw Exception("Acceso invalido a un mapa que no existe.\n");
     }
 }
 

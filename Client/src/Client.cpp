@@ -91,82 +91,54 @@ void Client::launch() {
 
     try {
 
-      //DESCOMENTAR ESTO PARA PROBAR SIN QT
-       // envio el nombre del jugador
-        std::string nombre = "dylan";
+        std::string nombre;
+        std::cout << "Nombre: ";
+        std::cin >> nombre;
         protocol.sendName(socket, nombre);
-
-        // comando de partida (1: crear, 2: unirse, 3: listar)
-        uint16_t comando = 1;
+        std::cout << std::endl;
+        std::cout << "Comando de partida (1: crear, 2: unirse, 3: listar):";
+        uint16_t comando;
+        std::cin >> comando;
         protocol.sendResponse(socket, comando);
 
-        // nombre de la partida
-        std::string nombre_partida = "duelo";
-        protocol.sendName(socket, nombre_partida);
+        if (comando == 1) {
+            std::cout << "\nNombre de la partida: ";
+            std::string nombre_partida;
+            std::cin >> nombre_partida;
+            protocol.sendName(socket, nombre_partida);
 
-        // cantidad de jugadores de la partida
-        uint16_t cant_jugadores = 1;
-        protocol.sendResponse(socket, cant_jugadores);
+            std::cout << "\nCantidad de jugadores de la partida: ";
+            uint16_t cant_jugadores;
+            std::cin >> cant_jugadores;
+            protocol.sendResponse(socket, cant_jugadores);
 
-        uint16_t map_id = 1;
-        protocol.sendResponse(socket, map_id);
+            std::cout << "\nMapa de la partida (1: mapa1, 2: mapa2, 3: mapa3): " << std::endl;
+            uint16_t map_id;
+            std::cin >> map_id;
+            protocol.sendResponse(socket, map_id);
+            uint16_t response = protocol.recvResponse(socket);
+            if (response == 0) {
+                std::cout << "se creo la partida" << std::endl;
+                std::vector<std::vector<char>> map = protocol.recvMap(socket);
 
-        uint16_t response = protocol.recvResponse(socket);
-
-        if (response == 0) {
-            std::cout << "se creo la partida" << std::endl;
-        }
-
-        // -------- a partir de este punto el servidor ya creo la partida y lo une al jugador ----------
-
-
-
-        // muestro las partidas que hay creadas (para ver que se haya creado bien)
-        std::vector<std::string> list = this->protocol.recvGameList(socket);
-        if (!list.empty()) {
-        int n = (int)list.size();
-        for (int i = 0; i <= (n-2); i = i+3) {
-            std::cout << (list[i+2]);
-            std::cout << " " << list[i] << "/" << list[i+1] << std::endl;
+            }
+        } else if (comando == 2) {
+            std::cout << "\nNombre de la partida: ";
+            std::string name_game;
+            std::cin >> name_game;
+            protocol.sendName(socket,name_game);
+        } else if (comando == 3) {
+            std::vector<std::string> list = this->protocol.recvGameList(socket);
+            if (!list.empty()) {
+                int n = (int)list.size();
+                for (int i = 0; i <= (n-2); i = i+3) {
+                    std::cout << (list[i+2]);
+                    std::cout << " " << list[i] << "/" << list[i+1] << std::endl;
+                }
+            } else {
+                std::cout << "No hay partidas creadas..." << std::endl;
             }
         }
-        // como la partida creada es de 1 solo entonces el servidor le envia el mapa
-        std::vector<std::vector<char>> map = protocol.recvMap(socket);
-
-        NonBlockingQueue<std::vector<GameObject*>> queueNb;
-        BlockingQueue<CommandCL*> queueB;
-        RecvThread recvThread(queueNb, socket, protocol);
-        SendThread sendThread(queueB, socket, protocol);
-        recvThread.start();
-        sendThread.start();
-
-        SDL2pp::SDL sdl(SDL_INIT_VIDEO);
-        SDL2pp::Window window("DUNE - v0.1", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
-                              1280, 720, SDL_WINDOW_RESIZABLE);
-        SDL2pp::Renderer renderer(window, -1, SDL_RENDERER_ACCELERATED);
-        Camera camera;
-        TextureManager textureManager(renderer, camera);
-
-        loadTextures(textureManager);
-        EventManager eventManager;
-        std::vector<GameObject*> objects;
-
-        //mapa de prueba
-        //std::vector<std::vector<char>> map(50, std::vector<char> (50, 'A') );
-
-        Engine engine(map, objects, textureManager, eventManager, queueNb, queueB);
-
-        while (engine.IsRunning()) {
-            engine.Events();
-            engine.Update();
-            engine.Render(renderer);
-            usleep(FRAME_RATE);
-        }
-
-        sendThread.stop();
-        recvThread.stop();
-        sendThread.join();
-        recvThread.join();
 
     } catch (std::exception& e) {
         std::cout << e.what() << std::endl;

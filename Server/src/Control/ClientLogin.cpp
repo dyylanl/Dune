@@ -30,11 +30,8 @@ void ClientLogin::run() {
         uint16_t len_name = protocol.recvCommand(peer);
         name = protocol.recvName(peer, len_name);
         std::cout << "Cliente logeado: " << name << std::endl;
-        int resp = 1;
-        while (resp == 1) {
-            uint16_t command = protocol.recvCommand(peer); // este comando puede ser 1 2 o 3
-            resp = execute(command, name); // si devuelve 0 es porque el cliente ya se unio a una partida o la creo
-        }
+        uint16_t command = protocol.recvCommand(peer); // este comando puede ser 1 2 o 3
+        execute(command, name); // si devuelve 0 es porque el cliente ya se unio a una partida o la creo
     } catch (const std::exception& e) {
         try {
             peer.shutdown();
