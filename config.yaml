@@ -1,12 +1,10 @@
 port: "8082"
 ticks_per_sec: 60
-total_maps: 5
+total_maps: 3
 maps:
-  0: "/home/dypa/Dune/mapa1.yaml"
-  1: "/home/dypa/Dune/mapa2.yaml"
-  2: "/home/dypa/Dune/mapa3.yaml"
-  3: "/home/dypa/Dune/mapa4.yaml"
-  4: "/home/dypa/Dune/mapa5.yaml"
+  0: "/home/dypa/Dune/mapa2.yaml"
+  1: "/home/dypa/Dune/mapa3.yaml"
+  2: "/home/dypa/Dune/mapa5.yaml"
 speedFactor: 50
 blockMovement: 2
 rangeFactor: 2000

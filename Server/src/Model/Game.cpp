@@ -33,17 +33,23 @@ void Game::addPlayer(const std::string& game_name) {
 // ---------- METODOS PUBLICOS ------------ //
 
 Game::Game(int rate, ConfigurationReader reader1) :
+            maps_init(),
             maps(),
             games(),
             players(),
-            next_id(FIRST_ID),
             /*map(reader1.getMapPath()),*/
             /*aStar(map),*/
+            next_id(FIRST_ID),
             game_config(reader1)
 {
-    std::cout << "Cargando mapas..." << std::endl;
-    int total_maps = game_config.getTotalMaps();
-    std::cout << "Cantidad de mapas cargados en el servidor: " << total_maps << std::endl;
+    std::list<std::string> map_paths = game_config.getAllPaths();
+    int map_id = 0;
+    std::cout << "Mapas cargados: " << std::endl;
+    for (auto path : map_paths) {
+        this->maps_init[map_id] = new Map(path);
+        map_id++;
+        std::cout << "map_id: " << map_id << "\nRuta: " << path << std::endl;
+    }
 }
 
 uint16_t Game::createGame(int req, Id id_map, const std::string& name_game) {
@@ -139,4 +145,7 @@ std::vector<std::vector<char>>& Game::getMap(std::string name_game) {
     } else {
         throw Exception("Se quiere obtener un mapa que no existe.\n");
     }
+}
+
+Game::~Game() {
 }

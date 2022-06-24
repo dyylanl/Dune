@@ -15,7 +15,8 @@
 
 class Game {
 private:
-    std::map<Id,Map> maps_init;
+
+    std::map<Id, Map*> maps_init;
     /*
      * Contiene todas las partidas creadas por los users
      * clave: nombre del mapa
@@ -113,6 +114,8 @@ public:
     void moveUnitSelecteds(const uint16_t i, const uint16_t i1);
 
     void createUnit(char unit_type);
+
+    ~Game();
 };
 
 
