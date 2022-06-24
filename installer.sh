@@ -80,16 +80,18 @@ function installDependencies() {
 function installGame() {
 	tput civis
 	clear
-    echo -e "${blueColour} Comenzando la instalacion de DUNE ${endColour}"
-    sleep 2
-    sudo rm -r "/home/"$USER"/Dune/build"
-    mkdir "/home/"$USER"/Dune/build"
-    cd "/home/"$USER"/Dune/build"
-    sudo make install -j6 > /dev/null 2>&1
-    echo ""
-    echo -e "\n${greenColour}[*] DUNE instalado en /home/"$USER"/Dune/build ${endColour}\n"
-    echo ""
-    return
+  echo -e "${blueColour} Comenzando la instalacion de DUNE ${endColour}"
+  sleep 2
+  sudo rm -r build 2>&1
+  mkdir build
+  cd build
+  sudo cmake .. > /dev/null 2>&1
+  sudo make install -j6 > /dev/null 2>&1
+  echo ""
+  echo -e "\n${greenColour}[*] DUNE instalado en "$(pwd)"${endColour}\n"
+  path=$pwd
+  echo ""
+  return
 }
 
 function post_installation() {
@@ -100,7 +102,7 @@ function post_installation() {
 	tput cnorm
 	case $OPTION in
 		c) 
-			cd "/home/"$USER"/Dune/build/"
+			cd "$path"
 			echo "Directorio DUNE"
 			exit 0
 			;;

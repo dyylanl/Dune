@@ -21,21 +21,17 @@ void ClientConnection::_freeNotifications() {
 void ClientConnection::_sender() {
     try {
         Protocol protocol;
-        //Command* command = nullptr;
-        //bool socket_valid = true;
-        /*while ((command = notifications.pop())) {
+        Command* command = nullptr;
+        bool socket_valid = true;
+        while ((command = notifications.pop())) {
             // aca hay que ejecutar una logica
             // aca se mandaria el snapshot
             socket_valid = protocol.sendResponse(peer, 1);
-            delete notification;
+            delete command;
             if (!socket_valid) {
                 break;
             }
-        }*/
-        int countObject = 1;
-        protocol.sendCountObject(peer, countObject);
-
-        protocol.enviar(peer);
+        }
     } catch (const std::exception& e) {
         stop();
         fprintf(stderr, "[ClientConnection]: %s\n", e.what());
@@ -111,7 +107,7 @@ void ClientConnection::join() {
     try {
         peer.shutdown();
     } catch (const Exception& e) {
-        fprintf(stderr, "[ClientConnection]: Ocurrio un erro en el join del player: %i (id)\n",id);
+        fprintf(stderr, "[ClientConnection]: Ocurrio un erro en el join del player(id): %i \n",id);
     }
 }
 
@@ -124,7 +120,7 @@ void ClientConnection::stop() {
     try {
         peer.shutdown();
     } catch (const Exception& e) {
-        fprintf(stderr, "[ClientConnection]: Error en el stop del player: %i (id)\n",id);
+        fprintf(stderr, "[ClientConnection]: Error en el stop del player (id): %i\n",id);
     }
 }
 

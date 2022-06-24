@@ -31,7 +31,7 @@ void ClientLogin::run() {
         name = protocol.recvName(peer, len_name);
         std::cout << "Cliente logeado: " << name << std::endl;
         uint16_t command = protocol.recvCommand(peer); // este comando puede ser 1 2 o 3
-        execute(command, name); // si devuelve 0 es porque el cliente ya se unio a una partida o la creo
+        execute(command, name); // si devuelve 0 es porque el cliente ya se unio a una partida o la crea
     } catch (const std::exception& e) {
         try {
             peer.shutdown();
@@ -85,6 +85,8 @@ int ClientLogin::execute(uint16_t command, std::string name_player) {
         if (resp == SUCCESS) {
             new_connections.push(new NewConnection(peer, name_player, name_game, map_id));
             return SUCCESS;
+        } else {
+            return ERROR;
         }
     }
     /*
@@ -103,6 +105,8 @@ int ClientLogin::execute(uint16_t command, std::string name_player) {
         if (resp == SUCCESS) {
             new_connections.push(new NewConnection(peer, name_player, name_game, map_id));
             return SUCCESS;
+        } else {
+            return ERROR;
         }
     }
     /*
@@ -111,9 +115,9 @@ int ClientLogin::execute(uint16_t command, std::string name_player) {
     else if (command == LIST_GAMES) {
         std::cout << "El jugador desea listar las partidas" << std::endl;
         protocol.sendGameList(peer, game.listGames());
-        return 1;
+        return ERROR;
     }
-    return 1;
+    return ERROR;
 }
 
 ClientLogin::~ClientLogin() = default;

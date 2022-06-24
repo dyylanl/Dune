@@ -56,6 +56,10 @@ uint16_t Game::createGame(Id id_map, const std::string& name_game) {
         int req = maps_init[id_map]->getReqPlayers();
         put(name_game, 1, req);
         this->maps_created[name_game] = maps_init[id_map];
+        if (req == 1) {
+            std::cout << "Iniciando partida " << name_game << "..." << std::endl;
+            return SUCCESS;
+        }
         std::cout << "Se creo la partida " << name_game << " de " << req << " jugadores."<< std::endl;
         return SUCCESS;
     }
