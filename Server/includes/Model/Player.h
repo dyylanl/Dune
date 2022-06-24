@@ -8,6 +8,7 @@
 #include <string>
 #include "Buildings/Building.h"
 #include "../defs.h"
+#include "Units/Unit.h"
 
 class Building;
 
@@ -28,6 +29,8 @@ public:
 
     // edificaciones que le pertenecen al player
     std::vector<Building*> buildings;
+    // unidades que le pertenecen al player
+    std::vector<Unit*> units;
 
     Player(InstanceId id, std::string house, std::string name);
     void addGold(int gold);
@@ -37,6 +40,10 @@ public:
 
     // agrega a la lista de edificaciones del jugador la nueva construccion
     void addBuilding(Building* building);
+
+    void addUnit(Unit* unit);
+
+    std::string getName() {return name;}
 
     int getId() {return id;}
 

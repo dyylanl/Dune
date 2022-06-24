@@ -25,19 +25,19 @@ std::vector<std::vector<char>> MapReader::getMap() {
             if (tipo == "Arena") {
                 map[i][j] = 'A';
             }
-            if (tipo == "Roca") {
+            else if (tipo == "Roca") {
                 map[i][j] = 'R';
 
             }
-            if (tipo == "Duna") {
+            else if (tipo == "Duna") {
                 map[i][j] = 'D';
 
             }
-            if (tipo == "Precipicio") {
+            else if (tipo == "Precipicio") {
                 map[i][j] = 'P';
 
             }
-            if (tipo == "Cimas") {
+            else if (tipo == "Cimas") {
                 map[i][j] = 'C';
 
             }
@@ -56,6 +56,10 @@ std::vector<Building> MapReader::getBuildings() {
         builds.push_back(center);
     }
     return builds;
+}
+
+unsigned MapReader::getReqPlayers() {
+    return this->config["Cantidad Jugadores"].as<unsigned>();
 }
 
 MapReader::~MapReader() = default;

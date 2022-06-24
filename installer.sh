@@ -15,6 +15,7 @@ trap ctrl_c INT
 
 function ctrl_c() {
 	echo -e "\n${redColour}[*] ABORTANDO ${endColour}\n"
+	tput cnorm
 	exit 0
 }
 
@@ -27,9 +28,9 @@ function initialMessage () {
 }
 
 function helpMessage() {
-    echo "Opciones:"
+    echo -e "${purpleColour} Opciones:"
     echo "  d: instalar DUNE"
-    echo "  q: salir."
+    echo -e "  q: salir. ${endColour}"
     echo ""
 }
 
@@ -39,49 +40,52 @@ function unknownInput() {
     echo ""
 }
 
-function build() {
-    sudo mkdir /home/"$USER"/Dune
-    sudo rm -rf build
-    mkdir build
-    cd build
-    cmake ..
-}
-
 function installDependencies() {
-    echo "=== INSTALANDO LIBRERIAS ==="
+	tput civis
+	clear
+    echo -e "${yellowColour} [*] Instalando librerias necesarias.... ${endColour}"
     echo ""
     echo ">> Instalando 'cmake'..."
-    sudo apt-get install cmake
+    sudo apt-get install cmake > /dev/null 2>&1
     echo ""
     echo ">> Instalando 'libsdl2-dev'..."
-    sudo apt-get install libsdl2-dev
+    sudo apt-get install libsdl2-dev > /dev/null 2>&1
     echo ""
     echo ">> Instalando 'libsdl2-image-dev'..."
-    sudo apt-get install libsdl2-image-dev
+    sudo apt-get install libsdl2-image-dev  > /dev/null 2>&1
     echo ""
     echo ">> Instalando 'libsdl2-ttf-dev'..."
-    sudo apt-get install libsdl2-ttf-dev
+    sudo apt-get install libsdl2-ttf-dev  > /dev/null 2>&1
     echo ""
     echo ">> Instalando 'libsdl2-mixer-dev'..."
-    sudo apt-get install libsdl2-mixer-dev
+    sudo apt-get install libsdl2-mixer-dev > /dev/null 2>&1
     echo ""
     echo ">> Instalando 'libyaml-cpp-dev'..."
-    sudo apt-get install libyaml-cpp-dev
+    sudo apt-get install libyaml-cpp-dev > /dev/null 2>&1
+    echo ""
     echo ">> Instalando 'qtbase5-dev'..."
-    sudo apt-get install qtbase5-dev
+    sudo apt-get install qtbase5-dev > /dev/null 2>&1
+    echo ""
     echo ">> Instalando 'qtmultimedia5-dev'..."
-    sudo apt-get install qtmultimedia5-dev
+    sudo apt-get install qtmultimedia5-dev > /dev/null 2>&1
+    echo ""
     echo ">> Instalando 'qtdeclarative5-dev'"
-    sudo apt-get install qtdeclarative5-dev
+    sudo apt-get install qtdeclarative5-dev > /dev/null 2>&1
     echo ""
-        echo "Instalación de librerias finalizada."
+        echo -e "${greenColour}Instalación de librerias finalizada.${endColour}"
     echo ""
+    sleep 2
 }
 
 function installGame() {
-    echo "=== INSTALACIÓN DEL JUEGO ==="
-    cd "/home/$"USER"/Dune"
-    sudo make install -j6
+	tput civis
+	clear
+    echo -e "${blueColour} Comenzando la instalacion de DUNE ${endColour}"
+    sleep 2
+    sudo rm -r "/home/"$USER"/Dune/build"
+    mkdir "/home/"$USER"/Dune/build"
+    cd "/home/"$USER"/Dune/build"
+    sudo make install -j6 > /dev/null 2>&1
     echo ""
     echo -e "\n${greenColour}[*] DUNE instalado en /home/"$USER"/Dune/build ${endColour}\n"
     echo ""
@@ -93,13 +97,16 @@ function post_installation() {
 	echo " 	q) Salir."
 	waitingInputMessage
 	read OPTION
+	tput cnorm
 	case $OPTION in
 		c) 
-			cd "/home/"$USER"/Dune/build"
+			cd "/home/"$USER"/Dune/build/"
+			echo "Directorio DUNE"
 			exit 0
 			;;
 		q) 
 			echo "Adios!"
+			exit 0
 			;;
 		*)
 			exit 0
@@ -117,7 +124,6 @@ function init_installer() {
 			d)
 				echo ""
 				installDependencies
-            			build
             			installGame
             			post_installation
         			;;

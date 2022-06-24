@@ -1,4 +1,5 @@
 #include "../../includes/Model/Game.h"
+#include "../../includes/Model/Player.h"
 
 #define FIRST_ID 1
 #define SUCCESS 0
@@ -27,25 +28,22 @@ void Game::addPlayer(const std::string& game_name) {
     if (contains(game_name)) {
         put(game_name, (get(game_name)[0]+1), get(game_name)[1]);
     }
-    std::cout << "Se unio un jugador a la partida " << game_name << std::endl;
 }
+
+// ---------- METODOS PUBLICOS ------------ //
 
 Game::Game(int rate, ConfigurationReader reader1) :
             next_id(FIRST_ID),
             map(reader1.getMapPath()),
             aStar(map),
-            units_selected(),
             game_config(reader1)
 {}
 
-uint16_t Game::createGame(int req, const std::string& name) {
+uint16_t Game::createGame(int req, Id id_map, const std::string& name_game) {
     std::lock_guard<std::mutex> lock(mutex);
-    if (!contains(name)) {
-        put(name, 1, req);
-        std::cout << "Se creo la partida " << name << std::endl;
-        if (req == 1) {
-            std::cout << "Comenzando partida " << name << "..." << std::endl;
-        }
+    if (!contains(name_game)) {
+        put(name_game, 1, req);
+        std::cout << "Se creo la partida " << name_game << std::endl;
         return SUCCESS;
     }
     return ERROR;
@@ -56,7 +54,6 @@ uint16_t Game::acceptPlayer(const std::string& name) {
     if (contains(name)) {
         if ((get(name))[0] < (get(name))[1]) {
             addPlayer(name);
-            std::cout << "Se unio un jugador a la partida " << name << std::endl;
             if (get(name)[0] == get(name)[1]) {
                 std::cout << "Comenzando partida " << name << "..." << std::endl;
             }
@@ -120,4 +117,12 @@ void Game::moveUnitSelecteds(const uint16_t i, const uint16_t i1) {
 
 void Game::createUnit(char unit_type) {
     std::cout << "Creando unidades del tipo" << unit_type << std::endl;
+}
+
+std::vector<std::vector<char>> Game::getMap(std::string name_game) {
+    if (contains(name_game)){
+        return this->maps.at(name_game).getMap();
+    } else {
+        throw Exception("Se quiere obtener un mapa que no existe.\n");
+    }
 }

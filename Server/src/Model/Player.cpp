@@ -26,10 +26,9 @@ float Player::getEnergyFactor() {
     return energy_factor;
 }
 
-// ToDo: setear el edificio del player
 void Player::addBuilding(Building *building) {
     buildings.push_back(building);
-    //building->setPlayer(this);
+    building->setPlayer(this);
 }
 
 bool Player::hasNews() {
@@ -40,4 +39,9 @@ bool Player::hasNews() {
 
 bool Player::operator==(const Player &other) const {
     return this->id == other.id;
+}
+
+void Player::addUnit(Unit *unit) {
+    units.push_back(unit);
+    unit->setPlayer(*this);
 }

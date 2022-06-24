@@ -17,13 +17,13 @@ void ClientConnection::_freeNotifications() {
 }
 
 // hilo sender -- envia respuesta al cliente
+// todo: implementar logica de envio de informacion pertinente al player
 void ClientConnection::_sender() {
     try {
         Protocol protocol;
         //Command* command = nullptr;
         //bool socket_valid = true;
         /*while ((command = notifications.pop())) {
-            // TODO SIEMPRE ENVIA 1 DE RESPUESTA
             // aca hay que ejecutar una logica
             // aca se mandaria el snapshot
             socket_valid = protocol.sendResponse(peer, 1);

@@ -11,6 +11,7 @@ public:
     unsigned getCols() const;
     std::vector<std::vector<char>> getMap();
     std::vector<Building> getBuildings();
+    unsigned getReqPlayers();
     ~MapReader();
 
 };

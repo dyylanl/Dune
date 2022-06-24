@@ -37,6 +37,8 @@ private:
     std::thread receiver;
     NonBlockingQueue<Command*>& commands;
 
+    //Game &game;
+
     void _finishThread();
     // POR NO USAR PTR INTELIGENTES
     void _freeNotifications();

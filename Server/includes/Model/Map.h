@@ -19,6 +19,7 @@ class Map {
     std::vector<std::vector<char>> mapa; // contiene el tipo de unidad en esa posicion
     std::vector<Unit*> units;
     std::vector<Building*> buildings;
+    int req_players;
 public:
     explicit Map(std::string map_path);
     ~Map();
@@ -27,6 +28,7 @@ public:
     int getRows() const {return rows;}
     int getCols() const {return cols;}
     std::vector<std::vector<char>> getMap() {return this->mapa;}
+    int getReqPlayers() const {return req_players;}
     char getTypeTerrain(int posX, int posY);
     // comandos
     void selectUnit(int pos_x, int pos_y);

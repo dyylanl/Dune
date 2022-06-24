@@ -1,14 +1,21 @@
 #include "../../includes/Control/Engine.h"
 
-
+/*
+ * Que el engine procese una nueva conexion significa que este cliente ya decidio si
+ * creo una partida o se unio a una
+ * 1) obtengo el nombre a la partida que decidio unirse
+ * 2) le envio el mapa de la partida a la que se unio
+ * 3) lo agrego al contenedor de conexiones establecidas
+ */
 void Engine::_processNewConnections() {
     NewConnection* new_connection = nullptr;
+    std::string name_game;
     while ((new_connection = new_connections.pop())) {
-        protocol.sendGameList(new_connection->peer,game.listGames());
-        protocol.sendMap(new_connection->peer,game.getMap());
-        Id id = new_connection->getId();
-        auto map_id = this->game.getMapId(id);
-        established_connections.add(id, map_id, (*new_connection).peer);
+        name_game = new_connection->name_game;
+        std::vector<std::vector<char>> map = game.getMap(name_game);
+        Id map_id = game.getMapId(name_game);
+        protocol.sendMap(new_connection->peer,map);
+        established_connections.add(game.getConnectionId(),map_id,new_connection->peer);
         delete new_connection;
     }
 }
@@ -22,9 +29,8 @@ void Engine::_processNewConnections() {
 void Engine::_processCommands() {
     Command* command_process = nullptr;
     while ((command_process = commands.pop())) {
-        fprintf(stderr, "[ENGINE]: Procesando comando...\n");
-        std::cout << "Ejecutando comando: " << command_process << std::endl;
-        std::cout << "Pusheando snapshot" << std::endl;
+        command_process->exec(game);
+        delete command_process;
     }
 }
 
@@ -37,12 +43,10 @@ void Engine::_processFinishedConnections() {
 }
 
 void Engine::_freeQueues() {
-    {
         InstanceId* p = nullptr;
         while ((p = finished_connections.pop())) {
             delete p;
         }
-    }
 }
 
 void Engine::_loopIteration(int it) {
