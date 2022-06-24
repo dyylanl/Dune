@@ -22,7 +22,7 @@ private:
      * clave: nombre del mapa
      * valor: mapa
      */
-    std::map<std::string, Map> maps;
+    std::map<std::string, Map*> maps_created;
     /*
      * aca esta toda la informacion actualizada para enviarsela al cliente y hacer todos los chequeos
      * por lo tanto al ser el unico recurso compartido solo uso el mutex en este map

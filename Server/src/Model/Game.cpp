@@ -34,7 +34,7 @@ void Game::addPlayer(const std::string& game_name) {
 
 Game::Game(int rate, ConfigurationReader reader1) :
             maps_init(),
-            maps(),
+            maps_created(),
             games(),
             players(),
             /*map(reader1.getMapPath()),*/
@@ -57,7 +57,7 @@ uint16_t Game::createGame(int req, Id id_map, const std::string& name_game) {
     std::cout << "DESPUES DE ESTA LINEA EXPLOTA TODO A LPM" << std::endl;
     if (!contains(name_game)) {
         put(name_game, 1, req);
-
+        this->maps_created[name_game] = maps_init[id_map];
         std::cout << "Se creo la partida " << name_game << std::endl;
         return SUCCESS;
     }
@@ -141,7 +141,7 @@ void Game::createUnit(char unit_type) {
 std::vector<std::vector<char>>& Game::getMap(std::string name_game) {
     if (contains(name_game)){
         std::cout << "[GAME]: el mapa existe" << std::endl;
-        return this->maps.at(name_game).getMap();
+        return this->maps_created.at(name_game)->getMap();
     } else {
         throw Exception("Se quiere obtener un mapa que no existe.\n");
     }
