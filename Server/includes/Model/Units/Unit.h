@@ -7,11 +7,16 @@
 #include "Attackable.h"
 #include "../Terrains/Terrain.h"
 #include "../Weapons/Rocket.h"
+#include "States/UnitState.h"
 
+class AttackingState;
+class MovingState;
 
 class Unit : public Attackable {
 public:
-
+    static const AttackingState attacking;
+    static const MovingState moving;
+    static const MovingState stopped;
     enum UnitType {
         HARVESTER,
         LIGHT_INFANTRY,
@@ -20,8 +25,7 @@ public:
         TANK,
         TRIKE,
     };
-
-    Unit(const int x, const int y, const int hitPoints, const int speed, const int cost);
+    Unit(int x, int y, int hitPoints, int speed, int cost);
     bool operator==(const Unit& other);
     void setPath(std::stack<Position> path, Position destiny);
     bool move(Map &map);
@@ -33,8 +37,11 @@ public:
     virtual Rocket* getRocket();
     void checkForDeadVictim();
     virtual bool hasNews();
-
-
+    UnitState* makeAttack(Map& map);
+    UnitState *makeFollow(Map &map);
+    bool isAttacking();
+    void makeAction(Map &map);
+    UnitState *makeStopped(Map &map);
 public:
     const int id;
 protected:
@@ -42,6 +49,7 @@ protected:
     const int speed;
     const int cost;
     int actual_speed;
+    UnitState* state;
     std::stack<Position> pathToDestiny;
     Attackable* foll_unit;
     Position destiny;

@@ -3,7 +3,7 @@
 void Accepter::_acceptClient(int next_id) {
     Socket peer = socket.accept();
     if (keep_accepting) {
-        auto client = new ClientLogin(next_id,game,peer, reader, new_connections);
+        auto client = new ClientLogin(game,peer, reader, new_connections);
         client_logins.emplace_back(client);
         client->start();
     }

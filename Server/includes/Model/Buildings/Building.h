@@ -37,17 +37,14 @@ public:
     void demolish();
     bool hasNews();
 
-    Position getPosition() {return all_positions[0];}
-
-
     const int id;
     const int width, height;
     const int energy;
     const int cost;
-
 private:
     static int counter;
     Player* player;
+    Position pos;
     BuildingType key;
     std::vector<Position> all_positions;
 

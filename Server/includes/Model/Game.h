@@ -15,13 +15,28 @@
 
 class Game {
 private:
+    /*
+     * Contiene todas las partidas creadas por los users
+     * clave: nombre del mapa
+     * valor: mapa
+     */
+    std::map<std::string, Map> maps;
+    /*
+     * aca esta toda la informacion actualizada para enviarsela al cliente y hacer todos los chequeos
+     * por lo tanto al ser el unico recurso compartido solo uso el mutex en este map
+     */
     std::map<std::string, std::vector<int>> games;
+    /*
+     * clave: nombre de la partida
+     * valor: jugadores en esa partida
+     * {duelo 3vs3: [dylan,ricardo,fede,fede,mateo,pepe], solo: [alone], ...}
+     */
+    std::map<std::string,std::vector<Player*>> players;
     std::mutex mutex;
     InstanceId next_id;
     Map map;
     AStar aStar;
     // comandos
-    std::list<Unit*> units_selected;
     ConfigurationReader game_config;
 
     /*
@@ -52,10 +67,11 @@ private:
 public:
     Game(int rate, ConfigurationReader reader);
     /*
-     * Crea una partida {name:[1,req]}
-     * ToDo: indicar con que mapa jugara
+     * Crea una partida {name:[1,req,id_mapa]}
+     * Return: 0 exito 1 error
+     *
      */
-    uint16_t createGame(int req, const std::string& name);
+    uint16_t createGame(int req,Id id_map, const std::string& name);
     /*
      * Inserta un jugador a la partida name.
      */
@@ -73,10 +89,11 @@ public:
     std::stack<Position> makePath(Unit& unit, Position pos_end);
 
     InstanceId getConnectionId() {return next_id++;}
-    std::vector<std::vector<char>> getMap() {return this->map.getMap();}
+
+    std::vector<std::vector<char>> getMap(std::string name_game);
 
     // TODO: TERMINAR ID's de mapa
-    static Id getMapId(int map_id) {return 1;};
+    static Id getMapId(std::string name_game) {return 1;};
 
 
     ///////////// comandos ////////////

@@ -14,7 +14,8 @@ public:
     explicit Attackable(const int life, const int x, const int y);
     virtual ~Attackable() = default;
     void setPosition(Position pos);
-    Position& getPosition();
+
+    virtual Position& getPosition();
     virtual Position& getClosestPosition(Position& pos);
     virtual int getLife();
     virtual int getInitialLife();

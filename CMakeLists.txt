@@ -67,7 +67,7 @@ add_executable(dune ${client_src})
 target_link_libraries(dune dune-common SDL2 SDL2_image SDL2_ttf SDL2_mixer ${SDL2PP_LIBRARIES} Qt5::Core Qt5::Gui Qt5::Widgets Qt5::Multimedia)
 
 # Server
-add_executable(dune-server ${server_src} Server/src/Model/Units/Attackable.cpp Server/src/Model/Units/Attacker.cpp Server/src/Model/Units/Offensive.cpp)
+add_executable(dune-server ${server_src} Server/src/Model/Units/Attackable.cpp Server/src/Model/Units/Attacker.cpp Server/src/Model/Units/Offensive.cpp Server/includes/Model/Units/States/AttackingState.h Server/src/Model/Units/States/AttackingState.cpp Server/includes/Model/Units/States/MovingState.h Server/src/Model/Units/States/MovingState.cpp)
 target_link_libraries(dune-server dune-common ${YAML_CPP_LIBRARIES})
 #------------------------------------------------------------------------------
 

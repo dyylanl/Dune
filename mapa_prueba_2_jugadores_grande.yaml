@@ -2501,6 +2501,7 @@ Tablero:
     Tipo: Roca
     Ocupada: false
     Cantidad Especia: 0
+
 Cantidad Jugadores: 2
 Estructuras:
   Cantidad: 2

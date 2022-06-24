@@ -1,9 +1,8 @@
 #include "../../../includes/Model/Units/Unit.h"
-#include "../../../includes/Model/Weapons/Rocket.h"
+#include "../../../includes/Model/Units/States/MovingState.h"
+#include "../../../includes/Model/Units/States/AttackingState.h"
 #include "../../../includes/Model/Map.h"
 #include "../../../includes/Model/Player.h"
-#include <iostream>
-#include <stack>
 
 int Unit::counter = 0;
 Unit::Unit(const int x, const int y, const int hitPoints, const int speed, const int cost) :
@@ -12,15 +11,21 @@ Unit::Unit(const int x, const int y, const int hitPoints, const int speed, const
         speed(speed),
         cost(cost),
         actual_speed(0),
+        state((UnitState*) & Unit::stopped),
         pathToDestiny(),
         foll_unit(nullptr),
         destiny(x, y),
         prev_foll_unit_pos(),
         next_pos(x, y),
-        news(true) {
+        news(true)
+{
     counter += 1;
 }
 
+
+const AttackingState Unit::attacking;
+const MovingState Unit::moving;
+const MovingState Unit::stopped;
 
 bool Unit::move(Map &map) {
     bool moved = true;
@@ -53,10 +58,10 @@ bool Unit::move(Map &map) {
     return moved;
 }
 
-void Unit::setPath(std::stack<Position> path1, Position destiny1) {
-    pathToDestiny = path1;
+void Unit::setPath(std::stack<Position> path, Position destiny1) {
+    pathToDestiny = path;
     this->destiny = destiny1;
-    if (!path1.empty()) {
+    if (!path.empty()) {
         next_pos = pathToDestiny.top();
         pathToDestiny.pop();
 //        state = (UnitState*)&Unit::moving;
@@ -84,7 +89,7 @@ void Unit::follow(Attackable* other, Map& map) {
     map.setDestiny(*this, foll_unit->getClosestPosition(pos).x, foll_unit->getClosestPosition(pos).y);
     if (occupied_pos)
         map.at(prev_foll_unit_pos).occupy();
-    std::cout << "La unidad esta moviendose..." << std::endl;
+    state = (UnitState*)&Unit::moving;
 }
 
 void Unit::setPlayer(Player &player1) {
@@ -96,6 +101,39 @@ Player &Unit::getPlayer() {
     return *player;
 }
 
+void Unit::makeAction(Map &map) {
+    state = state->makeAction(map, *this);
+}
+
+bool Unit::isAttacking() {
+    return state->isAttacking();
+}
+
+UnitState *Unit::makeFollow(Map &map) {
+    return state;
+}
+
+UnitState *Unit::makeAttack(Map &map) {
+    return state;
+}
+
+UnitState *Unit::makeStopped(Map &map) {
+    return state;
+}
+/*
+void Unit::actionOnPosition(Map &map, Position &pos) {
+//    Unit* foll_unit = map.getClosestUnit(pos, 50 * 50, *player, false);
+    Attackable* foll_unit = map.getClosestAttackable(pos, 50 * 50, *player);
+    if (foll_unit != nullptr) {
+        this->follow(foll_unit, map);
+        state = (UnitState*) &Unit::following;
+    } else {
+        map.setDestiny(*this, pos.x, pos.y);
+        state = (UnitState*) &Unit::moving;
+    }
+}
+*/
+
 bool Unit::shotARocket() {
     return false;
 }
@@ -103,14 +141,15 @@ bool Unit::shotARocket() {
 Rocket* Unit::getRocket() {
     return nullptr;
 }
+
 void Unit::checkForDeadVictim() {
     if (foll_unit != nullptr) {
         if (Unit::isDead(foll_unit)) {
             this->foll_unit = nullptr;
+            this->state = (UnitState*)&Unit::stopped;
         }
     }
 }
-
 
 bool Unit::hasNews() {
     return (news);
