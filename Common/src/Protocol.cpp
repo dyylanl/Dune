@@ -361,8 +361,11 @@ std::vector<std::string> Protocol::recvMapsId(Socket &socket) {
     }
 }
 
-
-void Protocol::sendMapsId(Socket &socket, std::vector<std::string> &maps_id){
+/*
+* envio la cantidad de mapas
+* 
+*/
+void Protocol::sendMapsId(Socket &socket, std::vector<std::string> maps_id){
     if (maps_id.empty()) { // si no hay mapas cargados (raro) envio 0
         uint16_t empt = htons(0);
         socket.send(reinterpret_cast<const char *>(&empt), sizeof(uint16_t));
@@ -379,3 +382,16 @@ void Protocol::sendMapsId(Socket &socket, std::vector<std::string> &maps_id){
     }
 }
 
+
+
+void Protocol::sendMapsCreated(Socket &socket, int total_maps_id) {
+    uint16_t total_id = htons(total_maps_id);
+    socket.send(reinterpret_cast<const char *>(&total_id), sizeof(uint16_t)); // envio la cantidad de id's
+}
+
+uint16_t Protocol::recvMapsCreated(Socket &socket) {
+    uint16_t total_maps = 0;
+    socket.recv(reinterpret_cast<char *>(&total_maps), sizeof(uint16_t)); // recibo la cantidad de mapas creados
+    total_maps = ntohs(total_maps);
+    return total_maps;
+}

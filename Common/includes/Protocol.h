@@ -154,7 +154,11 @@ public:
      */
     std::vector<std::string> recvMapsId(Socket &socket);
 
-    void sendMapsId(Socket &socket, std::vector<std::string> &maps_id);
+    void sendMapsId(Socket &socket, std::vector<std::string> maps_id);
+
+    void sendMapsCreated(Socket &socket, int total_maps_id);
+
+    uint16_t recvMapsCreated(Socket &socket);
 };
 
 

@@ -116,6 +116,14 @@ public:
     void createUnit(char unit_type);
 
     ~Game();
+
+
+    /*
+    * Retorna una lista con del tipo "Id"
+    */
+   std::vector<std::string> getMaps();
+
+   int getMapsCreated() {return maps_init.size();}
 };
 
 

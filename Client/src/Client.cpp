@@ -100,6 +100,8 @@ void Client::launch() {
         Socket socket(ip,port);
         Protocol protocol;
 
+        std::cout << "Conexion exitosa.\n";
+
         std::string nombre;
         std::cout << "\nNombre: ";
         std::cin >> nombre;
@@ -115,7 +117,14 @@ void Client::launch() {
                 std::string nombre_partida;
                 std::cin >> nombre_partida;
                 protocol.sendName(socket, nombre_partida);
-                std::cout << "\n  * [1] Mapa_1\n  * [2] Mapa_2\n  * [3] Mapa_3\n";
+                int maps_ = protocol.recvMapsCreated(socket);
+                if (maps_ == 0) {
+                  std::cout << "No hay mapas cargados en el server" << std::endl;
+                } else {
+                  for (int i = 1; i <= maps_; i++) {
+                    std::cout << "\n  ["<<i<<"] Mapa " << i << std::endl;
+                  }
+                }
                 uint16_t map_id;
                 std::cout << "Seleccione un mapa: ";
                 std::cin >> map_id;

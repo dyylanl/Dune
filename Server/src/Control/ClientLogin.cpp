@@ -79,6 +79,7 @@ int ClientLogin::execute(uint16_t command, std::string name_player) {
         std::string name_game;
         uint16_t len_name = protocol.recvCommand(peer);
         name_game = protocol.recvName(peer, len_name);
+        protocol.sendMapsCreated(peer, game.getMapsCreated());
         uint16_t map_id = protocol.recvCommand(peer);
         uint16_t resp = game.createGame(map_id, name_game);
         protocol.sendResponse(peer, resp);
