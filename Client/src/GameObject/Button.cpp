@@ -20,6 +20,7 @@ void Button::update(EventManager &eventManager, BlockingQueue<CommandCL *> &queu
         SDL2pp::Point point = eventManager.getMouse();
         if (SDL_PointInRect(&point, &shape)) {
             CommandCL *command = new SelectCL(m_id);
+            std::cout << "Push commando Select" << std::endl;
             queue.push(command);
         }
     }

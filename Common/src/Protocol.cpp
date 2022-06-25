@@ -330,7 +330,8 @@ Protocol::recvBotton(Socket &socket, int &id, char &player, int &constructionTim
 void Protocol::sendCommandSelect(Socket &socket, char &action, int &id) {
     socket.send(reinterpret_cast<char *>(&action), sizeof(uint8_t));
     socket.send(reinterpret_cast<char *>(&id), sizeof(uint16_t));
-    std::cout << "Se envia Seleccionar id: " << id << std::endl;
+    std::cout << "action(uint8_t) : " << (int)action << std::endl;
+    std::cout << "id(uint16_t) : " << id << std::endl;
 }
 
 void Protocol::sendCommandMove(Socket &socket, char &action, int &id, int &posX, int &posY) {
@@ -338,7 +339,10 @@ void Protocol::sendCommandMove(Socket &socket, char &action, int &id, int &posX,
     socket.send(reinterpret_cast<char *>(&id), sizeof(uint16_t));
     socket.send(reinterpret_cast<char *>(&posX), sizeof(uint16_t));
     socket.send(reinterpret_cast<char *>(&posY), sizeof(uint16_t));
-    std::cout << "Se envia mover id: " << id << " a la posicion " << posX << "," << posY << std::endl;
+    std::cout << "action(uint8_t) : " << (int)action << std::endl;
+    std::cout << "id(uint16_t) : " << id << std::endl;
+    std::cout << "posX(uint16_t) : " << posX << std::endl;
+    std::cout << "posY(uint16_t) : " << posY << std::endl;
 }
 
 void Protocol::sendCommandBuildBuilding(Socket &socket, char &action, char &build, int &posX, int &posY) {
@@ -346,4 +350,8 @@ void Protocol::sendCommandBuildBuilding(Socket &socket, char &action, char &buil
     socket.send(reinterpret_cast<char *>(&build), sizeof(uint8_t));
     socket.send(reinterpret_cast<char *>(&posX), sizeof(uint16_t));
     socket.send(reinterpret_cast<char *>(&posY), sizeof(uint16_t));
+    std::cout << "action(uint8_t) : " << (int)action << std::endl;
+    std::cout << "build(uint8_t) : " << (int)build << std::endl;
+    std::cout << "posX(uint16_t) : " << posX << std::endl;
+    std::cout << "posY(uint16_t) : " << posY << std::endl;
 }

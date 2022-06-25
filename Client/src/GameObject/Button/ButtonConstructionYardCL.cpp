@@ -11,5 +11,6 @@ ButtonConstructionYardCL::ButtonConstructionYardCL(int id, char player, int cons
 void ButtonConstructionYardCL::buildBuilding(BlockingQueue<CommandCL *> &queue, SDL2pp::Point point) {
     char build = 0;
     CommandCL *command = new BuildBuilding(build, point);
+    std::cout << "Push command BuildBuilding" << std::endl;
     queue.push(command);
 }

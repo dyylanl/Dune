@@ -11,5 +11,6 @@ ButtonRefinery::ButtonRefinery(int id, char player, int constructionTime, bool s
 void ButtonRefinery::buildBuilding(BlockingQueue<CommandCL *> &queue, SDL2pp::Point point) {
     char build = 4;
     CommandCL *command = new BuildBuilding(build, point);
+    std::cout << "Push command BuildBuilding" << std::endl;
     queue.push(command);
 }

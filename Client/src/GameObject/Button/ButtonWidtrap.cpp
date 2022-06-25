@@ -11,5 +11,6 @@ ButtonWidtrap::ButtonWidtrap(int id, char player, int constructionTime, bool sel
 void ButtonWidtrap::buildBuilding(BlockingQueue<CommandCL *> &queue, SDL2pp::Point point) {
     char build = 3;
     CommandCL *command = new BuildBuilding(build, point);
+    std::cout << "Push command BuildBuilding" << std::endl;
     queue.push(command);
 }

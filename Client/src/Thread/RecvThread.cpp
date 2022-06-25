@@ -54,43 +54,43 @@ void RecvThread::addVehicle(std::vector<GameObject*> &gameObjects) {
         case TRIKE:
             m_protocol.recvUnit(m_socket, id, player, selectStatus, posX, posY, posActX,
                                 posActY, life, action);
-            gameObjects.push_back(new TrikeCL(0, player, selectStatus, SDL2pp::Point(posX, posY),
+            gameObjects.push_back(new TrikeCL(id, player, selectStatus, SDL2pp::Point(posX, posY),
                                               SDL2pp::Point(posActX, posActY), life, action));
             break;
         case SONIC_TANK:
             m_protocol.recvUnit(m_socket, id, player, selectStatus, posX, posY, posActX,
                                 posActY, life, action);
-            gameObjects.push_back(new SonicTankCL(0, player, selectStatus, SDL2pp::Point(posX, posY),
+            gameObjects.push_back(new SonicTankCL(id, player, selectStatus, SDL2pp::Point(posX, posY),
                                                   SDL2pp::Point(posActX, posActY), life, action));
             break;
         case RAIDER:
             m_protocol.recvUnit(m_socket, id, player, selectStatus, posX, posY, posActX,
                                 posActY, life, action);
-            gameObjects.push_back(new TrikeCL(0, player, selectStatus, SDL2pp::Point(posX, posY),
+            gameObjects.push_back(new TrikeCL(id, player, selectStatus, SDL2pp::Point(posX, posY),
                                               SDL2pp::Point(posActX, posActY), life, action));
             break;
         case DESVIATOR:
             m_protocol.recvUnit(m_socket, id, player, selectStatus, posX, posY, posActX,
                                 posActY, life, action);
-            gameObjects.push_back(new DeviatorCL(0, player, selectStatus, SDL2pp::Point(posX, posY),
+            gameObjects.push_back(new DeviatorCL(id, player, selectStatus, SDL2pp::Point(posX, posY),
                                                  SDL2pp::Point(posActX, posActY), life, action));
             break;
         case TANK:
             m_protocol.recvUnit(m_socket, id, player, selectStatus, posX, posY, posActX,
                                 posActY, life, action);
-            gameObjects.push_back(new TankCL(0, player, selectStatus, SDL2pp::Point(posX, posY),
+            gameObjects.push_back(new TankCL(id, player, selectStatus, SDL2pp::Point(posX, posY),
                                              SDL2pp::Point(posActX, posActY), life, action));
             break;
         case DEVASTATOR:
             m_protocol.recvUnit(m_socket, id, player, selectStatus, posX, posY, posActX,
                                 posActY, life, action);
-            gameObjects.push_back(new DevastatorCL(0, player, selectStatus, SDL2pp::Point(posX, posY),
+            gameObjects.push_back(new DevastatorCL(id, player, selectStatus, SDL2pp::Point(posX, posY),
                                                    SDL2pp::Point(posActX, posActY), life, action));
             break;
         case HARVESTER:
             m_protocol.recvUnit(m_socket, id, player, selectStatus, posX, posY, posActX,
                                 posActY, life, action);
-            gameObjects.push_back(new HarvesterCL(0, player, selectStatus, SDL2pp::Point(posX, posY),
+            gameObjects.push_back(new HarvesterCL(id, player, selectStatus, SDL2pp::Point(posX, posY),
                                                   SDL2pp::Point(posActX, posActY), life, action));
             break;
         default:
