@@ -134,7 +134,13 @@ void Client::launch() {
                     std::cout << "\nSe creo la partida" << std::endl;
                     std::vector<std::vector<char>> map = protocol.recvMap(socket);
                     std::cout << "Mapa de " << map.size() << "x" << map[0].size() << std::endl;
-                    protocol.recvResponse(socket); // para bloquearlo
+                    int full_game = protocol.recvResponse(socket); // pregunto si la partida era de uno
+                    if (full_game == 0) {
+                      std::cout << "\nComenzando partida...\n";
+                      std::cout << "ACA TAMBIEN LANZAR SDL" << std::endl;
+                      protocol.recvResponse(socket); // bloqueante
+                    }
+                    
                 } else {
                     std::cout << "Esa partida ya existe..." << std::endl;
                 }
@@ -145,9 +151,18 @@ void Client::launch() {
                 protocol.sendName(socket,name_game);
                 int resp = protocol.recvResponse(socket);
                 if (resp == 0) {
+                    std::cout << "\nUnion exitosa...\nRecibiendo mapa de la partida..." << std::endl;
                     std::vector<std::vector<char>> map = protocol.recvMap(socket);
                     std::cout << "Mapa de " << map.size() << "x" << map[0].size() << std::endl;
-                    protocol.recvResponse(socket); // para bloquearlo
+                    int full_game = protocol.recvResponse(socket); // pregunto si la partida se completo
+                    if (full_game == 0) {
+                      std::cout << "\nComenzando partida..." << std::endl;
+                      std::cout << "ACA LANZAR SDL" << std::endl;
+                      protocol.recvResponse(socket); // bloqueante
+                    }
+                } else {
+                    std::cout << "Partida inexistente. " << std::endl;
+                    return;
                 }
             } else if (comando == 3) {
                 std::cout << "Partidas creadas: " << std::endl;

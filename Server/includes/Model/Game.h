@@ -124,6 +124,8 @@ public:
    std::vector<std::string> getMaps();
 
    int getMapsCreated() {return maps_init.size();}
+
+   bool fullyGame(std::string name_game);
 };
 
 

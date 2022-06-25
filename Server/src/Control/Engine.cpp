@@ -15,6 +15,10 @@ void Engine::_processNewConnections() {
         std::vector<std::vector<char>>& map = game.getMap(name_game);
         Id map_id = game.getMapId(name_game);
         protocol.sendMap(new_connection->peer,map);
+        if (game.fullyGame(name_game)) {
+            uint16_t fully_game = 0;
+            protocol.sendResponse(new_connection->peer, fully_game);
+        }
         established_connections.add(game.getConnectionId(),map_id,new_connection->peer);
         delete new_connection;
     }

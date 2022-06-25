@@ -73,6 +73,7 @@ uint16_t Game::acceptPlayer(const std::string& name) {
             addPlayer(name);
             if (get(name)[0] == get(name)[1]) {
                 std::cout << "Comenzando partida " << name << "..." << std::endl;
+                return SUCCESS;
             }
             return SUCCESS;
         }
@@ -160,4 +161,13 @@ std::vector<std::string> Game::getMaps() {
         maps.push_back(key_);
     }
     return maps;
+}
+
+bool Game::fullyGame(std::string game_name) {
+    if (get(game_name)[0] == get(game_name)[1]) {
+        std::cout << "Comenzando partida " << game_name << "..." << std::endl;
+        return true;
+    } else {
+        return false;
+    }
 }
