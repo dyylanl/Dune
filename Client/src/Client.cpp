@@ -88,7 +88,7 @@ void Client::enviar_nombre_partida(std::string nombre_partida){
 }*/
 
 void Client::launch() {
-    std::cout << "Iniciando cliente.... \n\n";
+/*    std::cout << "Iniciando cliente.... \n\n";
     try {
         std::string ip;
         std::string port;
@@ -169,10 +169,15 @@ void Client::launch() {
     } catch (std::exception& e) {
         std::cout << e.what() << std::endl;
         return;
-    }
+    }*/
 
 
-/*    NonBlockingQueue<std::vector<GameObject*>> queueNb;
+
+
+
+    Socket socket("localhost","8082");
+    Protocol protocol;
+    NonBlockingQueue<std::vector<GameObject*>> queueNb;
     BlockingQueue<CommandCL*> queueB;
     RecvThread recvThread(queueNb, socket, protocol);
     SendThread sendThread(queueB, socket, protocol);
@@ -205,7 +210,7 @@ void Client::launch() {
     sendThread.stop();
     recvThread.stop();
     sendThread.join();
-    recvThread.join();*/
+    recvThread.join();
 
 
 }

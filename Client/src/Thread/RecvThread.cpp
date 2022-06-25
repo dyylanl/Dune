@@ -35,6 +35,7 @@ void RecvThread::run() {
 
 void RecvThread::stop() {
     running = false;
+    m_socket.shutdown();
 }
 
 void RecvThread::addVehicle(std::vector<GameObject*> &gameObjects) {

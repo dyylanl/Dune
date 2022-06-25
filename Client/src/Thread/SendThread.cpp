@@ -15,6 +15,6 @@ void SendThread::run() {
 }
 
 void SendThread::stop() {
-    m_quene.close();
     running = false;
+    m_quene.close();
 }
