@@ -23,16 +23,16 @@
 
 //-----------------------------------------------------------------------------
 
-Client::Client(std::string ip1, std::string port1) : socket(ip1,port1), protocol() {
-}
+Client::Client() {}
 
+/*
 void Client::crear_partida(const std::string& nombre_jugador, const std::string&  nombre_partida, int cantidad_jugadores){
   this->enviar_nombre_jugador(nombre_jugador);
   this->enviar_accion("crear");
   this->enviar_nombre_partida(nombre_partida);
   this->enviar_cant_jugadores(cantidad_jugadores);
-}
-
+}*/
+/*
 int Client::obtener_numero_casa(const std::string& casa) {
   std::string Harkonnen = "Harkonnen";
   std::string Atreides = "Atreides";
@@ -47,8 +47,8 @@ int Client::obtener_numero_casa(const std::string& casa) {
     return 2;
   }
   return -1;
-}
-
+}*/
+/*
 void Client::enviar_nombre_jugador(std::string nombre_jugador){
  protocol.sendName(socket, nombre_jugador); 
 }
@@ -85,12 +85,23 @@ void Client::enviar_cant_jugadores(int cantidad){
 
 void Client::enviar_nombre_partida(std::string nombre_partida){
   protocol.sendName(socket, nombre_partida);
-}
+}*/
 
 void Client::launch() {
+    std::cout << "Iniciando cliente.... \n\n";
     try {
+        std::string ip;
+        std::string port;
+        std::cout << "IP: ";
+        std::cin >> ip;
+        std::cout << "\nPORT: ";
+        std::cin >> port;
+
+        Socket socket(ip,port);
+        Protocol protocol;
+
         std::string nombre;
-        std::cout << "Nombre: ";
+        std::cout << "\nNombre: ";
         std::cin >> nombre;
         protocol.sendName(socket, nombre);
         std::cout << std::endl;
@@ -131,7 +142,7 @@ void Client::launch() {
                 }
             } else if (comando == 3) {
                 std::cout << "Partidas creadas: " << std::endl;
-                std::vector<std::string> list = this->protocol.recvGameList(socket);
+                std::vector<std::string> list = protocol.recvGameList(socket);
                 if (!list.empty()) {
                     int n = (int)list.size();
                     for (int i = 0; i <= (n-2); i = i+3) {
