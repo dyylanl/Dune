@@ -19,7 +19,7 @@ protected:
     bool m_ready;
 
 public:
-    Button(std::string textureID, SDL2pp::Point position, int id, char player, int constructionTime);
+    Button(std::string textureID, SDL2pp::Point position, int id, char player, int constructionTime, bool selectStatus, bool ready);
 
     void update(EventManager &eventManager, BlockingQueue<CommandCL *> &queue);
 

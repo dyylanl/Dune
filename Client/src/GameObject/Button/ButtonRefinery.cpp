@@ -5,8 +5,8 @@
 #include "ButtonRefinery.h"
 #include "../../Action/BuildBuilding.h"
 
-ButtonRefinery::ButtonRefinery(int id, char player, int constructionTime)
-        : Button("ButtonRefinery", SDL2pp::Point(1089, 120),id, player, constructionTime) {}
+ButtonRefinery::ButtonRefinery(int id, char player, int constructionTime, bool selectStatus, bool ready)
+        : Button("ButtonRefinery", SDL2pp::Point(1089, 120),id, player, constructionTime, selectStatus, ready) {}
 
 void ButtonRefinery::buildBuilding(BlockingQueue<CommandCL *> &queue, SDL2pp::Point point) {
     char build = 4;

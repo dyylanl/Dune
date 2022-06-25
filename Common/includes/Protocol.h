@@ -141,7 +141,7 @@ public:
 
     void recvObjectType(Socket &socket, char &i);
 
-    void recvBotton(Socket &socket, int &id, char &player, int &constructionTime);
+    void recvBotton(Socket &socket, int &id, char &player, int &constructionTime, bool &selectStatus, bool &ready);
 
     void sendCommandSelect(Socket &socket, char &action, int &id);
 

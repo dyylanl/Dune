@@ -5,11 +5,13 @@
 #include "Button.h"
 #include "../Action/SelectCL.h"
 
-Button::Button(std::string textureID, SDL2pp::Point position, int id, char player, int constructionTime)
+Button::Button(std::string textureID, SDL2pp::Point position, int id, char player, int constructionTime, bool selectStatus, bool ready)
 : GameObject(textureID, position, SDL2pp::Point(66, 66)){
     m_id = id;
     m_player = player;
     m_constructionTime = constructionTime;
+    m_selectStatus = selectStatus;
+    m_ready = ready;
 }
 
 void Button::update(EventManager &eventManager, BlockingQueue<CommandCL *> &queue) {

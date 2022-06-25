@@ -135,24 +135,26 @@ void RecvThread::addButton(std::vector<GameObject *> &gameObjects) {
     int id = 0;
     char player = 0;
     int constructionTime = 0;
+    bool selectStatus = false;
+    bool ready = false;
 
     m_protocol.recvObjectType(m_socket, objectType);
     switch (objectType) {
         case CONSTRUCTION_YARD:
-            m_protocol.recvBotton(m_socket, id, player, constructionTime);
-            gameObjects.push_back(new ButtonConstructionYardCL(id, player, constructionTime));
+            m_protocol.recvBotton(m_socket, id, player, constructionTime, selectStatus, ready);
+            gameObjects.push_back(new ButtonConstructionYardCL(id, player, constructionTime, selectStatus, ready));
             break;
         case LIGHT_FACTORY: //Hacer Factory
             break;
         case HEAVY_FACTORY: //Hacer la clase HeavyFactory
             break;
         case WIND_TRAP:
-            m_protocol.recvBotton(m_socket, id, player, constructionTime);
-            gameObjects.push_back(new ButtonWidtrap(id, player, constructionTime));
+            m_protocol.recvBotton(m_socket, id, player, constructionTime, selectStatus, ready);
+            gameObjects.push_back(new ButtonWidtrap(id, player, constructionTime, selectStatus, ready));
             break;
         case SPICE_REFINERY:
-            m_protocol.recvBotton(m_socket, id, player, constructionTime);
-            gameObjects.push_back(new ButtonRefinery(id, player, constructionTime));
+            m_protocol.recvBotton(m_socket, id, player, constructionTime, selectStatus, ready);
+            gameObjects.push_back(new ButtonRefinery(id, player, constructionTime, selectStatus, ready));
             break;
         case SPICE_SILO: //Hacer la clase SpiceSilo
             break;

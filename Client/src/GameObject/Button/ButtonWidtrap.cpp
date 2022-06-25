@@ -5,8 +5,8 @@
 #include "ButtonWidtrap.h"
 #include "../../Action/BuildBuilding.h"
 
-ButtonWidtrap::ButtonWidtrap(int id, char player, int constructionTime)
-: Button("ButtonWidtrap", SDL2pp::Point(1089, 120), id, player, constructionTime) {}
+ButtonWidtrap::ButtonWidtrap(int id, char player, int constructionTime, bool selectStatus, bool ready)
+: Button("ButtonWidtrap", SDL2pp::Point(1089, 120), id, player, constructionTime, selectStatus, ready) {}
 
 void ButtonWidtrap::buildBuilding(BlockingQueue<CommandCL *> &queue, SDL2pp::Point point) {
     char build = 3;

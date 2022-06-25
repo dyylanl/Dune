@@ -88,7 +88,7 @@ void Client::enviar_nombre_partida(std::string nombre_partida){
 }
 
 void Client::launch() {
-    try {
+/*    try {
         std::string nombre;
         std::cout << "Nombre: ";
         std::cin >> nombre;
@@ -149,7 +149,44 @@ void Client::launch() {
     } catch (std::exception& e) {
         std::cout << e.what() << std::endl;
         return;
+    }*/
+
+
+    NonBlockingQueue<std::vector<GameObject*>> queueNb;
+    BlockingQueue<CommandCL*> queueB;
+    RecvThread recvThread(queueNb, socket, protocol);
+    SendThread sendThread(queueB, socket, protocol);
+    recvThread.start();
+    sendThread.start();
+
+    SDL2pp::SDL sdl(SDL_INIT_VIDEO);
+    SDL2pp::Window window("DUNE - v0.1", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
+                          1280, 720, SDL_WINDOW_RESIZABLE);
+    SDL2pp::Renderer renderer(window, -1, SDL_RENDERER_ACCELERATED);
+    Camera camera;
+    TextureManager textureManager(renderer, camera);
+
+    loadTextures(textureManager);
+    EventManager eventManager;
+    std::vector<GameObject*> objects;
+
+    //mapa de prueba
+    std::vector<std::vector<char>> map(50, std::vector<char> (50, 'A') );
+
+    Engine engine(map, objects, textureManager, eventManager, queueNb, queueB);
+
+    while (engine.IsRunning()) {
+        engine.Events();
+        engine.Update();
+        engine.Render(renderer);
+        usleep(FRAME_RATE);
     }
+
+    sendThread.stop();
+    recvThread.stop();
+    sendThread.join();
+    recvThread.join();
+
 
 }
 

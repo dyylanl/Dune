@@ -10,7 +10,7 @@
 
 class ButtonConstructionYardCL : public Button {
 public:
-    ButtonConstructionYardCL(int id, char player, int constructionTime);
+    ButtonConstructionYardCL(int id, char player, int constructionTime, bool selectStatus, bool ready);
 
     void buildBuilding(BlockingQueue<CommandCL *> &queue, SDL2pp::Point point);
 };
