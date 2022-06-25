@@ -70,7 +70,7 @@ function installDependencies() {
     sudo apt-get install qtmultimedia5-dev > /dev/null 2>&1
     echo ""
     echo ">> Instalando 'qtdeclarative5-dev'"
-    sudo apt-get install qtdeclarative5-dev > /dev/null 2>&1
+    sudo apt-get install qtdeclarative5-dev -s > /dev/null 2>&1
     echo ""
         echo -e "${greenColour}Instalación de librerias finalizada.${endColour}"
     echo ""

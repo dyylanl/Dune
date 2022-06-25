@@ -344,3 +344,38 @@ void Protocol::sendCommandBuildBuilding(Socket &socket, char &action, char &buil
     socket.send(reinterpret_cast<char *>(&posX), sizeof(uint16_t));
     socket.send(reinterpret_cast<char *>(&posY), sizeof(uint16_t));
 }
+
+std::vector<std::string> Protocol::recvMapsId(Socket &socket) {
+    std::vector<std::string> list;
+    uint16_t count = 0;
+    socket.recv(reinterpret_cast<char *>(&count), sizeof(uint16_t)); // recibo la cantidad de mapas creados
+    count = ntohs(count);
+    if (count == 0) {
+        return list;
+    } else {
+        for (int i = 0; i < count; ++i) {
+            int len = recvNameLen(socket);
+            list.push_back(recvName(socket, len));
+        }
+        return list;
+    }
+}
+
+
+void Protocol::sendMapsId(Socket &socket, std::vector<std::string> &maps_id){
+    if (maps_id.empty()) { // si no hay mapas cargados (raro) envio 0
+        uint16_t empt = htons(0);
+        socket.send(reinterpret_cast<const char *>(&empt), sizeof(uint16_t));
+        return;
+    } else { // si la lista no esta vacia le envio la info de maps_id
+        uint16_t total_id = maps_id.size(); // total de id
+        uint16_t count_s = htons(total_id); // casteo host to netw
+        socket.send(reinterpret_cast<const char *>(&count_s), sizeof(uint16_t)); // envio la cantidad de id's
+        int n = (int)maps_id.size(); // cantidad int de id's
+        for (int i = 0; i < n; i++){
+            std::string map_id = maps_id[i];
+            sendName(socket, map_id); // envio cada nombre de mapa
+        }
+    }
+}
+

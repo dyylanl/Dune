@@ -148,6 +148,13 @@ public:
     void sendCommandMove(Socket &socket, char &action, int &id, int &posX, int &posY);
 
     void sendCommandBuildBuilding(Socket &socket, char &action, char &build, int &posX, int &posY);
+
+    /*
+     *
+     */
+    std::vector<std::string> recvMapsId(Socket &socket);
+
+    void sendMapsId(Socket &socket, std::vector<std::string> &maps_id);
 };
 
 
