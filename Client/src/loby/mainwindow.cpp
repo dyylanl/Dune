@@ -28,7 +28,7 @@ void MainWindow::on_button_confirmar_clicked()
     this->text_nombre = this->ui->nombre_text_input->text();
     this->ui->stackedWidget->setCurrentIndex(1);
     
-    this->cliente = new Client(this->text_IP.toStdString(),this->text_puerto.toStdString());
+    this->cliente = new Client();
     
     QString mensaje_bienvenida = "Bienvenido a Dune " + this->text_nombre;
     this->ui->bienvenida_label->setText(mensaje_bienvenida);
@@ -51,7 +51,7 @@ void MainWindow::on_button_cofirmar_cant_nombre_clicked()
 {
     this->text_nombre_partida = this->ui->nombre_partida_input->text();
     this->text_cantidad_jugadores = this->ui->cantidad_jugadores_input->text();
-    this->cliente->crear_partida(this->text_nombre.toStdString(),this->text_nombre_partida.toStdString(),this->text_cantidad_jugadores.toInt());
+    //this->cliente->crear_partida(this->text_nombre.toStdString(),this->text_nombre_partida.toStdString(),this->text_cantidad_jugadores.toInt());
    
     
     this->ui->stackedWidget->setCurrentIndex(4);
@@ -85,7 +85,7 @@ void MainWindow::on_button_ordos_clicked()
 
 void MainWindow::on_button_unirse_partida_clicked()
 {   
-    std::vector<std::string> list = this->cliente->listar_partidas();
+    /*std::vector<std::string> list = this->cliente->listar_partidas();
         if (!list.empty()) {
         int n = (int)list.size();
         for (int i = 0; i <= (n-2); i = i+3) {
@@ -98,7 +98,7 @@ void MainWindow::on_button_unirse_partida_clicked()
             
             }
         }
-    this->ui->stackedWidget->setCurrentIndex(3);
+    this->ui->stackedWidget->setCurrentIndex(3);*/
     //AGREGAR CURRENITEM DE LA LISTA PARA SELECIONAR
 }
 

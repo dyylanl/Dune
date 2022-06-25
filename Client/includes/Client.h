@@ -17,31 +17,15 @@
 //-----------------------------------------------------------------------------
 
 class Client {
-private:
-    Socket socket;
-    Protocol protocol;
 public:
-    /* Constructor */
-    Client(std::string ip, std::string port);
-
-    /* Deshabilitamos el constructor por copia. */
+    Client();
     Client(const Client&) = delete;
-
-    /* Deshabilitamos el operador= para copia.*/
     Client& operator=(const Client&) = delete;
-
-    /* Deshabilitamos el constructor por movimiento. */
     Client(Client&& other) = delete;
-
-    /* Deshabilitamos el operador= para movimiento. */
     Client& operator=(Client&& other) = delete;
 
-    //-----------------------------------------------------------------------------
-    // Métodos de la API pública
-
-    /* Ejecuta el cliente */
     void launch();
-
+/*
     void crear_partida(const std::string& nombre_jugador, const std::string&  nombre_partida, int cantidad_jugadores);
 
     int obtener_numero_casa(const std::string& casa);
@@ -54,14 +38,10 @@ public:
 
     void enviar_nombre_partida(std::string nombre_partida);
 
-    std::vector<std::string> listar_partidas();
-
-    //-----------------------------------------------------------------------------
-
-    /* Destructor */
+    std::vector<std::string> listar_partidas();*/
     ~Client();
 
-    void crearUnidad();
+    /*void crearUnidad();*/
 
     void loadTextures(TextureManager &textureManager) const;
 };

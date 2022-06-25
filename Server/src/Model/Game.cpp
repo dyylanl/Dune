@@ -151,3 +151,13 @@ std::vector<std::vector<char>>& Game::getMap(std::string name_game) {
 
 Game::~Game() {
 }
+
+std::vector<std::string> Game::getMaps() {
+    std::vector<std::string> maps;
+    int total = maps_init.size();
+    for (int i=1; i<=total; i++) {
+        std::string key_ = std::to_string(i);
+        maps.push_back(key_);
+    }
+    return maps;
+}
