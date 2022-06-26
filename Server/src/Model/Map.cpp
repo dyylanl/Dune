@@ -328,5 +328,4 @@ Map::Map(std::string config_path) :
             terrrains[i][j] = Terrain(type);
         }
     }
-    std::cout << "Se inicio un mapa cargado en: " << config_path << std::endl;
 }

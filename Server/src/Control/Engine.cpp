@@ -103,7 +103,7 @@ uint16_t Engine::addClient(NewConnection *client) {
     if (current_players < req_players) {
         current_players += 1;
         InstanceId id = current_players;
-        std::cout << name_game << " " << current_players << "/" << req_players  << " mapa " << map_id  << std::endl;
+        std::cout << name_game << " " << current_players << "/" << req_players  << " map id: " << map_id  << std::endl;
         established_connections.add(id,client->map_id,client->peer);
         ret = SUCCESS;
     }
