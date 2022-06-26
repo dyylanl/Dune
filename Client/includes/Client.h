@@ -44,6 +44,8 @@ public:
     /*void crearUnidad();*/
 
     void loadTextures(TextureManager &textureManager) const;
+
+    void initSDL(Socket &socket, Protocol &protocol, std::vector<std::vector<char>> &map) const;
 };
 
 //-----------------------------------------------------------------------------

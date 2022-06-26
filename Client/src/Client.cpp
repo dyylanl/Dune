@@ -194,17 +194,18 @@ void Client::launch() {
         } else if (comando == LIST_GAMES) {
           listGames(protocol,socket);
         }
+
+        initSDL(socket, protocol, map);
+
     } catch (std::exception& e) {
         std::cout << e.what() << std::endl;
         return;
     }
+}
 
-
-
-
-
-    /*Socket socket("localhost","8082");
-    Protocol protocol;
+void Client::initSDL(Socket &socket, Protocol &protocol,
+                     std::vector<std::vector<char>> &map) const {//Socket socket("localhost","8082");
+//Protocol protocol;
     NonBlockingQueue<std::vector<GameObject*>> queueNb;
     BlockingQueue<CommandCL*> queueB;
     RecvThread recvThread(queueNb, socket, protocol);
@@ -224,7 +225,7 @@ void Client::launch() {
     std::vector<GameObject*> objects;
 
     //mapa de prueba
-    std::vector<std::vector<char>> map(50, std::vector<char> (50, 'A') );
+//std::vector<std::vector<char>> map(50, std::vector<char> (50, 'A') );
 
     Engine engine(map, objects, textureManager, eventManager, queueNb, queueB);
 
@@ -238,9 +239,7 @@ void Client::launch() {
     sendThread.stop();
     recvThread.stop();
     sendThread.join();
-    recvThread.join();*/
-
-
+    recvThread.join();
 }
 
 void Client::loadTextures(TextureManager &textureManager) const {
