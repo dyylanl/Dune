@@ -1,6 +1,4 @@
 #include "../../../includes/Model/Units/Unit.h"
-#include "../../../includes/Model/Units/States/MovingState.h"
-#include "../../../includes/Model/Units/States/AttackingState.h"
 #include "../../../includes/Model/Map.h"
 #include "../../../includes/Model/Player.h"
 
@@ -11,7 +9,7 @@ Unit::Unit(const int x, const int y, const int hitPoints, const int speed, const
         speed(speed),
         cost(cost),
         actual_speed(0),
-        state((UnitState*) & Unit::stopped),
+        //state((UnitState*) & Unit::stopped),
         pathToDestiny(),
         foll_unit(nullptr),
         destiny(x, y),
@@ -21,11 +19,6 @@ Unit::Unit(const int x, const int y, const int hitPoints, const int speed, const
 {
     counter += 1;
 }
-
-
-const AttackingState Unit::attacking;
-const MovingState Unit::moving;
-const MovingState Unit::stopped;
 
 bool Unit::move(Map &map) {
     bool moved = true;
@@ -89,7 +82,7 @@ void Unit::follow(Attackable* other, Map& map) {
     map.setDestiny(*this, foll_unit->getClosestPosition(pos).x, foll_unit->getClosestPosition(pos).y);
     if (occupied_pos)
         map.at(prev_foll_unit_pos).occupy();
-    state = (UnitState*)&Unit::moving;
+    //state = (UnitState*)&Unit::moving;
 }
 
 void Unit::setPlayer(Player &player1) {
@@ -100,7 +93,7 @@ void Unit::setPlayer(Player &player1) {
 Player &Unit::getPlayer() {
     return *player;
 }
-
+/*
 void Unit::makeAction(Map &map) {
     state = state->makeAction(map, *this);
 }
@@ -119,7 +112,7 @@ UnitState *Unit::makeAttack(Map &map) {
 
 UnitState *Unit::makeStopped(Map &map) {
     return state;
-}
+}*/
 /*
 void Unit::actionOnPosition(Map &map, Position &pos) {
 //    Unit* foll_unit = map.getClosestUnit(pos, 50 * 50, *player, false);
@@ -146,7 +139,7 @@ void Unit::checkForDeadVictim() {
     if (foll_unit != nullptr) {
         if (Unit::isDead(foll_unit)) {
             this->foll_unit = nullptr;
-            this->state = (UnitState*)&Unit::stopped;
+            //this->state = (UnitState*)&Unit::stopped;
         }
     }
 }

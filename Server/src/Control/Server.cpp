@@ -1,19 +1,17 @@
 #include "../../includes/Control/Server.h"
 
 
-Server::Server(const std::string& config_path, const int max_clients_queued)
-        : reader(config_path),
-          game(reader.getFPS(), reader),
-          new_connections(),
-          accepter(game, reader.getPort(), max_clients_queued, reader, new_connections),
-          engine(game, reader, new_connections) {}
+Server::Server(const std::string& config_path, const std::string& port, const int max_clients_queued) :
+          game(config_path),
+          accepter(game, port, max_clients_queued) 
+          {}
 
 void Server::run() {
     // Se lanza el hilo aceptador de conexiones.
     accepter.start();
 
     // Se lanza el hilo motor del juego
-    engine.start();
+    //engine.start();
     /*
      * Presionando la tecla 'q' por stdin cerramos el servidor.
      */
@@ -23,10 +21,10 @@ void Server::run() {
     }
 
     accepter.stop();
-    engine.stop();
+    //engine.stop();
 
     accepter.join();
-    engine.join();
+    //engine.join();
 
 }
 

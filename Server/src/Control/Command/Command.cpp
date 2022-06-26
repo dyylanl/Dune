@@ -15,6 +15,7 @@
 
 
 Command::Command(const InstanceId caller) : caller(caller) {}
+
 Command::~Command() {}
 
 const InstanceId Command::getCaller() const {

@@ -21,15 +21,12 @@
 
 class Server {
 private:
-    ConfigurationReader reader;
     Game game;
-    NonBlockingQueue<NewConnection*> new_connections;
     Accepter accepter;
-    Engine engine;
 
 public:
     /* Constructor */
-    Server(const std::string& port, int max_clients_queued);
+    Server(const std::string& config_path, const std::string& port, int max_clients_queued);
     Server(const Server&) = delete;
     Server& operator=(const Server&) = delete;
     Server(Server&& other) = delete;

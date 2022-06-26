@@ -7,26 +7,7 @@
 #include "../../includes/Model/Terrains/Rock.h"
 
 
-Map::Map(std::string map_path) : map_reader(std::move(map_path)),
-                                 rows(map_reader.getRows()),
-                                 cols(map_reader.getCols()),
-                                 units(),
-                                 buildings(),
-                                 req_players(map_reader.getReqPlayers()) {
-    std::vector <std::vector<Terrain>> terrain_init
-            ((uint16_t) rows, std::vector<Terrain>((uint16_t) cols, Terrain('A')));
-    this->terrrains = terrain_init;
-    this->mapa = map_reader.getMap();
-    int rows_ = mapa.size();
-    int cols_ = mapa[0].size();
-    for (int i = 0; i < rows_; ++i) {
-        for (int j = 0; j < cols_; ++j) {
-            char type = this->mapa[i][j];
-            terrrains[i][j] = Terrain(type);
-        }
-    }
 
-}
 
 Map::~Map() {}
 
@@ -331,3 +312,20 @@ std::vector<std::vector<char>> &Map::getMap() {
     return this->mapa;
 }
 
+Map::Map(std::string config_path) : 
+                            map_reader(config_path),
+                            rows(map_reader.getRows()),
+                            cols(map_reader.getCols()),
+                            mapa(map_reader.getMap())
+{
+    std::vector <std::vector<Terrain>> terrain_init((uint16_t) rows, std::vector<Terrain>((uint16_t) cols, Terrain('A')));
+    this->terrrains = terrain_init;
+    int rows_ = mapa.size();
+    int cols_ = mapa[0].size();
+    for (int i = 0; i < rows_; ++i) {
+        for (int j = 0; j < cols_; ++j) {
+            char type = this->mapa[i][j];
+            terrrains[i][j] = Terrain(type);
+        }
+    }
+}

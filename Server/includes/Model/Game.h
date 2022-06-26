@@ -5,125 +5,91 @@
 #include <map>
 #include <string>
 #include <mutex>
-////////////////////////////////////////
 #include "../defs.h"
-#include "Map.h"
-#include "AStar.h"
-#include "../Control/NewConnection.h"
-#include "../../config/GameConfig.h"
+#include "DTOs/MapDTO.h"
 #include "../../config/ConfigReader.h"
-
+#include "../Control/NewConnection.h"
+#include "../Model/Map.h"
+#include "../Control/Engine.h"
+////////////////////////////////////////
 class Game {
 private:
 
-    std::map<Id, Map*> maps_init;
     /*
-     * Contiene todas las partidas creadas por los users
-     * clave: nombre del mapa
-     * valor: mapa
-     */
-    std::map<std::string, Map*> maps_created;
-    /*
-     * aca esta toda la informacion actualizada para enviarsela al cliente y hacer todos los chequeos
-     * por lo tanto al ser el unico recurso compartido solo uso el mutex en este map
-     */
-    std::map<std::string, std::vector<int>> games;
-    /*
-     * clave: nombre de la partida
-     * valor: jugadores en esa partida
-     * {duelo 3vs3: [dylan,ricardo,fede,fede,mateo,pepe], solo: [alone], ...}
-     */
-    std::map<std::string,std::vector<Player*>> players;
+    * Carga inicial de los mapas.yaml
+    */
+    std::map<Id,MapDTO> maps_dto_init;
 
-    // --------------------------------------------------- //
+    /*
+    * Cada vez que se cree una partida se iniciara un Engine para manejar esa partida y unir los jugadores a esa partida
+    */
+    std::map<std::string,Engine*> games;
+    
+
     std::mutex mutex;
-    InstanceId next_id;
-    //Map map;
-    //AStar aStar;
-    // comandos
     ConfigurationReader game_config;
 
     /*
      * Lockea el mutex, retorna true si el name ya existe.
      */
     bool contains(const std::string& game_name);
-    /*
-     * Lockea el mutex e insterta el valor current y req en games
-     * si es que hay una key = game_name.
-     */
-    void put(const std::string& game_name, int current, int req);
+
     /*
      * Retorna el valor asociado a la clave game_name si es
      * que existe. El contains() lockea el mutex.
      */
     std::vector<int> get(const std::string& game_name);
-    /*
-     * Agrega un jugador a la partida game_name si es
-     * que esta partida no esta completa.
-     */
-    void addPlayer(const std::string& game_name);
-    /*
-     * Lockea el mutex e imprime por pantalla
-     * el comienzo de la partida 'name'.
-     */
-    // void printStartGame(const std::string &name);
+
 
 public:
-    Game(int rate, ConfigurationReader reader);
     /*
-     * Crea una partida {name:[1,req,id_mapa]}
-     * Return: 0 exito 1 error
+        *   Recibe por parametro la ruta para cargar la configuracion del juego.
+        *   Carga todos los mapas con la ruta que le proporciona el config.yaml
+        *   A cada mapa le setea un id unico.
+    */
+    Game(std::string path_game_config);
+
+    /*
+     * Crea una partida con el id y nombre solicitado
+     * retorna 0 si se pudo crear
+     * retorna 1 si no se pudo (es decir, ya existe una partida con ese nombre)
      *
      */
     uint16_t createGame(Id id_map, const std::string& name);
+
     /*
-     * Inserta un jugador a la partida name.
+     * Inserta un jugador a la partida que eligio.
+     * retorna 0 si lo pudo unir
+     * retorna 1 si no lo pudo unir (es decir, esta completa esa partida o bien no existe)
      */
-    uint16_t acceptPlayer(const std::string& name);
+    uint16_t acceptPlayer(NewConnection* new_player);
+
     /*
      * Retorna una lista con formato [nombre, actuales, req]
      */
     std::vector<std::string> listGames();
 
     /*
-     * Retorna un id de instancia nuevo
-     */
-    InstanceId newConnection(NewConnection* connection);
-
-    std::stack<Position> makePath(Unit& unit, Position pos_end);
-
-    InstanceId getConnectionId() {return next_id++;}
-
-    std::vector<std::vector<char>>& getMap(std::string name_game);
-
-    // TODO: TERMINAR ID's de mapa
-    static Id getMapId(std::string name_game) {return 1;};
-
-
-    ///////////// comandos ////////////
-    /*
-     * si hay una unidad en pos_x pos_y entonces la agrega a la lista de unidades selecteds
-     */
-    void selectUnitInPos(int pos_x, int pos_y);
-
-    /*
-     * construye un edificio del tipo type en la posicion indicada si es que se puede
-     */
-    void build(char build_type, int pos_x, int pos_y);
-
-    void moveUnitSelecteds(const uint16_t i, const uint16_t i1);
-
-    void createUnit(char unit_type);
-
+    * Retorna el id de mapa asociado a esa partida
+    */
+    Id getMapId(std::string name_game);
+   
+   /*
+   * Retorna todos los MapDTO que se cargaron en el servidor.
+   */
+   std::vector<MapDTO> getMapsLoads();
+   
     ~Game();
 
 
-    /*
-    * Retorna una lista con del tipo "Id"
-    */
-   std::vector<std::string> getMaps();
 
-   int getMapsCreated() {return maps_init.size();}
+
+// ------------------ ESTO HAY QUE BORRARLO --------------- //
+    void selectUnitInPos(int pos_x, int pos_y);
+    void build(char build_type, int pos_x, int pos_y);
+    void moveUnitSelecteds(const uint16_t i, const uint16_t i1);
+    void createUnit(char unit_type);
+    bool fullyGame(std::string name_game);
 };
 
 

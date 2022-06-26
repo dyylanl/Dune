@@ -117,26 +117,28 @@ void Client::launch() {
                 std::string nombre_partida;
                 std::cin >> nombre_partida;
                 protocol.sendName(socket, nombre_partida);
-                int maps_ = protocol.recvMapsCreated(socket);
-                if (maps_ == 0) {
+                std::vector<std::vector<std::string>> maps_ = protocol.recvMapsCreated(socket);
+                std::cout << "\n\n";
+                if (maps_.size() == 0) {
                   std::cout << "No hay mapas cargados en el server" << std::endl;
                 } else {
-                  for (int i = 1; i <= maps_; i++) {
-                    std::cout << "\n  ["<<i<<"] Mapa " << i << std::endl;
+                  int total_maps_uploaded = (int)maps_.size();
+                  for (int i = 0; i < total_maps_uploaded; i++) {
+                    std::cout << "\nMapa " << i+1 << "\nFilas: " << maps_[i][0] << "\nColumnas: " << maps_[i][1] << "\nJugadores Requeridos: " << maps_[i][2] << std::endl;
                   }
                 }
                 uint16_t map_id;
-                std::cout << "Seleccione un mapa: ";
+                std::cout << "\nSeleccione un mapa: ";
                 std::cin >> map_id;
                 protocol.sendResponse(socket, map_id);
-                uint16_t response = protocol.recvResponse(socket);
-                if (response == 0) {
+                uint16_t response_create_game = protocol.recvResponse(socket);
+                if (response_create_game == 0) {
                     std::cout << "\nSe creo la partida" << std::endl;
-                    std::vector<std::vector<char>> map = protocol.recvMap(socket);
-                    std::cout << "Mapa de " << map.size() << "x" << map[0].size() << std::endl;
-                    protocol.recvResponse(socket); // para bloquearlo
+                    uint16_t response_accept_player = protocol.recvResponse(socket);
+                    std::cout << "response_accept_player: " << response_accept_player << std::endl;
                 } else {
-                    std::cout << "Esa partida ya existe..." << std::endl;
+                    std::cout << "ERROR creando la partida..." << std::endl;
+                    return;
                 }
             } else if (comando == 2) {
                 std::cout << "\nNombre de la partida: ";
@@ -145,9 +147,21 @@ void Client::launch() {
                 protocol.sendName(socket,name_game);
                 int resp = protocol.recvResponse(socket);
                 if (resp == 0) {
+                    std::cout << "\nEn la sala..." << std::endl;
                     std::vector<std::vector<char>> map = protocol.recvMap(socket);
                     std::cout << "Mapa de " << map.size() << "x" << map[0].size() << std::endl;
-                    protocol.recvResponse(socket); // para bloquearlo
+                    int full_game = protocol.recvResponse(socket); // pregunto si la partida se completo
+                    if (full_game == 0) {
+                      std::cout << "\nComenzando partida..." << std::endl;
+                      std::cout << "ACA LANZAR SDL" << std::endl;
+                      protocol.recvResponse(socket); // bloqueante
+                    }
+                } if (resp == 10) {
+                    std::cout << "Partida completa.\nIniciando SDL..." << std::endl;
+                }
+                else {
+                    std::cout << "Partida inexistente. " << std::endl;
+                    return;
                 }
             } else if (comando == 3) {
                 std::cout << "Partidas creadas: " << std::endl;
@@ -164,8 +178,6 @@ void Client::launch() {
                     std::cout << "No hay partidas creadas..." << std::endl;
                 }
             }
-            int resp = protocol.recvResponse(socket);
-            std::cout << "Se recibio: " << resp << std::endl;
     } catch (std::exception& e) {
         std::cout << e.what() << std::endl;
         return;

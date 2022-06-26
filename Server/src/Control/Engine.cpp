@@ -1,24 +1,6 @@
 #include "../../includes/Control/Engine.h"
-
-/*
- * Que el engine procese una nueva conexion significa que este cliente ya decidio si
- * creo una partida o se unio a una
- * 1) obtengo el nombre a la partida que decidio unirse
- * 2) le envio el mapa de la partida a la que se unio
- * 3) lo agrego al contenedor de conexiones establecidas
- */
-void Engine::_processNewConnections() {
-    NewConnection* new_connection = nullptr;
-    std::string name_game;
-    while ((new_connection = new_connections.pop())) {
-        name_game = new_connection->name_game;
-        std::vector<std::vector<char>>& map = game.getMap(name_game);
-        Id map_id = game.getMapId(name_game);
-        protocol.sendMap(new_connection->peer,map);
-        established_connections.add(game.getConnectionId(),map_id,new_connection->peer);
-        delete new_connection;
-    }
-}
+#define SUCCESS 0
+#define ERROR 1
 
 /*
  * 1° Popea un comando
@@ -27,61 +9,58 @@ void Engine::_processNewConnections() {
  * 4° Vuelve a 1°
  */
 void Engine::_processCommands() {
-    Command* command_process = nullptr;
+    /*Command* command_process = nullptr;
     while ((command_process = commands.pop())) {
-        command_process->exec(game);
+        //command_process->exec(game);
         delete command_process;
-    }
+    }*/
 }
 
 void Engine::_processFinishedConnections() {
-    InstanceId* finished_connection = nullptr;
+    /*InstanceId* finished_connection = nullptr;
     while ((finished_connection = finished_connections.pop())) {
         delete finished_connection;
         fprintf(stderr, "[ENGINE]: Se ha desconectado un jugador.\n");
-    }
+    }*/
 }
 
 void Engine::_freeQueues() {
-        InstanceId* p = nullptr;
+       /* InstanceId* p = nullptr;
         while ((p = finished_connections.pop())) {
             delete p;
-        }
+        }*/
 }
 
 void Engine::_loopIteration(int it) {
-    _processNewConnections();
     _processCommands();
     _processFinishedConnections();
 }
 
-//-----------------------------------------------------------------------------
-// API Pública
+// ---------------------------------------------- //
 
-Engine::Engine(Game& game1, ConfigurationReader& reader1,
-               NonBlockingQueue<NewConnection*>& new_connections)
-        : keep_executing(true),
-          reader(reader1),
-          protocol(),
-          rate(30),
-          new_connections(new_connections),
-          finished_connections(),
-          game(game1),
-          commands(),
-          snapshot(),
-          established_connections(commands, finished_connections) {
-    int fps = reader.getFPS();
-    this->rate = 1000 / fps;
+Engine::Engine(MapDTO map_dto) : 
+        keep_executing(true),
+        rate(30),
+        map(map_dto.path),
+        current_players(0),
+        req_players(map_dto.max_players),
+        map_id(map_dto.map_id),
+        name_game(map_dto.name_map),
+        finished_connections(),
+        commands(),
+        established_connections(commands, finished_connections)
+{
+
 }
 
 void Engine::run() {
-    fprintf(stderr, "[ENGINE]: Empezando ejecución.\n");
+    fprintf(stderr, "[ENGINE]: Empezando partida.\n");
     auto t1 = std::chrono::steady_clock::now();
     auto t2 = t1;
     std::chrono::duration<float, std::milli> diff{};
     int rest = 0, behind = 0, lost = 0;
     int it = 1;
-    // LOP GAME = OJO CON LO Q TOCAN ACÁ
+    // LOOP GAME = OJO CON LO Q TOCAN ACÁ
     while (keep_executing) {
         _loopIteration(it);
         it = 0;
@@ -107,5 +86,31 @@ void Engine::stop() {
     keep_executing = false;
 }
 
-Engine::~Engine() = default;
+Engine::~Engine() {
+    std::cout << "[ENGINE]: Destruyendo engine." << std::endl;
+}
 
+
+/*
+ * Que el engine procese una nueva conexion significa que este cliente ya decidio si
+ * creo una partida o se unio a una
+ * 1) obtengo el nombre a la partida que decidio unirse
+ * 2) le envio el mapa de la partida a la que se unio
+ * 3) lo agrego al contenedor de conexiones establecidas
+ */
+uint16_t Engine::addClient(NewConnection *client) {
+    uint16_t ret = ERROR;
+    if (current_players < req_players) {
+        current_players += 1;
+        InstanceId id = current_players;
+        std::cout << name_game << " " << current_players << "/" << req_players  << " map id: " << map_id  << std::endl;
+        established_connections.add(id,client->map_id,client->peer);
+        ret = SUCCESS;
+    }
+    if (current_players == req_players) {
+        established_connections.initGame();
+        this->run();
+        ret = SUCCESS;
+    }
+    return ret;
+}

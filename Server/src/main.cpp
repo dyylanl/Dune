@@ -5,15 +5,14 @@
 
 
 int main(int argc, char* argv[]) {
-    if (argc != 2) {
-        fprintf(stderr, "Usage: ./server <config_path> \n");
+    if (argc != 3) {
+        fprintf(stderr, "Usage: ./server <port> <config_path> \n");
         return 1;
     }
-
-    std::string config_path = argv[1];
-
+    std::string port = argv[1];
+    std::string config_path = argv[2];
     try {
-        Server server(config_path, MAX_CLIENTS_QUEUED);
+        Server server(config_path, port, MAX_CLIENTS_QUEUED);
         server.run();
     } catch (const std::exception& e) {
         fprintf(stderr, "%s\n", e.what());
@@ -22,7 +21,6 @@ int main(int argc, char* argv[]) {
         fprintf(stderr, "Unknown error.\n");
         return 1;
     }
-
     return 0;
 }
 

@@ -1,43 +1,28 @@
 #ifndef __CLIENT_CONNECTION_H__
 #define __CLIENT_CONNECTION_H__
 
-//-----------------------------------------------------------------------------
 #include <atomic>
 #include <exception>
 #include <mutex>
 #include <thread>
-//-----------------------------------------------------------------------------
-
-//-----------------------------------------------------------------------------
+#include <iostream>
 #include "../../../Common/includes/BlockingQueue.h"
 #include "../../../Common/includes/Exceptions/Exception.h"
 #include "../../../Common/includes/NonBlockingQueue.h"
 #include "../../../Common/includes/Socket/Socket.h"
-//-----------------------------------------------------------------------------
-
-//-----------------------------------------------------------------------------
-#include "Commands/Command.h"
-//-----------------------------------------------------------------------------
-
-//-----------------------------------------------------------------------------
+#include "../../../Server/includes/defs.h"
 
 class ClientConnection {
 private:
     InstanceId id;
-    std::atomic<Id> map;
+    std::atomic<Id> map_id;
     Socket peer;
     NonBlockingQueue<InstanceId*>& finished_connections;
     // Comparten el int finished_threads => necesito el mutex
     std::mutex m;
     int finished_threads;
-
     std::thread sender;
-    BlockingQueue<Command*> notifications;
-
     std::thread receiver;
-    NonBlockingQueue<Command*>& commands;
-
-    //Game &game;
 
     void _finishThread();
     // POR NO USAR PTR INTELIGENTES
@@ -51,8 +36,7 @@ public:
     ClientConnection(const InstanceId id,
                      const Id map,
                      Socket& peer,
-                     NonBlockingQueue<InstanceId*>& finished_connections,
-                     NonBlockingQueue<Command*>& commands);
+                     NonBlockingQueue<InstanceId*>& finished_connections);
 
     ClientConnection(const ClientConnection&) = delete;
     ClientConnection& operator=(const ClientConnection&) = delete;
@@ -60,11 +44,13 @@ public:
     ClientConnection& operator=(ClientConnection&& other) = delete;
 
     void start();
-    void push(Command* notification);
-    void changeMap(Id map_id);
     void join();
     void stop();
     ~ClientConnection();
+
+
+    void sendInit();
+    
 };
 
 
