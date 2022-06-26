@@ -20,11 +20,14 @@ void Server::run() {
         std::cin >> input;
     }
 
+    game.stop();
+
     accepter.stop();
     //engine.stop();
 
     accepter.join();
     //engine.join();
+
 
 }
 

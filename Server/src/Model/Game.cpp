@@ -126,7 +126,14 @@ std::vector<MapDTO> Game::getMapsLoads(){
 
 
 
-
+void Game::stop() {
+    
+    for (const auto& [name_game, engine] : this->games) {
+        std::cout << "FINALIZANDO GAME." << std::endl;
+        engine->stop();
+        engine->join();
+    }
+}
 
 
 
