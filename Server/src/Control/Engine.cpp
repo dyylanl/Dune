@@ -9,26 +9,26 @@
  * 4° Vuelve a 1°
  */
 void Engine::_processCommands() {
-    Command* command_process = nullptr;
+    /*Command* command_process = nullptr;
     while ((command_process = commands.pop())) {
         //command_process->exec(game);
         delete command_process;
-    }
+    }*/
 }
 
 void Engine::_processFinishedConnections() {
-    InstanceId* finished_connection = nullptr;
+    /*InstanceId* finished_connection = nullptr;
     while ((finished_connection = finished_connections.pop())) {
         delete finished_connection;
         fprintf(stderr, "[ENGINE]: Se ha desconectado un jugador.\n");
-    }
+    }*/
 }
 
 void Engine::_freeQueues() {
-        InstanceId* p = nullptr;
+       /* InstanceId* p = nullptr;
         while ((p = finished_connections.pop())) {
             delete p;
-        }
+        }*/
 }
 
 void Engine::_loopIteration(int it) {
@@ -39,14 +39,14 @@ void Engine::_loopIteration(int it) {
 //-----------------------------------------------------------------------------
 // API Pública
 
-Engine::Engine(Map *map, NonBlockingQueue<NewConnection*>& new_connections)
-        : keep_executing(true),
-          rate(30),
-          new_connections(new_connections),
-          finished_connections(),
-          commands(),
-          snapshot(),
-          established_connections(commands, finished_connections) 
+Engine::Engine(MapDTO map_dto) : 
+        keep_executing(true),
+        rate(30),
+        map(map_dto.path),
+        current_players(0),
+        req_players(map_dto.max_players),
+        map_id(map_dto.map_id),
+        name_game(map_dto.name_map)
 {
 
 }
@@ -84,7 +84,9 @@ void Engine::stop() {
     keep_executing = false;
 }
 
-Engine::~Engine() {}
+Engine::~Engine() {
+    std::cout << "[ENGINE]: Destruyendo engine." << std::endl;
+}
 
 
 /*
@@ -94,16 +96,14 @@ Engine::~Engine() {}
  * 2) le envio el mapa de la partida a la que se unio
  * 3) lo agrego al contenedor de conexiones establecidas
  */
-void Engine::addClient(NewConnection *client) {
-    NewConnection* new_connection = nullptr;
-    std::string name_game;
-    while ((new_connection = new_connections.pop())) {
-        name_game = new_connection->name_game;
-        //std::vector<std::vector<char>>& map = game.getMap(name_game);
-        //Id map_id = game.getMapId(name_game);
-        //protocol.sendMap(new_connection->peer,map);
-        //established_connections.add(game.getConnectionId(),map_id,new_connection->peer);
-        delete new_connection;
-    }
-}
 
+void Engine::addClient(NewConnection *client) {
+    if (current_players < req_players) {
+        current_players++;
+        std::cout << "[ENGINE]: " << client->name_player << " agregado a partida: " << name_game << "." << std::endl;
+    }
+    if (current_players == req_players) {
+        std::cout << "[ENGINE]: Comenzando partida " << name_game << std::endl;
+    }
+    
+}

@@ -26,7 +26,6 @@ void ClientLogin::run() {
         std::string name;
         uint16_t len_name = protocol.recvCommand(peer);
         name = protocol.recvName(peer, len_name);
-        std::cout << "Cliente: " << name << std::endl;
         uint16_t command = protocol.recvCommand(peer); // este comando puede ser 1 2 o 3
         int resp = 1;
         while (resp != 0) {
@@ -102,7 +101,7 @@ int ClientLogin::execute(uint16_t command, std::string name_player) {
         std::string name_game;
         uint16_t len_name = protocol.recvCommand(peer);
         name_game = protocol.recvName(peer, len_name);
-        Id map_id = 1;/*game.getMapId(name_game);*/
+        Id map_id = game.getMapId(name_game);
         uint16_t resp = game.acceptPlayer(new NewConnection(peer, name_player, name_game, map_id));
         protocol.sendResponse(peer, resp);
         return resp;

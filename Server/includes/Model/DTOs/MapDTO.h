@@ -15,6 +15,7 @@ struct MapDTO {
     int rows, cols;
     int max_players;
     std::vector<std::vector<char>> map;
+    std::string name_map;
 };
 
 

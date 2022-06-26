@@ -10,23 +10,20 @@
 #include "../../config/ConfigReader.h"
 #include "../Control/NewConnection.h"
 #include "../Model/Map.h"
+#include "../Control/Engine.h"
 ////////////////////////////////////////
 class Game {
 private:
 
-    
-
-    std::map<Id,MapDTO> maps_dto_init;
-    
     /*
-     * Contiene todas las partidas creadas por los users
-     * clave: nombre del mapa
-     * valor: mapa
-     */
-    // std::map<std::string, Map*> maps_created;
+    * Carga inicial de los mapas.yaml
+    */
+    std::map<Id,MapDTO> maps_dto_init;
 
-    // {name_game:[current,req]}
-    std::map<std::string, std::vector<int>> info_games;
+    /*
+    * Cada vez que se cree una partida se iniciara un Engine para manejar esa partida y unir los jugadores a esa partida
+    */
+    std::map<std::string,Engine*> games;
     
 
     // --------------------------------------------------- //
@@ -41,21 +38,13 @@ private:
      * Lockea el mutex, retorna true si el name ya existe.
      */
     bool contains(const std::string& game_name);
-    /*
-     * Lockea el mutex e insterta el valor current y req en games
-     * si es que hay una key = game_name.
-     */
-    void put(const std::string& game_name, int current, int req);
+
     /*
      * Retorna el valor asociado a la clave game_name si es
      * que existe. El contains() lockea el mutex.
      */
     std::vector<int> get(const std::string& game_name);
-    /*
-     * Agrega un jugador a la partida game_name si es
-     * que esta partida no esta completa.
-     */
-    void addPlayer(const std::string& game_name);
+    
     /*
      * Lockea el mutex e imprime por pantalla
      * el comienzo de la partida 'name'.
@@ -85,16 +74,7 @@ public:
      */
     std::vector<std::string> listGames();
 
-    /*
-    * Retorna un nuevo id de conexion.
-    */
-    InstanceId getConnectionId() {return next_id++;}
-
-    // devuelve el mapa ascii creado ¿por que el game deberia devolver el mapa??
-    //std::vector<std::vector<char>>& getMap(std::string name_game);
-
-    // TODO: TERMINAR ID's de mapa
-    // static Id getMapId(std::string name_game) {return 1;};
+    Id getMapId(std::string name_game);
    
    // devuelve la cantidad de mapas cargados en el servidor
    std::vector<MapDTO> getMapsLoads();

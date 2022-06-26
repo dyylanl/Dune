@@ -9,38 +9,25 @@ class Map;
 
 bool Game::contains(const std::string& game_name) {
     //std::lock_guard<std::mutex> lock(mutex);
-    return (this->info_games.find(game_name)!= this->info_games.end());
+    return (this->games.find(game_name)!= this->games.end());
 }
 
 std::vector<int> Game::get(const std::string& game_name) {
     // El contains ya lockea el mutex, no hace falta lockearlo aqui.
     if (contains(game_name)) {
         std::vector<int> game_info;
-        game_info.push_back(info_games[game_name][0]); // current players
-        game_info.push_back(info_games[game_name][1]); // req players
+        game_info.push_back(games[game_name]->getCurrentPlayers()); // current players
+        game_info.push_back(games[game_name]->getReqPlayers()); // req players
         return game_info;
     } else {
         throw Exception("Se desea obtener una partida inexistente.\n");
     }
 }
 
-void Game::put(const std::string& game_name, int current, int req) {
-    //std::lock_guard<std::mutex> lock(mutex);
-    std::vector<int> vec = {current, req};
-    this->info_games[game_name] = vec;
-}
-
-void Game::addPlayer(const std::string& game_name) {
-    if (contains(game_name)) {
-        put(game_name, (get(game_name)[0]+1), get(game_name)[1]);
-    }
-}
-
 // ---------- METODOS PUBLICOS ------------ //
 
 Game::Game(int rate, ConfigurationReader reader1) :
-            /*maps_created(),*/
-            next_id(FIRST_ID),
+            games(),
             game_config(reader1)
 {
     std::list<std::string> map_paths = game_config.getAllPaths();
@@ -56,36 +43,38 @@ Game::Game(int rate, ConfigurationReader reader1) :
         mapDto.map = mapReader.getMap();
         this->maps_dto_init[map_id] = mapDto;
         map_id++;
-        std::cout << "Mapa en: " << path << " cargado." << std::endl;
     }
 }
 
 uint16_t Game::createGame(Id id_map, const std::string& name_game) {
     std::lock_guard<std::mutex> lock(mutex);
-    if (info_games.count(name_game) > 0) {
+    if (games.count(name_game) > 0) {
         std::cout << "Se quiere crear una partida que ya existe..." << std::endl;
-    } else {
-        // agrego el nuevo mapa...
-        int req = maps_dto_init[id_map].max_players; // obtengo jugadores requeridos para ese mapa...
-        info_games[name_game] = {0,req}; // le seteo el valor inicial
+        return ERROR;
+    }
+    if (maps_dto_init.count(id_map) == 0) {
+        std::cout << "Id de mapa invalido." << std::endl;
+        return ERROR;
+    }
+    MapDTO map;
+    map.map_id = id_map;
+    map.path = maps_dto_init[id_map].path;
+    map.max_players = maps_dto_init[id_map].max_players;
+    map.name_map = name_game;
+    games[name_game] = (new Engine(map));
+    return SUCCESS;
+}
+
+uint16_t Game::acceptPlayer(NewConnection* new_player) {
+    std::lock_guard<std::mutex> lock(mutex);
+    if (games.count(new_player->name_game) > 0) { // si existe una partida con ese nombre entonces entro
+        games[new_player->name_game]->addClient(new_player);
         return SUCCESS;
     }
     return ERROR;
 }
 
-uint16_t Game::acceptPlayer(NewConnection* new_player) {
-    std::lock_guard<std::mutex> lock(mutex);
-    if (contains(new_player->name_game)) { // pregunto si esa partida existe
-        if ((get(new_player->name_game))[0] < (get(new_player->name_game))[1]) { // pregunto si la cantidad de usuarios actuales es menor a la requeridas
-            addPlayer(new_player->name_game); // actualizo la info_Games
-            //this->maps_created[new_player->name_game]->addPlayer(new_player); // agrego el jugador al mapa que eligio
-            return SUCCESS;
-        }
-    }
-    return ERROR;
-}
-
-
+// devuelve algo del tipo {[currents,reqs,len_name,name],...,[---]}
 std::vector<std::string> Game::listGames() {
     /*
      * Listar partidas es operacion de lectura.
@@ -94,11 +83,11 @@ std::vector<std::string> Game::listGames() {
      */
     std::lock_guard<std::mutex> lock(mutex);
     std::vector<std::string> list = {};
-    if (!this->info_games.empty()) {
-        list.push_back(std::to_string(this->info_games.size()));
-        for (const auto& [game_name, info] : this->info_games) {
-            list.push_back(std::to_string(info[0])); // mando players actuales
-            list.push_back(std::to_string(info[1])); // mando maximos
+    if (!this->games.empty()) {
+        list.push_back(std::to_string(this->games.size()));
+        for (const auto& [game_name, game] : this->games) {
+            list.push_back(std::to_string(game->getCurrentPlayers())); // mando players actuales
+            list.push_back(std::to_string(game->getReqPlayers())); // mando maximos
             list.push_back(std::to_string((game_name).size())); // mando len del nombre
             list.push_back(game_name); // mando nombre
         }
@@ -116,9 +105,16 @@ std::vector<std::vector<char>>& Game::getMap(std::string name_game) {
     }
 }*/
 
-Game::~Game() {}
+Game::~Game() {
+    for (const auto& [id, game] : this->games) {
+            delete game;
+        }
+    
+}
 
-
+Id Game::getMapId(std::string name_game) {
+    return games[name_game]->getMapId();
+}
 
 std::vector<MapDTO> Game::getMapsLoads(){
     std::vector<MapDTO> maps_loads;

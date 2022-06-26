@@ -6,19 +6,31 @@
 #include <atomic>
 #include <chrono>
 #include <cmath>
+#include <iostream>
 #include "../../../Common/includes/NonBlockingQueue.h"
 #include "../../../Common/includes/Thread.h"
+#include "../../includes/Model/DTOs/MapDTO.h"
+#include "../../config/MapReader.h"
+#include "../../includes/Model/Map.h"
+
+/*
 #include "NewConnection.h"
 #include "Commands/Command.h"
 #include "ClientsConnected.h"
-
+*/
 
 class Engine : public Thread {
 private:
 
     std::atomic_bool keep_executing;
     int rate;
-
+    Map map;
+    int current_players;
+    int req_players;
+    int map_id;
+    std::string name_game;
+/*
+    // clientes antes de comenzar la partida
     NonBlockingQueue<NewConnection*>& new_connections;
     NonBlockingQueue<InstanceId*> finished_connections;
 
@@ -27,15 +39,16 @@ private:
     // la que envia el server
     NonBlockingQueue<Command*> snapshot;
 
-    // todos los clientes del mapa
+    // clientes una vez iniciada la partida.
     ClientsConnected established_connections;
-
+*/
     void _processFinishedConnections();
     void _processCommands();
     void _freeQueues();
     void _loopIteration(int it);
 public:
-    Engine(Map *map, NonBlockingQueue<NewConnection*>& new_connections);
+    // el mapDTO que recibe solo tiene la ruta al yaml y el nombre que se eligio para crearlo
+    Engine(MapDTO map);
     Engine(const Engine&) = delete;
     Engine& operator=(const Engine&) = delete;
     Engine(Engine&& other) = delete;
@@ -43,7 +56,14 @@ public:
     void run() override;
     void stop();
     ~Engine() override;
-    void addClient(NewConnection* client);
+
+    void addClient(NewConnection* newPlayer);
+
+
+    int getCurrentPlayers() {return current_players;}
+    int getReqPlayers() {return req_players;}
+    Id getMapId() {return map_id;}
+
 };
 
 

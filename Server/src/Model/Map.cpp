@@ -312,14 +312,11 @@ std::vector<std::vector<char>> &Map::getMap() {
     return this->mapa;
 }
 
-Map::Map(MapDTO map_dto) : map_reader(map_dto.path),
-                            rows(map_dto.rows),
-                            cols(map_dto.cols),
-                            mapa(map_dto.map),
-                            req_players(map_dto.max_players),
-                            current_players(0)/*,
-                            connections(),
-                            engine(this, connections) */
+Map::Map(std::string config_path) : 
+                            map_reader(config_path),
+                            rows(map_reader.getRows()),
+                            cols(map_reader.getCols()),
+                            mapa(map_reader.getMap())
 {
     std::vector <std::vector<Terrain>> terrain_init((uint16_t) rows, std::vector<Terrain>((uint16_t) cols, Terrain('A')));
     this->terrrains = terrain_init;
@@ -331,18 +328,5 @@ Map::Map(MapDTO map_dto) : map_reader(map_dto.path),
             terrrains[i][j] = Terrain(type);
         }
     }
-    std::cout << "Mapa creado..." << std::endl;
-}
-
-#define FULL_GAME 0
-
-
-int Map::addPlayer(NewConnection* new_player) {
-    current_players += 1;
-
-    if (current_players == req_players) {
-        //engine.start();
-        return FULL_GAME;
-    } else
-        return 1;
+    std::cout << "Se inicio un mapa cargado en: " << config_path << std::endl;
 }

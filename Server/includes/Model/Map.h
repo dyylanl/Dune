@@ -20,19 +20,15 @@ class Map {
     std::vector<std::vector<char>> mapa; // contiene el tipo de unidad en esa posicion
     std::vector<Unit*> units;
     std::vector<Building*> buildings;
-    int req_players;
-    int current_players;
-    /*NonBlockingQueue<NewConnection*> connections;
-    Engine engine;*/
 public:
     ~Map();
     bool hasNews();
     bool canMove(const Unit& unit, Position postion);
     int getRows() const {return rows;}
     int getCols() const {return cols;}
+
     std::vector<std::vector<char>>& getMap();
-    int getReqPlayers() const {return req_players;}
-    int getCurrentPlayers() {return current_players;}
+    
     char getTypeTerrain(int posX, int posY);
     // comandos
     void selectUnit(int pos_x, int pos_y);
@@ -109,7 +105,7 @@ public:
     Attackable *getClosestAttackable(Position &position, int limitRadius, Player &player);
 
 
-    explicit Map(MapDTO map_dto);
+    explicit Map(std::string path_config);
 
     /*
      * retorna 0 si el mapa esta completo

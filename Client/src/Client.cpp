@@ -118,12 +118,13 @@ void Client::launch() {
                 std::cin >> nombre_partida;
                 protocol.sendName(socket, nombre_partida);
                 std::vector<std::vector<std::string>> maps_ = protocol.recvMapsCreated(socket);
+                std::cout << "\n\n";
                 if (maps_.size() == 0) {
                   std::cout << "No hay mapas cargados en el server" << std::endl;
                 } else {
                   int total_maps_uploaded = (int)maps_.size();
                   for (int i = 0; i < total_maps_uploaded; i++) {
-                    std::cout << "Mapa " << i << "\nFilas: " << maps_[i][0] << "\nColumnas: " << maps_[i][1] << "\nJugadores Requeridos: " << maps_[i][2] << std::endl;
+                    std::cout << "\nMapa " << i+1 << "\nFilas: " << maps_[i][0] << "\nColumnas: " << maps_[i][1] << "\nJugadores Requeridos: " << maps_[i][2] << std::endl;
                   }
                   
                 }
@@ -144,7 +145,8 @@ void Client::launch() {
                     }
                     
                 } else {
-                    std::cout << "Esa partida ya existe..." << std::endl;
+                    std::cout << "ERROR creando la partida..." << std::endl;
+                    return;
                 }
             } else if (comando == 2) {
                 std::cout << "\nNombre de la partida: ";
