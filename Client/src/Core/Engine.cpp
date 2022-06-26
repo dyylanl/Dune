@@ -10,12 +10,6 @@ bool Engine::IsRunning() {
 
 void Engine::Events() {
     m_Running = m_eventManager.listen();
-/*    if (m_eventManager.mouseButtonDown(LEFT)) {
-        m_queueB.push(new CommandCL(5, 0, m_eventManager.getMouse()));
-    }
-    if (m_eventManager.mouseButtonDown(RIGHT)) {
-        m_queueB.push(new CommandCL(6,0,m_eventManager.getMouse()));
-    }*/
 }
 
 void Engine::Update() {
@@ -39,7 +33,6 @@ void Engine::Render(SDL2pp::Renderer &m_Renderer) {
     }
     m_Renderer.Present();
     //m_objects.clear();
-    //m_players.clear();
 }
 
 Engine::Engine(std::vector<std::vector<char>> &mapa, std::vector<GameObject*> &objects, TextureManager &textureManager, EventManager &eventManager,
