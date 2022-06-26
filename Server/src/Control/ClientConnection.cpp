@@ -124,6 +124,5 @@ ClientConnection::~ClientConnection() {
 
 void ClientConnection::sendInit() {
     uint16_t init = 10;
-    std::cout << "Enviando iniciar partida a cliente" << std::endl; 
     peer.send((const char*)&init, sizeof(uint16_t));
 }

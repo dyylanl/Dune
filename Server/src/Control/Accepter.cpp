@@ -57,6 +57,7 @@ void Accepter:: run() {
 }
 
 void Accepter::stop() {
+    fprintf(stderr, "[Accepter]: STOP.\n");
     keep_accepting = false;
     try {
         socket.shutdown();

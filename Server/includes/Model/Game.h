@@ -78,7 +78,10 @@ public:
    * Retorna todos los MapDTO que se cargaron en el servidor.
    */
    std::vector<MapDTO> getMapsLoads();
+
+   void stop();
    
+
     ~Game();
 
 
