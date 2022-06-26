@@ -3,12 +3,13 @@
 
 
 #include <string>
-#include "Position.h"
-#include "Units/Unit.h"
-#include "Terrains/Terrain.h"
-#include "Buildings/Building.h"
 #include "../../config/MapReader.h"
+#include "Terrains/Terrain.h"
+#include "Units/Unit.h"
+#include "../Control/NewConnection.h"
+#include "../../../Common/includes/NonBlockingQueue.h"
 #include "Area.h"
+#include "DTOs/MapDTO.h"
 
 class Map {
     MapReader map_reader;
@@ -20,8 +21,10 @@ class Map {
     std::vector<Unit*> units;
     std::vector<Building*> buildings;
     int req_players;
+    int current_players;
+    /*NonBlockingQueue<NewConnection*> connections;
+    Engine engine;*/
 public:
-    explicit Map(std::string map_path);
     ~Map();
     bool hasNews();
     bool canMove(const Unit& unit, Position postion);
@@ -29,6 +32,7 @@ public:
     int getCols() const {return cols;}
     std::vector<std::vector<char>>& getMap();
     int getReqPlayers() const {return req_players;}
+    int getCurrentPlayers() {return current_players;}
     char getTypeTerrain(int posX, int posY);
     // comandos
     void selectUnit(int pos_x, int pos_y);
@@ -103,6 +107,15 @@ public:
     std::vector<Building *> getBuildingsInArea(Area &area, Player &player);
     void updateSpice(int x, int y);
     Attackable *getClosestAttackable(Position &position, int limitRadius, Player &player);
+
+
+    explicit Map(MapDTO map_dto);
+
+    /*
+     * retorna 0 si el mapa esta completo
+     * 1 si todavia no esta completo
+     */
+    int addPlayer(NewConnection* new_player);
 
 };
 

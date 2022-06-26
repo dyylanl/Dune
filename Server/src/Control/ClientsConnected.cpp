@@ -38,4 +38,3 @@ void ClientsConnected::stop() {
 }
 
 ClientsConnected::~ClientsConnected() = default;
-

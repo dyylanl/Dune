@@ -7,26 +7,7 @@
 #include "../../includes/Model/Terrains/Rock.h"
 
 
-Map::Map(std::string map_path) : map_reader(std::move(map_path)),
-                                 rows(map_reader.getRows()),
-                                 cols(map_reader.getCols()),
-                                 units(),
-                                 buildings(),
-                                 req_players(map_reader.getReqPlayers()) {
-    std::vector <std::vector<Terrain>> terrain_init
-            ((uint16_t) rows, std::vector<Terrain>((uint16_t) cols, Terrain('A')));
-    this->terrrains = terrain_init;
-    this->mapa = map_reader.getMap();
-    int rows_ = mapa.size();
-    int cols_ = mapa[0].size();
-    for (int i = 0; i < rows_; ++i) {
-        for (int j = 0; j < cols_; ++j) {
-            char type = this->mapa[i][j];
-            terrrains[i][j] = Terrain(type);
-        }
-    }
 
-}
 
 Map::~Map() {}
 
@@ -331,3 +312,37 @@ std::vector<std::vector<char>> &Map::getMap() {
     return this->mapa;
 }
 
+Map::Map(MapDTO map_dto) : map_reader(map_dto.path),
+                            rows(map_dto.rows),
+                            cols(map_dto.cols),
+                            mapa(map_dto.map),
+                            req_players(map_dto.max_players),
+                            current_players(0)/*,
+                            connections(),
+                            engine(this, connections) */
+{
+    std::vector <std::vector<Terrain>> terrain_init((uint16_t) rows, std::vector<Terrain>((uint16_t) cols, Terrain('A')));
+    this->terrrains = terrain_init;
+    int rows_ = mapa.size();
+    int cols_ = mapa[0].size();
+    for (int i = 0; i < rows_; ++i) {
+        for (int j = 0; j < cols_; ++j) {
+            char type = this->mapa[i][j];
+            terrrains[i][j] = Terrain(type);
+        }
+    }
+    std::cout << "Mapa creado..." << std::endl;
+}
+
+#define FULL_GAME 0
+
+
+int Map::addPlayer(NewConnection* new_player) {
+    current_players += 1;
+
+    if (current_players == req_players) {
+        //engine.start();
+        return FULL_GAME;
+    } else
+        return 1;
+}

@@ -1,28 +1,6 @@
 #include "../../includes/Control/Engine.h"
 
-/*
- * Que el engine procese una nueva conexion significa que este cliente ya decidio si
- * creo una partida o se unio a una
- * 1) obtengo el nombre a la partida que decidio unirse
- * 2) le envio el mapa de la partida a la que se unio
- * 3) lo agrego al contenedor de conexiones establecidas
- */
-void Engine::_processNewConnections() {
-    NewConnection* new_connection = nullptr;
-    std::string name_game;
-    while ((new_connection = new_connections.pop())) {
-        name_game = new_connection->name_game;
-        std::vector<std::vector<char>>& map = game.getMap(name_game);
-        Id map_id = game.getMapId(name_game);
-        protocol.sendMap(new_connection->peer,map);
-        if (game.fullyGame(name_game)) {
-            uint16_t fully_game = 0;
-            protocol.sendResponse(new_connection->peer, fully_game);
-        }
-        established_connections.add(game.getConnectionId(),map_id,new_connection->peer);
-        delete new_connection;
-    }
-}
+
 
 /*
  * 1° Popea un comando
@@ -33,7 +11,7 @@ void Engine::_processNewConnections() {
 void Engine::_processCommands() {
     Command* command_process = nullptr;
     while ((command_process = commands.pop())) {
-        command_process->exec(game);
+        //command_process->exec(game);
         delete command_process;
     }
 }
@@ -54,7 +32,6 @@ void Engine::_freeQueues() {
 }
 
 void Engine::_loopIteration(int it) {
-    _processNewConnections();
     _processCommands();
     _processFinishedConnections();
 }
@@ -62,24 +39,20 @@ void Engine::_loopIteration(int it) {
 //-----------------------------------------------------------------------------
 // API Pública
 
-Engine::Engine(Game& game1, ConfigurationReader& reader1,
-               NonBlockingQueue<NewConnection*>& new_connections)
+Engine::Engine(Map *map, NonBlockingQueue<NewConnection*>& new_connections)
         : keep_executing(true),
-          reader(reader1),
-          protocol(),
           rate(30),
           new_connections(new_connections),
           finished_connections(),
-          game(game1),
           commands(),
           snapshot(),
-          established_connections(commands, finished_connections) {
-    int fps = reader.getFPS();
-    this->rate = 1000 / fps;
+          established_connections(commands, finished_connections) 
+{
+
 }
 
 void Engine::run() {
-    fprintf(stderr, "[ENGINE]: Empezando ejecución.\n");
+    fprintf(stderr, "[ENGINE]: Empezando partida.\n");
     auto t1 = std::chrono::steady_clock::now();
     auto t2 = t1;
     std::chrono::duration<float, std::milli> diff{};
@@ -111,5 +84,26 @@ void Engine::stop() {
     keep_executing = false;
 }
 
-Engine::~Engine() = default;
+Engine::~Engine() {}
+
+
+/*
+ * Que el engine procese una nueva conexion significa que este cliente ya decidio si
+ * creo una partida o se unio a una
+ * 1) obtengo el nombre a la partida que decidio unirse
+ * 2) le envio el mapa de la partida a la que se unio
+ * 3) lo agrego al contenedor de conexiones establecidas
+ */
+void Engine::addClient(NewConnection *client) {
+    NewConnection* new_connection = nullptr;
+    std::string name_game;
+    while ((new_connection = new_connections.pop())) {
+        name_game = new_connection->name_game;
+        //std::vector<std::vector<char>>& map = game.getMap(name_game);
+        //Id map_id = game.getMapId(name_game);
+        //protocol.sendMap(new_connection->peer,map);
+        //established_connections.add(game.getConnectionId(),map_id,new_connection->peer);
+        delete new_connection;
+    }
+}
 

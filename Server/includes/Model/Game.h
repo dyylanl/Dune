@@ -5,35 +5,29 @@
 #include <map>
 #include <string>
 #include <mutex>
-////////////////////////////////////////
 #include "../defs.h"
-#include "Map.h"
-#include "AStar.h"
-#include "../Control/NewConnection.h"
-#include "../../config/GameConfig.h"
+#include "DTOs/MapDTO.h"
 #include "../../config/ConfigReader.h"
-
+#include "../Control/NewConnection.h"
+#include "../Model/Map.h"
+////////////////////////////////////////
 class Game {
 private:
 
-    std::map<Id, Map*> maps_init;
+    
+
+    std::map<Id,MapDTO> maps_dto_init;
+    
     /*
      * Contiene todas las partidas creadas por los users
      * clave: nombre del mapa
      * valor: mapa
      */
-    std::map<std::string, Map*> maps_created;
-    /*
-     * aca esta toda la informacion actualizada para enviarsela al cliente y hacer todos los chequeos
-     * por lo tanto al ser el unico recurso compartido solo uso el mutex en este map
-     */
-    std::map<std::string, std::vector<int>> games;
-    /*
-     * clave: nombre de la partida
-     * valor: jugadores en esa partida
-     * {duelo 3vs3: [dylan,ricardo,fede,fede,mateo,pepe], solo: [alone], ...}
-     */
-    std::map<std::string,std::vector<Player*>> players;
+    // std::map<std::string, Map*> maps_created;
+
+    // {name_game:[current,req]}
+    std::map<std::string, std::vector<int>> info_games;
+    
 
     // --------------------------------------------------- //
     std::mutex mutex;
@@ -70,62 +64,52 @@ private:
 
 public:
     Game(int rate, ConfigurationReader reader);
+
     /*
-     * Crea una partida {name:[1,req,id_mapa]}
-     * Return: 0 exito 1 error
+     * Crea una partida con el id y nombre solicitado
+     * retorna 0 si se pudo crear
+     * retorna 1 si no se pudo (es decir, ya existe una partida con ese nombre)
      *
      */
     uint16_t createGame(Id id_map, const std::string& name);
+
     /*
-     * Inserta un jugador a la partida name.
+     * Inserta un jugador a la partida que eligio.
+     * retorna 0 si lo pudo unir
+     * retorna 1 si no lo pudo unir (es decir, esta completa esa partida o bien no existe)
      */
-    uint16_t acceptPlayer(const std::string& name);
+    uint16_t acceptPlayer(NewConnection* new_player);
+
     /*
      * Retorna una lista con formato [nombre, actuales, req]
      */
     std::vector<std::string> listGames();
 
     /*
-     * Retorna un id de instancia nuevo
-     */
-    InstanceId newConnection(NewConnection* connection);
-
-    std::stack<Position> makePath(Unit& unit, Position pos_end);
-
+    * Retorna un nuevo id de conexion.
+    */
     InstanceId getConnectionId() {return next_id++;}
 
-    std::vector<std::vector<char>>& getMap(std::string name_game);
+    // devuelve el mapa ascii creado ¿por que el game deberia devolver el mapa??
+    //std::vector<std::vector<char>>& getMap(std::string name_game);
 
     // TODO: TERMINAR ID's de mapa
-    static Id getMapId(std::string name_game) {return 1;};
-
-
-    ///////////// comandos ////////////
-    /*
-     * si hay una unidad en pos_x pos_y entonces la agrega a la lista de unidades selecteds
-     */
-    void selectUnitInPos(int pos_x, int pos_y);
-
-    /*
-     * construye un edificio del tipo type en la posicion indicada si es que se puede
-     */
-    void build(char build_type, int pos_x, int pos_y);
-
-    void moveUnitSelecteds(const uint16_t i, const uint16_t i1);
-
-    void createUnit(char unit_type);
-
+    // static Id getMapId(std::string name_game) {return 1;};
+   
+   // devuelve la cantidad de mapas cargados en el servidor
+   std::vector<MapDTO> getMapsLoads();
+   
     ~Game();
 
 
-    /*
-    * Retorna una lista con del tipo "Id"
-    */
-   std::vector<std::string> getMaps();
 
-   int getMapsCreated() {return maps_init.size();}
 
-   bool fullyGame(std::string name_game);
+// ------------------ ESTO HAY QUE BORRARLO --------------- //
+    void selectUnitInPos(int pos_x, int pos_y);
+    void build(char build_type, int pos_x, int pos_y);
+    void moveUnitSelecteds(const uint16_t i, const uint16_t i1);
+    void createUnit(char unit_type);
+    bool fullyGame(std::string name_game);
 };
 
 

@@ -1,7 +1,5 @@
 #!/bin/bash
 
-# Author: dypa
-
 greenColour="\e[0;32m\033[1m"
 endColour="\033[0m\e[0m"
 redColour="\e[0;31m\033[1m"
@@ -30,10 +28,7 @@ function initialMessage () {
 function helpMessage() {
     echo -e "${purpleColour} Opciones:"
     echo "  d: instalar DUNE"
-    echo -e "  q: salir. ${endColour}"
-    echo ""
-}
-
+    echo -e "  q: salir. ${endColour}
 function unknownInput() {
     echo " >'q' para salir."
     echo " >'d' para instalar DUNE"

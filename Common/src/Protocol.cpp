@@ -210,7 +210,7 @@ void Protocol::sendMap(Socket &socket, std::vector<std::vector<char>>& map) {
             char type = map[i][j];
             socket.send(reinterpret_cast<const char *>(&type), sizeof(uint8_t));}
     }
-    std::cout << "Mapa de " << rows << "x" << cols << " enviado." << std::endl;
+    //std::cout << "Mapa de " << rows << "x" << cols << " enviado." << std::endl;
 }
 
 std::vector<std::vector<char>> Protocol::recvMap(Socket &socket) {
@@ -395,14 +395,33 @@ void Protocol::sendMapsId(Socket &socket, std::vector<std::string> maps_id){
 
 
 
-void Protocol::sendMapsCreated(Socket &socket, int total_maps_id) {
-    uint16_t total_id = htons(total_maps_id);
-    socket.send(reinterpret_cast<const char *>(&total_id), sizeof(uint16_t)); // envio la cantidad de id's
+void Protocol::sendMapsCreated(Socket &socket, std::vector<MapDTO> maps) {
+    uint16_t total = maps.size();
+    uint16_t total_s = htons(total);
+    socket.send((const char*)(&total_s), sizeof(uint16_t));
+    // comienzo a enviar los mapas
+    int total_maps_created = (int)maps.size();
+    for (int i = 0; i < total_maps_created; i++) {
+        MapDTO map = maps[i];
+        socket.send((const char*)&map.rows, sizeof(uint16_t));
+        socket.send((const char*)&map.cols, sizeof(uint16_t));
+        socket.send((const char*)&map.max_players, sizeof(uint16_t));
+    }
+    
 }
 
-uint16_t Protocol::recvMapsCreated(Socket &socket) {
-    uint16_t total_maps = 0;
-    socket.recv(reinterpret_cast<char *>(&total_maps), sizeof(uint16_t)); // recibo la cantidad de mapas creados
-    total_maps = ntohs(total_maps);
-    return total_maps;
+std::vector<std::vector<std::string>> Protocol::recvMapsCreated(Socket &socket) {
+    std::vector<std::vector<std::string>> maps;
+    uint16_t total = 0;
+    socket.recv((char*)&total, sizeof(uint16_t));
+    uint16_t n = ntohs(total);
+    for (int i = 0; i < n; i++){
+        uint16_t rows,cols,max_players = 0;
+        socket.recv((char*)&rows,sizeof(uint16_t));
+        socket.recv((char*)&cols,sizeof(uint16_t));
+        socket.recv((char*)&max_players,sizeof(uint16_t));
+        std::vector<std::string> map_dto = {std::to_string(rows),std::to_string(cols),std::to_string(max_players)};
+        maps.push_back(map_dto);
+    }
+    return maps;
 }

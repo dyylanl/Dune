@@ -117,13 +117,15 @@ void Client::launch() {
                 std::string nombre_partida;
                 std::cin >> nombre_partida;
                 protocol.sendName(socket, nombre_partida);
-                int maps_ = protocol.recvMapsCreated(socket);
-                if (maps_ == 0) {
+                std::vector<std::vector<std::string>> maps_ = protocol.recvMapsCreated(socket);
+                if (maps_.size() == 0) {
                   std::cout << "No hay mapas cargados en el server" << std::endl;
                 } else {
-                  for (int i = 1; i <= maps_; i++) {
-                    std::cout << "\n  ["<<i<<"] Mapa " << i << std::endl;
+                  int total_maps_uploaded = (int)maps_.size();
+                  for (int i = 0; i < total_maps_uploaded; i++) {
+                    std::cout << "Mapa " << i << "\nFilas: " << maps_[i][0] << "\nColumnas: " << maps_[i][1] << "\nJugadores Requeridos: " << maps_[i][2] << std::endl;
                   }
+                  
                 }
                 uint16_t map_id;
                 std::cout << "Seleccione un mapa: ";

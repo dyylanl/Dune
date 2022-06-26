@@ -1,6 +1,4 @@
 #include "../../includes/Control/ClientLogin.h"
-#include "../../includes/defs.h"
-#include "../../includes/Model/Game.h"
 #include "../../includes/Model/Player.h"
 
 #define CREATE_GAME 1
@@ -9,19 +7,18 @@
 #define SUCCESS 0
 #define ERROR 1
 
-ClientLogin::ClientLogin(Game& game1,Socket& peer, YAMLReader& reader1,
-                         NonBlockingQueue<NewConnection*>& new_connections)
+ClientLogin::ClientLogin(Game& game1,Socket& peer, NonBlockingQueue<NewConnection*>& new_connections)
         : is_running(false),
           peer(std::move(peer)),
           protocol(),
-          reader(reader1),
           new_connections(new_connections),
           game(game1) {}
 
 /*
- * El cliente me enviara
- *  1° Nombre del jugador
- *  2° Crear, unirse o listar partidas.
+ * recv len name_player
+ * recv namePlayer
+ * recv command
+ * ejecuto comando
  */
 void ClientLogin::run() {
     is_running = true;
@@ -29,9 +26,12 @@ void ClientLogin::run() {
         std::string name;
         uint16_t len_name = protocol.recvCommand(peer);
         name = protocol.recvName(peer, len_name);
-        std::cout << "Cliente logeado: " << name << std::endl;
+        std::cout << "Cliente: " << name << std::endl;
         uint16_t command = protocol.recvCommand(peer); // este comando puede ser 1 2 o 3
-        execute(command, name); // si devuelve 0 es porque el cliente ya se unio a una partida o la crea
+        int resp = 1;
+        while (resp != 0) {
+            resp = execute(command, name); // si devuelve 0 es porque el cliente ya se unio a una partida o la crea si devuelve 1 hay q volver a recibir el comando que indique
+        }
     } catch (const std::exception& e) {
         try {
             peer.shutdown();
@@ -71,20 +71,22 @@ int ClientLogin::execute(uint16_t command, std::string name_player) {
     /*
      * Si el comando recibido es crear entonces:
      *  1° Recv Nombre de la partida
-     *  2° Recv Jugadores requeridos
+     *  2° Send Mapas cargados en el servidor
      *  3° Recv Mapa en el que se jugara
-     *  4° Envio respuesta si se pudo crear o no
+     *  4° Game crea partida
+     *  5° Envio respuesta si se pudo crear o no
+     *  6° Si se pudo crear game acepta el player
      */
     if (command == CREATE_GAME) {
         std::string name_game;
         uint16_t len_name = protocol.recvCommand(peer);
-        name_game = protocol.recvName(peer, len_name);
-        protocol.sendMapsCreated(peer, game.getMapsCreated());
-        uint16_t map_id = protocol.recvCommand(peer);
-        uint16_t resp = game.createGame(map_id, name_game);
+        name_game = protocol.recvName(peer, len_name); // recibo el nombre de la partida
+        protocol.sendMapsCreated(peer, game.getMapsLoads()); // envio mapas que cargo el server
+        uint16_t map_id = protocol.recvCommand(peer); // recibo el mapa que eligio para crear la partida
+        uint16_t resp = game.createGame(map_id, name_game); // pido al game que cree esa partida
         protocol.sendResponse(peer, resp);
-        if (resp == SUCCESS) {
-            new_connections.push(new NewConnection(peer, name_player, name_game, map_id));
+        if (resp == SUCCESS) { // si la respuesta es 0 entonces el game me creo la partida
+            game.acceptPlayer(new NewConnection(peer, name_player, name_game, map_id)); // si la partida se creo entonces le digo al game que me acepte este player
             return SUCCESS;
         } else {
             return ERROR;
@@ -100,15 +102,10 @@ int ClientLogin::execute(uint16_t command, std::string name_player) {
         std::string name_game;
         uint16_t len_name = protocol.recvCommand(peer);
         name_game = protocol.recvName(peer, len_name);
-        uint16_t resp = game.acceptPlayer(name_game);
-        Id map_id = game.getMapId(name_game);
+        Id map_id = 1;/*game.getMapId(name_game);*/
+        uint16_t resp = game.acceptPlayer(new NewConnection(peer, name_player, name_game, map_id));
         protocol.sendResponse(peer, resp);
-        if (resp == SUCCESS) {
-            new_connections.push(new NewConnection(peer, name_player, name_game, map_id));
-            return SUCCESS;
-        } else {
-            return ERROR;
-        }
+        return resp;
     }
     /*
      * Envio la lista de partidas actuales

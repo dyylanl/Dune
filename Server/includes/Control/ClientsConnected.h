@@ -9,6 +9,8 @@
 #include "ClientConnection.h"
 #include "Commands/Command.h"
 
+class Command;
+
 class ClientsConnected {
 private:
     NonBlockingQueue<Command*>& commands;

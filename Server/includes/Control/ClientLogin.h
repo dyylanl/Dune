@@ -20,12 +20,21 @@ private:
     std::atomic_bool is_running;
     Socket peer;
     Protocol protocol;
-    YAMLReader& reader;
     NonBlockingQueue<NewConnection*>& new_connections;
     Game& game;
 
+    /* ejecuta el comando recibido.
+    *   1: crear partida
+    *   2: unirse a partida
+    *   3: listar partidas
+    * 
+    * retorna 0 si el jugador ya se unio a una partida (o creo).
+    * retorna 1 si el jugador decidio listar las partidas, por lo que no se unio a niguna.
+    */
+    int execute(uint16_t command, std::string name_player);
+
 public:
-    ClientLogin(Game& game,Socket& peer, YAMLReader& reader,
+    ClientLogin(Game& game,Socket& peer,
                 NonBlockingQueue<NewConnection*>& new_connections);
     ClientLogin(const ClientLogin&) = delete;
     ClientLogin& operator=(const ClientLogin&) = delete;
@@ -33,10 +42,9 @@ public:
     ClientLogin& operator=(ClientLogin&& other) = delete;
 
     /*
-     * Utilizada para la carga de configuracion del nuevo cliente.
+     * Luego de haber aceptado una conexion, el servidor requiere los datos del nuevo cliente.
      */
     void run() override;
-    int execute(uint16_t command, std::string name_player);
     bool isRunning() const;
     void stop();
 

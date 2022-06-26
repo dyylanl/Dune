@@ -25,7 +25,6 @@ private:
     Game game;
     NonBlockingQueue<NewConnection*> new_connections;
     Accepter accepter;
-    Engine engine;
 
 public:
     /* Constructor */

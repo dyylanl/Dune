@@ -86,7 +86,7 @@ ClientConnection::ClientConnection(
           commands(commands) {}
 
 void ClientConnection::start() {
-    std::cout << "Iniciando hilos sender/receiver del cliente" << std::endl;
+    std::cout << "Iniciando hilos sender/receiver del cliente...\n\n" << std::endl;
     sender = std::thread(&ClientConnection::_receiver, this);
     receiver = std::thread(&ClientConnection::_sender, this);
 }

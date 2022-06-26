@@ -1,11 +1,12 @@
 #include "../../includes/Control/Accepter.h"
 
-void Accepter::_acceptClient(int next_id) {
+// acepta una nueva conexion
+void Accepter::_acceptClient() {
     Socket peer = socket.accept();
     if (keep_accepting) {
-        auto client = new ClientLogin(game,peer, reader, new_connections);
-        client_logins.emplace_back(client);
-        client->start();
+        auto client_lobby = new ClientLogin(game,peer, new_connections);
+        client_logins.emplace_back(client_lobby);
+        client_lobby->start();
     }
 }
 
@@ -42,13 +43,11 @@ Accepter::Accepter(Game& game1, const std::string& port, const int max_clients_q
           game(game1) {}
 
 void Accepter:: run() {
-    int next_id = 1;
     fprintf(stderr, "[Accepter]: Comenzando ejecucion.\n");
     try {
         while (keep_accepting) {
-            _acceptClient(next_id);
+            _acceptClient();
             _joinFinishedLogins();
-            next_id++;
         }
     } catch (const ClosedSocketException& e) {
     } catch (const std::exception& e) {

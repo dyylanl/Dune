@@ -24,7 +24,7 @@ private:
     std::list<ClientLogin*> client_logins;
     Game& game;
 
-    void _acceptClient(int next_id);
+    void _acceptClient();
     void _joinFinishedLogins();
     void _joinLogins();
 
