@@ -8,7 +8,7 @@
 #define ERROR 1
 
 ClientLogin::ClientLogin(Game& game1, Socket& peer) : 
-        is_running(false), 
+        is_running(true), 
         peer(std::move(peer)),
         protocol(),
         game(game1) {}
@@ -20,15 +20,13 @@ ClientLogin::ClientLogin(Game& game1, Socket& peer) :
  * ejecuto comando
  */
 void ClientLogin::run() {
-    is_running = true;
     try {
         std::string name;
         uint16_t len_name = protocol.recvCommand(peer);
         name = protocol.recvName(peer, len_name);
-        uint16_t command = protocol.recvCommand(peer); // este comando puede ser 1 2 o 3
-        int resp = 1;
-        while (resp != 0 && is_running) {
-            resp = execute(command, name); // si devuelve 0 es porque el cliente ya se unio a una partida o la crea si devuelve 1 hay q volver a recibir el comando que indique
+        while (is_running) {
+            uint16_t command = protocol.recvCommand(peer); // este comando puede ser 1 2 o 3
+            execute(command, name); // si devuelve 0 es porque el cliente ya se unio a una partida o la crea si devuelve 1 hay q volver a recibir el comando que indique
         }
     } catch (const std::exception& e) {
         try {
@@ -65,7 +63,7 @@ void ClientLogin::stop() {
     }
 }
 
-int ClientLogin::execute(uint16_t command, std::string name_player) {
+void ClientLogin::execute(uint16_t command, std::string name_player) {
     /*
      * Si el comando recibido es crear entonces:
      *  1° Recv Nombre de la partida
@@ -85,7 +83,7 @@ int ClientLogin::execute(uint16_t command, std::string name_player) {
         protocol.sendResponse(peer, resp_create_game);
         if (resp_create_game == SUCCESS) { // si la respuesta es 0 entonces el game me creo la partida
             game.acceptPlayer(new NewConnection(peer, name_player, name_game, map_id)); // si la partida se creo entonces le digo al game que me acepte este player
-            return SUCCESS;
+            is_running = false;
         }
     }
     /*
@@ -98,17 +96,15 @@ int ClientLogin::execute(uint16_t command, std::string name_player) {
         uint16_t len_name = protocol.recvCommand(peer);
         name_game = protocol.recvName(peer, len_name);
         Id map_id = game.getMapId(name_game);
-        uint16_t resp = game.acceptPlayer(new NewConnection(peer, name_player, name_game, map_id));
-        return resp;
+        game.acceptPlayer(new NewConnection(peer, name_player, name_game, map_id));
+        is_running = false;
     }
     /*
      * Envio la lista de partidas actuales
      */
     else if (command == LIST_GAMES) {
         protocol.sendGameList(peer, game.listGames());
-        return ERROR;
     }
-    return ERROR;
 }
 
 ClientLogin::~ClientLogin() = default;

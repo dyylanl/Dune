@@ -13,6 +13,7 @@ void Accepter::_acceptClient() {
 void Accepter::_joinFinishedLogins() {
     for (auto client = client_logins.begin(); client != client_logins.end();) {
         if (!((*client)->isRunning())) {
+            std::cout << "Un jugador salio del lobby." << std::endl;
             (*client)->join();
             delete (*client);
             client = client_logins.erase(client);
