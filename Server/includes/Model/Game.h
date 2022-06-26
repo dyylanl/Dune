@@ -26,9 +26,7 @@ private:
     std::map<std::string,Engine*> games;
     
 
-    // --------------------------------------------------- //
     std::mutex mutex;
-    InstanceId next_id;
     ConfigurationReader game_config;
 
     /*
@@ -49,7 +47,7 @@ public:
         *   Carga todos los mapas con la ruta que le proporciona el config.yaml
         *   A cada mapa le setea un id unico.
     */
-    Game(ConfigurationReader path_game_config);
+    Game(std::string path_game_config);
 
     /*
      * Crea una partida con el id y nombre solicitado

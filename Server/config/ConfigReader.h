@@ -15,7 +15,6 @@ public:
     int getTotalMaps();
     std::list<std::string> getAllPaths();
     std::string getMapPath() const;
-    std::string getPort() const;
     int getFPS() const;
     //game
     unsigned getSpeedFactor() const;

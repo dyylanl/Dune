@@ -4,7 +4,7 @@
 void Accepter::_acceptClient() {
     Socket peer = socket.accept();
     if (keep_accepting) {
-        auto client_lobby = new ClientLogin(game,peer, new_connections);
+        auto client_lobby = new ClientLogin(game,peer);
         client_logins.emplace_back(client_lobby);
         client_lobby->start();
     }
@@ -33,12 +33,9 @@ void Accepter::_joinLogins() {
 
 // --------------------- // ---------------- //
 
-Accepter::Accepter(Game& game1, const std::string& port, const int max_clients_queued,
-                   YAMLReader& reader1,
-                   NonBlockingQueue<NewConnection*>& new_connections1)
+Accepter::Accepter(Game& game1, const std::string& port, 
+                    const int max_clients_queued)
         : socket(port, max_clients_queued),
-          reader(reader1),
-          new_connections(new_connections1),
           keep_accepting(true),
           game(game1) {}
 

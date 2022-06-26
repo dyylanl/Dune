@@ -20,7 +20,6 @@ private:
     std::atomic_bool is_running;
     Socket peer;
     Protocol protocol;
-    NonBlockingQueue<NewConnection*>& new_connections;
     Game& game;
 
     /* ejecuta el comando recibido.
@@ -34,8 +33,7 @@ private:
     int execute(uint16_t command, std::string name_player);
 
 public:
-    ClientLogin(Game& game,Socket& peer,
-                NonBlockingQueue<NewConnection*>& new_connections);
+    ClientLogin(Game& game, Socket& peer);
     ClientLogin(const ClientLogin&) = delete;
     ClientLogin& operator=(const ClientLogin&) = delete;
     ClientLogin(ClientLogin&& other) = delete;

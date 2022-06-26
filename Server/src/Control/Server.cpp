@@ -1,11 +1,10 @@
 #include "../../includes/Control/Server.h"
 
 
-Server::Server(const std::string& config_path, const int max_clients_queued)
-        : reader(config_path),
-          game(reader),
-          new_connections(),
-          accepter(game, reader.getPort(), max_clients_queued, reader, new_connections) {}
+Server::Server(const std::string& config_path, const std::string& port, const int max_clients_queued) :
+          game(config_path),
+          accepter(game, port, max_clients_queued) 
+          {}
 
 void Server::run() {
     // Se lanza el hilo aceptador de conexiones.

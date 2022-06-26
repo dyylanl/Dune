@@ -7,12 +7,11 @@
 #define SUCCESS 0
 #define ERROR 1
 
-ClientLogin::ClientLogin(Game& game1,Socket& peer, NonBlockingQueue<NewConnection*>& new_connections)
-        : is_running(false),
-          peer(std::move(peer)),
-          protocol(),
-          new_connections(new_connections),
-          game(game1) {}
+ClientLogin::ClientLogin(Game& game1, Socket& peer) : 
+        is_running(false), 
+        peer(std::move(peer)),
+        protocol(),
+        game(game1) {}
 
 /*
  * recv len name_player

@@ -20,7 +20,7 @@ void ClientConnection::_freeNotifications() {
 // todo: implementar logica de envio de informacion pertinente al player
 void ClientConnection::_sender() {
     try {
-        std::cout << "Sender comenzando ejecucion." << std::endl;
+        //std::cout << "Sender comenzando ejecucion." << std::endl;
         /*Protocol protocol;
         Command* command = nullptr;
         bool socket_valid = true;
@@ -44,7 +44,7 @@ void ClientConnection::_sender() {
 
 void ClientConnection::_receiver() {
     try {
-        std::cout << "Receiver comenzando ejecucion..." << std::endl;
+        //std::cout << "Receiver comenzando ejecucion..." << std::endl;
         uint8_t opcode = 0;
         while (peer.recv(reinterpret_cast<char *>(opcode), sizeof(uint16_t))) {
             if (opcode != 0) {
@@ -88,7 +88,6 @@ ClientConnection::ClientConnection(
           finished_threads(0)  {}
 
 void ClientConnection::start() {
-    std::cout << "Jugador aceptado." << std::endl;
     sender = std::thread(&ClientConnection::_receiver, this);
     receiver = std::thread(&ClientConnection::_sender, this);
 }

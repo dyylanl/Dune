@@ -6,10 +6,6 @@ std::string ConfigurationReader::getMapPath() const{
     return this->config["map_path"].as<std::string>();
 }
 
-std::string ConfigurationReader::getPort() const{
-    return this->config["port"].as<std::string>();
-}
-
 int ConfigurationReader::getFPS() const{
     return this->config["ticks_per_sec"].as<int>();
 }

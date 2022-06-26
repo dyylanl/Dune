@@ -26,9 +26,10 @@ std::vector<int> Game::get(const std::string& game_name) {
 
 // ---------- METODOS PUBLICOS ------------ //
 
-Game::Game(ConfigurationReader reader1) :
-            games(),
-            game_config(reader1)
+Game::Game(std::string path_config_game) :
+        games(),
+        game_config(path_config_game)
+
 {
     std::list<std::string> map_paths = game_config.getAllPaths();
     int map_id = 1;
