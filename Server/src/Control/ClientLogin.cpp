@@ -80,7 +80,6 @@ void ClientLogin::execute(uint16_t command, std::string name_player) {
         protocol.sendMapsCreated(peer, game.getMapsLoads()); // envio mapas que cargo el server
         uint16_t map_id = protocol.recvCommand(peer); // recibo el mapa que eligio para crear la partida
         uint16_t resp_create_game = game.createGame(map_id, name_game); // pido al game que cree esa partida
-        protocol.sendResponse(peer, resp_create_game);
         if (resp_create_game == SUCCESS) { // si la respuesta es 0 entonces el game me creo la partida
             game.acceptPlayer(new NewConnection(peer, name_player, name_game, map_id)); // si la partida se creo entonces le digo al game que me acepte este player
             is_running = false;

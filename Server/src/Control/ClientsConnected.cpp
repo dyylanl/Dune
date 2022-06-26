@@ -38,8 +38,8 @@ ClientsConnected::~ClientsConnected() = default;
 
 
 
-void ClientsConnected::initGame() {
+void ClientsConnected::initGame(std::vector<std::vector<char>>& map) {
     for (auto it = clients.begin(); it != clients.end(); it++) {
-        it->second.sendInit();
+        it->second.sendInitGame(map);
     }
 }

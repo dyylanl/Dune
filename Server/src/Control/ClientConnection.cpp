@@ -85,9 +85,12 @@ ClientConnection::ClientConnection(
           map_id(map_id1),
           peer(std::move(peer)),
           finished_connections(finished_connections),
-          finished_threads(0)  {}
+          finished_threads(0),
+          protocol()  {}
 
 void ClientConnection::start() {
+    // si llegamos hasta aca es porque el jugador se pudo conectar entonces se lo hacemos saber al cliente
+    protocol.sendEstablishConnection(peer);
     sender = std::thread(&ClientConnection::_receiver, this);
     receiver = std::thread(&ClientConnection::_sender, this);
 }
@@ -122,7 +125,6 @@ ClientConnection::~ClientConnection() {
 }
 
 
-void ClientConnection::sendInit() {
-    uint16_t init = 10;
-    peer.send((const char*)&init, sizeof(uint16_t));
+void ClientConnection::sendInitGame(std::vector<std::vector<char>>& map) {
+    protocol.sendMap(peer, map);
 }

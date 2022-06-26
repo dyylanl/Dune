@@ -33,7 +33,7 @@ public:
     ~ClientsConnected();
 
 
-    void initGame();
+    void initGame(std::vector<std::vector<char>>& map);
 
 };
 
