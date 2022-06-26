@@ -1,6 +1,6 @@
 #include "../../includes/Control/Engine.h"
-
-
+#define SUCCESS 0
+#define ERROR 1
 
 /*
  * 1° Popea un comando
@@ -36,8 +36,7 @@ void Engine::_loopIteration(int it) {
     _processFinishedConnections();
 }
 
-//-----------------------------------------------------------------------------
-// API Pública
+// ---------------------------------------------- //
 
 Engine::Engine(MapDTO map_dto) : 
         keep_executing(true),
@@ -46,7 +45,10 @@ Engine::Engine(MapDTO map_dto) :
         current_players(0),
         req_players(map_dto.max_players),
         map_id(map_dto.map_id),
-        name_game(map_dto.name_map)
+        name_game(map_dto.name_map),
+        finished_connections(),
+        commands(),
+        established_connections(commands, finished_connections)
 {
 
 }
@@ -58,7 +60,7 @@ void Engine::run() {
     std::chrono::duration<float, std::milli> diff{};
     int rest = 0, behind = 0, lost = 0;
     int it = 1;
-    // LOP GAME = OJO CON LO Q TOCAN ACÁ
+    // LOOP GAME = OJO CON LO Q TOCAN ACÁ
     while (keep_executing) {
         _loopIteration(it);
         it = 0;
@@ -96,14 +98,16 @@ Engine::~Engine() {
  * 2) le envio el mapa de la partida a la que se unio
  * 3) lo agrego al contenedor de conexiones establecidas
  */
-
-void Engine::addClient(NewConnection *client) {
+uint16_t Engine::addClient(NewConnection *client) {
     if (current_players < req_players) {
-        current_players++;
-        std::cout << "[ENGINE]: " << client->name_player << " agregado a partida: " << name_game << "." << std::endl;
+        current_players += 1;
+        InstanceId id = current_players;
+        established_connections.add(id,client->map_id,client->peer);
+        return SUCCESS;
     }
     if (current_players == req_players) {
-        std::cout << "[ENGINE]: Comenzando partida " << name_game << std::endl;
+        established_connections.initGame();
+        this->run();
     }
-    
+    return ERROR;
 }

@@ -3,6 +3,7 @@
 ClientsConnected::ClientsConnected(
         NonBlockingQueue<Command*>& commands,
         NonBlockingQueue<InstanceId*>& finished_connections) :
+        
         commands(commands),
         finished_connections(finished_connections),
         clients() {}
@@ -13,7 +14,7 @@ void ClientsConnected::add(const InstanceId id, const Id map_id, Socket& peer) {
     }
     clients.emplace(
             std::piecewise_construct, std::forward_as_tuple(id),
-            std::forward_as_tuple(id, map_id, peer, finished_connections, commands));
+            std::forward_as_tuple(id, map_id, peer, finished_connections));
     clients.at(id).start();
 }
 
@@ -25,10 +26,6 @@ void ClientsConnected::remove(const InstanceId id) {
     clients.erase(id);
 }
 
-void ClientsConnected::changeMap(const InstanceId id, const Id new_map) {
-    this->clients.at(id).changeMap(new_map);
-}
-
 void ClientsConnected::stop() {
     for (auto it = clients.begin(); it != clients.end(); it++) {
         it->second.stop();
@@ -38,3 +35,11 @@ void ClientsConnected::stop() {
 }
 
 ClientsConnected::~ClientsConnected() = default;
+
+
+
+void ClientsConnected::initGame() {
+    for (auto it = clients.begin(); it != clients.end(); it++) {
+        it->second.sendInit();
+    }
+}

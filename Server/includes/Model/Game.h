@@ -29,9 +29,6 @@ private:
     // --------------------------------------------------- //
     std::mutex mutex;
     InstanceId next_id;
-    //Map map;
-    //AStar aStar;
-    // comandos
     ConfigurationReader game_config;
 
     /*
@@ -44,15 +41,15 @@ private:
      * que existe. El contains() lockea el mutex.
      */
     std::vector<int> get(const std::string& game_name);
-    
-    /*
-     * Lockea el mutex e imprime por pantalla
-     * el comienzo de la partida 'name'.
-     */
-    // void printStartGame(const std::string &name);
+
 
 public:
-    Game(int rate, ConfigurationReader reader);
+    /*
+        *   Recibe por parametro la ruta para cargar la configuracion del juego.
+        *   Carga todos los mapas con la ruta que le proporciona el config.yaml
+        *   A cada mapa le setea un id unico.
+    */
+    Game(ConfigurationReader path_game_config);
 
     /*
      * Crea una partida con el id y nombre solicitado
@@ -74,9 +71,14 @@ public:
      */
     std::vector<std::string> listGames();
 
+    /*
+    * Retorna el id de mapa asociado a esa partida
+    */
     Id getMapId(std::string name_game);
    
-   // devuelve la cantidad de mapas cargados en el servidor
+   /*
+   * Retorna todos los MapDTO que se cargaron en el servidor.
+   */
    std::vector<MapDTO> getMapsLoads();
    
     ~Game();

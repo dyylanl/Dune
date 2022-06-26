@@ -3,7 +3,7 @@
 
 Server::Server(const std::string& config_path, const int max_clients_queued)
         : reader(config_path),
-          game(reader.getFPS(), reader),
+          game(reader),
           new_connections(),
           accepter(game, reader.getPort(), max_clients_queued, reader, new_connections) {}
 

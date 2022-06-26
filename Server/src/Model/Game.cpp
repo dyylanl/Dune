@@ -26,7 +26,7 @@ std::vector<int> Game::get(const std::string& game_name) {
 
 // ---------- METODOS PUBLICOS ------------ //
 
-Game::Game(int rate, ConfigurationReader reader1) :
+Game::Game(ConfigurationReader reader1) :
             games(),
             game_config(reader1)
 {
@@ -68,8 +68,7 @@ uint16_t Game::createGame(Id id_map, const std::string& name_game) {
 uint16_t Game::acceptPlayer(NewConnection* new_player) {
     std::lock_guard<std::mutex> lock(mutex);
     if (games.count(new_player->name_game) > 0) { // si existe una partida con ese nombre entonces entro
-        games[new_player->name_game]->addClient(new_player);
-        return SUCCESS;
+        return games[new_player->name_game]->addClient(new_player); // chequea si la partida no esta completa para unir el nuevo player    
     }
     return ERROR;
 }

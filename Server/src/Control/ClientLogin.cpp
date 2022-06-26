@@ -28,7 +28,7 @@ void ClientLogin::run() {
         name = protocol.recvName(peer, len_name);
         uint16_t command = protocol.recvCommand(peer); // este comando puede ser 1 2 o 3
         int resp = 1;
-        while (resp != 0) {
+        while (resp != 0 && is_running) {
             resp = execute(command, name); // si devuelve 0 es porque el cliente ya se unio a una partida o la crea si devuelve 1 hay q volver a recibir el comando que indique
         }
     } catch (const std::exception& e) {
@@ -38,7 +38,7 @@ void ClientLogin::run() {
             fprintf(stderr, "[ClientLogin]: Error apagando el socket.\n");
         }
         peer.close();
-        fprintf(stderr, "[ClientLogin]: %s\n", e.what());
+        fprintf(stderr, "[ClientLogin]: CLOSE %s\n", e.what());
     } catch (...) {
         try {
             peer.shutdown();
@@ -82,13 +82,11 @@ int ClientLogin::execute(uint16_t command, std::string name_player) {
         name_game = protocol.recvName(peer, len_name); // recibo el nombre de la partida
         protocol.sendMapsCreated(peer, game.getMapsLoads()); // envio mapas que cargo el server
         uint16_t map_id = protocol.recvCommand(peer); // recibo el mapa que eligio para crear la partida
-        uint16_t resp = game.createGame(map_id, name_game); // pido al game que cree esa partida
-        protocol.sendResponse(peer, resp);
-        if (resp == SUCCESS) { // si la respuesta es 0 entonces el game me creo la partida
+        uint16_t resp_create_game = game.createGame(map_id, name_game); // pido al game que cree esa partida
+        protocol.sendResponse(peer, resp_create_game);
+        if (resp_create_game == SUCCESS) { // si la respuesta es 0 entonces el game me creo la partida
             game.acceptPlayer(new NewConnection(peer, name_player, name_game, map_id)); // si la partida se creo entonces le digo al game que me acepte este player
             return SUCCESS;
-        } else {
-            return ERROR;
         }
     }
     /*
@@ -97,20 +95,17 @@ int ClientLogin::execute(uint16_t command, std::string name_player) {
      *  2° Envio la respuesta si se pudo unir o no
      */
     else if (command == JOIN_GAME) {
-        std::cout << "El jugador se unira una partida existente" << std::endl;
         std::string name_game;
         uint16_t len_name = protocol.recvCommand(peer);
         name_game = protocol.recvName(peer, len_name);
         Id map_id = game.getMapId(name_game);
         uint16_t resp = game.acceptPlayer(new NewConnection(peer, name_player, name_game, map_id));
-        protocol.sendResponse(peer, resp);
         return resp;
     }
     /*
      * Envio la lista de partidas actuales
      */
     else if (command == LIST_GAMES) {
-        std::cout << "El jugador desea listar las partidas" << std::endl;
         protocol.sendGameList(peer, game.listGames());
         return ERROR;
     }

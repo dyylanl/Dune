@@ -9,18 +9,19 @@ void ClientConnection::_finishThread() {
 }
 
 void ClientConnection::_freeNotifications() {
-    notifications.close();
+    /*notifications.close();
     Command* notification = nullptr;
     while ((notification = notifications.pop())) {
         delete notification;
-    }
+    }*/
 }
 
 // hilo sender -- envia respuesta al cliente
 // todo: implementar logica de envio de informacion pertinente al player
 void ClientConnection::_sender() {
     try {
-        Protocol protocol;
+        std::cout << "Sender comenzando ejecucion." << std::endl;
+        /*Protocol protocol;
         Command* command = nullptr;
         bool socket_valid = true;
         while ((command = notifications.pop())) {
@@ -30,11 +31,10 @@ void ClientConnection::_sender() {
             delete command;
             if (!socket_valid) {
                 break;
-            }
-        }
+            }*/
     } catch (const std::exception& e) {
-        stop();
-        fprintf(stderr, "[ClientConnection]: %s\n", e.what());
+            stop();
+            fprintf(stderr, "[ClientConnection]: %s\n", e.what());
     } catch (...) {
         stop();
         fprintf(stderr, "[ClientConnection]: Ocurrio un error en el hilo sender.\n");
@@ -44,6 +44,7 @@ void ClientConnection::_sender() {
 
 void ClientConnection::_receiver() {
     try {
+        std::cout << "Receiver comenzando ejecucion..." << std::endl;
         uint8_t opcode = 0;
         while (peer.recv(reinterpret_cast<char *>(opcode), sizeof(uint16_t))) {
             if (opcode != 0) {
@@ -60,7 +61,7 @@ void ClientConnection::_receiver() {
         stop();
         fprintf(stderr, "[ClientConnection]: Ocurrio un error en el hilo receiver.\n");
     }
-    this->notifications.close();
+    //this->notifications.close();
     _finishThread();
 }
 
@@ -68,31 +69,28 @@ void ClientConnection::_receiveCommand() {
     uint8_t opcode_cmd = 0;
     peer.recv(reinterpret_cast<char *>(opcode_cmd), sizeof(uint16_t));
     try {
-        Command* cmd = CommandFactory::newCommand(id, opcode_cmd, peer);
-        commands.push(cmd);
-    } catch (const UnknownCommandException& e) {
+        std::cout << "Jugador recibio: " << opcode_cmd << std::endl;
+        /*Command* cmd = CommandFactory::newCommand(id, opcode_cmd, peer);
+        commands.push(cmd);*/
+    } catch (const Exception& e) {
     }
 }
 
 ClientConnection::ClientConnection(
-        const InstanceId id, const Id map, Socket& peer,
-        NonBlockingQueue<InstanceId*>& finished_connections,
-        NonBlockingQueue<Command*>& commands)
+        const InstanceId id, 
+        const Id map_id1,
+        Socket& peer,
+        NonBlockingQueue<InstanceId*>& finished_connections)
         : id(id),
-          map(map),
+          map_id(map_id1),
           peer(std::move(peer)),
           finished_connections(finished_connections),
-          finished_threads(0),
-          commands(commands) {}
+          finished_threads(0)  {}
 
 void ClientConnection::start() {
-    std::cout << "Iniciando hilos sender/receiver del cliente...\n\n" << std::endl;
+    std::cout << "Jugador aceptado." << std::endl;
     sender = std::thread(&ClientConnection::_receiver, this);
     receiver = std::thread(&ClientConnection::_sender, this);
-}
-
-void ClientConnection::push(Command* notification) {
-    notifications.push(notification);
 }
 
 void ClientConnection::join() {
@@ -111,12 +109,8 @@ void ClientConnection::join() {
     }
 }
 
-void ClientConnection::changeMap(Id map_id) {
-    this->map = map_id;
-}
-
 void ClientConnection::stop() {
-    notifications.close();
+    //notifications.close();
     try {
         peer.shutdown();
     } catch (const Exception& e) {
@@ -126,4 +120,11 @@ void ClientConnection::stop() {
 
 ClientConnection::~ClientConnection() {
     _freeNotifications();
+}
+
+
+void ClientConnection::sendInit() {
+    uint16_t init = 10;
+    std::cout << "Enviando iniciar partida a cliente" << std::endl; 
+    peer.send((const char*)&init, sizeof(uint16_t));
 }

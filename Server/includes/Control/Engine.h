@@ -12,12 +12,8 @@
 #include "../../includes/Model/DTOs/MapDTO.h"
 #include "../../config/MapReader.h"
 #include "../../includes/Model/Map.h"
-
-/*
-#include "NewConnection.h"
-#include "Commands/Command.h"
 #include "ClientsConnected.h"
-*/
+
 
 class Engine : public Thread {
 private:
@@ -29,19 +25,18 @@ private:
     int req_players;
     int map_id;
     std::string name_game;
-/*
-    // clientes antes de comenzar la partida
-    NonBlockingQueue<NewConnection*>& new_connections;
+
+    // jugadores que se desconectaron
     NonBlockingQueue<InstanceId*> finished_connections;
 
-    // comandos que recibe de los clientes
+    //      comandos que recibe de los clientes
     NonBlockingQueue<Command*> commands;
-    // la que envia el server
-    NonBlockingQueue<Command*> snapshot;
+    //      la que envia el server
+    //NonBlockingQueue<Command*> snapshot;
 
-    // clientes una vez iniciada la partida.
+    //      clientes conectados a esta partida
     ClientsConnected established_connections;
-*/
+
     void _processFinishedConnections();
     void _processCommands();
     void _freeQueues();
@@ -57,13 +52,15 @@ public:
     void stop();
     ~Engine() override;
 
-    void addClient(NewConnection* newPlayer);
 
-
+    /*
+    *   Retorna 0 si pudo unir el nuevo jugador a la partida
+    *   Retorna 1 si no pudo unir el jugador a la partida (es decir, esta completa)
+    */
+    uint16_t addClient(NewConnection* newPlayer);
     int getCurrentPlayers() {return current_players;}
     int getReqPlayers() {return req_players;}
     Id getMapId() {return map_id;}
-
 };
 
 
