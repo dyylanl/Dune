@@ -6,7 +6,7 @@
 #include "../../Action/BuildBuilding.h"
 
 ButtonLightFactoryCL::ButtonLightFactoryCL(int id, char player, int constructionTime, bool selectStatus, bool ready)
-        : Button(BLIGHT_FACTORY, SDL2pp::Point(1114, 222), id, player, constructionTime, selectStatus, ready) {}
+        : ButtonBuild(BLIGHT_FACTORY, SDL2pp::Point(1114, 222), id, player, constructionTime, selectStatus, ready) {}
 
 void ButtonLightFactoryCL::buildBuilding(BlockingQueue<CommandCL *> &queue, SDL2pp::Point point) {
     char build = 1;

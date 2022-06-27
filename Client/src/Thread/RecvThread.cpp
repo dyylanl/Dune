@@ -6,9 +6,9 @@
 #include "../GameObject/Vehicles/DevastatorCL.h"
 #include "../GameObject/Vehicles/HarvesterCL.h"
 #include "../GameObject/Builds/ConstructionYardCL.h"
-#include "../GameObject/Button/ButtonWidtrap.h"
+#include "../GameObject/Button/ButtonWidtrapCL.h"
 #include "../GameObject/Button/ButtonConstructionYardCL.h"
-#include "../GameObject/Button/ButtonRefinery.h"
+#include "../GameObject/Button/ButtonRefineryCL.h"
 #include "../GameObject/Builds/LightFactoryCL.h"
 #include "../GameObject/Builds/HeavyFactoryCL.h"
 #include "../GameObject/Builds/WindTrapCL.h"
@@ -18,9 +18,16 @@
 #include "../GameObject/Builds/PalaceCL.h"
 #include "../GameObject/Button/ButtonLightFactoryCL.h"
 #include "../GameObject/Button/ButtonHeavyFactoryCL.h"
-#include "../GameObject/Button/ButtonSilo.h"
-#include "../GameObject/Button/ButtonBarrack.h"
+#include "../GameObject/Button/ButtonSiloCL.h"
+#include "../GameObject/Button/ButtonBarrackCL.h"
 #include "../GameObject/Button/ButtonPalaceCL.h"
+#include "ButtonTrikeCL.h"
+#include "ButtonRaiderCL.h"
+#include "ButtonTankCL.h"
+#include "ButtonHarvesterCL.h"
+#include "ButtonLightInfantryCL.h"
+#include "ButtonHeavyInfantryCL.h"
+#include "ButtonSardaukarCL.h"
 
 void RecvThread::run() {
     while (running) {
@@ -32,11 +39,11 @@ void RecvThread::run() {
         for (int i = 0; i < size; ++i) {
             m_protocol.recvType(m_socket, type);
             switch (type) {
-                case VEHICLE: addVehicle(gameObjects);
+                case UNIT: addVehicle(gameObjects);
                     break;
                 case BUILD: addBuild(gameObjects);
                     break;
-                case BUTTON: addButton(gameObjects);
+                case BUTTON: addButtonBuild(gameObjects);
                     break;
                 default: std::cout << "Tipo invalido" << std::endl;
             }
@@ -157,7 +164,7 @@ void RecvThread::addBuild(std::vector<GameObject *> &gameObjects) {
     }
 }
 
-void RecvThread::addButton(std::vector<GameObject *> &gameObjects) {
+void RecvThread::addButtonBuild(std::vector<GameObject *> &gameObjects) {
     char objectType = 0;
     int id = 0;
     char player = 0;
@@ -167,6 +174,34 @@ void RecvThread::addButton(std::vector<GameObject *> &gameObjects) {
 
     m_protocol.recvObjectType(m_socket, objectType);
     switch (objectType) {
+        case BTRIKE:
+            m_protocol.recvBotton(m_socket, id, player, constructionTime, selectStatus, ready);
+            gameObjects.push_back(new ButtonTrikeCL(id, player, constructionTime, selectStatus, ready));
+            break;
+        case BRAIDER:
+            m_protocol.recvBotton(m_socket, id, player, constructionTime, selectStatus, ready);
+            gameObjects.push_back(new ButtonRaiderCL(id, player, constructionTime, selectStatus, ready));
+            break;
+        case BTANK:
+            m_protocol.recvBotton(m_socket, id, player, constructionTime, selectStatus, ready);
+            gameObjects.push_back(new ButtonTankCL(id, player, constructionTime, selectStatus, ready));
+            break;
+        case BHARVESTER:
+            m_protocol.recvBotton(m_socket, id, player, constructionTime, selectStatus, ready);
+            gameObjects.push_back(new ButtonHarvesterCL(id, player, constructionTime, selectStatus, ready));
+            break;
+        case BLIGHT_INFANTRY:
+            m_protocol.recvBotton(m_socket, id, player, constructionTime, selectStatus, ready);
+            gameObjects.push_back(new ButtonLightInfantryCL(id, player, constructionTime, selectStatus, ready));
+            break;
+        case BHEAVY_INFANTRY:
+            m_protocol.recvBotton(m_socket, id, player, constructionTime, selectStatus, ready);
+            gameObjects.push_back(new ButtonHeavyInfantryCL(id, player, constructionTime, selectStatus, ready));
+            break;
+        case BSARDAUKAR:
+            m_protocol.recvBotton(m_socket, id, player, constructionTime, selectStatus, ready);
+            gameObjects.push_back(new ButtonSardaukarCL(id, player, constructionTime, selectStatus, ready));
+            break;
         case BCONSTRUCTION_YARD:
             m_protocol.recvBotton(m_socket, id, player, constructionTime, selectStatus, ready);
             gameObjects.push_back(new ButtonConstructionYardCL(id, player, constructionTime, selectStatus, ready));
@@ -181,19 +216,19 @@ void RecvThread::addButton(std::vector<GameObject *> &gameObjects) {
             break;
         case BWIND_TRAP:
             m_protocol.recvBotton(m_socket, id, player, constructionTime, selectStatus, ready);
-            gameObjects.push_back(new ButtonWidtrap(id, player, constructionTime, selectStatus, ready));
+            gameObjects.push_back(new ButtonWidtrapCL(id, player, constructionTime, selectStatus, ready));
             break;
         case BREFINERY:
             m_protocol.recvBotton(m_socket, id, player, constructionTime, selectStatus, ready);
-            gameObjects.push_back(new ButtonRefinery(id, player, constructionTime, selectStatus, ready));
+            gameObjects.push_back(new ButtonRefineryCL(id, player, constructionTime, selectStatus, ready));
             break;
         case BSILO:
             m_protocol.recvBotton(m_socket, id, player, constructionTime, selectStatus, ready);
-            gameObjects.push_back(new ButtonSilo(id, player, constructionTime, selectStatus, ready));
+            gameObjects.push_back(new ButtonSiloCL(id, player, constructionTime, selectStatus, ready));
             break;
         case BBARRACK:
             m_protocol.recvBotton(m_socket, id, player, constructionTime, selectStatus, ready);
-            gameObjects.push_back(new ButtonBarrack(id, player, constructionTime, selectStatus, ready));
+            gameObjects.push_back(new ButtonBarrackCL(id, player, constructionTime, selectStatus, ready));
             break;
         case BPALACE:
             m_protocol.recvBotton(m_socket, id, player, constructionTime, selectStatus, ready);
@@ -202,6 +237,3 @@ void RecvThread::addButton(std::vector<GameObject *> &gameObjects) {
         default: std::cout << "Tipo de button edificio invalido" << std::endl;
     }
 }
-
-
-

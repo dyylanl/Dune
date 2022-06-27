@@ -2,15 +2,15 @@
 // Created by riclui on 20/06/22.
 //
 
-#ifndef DUNE_BUTTON_H
-#define DUNE_BUTTON_H
+#ifndef DUNE_BUTTONBUILD_H
+#define DUNE_BUTTONBUILD_H
 
 #include "SDL2pp/SDL2pp.hh"
 #include "../Graphics/TextureManager.h"
 #include "../Object/GameObject.h"
 
 
-class Button : public GameObject{
+class ButtonBuild : public GameObject{
 protected:
     int m_id;
     char m_player;
@@ -19,7 +19,7 @@ protected:
     bool m_ready;
 
 public:
-    Button(char textureID, SDL2pp::Point position, int id, char player, int constructionTime, bool selectStatus, bool ready);
+    ButtonBuild(char textureID, SDL2pp::Point position, int id, char player, int constructionTime, bool selectStatus, bool ready);
 
     void update(EventManager &eventManager, BlockingQueue<CommandCL *> &queue);
 
@@ -29,4 +29,4 @@ public:
 };
 
 
-#endif //DUNE_BUTTON_H
+#endif //DUNE_BUTTONBUILD_H
