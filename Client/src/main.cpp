@@ -9,7 +9,7 @@
 
 int main(int argc, char** argv){
 
-    std::cout << "empieza" << std::endl;
+    /*std::cout << "empieza" << std::endl;
     QApplication a(argc,argv);
     std::cout << "bug 1" << std::endl;
     MainWindow w(nullptr);
@@ -17,7 +17,7 @@ int main(int argc, char** argv){
     w.show();
     std::cout << "bug 3" << std::endl;
     a.exec();
-    std::cout << "bug 4" << std::endl;
+    std::cout << "bug 4" << std::endl;*/
     
     try {
         Client client;

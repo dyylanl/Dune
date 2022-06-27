@@ -17,8 +17,8 @@
 //-----------------------------------------------------------------------------
 
 class Client {
-    Socket socket;
-    Protocol protocol;
+    Socket m_socket;
+    Protocol m_protocol;
 public:
     Client();
     Client(std::string ip1, std::string port1); 
@@ -57,7 +57,7 @@ public:
 
     /*void crearUnidad();*/
 
-    void loadTextures(TextureManager &textureManager) const;
+    void loadTextures(TextureManager &textureManager, SDL2pp::Renderer &renderer) const;
 
     void initSDL(Socket &socket, Protocol &protocol, std::vector<std::vector<char>> &map) const;
 };

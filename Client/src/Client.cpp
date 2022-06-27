@@ -28,7 +28,7 @@
 
 Client::Client() {}
 
-Client::Client(std::string ip1, std::string port1) : socket(ip1,port1), protocol() {
+Client::Client(std::string ip1, std::string port1) : m_socket(ip1,port1), m_protocol() {
 }
 
 void Client::crear_partida(std::string nombre_jugador, std::string  nombre_partida){
@@ -54,7 +54,7 @@ int Client::obtener_numero_casa(const std::string& casa) {
 }
 
 void Client::enviar_nombre_jugador(std::string nombre_jugador){
- protocol.sendName(socket, nombre_jugador); 
+ m_protocol.sendName(m_socket, nombre_jugador);
 }
 
 void Client::enviar_accion(std::string comando){
@@ -64,54 +64,54 @@ void Client::enviar_accion(std::string comando){
 
   if(comando == crear){
     uint16_t comando_num = 1;
-    protocol.sendResponse(socket, comando_num);
+    m_protocol.sendResponse(m_socket, comando_num);
   }
   if(comando == unirse){
     uint16_t comando_num = 2;
-    protocol.sendResponse(socket, comando_num);
+    m_protocol.sendResponse(m_socket, comando_num);
   }
   if(comando == listar){
     uint16_t comando_num = 3;
-    protocol.sendResponse(socket, comando_num);
+    m_protocol.sendResponse(m_socket, comando_num);
   }
 }
 
 void Client::enviar_nombre_y_comando(const std::string& nombre_jugador,std::string comando){
-  this->protocol.sendName(socket, nombre_jugador);
+  this->m_protocol.sendName(m_socket, nombre_jugador);
   this->enviar_accion(comando);
 }
 
 std::vector<std::string> Client::listar_partidas(){
-  std::vector<std::string> list = this->protocol.recvGameList(socket);
+  std::vector<std::string> list = this->m_protocol.recvGameList(m_socket);
   return list;
 }
 
 std::vector<std::vector<std::string>> Client::listar_mapas(){
-  std::vector<std::vector<std::string>> maps_ = protocol.recvMapsCreated(socket);
+  std::vector<std::vector<std::string>> maps_ = m_protocol.recvMapsCreated(m_socket);
   return maps_;
 }
 
 void Client::enviar_cant_jugadores(int cantidad){
- uint16_t cant_jugadores = cantidad;
-  protocol.sendResponse(socket, cant_jugadores); 
+    uint16_t cant_jugadores = cantidad;
+    m_protocol.sendResponse(m_socket, cant_jugadores);
 }
 
 
 void Client::enviar_map_id(int map_id){
-  protocol.sendResponse(socket, map_id);
+    m_protocol.sendResponse(m_socket, map_id);
 }
 
 
 void Client::enviar_nombre_partida(std::string nombre_partida){
-  protocol.sendName(socket, nombre_partida);
+    m_protocol.sendName(m_socket, nombre_partida);
 }
 
 int Client::recibir_respuesta(){
-  return (int) this->protocol.recvResponse(socket);
+  return (int) this->m_protocol.recvResponse(m_socket);
 }
 
 bool Client::partida_iniciada(){
-  if(protocol.recvEstablishConnection(socket)) { // ACA TIENE QUE ESTAR BLOQUEADO HASTA QUE SE INICIE LA PARTIDA
+  if(m_protocol.recvEstablishConnection(m_socket)) { // ACA TIENE QUE ESTAR BLOQUEADO HASTA QUE SE INICIE LA PARTIDA
     return true;
   }
   return false;
@@ -218,7 +218,7 @@ void listGames(Protocol protocol, Socket &socket) {
 void Client::launch() {
     std::cout << "Iniciando cliente.... \n\n";
     try {
-        std::string ip;
+        /*std::string ip;
         std::string port;
         std::cout << "IP: ";
         std::cin >> ip;
@@ -245,11 +245,11 @@ void Client::launch() {
           map = joinGame(protocol, socket);
         } else if (comando == LIST_GAMES) {
           listGames(protocol,socket);
-        }
+        }*/
 
-        /*Socket socket("localhost","8082");
+        Socket socket("localhost","8082");
         Protocol protocol;
-        std::vector<std::vector<char>> map(50, std::vector<char> (50, 'A') );*/
+        std::vector<std::vector<char>> map(50, std::vector<char> (50, 'A') );
 
         initSDL(socket, protocol, map);
 
@@ -277,7 +277,7 @@ void Client::initSDL(Socket &socket, Protocol &protocol,
     Camera camera;
     TextureManager textureManager(renderer, camera);
 
-    loadTextures(textureManager);
+    loadTextures(textureManager, renderer);
     EventManager eventManager;
     std::vector<GameObject*> objects;
 
@@ -299,7 +299,7 @@ void Client::initSDL(Socket &socket, Protocol &protocol,
     recvThread.join();
 }
 
-void Client::loadTextures(TextureManager &textureManager) const {
+void Client::loadTextures(TextureManager &textureManager, SDL2pp::Renderer &renderer) const {
     textureManager.load("Trike", DATA_PATH "assets/Vehicles/Trike.png");
     textureManager.load("SonicTank", DATA_PATH "assets/Vehicles/SonicTank.png");
     textureManager.load("Deviator", DATA_PATH "assets/Vehicles/Deviator.png");
