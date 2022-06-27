@@ -167,35 +167,35 @@ void RecvThread::addButton(std::vector<GameObject *> &gameObjects) {
 
     m_protocol.recvObjectType(m_socket, objectType);
     switch (objectType) {
-        case CONSTRUCTION_YARD:
+        case BCONSTRUCTION_YARD:
             m_protocol.recvBotton(m_socket, id, player, constructionTime, selectStatus, ready);
             gameObjects.push_back(new ButtonConstructionYardCL(id, player, constructionTime, selectStatus, ready));
             break;
-        case LIGHT_FACTORY:
+        case BLIGHT_FACTORY:
             m_protocol.recvBotton(m_socket, id, player, constructionTime, selectStatus, ready);
             gameObjects.push_back(new ButtonLightFactoryCL(id, player, constructionTime, selectStatus, ready));
             break;
-        case HEAVY_FACTORY:
+        case BHEAVY_FACTORY:
             m_protocol.recvBotton(m_socket, id, player, constructionTime, selectStatus, ready);
             gameObjects.push_back(new ButtonHeavyFactoryCL(id, player, constructionTime, selectStatus, ready));
             break;
-        case WIND_TRAP:
+        case BWIND_TRAP:
             m_protocol.recvBotton(m_socket, id, player, constructionTime, selectStatus, ready);
             gameObjects.push_back(new ButtonWidtrap(id, player, constructionTime, selectStatus, ready));
             break;
-        case REFINERY:
+        case BREFINERY:
             m_protocol.recvBotton(m_socket, id, player, constructionTime, selectStatus, ready);
             gameObjects.push_back(new ButtonRefinery(id, player, constructionTime, selectStatus, ready));
             break;
-        case SILO:
+        case BSILO:
             m_protocol.recvBotton(m_socket, id, player, constructionTime, selectStatus, ready);
             gameObjects.push_back(new ButtonSilo(id, player, constructionTime, selectStatus, ready));
             break;
-        case BARRACK:
+        case BBARRACK:
             m_protocol.recvBotton(m_socket, id, player, constructionTime, selectStatus, ready);
             gameObjects.push_back(new ButtonBarrack(id, player, constructionTime, selectStatus, ready));
             break;
-        case PALACE:
+        case BPALACE:
             m_protocol.recvBotton(m_socket, id, player, constructionTime, selectStatus, ready);
             gameObjects.push_back(new ButtonPalaceCL(id, player, constructionTime, selectStatus, ready));
             break;

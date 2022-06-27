@@ -54,7 +54,7 @@ int Client::obtener_numero_casa(const std::string& casa) {
 }
 
 void Client::enviar_nombre_jugador(std::string nombre_jugador){
- protocol.sendName(socket, nombre_jugador); 
+ protocol.sendName(socket, nombre_jugador);
 }
 
 void Client::enviar_accion(std::string comando){
@@ -92,18 +92,18 @@ std::vector<std::vector<std::string>> Client::listar_mapas(){
 }
 
 void Client::enviar_cant_jugadores(int cantidad){
- uint16_t cant_jugadores = cantidad;
-  protocol.sendResponse(socket, cant_jugadores); 
+    uint16_t cant_jugadores = cantidad;
+    protocol.sendResponse(socket, cant_jugadores);
 }
 
 
 void Client::enviar_map_id(int map_id){
-  protocol.sendResponse(socket, map_id);
+    protocol.sendResponse(socket, map_id);
 }
 
 
 void Client::enviar_nombre_partida(std::string nombre_partida){
-  protocol.sendName(socket, nombre_partida);
+    protocol.sendName(socket, nombre_partida);
 }
 
 int Client::recibir_respuesta(){
@@ -117,6 +117,7 @@ bool Client::conexion_exitosa(){
   return false;
 }
 
+<<<<<<< HEAD
 
 bool Client::partida_iniciada(){
   if(protocol.recvInitGame(socket)) { // ACA TIENE QUE ESTAR BLOQUEADO HASTA QUE SE INICIE LA PARTIDA
@@ -127,6 +128,9 @@ bool Client::partida_iniciada(){
 
 
 void createGame(Protocol protocol, Socket &socket) {
+=======
+void createGame(Protocol protocol, Socket &socket, std::vector<std::vector<char>> &map) {
+>>>>>>> 8e200e70843e6b2498a82e53defbe590ac241482
 
 
   // SEND NOMBRE PARTIDA
@@ -154,7 +158,7 @@ void createGame(Protocol protocol, Socket &socket) {
   protocol.sendResponse(socket, map_id);
 
   
-  std::vector<std::vector<char>> map;
+  //std::vector<std::vector<char>> map;
 
   if(protocol.recvEstablishConnection(socket)) { 
       std::cout << "Union exitosa" << std::endl;
@@ -230,19 +234,19 @@ void Client::launch() {
         std::vector<std::vector<char>> map;
         protocol.sendResponse(socket, comando);
         if (comando == CREATE_GAME) {
-          createGame(protocol, socket);
-          //map = joinGame(protocol, socket);
+            createGame(protocol, socket, map);
+            //map = joinGame(protocol, socket);
         } else if (comando == JOIN_GAME) {
-          map = joinGame(protocol, socket);
+            map = joinGame(protocol, socket);
         } else if (comando == LIST_GAMES) {
-          listGames(protocol,socket);
+            listGames(protocol,socket);
         }
 
-        /*Socket socket("localhost","8082");
+        /*socket("localhost","8082");
         Protocol protocol;
         std::vector<std::vector<char>> map(50, std::vector<char> (50, 'A') );*/
 
-        //initSDL(socket, protocol, map);
+        initSDL(socket, protocol, map);
 
     } catch (std::exception& e) {
         std::cout << e.what() << std::endl;
@@ -250,14 +254,12 @@ void Client::launch() {
     }
 }
 
-void Client::initSDL(Socket &socket, Protocol &protocol,
+void Client::initSDL(Socket &aSocket, Protocol &aProtocol,
                      std::vector<std::vector<char>> &map) const {
-    //Socket socket("localhost","8082");
-    //Protocol protocol;
     NonBlockingQueue<std::vector<GameObject*>> queueNb;
     BlockingQueue<CommandCL*> queueB;
-    RecvThread recvThread(queueNb, socket, protocol);
-    SendThread sendThread(queueB, socket, protocol);
+    RecvThread recvThread(queueNb, aSocket, aProtocol);
+    SendThread sendThread(queueB, aSocket, aProtocol);
     recvThread.start();
     sendThread.start();
 
@@ -268,12 +270,9 @@ void Client::initSDL(Socket &socket, Protocol &protocol,
     Camera camera;
     TextureManager textureManager(renderer, camera);
 
-    loadTextures(textureManager);
+    loadTextures(textureManager, renderer);
     EventManager eventManager;
     std::vector<GameObject*> objects;
-
-    //mapa de prueba
-    //std::vector<std::vector<char>> map(50, std::vector<char> (50, 'A') );
 
     Engine engine(map, objects, textureManager, eventManager, queueNb, queueB);
 
@@ -290,38 +289,55 @@ void Client::initSDL(Socket &socket, Protocol &protocol,
     recvThread.join();
 }
 
-void Client::loadTextures(TextureManager &textureManager) const {
-    textureManager.load("Trike", DATA_PATH "assets/Vehicles/Trike.png");
-    textureManager.load("SonicTank", DATA_PATH "assets/Vehicles/SonicTank.png");
-    textureManager.load("Deviator", DATA_PATH "assets/Vehicles/Deviator.png");
-    textureManager.load("Tank", DATA_PATH "assets/Vehicles/Tank.png");
-    textureManager.load("Devastator", DATA_PATH "assets/Vehicles/Devastator.png");
-    textureManager.load("Harvester", DATA_PATH "assets/Vehicles/Harvester.png");
+void Client::loadTextures(TextureManager &textureManager, SDL2pp::Renderer &renderer) const {
+    textureManager.load(TRIKE, DATA_PATH "assets/Vehicles/Trike.png");
+    textureManager.load(SONIC_TANK, DATA_PATH "assets/Vehicles/SonicTank.png");
+    textureManager.load(RAIDER, DATA_PATH "assets/Vehicles/Trike.png");
+    textureManager.load(DESVIATOR, DATA_PATH "assets/Vehicles/Deviator.png");
+    textureManager.load(TANK, DATA_PATH "assets/Vehicles/Tank.png");
+    textureManager.load(DEVASTATOR, DATA_PATH "assets/Vehicles/Devastator.png");
+    textureManager.load(HARVESTER, DATA_PATH "assets/Vehicles/Harvester.png");
+    textureManager.load(LIGHT_INFANTRY, DATA_PATH "assets/Vehicles/Deviator.png");
+    textureManager.load(HEAVY_INFANTRY, DATA_PATH "assets/Vehicles/Tank.png");
+    textureManager.load(FREMEN, DATA_PATH "assets/Vehicles/Devastator.png");
+    textureManager.load(SARDAUKAR, DATA_PATH "assets/Vehicles/Harvester.png");
 
-    textureManager.load("ConstructionYard", DATA_PATH "assets/Builds/ConstructionYard.png");
-    textureManager.load("LightFactory", DATA_PATH "assets/Builds/LightFactory.png");
-    textureManager.load("HeavyFactory", DATA_PATH "assets/Builds/HeavyFactory.png");
-    textureManager.load("WindTrap", DATA_PATH "assets/Builds/WindTrap.png");
-    textureManager.load("Refinery", DATA_PATH "assets/Builds/Refinery.png");
-    textureManager.load("Silo", DATA_PATH "assets/Builds/Silo.png");
-    textureManager.load("Barrack", DATA_PATH "assets/Builds/Barrack.png");
-    textureManager.load("Palace", DATA_PATH "assets/Builds/Palace.png");
+    textureManager.load(CONSTRUCTION_YARD, DATA_PATH "assets/Builds/ConstructionYard.png");
+    textureManager.load(LIGHT_FACTORY, DATA_PATH "assets/Builds/LightFactory.png");
+    textureManager.load(HEAVY_FACTORY, DATA_PATH "assets/Builds/HeavyFactory.png");
+    textureManager.load(WIND_TRAP, DATA_PATH "assets/Builds/WindTrap.png");
+    textureManager.load(REFINERY, DATA_PATH "assets/Builds/Refinery.png");
+    textureManager.load(SILO, DATA_PATH "assets/Builds/Silo.png");
+    textureManager.load(BARRACK, DATA_PATH "assets/Builds/Barrack.png");
+    textureManager.load(PALACE, DATA_PATH "assets/Builds/Palace.png");
 
-    textureManager.load("ButtonConstructionYard", DATA_PATH "assets/Button/ConstructionYard.gif");
-    textureManager.load("ButtonLightFactory", DATA_PATH "assets/Button/LightFactory.png");
-    textureManager.load("ButtonHeavyFactory", DATA_PATH "assets/Button/HeavyFactory.png");
-    textureManager.load("ButtonWindTrap", DATA_PATH "assets/Button/WindTrap.png");
-    textureManager.load("ButtonRefinery", DATA_PATH "assets/Button/Refinery.png");
-    textureManager.load("ButtonSilo", DATA_PATH "assets/Button/Silo.png");
-    textureManager.load("ButtonBarrack", DATA_PATH "assets/Button/Barrack.png");
-    textureManager.load("ButtonPalace", DATA_PATH "assets/Button/Palace.png");
+    textureManager.load(BTRIKE, DATA_PATH "assets/Button/Trike.gif");
+    textureManager.load(BSONIC_TANK, DATA_PATH "assets/Button/SonicTank.gif");
+    textureManager.load(BRAIDER, DATA_PATH "assets/Button/Trike.gif");
+    textureManager.load(BDESVIATOR, DATA_PATH "assets/Button/Deviator.gif");
+    textureManager.load(BTANK, DATA_PATH "assets/Button/Tank.gif");
+    textureManager.load(BDEVASTATOR, DATA_PATH "assets/Button/Devastator.gif");
+    textureManager.load(HARVESTER, DATA_PATH "assets/Button/Harvester.gif");
+    textureManager.load(BLIGHT_INFANTRY, DATA_PATH "assets/Button/LightInfantry.gif");
+    textureManager.load(BHEAVY_INFANTRY, DATA_PATH "assets/Button/HeavyInfantry.gif");
+    textureManager.load(BFREMEN, DATA_PATH "assets/Button/Fremen.gif");
+    textureManager.load(BSARDAUKAR, DATA_PATH "assets/Button/Sardaukar.gif");
 
-    textureManager.load("menu", DATA_PATH "assets/menu.png");
-    textureManager.load("arena", DATA_PATH "assets/Terrain/tile_arena.png");
-    textureManager.load("cima", DATA_PATH "assets/Terrain/tile_cimas.png");
-    textureManager.load("duna", DATA_PATH "assets/Terrain/tile_dunas.png");
-    textureManager.load("precipicio", DATA_PATH "assets/Terrain/tile_precipicio.png");
-    textureManager.load("roca", DATA_PATH "assets/Terrain/tile_roca.png");
+    textureManager.load(BCONSTRUCTION_YARD, DATA_PATH "assets/Button/ConstructionYard.gif");
+    textureManager.load(BLIGHT_FACTORY, DATA_PATH "assets/Button/LightFactory.gif");
+    textureManager.load(BHEAVY_FACTORY, DATA_PATH "assets/Button/HeavyFactory.gif");
+    textureManager.load(BWIND_TRAP, DATA_PATH "assets/Button/WindTrap.gif");
+    textureManager.load(BREFINERY, DATA_PATH "assets/Button/Refinery.gif");
+    textureManager.load(BSILO, DATA_PATH "assets/Button/Silo.gif");
+    textureManager.load(BBARRACK, DATA_PATH "assets/Button/Barrack.gif");
+    textureManager.load(BPALACE, DATA_PATH "assets/Button/Palace.gif");
+
+    textureManager.load(MENU, DATA_PATH "assets/menu.png");
+    textureManager.load(ARENA, DATA_PATH "assets/Terrain/tile_arena.png");
+    textureManager.load(CIMA, DATA_PATH "assets/Terrain/tile_cimas.png");
+    textureManager.load(DUNA, DATA_PATH "assets/Terrain/tile_dunas.png");
+    textureManager.load(PRECIPICIO, DATA_PATH "assets/Terrain/tile_precipicio.png");
+    textureManager.load(ROCA, DATA_PATH "assets/Terrain/tile_roca.png");
 
 }
 

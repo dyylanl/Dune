@@ -5,7 +5,7 @@
 #include "PalaceCL.h"
 
 PalaceCL::PalaceCL(int id, int player, SDL2pp::Point position, int life)
-        : BuildCL("ConstructionYard",position, SDL2pp::Point(99,89), id, player, life) {}
+        : BuildCL(PALACE,position, SDL2pp::Point(99,89), id, player, life) {}
 
 void PalaceCL::draw(SDL2pp::Renderer &renderer, TextureManager &textureManager) {
     SDL2pp::Point posFrame(0,0);

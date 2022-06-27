@@ -19,7 +19,7 @@ void Server::run() {
     while (input != "q") {
         std::cin >> input;
 
-        // comandos para el administrador de sistema.
+        // comandos para el administrador del sistema.
         if (input == "l") {
             std::vector<std::vector<std::string>> list = game.listGames();
             if (!list.empty()) {

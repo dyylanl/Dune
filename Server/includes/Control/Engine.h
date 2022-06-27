@@ -56,9 +56,8 @@ public:
     *   Retorna 1 si no pudo unir el jugador a la partida (es decir, esta completa)
     */
     uint16_t addClient(NewConnection newPlayer);
-    int getCurrentPlayers() {return current_players;}
-    int getReqPlayers() {return req_players;}
-    Id getMapId() {return map_id;}
+
+    
 };
 
 

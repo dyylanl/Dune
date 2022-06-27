@@ -6,7 +6,7 @@
 
 SonicTankCL::SonicTankCL(int id, int player, bool selecStatus, SDL2pp::Point position, SDL2pp::Point posAction,
                          int life,
-                         bool action) : Vehicle("SonicTank", position,
+                         bool action) : Vehicle(SONIC_TANK, position,
                                             SDL2pp::Point(32,25), id, player,
                                             selecStatus, posAction,
                                             life, action) {}
