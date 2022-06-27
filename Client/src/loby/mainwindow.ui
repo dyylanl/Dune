@@ -24,7 +24,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>3</number>
+     <number>4</number>
     </property>
     <widget class="QWidget" name="page_inicio">
      <widget class="QLabel" name="titulo_label">
@@ -178,19 +178,6 @@
        <item row="0" column="1">
         <widget class="QLineEdit" name="nombre_partida_input"/>
        </item>
-       <item row="1" column="0">
-        <widget class="QLabel" name="cantidad_jugadores_label">
-         <property name="text">
-          <string>Ingresar cantidad de jugadores</string>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignCenter</set>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="1">
-        <widget class="QLineEdit" name="cantidad_jugadores_input"/>
-       </item>
       </layout>
      </widget>
     </widget>
@@ -203,6 +190,44 @@
         <width>291</width>
         <height>221</height>
        </rect>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="button_confirmar_unirse">
+      <property name="geometry">
+       <rect>
+        <x>548</x>
+        <y>374</y>
+        <width>131</width>
+        <height>51</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Confirmar</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="page_lista_mapas">
+     <widget class="QListWidget" name="lista_mapas">
+      <property name="geometry">
+       <rect>
+        <x>275</x>
+        <y>151</y>
+        <width>311</width>
+        <height>211</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="button_confirmar_mapa">
+      <property name="geometry">
+       <rect>
+        <x>610</x>
+        <y>440</y>
+        <width>111</width>
+        <height>51</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Confirmar</string>
       </property>
      </widget>
     </widget>
@@ -340,6 +365,21 @@
         </spacer>
        </item>
       </layout>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="page_espera">
+     <widget class="QLabel" name="label_espera">
+      <property name="geometry">
+       <rect>
+        <x>320</x>
+        <y>310</y>
+        <width>281</width>
+        <height>111</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Esperando que comience la partida</string>
+      </property>
      </widget>
     </widget>
    </widget>

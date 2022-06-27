@@ -2,10 +2,14 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QTimer>
 #include <QString>
 #include <string>
+#include <vector>
 #include <QListWidget>
 #include "../../includes/Client.h"
+//#include "../../../Common/includes/Socket/Socket.h"
+//#include "../../../Common/includes/Protocol.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -19,7 +23,7 @@ public:
     MainWindow(QWidget *parent = nullptr);
     std::string get_nombre();
     ~MainWindow();
-    Client* get_cliente()const;
+    //Client* get_cliente()const;
 
 private slots:
     void on_button_confirmar_clicked();
@@ -40,6 +44,16 @@ private slots:
 
     void on_button_unirse_partida_clicked();
 
+    void on_button_confirmar_unirse_clicked();
+
+    void on_button_confirmar_mapa_clicked();
+
+    void actualizar_lista_partidas();
+
+    void mostrar_partidas();
+    
+    void mostrar_mapas();
+
 private:
     Ui::MainWindow *ui;
     QString text_IP;
@@ -50,5 +64,9 @@ private:
     QString text_cantidad_jugadores;
     QString casa;
     Client* cliente;
+    //std::vector<Socket> vector_socket;
+    //Socket* skt;
+    //Protocol protocolo;
+    QTimer* reloj;
 };
 #endif // MAINWINDOW_H

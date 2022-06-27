@@ -28,14 +28,15 @@
 
 Client::Client() {}
 
-/*
-void Client::crear_partida(const std::string& nombre_jugador, const std::string&  nombre_partida, int cantidad_jugadores){
+Client::Client(std::string ip1, std::string port1) : socket(ip1,port1), protocol() {
+}
+
+void Client::crear_partida(std::string nombre_jugador, std::string  nombre_partida){
   this->enviar_nombre_jugador(nombre_jugador);
   this->enviar_accion("crear");
   this->enviar_nombre_partida(nombre_partida);
-  this->enviar_cant_jugadores(cantidad_jugadores);
-}*/
-/*
+}
+
 int Client::obtener_numero_casa(const std::string& casa) {
   std::string Harkonnen = "Harkonnen";
   std::string Atreides = "Atreides";
@@ -50,8 +51,8 @@ int Client::obtener_numero_casa(const std::string& casa) {
     return 2;
   }
   return -1;
-}*/
-/*
+}
+
 void Client::enviar_nombre_jugador(std::string nombre_jugador){
  protocol.sendName(socket, nombre_jugador); 
 }
@@ -75,20 +76,35 @@ void Client::enviar_accion(std::string comando){
   }
 }
 
+void Client::enviar_nombre_y_comando(const std::string& nombre_jugador,std::string comando){
+  this->protocol.sendName(socket, nombre_jugador);
+  this->enviar_accion(comando);
+}
+
 std::vector<std::string> Client::listar_partidas(){
   std::vector<std::string> list = this->protocol.recvGameList(socket);
   return list;
 }
 
+std::vector<std::vector<std::string>> Client::listar_mapas(){
+  std::vector<std::vector<std::string>> maps_ = protocol.recvMapsCreated(socket);
+  return maps_;
+}
 
 void Client::enviar_cant_jugadores(int cantidad){
  uint16_t cant_jugadores = cantidad;
   protocol.sendResponse(socket, cant_jugadores); 
 }
 
+
+void Client::enviar_map_id(int map_id){
+  protocol.sendResponse(socket, map_id);
+}
+
+
 void Client::enviar_nombre_partida(std::string nombre_partida){
   protocol.sendName(socket, nombre_partida);
-}*/
+}
 
 void createGame(Protocol protocol, Socket &socket) {
 

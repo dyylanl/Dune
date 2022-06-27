@@ -17,16 +17,19 @@
 //-----------------------------------------------------------------------------
 
 class Client {
+    Socket socket;
+    Protocol protocol;
 public:
     Client();
+    Client(std::string ip1, std::string port1); 
     Client(const Client&) = delete;
     Client& operator=(const Client&) = delete;
     Client(Client&& other) = delete;
     Client& operator=(Client&& other) = delete;
 
     void launch();
-/*
-    void crear_partida(const std::string& nombre_jugador, const std::string&  nombre_partida, int cantidad_jugadores);
+
+    void crear_partida( std::string nombre_jugador,  std::string  nombre_partida);
 
     int obtener_numero_casa(const std::string& casa);
 
@@ -34,11 +37,18 @@ public:
 
     void enviar_accion(std::string comando);
 
-    void enviar_nombre_jugador(std::string nombre_jugadar);
+    void enviar_nombre_jugador(std::string nombre_jugador);
 
     void enviar_nombre_partida(std::string nombre_partida);
 
-    std::vector<std::string> listar_partidas();*/
+    std::vector<std::string> listar_partidas();
+
+    std::vector<std::vector<std::string>> listar_mapas();
+
+    void enviar_map_id(int map_id);
+
+    void enviar_nombre_y_comando(const std::string& nombre_jugador,std::string comando);
+
     ~Client();
 
     /*void crearUnidad();*/
