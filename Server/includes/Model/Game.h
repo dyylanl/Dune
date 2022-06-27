@@ -30,6 +30,12 @@ private:
     ConfigurationReader game_config;
 
     /*
+    *   Contiene informacion sobre todas las partidas creadas con un orden {nombre: [actuales,requeridos], ...}
+    */
+    std::map<std::string, std::vector<int>> games_info;
+
+
+    /*
      * Lockea el mutex, retorna true si el name ya existe.
      */
     bool contains(const std::string& game_name);
@@ -66,9 +72,9 @@ public:
 
 
     /*
-     * Retorna una lista con formato [nombre, actuales, req]
+     * Retorna una lista con formato [actuales, req, name_game]
      */
-    std::vector<std::string> listGames();
+    std::vector<std::vector<std::string>> listGames();
 
     /*
     * Retorna el id de mapa asociado a esa partida

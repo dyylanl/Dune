@@ -28,8 +28,8 @@ std::vector<int> Game::get(const std::string& game_name) {
 
 Game::Game(std::string path_config_game) :
         games(),
-        game_config(path_config_game)
-
+        game_config(path_config_game),
+        games_info()
 {
     std::list<std::string> map_paths = game_config.getAllPaths();
     int map_id = 1;
@@ -63,33 +63,38 @@ uint16_t Game::createGame(Id id_map, const std::string& name_game) {
     map.max_players = maps_dto_init[id_map].max_players;
     map.name_map = name_game;
     games[name_game] = (new Engine(map));
+    games_info[name_game] = {0,map.max_players};
     return SUCCESS;
 }
 
 uint16_t Game::acceptPlayer(Socket &peer, std::string name_player, std::string name_game, Id map_id1) {
+    int ret = ERROR;
     std::lock_guard<std::mutex> lock(mutex);
     if (games.count(name_game) > 0) { // si existe una partida con ese nombre entonces entro
-        return games[name_game]->addClient(NewConnection(peer,name_player,name_game,map_id1)); // chequea si la partida no esta completa para unir el nuevo player    
+        ret = games[name_game]->addClient(NewConnection(peer,name_player,name_game,map_id1)); // chequea si la partida no esta completa para unir el nuevo player    
+        if (ret == SUCCESS) {
+            games_info[name_game][0]++;
+        }
     }
-    return ERROR;
+    return ret;
 }
 
-// devuelve algo del tipo {[currents,reqs,len_name,name],...,[---]}
-std::vector<std::string> Game::listGames() {
+// devuelve un vector de vectores del tipo {[currents,reqs,name],...,[---]}
+std::vector<std::vector<std::string>> Game::listGames() {
     /*
      * Listar partidas es operacion de lectura.
      * Pueda que mientras se esten recorriendo las
      * partidas otro hilo modifique el map.
      */
     std::lock_guard<std::mutex> lock(mutex);
-    std::vector<std::string> list = {};
+    std::vector<std::vector<std::string>> list = {};
     if (!this->games.empty()) {
-        list.push_back(std::to_string(this->games.size()));
-        for (const auto& [game_name, game] : this->games) {
-            list.push_back(std::to_string(game->getCurrentPlayers())); // mando players actuales
-            list.push_back(std::to_string(game->getReqPlayers())); // mando maximos
-            list.push_back(std::to_string((game_name).size())); // mando len del nombre
-            list.push_back(game_name); // mando nombre
+        for (const auto& [game_name, stats] : this->games_info) {
+            std::vector<std::string> info_game = {};
+            info_game.push_back(std::to_string(stats[0]));
+            info_game.push_back(std::to_string(stats[1]));
+            info_game.push_back(game_name);
+            list.push_back(info_game);
         }
     }
     return list;

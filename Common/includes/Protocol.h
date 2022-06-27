@@ -28,6 +28,13 @@ public:
      */
     void createGame(Socket &socket, uint16_t house,
                     const std::string& name, int req);
+
+
+    void sendInitGame(Socket &socket);
+    bool recvInitGame(Socket &socket);
+
+    void sendCreateGameInvalid(Socket &socket);
+
     /*
      * Envia la informacion requerida para unirse una partida.
      */
@@ -73,11 +80,11 @@ public:
     /*
      * Envia una lista con el formato. (cantidad de elementos, (actuales, requeridos, longitud_nombre, nombre) ... ( , , , ,))
      */
-    void sendGameList(Socket &socket, const std::vector<std::string>& list);
+    void sendGameList(Socket &socket, const std::vector<std::vector<std::string>>& list);
     /*
      * Retorna una lista con el formato (actuales, requeridos, nombre).
      */
-    std::vector<std::string> recvGameList(Socket &socket);
+    std::vector<std::vector<std::string>> recvGameList(Socket &socket);
     /*
      *
      */
