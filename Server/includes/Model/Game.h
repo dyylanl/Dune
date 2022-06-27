@@ -30,9 +30,9 @@ private:
     ConfigurationReader game_config;
 
     /*
-    *   Contiene informacion sobre todas las partidas creadas con un orden {nombre: [actuales,requeridos], ...}
+    *   Contiene informacion sobre todas las partidas creadas con un orden {nombre: [actuales,requeridos,map_id], ...}
     */
-    std::map<std::string, std::vector<int>> games_info;
+    std::map<std::string, std::vector<int>> info_games;
 
 
     /*
