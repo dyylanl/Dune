@@ -3,10 +3,10 @@
 //
 
 #include "ButtonSiloCL.h"
-#include "../../Action/BuildBuilding.h"
+#include "../../../Action/BuildBuilding.h"
 
 ButtonSiloCL::ButtonSiloCL(int id, char player, int constructionTime, bool selectStatus, bool ready)
-        : ButtonBuild(BSILO, SDL2pp::Point(1114, 222), id, player, constructionTime, selectStatus, ready) {}
+        : ButtonCL(BSILO, SDL2pp::Point(1114, 222), id, player, constructionTime, selectStatus, ready) {}
 
 void ButtonSiloCL::buildBuilding(BlockingQueue<CommandCL *> &queue, SDL2pp::Point point) {
     char build = 5;

@@ -3,10 +3,10 @@
 //
 
 #include "ButtonWidtrapCL.h"
-#include "../../Action/BuildBuilding.h"
+#include "../../../Action/BuildBuilding.h"
 
 ButtonWidtrapCL::ButtonWidtrapCL(int id, char player, int constructionTime, bool selectStatus, bool ready)
-: ButtonBuild(BWIND_TRAP, SDL2pp::Point(1089, 120), id, player, constructionTime, selectStatus, ready) {}
+: ButtonCL(BWIND_TRAP, SDL2pp::Point(1089, 120), id, player, constructionTime, selectStatus, ready) {}
 
 void ButtonWidtrapCL::buildBuilding(BlockingQueue<CommandCL *> &queue, SDL2pp::Point point) {
     char build = 3;

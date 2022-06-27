@@ -6,9 +6,9 @@
 #define DUNE_BUTTONPALACECL_H
 
 
-#include "../ButtonBuild.h"
+#include "../../ButtonCL.h"
 
-class ButtonPalaceCL : public ButtonBuild {
+class ButtonPalaceCL : public ButtonCL {
 public:
     ButtonPalaceCL(int id, char player, int constructionTime, bool selectStatus, bool ready);
 

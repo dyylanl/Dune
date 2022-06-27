@@ -11,8 +11,8 @@
 #include "../../Common/includes/BlockingQueue.h"
 #include "../../Common/includes/NonBlockingQueue.h"
 #include "Thread/SendThread.h"
-#include "GameObject/Button/ButtonWidtrapCL.h"
-#include "GameObject/Button/ButtonRefineryCL.h"
+#include "GameObject/Button/ButtonBuild/ButtonWidtrapCL.h"
+#include "GameObject/Button/ButtonBuild/ButtonRefineryCL.h"
 #include "Animation/Animation.h"
 #include <arpa/inet.h>
 
@@ -200,7 +200,7 @@ void listGames(Protocol protocol, Socket &socket) {
 void Client::launch() {
     std::cout << "Iniciando cliente.... \n\n";
     try {
-        /*std::string ip;
+        std::string ip;
         std::string port;
         std::cout << "IP: ";
         std::cin >> ip;
@@ -227,13 +227,13 @@ void Client::launch() {
             map = joinGame(protocol, socket);
         } else if (comando == LIST_GAMES) {
             listGames(protocol,socket);
-        }*/
+        }
 
-        Socket socket_("localhost","8082");
+        /*Socket socket_("localhost","8082");
         Protocol protocol_;
-        std::vector<std::vector<char>> map(50, std::vector<char> (50, 'A') );
+        std::vector<std::vector<char>> map(50, std::vector<char> (50, 'A') );*/
 
-        initSDL(socket_, protocol_, map);
+        initSDL(socket, protocol, map);
 
     } catch (std::exception& e) {
         std::cout << e.what() << std::endl;

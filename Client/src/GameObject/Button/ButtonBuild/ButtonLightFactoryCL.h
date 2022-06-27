@@ -6,9 +6,9 @@
 #define DUNE_BUTTONLIGHTFACTORYCL_H
 
 
-#include "../ButtonBuild.h"
+#include "../../ButtonCL.h"
 
-class ButtonLightFactoryCL : public ButtonBuild {
+class ButtonLightFactoryCL : public ButtonCL {
 public:
     ButtonLightFactoryCL(int id, char player, int constructionTime, bool selectStatus, bool ready);
 

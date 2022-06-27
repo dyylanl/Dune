@@ -7,10 +7,10 @@
 
 
 #include "SDL2pp/SDL2pp.hh"
-#include "../../Graphics/TextureManager.h"
-#include "../ButtonBuild.h"
+#include "../../../Graphics/TextureManager.h"
+#include "../../ButtonCL.h"
 
-class ButtonWidtrapCL : public ButtonBuild{
+class ButtonWidtrapCL : public ButtonCL{
 public:
     ButtonWidtrapCL(int id, char player, int constructionTime, bool selectStatus, bool ready);
 

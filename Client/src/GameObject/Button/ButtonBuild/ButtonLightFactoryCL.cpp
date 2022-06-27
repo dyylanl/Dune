@@ -3,10 +3,10 @@
 //
 
 #include "ButtonLightFactoryCL.h"
-#include "../../Action/BuildBuilding.h"
+#include "../../../Action/BuildBuilding.h"
 
 ButtonLightFactoryCL::ButtonLightFactoryCL(int id, char player, int constructionTime, bool selectStatus, bool ready)
-        : ButtonBuild(BLIGHT_FACTORY, SDL2pp::Point(1114, 222), id, player, constructionTime, selectStatus, ready) {}
+        : ButtonCL(BLIGHT_FACTORY, SDL2pp::Point(1114, 222), id, player, constructionTime, selectStatus, ready) {}
 
 void ButtonLightFactoryCL::buildBuilding(BlockingQueue<CommandCL *> &queue, SDL2pp::Point point) {
     char build = 1;
