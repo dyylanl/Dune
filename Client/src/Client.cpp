@@ -106,6 +106,17 @@ void Client::enviar_nombre_partida(std::string nombre_partida){
   protocol.sendName(socket, nombre_partida);
 }
 
+int Client::recibir_respuesta(){
+  return (int) this->protocol.recvResponse(socket);
+}
+
+bool Client::partida_iniciada(){
+  if(protocol.recvEstablishConnection(socket)) { // ACA TIENE QUE ESTAR BLOQUEADO HASTA QUE SE INICIE LA PARTIDA
+    return true;
+  }
+  return false;
+}
+
 void createGame(Protocol protocol, Socket &socket) {
 
 
@@ -126,7 +137,6 @@ void createGame(Protocol protocol, Socket &socket) {
     std::cout << "\nMapa " << i+1 << "\nFilas: " << maps_[i][0] << "\nColumnas: " << maps_[i][1] << "\nJugadores Requeridos: " << maps_[i][2] << std::endl;
     }
   }
-
 
   // SEND MAP ID
   uint16_t map_id;

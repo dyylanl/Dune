@@ -49,6 +49,10 @@ public:
 
     void enviar_nombre_y_comando(const std::string& nombre_jugador,std::string comando);
 
+    int recibir_respuesta();
+
+    bool partida_iniciada();
+
     ~Client();
 
     /*void crearUnidad();*/

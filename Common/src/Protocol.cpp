@@ -1,4 +1,5 @@
 #include "../includes/Protocol.h"
+#include <iostream>
 
 #define JOIN 1
 #define LIST 2
@@ -430,14 +431,20 @@ std::vector<std::vector<std::string>> Protocol::recvMapsCreated(Socket &socket) 
 
 void Protocol::sendEstablishConnection(Socket &socket) {
     uint16_t connect = ESTABLISH_CONNECTION;
+    std::cout << connect << std::endl;
     socket.send((const char*)&connect, sizeof(uint16_t));
 }
 
 bool Protocol::recvEstablishConnection(Socket &socket) {
     uint16_t connect = 0;
+    std::cout << "ESPERO" << std::endl;
     socket.recv((char*)&connect, sizeof(uint16_t));
+    std::cout << "TERMINO DE ESPERAR" << std::endl;
+    std::cout << connect << std::endl;
     if (connect == ESTABLISH_CONNECTION) {
+        std::cout << "ME CONECTE" << std::endl;
         return true;
     }
+    std::cout << "NO ME CONECTE" << std::endl;
     return false;
 }

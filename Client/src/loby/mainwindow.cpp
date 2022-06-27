@@ -1,6 +1,6 @@
 #include "mainwindow.h"
 #include "./ui_mainwindow.h"
-
+#include <QMessageBox>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -160,9 +160,34 @@ void MainWindow::mostrar_partidas(){
 void MainWindow::on_button_confirmar_unirse_clicked()
 {
     QListWidgetItem *partida_elegida =  this->ui->lista_partidas->currentItem();
-    std::cout << partida_elegida->text().toStdString() << std::endl;
     this->ui->stackedWidget->setCurrentIndex(5);
     this->reloj->stop();
+    std::string buf;                 // Have a buffer string
+    std::stringstream ss(partida_elegida->text().toStdString());       // Insert the string into a stream
+
+    std::vector<std::string> tokens; // Create vector to hold our words
+
+    while (ss >> buf){
+        tokens.push_back(buf);
+    }
+    std::cout << tokens[0] << std::endl;
+    this->cliente->enviar_accion("unirse");
+    this->cliente->enviar_nombre_partida(tokens[0]);
+
+    int respuesta_unirse_partida = this->cliente->recibir_respuesta();
+    if(respuesta_unirse_partida == 9){
+        QMessageBox msgBox;
+        msgBox.setText("Se unio con exito");
+        msgBox.exec();
+    }
+
+    //this->ui->stackedWidget->setCurrentIndex(5);
+    if(this->cliente->partida_iniciada()){
+        QMessageBox msgBox;
+        msgBox.setText("La partida va a empezar");
+        msgBox.exec();
+        QApplication::quit();
+    }
 
 }
 
@@ -178,7 +203,24 @@ void MainWindow::on_button_confirmar_mapa_clicked()
     int map_id_cast =(int)map_id - 48;
     std::cout << map_id_cast << std::endl;
     this->cliente->enviar_map_id(map_id_cast);
+
+    int respuesta_crear_partida = this->cliente->recibir_respuesta();
+    if(respuesta_crear_partida == 9){
+        QMessageBox msgBox;
+        msgBox.setText("Partida creada con exito");
+        msgBox.exec();
+    }
+
     this->ui->stackedWidget->setCurrentIndex(5);
+    std::cout << "PASO EL" << std::endl;
+    if(this->cliente->partida_iniciada()){
+        std::cout << "EMPIEZA LA PARTIDA" << std::endl;
+        QMessageBox msgBox;
+        msgBox.setText("La partida va a empezar");
+        msgBox.exec();
+        QApplication::quit();
+    }
+
 }
 
 void MainWindow::actualizar_lista_partidas(){
