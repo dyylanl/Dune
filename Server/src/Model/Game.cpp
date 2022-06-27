@@ -5,7 +5,6 @@
 #define SUCCESS 0
 #define ERROR 1
 
-class Map;
 
 bool Game::contains(const std::string& game_name) {
     //std::lock_guard<std::mutex> lock(mutex);

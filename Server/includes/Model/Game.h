@@ -9,7 +9,6 @@
 #include "DTOs/MapDTO.h"
 #include "../../config/ConfigReader.h"
 #include "../Control/NewConnection.h"
-#include "../Model/Map.h"
 #include "../Control/Engine.h"
 ////////////////////////////////////////
 class Game {

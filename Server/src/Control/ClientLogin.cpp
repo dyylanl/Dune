@@ -24,7 +24,9 @@ void ClientLogin::run() {
         std::string name;
         name = protocol.recvName(peer);
         uint16_t command = protocol.recvCommand(peer); // este comando puede ser 1 2 o 3
-        execute(command, name); // si devuelve 0 es porque el cliente ya se unio a una partida o la crea si devuelve 1 hay q volver a recibir el comando que indique
+        while (is_running) {
+            execute(command, name); // si devuelve 0 es porque el cliente ya se unio a una partida o la crea si devuelve 1 hay q volver a recibir el comando que indique
+        }
     } catch (const std::exception& e) {
         try {
             peer.shutdown();
@@ -43,6 +45,7 @@ void ClientLogin::run() {
         fprintf(stderr, "[ClientLogin]: Error en el run.\n");
     }
     is_running = false;
+    std::cout << "Salio del Lobby" << std::endl;
 }
 
 bool ClientLogin::isRunning() const {
@@ -79,10 +82,8 @@ uint16_t ClientLogin::execute(uint16_t command, std::string name_player) {
         if (resp_create_game == SUCCESS) { // si la respuesta es 0 entonces el game me creo la partida
             game.acceptPlayer(peer, name_player, name_game, map_id); // si la partida se creo entonces le digo al game que me acepte este player
             is_running = false;
-            return SUCCESS;
         } else {
             protocol.sendCreateGameInvalid(peer);
-            return ERROR;
         }
     }
     /*
@@ -95,9 +96,13 @@ uint16_t ClientLogin::execute(uint16_t command, std::string name_player) {
         //uint16_t len_name = protocol.recvCommand(peer);
         name_game = protocol.recvName(peer/*, len_name*/);
         Id map_id = game.getMapId(name_game);
-        game.acceptPlayer(peer, name_player, name_game, map_id);
-        is_running = false;
-        return SUCCESS;
+        uint16_t  flag_join = game.acceptPlayer(peer, name_player, name_game, map_id);
+        if (flag_join == 0) {
+            is_running = false;
+            return SUCCESS;
+        } else {
+            return ERROR;
+        }
     }
     /*
      * Envio la lista de partidas actuales
