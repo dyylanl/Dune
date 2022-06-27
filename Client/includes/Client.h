@@ -19,14 +19,14 @@
 enum TextureType: char {TRIKE, SONIC_TANK, RAIDER, DESVIATOR, TANK, DEVASTATOR, HARVESTER,
         LIGHT_INFANTRY, HEAVY_INFANTRY, FREMEN, SARDAUKAR,
         CONSTRUCTION_YARD, LIGHT_FACTORY, HEAVY_FACTORY,WIND_TRAP, REFINERY, SILO, BARRACK, PALACE,
-        BTRIKE, BSONIC_TANK, BRAIDER, BDESVIATOR, BTANK, BDEVASTATOR,
+        BTRIKE, BSONIC_TANK, BRAIDER, BDESVIATOR, BTANK, BDEVASTATOR, BHARVESTER,
         BLIGHT_INFANTRY, BHEAVY_INFANTRY, BFREMEN, BSARDAUKAR,
         BCONSTRUCTION_YARD, BLIGHT_FACTORY, BHEAVY_FACTORY, BWIND_TRAP, BREFINERY, BSILO, BBARRACK, BPALACE,
         MENU, ARENA, CIMA, DUNA, PRECIPICIO, ROCA};
 
 class Client {
-    Socket m_socket;
-    Protocol m_protocol;
+    Socket socket;
+    Protocol protocol;
 public:
     Client();
     Client(std::string ip1, std::string port1); 
@@ -67,7 +67,7 @@ public:
 
     void loadTextures(TextureManager &textureManager, SDL2pp::Renderer &renderer) const;
 
-    void initSDL(Socket &socket, Protocol &protocol, std::vector<std::vector<char>> &map) const;
+    void initSDL(Socket &aSocket, Protocol &aProtocol, std::vector<std::vector<char>> &map) const;
 };
 
 //-----------------------------------------------------------------------------

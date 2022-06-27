@@ -28,7 +28,7 @@
 
 Client::Client() {}
 
-Client::Client(std::string ip1, std::string port1) : m_socket(ip1,port1), m_protocol() {
+Client::Client(std::string ip1, std::string port1) : socket(ip1,port1), protocol() {
 }
 
 void Client::crear_partida(std::string nombre_jugador, std::string  nombre_partida){
@@ -54,7 +54,7 @@ int Client::obtener_numero_casa(const std::string& casa) {
 }
 
 void Client::enviar_nombre_jugador(std::string nombre_jugador){
- m_protocol.sendName(m_socket, nombre_jugador);
+ protocol.sendName(socket, nombre_jugador);
 }
 
 void Client::enviar_accion(std::string comando){
@@ -64,54 +64,54 @@ void Client::enviar_accion(std::string comando){
 
   if(comando == crear){
     uint16_t comando_num = 1;
-    m_protocol.sendResponse(m_socket, comando_num);
+    protocol.sendResponse(socket, comando_num);
   }
   if(comando == unirse){
     uint16_t comando_num = 2;
-    m_protocol.sendResponse(m_socket, comando_num);
+    protocol.sendResponse(socket, comando_num);
   }
   if(comando == listar){
     uint16_t comando_num = 3;
-    m_protocol.sendResponse(m_socket, comando_num);
+    protocol.sendResponse(socket, comando_num);
   }
 }
 
 void Client::enviar_nombre_y_comando(const std::string& nombre_jugador,std::string comando){
-  this->m_protocol.sendName(m_socket, nombre_jugador);
+  this->protocol.sendName(socket, nombre_jugador);
   this->enviar_accion(comando);
 }
 
 std::vector<std::string> Client::listar_partidas(){
-  std::vector<std::string> list = this->m_protocol.recvGameList(m_socket);
+  std::vector<std::string> list = this->protocol.recvGameList(socket);
   return list;
 }
 
 std::vector<std::vector<std::string>> Client::listar_mapas(){
-  std::vector<std::vector<std::string>> maps_ = m_protocol.recvMapsCreated(m_socket);
+  std::vector<std::vector<std::string>> maps_ = protocol.recvMapsCreated(socket);
   return maps_;
 }
 
 void Client::enviar_cant_jugadores(int cantidad){
     uint16_t cant_jugadores = cantidad;
-    m_protocol.sendResponse(m_socket, cant_jugadores);
+    protocol.sendResponse(socket, cant_jugadores);
 }
 
 
 void Client::enviar_map_id(int map_id){
-    m_protocol.sendResponse(m_socket, map_id);
+    protocol.sendResponse(socket, map_id);
 }
 
 
 void Client::enviar_nombre_partida(std::string nombre_partida){
-    m_protocol.sendName(m_socket, nombre_partida);
+    protocol.sendName(socket, nombre_partida);
 }
 
 int Client::recibir_respuesta(){
-  return (int) this->m_protocol.recvResponse(m_socket);
+  return (int) this->protocol.recvResponse(socket);
 }
 
 bool Client::partida_iniciada(){
-  if(m_protocol.recvEstablishConnection(m_socket)) { // ACA TIENE QUE ESTAR BLOQUEADO HASTA QUE SE INICIE LA PARTIDA
+  if(protocol.recvEstablishConnection(socket)) { // ACA TIENE QUE ESTAR BLOQUEADO HASTA QUE SE INICIE LA PARTIDA
     return true;
   }
   return false;
@@ -247,8 +247,8 @@ void Client::launch() {
           listGames(protocol,socket);
         }*/
 
-        Socket socket("localhost","8082");
-        Protocol protocol;
+        //socket("localhost","8082");
+        //Protocol protocol;
         std::vector<std::vector<char>> map(50, std::vector<char> (50, 'A') );
 
         initSDL(socket, protocol, map);
@@ -259,14 +259,14 @@ void Client::launch() {
     }
 }
 
-void Client::initSDL(Socket &socket, Protocol &protocol,
+void Client::initSDL(Socket &aSocket, Protocol &aProtocol,
                      std::vector<std::vector<char>> &map) const {
     //Socket socket("localhost","8082");
     //Protocol protocol;
     NonBlockingQueue<std::vector<GameObject*>> queueNb;
     BlockingQueue<CommandCL*> queueB;
-    RecvThread recvThread(queueNb, socket, protocol);
-    SendThread sendThread(queueB, socket, protocol);
+    RecvThread recvThread(queueNb, aSocket, aProtocol);
+    SendThread sendThread(queueB, aSocket, aProtocol);
     recvThread.start();
     sendThread.start();
 
@@ -327,6 +327,7 @@ void Client::loadTextures(TextureManager &textureManager, SDL2pp::Renderer &rend
     textureManager.load(BDESVIATOR, DATA_PATH "assets/Button/Deviator.gif");
     textureManager.load(BTANK, DATA_PATH "assets/Button/Tank.gif");
     textureManager.load(BDEVASTATOR, DATA_PATH "assets/Button/Devastator.gif");
+    textureManager.load(HARVESTER, DATA_PATH "assets/Button/Harvester.gif");
     textureManager.load(BLIGHT_INFANTRY, DATA_PATH "assets/Button/LightInfantry.gif");
     textureManager.load(BHEAVY_INFANTRY, DATA_PATH "assets/Button/HeavyInfantry.gif");
     textureManager.load(BFREMEN, DATA_PATH "assets/Button/Fremen.gif");
