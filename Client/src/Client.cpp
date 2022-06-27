@@ -166,7 +166,7 @@ void listGames(Protocol protocol, Socket &socket) {
 void Client::launch() {
     std::cout << "Iniciando cliente.... \n\n";
     try {
-        std::string ip;
+        /*std::string ip;
         std::string port;
         std::cout << "IP: ";
         std::cin >> ip;
@@ -193,8 +193,11 @@ void Client::launch() {
           map = joinGame(protocol, socket);
         } else if (comando == LIST_GAMES) {
           listGames(protocol,socket);
-        }
+        }*/
 
+        Socket socket("localhost","8082");
+        Protocol protocol;
+        std::vector<std::vector<char>> map(50, std::vector<char> (50, 'A') );
         initSDL(socket, protocol, map);
 
     } catch (std::exception& e) {
@@ -204,8 +207,9 @@ void Client::launch() {
 }
 
 void Client::initSDL(Socket &socket, Protocol &protocol,
-                     std::vector<std::vector<char>> &map) const {//Socket socket("localhost","8082");
-//Protocol protocol;
+                     std::vector<std::vector<char>> &map) const {
+    //Socket socket("localhost","8082");
+    //Protocol protocol;
     NonBlockingQueue<std::vector<GameObject*>> queueNb;
     BlockingQueue<CommandCL*> queueB;
     RecvThread recvThread(queueNb, socket, protocol);
@@ -225,7 +229,7 @@ void Client::initSDL(Socket &socket, Protocol &protocol,
     std::vector<GameObject*> objects;
 
     //mapa de prueba
-//std::vector<std::vector<char>> map(50, std::vector<char> (50, 'A') );
+    //std::vector<std::vector<char>> map(50, std::vector<char> (50, 'A') );
 
     Engine engine(map, objects, textureManager, eventManager, queueNb, queueB);
 
