@@ -11,25 +11,19 @@
 void Engine::_processCommands() {
     /*Command* command_process = nullptr;
     while ((command_process = commands.pop())) {
-        //command_process->exec(game);
+        std::cout << "Ejecutando comando." << std::endl;
         delete command_process;
     }*/
 }
 
 void Engine::_processFinishedConnections() {
-    /*InstanceId* finished_connection = nullptr;
+    InstanceId* finished_connection = nullptr;
     while ((finished_connection = finished_connections.pop())) {
         delete finished_connection;
         fprintf(stderr, "[ENGINE]: Se ha desconectado un jugador.\n");
-    }*/
+    }
 }
 
-void Engine::_freeQueues() {
-       /* InstanceId* p = nullptr;
-        while ((p = finished_connections.pop())) {
-            delete p;
-        }*/
-}
 
 void Engine::_loopIteration(int it) {
     _processCommands();
@@ -55,6 +49,7 @@ Engine::Engine(MapDTO map_dto) :
 
 void Engine::run() {
     fprintf(stderr, "[ENGINE]: Empezando partida.\n");
+    established_connections.initGame(map.getMap());
     auto t1 = std::chrono::steady_clock::now();
     auto t2 = t1;
     std::chrono::duration<float, std::milli> diff{};
@@ -78,17 +73,26 @@ void Engine::run() {
         t1 += std::chrono::milliseconds(rate);
         it += 1;
     }
-    _freeQueues();
+    clearAll();
     fprintf(stderr, "[ENGINE]: Terminando ejecución.\n");
+}
+
+void Engine::clearAll() {
+    InstanceId* id_dlt = nullptr;
+    while ((id_dlt = finished_connections.pop())) {
+        delete id_dlt;
+    }
+    /*Command* command = nullptr;
+    while ((command = commands.pop())) {
+        delete command;
+    }*/
 }
 
 void Engine::stop() {
     keep_executing = false;
 }
 
-Engine::~Engine() {
-    std::cout << "[ENGINE]: Destruyendo engine." << std::endl;
-}
+Engine::~Engine() {}
 
 
 /*
@@ -98,17 +102,14 @@ Engine::~Engine() {
  * 2) le envio el mapa de la partida a la que se unio
  * 3) lo agrego al contenedor de conexiones establecidas
  */
-uint16_t Engine::addClient(NewConnection *client) {
+uint16_t Engine::addClient(NewConnection client) {
     uint16_t ret = ERROR;
     if (current_players < req_players) {
         current_players += 1;
-        InstanceId id = current_players;
-        std::cout << name_game << " " << current_players << "/" << req_players  << " map id: " << map_id  << std::endl;
-        established_connections.add(id,client->map_id,client->peer);
+        established_connections.add((InstanceId)current_players,client.map_id,client.peer);
         ret = SUCCESS;
     }
     if (current_players == req_players) {
-        established_connections.initGame(map.getMap());
         this->run();
         ret = SUCCESS;
     }

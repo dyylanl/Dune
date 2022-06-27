@@ -1,0 +1,36 @@
+SERVIDOR:
+
+recv Nombre jugador
+
+recv Command (crear unirse listar)
+
+
+
+crear{
+
+recv Nombre partida
+
+send Mapas cargados
+
+recv Map Id
+
+acceptPlayer ---> protocol.sendEstablishConnection() [9]
+	-----> si es de a 1 => protocol.sendMap()
+	}
+	
+unirse {
+
+recv Nombre partida
+
+acceptPlayer ---> protocol.sendEstablishConnection() [9]
+	-----> si esta completa => protocol.sendMap()
+
+}
+
+
+listar {
+
+protocol.sendGameList();
+
+}
+

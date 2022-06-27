@@ -66,10 +66,10 @@ uint16_t Game::createGame(Id id_map, const std::string& name_game) {
     return SUCCESS;
 }
 
-uint16_t Game::acceptPlayer(NewConnection* new_player) {
+uint16_t Game::acceptPlayer(Socket &peer, std::string name_player, std::string name_game, Id map_id1) {
     std::lock_guard<std::mutex> lock(mutex);
-    if (games.count(new_player->name_game) > 0) { // si existe una partida con ese nombre entonces entro
-        return games[new_player->name_game]->addClient(new_player); // chequea si la partida no esta completa para unir el nuevo player    
+    if (games.count(name_game) > 0) { // si existe una partida con ese nombre entonces entro
+        return games[name_game]->addClient(NewConnection(peer,name_player,name_game,map_id1)); // chequea si la partida no esta completa para unir el nuevo player    
     }
     return ERROR;
 }
@@ -128,7 +128,6 @@ std::vector<MapDTO> Game::getMapsLoads(){
 
 void Game::stop() {
     for (const auto& [name_game, engine] : this->games) {
-        std::cout << "FINALIZANDO GAME." << std::endl;
         engine->stop();
         engine->join();
     }

@@ -15,6 +15,11 @@ class Protocol {
 private:
     bool was_closed;
 
+    /*
+     * Retorna el largo del nombre (2 bytes en little-endiann).
+     */
+    uint16_t recvNameLen(Socket &socket);
+    
 public:
     Protocol();
     ~Protocol();
@@ -47,15 +52,12 @@ public:
     /*
      * Retorna un string de longitud name_long.
      */
-    std::string recvName(Socket &socket, uint16_t name_long);
+    std::string recvName(Socket &socket);
     /*
      * Retorna el tipo de casa (0 Harkonnen, 1 Atreides y 2 Ordos)
      */
     uint16_t recvHouse(Socket &socket);
-    /*
-     * Retorna el largo del nombre (2 bytes en little-endiann).
-     */
-    uint16_t recvNameLen(Socket &socket);
+    
     /*
      * Retorna la cantidad de jugadores actuales (1 byte)
      */

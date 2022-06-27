@@ -15,12 +15,31 @@ Protocol::~Protocol() {
     this->close();
 }
 
-std::string Protocol::recvName(Socket &skt, uint16_t name_len) {
+void Protocol::sendName(Socket &socket, std::string name) {
+    uint16_t len_name = name.size();
+    socket.send(reinterpret_cast<const char *>(&len_name), sizeof(uint8_t));
+    std::cout << "[PROTOCOL]: Envio tamanio del nombre: " << len_name << std::endl;
+    socket.send(name.c_str(), name.size());
+    std::cout << "[PROTOCOL]: Envio nombre" << std::endl;
+
+}
+
+std::string Protocol::recvName(Socket &skt) {
+    uint16_t name_len = this->recvNameLen(skt);
     std::vector<char> name(name_len+1);
     int bytes_recv = skt.recv(name.data(), name_len);
     name[bytes_recv] = 0;
     std::string game_name = name.data();
+    std::cout << "[PROTOCOL]: Recv nombre " << game_name << std::endl;
     return game_name;
+}
+
+uint16_t Protocol::recvNameLen(Socket &skt) {
+    uint16_t len = 0;
+    skt.recv(reinterpret_cast<char *>(&len), sizeof(uint8_t));
+    //uint16_t len_ret = ntohs(len);
+    std::cout << "[PROTOCOL]: Recv tamanio del nombre: " << len << std::endl;
+    return len;
 }
 
 void Protocol::joinGame(Socket &skt, uint16_t house, const std::string& name) {
@@ -78,11 +97,7 @@ uint16_t Protocol::recvCurrent(Socket &skt) {
     return current;
 }
 
-uint16_t Protocol::recvNameLen(Socket &skt) {
-    uint16_t len = 0;
-    skt.recv(reinterpret_cast<char *>(&len), sizeof(uint16_t));
-    return ntohs(len);
-}
+
 
 uint16_t Protocol::recvReq(Socket &skt) {
     uint16_t req = 0;
@@ -131,8 +146,7 @@ std::vector<std::string> Protocol::recvGameList(Socket &skt) {
         for (int i = 0; i < count; ++i) {
             list.push_back(std::to_string(recvCurrent(skt)));
             list.push_back(std::to_string(recvReq(skt)));
-            int len = recvNameLen(skt);
-            list.push_back(recvName(skt, len));
+            list.push_back(recvName(skt));
         }
         return list;
     }
@@ -141,14 +155,12 @@ std::vector<std::string> Protocol::recvGameList(Socket &skt) {
 void Protocol::recvCreate(Socket &socket, int &house, int &req, std::string &name) {
     house = recvHouse(socket);
     req = recvReq(socket);
-    int name_len = recvNameLen(socket);
-    name = recvName(socket, name_len);
+    name = recvName(socket);
 }
 
 void Protocol::recvJoin(Socket &socket, std::string &name) {
     recvHouse(socket);
-    int game_name_len = recvNameLen(socket);
-    name = recvName(socket, game_name_len);
+    name = recvName(socket);
 }
 
 void Protocol::sendUnit(Socket &socket, int type) {
@@ -229,13 +241,6 @@ std::vector<std::vector<char>> Protocol::recvMap(Socket &socket) {
         }
     }
     return mapa;
-}
-
-void Protocol::sendName(Socket &socket, std::string name) {
-    uint16_t len_name = name.size();
-    socket.send(reinterpret_cast<const char *>(&len_name), sizeof(uint8_t));
-    socket.send(name.c_str(), name.size());
-
 }
 
 void Protocol::recvType(Socket &socket, char &type) {
@@ -366,8 +371,7 @@ std::vector<std::string> Protocol::recvMapsId(Socket &socket) {
         return list;
     } else {
         for (int i = 0; i < count; ++i) {
-            int len = recvNameLen(socket);
-            list.push_back(recvName(socket, len));
+            list.push_back(recvName(socket));
         }
         return list;
     }
