@@ -18,6 +18,20 @@ void Server::run() {
     std::string input;
     while (input != "q") {
         std::cin >> input;
+
+        // comandos para el administrador de sistema.
+        if (input == "l") {
+            std::vector<std::vector<std::string>> list = game.listGames();
+            if (!list.empty()) {
+                int n = (int)list.size();
+                for (int i = 0; i < n; i++) {
+                    std::cout << list[i][2] << " " << list[i][0] << "/" << list[i][1] << std::endl;
+                }
+            } else {
+                std::cout << "No hay partidas creadas..." << std::endl;
+            }
+        }
+
     }
 
     game.stop();

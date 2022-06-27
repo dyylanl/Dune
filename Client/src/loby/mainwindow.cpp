@@ -140,7 +140,7 @@ Client* MainWindow::get_cliente()const{
 void MainWindow::mostrar_partidas(){
     this->ui->lista_partidas->clear();
     this->cliente->enviar_accion("listar");
-    std::vector<std::string> list = this->cliente->listar_partidas();
+    std::vector<std::string> list = {}; //this->cliente->listar_partidas();
     std::cout << "recibo las partidas" << std::endl;
     if (!list.empty()) {
        int n = (int)list.size();

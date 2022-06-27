@@ -16,9 +16,7 @@ private:
     std::unordered_map<InstanceId, ClientConnection> clients;
 
 public:
-    ClientsConnected(NonBlockingQueue<Command*>& commands,
-                  NonBlockingQueue<InstanceId*>& finished_connections);
-
+    ClientsConnected(NonBlockingQueue<Command*>& commands, NonBlockingQueue<InstanceId*>& finished_connections);
     ClientsConnected(const ClientsConnected&) = delete;
     ClientsConnected& operator=(const ClientsConnected&) = delete;
     ClientsConnected(ClientsConnected&& other) = delete;

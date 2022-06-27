@@ -91,6 +91,7 @@ ClientConnection::ClientConnection(
 void ClientConnection::start() {
     // si llegamos hasta aca es porque el jugador se pudo conectar entonces se lo hacemos saber al cliente
     protocol.sendEstablishConnection(peer);
+    std::cout << "Envio conexion establecida [9]" << std::endl;
     sender = std::thread(&ClientConnection::_receiver, this);
     receiver = std::thread(&ClientConnection::_sender, this);
 }
@@ -126,5 +127,7 @@ ClientConnection::~ClientConnection() {
 
 
 void ClientConnection::sendInitGame(std::vector<std::vector<char>>& map) {
+    protocol.sendInitGame(peer);
     protocol.sendMap(peer, map);
+    std::cout << "Envio partida completa [10] y mapa" << std::endl;
 }

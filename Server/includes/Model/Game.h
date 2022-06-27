@@ -30,6 +30,12 @@ private:
     ConfigurationReader game_config;
 
     /*
+    *   Contiene informacion sobre todas las partidas creadas con un orden {nombre: [actuales,requeridos], ...}
+    */
+    std::map<std::string, std::vector<int>> games_info;
+
+
+    /*
      * Lockea el mutex, retorna true si el name ya existe.
      */
     bool contains(const std::string& game_name);
@@ -62,12 +68,13 @@ public:
      * retorna 0 si lo pudo unir
      * retorna 1 si no lo pudo unir (es decir, esta completa esa partida o bien no existe)
      */
-    uint16_t acceptPlayer(NewConnection* new_player);
+    uint16_t acceptPlayer(Socket &peer, std::string name_player, std::string name_game, Id map_id);
+
 
     /*
-     * Retorna una lista con formato [nombre, actuales, req]
+     * Retorna una lista con formato [actuales, req, name_game]
      */
-    std::vector<std::string> listGames();
+    std::vector<std::vector<std::string>> listGames();
 
     /*
     * Retorna el id de mapa asociado a esa partida

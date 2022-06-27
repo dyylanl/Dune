@@ -8,9 +8,8 @@
 #define SUCCESS 0
 
 int main(int argc, char** argv){
-
     try {
-        Client client("localhost", "8082");
+        Client client;
         client.launch();
     } catch (const std::exception& e) {
         fprintf(stderr, "%s\n", e.what());

@@ -15,12 +15,26 @@ Protocol::~Protocol() {
     this->close();
 }
 
-std::string Protocol::recvName(Socket &skt, uint16_t name_len) {
+void Protocol::sendName(Socket &socket, std::string name) {
+    uint16_t len_name = name.size();
+    socket.send(reinterpret_cast<const char *>(&len_name), sizeof(uint8_t));
+    socket.send(name.c_str(), name.size());
+
+}
+
+std::string Protocol::recvName(Socket &skt) {
+    uint16_t name_len = this->recvNameLen(skt);
     std::vector<char> name(name_len+1);
     int bytes_recv = skt.recv(name.data(), name_len);
     name[bytes_recv] = 0;
     std::string game_name = name.data();
     return game_name;
+}
+
+uint16_t Protocol::recvNameLen(Socket &skt) {
+    uint16_t len = 0;
+    skt.recv(reinterpret_cast<char *>(&len), sizeof(uint8_t));
+    return len;
 }
 
 void Protocol::joinGame(Socket &skt, uint16_t house, const std::string& name) {
@@ -78,11 +92,7 @@ uint16_t Protocol::recvCurrent(Socket &skt) {
     return current;
 }
 
-uint16_t Protocol::recvNameLen(Socket &skt) {
-    uint16_t len = 0;
-    skt.recv(reinterpret_cast<char *>(&len), sizeof(uint16_t));
-    return ntohs(len);
-}
+
 
 uint16_t Protocol::recvReq(Socket &skt) {
     uint16_t req = 0;
@@ -96,43 +106,37 @@ uint16_t Protocol::recvResponse(Socket &skt) {
     return resp;
 }
 
-void Protocol::sendGameList(Socket &skt, const std::vector<std::string>& list) {
+void Protocol::sendGameList(Socket &skt, const std::vector<std::vector<std::string>>& list) {
     if (list.empty()) {
         uint16_t empt = htons(0);
         skt.send(reinterpret_cast<const char *>(&empt), sizeof(uint16_t));
         return;
     } else {
-        uint16_t count = stoi(list[0]);
+        uint16_t count = (list.size());
         uint16_t count_s = htons(count);
         skt.send(reinterpret_cast<const char *>(&count_s), sizeof(uint16_t));
         int n = (int)list.size();
-        for (int i = 1; i <= n-3; i = i+4) {
-            uint16_t current = stoi(list[i]);
-            uint16_t req = stoi(list[i+1]);
-            uint16_t game_name_len = stoi(list[i+2]);
-            std::string name = list[i+3];
-            game_name_len = htons(game_name_len);
+        for (int i = 0; i < n; i++) {
+            uint16_t current = stoi(list[i][0]);
+            uint16_t req = stoi(list[i][1]);
+            std::string name = list[i][2];
             skt.send(reinterpret_cast<const char *>(&current), sizeof(uint8_t));
             skt.send(reinterpret_cast<const char *>(&req), sizeof(uint8_t));
-            skt.send(reinterpret_cast<const char *>(&game_name_len), sizeof(uint16_t));
-            skt.send(name.c_str(), (name).size());
+            this->sendName(skt,name);
         }
     }
 }
 
-std::vector<std::string> Protocol::recvGameList(Socket &skt) {
-    std::vector<std::string> list;
+std::vector<std::vector<std::string>> Protocol::recvGameList(Socket &skt) {
+    std::vector<std::vector<std::string>> list;
     uint16_t count = 0;
     skt.recv(reinterpret_cast<char *>(&count), sizeof(uint16_t));
     count = ntohs(count);
     if (count == 0) {
         return list;
     } else {
-        for (int i = 0; i < count; ++i) {
-            list.push_back(std::to_string(recvCurrent(skt)));
-            list.push_back(std::to_string(recvReq(skt)));
-            int len = recvNameLen(skt);
-            list.push_back(recvName(skt, len));
+        for (int i = 0; i < count; i++) {
+            list.push_back({std::to_string(recvCurrent(skt)),std::to_string(recvReq(skt)),recvName(skt)});
         }
         return list;
     }
@@ -141,14 +145,12 @@ std::vector<std::string> Protocol::recvGameList(Socket &skt) {
 void Protocol::recvCreate(Socket &socket, int &house, int &req, std::string &name) {
     house = recvHouse(socket);
     req = recvReq(socket);
-    int name_len = recvNameLen(socket);
-    name = recvName(socket, name_len);
+    name = recvName(socket);
 }
 
 void Protocol::recvJoin(Socket &socket, std::string &name) {
     recvHouse(socket);
-    int game_name_len = recvNameLen(socket);
-    name = recvName(socket, game_name_len);
+    name = recvName(socket);
 }
 
 void Protocol::sendUnit(Socket &socket, int type) {
@@ -201,6 +203,21 @@ int Protocol::idUnidRecv(Socket &socket) {
     return id;
 }
 
+void Protocol::sendInitGame(Socket &socket) {
+    uint16_t flag_init = 10;
+    socket.send((const char*)&flag_init, sizeof(uint16_t));
+}
+
+bool Protocol::recvInitGame(Socket &socket) {
+    uint16_t flag_recv = 0;
+    socket.recv((char*)&flag_recv, sizeof(uint16_t));
+    uint16_t flag_init = 10;
+    if (flag_recv == flag_init) {
+        return true;
+    }
+    return false;
+}
+
 void Protocol::sendMap(Socket &socket, std::vector<std::vector<char>>& map) {
     int rows = map.size();
     int cols = map[0].size();
@@ -213,6 +230,8 @@ void Protocol::sendMap(Socket &socket, std::vector<std::vector<char>>& map) {
     }
     //std::cout << "Mapa de " << rows << "x" << cols << " enviado." << std::endl;
 }
+
+
 
 std::vector<std::vector<char>> Protocol::recvMap(Socket &socket) {
     uint16_t rows, cols = 0;
@@ -229,13 +248,6 @@ std::vector<std::vector<char>> Protocol::recvMap(Socket &socket) {
         }
     }
     return mapa;
-}
-
-void Protocol::sendName(Socket &socket, std::string name) {
-    uint16_t len_name = name.size();
-    socket.send(reinterpret_cast<const char *>(&len_name), sizeof(uint8_t));
-    socket.send(name.c_str(), name.size());
-
 }
 
 void Protocol::recvType(Socket &socket, char &type) {
@@ -366,8 +378,7 @@ std::vector<std::string> Protocol::recvMapsId(Socket &socket) {
         return list;
     } else {
         for (int i = 0; i < count; ++i) {
-            int len = recvNameLen(socket);
-            list.push_back(recvName(socket, len));
+            list.push_back(recvName(socket));
         }
         return list;
     }
@@ -428,23 +439,23 @@ std::vector<std::vector<std::string>> Protocol::recvMapsCreated(Socket &socket) 
 }
 
 #define ESTABLISH_CONNECTION 9
+#define BAD_CONNECTION 1
 
 void Protocol::sendEstablishConnection(Socket &socket) {
     uint16_t connect = ESTABLISH_CONNECTION;
-    std::cout << connect << std::endl;
     socket.send((const char*)&connect, sizeof(uint16_t));
 }
 
 bool Protocol::recvEstablishConnection(Socket &socket) {
     uint16_t connect = 0;
-    std::cout << "ESPERO" << std::endl;
     socket.recv((char*)&connect, sizeof(uint16_t));
-    std::cout << "TERMINO DE ESPERAR" << std::endl;
-    std::cout << connect << std::endl;
     if (connect == ESTABLISH_CONNECTION) {
-        std::cout << "ME CONECTE" << std::endl;
         return true;
     }
-    std::cout << "NO ME CONECTE" << std::endl;
     return false;
+}
+
+void Protocol::sendCreateGameInvalid(Socket &socket) {
+    uint16_t flag_bad_connection = BAD_CONNECTION;
+    socket.send((const char*)&flag_bad_connection, sizeof(uint16_t));
 }

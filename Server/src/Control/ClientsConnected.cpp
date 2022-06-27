@@ -3,7 +3,7 @@
 ClientsConnected::ClientsConnected(
         NonBlockingQueue<Command*>& commands,
         NonBlockingQueue<InstanceId*>& finished_connections) :
-        
+
         commands(commands),
         finished_connections(finished_connections),
         clients() {}

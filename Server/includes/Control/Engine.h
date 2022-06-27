@@ -39,8 +39,8 @@ private:
 
     void _processFinishedConnections();
     void _processCommands();
-    void _freeQueues();
     void _loopIteration(int it);
+    void clearAll();
 public:
     // el mapDTO que recibe solo tiene la ruta al yaml y el nombre que se eligio para crearlo
     Engine(MapDTO map);
@@ -51,13 +51,11 @@ public:
     void run() override;
     void stop();
     ~Engine() override;
-
-
     /*
     *   Retorna 0 si pudo unir el nuevo jugador a la partida
     *   Retorna 1 si no pudo unir el jugador a la partida (es decir, esta completa)
     */
-    uint16_t addClient(NewConnection* newPlayer);
+    uint16_t addClient(NewConnection newPlayer);
     int getCurrentPlayers() {return current_players;}
     int getReqPlayers() {return req_players;}
     Id getMapId() {return map_id;}
