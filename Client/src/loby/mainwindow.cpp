@@ -127,9 +127,19 @@ void MainWindow::on_button_unirse_partida_clicked()
     std::cout << "paso el reloj" << std::endl;
     //this->cliente->enviar_nombre_y_comando(this->text_nombre.toStdString(),"listar");
     this->cliente->enviar_nombre_jugador(this->text_nombre.toStdString());
+    std::cout << "LLEGO A LA PARTIDA" << std::endl;
+    this->cliente->enviar_accion("listar");
+    std::cout << "TRATO DE RECIBIR" << std::endl;
+    std::vector<std::vector<std::string>> list_1 = this->cliente->listar_partidas();
+    std::cout << "LLEGO A LA PARTIDA" << std::endl;
+    this->cliente->enviar_accion("listar");
+    std::cout << "TRATO DE RECIBIR" << std::endl;
+    std::vector<std::vector<std::string>> list_2 = this->cliente->listar_partidas();
     this->mostrar_partidas();
     //this->mostrar_partidas();
+
     this->ui->stackedWidget->setCurrentIndex(3);
+    std::cout << "PASO MOSTRAR NO ERROR" << std::endl;
     //AGREGAR CURRENITEM DE LA LISTA PARA SELECIONAR
 }
 /*
@@ -139,20 +149,23 @@ Client* MainWindow::get_cliente()const{
 
 void MainWindow::mostrar_partidas(){
     this->ui->lista_partidas->clear();
+    std::cout << "LLEGO A LA PARTIDA" << std::endl;
     this->cliente->enviar_accion("listar");
-    std::vector<std::string> list = {}; //this->cliente->listar_partidas();
+    std::cout << "TRATO DE RECIBIR" << std::endl;
+    std::vector<std::vector<std::string>> list = this->cliente->listar_partidas();
     std::cout << "recibo las partidas" << std::endl;
     if (!list.empty()) {
        int n = (int)list.size();
-       for (int i = 0; i <= (n-2); i = i+3) {
-           std::string nombre_partida = list[i+2];
-            std::cout << nombre_partida;
-            std::cout << " " << list[i] << "/" << list[i+1] << std::endl;
-            std::string nombre_partida_completo = nombre_partida + " " + list[i] + "/" + list[i+1];
+       for (int i = 0; i < n;  i++) {
+           std::string nombre_partida = list[i][2];
+            //std::cout << nombre_partida;
+            //std::cout << " " << list[i][0] << "/" << list[i][1] << std::endl;
+            std::string nombre_partida_completo = nombre_partida + " " + list[i][0] + "/" + list[i][1];
+            std::cout << nombre_partida_completo << std::endl;
             QListWidgetItem *partida_en_lista = new QListWidgetItem;
             partida_en_lista->setText(QString::fromStdString(nombre_partida_completo));
             this->ui->lista_partidas->insertItem(i,partida_en_lista);
-            
+            std::cout << "PASO MOSTRAR PARTIDAS" << std::endl;
         }
     }
 }
@@ -174,7 +187,26 @@ void MainWindow::on_button_confirmar_unirse_clicked()
     this->cliente->enviar_accion("unirse");
     this->cliente->enviar_nombre_partida(tokens[0]);
 
-    int respuesta_unirse_partida = this->cliente->recibir_respuesta();
+
+    if(this->cliente->conexion_exitosa()) { 
+      std::cout << "Union exitosa" << std::endl;
+        QMessageBox msgBox;
+        msgBox.setText("Partida creada con exito");
+        msgBox.exec();
+      if(this->cliente->partida_iniciada()) { // ACA TIENE QUE ESTAR BLOQUEADO HASTA QUE SE CREE LA PARTIDA
+        std::cout << "Se completo la partida..." << std::endl;
+        QMessageBox msgBox;
+        msgBox.setText("La partida va a empezar");
+        msgBox.exec();
+        QApplication::quit();
+        /*map = protocol.recvMap(socket);
+        std::cout << "Mapa recibido..." << std::endl;*/
+      }  
+  } else {
+    std::cout << "ERROR UNIENDOME A LA PARTIDA "<< std::endl;
+  }
+
+    /*int respuesta_unirse_partida = this->cliente->recibir_respuesta();
     if(respuesta_unirse_partida == 9){
         QMessageBox msgBox;
         msgBox.setText("Se unio con exito");
@@ -187,7 +219,7 @@ void MainWindow::on_button_confirmar_unirse_clicked()
         msgBox.setText("La partida va a empezar");
         msgBox.exec();
         QApplication::quit();
-    }
+    }*/
 
 }
 
@@ -204,13 +236,33 @@ void MainWindow::on_button_confirmar_mapa_clicked()
     std::cout << map_id_cast << std::endl;
     this->cliente->enviar_map_id(map_id_cast);
 
+
+    if(this->cliente->conexion_exitosa()) { 
+      std::cout << "Union exitosa" << std::endl;
+        QMessageBox msgBox;
+        msgBox.setText("Partida creada con exito");
+        msgBox.exec();
+      if(this->cliente->partida_iniciada()) { // ACA TIENE QUE ESTAR BLOQUEADO HASTA QUE SE CREE LA PARTIDA
+        std::cout << "Se completo la partida..." << std::endl;
+        QMessageBox msgBox;
+        msgBox.setText("La partida va a empezar");
+        msgBox.exec();
+        QApplication::quit();
+        /*map = protocol.recvMap(socket);
+        std::cout << "Mapa recibido..." << std::endl;*/
+      }  
+  } else {
+    std::cout << "ERROR UNIENDOME A LA PARTIDA "<< std::endl;
+  }
+
+/*
     int respuesta_crear_partida = this->cliente->recibir_respuesta();
     if(respuesta_crear_partida == 9){
         QMessageBox msgBox;
         msgBox.setText("Partida creada con exito");
         msgBox.exec();
     }
-
+    
     this->ui->stackedWidget->setCurrentIndex(5);
     std::cout << "PASO EL" << std::endl;
     if(this->cliente->partida_iniciada()){
@@ -220,7 +272,7 @@ void MainWindow::on_button_confirmar_mapa_clicked()
         msgBox.exec();
         QApplication::quit();
     }
-
+*/
 }
 
 void MainWindow::actualizar_lista_partidas(){

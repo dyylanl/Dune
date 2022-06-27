@@ -41,7 +41,7 @@ public:
 
     void enviar_nombre_partida(std::string nombre_partida);
 
-    //std::vector<std::string> listar_partidas();
+    std::vector<std::vector<std::string>> listar_partidas();
 
     std::vector<std::vector<std::string>> listar_mapas();
 
@@ -52,6 +52,9 @@ public:
     int recibir_respuesta();
 
     bool partida_iniciada();
+
+    bool conexion_exitosa();
+    
 
     ~Client();
 

@@ -80,11 +80,11 @@ void Client::enviar_nombre_y_comando(const std::string& nombre_jugador,std::stri
   this->protocol.sendName(socket, nombre_jugador);
   this->enviar_accion(comando);
 }
-/*
-std::vector<std::string> Client::listar_partidas(){
-  std::vector<std::string> list = this->protocol.recvGameList(socket);
+
+std::vector<std::vector<std::string>> Client::listar_partidas(){
+  std::vector<std::vector<std::string>> list = this->protocol.recvGameList(socket);
   return list;
-}*/
+}
 
 std::vector<std::vector<std::string>> Client::listar_mapas(){
   std::vector<std::vector<std::string>> maps_ = protocol.recvMapsCreated(socket);
@@ -110,12 +110,21 @@ int Client::recibir_respuesta(){
   return (int) this->protocol.recvResponse(socket);
 }
 
-bool Client::partida_iniciada(){
+bool Client::conexion_exitosa(){
   if(protocol.recvEstablishConnection(socket)) { // ACA TIENE QUE ESTAR BLOQUEADO HASTA QUE SE INICIE LA PARTIDA
     return true;
   }
   return false;
 }
+
+
+bool Client::partida_iniciada(){
+  if(protocol.recvInitGame(socket)) { // ACA TIENE QUE ESTAR BLOQUEADO HASTA QUE SE INICIE LA PARTIDA
+    return true;
+  }
+  return false;
+}
+
 
 void createGame(Protocol protocol, Socket &socket) {
 
@@ -147,9 +156,9 @@ void createGame(Protocol protocol, Socket &socket) {
   
   std::vector<std::vector<char>> map;
 
-  if(protocol.recvEstablishConnection(socket)) { // ACA TIENE QUE ESTAR BLOQUEADO HASTA QUE SE CREE LA PARTIDA
+  if(protocol.recvEstablishConnection(socket)) { 
       std::cout << "Union exitosa" << std::endl;
-      if(protocol.recvInitGame(socket)) {
+      if(protocol.recvInitGame(socket)) { // ACA TIENE QUE ESTAR BLOQUEADO HASTA QUE SE CREE LA PARTIDA
         std::cout << "Se completo la partida..." << std::endl;
         map = protocol.recvMap(socket);
         std::cout << "Mapa recibido..." << std::endl;
@@ -169,9 +178,9 @@ std::vector<std::vector<char>> joinGame(Protocol protocol, Socket &socket) {
   protocol.sendName(socket,name_game);
 
     // RECV INIT PARTIDA
-    if(protocol.recvEstablishConnection(socket)) { // ACA TIENE QUE ESTAR BLOQUEADO HASTA QUE SE INICIE LA PARTIDA
+    if(protocol.recvEstablishConnection(socket)) { 
       std::cout << "Union exitosa" << std::endl;
-      if(protocol.recvInitGame(socket)) {
+      if(protocol.recvInitGame(socket)) { // ACA TIENE QUE ESTAR BLOQUEADO HASTA QUE SE CREE LA PARTIDA
         std::cout << "Se completo la partida..." << std::endl;
         map = protocol.recvMap(socket);
         std::cout << "Mapa recibido..." << std::endl;
