@@ -79,7 +79,7 @@ uint16_t Game::acceptPlayer(Socket &peer, std::string name_player, std::string n
     return ret;
 }
 
-// devuelve un vector de vectores del tipo {[currents,reqs,name],...,[---]}
+// devuelve algo del tipo {[currents,reqs,name],...,[---]}
 std::vector<std::vector<std::string>> Game::listGames() {
     /*
      * Listar partidas es operacion de lectura.

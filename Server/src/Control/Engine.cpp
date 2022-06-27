@@ -110,7 +110,7 @@ uint16_t Engine::addClient(NewConnection client) {
         ret = SUCCESS;
     }
     if (current_players == req_players) {
-        this->run();
+        this->start();
         ret = SUCCESS;
     }
     return ret;
