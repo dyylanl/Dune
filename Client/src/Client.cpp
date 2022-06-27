@@ -91,10 +91,15 @@ void Client::enviar_nombre_partida(std::string nombre_partida){
 }*/
 
 void createGame(Protocol protocol, Socket &socket) {
+
+
+  // SEND NOMBRE PARTIDA
   std::cout << "\nNombre de la partida: ";
   std::string nombre_partida;
   std::cin >> nombre_partida;
   protocol.sendName(socket, nombre_partida);
+
+  // RECV MAPAS CREADOS
   std::vector<std::vector<std::string>> maps_ = protocol.recvMapsCreated(socket);
   std::cout << "\n\n";
   if (maps_.size() == 0) {
@@ -105,19 +110,36 @@ void createGame(Protocol protocol, Socket &socket) {
     std::cout << "\nMapa " << i+1 << "\nFilas: " << maps_[i][0] << "\nColumnas: " << maps_[i][1] << "\nJugadores Requeridos: " << maps_[i][2] << std::endl;
     }
   }
+
+
+  // SEND MAP ID
   uint16_t map_id;
   std::cout << "\nSeleccione un mapa: ";
   std::cin >> map_id;
   protocol.sendResponse(socket, map_id);
+
+
+  //RECV RESP CREATE
   uint16_t response_create_game = protocol.recvResponse(socket);
-  if (response_create_game == 0) {
-  std::cout << "\nSe creo la partida" << std::endl;
-  uint16_t response_accept_player = protocol.recvResponse(socket);
-  std::cout << "response_accept_player: " << response_accept_player << std::endl;
+  std::cout << "RESPONSE A CREATE GAME: " << response_create_game << std::endl;
+  if (response_create_game == 9) {
+    std::cout << "\nSe creo la partida" << std::endl;
+
+
+    // RECV INIT PARTIDA
+    if(protocol.recvEstablishConnection(socket)) { // ACA TIENE QUE ESTAR BLOQUEADO HASTA QUE SE INICIE LA PARTIDA
+      std::cout << "LANZAR SDL" << std::endl;
+      std::vector<std::vector<char>> map = protocol.recvMap(socket);
+    }
+
+  // el response_create no es 0 entonces no se pudo crear
   } else {
   std::cout << "ERROR creando la partida..." << std::endl;
   return;
   }
+
+
+
 }
 
 std::vector<std::vector<char>> joinGame(Protocol protocol, Socket &socket) {
@@ -126,23 +148,27 @@ std::vector<std::vector<char>> joinGame(Protocol protocol, Socket &socket) {
   std::string name_game;
   std::cin >> name_game;
   protocol.sendName(socket,name_game);
-  int resp = protocol.recvResponse(socket);
-  if (resp == 0) {
-      std::cout << "\nEn la sala..." << std::endl;
+
+
+  //RECV RESP JOIN
+  uint16_t response_join_game = protocol.recvResponse(socket);
+  std::cout << "RESPONSE A CREATE GAME: " << response_join_game << std::endl;
+
+
+  // si el response es 9 me acepto
+  if (response_join_game == 9) {
+    std::cout << "Me uni a la partida" << std::endl;
+
+
+    // RECV INIT PARTIDA
+    if(protocol.recvEstablishConnection(socket)) { // ACA TIENE QUE ESTAR BLOQUEADO HASTA QUE SE INICIE LA PARTIDA
+      std::cout << "LANZAR SDL" << std::endl;
       map = protocol.recvMap(socket);
-      std::cout << "Mapa de " << map.size() << "x" << map[0].size() << std::endl;
-      int full_game = protocol.recvResponse(socket); // pregunto si la partida se completo
-      if (full_game == 0) {
-        std::cout << "\nComenzando partida..." << std::endl;
-        std::cout << "ACA LANZAR SDL" << std::endl;
-        protocol.recvResponse(socket); // bloqueante
-      }
-    } if (resp == 10) {
-      std::cout << "Partida completa.\nIniciando SDL..." << std::endl;
       return map;
-    } else {
-      std::cout << "Partida inexistente. " << std::endl;
     }
+  } else {
+    std::cout << "ERROR UNIENDOME A LA PARTIDA \nRESPONSE" << response_join_game << std::endl;
+  }
   return map;
 }
 

@@ -425,3 +425,19 @@ std::vector<std::vector<std::string>> Protocol::recvMapsCreated(Socket &socket) 
     }
     return maps;
 }
+
+#define ESTABLISH_CONNECTION 9
+
+void Protocol::sendEstablishConnection(Socket &socket) {
+    uint16_t connect = ESTABLISH_CONNECTION;
+    socket.send((const char*)&connect, sizeof(uint16_t));
+}
+
+bool Protocol::recvEstablishConnection(Socket &socket) {
+    uint16_t connect = 0;
+    socket.recv((char*)&connect, sizeof(uint16_t));
+    if (connect == ESTABLISH_CONNECTION) {
+        return true;
+    }
+    return false;
+}

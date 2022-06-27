@@ -159,6 +159,12 @@ public:
     void sendMapsCreated(Socket &socket, std::vector<MapDTO> maps);
 
     std::vector<std::vector<std::string>> recvMapsCreated(Socket &socket);
+
+    // Servidor le envia al cliente que se pudo conectar correctamente
+    void sendEstablishConnection(Socket &socket);
+
+    bool recvEstablishConnection(Socket &socket);
+
 };
 
 

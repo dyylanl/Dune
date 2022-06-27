@@ -11,6 +11,7 @@
 #include "../../../Common/includes/NonBlockingQueue.h"
 #include "../../../Common/includes/Socket/Socket.h"
 #include "../../../Server/includes/defs.h"
+#include "../../../Common/includes/Protocol.h"
 
 class ClientConnection {
 private:
@@ -23,6 +24,7 @@ private:
     int finished_threads;
     std::thread sender;
     std::thread receiver;
+    Protocol protocol;
 
     void _finishThread();
     // POR NO USAR PTR INTELIGENTES
@@ -49,7 +51,7 @@ public:
     ~ClientConnection();
 
 
-    void sendInit();
+    void sendInitGame(std::vector<std::vector<char>>& map);
     
 };
 

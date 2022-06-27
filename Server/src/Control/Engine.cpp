@@ -108,7 +108,7 @@ uint16_t Engine::addClient(NewConnection *client) {
         ret = SUCCESS;
     }
     if (current_players == req_players) {
-        established_connections.initGame();
+        established_connections.initGame(map.getMap());
         this->run();
         ret = SUCCESS;
     }
