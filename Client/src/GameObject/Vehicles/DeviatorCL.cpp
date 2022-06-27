@@ -5,7 +5,7 @@
 #include "DeviatorCL.h"
 
 DeviatorCL::DeviatorCL(int id, int player, bool selecStatus, SDL2pp::Point position, SDL2pp::Point posAction, int life,
-                       bool action) : Vehicle("Deviator", position,
+                       bool action) : Vehicle(DESVIATOR, position,
                                                                                                  SDL2pp::Point(30,30), id, player,
                                                                                                  selecStatus, posAction,
                                                                                                  life, action) {

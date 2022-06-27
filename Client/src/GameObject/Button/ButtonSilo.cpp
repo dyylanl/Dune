@@ -6,7 +6,7 @@
 #include "../../Action/BuildBuilding.h"
 
 ButtonSilo::ButtonSilo(int id, char player, int constructionTime, bool selectStatus, bool ready)
-        : Button("ButtonSilo", SDL2pp::Point(1114, 222), id, player, constructionTime, selectStatus, ready) {}
+        : Button(BSILO, SDL2pp::Point(1114, 222), id, player, constructionTime, selectStatus, ready) {}
 
 void ButtonSilo::buildBuilding(BlockingQueue<CommandCL *> &queue, SDL2pp::Point point) {
     char build = 5;

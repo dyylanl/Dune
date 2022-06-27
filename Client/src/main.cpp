@@ -8,7 +8,6 @@
 #define SUCCESS 0
 
 int main(int argc, char** argv){
-    
     try {
         Client client;
         client.launch();

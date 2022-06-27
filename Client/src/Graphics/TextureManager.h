@@ -13,20 +13,20 @@
 class TextureManager {
 private:
     SDL2pp::Renderer &m_renderer;
-    std::map<std::string, std::string> m_TextureMap;
+    std::map<char, SDL2pp::Texture*> m_TextureMap;
     Camera camera;
 
 public:
     TextureManager(SDL2pp::Renderer &renderer, Camera &camera);
 
-    void load(std::string id, std::string filename);
+    void load(char id, std::string filename);
 
-    void drawFrame(SDL2pp::Renderer &renderer, const std::string id, SDL2pp::Point position, SDL2pp::Point spritSize,
+    void drawFrame(SDL2pp::Renderer &renderer, char id, SDL2pp::Point position, SDL2pp::Point spritSize,
                    SDL2pp::Point posFrame);
 
-    void draw(SDL2pp::Renderer &renderer, const std::string id, SDL2pp::Point position, SDL2pp::Point size);
+    void draw(SDL2pp::Renderer &renderer, char id, SDL2pp::Point position, SDL2pp::Point size);
 
-    void drawTile(SDL2pp::Renderer &renderer, const std::string id, SDL2pp::Point position, SDL2pp::Point size);
+    void drawTile(SDL2pp::Renderer &renderer, char id, SDL2pp::Point position, SDL2pp::Point size);
 
     Camera& getCamera();
 

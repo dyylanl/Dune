@@ -6,6 +6,11 @@
 #include "../Action/SelectCL.h"
 #include "../Action/MoveCL.h"
 
+Vehicle::Vehicle(char textureID, SDL2pp::Point position, SDL2pp::Point size, int id, int player, bool selecStatus,
+                 SDL2pp::Point posAction, int life, bool action)
+                 : GameObject(textureID, position, size), m_id(id), m_player(player), m_selectStatus(selecStatus),
+                 m_posAction(posAction), m_life(life), m_action(action) {}
+
 void Vehicle::update(EventManager &eventManager, BlockingQueue<CommandCL *> &queue) {
     if (eventManager.mouseButtonDown(LEFT)) {
         SDL_Rect shape = SDL2pp::Rect(m_position, m_size);
