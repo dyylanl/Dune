@@ -9,6 +9,18 @@
 #include "../GameObject/Button/ButtonWidtrap.h"
 #include "../GameObject/Button/ButtonConstructionYardCL.h"
 #include "../GameObject/Button/ButtonRefinery.h"
+#include "../GameObject/Builds/LightFactoryCL.h"
+#include "../GameObject/Builds/HeavyFactoryCL.h"
+#include "../GameObject/Builds/WindTrapCL.h"
+#include "../GameObject/Builds/RefineryCL.h"
+#include "../GameObject/Builds/SiloCL.h"
+#include "../GameObject/Builds/BarrackCL.h"
+#include "../GameObject/Builds/PalaceCL.h"
+#include "../GameObject/Button/ButtonLightFactoryCL.h"
+#include "../GameObject/Button/ButtonHeavyFactoryCL.h"
+#include "../GameObject/Button/ButtonSilo.h"
+#include "../GameObject/Button/ButtonBarrack.h"
+#include "../GameObject/Button/ButtonPalaceCL.h"
 
 void RecvThread::run() {
     while (running) {
@@ -113,19 +125,33 @@ void RecvThread::addBuild(std::vector<GameObject *> &gameObjects) {
             m_protocol.recvBuild(m_socket, id, player, posX, posY, life);
             gameObjects.push_back(new ConstructionYardCL(id, player, SDL2pp::Point(posX, posY), life));
             break;
-        case LIGHT_FACTORY: //Hacer Factory
+        case LIGHT_FACTORY:
+            m_protocol.recvBuild(m_socket, id, player, posX, posY, life);
+            gameObjects.push_back(new LightFactoryCL(id, player, SDL2pp::Point(posX, posY), life));
             break;
-        case HEAVY_FACTORY: //Hacer la clase HeavyFactory
+        case HEAVY_FACTORY:
+            m_protocol.recvBuild(m_socket, id, player, posX, posY, life);
+            gameObjects.push_back(new HeavyFactoryCL(id, player, SDL2pp::Point(posX, posY), life));
             break;
-        case WIND_TRAP: //Hacer la clase WindTrap
+        case WIND_TRAP:
+            m_protocol.recvBuild(m_socket, id, player, posX, posY, life);
+            gameObjects.push_back(new WindTrapCL(id, player, SDL2pp::Point(posX, posY), life));
             break;
-        case SPICE_REFINERY: //Hacer la clase SpiceRefinery
+        case REFINERY:
+            m_protocol.recvBuild(m_socket, id, player, posX, posY, life);
+            gameObjects.push_back(new RefineryCL(id, player, SDL2pp::Point(posX, posY), life));
             break;
-        case SPICE_SILO: //Hacer la clase SpiceSilo
+        case SILO:
+            m_protocol.recvBuild(m_socket, id, player, posX, posY, life);
+            gameObjects.push_back(new SiloCL(id, player, SDL2pp::Point(posX, posY), life));
             break;
-        case BARRACKS: //Hacer la clase Barracks
+        case BARRACK:
+            m_protocol.recvBuild(m_socket, id, player, posX, posY, life);
+            gameObjects.push_back(new BarrackCL(id, player, SDL2pp::Point(posX, posY), life));
             break;
-        case PALACE: //Hacer la clase Palace
+        case PALACE:
+            m_protocol.recvBuild(m_socket, id, player, posX, posY, life);
+            gameObjects.push_back(new PalaceCL(id, player, SDL2pp::Point(posX, posY), life));
             break;
         default: std::cout << "Tipo de edificio invalido" << std::endl;
     }
@@ -145,23 +171,33 @@ void RecvThread::addButton(std::vector<GameObject *> &gameObjects) {
             m_protocol.recvBotton(m_socket, id, player, constructionTime, selectStatus, ready);
             gameObjects.push_back(new ButtonConstructionYardCL(id, player, constructionTime, selectStatus, ready));
             break;
-        case LIGHT_FACTORY: //Hacer Factory
+        case LIGHT_FACTORY:
+            m_protocol.recvBotton(m_socket, id, player, constructionTime, selectStatus, ready);
+            gameObjects.push_back(new ButtonLightFactoryCL(id, player, constructionTime, selectStatus, ready));
             break;
-        case HEAVY_FACTORY: //Hacer la clase HeavyFactory
+        case HEAVY_FACTORY:
+            m_protocol.recvBotton(m_socket, id, player, constructionTime, selectStatus, ready);
+            gameObjects.push_back(new ButtonHeavyFactoryCL(id, player, constructionTime, selectStatus, ready));
             break;
         case WIND_TRAP:
             m_protocol.recvBotton(m_socket, id, player, constructionTime, selectStatus, ready);
             gameObjects.push_back(new ButtonWidtrap(id, player, constructionTime, selectStatus, ready));
             break;
-        case SPICE_REFINERY:
+        case REFINERY:
             m_protocol.recvBotton(m_socket, id, player, constructionTime, selectStatus, ready);
             gameObjects.push_back(new ButtonRefinery(id, player, constructionTime, selectStatus, ready));
             break;
-        case SPICE_SILO: //Hacer la clase SpiceSilo
+        case SILO:
+            m_protocol.recvBotton(m_socket, id, player, constructionTime, selectStatus, ready);
+            gameObjects.push_back(new ButtonSilo(id, player, constructionTime, selectStatus, ready));
             break;
-        case BARRACKS: //Hacer la clase Barracks
+        case BARRACK:
+            m_protocol.recvBotton(m_socket, id, player, constructionTime, selectStatus, ready);
+            gameObjects.push_back(new ButtonBarrack(id, player, constructionTime, selectStatus, ready));
             break;
-        case PALACE: //Hacer la clase Palace
+        case PALACE:
+            m_protocol.recvBotton(m_socket, id, player, constructionTime, selectStatus, ready);
+            gameObjects.push_back(new ButtonPalaceCL(id, player, constructionTime, selectStatus, ready));
             break;
         default: std::cout << "Tipo de button edificio invalido" << std::endl;
     }
