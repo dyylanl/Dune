@@ -5,7 +5,6 @@
 #define SUCCESS 0
 #define ERROR 1
 
-class Map;
 
 bool Game::contains(const std::string& game_name) {
     //std::lock_guard<std::mutex> lock(mutex);
@@ -16,8 +15,8 @@ std::vector<int> Game::get(const std::string& game_name) {
     // El contains ya lockea el mutex, no hace falta lockearlo aqui.
     if (contains(game_name)) {
         std::vector<int> game_info;
-        game_info.push_back(games[game_name]->getCurrentPlayers()); // current players
-        game_info.push_back(games[game_name]->getReqPlayers()); // req players
+        game_info.push_back(info_games[game_name][0]); // current players
+        game_info.push_back(info_games[game_name][1]); // req players
         return game_info;
     } else {
         throw Exception("Se desea obtener una partida inexistente.\n");
@@ -29,7 +28,7 @@ std::vector<int> Game::get(const std::string& game_name) {
 Game::Game(std::string path_config_game) :
         games(),
         game_config(path_config_game),
-        games_info()
+        info_games()
 {
     std::list<std::string> map_paths = game_config.getAllPaths();
     int map_id = 1;
@@ -63,7 +62,7 @@ uint16_t Game::createGame(Id id_map, const std::string& name_game) {
     map.max_players = maps_dto_init[id_map].max_players;
     map.name_map = name_game;
     games[name_game] = (new Engine(map));
-    games_info[name_game] = {0,map.max_players};
+    info_games[name_game] = {0,map.max_players,(int)id_map};
     return SUCCESS;
 }
 
@@ -73,7 +72,7 @@ uint16_t Game::acceptPlayer(Socket &peer, std::string name_player, std::string n
     if (games.count(name_game) > 0) { // si existe una partida con ese nombre entonces entro
         ret = games[name_game]->addClient(NewConnection(peer,name_player,name_game,map_id1)); // chequea si la partida no esta completa para unir el nuevo player    
         if (ret == SUCCESS) {
-            games_info[name_game][0]++;
+            info_games[name_game][0]++;
         }
     }
     return ret;
@@ -89,7 +88,7 @@ std::vector<std::vector<std::string>> Game::listGames() {
     std::lock_guard<std::mutex> lock(mutex);
     std::vector<std::vector<std::string>> list = {};
     if (!this->games.empty()) {
-        for (const auto& [game_name, stats] : this->games_info) {
+        for (const auto& [game_name, stats] : this->info_games) {
             std::vector<std::string> info_game = {};
             info_game.push_back(std::to_string(stats[0]));
             info_game.push_back(std::to_string(stats[1]));
@@ -118,7 +117,7 @@ Game::~Game() {
 }
 
 Id Game::getMapId(std::string name_game) {
-    return games[name_game]->getMapId();
+    return info_games[name_game][2];
 }
 
 std::vector<MapDTO> Game::getMapsLoads(){

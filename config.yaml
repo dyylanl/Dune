@@ -1,9 +1,9 @@
 ticks_per_sec: 60
 total_maps: 3
 maps:
-  0: "/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/mapa1.yaml"
-  1: "/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/mapa2.yaml"
-  2: "/home/riclui/Documentos/Fiuba/TallerDeProgramacionI/Dune/mapa3.yaml"
+  0: "/home/dypa/Dune/mapa1.yaml"
+  1: "/home/dypa/Dune/mapa2.yaml"
+  2: "/home/dypa/Dune/mapa3.yaml"
 speedFactor: 50
 blockMovement: 2
 rangeFactor: 2000
