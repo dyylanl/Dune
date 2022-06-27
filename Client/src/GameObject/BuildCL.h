@@ -15,10 +15,9 @@ protected:
     int m_life;
 
 public:
-    BuildCL(std::string textureID, SDL2pp::Point position, SDL2pp::Point size, int id, int player, int life)
-    : GameObject(textureID, position, size) ,m_id(id), m_player(player), m_life(life) {}
+    BuildCL(char textureID, SDL2pp::Point position, SDL2pp::Point size, int id, int player, int life);
 
-    void update(EventManager &eventManager, BlockingQueue<CommandCL *> &queue);
+    void update(EventManager &eventManager, BlockingQueue<CommandCL *> &queue) {}
 
     virtual void draw(SDL2pp::Renderer &renderer, TextureManager &textureManager) = 0;
 

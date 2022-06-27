@@ -300,37 +300,53 @@ void Client::initSDL(Socket &socket, Protocol &protocol,
 }
 
 void Client::loadTextures(TextureManager &textureManager, SDL2pp::Renderer &renderer) const {
-    textureManager.load("Trike", DATA_PATH "assets/Vehicles/Trike.png");
-    textureManager.load("SonicTank", DATA_PATH "assets/Vehicles/SonicTank.png");
-    textureManager.load("Deviator", DATA_PATH "assets/Vehicles/Deviator.png");
-    textureManager.load("Tank", DATA_PATH "assets/Vehicles/Tank.png");
-    textureManager.load("Devastator", DATA_PATH "assets/Vehicles/Devastator.png");
-    textureManager.load("Harvester", DATA_PATH "assets/Vehicles/Harvester.png");
+    textureManager.load(TRIKE, DATA_PATH "assets/Vehicles/Trike.png");
+    textureManager.load(SONIC_TANK, DATA_PATH "assets/Vehicles/SonicTank.png");
+    textureManager.load(RAIDER, DATA_PATH "assets/Vehicles/Trike.png");
+    textureManager.load(DESVIATOR, DATA_PATH "assets/Vehicles/Deviator.png");
+    textureManager.load(TANK, DATA_PATH "assets/Vehicles/Tank.png");
+    textureManager.load(DEVASTATOR, DATA_PATH "assets/Vehicles/Devastator.png");
+    textureManager.load(HARVESTER, DATA_PATH "assets/Vehicles/Harvester.png");
+    textureManager.load(LIGHT_INFANTRY, DATA_PATH "assets/Vehicles/Deviator.png");
+    textureManager.load(HEAVY_INFANTRY, DATA_PATH "assets/Vehicles/Tank.png");
+    textureManager.load(FREMEN, DATA_PATH "assets/Vehicles/Devastator.png");
+    textureManager.load(SARDAUKAR, DATA_PATH "assets/Vehicles/Harvester.png");
 
-    textureManager.load("ConstructionYard", DATA_PATH "assets/Builds/ConstructionYard.png");
-    textureManager.load("LightFactory", DATA_PATH "assets/Builds/LightFactory.png");
-    textureManager.load("HeavyFactory", DATA_PATH "assets/Builds/HeavyFactory.png");
-    textureManager.load("WindTrap", DATA_PATH "assets/Builds/WindTrap.png");
-    textureManager.load("Refinery", DATA_PATH "assets/Builds/Refinery.png");
-    textureManager.load("Silo", DATA_PATH "assets/Builds/Silo.png");
-    textureManager.load("Barrack", DATA_PATH "assets/Builds/Barrack.png");
-    textureManager.load("Palace", DATA_PATH "assets/Builds/Palace.png");
+    textureManager.load(CONSTRUCTION_YARD, DATA_PATH "assets/Builds/ConstructionYard.png");
+    textureManager.load(LIGHT_FACTORY, DATA_PATH "assets/Builds/LightFactory.png");
+    textureManager.load(HEAVY_FACTORY, DATA_PATH "assets/Builds/HeavyFactory.png");
+    textureManager.load(WIND_TRAP, DATA_PATH "assets/Builds/WindTrap.png");
+    textureManager.load(REFINERY, DATA_PATH "assets/Builds/Refinery.png");
+    textureManager.load(SILO, DATA_PATH "assets/Builds/Silo.png");
+    textureManager.load(BARRACK, DATA_PATH "assets/Builds/Barrack.png");
+    textureManager.load(PALACE, DATA_PATH "assets/Builds/Palace.png");
 
-    textureManager.load("ButtonConstructionYard", DATA_PATH "assets/Button/ConstructionYard.gif");
-    textureManager.load("ButtonLightFactory", DATA_PATH "assets/Button/LightFactory.png");
-    textureManager.load("ButtonHeavyFactory", DATA_PATH "assets/Button/HeavyFactory.png");
-    textureManager.load("ButtonWindTrap", DATA_PATH "assets/Button/WindTrap.png");
-    textureManager.load("ButtonRefinery", DATA_PATH "assets/Button/Refinery.png");
-    textureManager.load("ButtonSilo", DATA_PATH "assets/Button/Silo.png");
-    textureManager.load("ButtonBarrack", DATA_PATH "assets/Button/Barrack.png");
-    textureManager.load("ButtonPalace", DATA_PATH "assets/Button/Palace.png");
+    textureManager.load(BTRIKE, DATA_PATH "assets/Button/Trike.gif");
+    textureManager.load(BSONIC_TANK, DATA_PATH "assets/Button/SonicTank.gif");
+    textureManager.load(BRAIDER, DATA_PATH "assets/Button/Trike.gif");
+    textureManager.load(BDESVIATOR, DATA_PATH "assets/Button/Deviator.gif");
+    textureManager.load(BTANK, DATA_PATH "assets/Button/Tank.gif");
+    textureManager.load(BDEVASTATOR, DATA_PATH "assets/Button/Devastator.gif");
+    textureManager.load(BLIGHT_INFANTRY, DATA_PATH "assets/Button/LightInfantry.gif");
+    textureManager.load(BHEAVY_INFANTRY, DATA_PATH "assets/Button/HeavyInfantry.gif");
+    textureManager.load(BFREMEN, DATA_PATH "assets/Button/Fremen.gif");
+    textureManager.load(BSARDAUKAR, DATA_PATH "assets/Button/Sardaukar.gif");
 
-    textureManager.load("menu", DATA_PATH "assets/menu.png");
-    textureManager.load("arena", DATA_PATH "assets/Terrain/tile_arena.png");
-    textureManager.load("cima", DATA_PATH "assets/Terrain/tile_cimas.png");
-    textureManager.load("duna", DATA_PATH "assets/Terrain/tile_dunas.png");
-    textureManager.load("precipicio", DATA_PATH "assets/Terrain/tile_precipicio.png");
-    textureManager.load("roca", DATA_PATH "assets/Terrain/tile_roca.png");
+    textureManager.load(BCONSTRUCTION_YARD, DATA_PATH "assets/Button/ConstructionYard.gif");
+    textureManager.load(BLIGHT_FACTORY, DATA_PATH "assets/Button/LightFactory.gif");
+    textureManager.load(BHEAVY_FACTORY, DATA_PATH "assets/Button/HeavyFactory.gif");
+    textureManager.load(BWIND_TRAP, DATA_PATH "assets/Button/WindTrap.gif");
+    textureManager.load(BREFINERY, DATA_PATH "assets/Button/Refinery.gif");
+    textureManager.load(BSILO, DATA_PATH "assets/Button/Silo.gif");
+    textureManager.load(BBARRACK, DATA_PATH "assets/Button/Barrack.gif");
+    textureManager.load(BPALACE, DATA_PATH "assets/Button/Palace.gif");
+
+    textureManager.load(MENU, DATA_PATH "assets/menu.png");
+    textureManager.load(ARENA, DATA_PATH "assets/Terrain/tile_arena.png");
+    textureManager.load(CIMA, DATA_PATH "assets/Terrain/tile_cimas.png");
+    textureManager.load(DUNA, DATA_PATH "assets/Terrain/tile_dunas.png");
+    textureManager.load(PRECIPICIO, DATA_PATH "assets/Terrain/tile_precipicio.png");
+    textureManager.load(ROCA, DATA_PATH "assets/Terrain/tile_roca.png");
 
 }
 
