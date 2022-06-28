@@ -48,11 +48,9 @@ Game::Game(std::string path_config_game) :
 
 uint16_t Game::createGame(Id id_map, const std::string& name_game) {
     if (contains(name_game)) {
-        std::cout << "Se quiere crear una partida que ya existe..." << std::endl;
         return ERROR;
     }
     if (maps_dto_init.count(id_map) == 0) {
-        std::cout << "Se quiere crear una partida con Id de mapa invalido." << std::endl;
         return ERROR;
     }
     MapDTO map;
