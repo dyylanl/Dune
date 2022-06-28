@@ -30,7 +30,7 @@ private:
     * retorna 0 si el jugador ya se unio a una partida (o creo).
     * retorna 1 si el jugador decidio listar las partidas, por lo que no se unio a niguna.
     */
-    uint16_t execute(uint16_t command, std::string name_player);
+    void execute(uint16_t command, std::string name_player);
 
 public:
     ClientLogin(Game& game, Socket& peer);

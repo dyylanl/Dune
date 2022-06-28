@@ -6,9 +6,9 @@
 #define DUNE_BUTTONHEAVYFACTORYCL_H
 
 
-#include "../Button.h"
+#include "../../ButtonCL.h"
 
-class ButtonHeavyFactoryCL : public Button {
+class ButtonHeavyFactoryCL : public ButtonCL {
 public:
     ButtonHeavyFactoryCL(int id, char player, int constructionTime, bool selectStatus, bool ready);
 

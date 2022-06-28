@@ -440,6 +440,7 @@ std::vector<std::vector<std::string>> Protocol::recvMapsCreated(Socket &socket) 
 
 #define ESTABLISH_CONNECTION 9
 #define BAD_CONNECTION 1
+#define BAD_JOIN 1
 
 void Protocol::sendEstablishConnection(Socket &socket) {
     uint16_t connect = ESTABLISH_CONNECTION;
@@ -458,4 +459,9 @@ bool Protocol::recvEstablishConnection(Socket &socket) {
 void Protocol::sendCreateGameInvalid(Socket &socket) {
     uint16_t flag_bad_connection = BAD_CONNECTION;
     socket.send((const char*)&flag_bad_connection, sizeof(uint16_t));
+}
+
+void Protocol::sendAcceptPlayerInvalid(Socket &socket) {
+    uint16_t flag_bad_join = BAD_JOIN;
+    socket.send((const char*)&flag_bad_join, sizeof(uint16_t));
 }

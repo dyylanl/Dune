@@ -37,6 +37,7 @@ void MainWindow::on_button_confirmar_clicked()
     
     this->cliente = new Client(this->text_IP.toStdString(),this->text_puerto.toStdString());
     //Socket skt(this->text_IP.toStdString(),this->text_puerto.toStdString());
+    this->cliente->enviar_nombre_jugador(this->text_nombre.toStdString());
     
     QString mensaje_bienvenida = "Bienvenido a Dune " + this->text_nombre;
     //this->vector_socket.push_back(skt);
@@ -61,7 +62,6 @@ void MainWindow::on_button_cofirmar_cant_nombre_clicked()
     this->text_nombre_partida = this->ui->nombre_partida_input->text();
     //this->text_cantidad_jugadores = this->ui->cantidad_jugadores_input->text();
     //this->cliente->crear_partida(this->text_nombre.toStdString(),this->text_nombre_partida.toStdString());
-    this->cliente->enviar_nombre_jugador(this->text_nombre.toStdString());
     this->cliente->enviar_accion("crear");
     std::cout << this->text_nombre_partida.toStdString();
     this->cliente->enviar_nombre_partida(this->text_nombre_partida.toStdString());

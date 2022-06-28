@@ -11,7 +11,7 @@
 #include "../../../Common/includes/NonBlockingQueue.h"
 #include "../Object/GameObject.h"
 
-enum Type{VEHICLE, BUILD, BUTTON};
+enum Type{UNIT, BUILD, BUTTON};
 /*enum VehicleType {TRIKE, SONIC_TANK, RAIDER, DESVIATOR, TANK, DEVASTATOR, HARVESTER};
 enum BuilType {CONSTRUCTION_YARD, LIGHT_FACTORY, HEAVY_FACTORY,WIND_TRAP, REFINERY,
     SILO, BARRACK, PALACE};*/
@@ -34,7 +34,7 @@ public:
 
     void addBuild(std::vector<GameObject *> &gameObjects);
 
-    void addButton(std::vector<GameObject *> &gameObjects);
+    void addButtonBuild(std::vector<GameObject *> &gameObjects);
 };
 
 

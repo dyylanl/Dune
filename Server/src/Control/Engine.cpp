@@ -108,10 +108,10 @@ uint16_t Engine::addClient(NewConnection client) {
     if (current_players < req_players) {
         current_players += 1;
         established_connections.add((InstanceId)current_players,client.map_id,client.peer);
-        ret = SUCCESS;
-    }
-    if (current_players == req_players) {
-        this->start();
+        if (current_players == req_players) {
+            this->start();
+            ret = SUCCESS;
+        }
         ret = SUCCESS;
     }
     return ret;

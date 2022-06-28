@@ -35,6 +35,10 @@ public:
     Client(Client&& other) = delete;
     Client& operator=(Client&& other) = delete;
 
+    void createGame(Protocol protocol, Socket &socket);
+    void joinGame(Protocol protocol, Socket &socket);
+    void listGames(Protocol protocol, Socket &socket);
+
     void launch();
 
     void crear_partida( std::string nombre_jugador,  std::string  nombre_partida);

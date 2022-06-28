@@ -8,11 +8,11 @@
 
 bool Game::contains(const std::string& game_name) {
     //std::lock_guard<std::mutex> lock(mutex);
-    return (this->games.find(game_name)!= this->games.end());
+    return (this->info_games.find(game_name)!= this->info_games.end());
 }
 
 std::vector<int> Game::get(const std::string& game_name) {
-    // El contains ya lockea el mutex, no hace falta lockearlo aqui.
+    std::lock_guard<std::mutex> lock(mutex);
     if (contains(game_name)) {
         std::vector<int> game_info;
         game_info.push_back(info_games[game_name][0]); // current players
@@ -47,13 +47,10 @@ Game::Game(std::string path_config_game) :
 }
 
 uint16_t Game::createGame(Id id_map, const std::string& name_game) {
-    std::lock_guard<std::mutex> lock(mutex);
-    if (games.count(name_game) > 0) {
-        std::cout << "Se quiere crear una partida que ya existe..." << std::endl;
+    if (contains(name_game)) {
         return ERROR;
     }
     if (maps_dto_init.count(id_map) == 0) {
-        std::cout << "Id de mapa invalido." << std::endl;
         return ERROR;
     }
     MapDTO map;
@@ -66,10 +63,10 @@ uint16_t Game::createGame(Id id_map, const std::string& name_game) {
     return SUCCESS;
 }
 
-uint16_t Game::acceptPlayer(Socket &peer, std::string name_player, std::string name_game, Id map_id1) {
+uint16_t Game::acceptPlayer(Socket &peer, std::string name_player, std::string name_game) {
     int ret = ERROR;
-    std::lock_guard<std::mutex> lock(mutex);
-    if (games.count(name_game) > 0) { // si existe una partida con ese nombre entonces entro
+    if (contains(name_game)) { // si existe una partida con ese nombre entonces entro
+        Id map_id1 = (Id)info_games[name_game][2];
         ret = games[name_game]->addClient(NewConnection(peer,name_player,name_game,map_id1)); // chequea si la partida no esta completa para unir el nuevo player    
         if (ret == SUCCESS) {
             info_games[name_game][0]++;
@@ -116,11 +113,18 @@ Game::~Game() {
     
 }
 
+#define INVALID_ID -1
+
 Id Game::getMapId(std::string name_game) {
-    return info_games[name_game][2];
+    if (contains(name_game)) {
+        return info_games[name_game][2];
+    } else {
+        return INVALID_ID;
+    }
 }
 
 std::vector<MapDTO> Game::getMapsLoads(){
+    // no hay rc dado que solo se carga una vez sola cuando inicia el game
     std::vector<MapDTO> maps_loads;
     for (const auto& [id_game, map_dto] : this->maps_dto_init) {
         maps_loads.push_back(map_dto);
