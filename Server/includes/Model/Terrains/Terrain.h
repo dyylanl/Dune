@@ -9,7 +9,7 @@ class Terrain {
 protected:
     char key;
     bool occupied;
-    bool builtOn;
+    //bool builtOn;
     int speed_factor;
 
 public:
@@ -18,7 +18,7 @@ public:
     explicit Terrain(char key);
 
     void occupy();
-    virtual void buildOn(Building* building);
+    //virtual void buildOn(Building* building);
     virtual void free();
     bool isOccupied();
     bool isBuiltOn();

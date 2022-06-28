@@ -11,7 +11,8 @@ int ConfigurationReader::getFPS() const{
 }
 
 ConfigurationReader::ConfigurationReader(const std::string filename) :
-        YAMLReader(filename) {}
+        YAMLReader(filename),
+        config_path(filename) {}
 
 ConfigurationReader::~ConfigurationReader() = default;
 
@@ -77,7 +78,7 @@ unsigned ConfigurationReader::getSpiceCapacityFor(Building::BuildingType buildin
     std::string buildingName = this->parseType(buildingType);
     return this->config["buildings"][buildingName]["spiceCapacity"].as<unsigned>();
 }
-
+/*
 unsigned ConfigurationReader::getDamageFor(const WeaponType weaponType) const {
     std::string weaponName = this->parseType(weaponType);
     return this->config["weaponry"][weaponName]["damage"].as<unsigned>();
@@ -132,7 +133,7 @@ unsigned ConfigurationReader::getLoadSpeed(const Unit::UnitType unitType) const 
     std::string unitName = this->parseType(unitType);
     return this->config["units"][unitName]["loadSpeed"].as<unsigned>();
 }
-
+*/
 std::string ConfigurationReader::parseType(const Building::BuildingType buildingType) const {
     std::string buildingName;
     switch (buildingType) {
@@ -140,7 +141,7 @@ std::string ConfigurationReader::parseType(const Building::BuildingType building
             buildingName = "barracks";
             break;
         case Building::BuildingType::CONSTRUCTION_CENTER:
-            buildingName = "constructionYard";
+            buildingName = "constructionCenter";
             break;
         case Building::BuildingType::HEAVY_FACTORY:
             buildingName = "heavyFactory";
@@ -162,7 +163,7 @@ std::string ConfigurationReader::parseType(const Building::BuildingType building
     }
     return buildingName;
 }
-
+/*
 std::string ConfigurationReader::parseType(const WeaponType weaponType) const {
     std::string weaponName;
     switch (weaponType) {
@@ -200,7 +201,7 @@ std::string ConfigurationReader::parseType(const Unit::UnitType unitType) const 
             unitName = "raider";
             break;
         case Unit::UnitType::TANK:
-            unitName = "DeviatorCL";
+            unitName = "tank";
             break;
         case Unit::UnitType::TRIKE:
             unitName = "trike";
@@ -210,7 +211,7 @@ std::string ConfigurationReader::parseType(const Unit::UnitType unitType) const 
     }
     return unitName;
 }
-
+*/
 
 int ConfigurationReader::getTotalMaps() {
     return this->config["total_maps"].as<int>();

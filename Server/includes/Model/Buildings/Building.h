@@ -7,7 +7,7 @@
 #include "../Weapons/Weapon.h"
 #include "../Units/Attackable.h"
 
-class Player;
+//class Player;
 
 class Building : public Attackable {
 public:
@@ -25,15 +25,15 @@ public:
              const int hitPoints, const int width,
              const int height, BuildingType type);
 
-    static Building getBuildType(char type, int pos_x, int pos_y);
+    //static Building getBuildType(char type, int pos_x, int pos_y);
     virtual ~Building();
     bool operator==(const Building& other);
-    virtual void reciveBonusDammage(const Weapon &weapon) override;
+    //virtual void reciveBonusDammage(const Weapon &weapon) override;
     virtual int getCapacity();
     bool is(BuildingType type);
-    void setPlayer(Player* player);
-    Player* getPlayer();
-    Position& getClosestPosition(Position& position) override;
+    //void setPlayer(Player* player);
+    //Player* getPlayer();
+    //Position& getClosestPosition(Position& position) override;
     void demolish();
     bool hasNews();
 
@@ -43,7 +43,7 @@ public:
     const int cost;
 private:
     static int counter;
-    Player* player;
+    //Player* player;
     Position pos;
     BuildingType key;
     std::vector<Position> all_positions;

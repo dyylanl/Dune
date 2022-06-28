@@ -6,6 +6,8 @@
 #include "../includes/defs.h"
 
 class MapReader : public YAMLReader {
+private:
+    std::string filename;
 public:
     explicit MapReader(std::string filename);
     unsigned getRows() const;

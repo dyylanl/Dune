@@ -3,17 +3,16 @@
 
 #include <string>
 #include <memory>
-
-class ConfigurationReader;
+#include "ConfigReader.h"
 
 class GameConfiguration {
-private:
-    static std::unique_ptr<GameConfiguration> instance;
+
+    ConfigurationReader config;
 
 public:
+
+    explicit GameConfiguration(std::string config_path);
     ~GameConfiguration() = default;
-    static void init(const char *string);
-    static GameConfiguration& getConfig();
 
     //game
     const int speedFactor;
@@ -108,8 +107,6 @@ public:
     const int tankSpeed;
     const int tankConstructionTime;
     const int tankCost;
-
-    explicit GameConfiguration(const ConfigurationReader& config);
 };
 
 #endif	// __GAME_CONFIGURATION_H__

@@ -25,8 +25,8 @@ public:
     bool move(Map &map);
     void follow(Attackable* other, Map& map);
     virtual bool canMoveAboveTerrain(Terrain& terrain) = 0;
-    void setPlayer(Player &player);
-    Player& getPlayer();
+    //void setPlayer(Player &player);
+    //Player& getPlayer();
     virtual bool shotARocket();
     virtual Rocket* getRocket();
     void checkForDeadVictim();
@@ -45,7 +45,7 @@ protected:
     Position destiny;
     Position prev_foll_unit_pos;
     Position next_pos;
-    Player* player{};
+    //Player* player;
     bool news;
 };
 

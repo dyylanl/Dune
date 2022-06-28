@@ -84,7 +84,7 @@ void Unit::follow(Attackable* other, Map& map) {
         map.at(prev_foll_unit_pos).occupy();
     //state = (UnitState*)&Unit::moving;
 }
-
+/*
 void Unit::setPlayer(Player &player1) {
     this->player = &player1;
     this->player->subGold(this->cost);
@@ -93,7 +93,7 @@ void Unit::setPlayer(Player &player1) {
 Player &Unit::getPlayer() {
     return *player;
 }
-/*
+
 void Unit::makeAction(Map &map) {
     state = state->makeAction(map, *this);
 }
@@ -112,8 +112,8 @@ UnitState *Unit::makeAttack(Map &map) {
 
 UnitState *Unit::makeStopped(Map &map) {
     return state;
-}*/
-/*
+}
+
 void Unit::actionOnPosition(Map &map, Position &pos) {
 //    Unit* foll_unit = map.getClosestUnit(pos, 50 * 50, *player, false);
     Attackable* foll_unit = map.getClosestAttackable(pos, 50 * 50, *player);

@@ -2,9 +2,10 @@
 #include "../includes/defs.h"
 #include "ConfigReader.h"
 
-std::unique_ptr<GameConfiguration> GameConfiguration::instance(nullptr);
+GameConfiguration::GameConfiguration(std::string config_path) :
 
-GameConfiguration::GameConfiguration(const ConfigurationReader& config) :
+        config(config_path),
+
         speedFactor(config.getSpeedFactor()),
         blockMovement(config.getBlockMovement()),
         rangeFactor(config.getRangeFactor()),
@@ -111,20 +112,8 @@ GameConfiguration::GameConfiguration(const ConfigurationReader& config) :
         tankRange(config.getRangeFor(Unit::UnitType::TANK) * rangeFactor),
         tankSpeed(config.getSpeedFor(Unit::UnitType::TANK)),
         tankConstructionTime(config.getTrainingTimeFor(Unit::UnitType::TANK) * timeFactor),
-        tankCost(config.getCostFor(Unit::UnitType::TANK)) {}
-
-void GameConfiguration::init(const char *string) {
-    if (instance == nullptr) {
-        ConfigurationReader config(string);
-        instance = std::unique_ptr<GameConfiguration>(new GameConfiguration(config));
-    }
-}
-
-GameConfiguration& GameConfiguration::getConfig() {
-    if (instance == nullptr) {
-        std::string path = MAP_PATH;
-        ConfigurationReader config(path);
-        instance = std::unique_ptr<GameConfiguration>(new GameConfiguration(config));
-    }
-    return *instance;
-}
+        tankCost(config.getCostFor(Unit::UnitType::TANK))
+        
+        {
+            std::cout << "Cargando configuracion de: " << config.getConfigPath() << std::endl;
+        }

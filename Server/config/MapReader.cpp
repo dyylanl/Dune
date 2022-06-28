@@ -1,9 +1,13 @@
 #include "MapReader.h"
 #include "../includes/Model/Buildings/ConstructionCenter.h"
 #include "../includes/types.h"
+#include <iostream>
+#include <string>
 
-MapReader::MapReader(std::string filename) :
-    YAMLReader(filename) {}
+MapReader::MapReader(std::string filename1) :
+    YAMLReader(filename1),
+    filename(filename1)
+ {}
 
 unsigned MapReader::getRows() const{
     return this->config["Tablero"]["Filas"].as<int>();
@@ -47,11 +51,16 @@ std::vector<std::vector<char>> MapReader::getMap() {
 }
 
 std::vector<Building> MapReader::getBuildings() {
+    std::cout << "Cargando construcciones de: " << filename << std::endl;
     std::vector<Building> builds;
     int total = this->config["Estructuras"]["Cantidad"].as<unsigned>();
+    std::cout << "Cantidad de estructuras: " << total << std::endl;
     for (int i = 0; i < total; ++i) {
-        const int pos_x = this->config["Estructuras"][i]["Pos_x"].as<int>();
-        const int pos_y = this->config["Estructuras"][i]["Pos_y"].as<int>();
+        std::string key = std::to_string(i);    
+        std::cout << "Key: " << key << std::endl; 
+        const int pos_x = this->config["Estructuras"][key]["Pos_x"].as<int>();
+        const int pos_y = this->config["Estructuras"][key]["Pos_y"].as<int>();
+        std::cout << "Se agrego una construccion en: " << pos_x << "," << pos_y << std::endl;
         ConstructionCenter center(pos_x,pos_y,BLOCK_HEIGHT,BLOCK_WIDTH);
         builds.push_back(center);
     }

@@ -8,8 +8,12 @@
 #include <string>
 
 class ConfigurationReader : public YAMLReader {
+
 public:
+    std::string config_path;
     explicit ConfigurationReader(const std::string filename);
+
+    std::string getConfigPath() {return config_path;}
     ~ConfigurationReader();
     //map
     int getTotalMaps();
@@ -33,6 +37,7 @@ public:
     unsigned getHeightFor(const Building::BuildingType buildingType) const;
     unsigned getSpiceCapacityFor(const Building::BuildingType buildingType) const;
     //weapons
+    /*
     unsigned getDamageFor(const WeaponType weaponType) const;
     unsigned getShootingRateFor(const WeaponType weaponType) const;
     unsigned getBonusFor(const WeaponType weaponType) const;
@@ -44,11 +49,11 @@ public:
     unsigned getCostFor(const Unit::UnitType unitType) const;
     unsigned getSpiceCapacityFor(const Unit::UnitType unitType) const;
     unsigned getFarmSpeed(const Unit::UnitType unitType) const;
-    unsigned getLoadSpeed(const Unit::UnitType unitType) const;
+    unsigned getLoadSpeed(const Unit::UnitType unitType) const;*/
 private:
     std::string parseType(const Building::BuildingType buildingType) const;
-    std::string parseType(const WeaponType weaponType) const;
-    std::string parseType(const Unit::UnitType unitType) const;
+    /*std::string parseType(const WeaponType weaponType) const;
+    std::string parseType(const Unit::UnitType unitType) const;*/
 
 };
 

@@ -83,15 +83,16 @@ void Map::put(Unit &unit) {
     this->at(unit.getPosition()).occupy();
 }
 
-void Map::put(Building* building) {
+void Map::put(Building building) {
     buildings.push_back(building);
     this->occupy(building);
 }
 
-void Map::occupy(Building* building) {
-    for (int i = 0; i < building->height; i++) {
-        for (int j = 0; j < building->width; j++) {
-            this->terrrains[building->getPosition().x+i][building->getPosition().y+j].buildOn(building);
+void Map::occupy(Building building) {
+    for (int i = 0; i < building.height; i++) {
+        for (int j = 0; j < building.width; j++) {
+            std::cout << "Construyendo en: " << i << "," << j << std::endl;
+            //this->terrrains[building.getPosition().x+i][building.getPosition().y+j].buildOn(building);
         }
     }
 }
@@ -109,7 +110,7 @@ void Map::setDestiny(Unit &unit, int x_dest, int y_dest) {
     }
     unit.setPath(path, p_destiny);
 }
-
+/*
 Unit* Map::getClosestUnit(Position pos, int limitRadius, Player& player) {
     Unit* closest_unit = nullptr;
     int closest_unit_distance = limitRadius;
@@ -121,8 +122,8 @@ Unit* Map::getClosestUnit(Position pos, int limitRadius, Player& player) {
         }
     }
     return closest_unit;
-}
-
+}*/
+/*
 std::vector<Unit*> Map::getUnitsInArea(Area& area, Player& player) {
     std::vector<Unit*> answer;
     for (auto& unit : units) {
@@ -139,7 +140,7 @@ std::vector<Unit*> Map::getUnitsInArea(Area& area, Player& player) {
     }
     return (answer);
 }
-
+*/
 std::vector<Unit*> Map::getUnitsInArea(Area& area) {
     std::vector<Unit*> answer;
     for (auto& unit : units) {
@@ -152,35 +153,36 @@ std::vector<Unit*> Map::getUnitsInArea(Area& area) {
     return (answer);
 }
 
-std::vector<Building*> Map::getBuildingsInArea(Area& area, Player& player) {
-    std::vector<Building*> answer;
+/*
+std::vector<Building> Map::getBuildingsInArea(Area& area, Player& player) {
+    std::vector<Building> answer;
     Position pos(area.getX() + area.getWidth(), area.getY() + area.getHeight());
-    for (auto& building : buildings) {
-        if ( (building->getPosition().x > area.getX()) &&(building->getPosition().x + building->width < area.getX() + area.getWidth()) &&(building->getPosition().y > area.getY()) &&(building->getPosition().y + building->height < area.getY() + area.getHeight())) {
+    for (auto building : buildings) {
+        if ( (building.getPosition().x > area.getX()) &&(building.getPosition().x + building.width < area.getX() + area.getWidth()) &&(building.getPosition().y > area.getY()) &&(building.getPosition().y + building.height < area.getY() + area.getHeight())) {
                 answer.emplace_back(building);
             } else {
-                if ((pos.x > building->getPosition().x) && (pos.x < building->getPosition().x + building->width) &&
-                    (pos.y > building->getPosition().y) && (pos.y < building->getPosition().y + building->height)) {
+                if ((pos.x > building.getPosition().x) && (pos.x < building.getPosition().x + building.width) &&
+                    (pos.y > building.getPosition().y) && (pos.y < building.getPosition().y + building.height)) {
                     answer.emplace_back(building);
                 }
             }
     }
     return (answer);
-}
+}*/
 
-std::vector<Building*> Map::getBuildingsInArea(Area& area) {
-    std::vector<Building*> answer;
+std::vector<Building> Map::getBuildingsInArea(Area& area) {
+    std::vector<Building> answer;
     Position pos(area.getX() + area.getWidth(), area.getY() + area.getHeight());
     Position areaCenter(area.getX() + area.getWidth() / 2, area.getY() + area.getHeight() / 2);
-    for (auto& building : buildings) {
-        if ( (building->getClosestPosition(areaCenter).x > area.getX()) &&
-             (building->getClosestPosition(areaCenter).x + building->width < area.getX() + area.getWidth()) &&
-             (building->getClosestPosition(areaCenter).y > area.getY()) &&
-             (building->getClosestPosition(areaCenter).y + building->height < area.getY() + area.getHeight())) {
+    for (auto building : buildings) {
+        if ( (building.getClosestPosition(areaCenter).x > area.getX()) &&
+             (building.getClosestPosition(areaCenter).x + building.width < area.getX() + area.getWidth()) &&
+             (building.getClosestPosition(areaCenter).y > area.getY()) &&
+             (building.getClosestPosition(areaCenter).y + building.height < area.getY() + area.getHeight())) {
             answer.emplace_back(building);
         } else {
-            if ((pos.x > building->getClosestPosition(areaCenter).x) && (pos.x < building->getClosestPosition(areaCenter).x + building->width) &&
-                (pos.y > building->getClosestPosition(areaCenter).y) && (pos.y < building->getClosestPosition(areaCenter).y + building->height)) {
+            if ((pos.x > building.getClosestPosition(areaCenter).x) && (pos.x < building.getClosestPosition(areaCenter).x + building.width) &&
+                (pos.y > building.getClosestPosition(areaCenter).y) && (pos.y < building.getClosestPosition(areaCenter).y + building.height)) {
                 answer.emplace_back(building);
             }
         }
@@ -193,9 +195,9 @@ void Map::cleanUnit(Unit *unit) {
     units.erase(std::find(units.begin(), units.end(), unit));
 }
 
-void Map::cleanBuilding(Building *building) {
-    this->free(*building);
-    buildings.erase(std::find(buildings.begin(), buildings.end(), building));
+void Map::cleanBuilding(Building building) {
+    this->free(building);
+    //buildings.erase(std::find(buildings.begin(), buildings.end(), building));
 }
 
 void Map::free(Building &building) {
@@ -205,7 +207,7 @@ void Map::free(Building &building) {
         }
     }
 }
-
+/*
 bool Map::canWeBuild(Position& pos, int width, int height, Player& player) {
     for (int i = 0; i < height; i++) {
         for (int j = 0; j < width; j++) {
@@ -232,14 +234,14 @@ bool Map::canWeBuild(Position& pos, int width, int height, Player& player) {
 
     return false;
 }
-
-Position Map::getClosestFreePosition(Building* building) {
+*/
+Position Map::getClosestFreePosition(Building building) {
     int dist = 1;
     bool found = false;
-    Position& pos = building->getPosition();
+    Position& pos = building.getPosition();
     while (!found) {
-        for (int i = - dist; i <= building->height + dist; i++) {
-            for (int j =  - dist; j <= building->width + dist; j++) {
+        for (int i = - dist; i <= building.height + dist; i++) {
+            for (int j =  - dist; j <= building.width + dist; j++) {
                 try {
                     if (!(this->at(pos.x + i, pos.y + j).isOccupied())) {
                         return {pos.x + i, pos.y + j};
@@ -252,7 +254,7 @@ Position Map::getClosestFreePosition(Building* building) {
     }
     return pos;
 }
-
+/*
 Attackable *Map::getClosestAttackable(Position &position, int limitRadius, Player& player) {
     Attackable* closest_attackable = nullptr;
     int closest_unit_distance = limitRadius;
@@ -263,18 +265,18 @@ Attackable *Map::getClosestAttackable(Position &position, int limitRadius, Playe
             closest_unit_distance = distance;
         }
     }
-    for (auto& current_building : buildings) {
-        Position& pos = current_building->getClosestPosition(position);
+    for (auto current_building : buildings) {
+        Position& pos = current_building.getClosestPosition(position);
         int distance = pos.sqrtDistance(position);
         if (distance < limitRadius
             && distance < closest_unit_distance) {
-            closest_attackable = current_building;
+            //closest_attackable = &current_building;
             closest_unit_distance = distance;
         }
     }
     return closest_attackable;
 }
-/*
+
 Position Map::getCornerPosition(Position& pos) {
     return {(pos.x / BLOCK_WIDTH) * BLOCK_WIDTH, (pos.y / BLOCK_HEIGHT) * BLOCK_HEIGHT};
 }*/
@@ -316,7 +318,8 @@ Map::Map(std::string config_path) :
                             map_reader(config_path),
                             rows(map_reader.getRows()),
                             cols(map_reader.getCols()),
-                            mapa(map_reader.getMap())
+                            mapa(map_reader.getMap()),
+                            buildings(map_reader.getBuildings())
 {
     std::vector <std::vector<Terrain>> terrain_init((uint16_t) rows, std::vector<Terrain>((uint16_t) cols, Terrain('A')));
     this->terrrains = terrain_init;

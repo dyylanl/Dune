@@ -18,7 +18,7 @@ Building::Building(const int x, const int y, int blockWidth, int blockHeight,
         height(height),
         energy(energy),
         cost(cost),
-        player(nullptr),
+        /*player(nullptr),*/
         key(type),
         all_positions(),
         news(true) {
@@ -39,7 +39,7 @@ void Building::reciveBonusDammage(const Weapon &weapon) {
 bool Building::is(Building::BuildingType type) {
     return this->key == type;
 }
-
+/*
 void Building::setPlayer(Player* player1) {
     this->player = player1;
 }
@@ -47,7 +47,7 @@ void Building::setPlayer(Player* player1) {
 Player* Building::getPlayer() {
     return this->player;
 }
-
+*/
 void Building::demolish() {
     this->life = 0;
 }

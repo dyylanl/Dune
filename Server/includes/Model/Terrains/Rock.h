@@ -11,7 +11,7 @@ private:
 public:
     Rock();
 
-    virtual void buildOn(Building* building) override;
+    //virtual void buildOn(Building* building) override;
 
     virtual Building* getBuilding() override;
 
