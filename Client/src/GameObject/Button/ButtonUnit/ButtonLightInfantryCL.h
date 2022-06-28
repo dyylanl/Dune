@@ -11,6 +11,8 @@
 class ButtonLightInfantryCL : public ButtonUnitCL{
 public:
     ButtonLightInfantryCL(int id, char player, int constructionTime, bool selectStatus, bool ready);
+
+    ~ButtonLightInfantryCL() {}
 };
 
 

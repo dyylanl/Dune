@@ -15,6 +15,7 @@ public:
 
     void draw(SDL2pp::Renderer &renderer, TextureManager &textureManager);
 
+    ~HarvesterCL() {}
 };
 
 

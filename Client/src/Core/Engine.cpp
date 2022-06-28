@@ -15,7 +15,14 @@ void Engine::Events() {
 void Engine::Update() {
     std::vector<GameObject*> aux;
     aux = m_queueNb.pop();
-    if(!aux.empty()) m_objects = aux;
+    if(!aux.empty()) {
+        for (GameObject *obj: m_objects) {
+            delete obj;
+        }
+        m_objects.clear();
+
+        m_objects = aux;
+    }
 
     int size = m_objects.size();
     for (int i = 0; i < size; ++i) {

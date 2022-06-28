@@ -13,6 +13,8 @@ public:
     ButtonConstructionYardCL(int id, char player, int constructionTime, bool selectStatus, bool ready);
 
     void buildBuilding(BlockingQueue<CommandCL *> &queue, SDL2pp::Point point);
+
+    ~ButtonConstructionYardCL() {}
 };
 
 

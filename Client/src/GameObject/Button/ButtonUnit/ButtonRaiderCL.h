@@ -11,6 +11,8 @@
 class ButtonRaiderCL : public ButtonUnitCL{
 public:
     ButtonRaiderCL(int id, char player, int constructionTime, bool selectStatus, bool ready);
+
+    ~ButtonRaiderCL() {}
 };
 
 

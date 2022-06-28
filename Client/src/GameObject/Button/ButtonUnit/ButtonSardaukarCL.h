@@ -11,6 +11,8 @@
 class ButtonSardaukarCL : public ButtonUnitCL {
 public:
     ButtonSardaukarCL(int id, char player, int constructionTime, bool selectStatus, bool ready);
+
+    ~ButtonSardaukarCL() {}
 };
 
 

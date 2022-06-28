@@ -11,6 +11,8 @@
 class ButtonTankCL : public ButtonUnitCL {
 public:
     ButtonTankCL(int id, char player, int constructionTime, bool selectStatus, bool ready);
+
+    ~ButtonTankCL() {}
 };
 
 

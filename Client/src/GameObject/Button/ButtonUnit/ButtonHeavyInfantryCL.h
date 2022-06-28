@@ -11,6 +11,8 @@
 class ButtonHeavyInfantryCL : public ButtonUnitCL{
 public:
     ButtonHeavyInfantryCL(int id, char player, int constructionTime, bool selectStatus, bool ready);
+
+    ~ButtonHeavyInfantryCL() {}
 };
 
 

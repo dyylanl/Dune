@@ -14,6 +14,8 @@ public:
             bool action);
 
     void draw(SDL2pp::Renderer &renderer, TextureManager &textureManager);
+
+    ~TrikeCL() {}
 };
 
 

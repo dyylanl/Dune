@@ -26,6 +26,8 @@ public:
     virtual void draw(SDL2pp::Renderer &renderer, TextureManager &textureManager);
 
     virtual void buildBuilding(BlockingQueue<CommandCL *> &queue, SDL2pp::Point point) = 0;
+
+    virtual ~ButtonCL() {}
 };
 
 

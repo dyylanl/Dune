@@ -22,6 +22,8 @@ public:
     void update(EventManager &eventManager, BlockingQueue<CommandCL *> &queue);
 
     virtual void draw(SDL2pp::Renderer &renderer, TextureManager &textureManager);
+
+    virtual ~ButtonUnitCL() {}
 };
 
 

@@ -11,6 +11,8 @@
 class ButtonTrikeCL : public ButtonUnitCL{
 public:
     ButtonTrikeCL(int id, char player, int constructionTime, bool selectStatus, bool ready);
+
+    ~ButtonTrikeCL() {}
 };
 
 

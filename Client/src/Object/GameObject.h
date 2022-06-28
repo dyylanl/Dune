@@ -32,6 +32,8 @@ public:
 
     virtual void draw(SDL2pp::Renderer &renderer, TextureManager &textureManager) = 0;
 
+    virtual ~GameObject() {}
+
 };
 
 
