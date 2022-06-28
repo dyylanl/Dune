@@ -117,7 +117,6 @@ bool Client::conexion_exitosa(){
   return false;
 }
 
-<<<<<<< HEAD
 
 bool Client::partida_iniciada(){
   if(protocol.recvInitGame(socket)) { // ACA TIENE QUE ESTAR BLOQUEADO HASTA QUE SE INICIE LA PARTIDA
@@ -127,10 +126,8 @@ bool Client::partida_iniciada(){
 }
 
 
-void createGame(Protocol protocol, Socket &socket) {
-=======
+void createGame(Protocol protocol, Socket &socket) {}
 void createGame(Protocol protocol, Socket &socket, std::vector<std::vector<char>> &map) {
->>>>>>> 8e200e70843e6b2498a82e53defbe590ac241482
 
 
   // SEND NOMBRE PARTIDA

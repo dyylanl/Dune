@@ -37,6 +37,7 @@ void MainWindow::on_button_confirmar_clicked()
     
     this->cliente = new Client(this->text_IP.toStdString(),this->text_puerto.toStdString());
     //Socket skt(this->text_IP.toStdString(),this->text_puerto.toStdString());
+    
     QString mensaje_bienvenida = "Bienvenido a Dune " + this->text_nombre;
     //this->vector_socket.push_back(skt);
     this->ui->bienvenida_label->setText(mensaje_bienvenida);
@@ -59,7 +60,11 @@ void MainWindow::on_button_cofirmar_cant_nombre_clicked()
 {
     this->text_nombre_partida = this->ui->nombre_partida_input->text();
     //this->text_cantidad_jugadores = this->ui->cantidad_jugadores_input->text();
-    this->cliente->crear_partida(this->text_nombre.toStdString(),this->text_nombre_partida.toStdString());
+    //this->cliente->crear_partida(this->text_nombre.toStdString(),this->text_nombre_partida.toStdString());
+    this->cliente->enviar_nombre_jugador(this->text_nombre.toStdString());
+    this->cliente->enviar_accion("crear");
+    std::cout << this->text_nombre_partida.toStdString();
+    this->cliente->enviar_nombre_partida(this->text_nombre_partida.toStdString());
     //this->protocolo.crear_partida(this->skt,this->text_nombre.toStdString(),this->text_nombre_partida.toStdString())
     this->mostrar_mapas();
     this->ui->stackedWidget->setCurrentIndex(4);
@@ -126,7 +131,7 @@ void MainWindow::on_button_unirse_partida_clicked()
     this->reloj->start(5000);
     std::cout << "paso el reloj" << std::endl;
     //this->cliente->enviar_nombre_y_comando(this->text_nombre.toStdString(),"listar");
-    this->cliente->enviar_nombre_jugador(this->text_nombre.toStdString());
+    //this->cliente->enviar_nombre_jugador(this->text_nombre.toStdString());
     std::cout << "LLEGO A LA PARTIDA" << std::endl;
     this->cliente->enviar_accion("listar");
     std::cout << "TRATO DE RECIBIR" << std::endl;
@@ -173,7 +178,6 @@ void MainWindow::mostrar_partidas(){
 void MainWindow::on_button_confirmar_unirse_clicked()
 {
     QListWidgetItem *partida_elegida =  this->ui->lista_partidas->currentItem();
-    this->ui->stackedWidget->setCurrentIndex(5);
     this->reloj->stop();
     std::string buf;                 // Have a buffer string
     std::stringstream ss(partida_elegida->text().toStdString());       // Insert the string into a stream
@@ -198,12 +202,18 @@ void MainWindow::on_button_confirmar_unirse_clicked()
         QMessageBox msgBox;
         msgBox.setText("La partida va a empezar");
         msgBox.exec();
-        QApplication::quit();
+        this->ui->stackedWidget->setCurrentIndex(5);
+        //QApplication::quit();
         /*map = protocol.recvMap(socket);
         std::cout << "Mapa recibido..." << std::endl;*/
       }  
   } else {
-    std::cout << "ERROR UNIENDOME A LA PARTIDA "<< std::endl;
+    QMessageBox msgBox;
+        msgBox.setText("La partida esta llena. Elija otra");
+        msgBox.exec();
+        
+        std::cout << "ERROR UNIENDOME A LA PARTIDA "<< std::endl;
+        return;
   }
 
     /*int respuesta_unirse_partida = this->cliente->recibir_respuesta();
@@ -238,7 +248,7 @@ void MainWindow::on_button_confirmar_mapa_clicked()
 
 
     if(this->cliente->conexion_exitosa()) { 
-      std::cout << "Union exitosa" << std::endl;
+      std::cout << "Creacion exitosa" << std::endl;
         QMessageBox msgBox;
         msgBox.setText("Partida creada con exito");
         msgBox.exec();
@@ -247,12 +257,18 @@ void MainWindow::on_button_confirmar_mapa_clicked()
         QMessageBox msgBox;
         msgBox.setText("La partida va a empezar");
         msgBox.exec();
-        QApplication::quit();
+        this->close();
+        //QApplication::quit();
         /*map = protocol.recvMap(socket);
         std::cout << "Mapa recibido..." << std::endl;*/
       }  
   } else {
-    std::cout << "ERROR UNIENDOME A LA PARTIDA "<< std::endl;
+        QMessageBox msgBox;
+        msgBox.setText("Esa partida ya existe. Cambie el nombre");
+        msgBox.exec();
+        this->ui->stackedWidget->setCurrentIndex(2);
+        return;
+        std::cout << "ERROR UNIENDOME A LA PARTIDA "<< std::endl;
   }
 
 /*
