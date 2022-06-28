@@ -328,5 +328,4 @@ Map::Map(std::string config_path) :
             terrrains[i][j] = Terrain(type);
         }
     }
-    std::cout << "Mapa cargado" << std::endl;
 }
