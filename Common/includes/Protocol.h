@@ -32,8 +32,9 @@ public:
 
     void sendInitGame(Socket &socket);
     bool recvInitGame(Socket &socket);
-
     void sendCreateGameInvalid(Socket &socket);
+    void sendAcceptPlayerInvalid(Socket &socket);
+
 
     /*
      * Envia la informacion requerida para unirse una partida.

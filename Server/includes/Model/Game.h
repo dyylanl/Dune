@@ -67,7 +67,7 @@ public:
      * retorna 0 si lo pudo unir
      * retorna 1 si no lo pudo unir (es decir, esta completa esa partida o bien no existe)
      */
-    uint16_t acceptPlayer(Socket &peer, std::string name_player, std::string name_game, Id map_id);
+    uint16_t acceptPlayer(Socket &peer, std::string name_player, std::string name_game);
 
 
     /*
