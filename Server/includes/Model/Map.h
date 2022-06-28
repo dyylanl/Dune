@@ -6,7 +6,6 @@
 #include "../../config/MapReader.h"
 #include "Terrains/Terrain.h"
 #include "Units/Unit.h"
-#include "../Control/NewConnection.h"
 #include "../../../Common/includes/NonBlockingQueue.h"
 #include "Area.h"
 #include "DTOs/MapDTO.h"
@@ -106,12 +105,6 @@ public:
 
 
     explicit Map(std::string path_config);
-
-    /*
-     * retorna 0 si el mapa esta completo
-     * 1 si todavia no esta completo
-     */
-    int addPlayer(NewConnection* new_player);
 
 };
 

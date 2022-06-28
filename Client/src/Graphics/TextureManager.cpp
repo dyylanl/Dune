@@ -72,3 +72,11 @@ void TextureManager::drawMap(SDL2pp::Renderer &renderer, std::vector<std::vector
         }
     }
 }
+
+TextureManager::~TextureManager() {
+    for(std::map<char, SDL2pp::Texture*>::iterator itr = m_TextureMap.begin(); itr != m_TextureMap.end(); itr++)
+    {
+        delete (itr->second);
+    }
+    m_TextureMap.clear();
+}

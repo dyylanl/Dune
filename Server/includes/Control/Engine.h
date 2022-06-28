@@ -13,7 +13,7 @@
 #include "../../config/MapReader.h"
 #include "../../includes/Model/Map.h"
 #include "ClientsConnected.h"
-
+#include "NewConnection.h"
 
 class Engine : public Thread {
 private:

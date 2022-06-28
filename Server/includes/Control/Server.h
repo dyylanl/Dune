@@ -24,6 +24,9 @@ private:
     Game game;
     Accepter accepter;
 
+    void printGames();
+    void printUploadedMaps();
+
 public:
     /* Constructor */
     Server(const std::string& config_path, const std::string& port, int max_clients_queued);

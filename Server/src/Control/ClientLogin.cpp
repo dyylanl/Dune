@@ -82,10 +82,8 @@ void ClientLogin::execute(uint16_t command, std::string name_player) {
         if (flag_create == SUCCESS) { // si la respuesta es 0 entonces el game me creo la partida
             game.acceptPlayer(peer, name_player, name_game); // si la partida se creo entonces le digo al game que me acepte este player
             is_running = false;
-            std::cout << "Partida creada." << std::endl;
         } else {
             protocol.sendCreateGameInvalid(peer);
-            std::cout << "Partida invalida." << std::endl;
         }
     }
     /*
@@ -98,10 +96,8 @@ void ClientLogin::execute(uint16_t command, std::string name_player) {
         uint16_t  flag_join = game.acceptPlayer(peer, name_player, name_game);
         if (flag_join == SUCCESS) {
             is_running = false;
-            std::cout << "Jugador aceptado" << std::endl;
         } else {
             protocol.sendAcceptPlayerInvalid(peer);
-            std::cout << "Jugador rechazado" << std::endl;
         }
     }
     /*
@@ -109,7 +105,6 @@ void ClientLogin::execute(uint16_t command, std::string name_player) {
      */
     else if (command == LIST_GAMES) {
         protocol.sendGameList(peer, game.listGames());
-        std::cout << "Enviando partidas" << std::endl;
     }
 }
 
