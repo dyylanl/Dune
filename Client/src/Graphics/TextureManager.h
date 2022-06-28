@@ -31,6 +31,8 @@ public:
     Camera& getCamera();
 
     void drawMap(SDL2pp::Renderer &renderer, std::vector<std::vector<char>> &map);
+
+    ~TextureManager();
 };
 
 
