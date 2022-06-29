@@ -120,8 +120,8 @@ bool Client::partida_iniciada(){
 void Client::initSDL(Socket &aSocket, Protocol &aProtocol,
                      std::vector<std::vector<char>> &map) const {
 
-    NonBlockingQueue<std::vector<GameObject*>> queueNb;
-    BlockingQueue<CommandCL*> queueB;
+    NBQueue<std::vector<std::unique_ptr<GameObject>>> queueNb;
+    BQueue<std::unique_ptr<CommandCL>> queueB;
     RecvThread recvThread(queueNb, aSocket, aProtocol);
     SendThread sendThread(queueB, aSocket, aProtocol);
     recvThread.start();
@@ -136,7 +136,7 @@ void Client::initSDL(Socket &aSocket, Protocol &aProtocol,
 
     loadTextures(textureManager, renderer);
     EventManager eventManager;
-    std::vector<GameObject*> objects;
+    std::vector<std::unique_ptr<GameObject>> objects;
 
     Engine engine(map, objects, textureManager, eventManager, queueNb, queueB);
 
@@ -268,6 +268,11 @@ void Client::launch() {
         std::cout << e.what() << std::endl;
         return;
     }
+
+    /*Socket socket_("localhost","8082");
+    Protocol protocol_;
+    std::vector<std::vector<char>> map(50, std::vector<char> (50, 'A') );
+    initSDL(socket_, protocol_, map);*/
 }
 
 

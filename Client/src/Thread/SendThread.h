@@ -11,15 +11,16 @@
 #include "../../../Common/includes/Socket/Socket.h"
 #include "../../../Common/includes/Protocol.h"
 #include "../Action/CommandCL.h"
+#include "../Queue/BQueue.h"
 
 class SendThread : public Thread{
 private:
-    BlockingQueue<CommandCL*> &m_quene;
+    BQueue<std::unique_ptr<CommandCL>> &m_quene;
     Socket &m_socket;
     Protocol &m_protocol;
     std::atomic<bool> running;
 public:
-    SendThread(BlockingQueue<CommandCL*> &quene, Socket &socket, Protocol &protocol)
+    SendThread(BQueue<std::unique_ptr<CommandCL>> &quene, Socket &socket, Protocol &protocol)
             : m_quene(quene), m_socket(socket), m_protocol(protocol), running(true){}
 
     void run() override;

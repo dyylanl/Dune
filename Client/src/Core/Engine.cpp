@@ -17,15 +17,6 @@ void Engine::Update() {
         std::vector<std::unique_ptr<GameObject>> aux;
         m_objects = m_queueNb.front();
         m_queueNb.pop();
-        /*if(!aux.empty()) {
-            *//*for (auto & obj: m_objects) {
-            delete obj;
-        }*//*
-        m_objects.clear();
-
-        m_objects = aux;
-        }*/
-
         int size = m_objects.size();
         for (int i = 0; i < size; ++i) {
             m_objects[i]->update(m_eventManager, m_queueB);
@@ -48,7 +39,7 @@ void Engine::Render(SDL2pp::Renderer &m_Renderer) {
 }
 
 Engine::Engine(std::vector<std::vector<char>> &mapa, std::vector<std::unique_ptr<GameObject>> &objects, TextureManager &textureManager, EventManager &eventManager,
-               NBQueue<std::vector<std::unique_ptr<GameObject>>> &queueNb, BlockingQueue<CommandCL*> &queueB)
+               NBQueue<std::vector<std::unique_ptr<GameObject>>> &queueNb, BQueue<std::unique_ptr<CommandCL>> &queueB)
                : m_mapa (mapa), m_objects(std::move(objects)), m_TextureManager(textureManager), m_eventManager(eventManager),
                  m_queueNb(queueNb), m_queueB(queueB){
     m_Running = true;

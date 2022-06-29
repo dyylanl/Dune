@@ -13,7 +13,7 @@ class ButtonRefineryCL : public ButtonCL {
 public:
     ButtonRefineryCL(int id, char player, int constructionTime, bool selectStatus, bool ready);
 
-    void buildBuilding(BlockingQueue<CommandCL *> &queue, SDL2pp::Point point);
+    void buildBuilding(BQueue<std::unique_ptr<CommandCL>> &queue, SDL2pp::Point point);
 
     ~ButtonRefineryCL() {}
 };

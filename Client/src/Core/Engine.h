@@ -17,6 +17,7 @@
 #include "../Action/CommandCL.h"
 #include "../GameObject/Button/ButtonBuild/ButtonWidtrapCL.h"
 #include "../Queue/NBQueue.h"
+#include "../Queue/BQueue.h"
 
 class Engine {
 private:
@@ -26,9 +27,9 @@ private:
     EventManager &m_eventManager;
     bool m_Running;
     NBQueue<std::vector<std::unique_ptr<GameObject>>> &m_queueNb;
-    BlockingQueue<CommandCL*> &m_queueB;
+    BQueue<std::unique_ptr<CommandCL>> &m_queueB;
 public:
-    Engine(std::vector<std::vector<char>>& mapa, std::vector<std::unique_ptr<GameObject>> &objects, TextureManager &manager, EventManager &eventManager, NBQueue<std::vector<std::unique_ptr<GameObject>>> &queue_nb, BlockingQueue<CommandCL*> &queueB);
+    Engine(std::vector<std::vector<char>>& mapa, std::vector<std::unique_ptr<GameObject>> &objects, TextureManager &manager, EventManager &eventManager, NBQueue<std::vector<std::unique_ptr<GameObject>>> &queue_nb, BQueue<std::unique_ptr<CommandCL>> &queueB);
 
     bool IsRunning();
 

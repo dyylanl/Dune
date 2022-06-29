@@ -16,6 +16,8 @@ public:
     MoveCL(int id, SDL2pp::Point position) : m_id(id), m_position(position) {}
 
     void execute(Protocol &protocol, Socket &socket);
+
+    ~MoveCL() {}
 };
 
 

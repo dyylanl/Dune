@@ -19,7 +19,7 @@ protected:
 public:
     ButtonUnitCL(char textureID, SDL2pp::Point position, int id, char player, int constructionTime, bool selectStatus, bool ready);
 
-    void update(EventManager &eventManager, BlockingQueue<CommandCL *> &queue);
+    void update(EventManager &eventManager, BQueue<std::unique_ptr<CommandCL>> &queue);
 
     virtual void draw(SDL2pp::Renderer &renderer, TextureManager &textureManager);
 

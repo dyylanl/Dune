@@ -17,7 +17,7 @@ public:
     NonBlockingQueue(NonBlockingQueue&& other) = delete;
     NonBlockingQueue& operator=(NonBlockingQueue&& other) = delete;
 
-    void push(T &t) {
+    void push(const T &t) {
         std::unique_lock<std::mutex> l(m);
         queue.push(t);
     }

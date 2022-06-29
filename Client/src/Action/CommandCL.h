@@ -11,6 +11,8 @@
 class CommandCL {
 public:
     virtual void execute(Protocol &protocol, Socket &socket) = 0;
+
+    virtual ~CommandCL() {}
 };
 
 

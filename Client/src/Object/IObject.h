@@ -9,10 +9,11 @@
 #include "../Graphics/TextureManager.h"
 #include "../Action/CommandCL.h"
 #include "../../../Common/includes/BlockingQueue.h"
+#include "../Queue/BQueue.h"
 
 class IObject {
 public:
-    virtual void update(EventManager &eventManager, BlockingQueue<CommandCL *> &queue) = 0;
+    virtual void update(EventManager &eventManager, BQueue<std::unique_ptr<CommandCL>> &queue) = 0;
 
     virtual void draw(SDL2pp::Renderer &renderer, TextureManager &textureManager) = 0;
 
