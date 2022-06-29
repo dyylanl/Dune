@@ -2,9 +2,9 @@
 
 
 Rock::Rock() :
-        Terrain(ROCK_KEY),
-        building(nullptr) {}
-
+        Terrain(ROCK_KEY)/*,
+        building(nullptr) */{}
+/*
 void Rock::buildOn(Building* newBuilding) {
     this->occupied = true;
     this->builtOn = true;
@@ -19,3 +19,4 @@ void Rock::free() {
     this->building = nullptr;
     Terrain::free();
 }
+*/

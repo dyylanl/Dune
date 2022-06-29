@@ -129,3 +129,7 @@ void ClientConnection::sendInitGame(std::vector<std::vector<char>>& map) {
     protocol.sendInitGame(peer);
     protocol.sendMap(peer, map);
 }
+
+void ClientConnection::sendInitBuildings(std::vector<BuildingDTO> buildings) {
+    protocol.sendInitBuildings(peer, buildings);
+}

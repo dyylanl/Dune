@@ -174,7 +174,9 @@ public:
     void sendEstablishConnection(Socket &socket);
 
     bool recvEstablishConnection(Socket &socket);
-
+    
+    void sendInitBuildings(Socket &socket, std::vector<BuildingDTO> buildings);
+    std::vector<BuildingDTO> recvInitBuildings(Socket &socket);
 };
 
 

@@ -52,6 +52,7 @@ public:
 
 
     void sendInitGame(std::vector<std::vector<char>>& map);
+    void sendInitBuildings(std::vector<BuildingDTO> buildings);
     
 };
 

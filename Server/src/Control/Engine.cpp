@@ -24,10 +24,10 @@ void Engine::_processFinishedConnections() {
     }
 }
 
-
 void Engine::_loopIteration(int it) {
     _processCommands();
     _processFinishedConnections();
+
 }
 
 // ---------------------------------------------- //
@@ -49,7 +49,8 @@ Engine::Engine(MapDTO map_dto) :
 
 void Engine::run() {
     fprintf(stderr, "[ENGINE]: Empezando partida.\n");
-    established_connections.initGame(map.getMap());
+    established_connections.initGame(map.getMap());     // envio terrenos
+    established_connections.sendInitBuildings(map.getBuildings());   // envio el centro de construccion de cada jugador de la partida
     auto t1 = std::chrono::steady_clock::now();
     auto t2 = t1;
     std::chrono::duration<float, std::milli> diff{};

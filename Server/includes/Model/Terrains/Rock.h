@@ -6,16 +6,16 @@
 
 class Rock : public Terrain {
 private:
-    Building* building;
+    //Building* building;
 
 public:
     Rock();
 
-    virtual void buildOn(Building* building) override;
+    //virtual void buildOn(Building* building) override;
 
-    virtual Building* getBuilding() override;
+    //virtual Building* getBuilding() override;
 
-    virtual void free() override;
+    //virtual void free() override;
 };
 
 #endif //__ROCKS_H__

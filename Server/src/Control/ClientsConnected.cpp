@@ -43,3 +43,9 @@ void ClientsConnected::initGame(std::vector<std::vector<char>>& map) {
         it->second.sendInitGame(map);
     }
 }
+
+void ClientsConnected::sendInitBuildings(std::vector<BuildingDTO> buildings) {
+    for (auto it = clients.begin(); it != clients.end(); it++) {
+        it->second.sendInitBuildings(buildings);
+    }
+}
