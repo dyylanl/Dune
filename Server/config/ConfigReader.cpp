@@ -140,7 +140,7 @@ std::string ConfigurationReader::parseType(const Building::BuildingType building
             buildingName = "barracks";
             break;
         case Building::BuildingType::CONSTRUCTION_CENTER:
-            buildingName = "constructionYard";
+            buildingName = "constructionCenter";
             break;
         case Building::BuildingType::HEAVY_FACTORY:
             buildingName = "heavyFactory";
@@ -200,7 +200,7 @@ std::string ConfigurationReader::parseType(const Unit::UnitType unitType) const 
             unitName = "raider";
             break;
         case Unit::UnitType::TANK:
-            unitName = "DeviatorCL";
+            unitName = "tank";
             break;
         case Unit::UnitType::TRIKE:
             unitName = "trike";
