@@ -117,3 +117,8 @@ uint16_t Engine::addClient(NewConnection client) {
     }
     return ret;
 }
+
+
+std::vector<InstanceId> Engine::getAllPlayers() {
+    return established_connections.getAllPlayers();
+}

@@ -9,9 +9,10 @@
 #include "../../../Common/includes/BlockingQueue.h"
 #include "../../../Common/includes/Exceptions/Exception.h"
 #include "../../../Common/includes/NonBlockingQueue.h"
-#include "../../../Common/includes/Socket/Socket.h"
 #include "../../../Server/includes/defs.h"
 #include "../../../Common/includes/Protocol.h"
+
+class Command;
 
 class ClientConnection {
 private:
@@ -26,18 +27,20 @@ private:
     std::thread receiver;
     Protocol protocol;
 
+    NonBlockingQueue<Command*>& commands;
+
     void _finishThread();
     // POR NO USAR PTR INTELIGENTES
     void _freeNotifications();
     void _sender();
     void _receiver();
-    void _receiveCommand();
+    void _receiveCommand(uint8_t opcode);
 
 public:
     /* Constructor */
     ClientConnection(const InstanceId id,
-                     const Id map,
                      Socket& peer,
+                     NonBlockingQueue<Command*>& commands,
                      NonBlockingQueue<InstanceId*>& finished_connections);
 
     ClientConnection(const ClientConnection&) = delete;
@@ -53,6 +56,7 @@ public:
 
     void sendInitGame(std::vector<std::vector<char>>& map);
     void sendInitBuildings(std::vector<BuildingDTO> buildings);
+    InstanceId getId(){return id;}
     
 };
 

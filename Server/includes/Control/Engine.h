@@ -57,6 +57,10 @@ public:
     */
     uint16_t addClient(NewConnection newPlayer);
 
+
+
+    std::vector<Id> getAllPlayers();
+
     
 };
 

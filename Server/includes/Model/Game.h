@@ -85,7 +85,12 @@ public:
    */
    std::vector<MapDTO> getMapsLoads();
 
+    /*
+    *   Termina todas las partidas corriendo en el servidor-
+    */
    void stop();
+
+   std::vector<std::vector<InstanceId>> getAllPlayers();
    
 
     ~Game();

@@ -35,6 +35,8 @@ public:
 
     void sendInitBuildings(std::vector<BuildingDTO> buildings);
 
+    std::vector<InstanceId> getAllPlayers();
+
 };
 
 

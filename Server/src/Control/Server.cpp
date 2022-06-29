@@ -23,6 +23,24 @@ void Server::printUploadedMaps() {
     }
 }
 
+void Server::printAllPlayers() {
+    std::cout << "Jugadores: " << std::endl;
+    std::vector<std::vector<InstanceId>> players = game.getAllPlayers();
+    int total = players.size();
+    if (players.size() == 0) {
+        std::cout << "No hay jugadores conectados..." << std::endl;
+        return;
+    }
+    for (int i = 0; i < total; i++) {
+        std::cout << "Partida: " << i << std::endl;
+        int total_1 = players[i].size();
+        for (int j = 0; j < total_1; j++) {
+            std::cout << "Id jugador: " << players[i][j] << std::endl;
+        }
+        std::cout << std::endl;
+    }
+}
+
 
 Server::Server(const std::string& config_path, const std::string& port, const int max_clients_queued) :
           game(config_path),
@@ -32,9 +50,6 @@ Server::Server(const std::string& config_path, const std::string& port, const in
 void Server::run() {
     // Se lanza el hilo aceptador de conexiones.
     accepter.start();
-
-    // Se lanza el hilo motor del juego
-    //engine.start();
     /*
      * Comandos
      */
@@ -51,19 +66,22 @@ void Server::run() {
             printUploadedMaps();
         }
 
-        /*if (input == "c") {
-            system("clear");
-        }*/
+        if (input == "c") {
+            int ret = system("clear");
+            ret += 1;
+        }
+
+        if (input == "p") {
+            printAllPlayers();
+        }
+        
 
     }
 
     game.stop();
 
     accepter.stop();
-    //engine.stop();
-
     accepter.join();
-    //engine.join();
 
 
 }

@@ -133,6 +133,16 @@ std::vector<MapDTO> Game::getMapsLoads(){
 }
 
 
+std::vector<std::vector<InstanceId>> Game::getAllPlayers() {
+    std::vector<std::vector<InstanceId>> all_players;
+    for (const auto& [game_name, engine] : this->games) {
+        std::vector<InstanceId> players = engine->getAllPlayers();
+        all_players.push_back(players);
+    }
+    return all_players;
+}
+
+
 
 void Game::stop() {
     for (const auto& [name_game, engine] : this->games) {
