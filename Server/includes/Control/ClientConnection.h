@@ -12,11 +12,11 @@
 #include "../../../Common/includes/Socket/Socket.h"
 #include "../../../Server/includes/defs.h"
 #include "../../../Common/includes/Protocol.h"
+#include "../../../Server/includes/Control/Commands/Command.h"
 
 class ClientConnection {
 private:
     InstanceId id;
-    std::atomic<Id> map_id;
     Socket peer;
     NonBlockingQueue<InstanceId*>& finished_connections;
     // Comparten el int finished_threads => necesito el mutex
@@ -25,19 +25,20 @@ private:
     std::thread sender;
     std::thread receiver;
     Protocol protocol;
+    NonBlockingQueue<Command*>& commands;
 
     void _finishThread();
     // POR NO USAR PTR INTELIGENTES
     void _freeNotifications();
     void _sender();
     void _receiver();
-    void _receiveCommand();
+    void _receiveCommand(uint8_t opcode);
 
 public:
     /* Constructor */
     ClientConnection(const InstanceId id,
-                     const Id map,
                      Socket& peer,
+                     NonBlockingQueue<Command*>& commands,
                      NonBlockingQueue<InstanceId*>& finished_connections);
 
     ClientConnection(const ClientConnection&) = delete;

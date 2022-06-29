@@ -369,6 +369,12 @@ void Protocol::sendCommandBuildBuilding(Socket &socket, char &action, char &buil
     std::cout << "posY(uint16_t) : " << posY << std::endl;
 }
 
+void Protocol::recvCommandBuildBuilding(Socket &socket, char &type, uint16_t& pos_x, uint16_t& pos_y) {
+    socket.recv((char *)&type,sizeof(uint8_t));
+    socket.recv((char *)&pos_x,sizeof(uint16_t));
+    socket.recv((char *)&pos_y,sizeof(uint16_t));
+}
+
 std::vector<std::string> Protocol::recvMapsId(Socket &socket) {
     std::vector<std::string> list;
     uint16_t count = 0;

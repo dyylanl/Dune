@@ -1,6 +1,5 @@
 #include "../../includes/Control/ClientConnection.h"
 
-
 void ClientConnection::_finishThread() {
     std::unique_lock<std::mutex> l(m);
     if ((++finished_threads) == 2) {
@@ -19,19 +18,8 @@ void ClientConnection::_freeNotifications() {
 // hilo sender -- envia respuesta al cliente
 // todo: implementar logica de envio de informacion pertinente al player
 void ClientConnection::_sender() {
-    try {
-        //std::cout << "Sender comenzando ejecucion." << std::endl;
-        /*Protocol protocol;
-        Command* command = nullptr;
-        bool socket_valid = true;
-        while ((command = notifications.pop())) {
-            // aca hay que ejecutar una logica
-            // aca se mandaria el snapshot
-            socket_valid = protocol.sendResponse(peer, 1);
-            delete command;
-            if (!socket_valid) {
-                break;
-            }*/
+    /*try {
+        std::cout << "Iniciando el hilo sender... " << std::endl;
     } catch (const std::exception& e) {
             stop();
             fprintf(stderr, "[ClientConnection]: %s\n", e.what());
@@ -39,18 +27,20 @@ void ClientConnection::_sender() {
         stop();
         fprintf(stderr, "[ClientConnection]: Ocurrio un error en el hilo sender.\n");
     }
-    _finishThread();
+    _finishThread();*/
 }
 
 void ClientConnection::_receiver() {
     try {
-        //std::cout << "Receiver comenzando ejecucion..." << std::endl;
+        std::cout << "Receiver comenzando ejecucion..." << std::endl;
         uint8_t opcode = 0;
-        while (peer.recv(reinterpret_cast<char *>(opcode), sizeof(uint16_t))) {
-            if (opcode != 0) {
+        while ((opcode = protocol.recvResponse(peer))) { // este recv se usa para saber si esperamos un comando o un fin de conexion
+            std::cout << "Se recibio la accion " << opcode << std::endl;
+            if (opcode != 0) { // si el opcode recibido es 0 entonces significa que el cliente cerro la comunicacion
                 // lo unico que hace el hilo receiver es pushear a la cola de comandos
-                _receiveCommand();
+                _receiveCommand(opcode);
             } else {
+                std::cout << "Receiver: " << opcode << std::endl;
                 break;
             }
         }
@@ -65,28 +55,24 @@ void ClientConnection::_receiver() {
     _finishThread();
 }
 
-void ClientConnection::_receiveCommand() {
-    uint8_t opcode_cmd = 0;
-    peer.recv(reinterpret_cast<char *>(opcode_cmd), sizeof(uint16_t));
+void ClientConnection::_receiveCommand(uint8_t opcode) {
     try {
-        std::cout << "Jugador recibio: " << opcode_cmd << std::endl;
-        /*Command* cmd = CommandFactory::newCommand(id, opcode_cmd, peer);
-        commands.push(cmd);*/
+        Command* cmd = CommandFactory::newCommand(id,opcode,peer);
     } catch (const Exception& e) {
     }
 }
 
 ClientConnection::ClientConnection(
         const InstanceId id, 
-        const Id map_id1,
         Socket& peer,
+        NonBlockingQueue<Command*>& commands1,
         NonBlockingQueue<InstanceId*>& finished_connections)
         : id(id),
-          map_id(map_id1),
           peer(std::move(peer)),
           finished_connections(finished_connections),
           finished_threads(0),
-          protocol()  {}
+          protocol(),
+          commands(commands1)  {}
 
 void ClientConnection::start() {
     // si llegamos hasta aca es porque el jugador se pudo conectar entonces se lo hacemos saber al cliente

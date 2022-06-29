@@ -14,7 +14,7 @@ void ClientsConnected::add(const InstanceId id, const Id map_id, Socket& peer) {
     }
     clients.emplace(
             std::piecewise_construct, std::forward_as_tuple(id),
-            std::forward_as_tuple(id, map_id, peer, finished_connections));
+            std::forward_as_tuple(id, peer, commands, finished_connections));
     clients.at(id).start();
 }
 

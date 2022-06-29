@@ -36,6 +36,9 @@ public:
     void sendAcceptPlayerInvalid(Socket &socket);
 
 
+    void recvCommandBuildBuilding(Socket &socket, char& type, uint16_t& posx, uint16_t& posy);
+
+
     /*
      * Envia la informacion requerida para unirse una partida.
      */

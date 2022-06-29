@@ -189,7 +189,15 @@ void Client::createGame(Protocol protocol, Socket &socket) {
         std::cout << "Se completo la partida..." << std::endl;
         map = protocol.recvMap(socket);
         std::cout << "Mapa recibido..." << std::endl;
-        initSDL(socket, protocol, map);
+        char opcode = 7; // envio crear
+        char building_type = 'b'; // envio barrack
+        int pos_x = 10;
+        int pos_y = 15;
+        protocol.sendCommandBuildBuilding(socket,opcode,building_type,pos_x,pos_y);
+        //initSDL(socket, protocol, map);
+        protocol.recvResponse(socket);
+        protocol.recvResponse(socket);
+        protocol.recvResponse(socket);
       }  
   } else {
     std::cout << "ERROR UNIENDOME A LA PARTIDA "<< std::endl;

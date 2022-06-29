@@ -39,9 +39,10 @@ Command* CommandFactory::newCommand(InstanceId caller, uint8_t opcode,
         }
 
         case BUILD_BUILDING_COMMAND: {  // 7
-            char building_type = protocol.recvResponse(socket);
-            uint16_t pos_x = protocol.recvResponse(socket);
-            uint16_t pos_y = protocol.recvResponse(socket);
+            char building_type = 0;
+            uint16_t pos_x = 0;
+            uint16_t pos_y = 0;
+            protocol.recvCommandBuildBuilding(socket, building_type,pos_x,pos_y);
             return new BuildBuildingCommand(caller, building_type, pos_x, pos_y);
         }
 

@@ -160,7 +160,7 @@ void RecvThread::addBuild(std::vector<GameObject *> &gameObjects) {
             m_protocol.recvBuild(m_socket, id, player, posX, posY, life);
             gameObjects.push_back(new PalaceCL(id, player, SDL2pp::Point(posX, posY), life));
             break;
-        default: std::cout << "Tipo de edificio invalido" << std::endl;
+        default: std::cout << "Tipo de edificio invalido" << std::endl; this->stop();
     }
 }
 

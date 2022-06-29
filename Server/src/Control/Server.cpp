@@ -30,11 +30,10 @@ Server::Server(const std::string& config_path, const std::string& port, const in
           {}
 
 void Server::run() {
+
     // Se lanza el hilo aceptador de conexiones.
     accepter.start();
 
-    // Se lanza el hilo motor del juego
-    //engine.start();
     /*
      * Comandos
      */
@@ -51,19 +50,16 @@ void Server::run() {
             printUploadedMaps();
         }
 
-        /*if (input == "c") {
+        if (input == "c") {
             system("clear");
-        }*/
+        }
 
     }
 
     game.stop();
 
     accepter.stop();
-    //engine.stop();
-
     accepter.join();
-    //engine.join();
 
 
 }
