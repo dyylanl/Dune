@@ -9,11 +9,12 @@
 #include "SDL2pp/SDL2pp.hh"
 #include "../Camera/Camera.h"
 #include <map>
+#include <memory>
 
 class TextureManager {
 private:
     SDL2pp::Renderer &m_renderer;
-    std::map<char, SDL2pp::Texture*> m_TextureMap;
+    std::map<char, std::unique_ptr<SDL2pp::Texture>> m_TextureMap;
     Camera camera;
 
 public:
