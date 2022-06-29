@@ -13,22 +13,27 @@ void Engine::Events() {
 }
 
 void Engine::Update() {
-    std::vector<GameObject*> aux;
-    aux = m_queueNb.pop();
-    if(!aux.empty()) {
-        for (GameObject *obj: m_objects) {
+    try {
+        std::vector<std::unique_ptr<GameObject>> aux;
+        m_objects = m_queueNb.front();
+        m_queueNb.pop();
+        /*if(!aux.empty()) {
+            *//*for (auto & obj: m_objects) {
             delete obj;
-        }
+        }*//*
         m_objects.clear();
 
         m_objects = aux;
-    }
+        }*/
 
-    int size = m_objects.size();
-    for (int i = 0; i < size; ++i) {
-        m_objects[i]->update(m_eventManager, m_queueB);
+        int size = m_objects.size();
+        for (int i = 0; i < size; ++i) {
+            m_objects[i]->update(m_eventManager, m_queueB);
+        }
+        //m_TextureManager.getCamera().update(m_eventManager);
+    } catch (EmptyQueue & e) {
+        std::cerr << e.what() << std::endl;
     }
-    //m_TextureManager.getCamera().update(m_eventManager);
 }
 
 void Engine::Render(SDL2pp::Renderer &m_Renderer) {
@@ -42,9 +47,9 @@ void Engine::Render(SDL2pp::Renderer &m_Renderer) {
     //m_objects.clear();
 }
 
-Engine::Engine(std::vector<std::vector<char>> &mapa, std::vector<GameObject*> &objects, TextureManager &textureManager, EventManager &eventManager,
-               NonBlockingQueue<std::vector<GameObject*>> &queueNb, BlockingQueue<CommandCL*> &queueB)
-               : m_mapa (mapa), m_objects(objects), m_TextureManager(textureManager), m_eventManager(eventManager),
+Engine::Engine(std::vector<std::vector<char>> &mapa, std::vector<std::unique_ptr<GameObject>> &objects, TextureManager &textureManager, EventManager &eventManager,
+               NBQueue<std::vector<std::unique_ptr<GameObject>>> &queueNb, BlockingQueue<CommandCL*> &queueB)
+               : m_mapa (mapa), m_objects(std::move(objects)), m_TextureManager(textureManager), m_eventManager(eventManager),
                  m_queueNb(queueNb), m_queueB(queueB){
     m_Running = true;
 }

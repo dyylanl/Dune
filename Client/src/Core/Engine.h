@@ -16,18 +16,19 @@
 #include "../../../Common/includes/NonBlockingQueue.h"
 #include "../Action/CommandCL.h"
 #include "../GameObject/Button/ButtonBuild/ButtonWidtrapCL.h"
+#include "../Queue/NBQueue.h"
 
 class Engine {
 private:
     std::vector<std::vector<char>> m_mapa;
-    std::vector<GameObject*> m_objects;
+    std::vector<std::unique_ptr<GameObject>> m_objects;
     TextureManager &m_TextureManager;
     EventManager &m_eventManager;
     bool m_Running;
-    NonBlockingQueue<std::vector<GameObject*>> &m_queueNb;
+    NBQueue<std::vector<std::unique_ptr<GameObject>>> &m_queueNb;
     BlockingQueue<CommandCL*> &m_queueB;
 public:
-    Engine(std::vector<std::vector<char>>& mapa, std::vector<GameObject*> &objects, TextureManager &manager, EventManager &eventManager, NonBlockingQueue<std::vector<GameObject*>> &queue_nb, BlockingQueue<CommandCL*> &queueB);
+    Engine(std::vector<std::vector<char>>& mapa, std::vector<std::unique_ptr<GameObject>> &objects, TextureManager &manager, EventManager &eventManager, NBQueue<std::vector<std::unique_ptr<GameObject>>> &queue_nb, BlockingQueue<CommandCL*> &queueB);
 
     bool IsRunning();
 
