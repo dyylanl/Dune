@@ -470,12 +470,20 @@ void Protocol::sendInitBuildings(Socket &socket, std::vector<BuildingDTO> buildi
     uint16_t total = buildings.size();
     socket.send((const char*)&total, sizeof(uint16_t));
     for (int i = 0; i < total; i++) {
-        char type = buildings[i].type;
-        uint16_t pos_x = buildings[i].pos_x;
-        uint16_t pos_y = buildings[i].pos_y;
+        char type = 1;
+        char build_type = buildings[i].type;
+        uint16_t id = 2;
+        uint8_t player = 1;
+        uint16_t pos_x = buildings[i].pos_x * 30;
+        uint16_t pos_y = buildings[i].pos_y * 30;
+        uint16_t life = 0;
         socket.send((const char *)&type, sizeof(uint8_t));
+        socket.send((const char *)&build_type, sizeof(uint8_t));
+        socket.send((const char *)&id, sizeof(uint16_t));
+        socket.send((const char *)&player, sizeof(uint8_t));
         socket.send((const char *)&pos_x, sizeof(uint16_t));
         socket.send((const char *)&pos_y, sizeof(uint16_t));
+        socket.send((const char *)&life, sizeof(uint16_t));
     }
     
 }

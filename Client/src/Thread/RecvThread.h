@@ -11,10 +11,16 @@
 #include "../../../Common/includes/NonBlockingQueue.h"
 #include "../Object/GameObject.h"
 
+#define BARRACKS_KEY 'b'
+#define CONSTRUCTION_CENTER_KEY 'c'
+#define HEAVY_FACTORY_KEY 'h'
+#define LIGHT_FACTORY_KEY 'l'
+#define REFINERY_KEY 'r'
+#define SILO_KEY 's'
+#define WIND_TRAP_KEY 'w'
+#define PALACE_KEY 'p'
+
 enum Type{UNIT, BUILD, BUTTON};
-/*enum VehicleType {TRIKE, SONIC_TANK, RAIDER, DESVIATOR, TANK, DEVASTATOR, HARVESTER};
-enum BuilType {CONSTRUCTION_YARD, LIGHT_FACTORY, HEAVY_FACTORY,WIND_TRAP, REFINERY,
-    SILO, BARRACK, PALACE};*/
 
 class RecvThread : public Thread {
 private:

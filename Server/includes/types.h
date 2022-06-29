@@ -23,7 +23,7 @@
 #define LIGHT_FACTORY_KEY 'l'
 #define REFINERY_KEY 'r'
 #define SILO_KEY 's'
-#define WIND_TRAP_KEY 's'
+#define WIND_TRAP_KEY 'w'
 
 // --------------HOUSES------------ //
 #define HARKONNEN_HOUSE 1

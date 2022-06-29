@@ -128,35 +128,35 @@ void RecvThread::addBuild(std::vector<GameObject *> &gameObjects) {
 
     m_protocol.recvObjectType(m_socket, objectType);
     switch (objectType) {
-        case CONSTRUCTION_YARD:
+        case CONSTRUCTION_CENTER_KEY:
             m_protocol.recvBuild(m_socket, id, player, posX, posY, life);
             gameObjects.push_back(new ConstructionYardCL(id, player, SDL2pp::Point(posX, posY), life));
             break;
-        case LIGHT_FACTORY:
+        case LIGHT_FACTORY_KEY:
             m_protocol.recvBuild(m_socket, id, player, posX, posY, life);
             gameObjects.push_back(new LightFactoryCL(id, player, SDL2pp::Point(posX, posY), life));
             break;
-        case HEAVY_FACTORY:
+        case HEAVY_FACTORY_KEY :
             m_protocol.recvBuild(m_socket, id, player, posX, posY, life);
             gameObjects.push_back(new HeavyFactoryCL(id, player, SDL2pp::Point(posX, posY), life));
             break;
-        case WIND_TRAP:
+        case WIND_TRAP_KEY:
             m_protocol.recvBuild(m_socket, id, player, posX, posY, life);
             gameObjects.push_back(new WindTrapCL(id, player, SDL2pp::Point(posX, posY), life));
             break;
-        case REFINERY:
+        case REFINERY_KEY:
             m_protocol.recvBuild(m_socket, id, player, posX, posY, life);
             gameObjects.push_back(new RefineryCL(id, player, SDL2pp::Point(posX, posY), life));
             break;
-        case SILO:
+        case SILO_KEY:
             m_protocol.recvBuild(m_socket, id, player, posX, posY, life);
             gameObjects.push_back(new SiloCL(id, player, SDL2pp::Point(posX, posY), life));
             break;
-        case BARRACK:
+        case BARRACKS_KEY:
             m_protocol.recvBuild(m_socket, id, player, posX, posY, life);
             gameObjects.push_back(new BarrackCL(id, player, SDL2pp::Point(posX, posY), life));
             break;
-        case PALACE:
+        case PALACE_KEY:
             m_protocol.recvBuild(m_socket, id, player, posX, posY, life);
             gameObjects.push_back(new PalaceCL(id, player, SDL2pp::Point(posX, posY), life));
             break;

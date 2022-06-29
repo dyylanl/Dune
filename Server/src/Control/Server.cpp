@@ -51,9 +51,9 @@ void Server::run() {
             printUploadedMaps();
         }
 
-        if (input == "c") {
+        /*if (input == "c") {
             system("clear");
-        }
+        }*/
 
     }
 

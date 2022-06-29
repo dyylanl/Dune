@@ -5,7 +5,7 @@
 #include "TextureManager.h"
 #include "../../includes/Client.h"
 
-#define TILESIZE 50
+#define TILESIZE 30
 
 #include <map>
 #include <string>
