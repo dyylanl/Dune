@@ -51,6 +51,10 @@ void Server::run() {
             printUploadedMaps();
         }
 
+        if (input == "c") {
+            system("clear");
+        }
+
     }
 
     game.stop();

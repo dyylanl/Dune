@@ -4,13 +4,19 @@
 #include <vector>
 #include "../../../config/GameConfig.h"
 #include "../Position.h"
-#include "../Weapons/Weapon.h"
 #include "../Units/Attackable.h"
 
 class Player;
 
 class Building : public Attackable {
+    
 public:
+
+    const int id;
+    const int width, height;
+    const int energy;
+    const int cost;
+
     enum BuildingType {
         BARRACKS,
         CONSTRUCTION_CENTER,
@@ -36,11 +42,6 @@ public:
     Position& getClosestPosition(Position& position) override;
     void demolish();
     bool hasNews();
-
-    const int id;
-    const int width, height;
-    const int energy;
-    const int cost;
 private:
     static int counter;
     Player* player;

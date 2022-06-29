@@ -465,3 +465,22 @@ void Protocol::sendAcceptPlayerInvalid(Socket &socket) {
     uint16_t flag_bad_join = BAD_JOIN;
     socket.send((const char*)&flag_bad_join, sizeof(uint16_t));
 }
+
+void Protocol::sendInitBuildings(Socket &socket, std::vector<BuildingDTO> buildings) {
+    uint16_t total = buildings.size();
+    socket.send((const char*)&total, sizeof(uint16_t));
+    for (int i = 0; i < total; i++) {
+        char type = buildings[i].type;
+        uint16_t pos_x = buildings[i].pos_x;
+        uint16_t pos_y = buildings[i].pos_y;
+        socket.send((const char *)&type, sizeof(uint8_t));
+        socket.send((const char *)&pos_x, sizeof(uint16_t));
+        socket.send((const char *)&pos_y, sizeof(uint16_t));
+    }
+    
+}
+/*
+std::vector<BuildingDTO> Protocol::recvInitBuildings(Socket &socket) {
+    uint16_t total = 0;
+    socket.recv((char*)&total, sizeof(uint16_t));
+}*/

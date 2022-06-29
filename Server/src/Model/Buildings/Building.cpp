@@ -76,7 +76,6 @@ bool Building::operator==(const Building &other) {
     return this->id == other.id;
 }
 
-
 // TODO: terminar silo y trampa de aire
 Building Building::getBuildType(char type, int pos_x, int pos_y) {
     switch (type) {
