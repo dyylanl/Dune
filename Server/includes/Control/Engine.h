@@ -58,9 +58,14 @@ public:
     */
     uint16_t addClient(NewConnection newPlayer);
 
-
-
+    /*
+    *   Devuelve una lista de todos los id's conectados.
+    */
     std::vector<Id> getAllPlayers();
+
+    int getCurrentPlayers() {return current_players;}
+    int getMaxPlayers() {return req_players;}
+    Id getMapId() {return map_id;}
 
     
 };

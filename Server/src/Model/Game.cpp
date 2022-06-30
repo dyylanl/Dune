@@ -26,9 +26,11 @@ std::vector<int> Game::get(const std::string& game_name) {
 // ---------- METODOS PUBLICOS ------------ //
 
 Game::Game(std::string path_config_game) :
+        maps_dto_init(),
+        info_games(),
         games(),
-        game_config(path_config_game),
-        info_games()
+        game_config(path_config_game)
+
 {
     std::list<std::string> map_paths = game_config.getAllPaths();
     int map_id = 1;
@@ -60,7 +62,7 @@ uint16_t Game::createGame(Id id_map, const std::string& name_game) {
     map.max_players = maps_dto_init[id_map].max_players;
     map.name_map = name_game;
     games[name_game] = (new Engine(map));
-    info_games[name_game] = {0,map.max_players,(int)id_map};
+    this->info_games[name_game] = {0,maps_dto_init[id_map].max_players,(int)id_map}; // currents:0 , max_players: dto.max_players, id_map
     return SUCCESS;
 }
 
@@ -68,11 +70,9 @@ uint16_t Game::acceptPlayer(Socket &peer, std::string name_player, std::string n
     std::lock_guard<std::mutex> lock(this->mutex);
     int ret = ERROR;
     if (contains(name_game)) { // si existe una partida con ese nombre entonces entro
-        Id map_id1 = (Id)info_games[name_game][2];
-        ret = games[name_game]->addClient(NewConnection(peer,name_player,name_game,map_id1)); // chequea si la partida no esta completa para unir el nuevo player    
-        if (ret == SUCCESS) {
-            info_games[name_game][0]++;
-        }
+        Id map_id1 = (Id)games[name_game]->getMapId();
+        ret = games[name_game]->addClient(NewConnection(peer,name_player,name_game,map_id1)); // chequea si la partida no esta completa para unir el nuevo player
+
     }
     return ret;
 }
@@ -87,10 +87,10 @@ std::vector<std::vector<std::string>> Game::listGames() {
     std::lock_guard<std::mutex> lock(mutex);
     std::vector<std::vector<std::string>> list = {};
     if (!this->games.empty()) {
-        for (const auto& [game_name, stats] : this->info_games) {
+        for (const auto& [game_name, engine] : this->games) {
             std::vector<std::string> info_game = {};
-            info_game.push_back(std::to_string(stats[0]));
-            info_game.push_back(std::to_string(stats[1]));
+            info_game.push_back(std::to_string(engine->getCurrentPlayers()));
+            info_game.push_back(std::to_string(engine->getMaxPlayers()));
             info_game.push_back(game_name);
             list.push_back(info_game);
         }
@@ -119,7 +119,7 @@ Game::~Game() {
 
 Id Game::getMapId(std::string name_game) {
     if (contains(name_game)) {
-        return info_games[name_game][2];
+        return games[name_game]->getMapId();
     } else {
         throw Exception("Invalid get map id.\n");
     }

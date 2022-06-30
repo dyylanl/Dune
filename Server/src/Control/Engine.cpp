@@ -23,7 +23,7 @@ void Engine::_processFinishedConnections() {
         established_connections.remove(*finished_connection);
         delete finished_connection; // delete al new Instance id que hace el client connection
         fprintf(stderr, "[ENGINE]: Se ha desconectado un jugador.\n");
-        current_players--;
+        current_players -= 1;
     }
 }
 
@@ -112,7 +112,7 @@ Engine::~Engine() {}
 uint16_t Engine::addClient(NewConnection client) {
     uint16_t ret = ERROR;
     if (current_players < req_players) {
-        current_players++;
+        current_players += 1;
         established_connections.add((InstanceId)current_players,client.map_id,client.peer);
         if (current_players == req_players) {
             this->start();

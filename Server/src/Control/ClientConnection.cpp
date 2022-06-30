@@ -32,7 +32,7 @@ void ClientConnection::_sender() {
         stop();
         fprintf(stderr, "[ClientConnection]: Ocurrio un error en el hilo sender.\n");
     }
-    //_finishThread();
+    _finishThread();
 }
 
 void ClientConnection::_receiver() {
