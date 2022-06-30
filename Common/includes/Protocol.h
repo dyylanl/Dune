@@ -8,7 +8,6 @@
 #include <iostream>
 //----------------------------------------//
 #include "Socket/Socket.h"
-#include "../../Server/includes/Model/Units/Unit.h"
 #include "../../Server/includes/Model/Map.h"
 
 class Protocol {

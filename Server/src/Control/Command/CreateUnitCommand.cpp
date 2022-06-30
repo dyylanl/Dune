@@ -14,6 +14,6 @@ CreateUnitCommand::CreateUnitCommand(const InstanceId caller, char unit_type1) :
 
 CreateUnitCommand::~CreateUnitCommand() = default;
 
-void CreateUnitCommand::exec(Game &game) {
-    game.createUnit(unit_type);
+void CreateUnitCommand::exec() {
+    std::cout << "Creando unidad" <<std::endl;
 }

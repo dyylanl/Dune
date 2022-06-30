@@ -6,9 +6,7 @@
 #define DUNE_PLAYER_H
 
 #include <string>
-#include "Buildings/Building.h"
 #include "../defs.h"
-#include "Units/Unit.h"
 
 class Building;
 
@@ -27,10 +25,6 @@ public:
     int gold;
     int gold_limit;
 
-    // edificaciones que le pertenecen al player
-    std::vector<Building*> buildings;
-    // unidades que le pertenecen al player
-    std::vector<Unit*> units;
 
     Player(InstanceId id, std::string house, std::string name);
     void addGold(int gold);
@@ -39,9 +33,7 @@ public:
     bool operator==(const Player& other) const;
 
     // agrega a la lista de edificaciones del jugador la nueva construccion
-    void addBuilding(Building* building);
 
-    void addUnit(Unit* unit);
 
     std::string getName() {return name;}
 

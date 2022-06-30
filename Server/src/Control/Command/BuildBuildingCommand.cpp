@@ -13,6 +13,6 @@ BuildBuildingCommand::BuildBuildingCommand(const InstanceId caller,
 
 BuildBuildingCommand::~BuildBuildingCommand() = default;
 
-void BuildBuildingCommand::exec(Game &game) {
-    game.build(build_type,pos_x, pos_y);
+void BuildBuildingCommand::exec() {
+    std::cout << "Construyendo en: " << pos_x << "," << pos_y << std::endl;
 }

@@ -17,6 +17,6 @@ MoveUnitCommand::MoveUnitCommand(const InstanceId caller,
 
 MoveUnitCommand::~MoveUnitCommand() = default;
 
-void MoveUnitCommand::exec(Game &game) {
-    game.moveUnitSelecteds(pos_x, pos_y);
+void MoveUnitCommand::exec() {
+    std::cout << "Moviendo unidad a: " << pos_x << "," << pos_y << std::endl;
 }

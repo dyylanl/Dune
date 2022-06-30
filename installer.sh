@@ -19,8 +19,8 @@ function ctrl_c() {
 
 function helpPanel() {
     echo -e "${purpleColour} Opciones:"
-    echo "  d: instalar DUNE"
-    echo -e "  q: salir. ${endColour}"
+    echo "d: instalar DUNE"
+    echo -e "q: salir. ${endColour}"
      echo -e "\n${yellowColour} Ingrese una opcion: ${endColour}"
 }
 
@@ -64,7 +64,7 @@ function installDependencies() {
 function installGame() {
 	tput civis
 	clear
-    echo -e "${blueColour} Comenzando la instalacion de DUNE ${endColour}"
+    echo -e "\n${blueColour}  [*] Comenzando la instalacion de DUNE ${endColour}"
     sleep 2
     sudo rm -r build 2>&1
     mkdir build
@@ -72,16 +72,16 @@ function installGame() {
     sudo cmake .. > /dev/null 2>&1
     sudo make install -j6 > /dev/null 2>&1
     echo ""
-    echo -e "\n${greenColour}[*] DUNE instalado en "$(pwd)"${endColour}\n"
+    echo -e "\n${greenColour}  [*] DUNE instalado en "$(pwd)"${endColour}\n"
     path=$pwd
     echo ""
     return
 }
 
 function post_installation() {
-	echo "c) Ir a la carpeta donde se instalo DUNE."
+	echo -e "${yellowColour}c) Ir a la carpeta donde se instalo DUNE."
 	echo "q) Salir."
-	echo "Ingrese una opcion: "
+	echo -e "Ingrese una opcion:${endColour}"
 	read OPTION
 	tput cnorm
 	case $OPTION in
@@ -95,32 +95,36 @@ function post_installation() {
 			exit 0
 			;;
 		*)
-			helpPanel
-            getInput
+			exit 0
+			;;
 	esac
 }
 
 function init_installer() {
-	helpPanel
-	while :
-	do
-		read OPTION
-		case $OPTION in
-			d)
-				echo ""
-				installDependencies
-            	installGame
-            	post_installation
-        			;;
-        	q)
-            	exit 0
-        		;;
-        	*)
-            	echo ""
-            	helpPanel
-        		;;
-		esac
-	done
+	if [ "$(uname)" == "Linux" ]; then
+		helpPanel
+		while :
+			do
+			read OPTION
+			case $OPTION in
+				d)
+					echo ""
+					installDependencies
+            				installGame
+            				post_installation
+        				;;
+        			q)
+            				exit 0
+        				;;
+        			*)
+            				echo ""
+            				helpPanel
+        				;;
+			esac
+		done
+	else
+		echo -e "${redColour} [*] Error. Todavia no tenemos instalador para Windows/Mac ${endColour}"
+	fi
 }
 
 if [ "$(id -u)" == "0" ]; then
