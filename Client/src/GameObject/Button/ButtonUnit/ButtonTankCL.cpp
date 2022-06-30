@@ -5,4 +5,4 @@
 #include "ButtonTankCL.h"
 
 ButtonTankCL::ButtonTankCL(int id, char player, int constructionTime, bool selectStatus, bool ready)
-        : ButtonUnitCL(BTANK, SDL2pp::Point(1114, 222), id, player, constructionTime, selectStatus, ready) {}
+        : ButtonUnitCL(BTANK, SDL2pp::Point(1114, 222), id, 't',player, constructionTime, selectStatus, ready) {}

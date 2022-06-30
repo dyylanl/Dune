@@ -6,9 +6,9 @@
 #include "../../../Action/SelectCL.h"
 #include "../../../Action/CreateUniTCL.h"
 
-ButtonUnitCL::ButtonUnitCL(char textureID, SDL2pp::Point position, int id, char player, int constructionTime,
+ButtonUnitCL::ButtonUnitCL(char textureID, SDL2pp::Point position, int id, char unitType,char player, int constructionTime,
                            bool selectStatus, bool ready)
-        : GameObject(textureID, position, SDL2pp::Point(66, 66)), m_unitType(id), m_player(player)
+        : GameObject(textureID, position, SDL2pp::Point(66, 66)), m_id(id), m_unitType(unitType), m_player(player)
         , m_constructionTime(constructionTime), m_selectStatus(selectStatus), m_ready(ready) {}
 
 void ButtonUnitCL::update(EventManager &eventManager, BQueue<std::unique_ptr<CommandCL>> &queue) {

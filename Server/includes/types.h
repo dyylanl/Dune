@@ -37,5 +37,6 @@
 #define TRIKE_KEY 'a'
 #define RAIDER_KEY 'r'
 #define TANK_KEY 't'
+#define SARDAUKAR_KEY 's'
 
 #endif //DUNE_TYPES_H

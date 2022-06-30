@@ -5,4 +5,4 @@
 #include "ButtonSardaukarCL.h"
 
 ButtonSardaukarCL::ButtonSardaukarCL(int id, char player, int constructionTime, bool selectStatus, bool ready)
-        : ButtonUnitCL(BSARDAUKAR, SDL2pp::Point(1114, 222), id, player, constructionTime, selectStatus, ready) {}
+        : ButtonUnitCL(BSARDAUKAR, SDL2pp::Point(1114, 222), id, 's',player, constructionTime, selectStatus, ready) {}
