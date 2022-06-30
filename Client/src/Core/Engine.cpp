@@ -3,6 +3,7 @@
 //
 
 #include "Engine.h"
+#include "../GameObject/Button/ButtonUnit/ButtonRaiderCL.h"
 
 bool Engine::IsRunning() {
     return m_Running;
@@ -16,6 +17,9 @@ void Engine::Update() {
     try {
         std::vector<std::unique_ptr<GameObject>> aux;
         m_objects = m_queueNb.front();
+
+        m_objects.push_back(std::unique_ptr<GameObject>(new ButtonRaiderCL(1, 1, 1, false, true)));
+
         m_queueNb.pop();
         int size = m_objects.size();
         for (int i = 0; i < size; ++i) {
@@ -23,7 +27,11 @@ void Engine::Update() {
         }
         //m_TextureManager.getCamera().update(m_eventManager);
     } catch (EmptyQueue & e) {
-        std::cerr << e.what() << std::endl;
+        int size = m_objects.size();
+        for (int i = 0; i < size; ++i) {
+            m_objects[i]->update(m_eventManager, m_queueB);
+        }
+        //std::cerr << e.what() << std::endl;
     }
 }
 

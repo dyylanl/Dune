@@ -19,7 +19,8 @@ void ClientConnection::_freeNotifications() {
 // todo: implementar logica de envio de informacion pertinente al player
 void ClientConnection::_sender() {
     try {
-        system("sleep 2");
+        int t = system("sleep 2");
+        std::cout << t << std::endl;
         Command* cmd = commands.pop();
         if (cmd != nullptr) {
             std::cout << "Enviando comando llamado por: " << cmd->getCaller() << std::endl;

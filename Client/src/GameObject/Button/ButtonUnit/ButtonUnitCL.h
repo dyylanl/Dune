@@ -10,7 +10,7 @@
 
 class ButtonUnitCL : public GameObject{
 protected:
-    int m_id;
+    int m_unitType;
     char m_player;
     int m_constructionTime;
     bool m_selectStatus;

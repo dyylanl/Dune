@@ -301,7 +301,7 @@ void Client::loadTextures(TextureManager &textureManager, SDL2pp::Renderer &rend
 
     textureManager.load(BTRIKE, DATA_PATH "assets/Button/Trike.gif");
     textureManager.load(BSONIC_TANK, DATA_PATH "assets/Button/SonicTank.gif");
-    textureManager.load(BRAIDER, DATA_PATH "assets/Button/Trike.gif");
+    textureManager.load(BRAIDER, DATA_PATH "assets/Button/Raider.gif");
     textureManager.load(BDESVIATOR, DATA_PATH "assets/Button/Deviator.gif");
     textureManager.load(BTANK, DATA_PATH "assets/Button/Tank.gif");
     textureManager.load(BDEVASTATOR, DATA_PATH "assets/Button/Devastator.gif");
