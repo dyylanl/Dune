@@ -82,6 +82,7 @@ void Engine::clearAll() {
     InstanceId* id_dlt = nullptr;
     while ((id_dlt = finished_connections.pop())) {
         std::cout << "[ENGINE]: Eliminando jugador." << std::endl;
+        established_connections.remove(*id_dlt);
         delete id_dlt;
     }
     /*Command* command = nullptr;
