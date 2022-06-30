@@ -6,7 +6,7 @@
 #include "../../../Action/BuildBuilding.h"
 
 ButtonWidtrapCL::ButtonWidtrapCL(int id, char player, int constructionTime, bool selectStatus, bool ready)
-: ButtonCL(BWIND_TRAP, SDL2pp::Point(1089, 120), id, player, constructionTime, selectStatus, ready) {}
+: ButtonCL(BWIND_TRAP, SDL2pp::Point(1089, 712), id, player, constructionTime, selectStatus, ready) {}
 
 void ButtonWidtrapCL::buildBuilding(BQueue<std::unique_ptr<CommandCL>> &queue, SDL2pp::Point point) {
     char build = 3;
