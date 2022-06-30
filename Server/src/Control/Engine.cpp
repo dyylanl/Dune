@@ -11,7 +11,7 @@
 void Engine::_processCommands() {
     Command* command_process = nullptr;
     while ((command_process = commands.pop())) {
-        std::cout << "Ejecutando comando." << std::endl;
+        std::cout << "[ENGINE]: Ejecutando comando." << std::endl;
         command_process->exec(map);
         delete command_process;
     }
@@ -21,7 +21,7 @@ void Engine::_processFinishedConnections() {
     InstanceId* finished_connection = nullptr;
     while ((finished_connection = finished_connections.pop())) {
         established_connections.remove(*finished_connection);
-        delete finished_connection;
+        delete finished_connection; // delete al new Instance id que hace el client connection
         fprintf(stderr, "[ENGINE]: Se ha desconectado un jugador.\n");
     }
 }

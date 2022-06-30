@@ -18,7 +18,7 @@ void Engine::Update() {
         std::vector<std::unique_ptr<GameObject>> aux;
         m_objects = m_queueNb.front();
 
-        m_objects.push_back(std::unique_ptr<GameObject>(new ButtonRaiderCL(1, 1, 1, false, true)));
+        m_objects.push_back(std::unique_ptr<GameObject>(new ButtonRaiderCL('r', 1, 1, false, true)));
 
         m_queueNb.pop();
         int size = m_objects.size();
