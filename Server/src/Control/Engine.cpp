@@ -9,16 +9,18 @@
  * 4° Vuelve a 1°
  */
 void Engine::_processCommands() {
-    /*Command* command_process = nullptr;
+    Command* command_process = nullptr;
     while ((command_process = commands.pop())) {
         std::cout << "Ejecutando comando." << std::endl;
+        command_process->exec(map);
         delete command_process;
-    }*/
+    }
 }
 
 void Engine::_processFinishedConnections() {
     InstanceId* finished_connection = nullptr;
     while ((finished_connection = finished_connections.pop())) {
+        established_connections.remove(*finished_connection);
         delete finished_connection;
         fprintf(stderr, "[ENGINE]: Se ha desconectado un jugador.\n");
     }
@@ -85,6 +87,7 @@ void Engine::clearAll() {
         established_connections.remove(*id_dlt);
         delete id_dlt;
     }
+    established_connections.stop();
     /*Command* command = nullptr;
     while ((command = commands.pop())) {
         delete command;

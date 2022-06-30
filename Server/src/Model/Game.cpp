@@ -47,6 +47,7 @@ Game::Game(std::string path_config_game) :
 }
 
 uint16_t Game::createGame(Id id_map, const std::string& name_game) {
+    std::lock_guard<std::mutex> lock(this->mutex);
     if (contains(name_game)) {
         return ERROR;
     }
@@ -64,6 +65,7 @@ uint16_t Game::createGame(Id id_map, const std::string& name_game) {
 }
 
 uint16_t Game::acceptPlayer(Socket &peer, std::string name_player, std::string name_game) {
+    std::lock_guard<std::mutex> lock(this->mutex);
     int ret = ERROR;
     if (contains(name_game)) { // si existe una partida con ese nombre entonces entro
         Id map_id1 = (Id)info_games[name_game][2];
@@ -119,7 +121,7 @@ Id Game::getMapId(std::string name_game) {
     if (contains(name_game)) {
         return info_games[name_game][2];
     } else {
-        return INVALID_ID;
+        throw Exception("Invalid get map id.\n");
     }
 }
 

@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# Estructura de instalador tomada de: https://github.com/mauro7x/argentum/blob/master/installer.sh
+
 greenColour="\e[0;32m\033[1m"
 endColour="\033[0m\e[0m"
 redColour="\e[0;31m\033[1m"
@@ -30,28 +32,28 @@ function installDependencies() {
     echo -e "${yellowColour} [*] Instalando librerias necesarias.... ${endColour}"
     echo ""
     echo -e "${grayColour}>> Instalando 'cmake'..."
-    sudo apt-get install cmake > /dev/null 2>&1
+    sudo apt-get install cmake -y > /dev/null 2>&1
     echo ""
     echo ">> Instalando 'libsdl2-dev'..."
-    sudo apt-get install libsdl2-dev > /dev/null 2>&1
+    sudo apt-get install libsdl2-dev -y > /dev/null 2>&1
     echo ""
     echo ">> Instalando 'libsdl2-image-dev'..."
-    sudo apt-get install libsdl2-image-dev  > /dev/null 2>&1
+    sudo apt-get install libsdl2-image-dev -y  > /dev/null 2>&1
     echo ""
     echo ">> Instalando 'libsdl2-ttf-dev'..."
-    sudo apt-get install libsdl2-ttf-dev  > /dev/null 2>&1
+    sudo apt-get install libsdl2-ttf-dev -y > /dev/null 2>&1
     echo ""
     echo ">> Instalando 'libsdl2-mixer-dev'..."
-    sudo apt-get install libsdl2-mixer-dev > /dev/null 2>&1
+    sudo apt-get install libsdl2-mixer-dev -y > /dev/null 2>&1
     echo ""
     echo ">> Instalando 'libyaml-cpp-dev'..."
-    sudo apt-get install libyaml-cpp-dev > /dev/null 2>&1
+    sudo apt-get install libyaml-cpp-dev -y > /dev/null 2>&1
     echo ""
     echo ">> Instalando 'qtbase5-dev'..."
-    sudo apt-get install qtbase5-dev > /dev/null 2>&1
+    sudo apt-get install qtbase5-dev -y > /dev/null 2>&1
     echo ""
     echo ">> Instalando 'qtmultimedia5-dev'..."
-    sudo apt-get install qtmultimedia5-dev > /dev/null 2>&1
+    sudo apt-get install qtmultimedia5-dev -y > /dev/null 2>&1
     echo ""
     echo -e ">> Instalando 'qtdeclarative5-dev' ${endColour}"
     sudo apt-get install qtdeclarative5-dev -y > /dev/null 2>&1
@@ -110,16 +112,16 @@ function init_installer() {
 				d)
 					echo ""
 					installDependencies
-            				installGame
-            				post_installation
-        				;;
-        			q)
-            				exit 0
-        				;;
-        			*)
-            				echo ""
-            				helpPanel
-        				;;
+            		installGame
+            		post_installation
+        			;;
+        		q)
+            		exit 0
+        			;;
+        		*)
+            		echo ""
+            		helpPanel
+        			;;
 			esac
 		done
 	else

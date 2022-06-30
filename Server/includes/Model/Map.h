@@ -8,7 +8,7 @@
 #include "Area.h"
 #include "DTOs/MapDTO.h"
 #include "DTOs/BuildingDTO.h"
-
+#include "DTOs/UnitDTO.h"
 
 
 class Map {
@@ -18,7 +18,13 @@ class Map {
     ////////////////// IMPLEMENTACION CON TERRENOS //////////////////
     std::vector<std::vector<Terrain>> terrrains; // contiene el tipo de terreno en esa pos
     std::vector<std::vector<char>> mapa; // contiene el tipo de unidad en esa posicion
+
+
+
     std::vector<BuildingDTO> buildingsDTO;
+    std::vector<UnitDTO> unitsDTO;
+
+
 public:
     ~Map();
     bool hasNews();
@@ -65,15 +71,22 @@ public:
     void getInitialPositions();
     
     Position getClosestSpeciaPosition(Position pos, int radius);
+
     void updateSpice(int x, int y);
 
     explicit Map(std::string path_config);
 
     std::vector<BuildingDTO> getBuildings();
 
+    /*
+    *   Al player de id le asigna una unidad del type en posicion x,y
+    */
+    void putUnit(InstanceId id_player, char type, int x, int y);
 
-    void moveUnit(Position start, Position end, std::vector<Position*> path);
-
+    /*
+    *   
+    */
+    std::vector<UnitDTO> getUnits();
 
 };
 

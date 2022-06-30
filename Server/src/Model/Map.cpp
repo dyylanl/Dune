@@ -119,13 +119,24 @@ std::vector<std::vector<char>> &Map::getMap() {
     return this->mapa;
 }
 
-
+ 
 std::vector<BuildingDTO> Map::getBuildings() {
     return buildingsDTO;
 }
 
-void Map::moveUnit(Position start, Position end, std::vector<Position*> path) {
-    //aStar.makePath(start,end,path);
+
+void Map::putUnit(InstanceId id_player, char type, int x, int y) {
+    UnitDTO unit;
+    unit.type = type;
+    unit.pos_x = x;
+    unit.pos_y = y;
+    unit.unit_id = id_player;
+    unitsDTO.push_back(unit);
 }
+
+std::vector<UnitDTO> Map::getUnits() {
+    return unitsDTO;
+}
+
 
 Map::~Map() {}

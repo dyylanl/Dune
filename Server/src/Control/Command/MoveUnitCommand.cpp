@@ -17,6 +17,6 @@ MoveUnitCommand::MoveUnitCommand(const InstanceId caller,
 
 MoveUnitCommand::~MoveUnitCommand() = default;
 
-void MoveUnitCommand::exec() {
+void MoveUnitCommand::exec(Map &map) {
     std::cout << "Moviendo unidad a: " << pos_x << "," << pos_y << std::endl;
 }
