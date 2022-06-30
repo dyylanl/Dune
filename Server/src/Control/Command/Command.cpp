@@ -50,6 +50,10 @@ Command* CommandFactory::newCommand(InstanceId caller, uint8_t opcode,
             return new CreateUnitCommand(caller, unit_type);
         }
 
+        case 10: {
+            std::cout << "Se creo el comando 10" << std::endl;
+        }
+
         default: {
             throw UnknownCommandException();
         }

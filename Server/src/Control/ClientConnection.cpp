@@ -18,8 +18,12 @@ void ClientConnection::_freeNotifications() {
 // hilo sender -- envia respuesta al cliente
 // todo: implementar logica de envio de informacion pertinente al player
 void ClientConnection::_sender() {
-    /*try {
-        std::cout << "Iniciando el hilo sender... " << std::endl;
+    try {
+        system("sleep 2");
+        Command* cmd = commands.pop();
+        if (cmd != nullptr) {
+            std::cout << "Enviando comando llamado por: " << cmd->getCaller() << std::endl;
+        }
     } catch (const std::exception& e) {
             stop();
             fprintf(stderr, "[ClientConnection]: %s\n", e.what());
@@ -27,20 +31,18 @@ void ClientConnection::_sender() {
         stop();
         fprintf(stderr, "[ClientConnection]: Ocurrio un error en el hilo sender.\n");
     }
-    _finishThread();*/
+    _finishThread();
 }
 
 void ClientConnection::_receiver() {
     try {
-        std::cout << "Receiver comenzando ejecucion..." << std::endl;
         uint8_t opcode = 0;
         while ((opcode = protocol.recvResponse(peer))) { // este recv se usa para saber si esperamos un comando o un fin de conexion
-            std::cout << "Se recibio la accion " << opcode << std::endl;
+            std::cout << "Receiver opcode: " << opcode << std::endl;            
             if (opcode != 0) { // si el opcode recibido es 0 entonces significa que el cliente cerro la comunicacion
                 // lo unico que hace el hilo receiver es pushear a la cola de comandos
                 _receiveCommand(opcode);
             } else {
-                std::cout << "Receiver: " << opcode << std::endl;
                 break;
             }
         }
@@ -57,8 +59,9 @@ void ClientConnection::_receiver() {
 
 void ClientConnection::_receiveCommand(uint8_t opcode) {
     try {
-        /*Command* cmd = CommandFactory::newCommand(id,opcode,peer);
-        commands.push(cmd);*/
+        Command* cmd = CommandFactory::newCommand(id,opcode,peer);
+        commands.push(cmd);
+        std::cout << "Se pusheo el comando con opcode: " << opcode << std::endl;
     } catch (const Exception& e) {
     }
 }

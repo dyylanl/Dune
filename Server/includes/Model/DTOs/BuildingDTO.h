@@ -14,4 +14,4 @@ struct BuildingDTO {
 };
 
 
-#endif //DUNE_MAPDTO_H
+#endif //DUNE_BUILDINGDTO_H

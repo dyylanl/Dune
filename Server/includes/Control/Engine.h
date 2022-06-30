@@ -14,6 +14,7 @@
 #include "../../includes/Model/Map.h"
 #include "ClientsConnected.h"
 #include "NewConnection.h"
+#include "Commands/Command.h"
 
 class Engine : public Thread {
 private:

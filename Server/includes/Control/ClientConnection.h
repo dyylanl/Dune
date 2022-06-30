@@ -11,8 +11,7 @@
 #include "../../../Common/includes/NonBlockingQueue.h"
 #include "../../../Server/includes/defs.h"
 #include "../../../Common/includes/Protocol.h"
-
-class Command;
+#include "../../../Server/includes/Control/Commands/Command.h"
 
 class ClientConnection {
 private:

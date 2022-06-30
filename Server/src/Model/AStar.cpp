@@ -1,6 +1,6 @@
 #include "../../includes/Model/AStar.h"
 
-AStar::AStar(Map &map) : map(map) {}
+AStar::AStar(Map &map1) : map(map1) {}
 
 std::stack<Position> AStar::reconstructPath(std::map<Position, Position> &best_path, Position &start) {
     std::stack<Position> total_path;
@@ -14,13 +14,10 @@ std::stack<Position> AStar::reconstructPath(std::map<Position, Position> &best_p
     return (total_path);
 }
 
-std::stack<Position> AStar::makePath(Unit &unit, Position end) {
-    if (!map.canMove(unit, end)) {
-        return (std::stack<Position>());
-    }
+std::stack<Position> AStar::makePath(Position start, Position end, std::vector<Position*>& path) {
     std::map<Position, Position> best_path;
     AStarNode n_end(end);
-    AStarNode n_start(unit.getPosition());
+    AStarNode n_start(start);
     openList.push_back(n_start);
     while (!openList.empty()) {
         auto curr_node_itr = openList.begin();
@@ -30,6 +27,7 @@ std::stack<Position> AStar::makePath(Unit &unit, Position end) {
             }
         }
         if (*curr_node_itr == n_end) {
+            path.push_back(&end);
             return this->reconstructPath(best_path, end);
         }
         closeList.emplace_back(*curr_node_itr);
@@ -38,7 +36,7 @@ std::stack<Position> AStar::makePath(Unit &unit, Position end) {
         std::vector<AStarNode> children = curr_node_itr->getAdjacents(this->map);
         for (AStarNode& child : children) {
             auto child_cl_itr = std::find(closeList.begin(), closeList.end(), child);
-            if (child_cl_itr != closeList.end() || !map.canMove(unit, child.pos)) {
+            if (child_cl_itr != closeList.end() /*|| !map.canMove(unit, child.pos)*/) {
                 continue;
             }
             child.g = curr_node_itr->g + 1;
@@ -55,6 +53,7 @@ std::stack<Position> AStar::makePath(Unit &unit, Position end) {
                 child_ol_itr->f = child.f;
             }
             best_path[child.pos] = curr_node_itr->pos;
+            path.push_back(&curr_node_itr->pos);
         }
     }
     return (std::stack<Position>());
