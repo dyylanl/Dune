@@ -98,7 +98,7 @@ void ClientConnection::join() {
     try {
         peer.shutdown();
     } catch (const Exception& e) {
-        fprintf(stderr, "[ClientConnection]: Ocurrio un erro en el join del player(id): %i \n",id);
+        fprintf(stderr, "[ClientConnection]: Ocurrio un erro en el join del player: %i (id) \n",id);
     }
 }
 

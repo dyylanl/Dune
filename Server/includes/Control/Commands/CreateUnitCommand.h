@@ -19,7 +19,7 @@ public:
 
     ~CreateUnitCommand();
 
-    void exec();
+    void exec(Map &map) override;
 };
 
 #endif //DUNE_CREATEUNITCOMMAND_H

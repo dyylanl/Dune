@@ -2,15 +2,12 @@
 //-----------------------------------------------------------------------------
 #include "../../../includes/Control/Commands/Command.h"
 //-----------------------------------------------------------------------------
-
 #include "../../../../Common/includes/Exceptions/Exception.h"
 #include "../../../../Common/includes/Protocol.h"
 #include "../../../includes/Control/Commands/SelectUnitCommand.h"
 #include "../../../includes/Control/Commands/MoveUnitCommand.h"
 #include "../../../includes/Control/Commands/BuildBuildingCommand.h"
 #include "../../../includes/Control/Commands/CreateUnitCommand.h"
-
-
 //-----------------------------------------------------------------------------
 
 
@@ -50,7 +47,7 @@ Command* CommandFactory::newCommand(InstanceId caller, uint8_t opcode,
             return new CreateUnitCommand(caller, unit_type);
         }
 
-        case 10: {
+        case 10: {  // esto esta harcodeado para probar ... 
             std::cout << "Se creo el comando 10" << std::endl;
         }
 

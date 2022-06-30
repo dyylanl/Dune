@@ -13,6 +13,6 @@ BuildBuildingCommand::BuildBuildingCommand(const InstanceId caller,
 
 BuildBuildingCommand::~BuildBuildingCommand() = default;
 
-void BuildBuildingCommand::exec() {
+void BuildBuildingCommand::exec(Map &map) {
     std::cout << "Construyendo en: " << pos_x << "," << pos_y << std::endl;
 }

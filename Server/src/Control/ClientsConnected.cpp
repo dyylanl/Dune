@@ -22,6 +22,7 @@ void ClientsConnected::remove(const InstanceId id) {
     if (clients.count(id) == 0) {
         throw Exception("[ClientsConnected]: Se intenta remover una conexion que no existe.\n");
     }
+    //clients.at(id).stop();
     clients.at(id).join();
     clients.erase(id);
 }
