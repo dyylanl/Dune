@@ -19,12 +19,12 @@ void ClientConnection::_freeNotifications() {
 // todo: implementar logica de envio de informacion pertinente al player
 void ClientConnection::_sender() {
     try {
-        int t = system("sleep 2");
-        std::cout << t << std::endl;
+        /*int t = system("sleep 2");
+        t++;
         Command* cmd = commands.pop();
         if (cmd != nullptr) {
             std::cout << "Enviando comando llamado por: " << cmd->getCaller() << std::endl;
-        }
+        }*/
     } catch (const std::exception& e) {
             stop();
             fprintf(stderr, "[ClientConnection]: %s\n", e.what());
@@ -32,20 +32,22 @@ void ClientConnection::_sender() {
         stop();
         fprintf(stderr, "[ClientConnection]: Ocurrio un error en el hilo sender.\n");
     }
-    _finishThread();
+    //_finishThread();
 }
 
 void ClientConnection::_receiver() {
     try {
         uint8_t opcode = 0;
         while ((opcode = protocol.recvResponse(peer))) { // este recv se usa para saber si esperamos un comando o un fin de conexion
-            std::cout << "Receiver opcode: " << opcode << std::endl;            
+            _receiveCommand(opcode);
+/*
             if (opcode != 0) { // si el opcode recibido es 0 entonces significa que el cliente cerro la comunicacion
                 // lo unico que hace el hilo receiver es pushear a la cola de comandos
                 _receiveCommand(opcode);
             } else {
                 break;
             }
+*/
         }
     } catch (const std::exception& e) {
         stop();
@@ -62,7 +64,6 @@ void ClientConnection::_receiveCommand(uint8_t opcode) {
     try {
         Command* cmd = CommandFactory::newCommand(id,opcode,peer);
         commands.push(cmd);
-        std::cout << "Se pusheo el comando con opcode: " << opcode << std::endl;
     } catch (const Exception& e) {
     }
 }
@@ -98,7 +99,7 @@ void ClientConnection::join() {
     try {
         peer.shutdown();
     } catch (const Exception& e) {
-        fprintf(stderr, "[ClientConnection]: Ocurrio un erro en el join del player: %i (id) \n",id);
+        fprintf(stderr, "[ClientConnection]: Ocurrio un error en el ::join del player: %i (id) \n",id);
     }
 }
 
@@ -107,7 +108,7 @@ void ClientConnection::stop() {
     try {
         peer.shutdown();
     } catch (const Exception& e) {
-        fprintf(stderr, "[ClientConnection]: Error en el stop del player (id): %i\n",id);
+        fprintf(stderr, "[ClientConnection]: Error en el ::stop del player (id): %i\n",id);
     }
 }
 
