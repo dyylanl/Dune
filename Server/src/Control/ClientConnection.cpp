@@ -19,12 +19,12 @@ void ClientConnection::_freeNotifications() {
 // todo: implementar logica de envio de informacion pertinente al player
 void ClientConnection::_sender() {
     try {
-        /*int t = system("sleep 2");
+        int t = system("sleep 2");
         t++;
         Command* cmd = commands.pop();
         if (cmd != nullptr) {
             std::cout << "Enviando comando llamado por: " << cmd->getCaller() << std::endl;
-        }*/
+        }
     } catch (const std::exception& e) {
             stop();
             fprintf(stderr, "[ClientConnection]: %s\n", e.what());
@@ -39,15 +39,12 @@ void ClientConnection::_receiver() {
     try {
         uint8_t opcode = 0;
         while ((opcode = protocol.recvResponse(peer))) { // este recv se usa para saber si esperamos un comando o un fin de conexion
-            _receiveCommand(opcode);
-/*
             if (opcode != 0) { // si el opcode recibido es 0 entonces significa que el cliente cerro la comunicacion
                 // lo unico que hace el hilo receiver es pushear a la cola de comandos
                 _receiveCommand(opcode);
             } else {
                 break;
             }
-*/
         }
     } catch (const std::exception& e) {
         stop();
