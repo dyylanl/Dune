@@ -16,5 +16,5 @@ CreateUnitCommand::~CreateUnitCommand() = default;
 
 void CreateUnitCommand::exec(Map &map) {
     map.putUnit(caller,unit_type,5,5);  // todo: posicion harcodeada para probar
-    std::cout << "Creando unidad del tipo: " << unit_type <<std::endl;
+    std::cout << "[COMMAND]: Creando unidad del tipo " << unit_type <<std::endl;
 }
