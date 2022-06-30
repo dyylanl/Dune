@@ -487,6 +487,13 @@ void Protocol::sendInitBuildings(Socket &socket, std::vector<BuildingDTO> buildi
     }
     
 }
+
+void Protocol::sendCommandCreateUnit(Socket &socket, char &action, int &unitType) {
+    socket.send(reinterpret_cast<char *>(&action), sizeof(uint8_t));
+    socket.send(reinterpret_cast<char *>(&unitType), sizeof(uint8_t));
+    std::cout << "action(uint8_t) : " << (int)action << std::endl;
+    std::cout << "unit type(uint16_t) : " << unitType << std::endl;
+}
 /*
 std::vector<BuildingDTO> Protocol::recvInitBuildings(Socket &socket) {
     uint16_t total = 0;

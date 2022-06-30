@@ -6,5 +6,5 @@
 
 void CreateUniTCL::execute(Protocol &protocol, Socket &socket) {
     char action = 8;
-    protocol.sendCommandSelect(socket, action, m_unitType);
+    protocol.sendCommandCreateUnit(socket, action, m_unitType);
 }

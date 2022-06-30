@@ -176,6 +176,8 @@ public:
     
     void sendInitBuildings(Socket &socket, std::vector<BuildingDTO> buildings);
     std::vector<BuildingDTO> recvInitBuildings(Socket &socket);
+
+    void sendCommandCreateUnit(Socket &socket, char &action, int &unitType);
 };
 
 
