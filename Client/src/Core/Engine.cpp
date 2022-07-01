@@ -23,18 +23,18 @@ void Engine::Update() {
             m_objects[i]->update(m_eventManager, m_queueB);
         }
 
-        /*for (int i = 0; i < (int) m_menu.size(); ++i) {
+        for (int i = 0; i < (int) m_menu.size(); ++i) {
             m_menu[i]->update(m_eventManager, m_queueB);
-        }*/
+        }
         //m_TextureManager.getCamera().update(m_eventManager);
     } catch (EmptyQueue & e) {
         int size = m_objects.size();
         for (int i = 0; i < size; ++i) {
             m_objects[i]->update(m_eventManager, m_queueB);
         }
-        /*for (int i = 0; i < (int) m_menu.size(); ++i) {
+        for (int i = 0; i < (int) m_menu.size(); ++i) {
             m_menu[i]->update(m_eventManager, m_queueB);
-        }*/
+        }
         //std::cerr << e.what() << std::endl;
     }
 }
