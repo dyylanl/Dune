@@ -5,4 +5,4 @@
 #include "ButtonRaiderCL.h"
 
 ButtonRaiderCL::ButtonRaiderCL(int id, char player, int constructionTime, bool selectStatus, bool ready)
-        : ButtonUnitCL(BRAIDER, SDL2pp::Point(1190, 292), id, 'r',player, constructionTime, selectStatus, ready) {}
+        : ButtonUnitCL(BRAIDER, SDL2pp::Point(1190, 292), id, RAIDER_KEY,player, constructionTime, selectStatus, ready) {}

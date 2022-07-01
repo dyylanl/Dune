@@ -11,11 +11,9 @@ EventManager::EventManager() {
         exit(-1);
     }
     m_MouseButtonStates = {false, false};
-    runnig = true;
 }
 
 bool EventManager::listen() {
-    m_MouseLastPosition = m_MouseCurrPosition;
     SDL_Event event;
     while(SDL_PollEvent(&event)){
         switch(event.type) {
@@ -45,7 +43,7 @@ void EventManager::mouseDown(SDL_Event event) {
 
 void EventManager::mouseUp(SDL_Event event) {
     if(event.button.button == SDL_BUTTON_LEFT)
-        m_MouseButtonStates[LEFT] = false;;
+        m_MouseButtonStates[LEFT] = false;
 
     if(event.button.button == SDL_BUTTON_RIGHT)
         m_MouseButtonStates[RIGHT] = false;

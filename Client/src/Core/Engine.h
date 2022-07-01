@@ -23,13 +23,14 @@ class Engine {
 private:
     std::vector<std::vector<char>> m_mapa;
     std::vector<std::unique_ptr<GameObject>> m_objects;
+    std::vector<std::unique_ptr<ButtonCL>> m_menu;
     TextureManager &m_TextureManager;
     EventManager &m_eventManager;
     bool m_Running;
     NBQueue<std::vector<std::unique_ptr<GameObject>>> &m_queueNb;
     BQueue<std::unique_ptr<CommandCL>> &m_queueB;
 public:
-    Engine(std::vector<std::vector<char>>& mapa, std::vector<std::unique_ptr<GameObject>> &objects, TextureManager &manager, EventManager &eventManager, NBQueue<std::vector<std::unique_ptr<GameObject>>> &queue_nb, BQueue<std::unique_ptr<CommandCL>> &queueB);
+    Engine(std::vector<std::vector<char>>& mapa, std::vector<std::unique_ptr<GameObject>> &objects, std::vector<std::unique_ptr<ButtonCL>> &menu, TextureManager &manager, EventManager &eventManager, NBQueue<std::vector<std::unique_ptr<GameObject>>> &queue_nb, BQueue<std::unique_ptr<CommandCL>> &queueB);
 
     bool IsRunning();
 

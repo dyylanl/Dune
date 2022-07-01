@@ -6,7 +6,7 @@
 #define DUNE_BUTTONHEAVYINFANTRYCL_H
 
 
-#include "ButtonUnitCL.h"
+#include "../ButtonUnitCL.h"
 
 class ButtonHeavyInfantryCL : public ButtonUnitCL{
 public:

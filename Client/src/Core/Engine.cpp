@@ -17,20 +17,24 @@ void Engine::Update() {
     try {
         std::vector<std::unique_ptr<GameObject>> aux;
         m_objects = m_queueNb.front();
-
-        m_objects.push_back(std::unique_ptr<GameObject>(new ButtonRaiderCL('r', 1, 1, false, true)));
-
         m_queueNb.pop();
         int size = m_objects.size();
         for (int i = 0; i < size; ++i) {
             m_objects[i]->update(m_eventManager, m_queueB);
         }
+
+        /*for (int i = 0; i < (int) m_menu.size(); ++i) {
+            m_menu[i]->update(m_eventManager, m_queueB);
+        }*/
         //m_TextureManager.getCamera().update(m_eventManager);
     } catch (EmptyQueue & e) {
         int size = m_objects.size();
         for (int i = 0; i < size; ++i) {
             m_objects[i]->update(m_eventManager, m_queueB);
         }
+        /*for (int i = 0; i < (int) m_menu.size(); ++i) {
+            m_menu[i]->update(m_eventManager, m_queueB);
+        }*/
         //std::cerr << e.what() << std::endl;
     }
 }
@@ -42,13 +46,17 @@ void Engine::Render(SDL2pp::Renderer &m_Renderer) {
     for (int i = 0; i < (int) m_objects.size(); ++i) {
         m_objects[i]->draw(m_Renderer, m_TextureManager);
     }
+
+    for (int i = 0; i < (int) m_menu.size(); ++i) {
+        m_menu[i]->draw(m_Renderer, m_TextureManager);
+    }
     m_Renderer.Present();
     //m_objects.clear();
 }
 
-Engine::Engine(std::vector<std::vector<char>> &mapa, std::vector<std::unique_ptr<GameObject>> &objects, TextureManager &textureManager, EventManager &eventManager,
+Engine::Engine(std::vector<std::vector<char>> &mapa, std::vector<std::unique_ptr<GameObject>> &objects, std::vector<std::unique_ptr<ButtonCL>> &menu,TextureManager &textureManager, EventManager &eventManager,
                NBQueue<std::vector<std::unique_ptr<GameObject>>> &queueNb, BQueue<std::unique_ptr<CommandCL>> &queueB)
-               : m_mapa (mapa), m_objects(std::move(objects)), m_TextureManager(textureManager), m_eventManager(eventManager),
+               : m_mapa (mapa), m_objects(std::move(objects)), m_menu(std::move(menu)), m_TextureManager(textureManager), m_eventManager(eventManager),
                  m_queueNb(queueNb), m_queueB(queueB){
     m_Running = true;
 }

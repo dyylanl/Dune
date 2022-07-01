@@ -24,6 +24,7 @@
 #define REFINERY_KEY 'r'
 #define SILO_KEY 's'
 #define WIND_TRAP_KEY 'w'
+#define PALACE_KEY 'p'
 
 // --------------HOUSES------------ //
 #define HARKONNEN_HOUSE 1
@@ -38,5 +39,8 @@
 #define RAIDER_KEY 'r'
 #define TANK_KEY 't'
 #define SARDAUKAR_KEY 's'
+#define SONIC_TANK_KEY 'n'
+#define DESVIATOR_KEY 'd'
+#define DEVASTATOR_KEY 'v'
 
 #endif //DUNE_TYPES_H

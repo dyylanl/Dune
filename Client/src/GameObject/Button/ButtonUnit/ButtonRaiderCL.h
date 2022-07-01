@@ -6,7 +6,7 @@
 #define DUNE_BUTTONRAIDERCL_H
 
 
-#include "ButtonUnitCL.h"
+#include "../ButtonUnitCL.h"
 
 class ButtonRaiderCL : public ButtonUnitCL{
 public:

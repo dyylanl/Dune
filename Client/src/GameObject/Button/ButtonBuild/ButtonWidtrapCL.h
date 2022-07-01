@@ -6,11 +6,9 @@
 #define DUNE_BUTTONWIDTRAPCL_H
 
 
-#include "SDL2pp/SDL2pp.hh"
-#include "../../../Graphics/TextureManager.h"
-#include "../../ButtonCL.h"
+#include "../ButtonBuildCL.h"
 
-class ButtonWidtrapCL : public ButtonCL{
+class ButtonWidtrapCL : public ButtonBuildCL{
 public:
     ButtonWidtrapCL(int id, char player, int constructionTime, bool selectStatus, bool ready);
 

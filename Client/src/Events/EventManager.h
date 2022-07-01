@@ -13,10 +13,8 @@ enum MouseButton{LEFT, RIGHT};
 class EventManager {
 private:
     SDL2pp::Point m_MouseCurrPosition;
-    SDL2pp::Point m_MouseLastPosition;
     std::vector<bool> m_MouseButtonStates;
     const Uint8 *m_KeyStates;
-    bool runnig;
 
     void mouseMotion(SDL_Event event);
 

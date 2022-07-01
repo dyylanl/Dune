@@ -6,9 +6,9 @@
 #define DUNE_BUTTONCONSTRUCTIONYARDCL_H
 
 
-#include "../../ButtonCL.h"
+#include "../ButtonBuildCL.h"
 
-class ButtonConstructionYardCL : public ButtonCL {
+class ButtonConstructionYardCL : public ButtonBuildCL {
 public:
     ButtonConstructionYardCL(int id, char player, int constructionTime, bool selectStatus, bool ready);
 

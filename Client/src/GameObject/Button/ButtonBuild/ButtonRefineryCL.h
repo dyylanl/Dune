@@ -6,10 +6,9 @@
 #define DUNE_BUTTONREFINERYCL_H
 
 
-#include "../../../Graphics/TextureManager.h"
-#include "../../ButtonCL.h"
+#include "../ButtonBuildCL.h"
 
-class ButtonRefineryCL : public ButtonCL {
+class ButtonRefineryCL : public ButtonBuildCL {
 public:
     ButtonRefineryCL(int id, char player, int constructionTime, bool selectStatus, bool ready);
 

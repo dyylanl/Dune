@@ -6,7 +6,7 @@
 #define DUNE_BUTTONHARVESTERCL_H
 
 
-#include "ButtonUnitCL.h"
+#include "../ButtonUnitCL.h"
 
 class ButtonHarvesterCL : public ButtonUnitCL {
 public:

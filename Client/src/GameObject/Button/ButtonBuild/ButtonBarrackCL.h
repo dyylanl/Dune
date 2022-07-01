@@ -6,9 +6,9 @@
 #define DUNE_BUTTONBARRACKCL_H
 
 
-#include "../../ButtonCL.h"
+#include "../ButtonBuildCL.h"
 
-class ButtonBarrackCL : public ButtonCL {
+class ButtonBarrackCL : public ButtonBuildCL {
 public:
     ButtonBarrackCL(int id, char player, int constructionTime, bool selectStatus, bool ready);
 

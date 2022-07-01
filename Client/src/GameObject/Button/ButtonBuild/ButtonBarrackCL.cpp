@@ -6,7 +6,7 @@
 #include "../../../Action/BuildBuilding.h"
 
 ButtonBarrackCL::ButtonBarrackCL(int id, char player, int constructionTime, bool selectStatus, bool ready)
-        : ButtonCL(BBARRACK, SDL2pp::Point(1114, 222), id, player, constructionTime, selectStatus, ready) {}
+        : ButtonBuildCL(BBARRACK, SDL2pp::Point(1114, 222), id, BARRACKS_KEY, player, constructionTime, selectStatus, ready) {}
 
 void ButtonBarrackCL::buildBuilding(BQueue<std::unique_ptr<CommandCL>> &queue, SDL2pp::Point point) {
     char build = 6;

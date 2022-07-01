@@ -6,7 +6,7 @@
 #define DUNE_BUTTONSARDAUKARCL_H
 
 
-#include "ButtonUnitCL.h"
+#include "../ButtonUnitCL.h"
 
 class ButtonSardaukarCL : public ButtonUnitCL {
 public:

@@ -6,9 +6,9 @@
 #define DUNE_BUTTONSILOCL_H
 
 
-#include "../../ButtonCL.h"
+#include "../ButtonBuildCL.h"
 
-class ButtonSiloCL : public ButtonCL {
+class ButtonSiloCL : public ButtonBuildCL{
 public:
     ButtonSiloCL(int id, char player, int constructionTime, bool selectStatus, bool ready);
 

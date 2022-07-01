@@ -12,15 +12,6 @@
 #include "../Object/GameObject.h"
 #include "../Queue/NBQueue.h"
 
-#define BARRACKS_KEY 'b'
-#define CONSTRUCTION_CENTER_KEY 'c'
-#define HEAVY_FACTORY_KEY 'h'
-#define LIGHT_FACTORY_KEY 'l'
-#define REFINERY_KEY 'r'
-#define SILO_KEY 's'
-#define WIND_TRAP_KEY 'w'
-#define PALACE_KEY 'p'
-
 enum Type{UNIT, BUILD, BUTTON};
 
 class RecvThread : public Thread {
