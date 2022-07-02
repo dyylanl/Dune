@@ -7,8 +7,11 @@
 
 
 #include "../ButtonBuildCL.h"
+#include "../../Builds/PalaceCL.h"
 
 class ButtonPalaceCL : public ButtonBuildCL {
+private:
+    PalaceCL m_build;
 public:
     ButtonPalaceCL(int id, char player, int constructionTime, bool selectStatus, bool ready);
 

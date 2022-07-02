@@ -7,8 +7,11 @@
 
 
 #include "../ButtonBuildCL.h"
+#include "../../Builds/WindTrapCL.h"
 
 class ButtonWidtrapCL : public ButtonBuildCL{
+private:
+    WindTrapCL m_build;
 public:
     ButtonWidtrapCL(int id, char player, int constructionTime, bool selectStatus, bool ready);
 

@@ -7,8 +7,10 @@
 
 
 #include "../ButtonBuildCL.h"
+#include "../../Builds/RefineryCL.h"
 
 class ButtonRefineryCL : public ButtonBuildCL {
+    RefineryCL m_build;
 public:
     ButtonRefineryCL(int id, char player, int constructionTime, bool selectStatus, bool ready);
 

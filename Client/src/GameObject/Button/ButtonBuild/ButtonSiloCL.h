@@ -7,8 +7,11 @@
 
 
 #include "../ButtonBuildCL.h"
+#include "../../Builds/SiloCL.h"
 
 class ButtonSiloCL : public ButtonBuildCL{
+private:
+    SiloCL m_build;
 public:
     ButtonSiloCL(int id, char player, int constructionTime, bool selectStatus, bool ready);
 

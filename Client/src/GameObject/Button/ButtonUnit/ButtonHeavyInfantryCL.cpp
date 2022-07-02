@@ -5,4 +5,4 @@
 #include "ButtonHeavyInfantryCL.h"
 
 ButtonHeavyInfantryCL::ButtonHeavyInfantryCL(int id,char player, int constructionTime, bool selectStatus, bool ready)
-        : ButtonUnitCL(BHEAVY_FACTORY, SDL2pp::Point(1190, 432), id, HEAVY_INFANTRY_KEY, player, constructionTime, selectStatus, ready) {}
+        : ButtonUnitCL(BHEAVY_INFANTRY, SDL2pp::Point(1190, 432), id, HEAVY_INFANTRY_KEY, player, constructionTime, selectStatus, ready) {}

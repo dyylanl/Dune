@@ -267,7 +267,7 @@ void Client::listGames(Protocol protocol, Socket &socket) {
 
 void Client::launch() {
     std::cout << "Iniciando cliente.... \n\n";
-    try {
+    /*try {
         std::string ip;
         std::string port;
         std::cout << "IP: ";
@@ -299,12 +299,12 @@ void Client::launch() {
     } catch (std::exception& e) {
         std::cout << e.what() << std::endl;
         return;
-    }
+    }*/
 
-    /*Socket socket_("localhost","8082");
+    Socket socket_("localhost","8082");
     Protocol protocol_;
     std::vector<std::vector<char>> map(50, std::vector<char> (50, 'A') );
-    initSDL(socket_, protocol_, map);*/
+    initSDL(socket_, protocol_, map);
 }
 
 
