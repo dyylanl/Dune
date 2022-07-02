@@ -381,7 +381,7 @@ void Protocol::sendCommandBuildBuilding(Socket &socket, char &action, char &buil
     socket.send(reinterpret_cast<char *>(&posX), sizeof(uint16_t));
     socket.send(reinterpret_cast<char *>(&posY), sizeof(uint16_t));
     std::cout << "action(uint8_t) : " << (int)action << std::endl;
-    std::cout << "build(uint8_t) : " << (int)build << std::endl;
+    std::cout << "build type(uint8_t) : " << build << std::endl;
     std::cout << "posX(uint16_t) : " << posX << std::endl;
     std::cout << "posY(uint16_t) : " << posY << std::endl;
 }
@@ -507,11 +507,11 @@ void Protocol::sendInitBuildings(Socket &socket, std::vector<BuildingDTO> buildi
     std::cout << "[PROTOCOL]: SE ENVIA EDIFICIO " << std::endl;
 }
 
-void Protocol::sendCommandCreateUnit(Socket &socket, char &action, int &unitType) {
+void Protocol::sendCommandCreateUnit(Socket &socket, char &action, char &unitType) {
     socket.send(reinterpret_cast<char *>(&action), sizeof(uint8_t));
     socket.send(reinterpret_cast<char *>(&unitType), sizeof(uint8_t));
     std::cout << "action(uint8_t) : " << (int)action << std::endl;
-    std::cout << "unit type(uint16_t) : " << unitType << std::endl;
+    std::cout << "unit type(uint8_t) : " << unitType << std::endl;
 }
 /*
 std::vector<BuildingDTO> Protocol::recvInitBuildings(Socket &socket) {

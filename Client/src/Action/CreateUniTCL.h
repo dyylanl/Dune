@@ -10,10 +10,10 @@
 
 class CreateUniTCL  : public CommandCL{
 private:
-    int m_unitType;
+    char m_unitType;
 
 public:
-    CreateUniTCL(int unitType) : m_unitType(unitType) {}
+    CreateUniTCL(char unitType) : m_unitType(unitType) {}
 
     void execute(Protocol &protocol, Socket &socket);
 
