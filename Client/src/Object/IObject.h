@@ -9,7 +9,7 @@
 #include "../Graphics/TextureManager.h"
 #include "../Action/CommandCL.h"
 #include "../../../Common/includes/BlockingQueue.h"
-#include "../Queue/BQueue.h"
+#include "../../../Common/src/Queue/BQueue.h"
 
 class IObject {
 public:

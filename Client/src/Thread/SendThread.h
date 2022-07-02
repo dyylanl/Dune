@@ -11,7 +11,7 @@
 #include "../../../Common/includes/Socket/Socket.h"
 #include "../../../Common/includes/Protocol.h"
 #include "../Action/CommandCL.h"
-#include "../Queue/BQueue.h"
+#include "../../../Common/src/Queue/BQueue.h"
 
 class SendThread : public Thread{
 private:

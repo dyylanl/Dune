@@ -15,8 +15,8 @@
 #include "../../../Common/includes/NonBlockingQueue.h"
 #include "../Action/CommandCL.h"
 #include "../GameObject/Button/ButtonBuild/ButtonWidtrapCL.h"
-#include "../Queue/NBQueue.h"
-#include "../Queue/BQueue.h"
+#include "../../../Common/src/Queue/NBQueue.h"
+#include "../../../Common/src/Queue/BQueue.h"
 
 class Engine {
 private:

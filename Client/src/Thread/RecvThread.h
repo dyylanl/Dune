@@ -10,7 +10,7 @@
 #include "../../../Common/includes/Protocol.h"
 #include "../../../Common/includes/NonBlockingQueue.h"
 #include "../Object/GameObject.h"
-#include "../Queue/NBQueue.h"
+#include "../../../Common/src/Queue/NBQueue.h"
 
 enum Type{UNIT, BUILD, BUTTON};
 
