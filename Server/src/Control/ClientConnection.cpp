@@ -54,7 +54,7 @@ void ClientConnection::_receiver() {
         fprintf(stderr, "[ClientConnection]: Ocurrio un error en el hilo receiver.\n");
     }
     //this->notifications.close();
-    _finishThread();
+    //_finishThread();
 }
 
 void ClientConnection::_receiveCommand(uint8_t opcode) {

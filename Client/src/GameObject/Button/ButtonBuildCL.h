@@ -7,12 +7,18 @@
 
 
 #include "../ButtonCL.h"
+#include "../BuildCL.h"
 
 class ButtonBuildCL : public ButtonCL{
+protected:
+    SDL2pp::Point m_positionBuild;
+
 public:
     ButtonBuildCL(char textureID, SDL2pp::Point position, int id, char type, char player, int actionTime, bool selectStatus, bool ready);
 
     void update(EventManager &eventManager, BQueue<std::unique_ptr<CommandCL>> &queue);
+
+    void draw(SDL2pp::Renderer &renderer, TextureManager &textureManager) = 0;
 
     virtual void buildBuilding(BQueue<std::unique_ptr<CommandCL>> &queue, SDL2pp::Point point) = 0;
 

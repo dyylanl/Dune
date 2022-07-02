@@ -14,3 +14,10 @@ void ButtonSiloCL::buildBuilding(BQueue<std::unique_ptr<CommandCL>> &queue, SDL2
     std::cout << "Push command BuildBuilding" << std::endl;
     queue.push(std::move(command));
 }
+
+void ButtonSiloCL::draw(SDL2pp::Renderer &renderer, TextureManager &textureManager) {
+    ButtonCL::draw(renderer, textureManager);
+    if(m_selectStatus && m_ready) {
+        textureManager.draw(renderer, SILO, m_positionBuild,SDL2pp::Point(99,89));
+    }
+}

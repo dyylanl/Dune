@@ -21,6 +21,8 @@ public:
 
     virtual void draw(SDL2pp::Renderer &renderer, TextureManager &textureManager) = 0;
 
+    void setPosition(SDL2pp::Point position);
+
     virtual ~BuildCL() {}
 };
 
