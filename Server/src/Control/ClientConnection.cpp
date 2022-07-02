@@ -45,8 +45,8 @@ void ClientConnection::_receiver() {
     fprintf(stderr, "CLIENTE %i: Receiver comienza su ejecución.\n", id);
     try {
         uint8_t opcode;
-        while ((opcode = protocol.recvOpcode(peer))) {
-            fprintf(stderr, "CLIENTE %i: Receiver ejecutando opcode.\n", id);
+        while ((opcode = protocol.recvOneByte(peer))) {
+            fprintf(stderr, "CLIENTE %i: Receiver ejecutando opcode: %i.\n", id,opcode);
             if (opcode != 0) {
                 _receiveCommand(opcode);
             } else {

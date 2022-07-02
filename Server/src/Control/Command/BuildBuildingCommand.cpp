@@ -14,5 +14,5 @@ BuildBuildingCommand::BuildBuildingCommand(const InstanceId caller,
 BuildBuildingCommand::~BuildBuildingCommand() = default;
 
 void BuildBuildingCommand::exec(Map &map) {
-    std::cout << "Construyendo en: " << pos_x << "," << pos_y << std::endl;
+    std::cout << "Construyendo edificio del tipo" << build_type << " en: " << pos_x << "," << pos_y << std::endl;
 }

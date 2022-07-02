@@ -22,6 +22,13 @@ private:
 public:
     Protocol();
     ~Protocol();
+
+
+    uint8_t recvOneByte(Socket &socket);
+    uint16_t recvTwoBytes(Socket &socket);
+
+
+
     /*
      * Envia la informacion requerida para crear una partida.
      */
@@ -52,7 +59,7 @@ public:
     /*
      * Retorna el tipo de comando (unirse, listar o crear)
      */
-    uint16_t recvCommand(Socket &socket);
+    uint8_t recvCommand(Socket &socket);
     /*
      * Envia la respuesta al comando (0 exito, 1 error)
      */
@@ -77,7 +84,7 @@ public:
     /*
      * Retorna la respuesta a la ejecucion del comando (0 exito, 1 error)
      */
-    uint16_t recvResponse(Socket &socket);
+    uint8_t recvResponse(Socket &socket);
     /*
      * Envia una lista con el formato. (cantidad de elementos, (actuales, requeridos, longitud_nombre, nombre) ... ( , , , ,))
      */

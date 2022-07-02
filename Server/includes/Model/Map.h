@@ -84,6 +84,11 @@ public:
     void putUnit(InstanceId id_player, char type, int x, int y);
 
     /*
+    *   Le asigna una building al player del type en la pos x,y
+    */
+    void putBuilding(InstanceId id_player, char type, int x, int y);
+
+    /*
     *   
     */
     std::vector<UnitDTO> getUnits();

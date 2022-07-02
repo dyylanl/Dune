@@ -70,7 +70,7 @@ void Protocol::createGame(Socket &skt, uint16_t house,
     skt.send(name.c_str(), (name).size());
 }
 
-uint16_t Protocol::recvCommand(Socket &skt) {
+uint8_t Protocol::recvCommand(Socket &skt) {
     uint8_t command = 0;
     skt.recv(reinterpret_cast<char *>(&command), sizeof(uint8_t));
     return command;
@@ -114,11 +114,24 @@ uint16_t Protocol::recvReq(Socket &skt) {
     return req;
 }
 
-uint16_t Protocol::recvResponse(Socket &skt) {
-    uint16_t resp = 0;
+uint8_t Protocol::recvResponse(Socket &skt) {
+    uint8_t resp = 0;
     skt.recv(reinterpret_cast<char *>(&resp), sizeof(uint8_t));
     return resp;
 }
+
+uint8_t Protocol::recvOneByte(Socket &socket) {
+    uint8_t resp = 0;
+    socket.recv((char*)&resp, sizeof(uint8_t));
+    return resp;
+}
+
+uint16_t Protocol::recvTwoBytes(Socket &socket) {
+    uint16_t resp = 0;
+    socket.recv((char*)&resp, sizeof(uint16_t));
+    return resp;
+}
+
 
 void Protocol::sendGameList(Socket &skt, const std::vector<std::vector<std::string>>& list) {
     if (list.empty()) {
