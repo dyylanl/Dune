@@ -76,7 +76,16 @@ public:
 
     explicit Map(std::string path_config);
 
+    /*
+    *   
+    */
+    std::vector<UnitDTO> getUnits();
+
+    /*
+    *
+    */
     std::vector<BuildingDTO> getBuildings();
+
 
     /*
     *   Al player de id le asigna una unidad del type en posicion x,y
@@ -87,11 +96,6 @@ public:
     *   Le asigna una building al player del type en la pos x,y
     */
     void putBuilding(InstanceId id_player, char type, int x, int y);
-
-    /*
-    *   
-    */
-    std::vector<UnitDTO> getUnits();
 
 };
 

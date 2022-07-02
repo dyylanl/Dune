@@ -84,7 +84,7 @@ Terrain& Map::at(const Position& pos) {
 }
 
 bool Map::isValid(Position &pos) {
-    return pos.getX() >= 0 && pos.getY() >= 0 && pos.getX() < rows && pos.getY() < cols;
+    return (pos.getX() >= 0 && pos.getY() >= 0 && pos.getX() < rows && pos.getY() < cols);
 }
 
 Position Map::getClosestSpeciaPosition(Position pos, int radius) {
@@ -119,6 +119,9 @@ std::vector<std::vector<char>> &Map::getMap() {
     return this->mapa;
 }
 
+std::vector<UnitDTO> Map::getUnits() {
+    return unitsDTO;
+}
  
 std::vector<BuildingDTO> Map::getBuildings() {
     return buildingsDTO;
@@ -134,9 +137,17 @@ void Map::putUnit(InstanceId id_player, char type, int x, int y) {
     unitsDTO.push_back(unit);
 }
 
-std::vector<UnitDTO> Map::getUnits() {
-    return unitsDTO;
+void Map::putBuilding(InstanceId id_player, char type, int x, int y) {
+    Position pos(x,y);
+    if (!isValid(pos)) {
+        return;
+    }
+    BuildingDTO build;
+    build.build_id = id_player;
+    build.type = type;
+    build.pos_x = x;
+    build.pos_y = y;
+    buildingsDTO.push_back(build);
 }
-
 
 Map::~Map() {}

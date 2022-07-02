@@ -50,7 +50,7 @@ void ClientConnection::_receiver() {
             if (opcode != 0) {
                 _receiveCommand(opcode);
             } else {
-                throw Exception("[CLIENT %i] INVALID IPCODE.\n",id);
+                throw Exception("[CLIENT %i] INVALID OPCODE.\n",id);
             }
         }
     } catch (const std::exception& e) {
