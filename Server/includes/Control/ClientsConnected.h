@@ -30,12 +30,16 @@ public:
     void stop();
     ~ClientsConnected();
 
+    void notify(Id player_id, Response* resp);
+
 
     void initGame(std::vector<std::vector<char>>& map);
 
     void sendInitBuildings(std::vector<BuildingDTO> buildings);
 
     std::vector<InstanceId> getAllPlayers();
+
+    void start();
 
 };
 

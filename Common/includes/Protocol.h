@@ -28,6 +28,7 @@ public:
     void createGame(Socket &socket, uint16_t house,
                     const std::string& name, int req);
 
+    uint8_t recvOpcode(Socket &socket);
 
     void sendInitGame(Socket &socket);
     bool recvInitGame(Socket &socket);
@@ -126,7 +127,7 @@ public:
     static void sendMap(Socket &socket, std::vector<std::vector<char>>& map) ;
 
     static std::vector<std::vector<char>> recvMap(Socket &socket);
-    void sendName(Socket &socket, std::string name);
+    bool sendName(Socket &socket, std::string name);
 
     void
     recvUnit(Socket &socket, int &id, char &player, bool &selectStatus, int &posX, int &posY, int &posActX,
