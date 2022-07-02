@@ -16,7 +16,7 @@ void ButtonUnitCL::processEvent(SDL_Event &event, BQueue<std::unique_ptr<Command
         SDL2pp::Point point(event.motion.x, event.motion.y);
         if (SDL_PointInRect(&point, &shape)) {
             std::unique_ptr<CommandCL> command(new CreateUniTCL(m_type));
-            std::cout << "Push commando Select" << std::endl;
+            std::cout << "Push commando Create Unit" << std::endl;
             queue.push(std::move(command));
         }
     }

@@ -30,7 +30,6 @@ void Engine::Events() {
 
 void Engine::Update() {
     try {
-        std::vector<std::unique_ptr<GameObject>> aux;
         m_objects = m_queueNb.front();
         m_queueNb.pop();
     } catch (EmptyQueue & e) {
@@ -52,9 +51,9 @@ void Engine::Render(SDL2pp::Renderer &m_Renderer) {
     m_Renderer.Present();
 }
 
-Engine::Engine(std::vector<std::vector<char>> &mapa, std::vector<std::unique_ptr<GameObject>> &objects, std::vector<std::unique_ptr<ButtonCL>> &menu,TextureManager &textureManager,
+Engine::Engine(std::vector<std::vector<char>> &mapa, std::vector<std::unique_ptr<ButtonCL>> &menu,TextureManager &textureManager,
                NBQueue<std::vector<std::unique_ptr<GameObject>>> &queueNb, BQueue<std::unique_ptr<CommandCL>> &queueB)
-               : m_mapa (mapa), m_objects(std::move(objects)), m_menu(std::move(menu)), m_TextureManager(textureManager),
+               : m_mapa (mapa), m_menu(std::move(menu)), m_TextureManager(textureManager),
                  m_queueNb(queueNb), m_queueB(queueB){
     m_Running = true;
 }

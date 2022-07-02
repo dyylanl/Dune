@@ -150,7 +150,6 @@ void Client::initSDL(Socket &aSocket, Protocol &aProtocol,
     TextureManager textureManager(renderer, camera);
 
     loadTextures(textureManager, renderer);
-    std::vector<std::unique_ptr<GameObject>> objects;
     std::vector<std::unique_ptr<ButtonCL>> menu;
     menu.push_back(std::unique_ptr<ButtonCL>(new ButtonBarrackCL(1, 1, 10, false, false)));
     menu.push_back(std::unique_ptr<ButtonCL>(new ButtonHeavyFactoryCL(1, 1, 10, false, false)));
@@ -169,7 +168,7 @@ void Client::initSDL(Socket &aSocket, Protocol &aProtocol,
     menu.push_back(std::unique_ptr<ButtonCL>(new ButtonTrikeCL(1, 1, 10, false, false)));
 
 
-    Engine engine(map, objects, menu,textureManager, queueNb, queueB);
+    Engine engine(map, menu, textureManager, queueNb, queueB);
 
     while (engine.IsRunning()) {
         engine.Events();
@@ -266,7 +265,7 @@ void Client::listGames(Protocol protocol, Socket &socket) {
 
 void Client::launch() {
     std::cout << "Iniciando cliente.... \n\n";
-    try {
+    /*try {
         std::string ip = "localhost";
         std::string port = "8082";
         std::cout << "IP: localhost";
@@ -295,12 +294,12 @@ void Client::launch() {
     } catch (std::exception& e) {
         std::cout << e.what() << std::endl;
         return;
-    }
+    }*/
 
-    /*Socket socket_("localhost","8082");
+    Socket socket_("localhost","8082");
     Protocol protocol_;
     std::vector<std::vector<char>> map(50, std::vector<char> (50, 'A') );
-    initSDL(socket_, protocol_, map);*/
+    initSDL(socket_, protocol_, map);
 }
 
 

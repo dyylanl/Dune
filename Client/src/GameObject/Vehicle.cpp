@@ -12,7 +12,7 @@ Vehicle::Vehicle(char textureID, SDL2pp::Point position, SDL2pp::Point size, int
                  m_posAction(posAction), m_life(life), m_action(action) {}
 
 void Vehicle::processEvent(SDL_Event &event, BQueue<std::unique_ptr<CommandCL>> &queue) {
-    if (event.button.button == SDL_BUTTON_LEFT) {
+    if (event.type == SDL_MOUSEBUTTONDOWN && event.button.button == SDL_BUTTON_LEFT) {
         SDL_Rect shape = SDL2pp::Rect(m_position, m_size);
         SDL2pp::Point point(event.motion.x, event.motion.y);
         if (SDL_PointInRect(&point, &shape)) {
@@ -22,7 +22,7 @@ void Vehicle::processEvent(SDL_Event &event, BQueue<std::unique_ptr<CommandCL>> 
         }
     }
 
-    if (event.button.button == SDL_BUTTON_RIGHT && m_selectStatus) {
+    if (event.type == SDL_MOUSEBUTTONDOWN && event.button.button == SDL_BUTTON_RIGHT && m_selectStatus) {
         SDL2pp::Point point(event.motion.x, event.motion.y);
         std::unique_ptr<CommandCL> command (new MoveCL(m_id, point));
         std::cout << "Push command Move" << std::endl;
