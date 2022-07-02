@@ -12,51 +12,56 @@
 #include "../../../Server/includes/defs.h"
 #include "../../../Common/includes/Protocol.h"
 #include "../../../Server/includes/Control/Commands/Command.h"
+#include "Responses/Response.h"
 
 class ClientConnection {
-private:
+   private:
     InstanceId id;
-    std::atomic<Id> map_id;
     Socket peer;
     NonBlockingQueue<InstanceId*>& finished_connections;
-    // Comparten el int finished_threads => necesito el mutex
+
     std::mutex m;
     int finished_threads;
-    std::thread sender;
-    std::thread receiver;
-    Protocol protocol;
 
+    std::thread sender;
+    BlockingQueue<Response*> responses;
+
+    std::thread receiver;
     NonBlockingQueue<Command*>& commands;
 
+    Protocol protocol;
+
     void _finishThread();
-    // POR NO USAR PTR INTELIGENTES
     void _freeNotifications();
     void _sender();
     void _receiver();
     void _receiveCommand(uint8_t opcode);
 
-public:
+
+   public:
     /* Constructor */
     ClientConnection(const InstanceId id,
                      Socket& peer,
-                     NonBlockingQueue<Command*>& commands,
-                     NonBlockingQueue<InstanceId*>& finished_connections);
+                     NonBlockingQueue<InstanceId*>& finished_connections,
+                     NonBlockingQueue<Command*>& commands
+                     );
 
     ClientConnection(const ClientConnection&) = delete;
     ClientConnection& operator=(const ClientConnection&) = delete;
     ClientConnection(ClientConnection&& other) = delete;
     ClientConnection& operator=(ClientConnection&& other) = delete;
-
     void start();
+    void push(Response* notification);
     void join();
     void stop();
     ~ClientConnection();
 
-
     void sendInitGame(std::vector<std::vector<char>>& map);
     void sendInitBuildings(std::vector<BuildingDTO> buildings);
-    InstanceId getId(){return id;}
-    
+    InstanceId getId() {return id;}
+
+    void sendEstablishConnection();
+
 };
 
 

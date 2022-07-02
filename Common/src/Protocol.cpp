@@ -15,11 +15,16 @@ Protocol::~Protocol() {
     this->close();
 }
 
-void Protocol::sendName(Socket &socket, std::string name) {
+bool Protocol::sendName(Socket &socket, std::string name) {
     uint16_t len_name = name.size();
     socket.send(reinterpret_cast<const char *>(&len_name), sizeof(uint8_t));
-    socket.send(name.c_str(), name.size());
-
+    int size = socket.send(name.c_str(), name.size());
+    int esp = name.size();
+    std::cout << "[PROTOCOL]: SE ENVIA NAME: " << name << std::endl;
+    if (size < esp) {
+        return false;
+    }
+    return true;
 }
 
 std::string Protocol::recvName(Socket &skt) {
@@ -66,12 +71,21 @@ void Protocol::createGame(Socket &skt, uint16_t house,
 }
 
 uint16_t Protocol::recvCommand(Socket &skt) {
-    uint16_t command = 0;
+    uint8_t command = 0;
     skt.recv(reinterpret_cast<char *>(&command), sizeof(uint8_t));
     return command;
 }
+
+uint8_t Protocol::recvOpcode(Socket &socket) {
+    uint8_t opcode = 0;
+    socket.recv((char*)&opcode, sizeof(uint8_t));
+    std::cout << "[PROTOCOL]: Opcode: " << opcode << std::endl;
+    return opcode;
+}
+
 // devuelve true si pudo enviar todos los bytes sino devuelve false aka esta cerrado
 bool Protocol::sendResponse(Socket &skt, int resp) {
+    std::cout << "[PROTOCOL]: SE ENVIA RESP: " << resp << std::endl;
     int bytes = skt.send(reinterpret_cast<const char *>(&resp), sizeof(uint8_t));
     if (bytes == sizeof(uint8_t)){
         return true;
@@ -206,11 +220,13 @@ int Protocol::idUnidRecv(Socket &socket) {
 void Protocol::sendInitGame(Socket &socket) {
     uint16_t flag_init = 10;
     socket.send((const char*)&flag_init, sizeof(uint16_t));
+    std::cout << "[PROTOCOL]: SE ENVIA INIT_GAME: " << flag_init << std::endl;
 }
 
 bool Protocol::recvInitGame(Socket &socket) {
     uint16_t flag_recv = 0;
     socket.recv((char*)&flag_recv, sizeof(uint16_t));
+    std::cout << "[PROTOCOL]: SE RECV INIT_GAME: " << flag_recv << std::endl;
     uint16_t flag_init = 10;
     if (flag_recv == flag_init) {
         return true;
@@ -228,7 +244,7 @@ void Protocol::sendMap(Socket &socket, std::vector<std::vector<char>>& map) {
             char type = map[i][j];
             socket.send(reinterpret_cast<const char *>(&type), sizeof(uint8_t));}
     }
-    //std::cout << "Mapa de " << rows << "x" << cols << " enviado." << std::endl;
+    std::cout << "[PROTOCOL] Mapa de " << rows << "x" << cols << " enviado." << std::endl;
 }
 
 
@@ -247,6 +263,7 @@ std::vector<std::vector<char>> Protocol::recvMap(Socket &socket) {
             //std::cout << "Se recive: " << type << std::endl;
         }
     }
+    std::cout << "[PROTOCOL]: SE RECV MAPA " << std::endl;
     return mapa;
 }
 
@@ -435,6 +452,7 @@ std::vector<std::vector<std::string>> Protocol::recvMapsCreated(Socket &socket) 
         std::vector<std::string> map_dto = {std::to_string(rows),std::to_string(cols),std::to_string(max_players)};
         maps.push_back(map_dto);
     }
+    std::cout << "[PROTOCOL]: SE RECV MAPA" << std::endl;
     return maps;
 }
 
@@ -450,6 +468,7 @@ void Protocol::sendEstablishConnection(Socket &socket) {
 bool Protocol::recvEstablishConnection(Socket &socket) {
     uint16_t connect = 0;
     socket.recv((char*)&connect, sizeof(uint16_t));
+    std::cout << "[PROTOCOL]: SE RECV ESTAB_CONNECT: " << connect << std::endl;
     if (connect == ESTABLISH_CONNECTION) {
         return true;
     }
@@ -485,7 +504,7 @@ void Protocol::sendInitBuildings(Socket &socket, std::vector<BuildingDTO> buildi
         socket.send((const char *)&pos_x, sizeof(uint16_t));
         socket.send((const char *)&life, sizeof(uint16_t));
     }
-    
+    std::cout << "[PROTOCOL]: SE ENVIA EDIFICIO " << std::endl;
 }
 
 void Protocol::sendCommandCreateUnit(Socket &socket, char &action, int &unitType) {

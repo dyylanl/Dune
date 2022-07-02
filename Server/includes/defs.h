@@ -24,4 +24,8 @@ typedef uint32_t Id;
 #define BUILD_BUILDING_COMMAND 7
 #define CREATE_UNIT_COMMAND 8
 
+
+// -------------- RESPUESTAS SERVIDOR - CLIENTE -------------------- //
+#define INVALID_COMMAND 11
+
 #endif //DEFS_H

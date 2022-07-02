@@ -267,13 +267,11 @@ void Client::listGames(Protocol protocol, Socket &socket) {
 
 void Client::launch() {
     std::cout << "Iniciando cliente.... \n\n";
-    /*try {
-        std::string ip;
-        std::string port;
-        std::cout << "IP: ";
-        std::cin >> ip;
-        std::cout << "\nPORT: ";
-        std::cin >> port;
+    try {
+        std::string ip = "localhost";
+        std::string port = "8082";
+        std::cout << "IP: localhost";
+        std::cout << "\nPORT: 8082\n";
         Socket socket(ip,port);
         Protocol protocol;
         std::cout << "Conexion exitosa.\n";
@@ -286,7 +284,6 @@ void Client::launch() {
         uint16_t comando;
         std::cout << "Ingrese un comando: ";
         std::cin >> comando;
-        std::vector<std::vector<char>> map;
         protocol.sendResponse(socket, comando);
         if (comando == CREATE_GAME) {
             createGame(protocol, socket);
@@ -299,12 +296,12 @@ void Client::launch() {
     } catch (std::exception& e) {
         std::cout << e.what() << std::endl;
         return;
-    }*/
+    }
 
-    Socket socket_("localhost","8082");
-    Protocol protocol_;
-    std::vector<std::vector<char>> map(50, std::vector<char> (50, 'A') );
-    initSDL(socket_, protocol_, map);
+    //Socket socket_("localhost","8082");
+    //Protocol protocol_;
+    //std::vector<std::vector<char>> map(50, std::vector<char> (50, 'A') );
+    
 }
 
 
