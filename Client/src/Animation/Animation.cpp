@@ -13,9 +13,9 @@
 
 Animation::~Animation() {}
 
-/*void Animation::update(float dt) {
+/*void Animation::processEvent(float dt) {
     this->elapsed += dt;
-    *//* checks if the frame should be updated based on the time elapsed since the last update *//*
+    *//* checks if the frame should be updated based on the time elapsed since the last processEvent *//*
     while (this->elapsed > FRAME_RATE) {
         this->advanceFrame();
         this->elapsed -= FRAME_RATE;

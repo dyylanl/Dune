@@ -17,7 +17,7 @@ protected:
 public:
     BuildCL(char textureID, SDL2pp::Point position, SDL2pp::Point size, int id, int player, int life);
 
-    void update(SDL_Event &event, BQueue<std::unique_ptr<CommandCL>> &queue) {}
+    void processEvent(SDL_Event &event, BQueue<std::unique_ptr<CommandCL>> &queue) {}
 
     virtual void draw(SDL2pp::Renderer &renderer, TextureManager &textureManager) = 0;
 

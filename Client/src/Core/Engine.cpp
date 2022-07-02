@@ -17,11 +17,11 @@ void Engine::Events() {
         } else{
             unsigned int sizeObjects = m_objects.size();
             for (unsigned int i = 0; i < sizeObjects; ++i) {
-                m_objects[i]->update(event, m_queueB);
+                m_objects[i]->processEvent(event, m_queueB);
             }
             unsigned int sizeMenu = m_menu.size();
             for (unsigned int i = 0; i < sizeMenu; ++i) {
-                m_menu[i]->update(event, m_queueB);
+                m_menu[i]->processEvent(event, m_queueB);
             }
         }
     }

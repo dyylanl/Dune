@@ -11,7 +11,7 @@ Vehicle::Vehicle(char textureID, SDL2pp::Point position, SDL2pp::Point size, int
                  : GameObject(textureID, position, size), m_id(id), m_player(player), m_selectStatus(selecStatus),
                  m_posAction(posAction), m_life(life), m_action(action) {}
 
-void Vehicle::update(SDL_Event &event, BQueue<std::unique_ptr<CommandCL>> &queue) {
+void Vehicle::processEvent(SDL_Event &event, BQueue<std::unique_ptr<CommandCL>> &queue) {
     if (event.button.button == SDL_BUTTON_LEFT) {
         SDL_Rect shape = SDL2pp::Rect(m_position, m_size);
         SDL2pp::Point point(event.motion.x, event.motion.y);

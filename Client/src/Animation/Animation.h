@@ -29,7 +29,7 @@ private:
     int currentFrame;
     /** Total number of frames in the sprite. */
     int numFrames;
-    /** Time elapsed since last update. */
+    /** Time elapsed since last processEvent. */
     float elapsed;
     const std::string m_textureID;
     SDL_RendererFlip m_flip;

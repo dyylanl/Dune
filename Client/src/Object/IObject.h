@@ -13,7 +13,7 @@
 
 class IObject {
 public:
-    virtual void update(SDL_Event &eventManager, BQueue<std::unique_ptr<CommandCL>> &queue) = 0;
+    virtual void processEvent(SDL_Event &eventManager, BQueue<std::unique_ptr<CommandCL>> &queue) = 0;
 
     virtual void draw(SDL2pp::Renderer &renderer, TextureManager &textureManager) = 0;
 

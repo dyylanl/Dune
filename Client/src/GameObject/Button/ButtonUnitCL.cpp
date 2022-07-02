@@ -10,7 +10,7 @@ ButtonUnitCL::ButtonUnitCL(char textureID, SDL2pp::Point position, int id, char 
                            bool selectStatus, bool ready)
         : ButtonCL(textureID, position, id, type, player, actionTime, selectStatus, ready) {}
 
-void ButtonUnitCL::update(SDL_Event &event, BQueue<std::unique_ptr<CommandCL>> &queue) {
+void ButtonUnitCL::processEvent(SDL_Event &event, BQueue<std::unique_ptr<CommandCL>> &queue) {
     if (event.type == SDL_MOUSEBUTTONDOWN && event.button.button == SDL_BUTTON_LEFT && !m_selectStatus) {
         SDL2pp::Rect shape = SDL2pp::Rect(m_position, m_size);
         SDL2pp::Point point(event.motion.x, event.motion.y);
