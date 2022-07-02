@@ -12,7 +12,7 @@ class ButtonUnitCL : public ButtonCL{
 public:
     ButtonUnitCL(char textureID, SDL2pp::Point position, int id, char type, char player, int actionTime, bool selectStatus, bool ready);
 
-    void update(EventManager &eventManager, BQueue<std::unique_ptr<CommandCL>> &queue);
+    void update(SDL_Event &event, BQueue<std::unique_ptr<CommandCL>> &queue);
 
     virtual ~ButtonUnitCL() {}
 };

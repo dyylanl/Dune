@@ -10,10 +10,10 @@ ButtonUnitCL::ButtonUnitCL(char textureID, SDL2pp::Point position, int id, char 
                            bool selectStatus, bool ready)
         : ButtonCL(textureID, position, id, type, player, actionTime, selectStatus, ready) {}
 
-void ButtonUnitCL::update(EventManager &eventManager, BQueue<std::unique_ptr<CommandCL>> &queue) {
-    if (eventManager.mouseButtonDown(LEFT) && !m_selectStatus) {
+void ButtonUnitCL::update(SDL_Event &event, BQueue<std::unique_ptr<CommandCL>> &queue) {
+    if (event.type == SDL_MOUSEBUTTONDOWN && event.button.button == SDL_BUTTON_LEFT && !m_selectStatus) {
         SDL2pp::Rect shape = SDL2pp::Rect(m_position, m_size);
-        SDL2pp::Point point = eventManager.getMouse();
+        SDL2pp::Point point(event.motion.x, event.motion.y);
         if (SDL_PointInRect(&point, &shape)) {
             std::unique_ptr<CommandCL> command(new CreateUniTCL(m_type));
             std::cout << "Push commando Select" << std::endl;
