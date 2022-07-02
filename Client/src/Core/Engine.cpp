@@ -15,12 +15,12 @@ void Engine::Events() {
         if(event.type == SDL_QUIT) {
             m_Running = false;
         } else{
-            unsigned int size1 = m_objects.size();
-            for (unsigned int i = 0; i < size1; ++i) {
+            unsigned int sizeObjects = m_objects.size();
+            for (unsigned int i = 0; i < sizeObjects; ++i) {
                 m_objects[i]->update(event, m_queueB);
             }
-            unsigned int size2 = m_menu.size();
-            for (unsigned int i = 0; i < size2; ++i) {
+            unsigned int sizeMenu = m_menu.size();
+            for (unsigned int i = 0; i < sizeMenu; ++i) {
                 m_menu[i]->update(event, m_queueB);
             }
         }
@@ -52,9 +52,9 @@ void Engine::Render(SDL2pp::Renderer &m_Renderer) {
     m_Renderer.Present();
 }
 
-Engine::Engine(std::vector<std::vector<char>> &mapa, std::vector<std::unique_ptr<GameObject>> &objects, std::vector<std::unique_ptr<ButtonCL>> &menu,TextureManager &textureManager, EventManager &eventManager,
+Engine::Engine(std::vector<std::vector<char>> &mapa, std::vector<std::unique_ptr<GameObject>> &objects, std::vector<std::unique_ptr<ButtonCL>> &menu,TextureManager &textureManager,
                NBQueue<std::vector<std::unique_ptr<GameObject>>> &queueNb, BQueue<std::unique_ptr<CommandCL>> &queueB)
-               : m_mapa (mapa), m_objects(std::move(objects)), m_menu(std::move(menu)), m_TextureManager(textureManager), m_eventManager(eventManager),
+               : m_mapa (mapa), m_objects(std::move(objects)), m_menu(std::move(menu)), m_TextureManager(textureManager),
                  m_queueNb(queueNb), m_queueB(queueB){
     m_Running = true;
 }

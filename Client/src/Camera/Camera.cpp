@@ -4,8 +4,8 @@
 
 #include "Camera.h"
 
-void Camera::update(EventManager &eventManager) {
-    if(eventManager.GetKeyDown(SDL_SCANCODE_LEFT)) {
+void Camera::update(SDL_Event &event) {
+/*    if(eventManager.GetKeyDown(SDL_SCANCODE_LEFT)) {
         position = position - SDL2pp::Point(3,0);
     }
     if(eventManager.GetKeyDown(SDL_SCANCODE_RIGHT)) {
@@ -16,7 +16,7 @@ void Camera::update(EventManager &eventManager) {
     }
     if(eventManager.GetKeyDown(SDL_SCANCODE_DOWN)) {
         position = position - SDL2pp::Point(0,-3);
-    }
+    }*/
 }
 
 SDL2pp::Point Camera::getPosicion() {
