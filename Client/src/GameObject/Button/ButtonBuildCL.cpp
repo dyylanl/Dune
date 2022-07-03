@@ -10,7 +10,7 @@ ButtonBuildCL::ButtonBuildCL(char textureID, SDL2pp::Point position, int id, cha
                              bool selectStatus, bool ready) : ButtonCL(textureID, position, id, type, player, actionTime,
                                                                      selectStatus, ready) {}
 
-void ButtonBuildCL::processEvent(SDL_Event &event, BQueue<std::unique_ptr<CommandCL>> &queue) {
+void ButtonBuildCL::processEvent(SDL_Event &event, BQueue<std::unique_ptr<CommandCL>> &queue, Camera &camera) {
     if(event.button.button == SDL_BUTTON_LEFT && !m_selectStatus && !m_ready) {
         SDL2pp::Rect shape = SDL2pp::Rect(m_position, m_size);
         SDL2pp::Point point(event.motion.x, event.motion.y);
@@ -36,6 +36,6 @@ void ButtonBuildCL::processEvent(SDL_Event &event, BQueue<std::unique_ptr<Comman
     if (event.button.button == SDL_BUTTON_RIGHT && m_selectStatus && m_ready) {
         m_selectStatus = false;
         SDL2pp::Point point(event.motion.x, event.motion.y);
-        buildBuilding(queue, point);
+        buildBuilding(queue, point - camera.getPosicion());
     }
 }

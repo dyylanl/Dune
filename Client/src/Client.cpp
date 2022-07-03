@@ -146,8 +146,7 @@ void Client::initSDL(Socket &aSocket, Protocol &aProtocol,
     SDL2pp::SDL sdl(SDL_INIT_VIDEO);
     SDL2pp::Window window("DUNE - v0.1", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, 0);
     SDL2pp::Renderer renderer(window, -1, SDL_RENDERER_ACCELERATED);
-    Camera camera;
-    TextureManager textureManager(renderer, camera);
+    TextureManager textureManager(renderer);
 
     loadTextures(textureManager, renderer);
     std::vector<std::unique_ptr<ButtonCL>> menu;

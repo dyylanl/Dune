@@ -20,13 +20,16 @@ public:
     GameObject(char textureID, SDL2pp::Point position, SDL2pp::Point size)
     : m_textureID(textureID), m_position(position), m_size(size) {}
 
-    virtual void processEvent(SDL_Event &eventManager, BQueue<std::unique_ptr<CommandCL>> &queue) = 0;
+    virtual void processEvent(SDL_Event &eventManager, BQueue<std::unique_ptr<CommandCL>> &queue, Camera &camera) = 0;
 
     virtual void draw(SDL2pp::Renderer &renderer, TextureManager &textureManager) = 0;
+
+    void cameraOffset(Camera &camera) {
+        m_position = m_position + camera.getPosicion();
+    }
 
     virtual ~GameObject() {}
 
 };
-
 
 #endif //DUNE_GAMEOBJECT_H

@@ -20,6 +20,7 @@
 
 class Engine {
 private:
+    Camera m_camera;
     std::vector<std::vector<char>> m_mapa;
     std::vector<std::unique_ptr<GameObject>> m_objects;
     std::vector<std::unique_ptr<ButtonCL>> m_menu;

@@ -12,7 +12,7 @@ DeviatorCL::DeviatorCL(int id, int player, bool selecStatus, SDL2pp::Point posit
 
 }
 
-void DeviatorCL::draw(SDL2pp::Renderer &renderer, TextureManager &textureManager) {
+/*void DeviatorCL::draw(SDL2pp::Renderer &renderer, TextureManager &textureManager) {
     SDL2pp::Point posFrame(0,0);
     textureManager.drawFrame(renderer, m_textureID, m_position, m_size, posFrame);
-}
+}*/

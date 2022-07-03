@@ -17,12 +17,14 @@ void Engine::Events() {
         } else{
             unsigned int sizeObjects = m_objects.size();
             for (unsigned int i = 0; i < sizeObjects; ++i) {
-                m_objects[i]->processEvent(event, m_queueB);
+                m_objects[i]->processEvent(event, m_queueB, m_camera);
             }
             unsigned int sizeMenu = m_menu.size();
             for (unsigned int i = 0; i < sizeMenu; ++i) {
-                m_menu[i]->processEvent(event, m_queueB);
+                m_menu[i]->processEvent(event, m_queueB, m_camera);
             }
+
+            m_camera.update(event);
         }
     }
 
@@ -32,6 +34,12 @@ void Engine::Update() {
     try {
         m_objects = m_queueNb.front();
         m_queueNb.pop();
+
+        unsigned int sizeObjects = m_objects.size();
+        for (unsigned int i = 0; i < sizeObjects; ++i) {
+            m_objects[i]->cameraOffset(m_camera);
+        }
+
     } catch (EmptyQueue & e) {
         //std::cerr << e.what() << std::endl;
     }
@@ -39,7 +47,7 @@ void Engine::Update() {
 
 void Engine::Render(SDL2pp::Renderer &m_Renderer) {
     m_Renderer.Clear();
-    m_TextureManager.drawMap(m_Renderer, m_mapa);
+    m_TextureManager.drawMap(m_Renderer, m_mapa, m_camera);
     m_TextureManager.draw(m_Renderer, MENU, SDL2pp::Point(1089, 0), SDL2pp::Point(191, 720));
     for (int i = 0; i < (int) m_objects.size(); ++i) {
         m_objects[i]->draw(m_Renderer, m_TextureManager);
