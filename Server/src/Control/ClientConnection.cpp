@@ -2,7 +2,6 @@
 
 void ClientConnection::_finishThread() {
     std::unique_lock<std::mutex> l(m);
-    fprintf(stderr, "CLIENTE %i: se llamó a _finishThread.\n", id);
     if ((++finished_threads) == 2) {
         fprintf(stderr,"CLIENTE %i: _finishThread agrega conexión terminada a la cola.\n",id);
         finished_connections.push(new InstanceId(id));
@@ -19,7 +18,6 @@ void ClientConnection::_freeNotifications() {
 
 void ClientConnection::_sender() {
     try {
-        fprintf(stderr, "CLIENTE %i: Sender comienza su ejecución.\n", id);
         Response* notification = nullptr;
         bool socket_valid = true;
         while ((notification = responses.pop())) {
@@ -32,37 +30,34 @@ void ClientConnection::_sender() {
         }
     } catch (const std::exception& e) {
         stop();
-        fprintf(stderr, "ClientConnection // _sender: %s\n", e.what());
+        fprintf(stderr, "[ClientConnection]: Error en el hilo sender: %s\n", e.what());
     } catch (...) {
         stop();
-        fprintf(stderr, "ClientConnection // _sender: Unknown error.\n");
+        fprintf(stderr, "[ClientConnection]: Error desconocido.\n");
     }
     _finishThread(); // TODO DESCOMENTAR ESTO
-    fprintf(stderr, "CLIENTE %i: Sender finaliza su ejecución.\n", id);
 }
 
 void ClientConnection::_receiver() {
-    fprintf(stderr, "CLIENTE %i: Receiver comienza su ejecución.\n", id);
     try {
         uint8_t opcode;
         while ((opcode = protocol.recvOneByte(peer))) {
-            fprintf(stderr, "CLIENTE %i: Receiver ejecutando opcode: %i.\n", id,opcode);
+            fprintf(stderr, "CLIENTE %i: Receiver recibe comando con opcode: %i.\n", id,opcode);
             if (opcode != 0) {
                 _receiveCommand(opcode);
             } else {
-                throw Exception("[CLIENT %i] INVALID OPCODE.\n",id);
+                throw Exception("[CLIENT %i] Se recibe opcode invalido.\n",id);
             }
         }
     } catch (const std::exception& e) {
         stop();
-        fprintf(stderr, "ClientConnection::_receiver: %s\n", e.what());
+        fprintf(stderr, "[ClientConnection] Error en el hilo _receiver %s\n", e.what());
     } catch (...) {
         stop();
-        fprintf(stderr, "ClientConnection::_receiver: Unknown error.\n");
+        fprintf(stderr, "[ClientConnection] Error desconocido.\n");
     }
     this->responses.close();
     _finishThread();
-    fprintf(stderr, "CLIENTE %i: Receiver finaliza su ejecución.\n", id);
 }
 
 void ClientConnection::_receiveCommand(uint8_t opcode) {
@@ -70,7 +65,6 @@ void ClientConnection::_receiveCommand(uint8_t opcode) {
         Command* cmd = CommandFactory::newCommand(id, opcode, peer);
         commands.push(cmd);
     } catch (const UnknownCommandException& e) {
-        // Comando desconocido. Envio error.
         Response* reply_error = new Response(INVALID_COMMAND, e.what());
         this->responses.push(reply_error);
     }
@@ -106,7 +100,7 @@ void ClientConnection::join() {
     try {
         peer.shutdown();
     } catch (const Exception& e) {
-        fprintf(stderr, "CLIENTE %i: error in socket::shutdown. Aborting.\n",
+        fprintf(stderr, "CLIENTE %i: Error apagando el socket.\n",
                 id);
     }
 }
@@ -116,8 +110,7 @@ void ClientConnection::stop() {
     try {
         peer.shutdown();
     } catch (const Exception& e) {
-        fprintf(stderr, "CLIENTE %i: error in socket::shutdown. Aborting.\n",
-                id);
+        fprintf(stderr, "CLIENTE %i: Error apagando el socket.\n",id);
     }
 }
 

@@ -2,13 +2,6 @@
 #define SUCCESS 0
 #define ERROR 1
 
-
-
-#include "../../includes/Control/Engine.h"
-
-//-----------------------------------------------------------------------------
-// Métodos privados
-
 /*
  * 1° Popea un comando
  * 2° Ejecuta ese comando
@@ -33,7 +26,7 @@ void Engine::_processCommands() {
 void Engine::_processFinishedConnections() {
     InstanceId* finished_connection = nullptr;
     while ((finished_connection = finished_connections.pop())) {
-        //map.deleteCharacter(*finished_connection); TODO: BORRAR JUGADOR
+        //map.delete(*finished_connection); TODO: BORRAR JUGADOR
         established_connections.remove(*finished_connection);
         delete finished_connection;
         fprintf(stderr, "Se ha desconectado un jugador.\n");
@@ -63,21 +56,12 @@ void Engine::clearAll() {
 }
 
 void Engine::_loopIteration(int it) {
-    //std::cout << "[ENGINE]: It: " << it << std::endl;
     _processCommands();
-    /*game.actCharacters(it);
-    game.actCreatures(it);
-    game.spawnNewCreatures(it);TODO: LOGICA DEL JUEGO
-    game.persistPeriodicData(database, it);
-    game.updateDroppedItemsLifetime(it);
-    game.updateResurrectingPlayersCooldown(it);*/
+    //map.updateSpice(it);
+    //map.update(it);
+    //established_connections.updateClients();
     _processFinishedConnections();
 }
-
-//-----------------------------------------------------------------------------
-
-//-----------------------------------------------------------------------------
-// API Pública
 
 Engine::Engine(MapDTO map_dto)
         : keep_executing(true),
@@ -93,7 +77,7 @@ Engine::Engine(MapDTO map_dto)
 
 
 void Engine::run() {
-    fprintf(stderr, "ENGINE: Empezando ejecución.\n");
+    fprintf(stderr, "[Engine]: Empezando ejecución.\n");
     established_connections.initGame(map.getMap());     // envio terrenos
     established_connections.sendInitBuildings(map.getBuildings());   // envio el centro de construccion de cada jugador de la partida
     auto t1 = std::chrono::steady_clock::now();
@@ -111,25 +95,19 @@ void Engine::run() {
         diff = t2 - t1;
         rest = rate - std::ceil(diff.count());
         if (rest < 0) {
-            fprintf(stderr, ">> Ciclo principal: pérdida de frame/s.\n");
             behind = -rest;
             lost = rate + (behind - behind % rate);
             rest = rate - behind % rate;
             t1 += std::chrono::milliseconds(lost);
             it += std::floor(lost / rate);
         }
-        //fprintf(stderr, "ENGINE: Sleeping for %i ms.\n", rest);
         std::this_thread::sleep_for(std::chrono::milliseconds(rest));
         t1 += std::chrono::milliseconds(rate);
         it += 1;
     }
-    //-------------------------------------------------------------------------
-    // Salimos ordenadamente:
-    // Terminamos las conexiones
     established_connections.stop();
-    // Vaciamos las colas para no perder memoria:
     clearAll();
-    fprintf(stderr, "ENGINE: Terminando ejecución.\n");
+    fprintf(stderr, "[Engine]: Terminando ejecución.\n");
 }
 
 void Engine::stop() {
@@ -148,7 +126,6 @@ uint16_t Engine::addClient(NewConnection client) {
     if (current_players < req_players) {
         current_players += 1;
         established_connections.add((InstanceId)current_players,client.map_id,client.peer);
-        std::cout << "[ENGINE]: Cliente aceptado." << std::endl;
         if (current_players == req_players) {
             this->start();
         }
@@ -163,17 +140,3 @@ std::vector<InstanceId> Engine::getAllPlayers() {
 }
 
 Engine::~Engine() {}
-
-//-----------------------------------------------------------------------------
-
-
-
-
-
-
-
-
-
-
-
-
