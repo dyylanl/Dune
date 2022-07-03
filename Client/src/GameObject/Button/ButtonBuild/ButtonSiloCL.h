@@ -6,13 +6,20 @@
 #define DUNE_BUTTONSILOCL_H
 
 
-#include "../../ButtonCL.h"
+#include "../ButtonBuildCL.h"
+#include "../../Builds/SiloCL.h"
 
-class ButtonSiloCL : public ButtonCL {
+class ButtonSiloCL : public ButtonBuildCL{
+private:
+    SiloCL m_build;
 public:
     ButtonSiloCL(int id, char player, int constructionTime, bool selectStatus, bool ready);
 
-    void buildBuilding(BlockingQueue<CommandCL *> &queue, SDL2pp::Point point);
+    void draw(SDL2pp::Renderer &renderer, TextureManager &textureManager);
+
+    void buildBuilding(BQueue<std::unique_ptr<CommandCL>> &queue, SDL2pp::Point point);
+
+    ~ButtonSiloCL() {}
 };
 
 

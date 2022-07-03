@@ -16,6 +16,8 @@ public:
     SelectCL(int id) : m_id(id) {}
 
     void execute(Protocol &protocol, Socket &socket);
+
+    ~SelectCL() {}
 };
 
 

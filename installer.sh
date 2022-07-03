@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# Estructura de instalador tomada de: https://github.com/mauro7x/argentum/blob/master/installer.sh
+
 greenColour="\e[0;32m\033[1m"
 endColour="\033[0m\e[0m"
 redColour="\e[0;31m\033[1m"
@@ -19,8 +21,8 @@ function ctrl_c() {
 
 function helpPanel() {
     echo -e "${purpleColour} Opciones:"
-    echo "  d: instalar DUNE"
-    echo -e "  q: salir. ${endColour}"
+    echo "d: instalar DUNE"
+    echo -e "q: salir. ${endColour}"
      echo -e "\n${yellowColour} Ingrese una opcion: ${endColour}"
 }
 
@@ -30,28 +32,28 @@ function installDependencies() {
     echo -e "${yellowColour} [*] Instalando librerias necesarias.... ${endColour}"
     echo ""
     echo -e "${grayColour}>> Instalando 'cmake'..."
-    sudo apt-get install cmake > /dev/null 2>&1
+    sudo apt-get install cmake -y > /dev/null 2>&1
     echo ""
     echo ">> Instalando 'libsdl2-dev'..."
-    sudo apt-get install libsdl2-dev > /dev/null 2>&1
+    sudo apt-get install libsdl2-dev -y > /dev/null 2>&1
     echo ""
     echo ">> Instalando 'libsdl2-image-dev'..."
-    sudo apt-get install libsdl2-image-dev  > /dev/null 2>&1
+    sudo apt-get install libsdl2-image-dev -y  > /dev/null 2>&1
     echo ""
     echo ">> Instalando 'libsdl2-ttf-dev'..."
-    sudo apt-get install libsdl2-ttf-dev  > /dev/null 2>&1
+    sudo apt-get install libsdl2-ttf-dev -y > /dev/null 2>&1
     echo ""
     echo ">> Instalando 'libsdl2-mixer-dev'..."
-    sudo apt-get install libsdl2-mixer-dev > /dev/null 2>&1
+    sudo apt-get install libsdl2-mixer-dev -y > /dev/null 2>&1
     echo ""
     echo ">> Instalando 'libyaml-cpp-dev'..."
-    sudo apt-get install libyaml-cpp-dev > /dev/null 2>&1
+    sudo apt-get install libyaml-cpp-dev -y > /dev/null 2>&1
     echo ""
     echo ">> Instalando 'qtbase5-dev'..."
-    sudo apt-get install qtbase5-dev > /dev/null 2>&1
+    sudo apt-get install qtbase5-dev -y > /dev/null 2>&1
     echo ""
     echo ">> Instalando 'qtmultimedia5-dev'..."
-    sudo apt-get install qtmultimedia5-dev > /dev/null 2>&1
+    sudo apt-get install qtmultimedia5-dev -y > /dev/null 2>&1
     echo ""
     echo -e ">> Instalando 'qtdeclarative5-dev' ${endColour}"
     sudo apt-get install qtdeclarative5-dev -y > /dev/null 2>&1
@@ -64,7 +66,7 @@ function installDependencies() {
 function installGame() {
 	tput civis
 	clear
-    echo -e "${blueColour} Comenzando la instalacion de DUNE ${endColour}"
+    echo -e "\n${blueColour}  [*] Comenzando la instalacion de DUNE ${endColour}"
     sleep 2
     sudo rm -r build 2>&1
     mkdir build
@@ -72,16 +74,16 @@ function installGame() {
     sudo cmake .. > /dev/null 2>&1
     sudo make install -j6 > /dev/null 2>&1
     echo ""
-    echo -e "\n${greenColour}[*] DUNE instalado en "$(pwd)"${endColour}\n"
+    echo -e "\n${greenColour}  [*] DUNE instalado en "$(pwd)"${endColour}\n"
     path=$pwd
     echo ""
     return
 }
 
 function post_installation() {
-	echo "c) Ir a la carpeta donde se instalo DUNE."
+	echo -e "${yellowColour}c) Ir a la carpeta donde se instalo DUNE."
 	echo "q) Salir."
-	echo "Ingrese una opcion: "
+	echo -e "Ingrese una opcion:${endColour}"
 	read OPTION
 	tput cnorm
 	case $OPTION in
@@ -95,32 +97,36 @@ function post_installation() {
 			exit 0
 			;;
 		*)
-			helpPanel
-            getInput
+			exit 0
+			;;
 	esac
 }
 
 function init_installer() {
-	helpPanel
-	while :
-	do
-		read OPTION
-		case $OPTION in
-			d)
-				echo ""
-				installDependencies
-            	installGame
-            	post_installation
+	if [ "$(uname)" == "Linux" ]; then
+		helpPanel
+		while :
+			do
+			read OPTION
+			case $OPTION in
+				d)
+					echo ""
+					installDependencies
+            		installGame
+            		post_installation
         			;;
-        	q)
-            	exit 0
-        		;;
-        	*)
-            	echo ""
-            	helpPanel
-        		;;
-		esac
-	done
+        		q)
+            		exit 0
+        			;;
+        		*)
+            		echo ""
+            		helpPanel
+        			;;
+			esac
+		done
+	else
+		echo -e "${redColour} [*] Error. Todavia no tenemos instalador para Windows/Mac ${endColour}"
+	fi
 }
 
 if [ "$(id -u)" == "0" ]; then

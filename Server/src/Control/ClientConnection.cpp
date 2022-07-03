@@ -1,122 +1,116 @@
 #include "../../includes/Control/ClientConnection.h"
 
-
 void ClientConnection::_finishThread() {
     std::unique_lock<std::mutex> l(m);
     if ((++finished_threads) == 2) {
+        fprintf(stderr,"CLIENTE %i: _finishThread agrega conexión terminada a la cola.\n",id);
         finished_connections.push(new InstanceId(id));
     }
 }
 
 void ClientConnection::_freeNotifications() {
-    /*notifications.close();
-    Command* notification = nullptr;
-    while ((notification = notifications.pop())) {
+    responses.close();
+    Response* notification = NULL;
+    while ((notification = responses.pop())) {
         delete notification;
-    }*/
+    }
 }
 
-// hilo sender -- envia respuesta al cliente
-// todo: implementar logica de envio de informacion pertinente al player
 void ClientConnection::_sender() {
     try {
-        //std::cout << "Sender comenzando ejecucion." << std::endl;
-        /*Protocol protocol;
-        Command* command = nullptr;
+        Response* notification = nullptr;
         bool socket_valid = true;
-        while ((command = notifications.pop())) {
-            // aca hay que ejecutar una logica
-            // aca se mandaria el snapshot
-            socket_valid = protocol.sendResponse(peer, 1);
-            delete command;
+        while ((notification = responses.pop())) {
+            fprintf(stderr, "CLIENTE %i: Sender popeo una respuesta.\n", id);
+            socket_valid = notification->send(this->id, peer);
+            delete notification;
             if (!socket_valid) {
-                break;
-            }*/
-    } catch (const std::exception& e) {
-            stop();
-            fprintf(stderr, "[ClientConnection]: %s\n", e.what());
-    } catch (...) {
-        stop();
-        fprintf(stderr, "[ClientConnection]: Ocurrio un error en el hilo sender.\n");
-    }
-    _finishThread();
-}
-
-void ClientConnection::_receiver() {
-    try {
-        //std::cout << "Receiver comenzando ejecucion..." << std::endl;
-        uint8_t opcode = 0;
-        while (peer.recv(reinterpret_cast<char *>(opcode), sizeof(uint16_t))) {
-            if (opcode != 0) {
-                // lo unico que hace el hilo receiver es pushear a la cola de comandos
-                _receiveCommand();
-            } else {
                 break;
             }
         }
     } catch (const std::exception& e) {
         stop();
-        fprintf(stderr, "[ClientConnection]: %s\n", e.what());
+        fprintf(stderr, "[ClientConnection]: Error en el hilo sender: %s\n", e.what());
     } catch (...) {
         stop();
-        fprintf(stderr, "[ClientConnection]: Ocurrio un error en el hilo receiver.\n");
+        fprintf(stderr, "[ClientConnection]: Error desconocido.\n");
     }
-    //this->notifications.close();
+    _finishThread(); // TODO DESCOMENTAR ESTO
+}
+
+void ClientConnection::_receiver() {
+    try {
+        uint8_t opcode;
+        while ((opcode = protocol.recvOneByte(peer))) {
+            fprintf(stderr, "CLIENTE %i: Receiver recibe comando con opcode: %i.\n", id,opcode);
+            if (opcode != 0) {
+                _receiveCommand(opcode);
+            } else {
+                throw Exception("[CLIENT %i] Se recibe opcode invalido.\n",id);
+            }
+        }
+    } catch (const std::exception& e) {
+        stop();
+        fprintf(stderr, "[ClientConnection] Error en el hilo _receiver %s\n", e.what());
+    } catch (...) {
+        stop();
+        fprintf(stderr, "[ClientConnection] Error desconocido.\n");
+    }
+    this->responses.close();
     _finishThread();
 }
 
-void ClientConnection::_receiveCommand() {
-    uint8_t opcode_cmd = 0;
-    peer.recv(reinterpret_cast<char *>(opcode_cmd), sizeof(uint16_t));
+void ClientConnection::_receiveCommand(uint8_t opcode) {
     try {
-        std::cout << "Jugador recibio: " << opcode_cmd << std::endl;
-        /*Command* cmd = CommandFactory::newCommand(id, opcode_cmd, peer);
-        commands.push(cmd);*/
-    } catch (const Exception& e) {
+        Command* cmd = CommandFactory::newCommand(id, opcode, peer);
+        commands.push(cmd);
+    } catch (const UnknownCommandException& e) {
+        Response* reply_error = new Response(INVALID_COMMAND, e.what());
+        this->responses.push(reply_error);
     }
 }
 
+
 ClientConnection::ClientConnection(
-        const InstanceId id, 
-        const Id map_id1,
-        Socket& peer,
-        NonBlockingQueue<InstanceId*>& finished_connections)
+        const InstanceId id, Socket& peer,
+        NonBlockingQueue<InstanceId*>& finished_connections,
+        NonBlockingQueue<Command*>& commands)
         : id(id),
-          map_id(map_id1),
           peer(std::move(peer)),
           finished_connections(finished_connections),
           finished_threads(0),
-          protocol()  {}
+          commands(commands) {}
 
 void ClientConnection::start() {
-    // si llegamos hasta aca es porque el jugador se pudo conectar entonces se lo hacemos saber al cliente
-    protocol.sendEstablishConnection(peer);
     sender = std::thread(&ClientConnection::_receiver, this);
     receiver = std::thread(&ClientConnection::_sender, this);
+}
+
+void ClientConnection::push(Response* notification) {
+    responses.push(notification);
 }
 
 void ClientConnection::join() {
     if (sender.joinable()) {
         sender.join();
     }
-
     if (receiver.joinable()) {
         receiver.join();
     }
-
     try {
         peer.shutdown();
     } catch (const Exception& e) {
-        fprintf(stderr, "[ClientConnection]: Ocurrio un erro en el join del player(id): %i \n",id);
+        fprintf(stderr, "CLIENTE %i: Error apagando el socket.\n",
+                id);
     }
 }
 
 void ClientConnection::stop() {
-    //notifications.close();
+    responses.close();
     try {
         peer.shutdown();
     } catch (const Exception& e) {
-        fprintf(stderr, "[ClientConnection]: Error en el stop del player (id): %i\n",id);
+        fprintf(stderr, "CLIENTE %i: Error apagando el socket.\n",id);
     }
 }
 
@@ -125,7 +119,24 @@ ClientConnection::~ClientConnection() {
 }
 
 
+
 void ClientConnection::sendInitGame(std::vector<std::vector<char>>& map) {
-    protocol.sendInitGame(peer);
-    protocol.sendMap(peer, map);
+    try {
+        protocol.sendInitGame(peer);
+        protocol.sendMap(peer, map);
+    } catch (const Exception &e) {
+        std::cout << "Error enviando el mapa" << std::endl;
+    }
+}
+
+void ClientConnection::sendInitBuildings(std::vector<BuildingDTO> buildings) {
+    try {
+        protocol.sendInitBuildings(peer, buildings);
+    } catch (const Exception &e) {
+        std::cout << "Error enviando el centro de construccion." << std::endl;
+    }
+}
+
+void ClientConnection::sendEstablishConnection() {
+    protocol.sendEstablishConnection(peer);
 }

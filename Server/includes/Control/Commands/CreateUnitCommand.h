@@ -19,7 +19,7 @@ public:
 
     ~CreateUnitCommand();
 
-    void exec(Game& game) override;
+    void exec(Map &map) override;
 };
 
 #endif //DUNE_CREATEUNITCOMMAND_H

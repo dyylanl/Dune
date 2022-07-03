@@ -7,7 +7,6 @@
 #include "../../../../Common/includes/Protocol.h"
 #include "../../../../Common/includes/Socket/Socket.h"
 #include "../../../../Server/includes/defs.h"
-#include "../../Model/Game.h"
 //-----------------------------------------------------------------------------
 
 
@@ -21,10 +20,11 @@ public:
     Command& operator=(const Command&) = delete;
     Command(Command&& other) = delete;
     Command& operator=(Command&& other) = delete;
-    virtual void exec(Game& game) = 0;
     const InstanceId getCaller() const;
 
     //-------------------------------------------------------------------------
+
+    virtual void exec(Map &map) = 0;
 
     virtual ~Command();
 };

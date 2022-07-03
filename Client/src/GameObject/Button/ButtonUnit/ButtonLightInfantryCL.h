@@ -6,11 +6,13 @@
 #define DUNE_BUTTONLIGHTINFANTRYCL_H
 
 
-#include "ButtonUnitCL.h"
+#include "../ButtonUnitCL.h"
 
 class ButtonLightInfantryCL : public ButtonUnitCL{
 public:
     ButtonLightInfantryCL(int id, char player, int constructionTime, bool selectStatus, bool ready);
+
+    ~ButtonLightInfantryCL() {}
 };
 
 

@@ -6,11 +6,13 @@
 #define DUNE_BUTTONTRIKECL_H
 
 
-#include "ButtonUnitCL.h"
+#include "../ButtonUnitCL.h"
 
 class ButtonTrikeCL : public ButtonUnitCL{
 public:
     ButtonTrikeCL(int id, char player, int constructionTime, bool selectStatus, bool ready);
+
+    ~ButtonTrikeCL() {}
 };
 
 

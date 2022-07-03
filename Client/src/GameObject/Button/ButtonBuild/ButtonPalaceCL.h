@@ -6,13 +6,20 @@
 #define DUNE_BUTTONPALACECL_H
 
 
-#include "../../ButtonCL.h"
+#include "../ButtonBuildCL.h"
+#include "../../Builds/PalaceCL.h"
 
-class ButtonPalaceCL : public ButtonCL {
+class ButtonPalaceCL : public ButtonBuildCL {
+private:
+    PalaceCL m_build;
 public:
     ButtonPalaceCL(int id, char player, int constructionTime, bool selectStatus, bool ready);
 
-    void buildBuilding(BlockingQueue<CommandCL *> &queue, SDL2pp::Point point);
+    void draw(SDL2pp::Renderer &renderer, TextureManager &textureManager);
+
+    void buildBuilding(BQueue<std::unique_ptr<CommandCL>> &queue, SDL2pp::Point point);
+
+    ~ButtonPalaceCL() {}
 };
 
 

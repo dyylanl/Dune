@@ -14,7 +14,10 @@ private:
 
 public:
     BuildBuilding(char build, SDL2pp::Point position) : m_build(build), m_position(position) {}
+
     void execute(Protocol &protocol, Socket &socket);
+
+    ~BuildBuilding() {}
 };
 
 

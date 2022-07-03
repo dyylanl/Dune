@@ -5,4 +5,4 @@
 #include "ButtonLightInfantryCL.h"
 
 ButtonLightInfantryCL::ButtonLightInfantryCL(int id, char player, int constructionTime, bool selectStatus, bool ready)
-        : ButtonUnitCL(BLIGHT_INFANTRY, SDL2pp::Point(1114, 222), id, player, constructionTime, selectStatus, ready) {}
+        : ButtonUnitCL(BLIGHT_INFANTRY, SDL2pp::Point(1190, 362), id, LIGHT_INFANTRY_KEY,player, constructionTime, selectStatus, ready) {}

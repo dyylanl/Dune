@@ -17,10 +17,13 @@ protected:
 public:
     BuildCL(char textureID, SDL2pp::Point position, SDL2pp::Point size, int id, int player, int life);
 
-    void update(EventManager &eventManager, BlockingQueue<CommandCL *> &queue) {}
+    void processEvent(SDL_Event &event, BQueue<std::unique_ptr<CommandCL>> &queue, Camera &camera) {}
 
     virtual void draw(SDL2pp::Renderer &renderer, TextureManager &textureManager) = 0;
 
+    void setPosition(SDL2pp::Point position);
+
+    virtual ~BuildCL() {}
 };
 
 

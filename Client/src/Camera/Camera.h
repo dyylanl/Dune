@@ -6,14 +6,18 @@
 #define DUNE_CAMERA_H
 
 #include "SDL2pp/SDL2pp.hh"
-#include "../Events/EventManager.h"
+
+#define GAME_WIDTH 1089
+#define GAME_HEIGHT 720
+
 
 class Camera {
 private:
-    SDL2pp::Point position;
+    SDL2pp::Point m_position;
+    SDL2pp::Rect m_viewBox;
 public:
-    Camera() : position(0,0) {}
-    void update(EventManager &eventManager);
+    Camera() : m_viewBox(SDL2pp::Point(0, 0),SDL2pp::Point(GAME_WIDTH, GAME_HEIGHT)) {}
+    void update(SDL_Event &event);
     SDL2pp::Point getPosicion();
 };
 

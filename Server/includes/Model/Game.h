@@ -20,6 +20,12 @@ private:
     std::map<Id,MapDTO> maps_dto_init;
 
     /*
+    *   Contiene la informacion de cada partida
+    *   Estructura:     {... ,game_nameN : [current_playersN, req_playersN, map_idN], ...}
+    */
+   std::map<std::string, std::vector<int>> info_games;
+
+    /*
     * Cada vez que se cree una partida se iniciara un Engine para manejar esa partida y unir los jugadores a esa partida
     */
     std::map<std::string,Engine*> games;
@@ -28,11 +34,8 @@ private:
     std::mutex mutex;
     ConfigurationReader game_config;
 
-    /*
-    *   Contiene informacion sobre todas las partidas creadas con un orden {nombre: [actuales,requeridos,map_id], ...}
-    */
-    std::map<std::string, std::vector<int>> info_games;
 
+    // ---------- METODOS ------------- //
 
     /*
      * Lockea el mutex, retorna true si el name ya existe.
@@ -85,7 +88,12 @@ public:
    */
    std::vector<MapDTO> getMapsLoads();
 
+    /*
+    *   Termina todas las partidas corriendo en el servidor-
+    */
    void stop();
+
+   std::vector<std::vector<InstanceId>> getAllPlayers();
    
 
     ~Game();

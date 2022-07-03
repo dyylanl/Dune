@@ -6,11 +6,13 @@
 #define DUNE_BUTTONHARVESTERCL_H
 
 
-#include "ButtonUnitCL.h"
+#include "../ButtonUnitCL.h"
 
 class ButtonHarvesterCL : public ButtonUnitCL {
 public:
-    ButtonHarvesterCL(int id, char player, int constructionTime, bool selectStatus, bool ready);
+    ButtonHarvesterCL(int id,char player, int constructionTime, bool selectStatus, bool ready);
+
+    ~ButtonHarvesterCL() {}
 };
 
 

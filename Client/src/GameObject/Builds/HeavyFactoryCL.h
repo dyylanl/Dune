@@ -13,6 +13,8 @@ public:
     HeavyFactoryCL(int id, int player, SDL2pp::Point position, int life);
 
     void draw(SDL2pp::Renderer &renderer, TextureManager &textureManager);
+
+    ~HeavyFactoryCL() {}
 };
 
 

@@ -11,14 +11,28 @@ MainWindow::MainWindow(QWidget *parent)
     QPixmap pic_atreides(":/resources/atreides.png");
     QPixmap pic_harkonnen(":/resources/harkonnen.png");
     QPixmap pic_ordos(":/resources/ordos.png");
+    QPixmap pic_titulo(":/resources/titulo.jpeg");
     ui->atreides_pic_label->setPixmap(pic_atreides.scaled(100,100,Qt::KeepAspectRatio));
     ui->harkonnen_pic_label->setPixmap(pic_harkonnen.scaled(100,100,Qt::KeepAspectRatio));
     ui->ordos_pic_label->setPixmap(pic_ordos.scaled(100,100,Qt::KeepAspectRatio));
+    ui->titulo_label->setPixmap(pic_titulo.scaled(100,100,Qt::KeepAspectRatio));
     std::cout << "rompo en Index" << std::endl;
     ui->stackedWidget->setCurrentIndex(0);
     std::cout << "ROMPI" << std::endl;
-    connect(this->reloj,SIGNAL(timeout()),this,SLOT(actualizar_lista_partidas()));
+    //connect(this->reloj,SIGNAL(timeout()),this,SLOT(actualizar_lista_partidas()));
     std::cout << "ROMPE EL RELOJ" << std::endl;
+
+
+    this->ui->button_unirse_partida->setFixedSize(200,100);
+    this->ui->button_crear_partida->setFixedSize(200,100);
+    this->ui->button_confirmar->setFixedSize(150,75);
+    this->ui->titulo_label->setFixedSize(200,100);
+    this->ui->button_confirmar_unirse->setFixedSize(150,75);
+    this->ui->button_cofirmar_cant_nombre->setFixedSize(150,75);
+    this->ui->button_confirmar_mapa->setFixedSize(150,75);
+    this->ui->button_actualizar_partidas->setFixedSize(150,50);
+    this->ui->button_volver_list_partidas->setFixedSize(150,75);
+    this->ui->button_volver_crear->setFixedSize(150,75);
 
 }
 
@@ -39,17 +53,14 @@ void MainWindow::on_button_confirmar_clicked()
     //Socket skt(this->text_IP.toStdString(),this->text_puerto.toStdString());
     this->cliente->enviar_nombre_jugador(this->text_nombre.toStdString());
     
-    QString mensaje_bienvenida = "Bienvenido a Dune " + this->text_nombre;
+    //QString mensaje_bienvenida = "Bienvenido a Dune " + this->text_nombre;
     //this->vector_socket.push_back(skt);
-    this->ui->bienvenida_label->setText(mensaje_bienvenida);
+    //this->ui->bienvenida_label->setText(mensaje_bienvenida);
 
 }
 
 
-void MainWindow::on_button_volver_clicked()
-{
-    this->ui->stackedWidget->setCurrentIndex(0);
-}
+
 
 std::string MainWindow::get_nombre()
 {
@@ -107,28 +118,36 @@ void MainWindow::on_button_crear_partida_clicked()
 void MainWindow::on_button_atreides_clicked()
 {
     this->text_casa = "Atreides";
-    this->ui->stackedWidget->setCurrentIndex(6);
+    //this->ui->stackedWidget->setCurrentIndex(6);
+    //this->exit(1);
+    this->close();
+    QApplication::exit(1);
 }
 
 
 void MainWindow::on_button_harkonnen_clicked()
 {
     this->text_casa = "Harkonnen";
-    this->ui->stackedWidget->setCurrentIndex(6);
+    //this->ui->stackedWidget->setCurrentIndex(6);
+    this->close();
+    QApplication::exit(1);
 }
 
 
 void MainWindow::on_button_ordos_clicked()
 {
     this->text_casa = "Ordos";
-    this->ui->stackedWidget->setCurrentIndex(6);
+    //this->ui->stackedWidget->setCurrentIndex(6);
+    //this->exit(1);
+    this->close();
+    QApplication::exit(1);
 }
 
 
 void MainWindow::on_button_unirse_partida_clicked()
 {   
-    
-    this->reloj->start(5000);
+    /*
+    //this->reloj->start(5000);
     std::cout << "paso el reloj" << std::endl;
     //this->cliente->enviar_nombre_y_comando(this->text_nombre.toStdString(),"listar");
     //this->cliente->enviar_nombre_jugador(this->text_nombre.toStdString());
@@ -137,12 +156,8 @@ void MainWindow::on_button_unirse_partida_clicked()
     std::cout << "TRATO DE RECIBIR" << std::endl;
     std::vector<std::vector<std::string>> list_1 = this->cliente->listar_partidas();
     std::cout << "LLEGO A LA PARTIDA" << std::endl;
-    this->cliente->enviar_accion("listar");
-    std::cout << "TRATO DE RECIBIR" << std::endl;
-    std::vector<std::vector<std::string>> list_2 = this->cliente->listar_partidas();
+    //this->mostrar_partidas();*/
     this->mostrar_partidas();
-    //this->mostrar_partidas();
-
     this->ui->stackedWidget->setCurrentIndex(3);
     std::cout << "PASO MOSTRAR NO ERROR" << std::endl;
     //AGREGAR CURRENITEM DE LA LISTA PARA SELECIONAR
@@ -178,7 +193,13 @@ void MainWindow::mostrar_partidas(){
 void MainWindow::on_button_confirmar_unirse_clicked()
 {
     QListWidgetItem *partida_elegida =  this->ui->lista_partidas->currentItem();
-    this->reloj->stop();
+    //this->reloj->stop();
+    if(partida_elegida == nullptr){
+        QMessageBox msgBox;
+        msgBox.setText("Elija una partida");
+        msgBox.exec();
+        return;
+    }
     std::string buf;                 // Have a buffer string
     std::stringstream ss(partida_elegida->text().toStdString());       // Insert the string into a stream
 
@@ -195,7 +216,7 @@ void MainWindow::on_button_confirmar_unirse_clicked()
     if(this->cliente->conexion_exitosa()) { 
       std::cout << "Union exitosa" << std::endl;
         QMessageBox msgBox;
-        msgBox.setText("Partida creada con exito");
+        msgBox.setText("Se unio con éxito");
         msgBox.exec();
       if(this->cliente->partida_iniciada()) { // ACA TIENE QUE ESTAR BLOQUEADO HASTA QUE SE CREE LA PARTIDA
         std::cout << "Se completo la partida..." << std::endl;
@@ -222,6 +243,12 @@ void MainWindow::on_button_confirmar_unirse_clicked()
 void MainWindow::on_button_confirmar_mapa_clicked()
 {
     QListWidgetItem *mapa_elegido =  this->ui->lista_mapas->currentItem();
+    if(mapa_elegido == nullptr){
+        QMessageBox msgBox;
+        msgBox.setText("Elija un mapa");
+        msgBox.exec();
+        return;
+    }
     std::cout << mapa_elegido->text().toStdString() << std::endl;
     char map_id = mapa_elegido->text().toStdString().at(6);
     /*int prueba_int = std::stoi(prueba);
@@ -238,12 +265,14 @@ void MainWindow::on_button_confirmar_mapa_clicked()
         QMessageBox msgBox;
         msgBox.setText("Partida creada con exito");
         msgBox.exec();
+        this->ui->stackedWidget->setCurrentIndex(6);
       if(this->cliente->partida_iniciada()) { // ACA TIENE QUE ESTAR BLOQUEADO HASTA QUE SE CREE LA PARTIDA
         std::cout << "Se completo la partida..." << std::endl;
         QMessageBox msgBox;
         msgBox.setText("La partida va a empezar");
         msgBox.exec();
-        this->close();
+        this->ui->stackedWidget->setCurrentIndex(5);
+        //this->close();
         //QApplication::quit();
         /*map = protocol.recvMap(socket);
         std::cout << "Mapa recibido..." << std::endl;*/
@@ -265,3 +294,27 @@ void MainWindow::actualizar_lista_partidas(){
     this->mostrar_partidas();
     return;
 }
+
+void MainWindow::on_button_volver_list_partidas_clicked()
+{
+    this->ui->stackedWidget->setCurrentIndex(1);
+}
+
+
+
+
+
+void MainWindow::on_button_actualizar_partidas_clicked()
+{
+    //ACTUALIZAR
+    std::cout << "ACTUALIZO" << std::endl;
+    this->mostrar_partidas();
+    return;
+}
+
+
+void MainWindow::on_button_volver_crear_clicked()
+{
+    this->ui->stackedWidget->setCurrentIndex(1);
+}
+

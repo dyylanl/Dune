@@ -9,14 +9,17 @@
 
 int main(int argc, char** argv){
 
-    std::cout << "empieza" << std::endl;
+   std::cout << "empieza" << std::endl;
     QApplication a(argc,argv);
     std::cout << "bug 1" << std::endl;
     MainWindow w(nullptr);
     std::cout << "bug 2" << std::endl;
     w.show();
     std::cout << "bug 3" << std::endl;
-    a.exec();
+    int exit_code = a.exec();
+    if(exit_code == 0){
+        return ERROR;
+    }
     std::cout << "bug 4" << std::endl;    
     Client* cliente = w.get_cliente();
     cliente->iniciar();

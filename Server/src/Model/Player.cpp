@@ -26,22 +26,7 @@ float Player::getEnergyFactor() {
     return energy_factor;
 }
 
-void Player::addBuilding(Building *building) {
-    buildings.push_back(building);
-    building->setPlayer(this);
-}
-
-bool Player::hasNews() {
-    bool ret = news;
-    this->news = false;
-    return ret;
-}
-
 bool Player::operator==(const Player &other) const {
     return this->id == other.id;
 }
 
-void Player::addUnit(Unit *unit) {
-    units.push_back(unit);
-    unit->setPlayer(*this);
-}

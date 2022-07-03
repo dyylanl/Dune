@@ -23,11 +23,24 @@
 #define LIGHT_FACTORY_KEY 'l'
 #define REFINERY_KEY 'r'
 #define SILO_KEY 's'
-#define WIND_TRAP_KEY 's'
+#define WIND_TRAP_KEY 'w'
+#define PALACE_KEY 'p'
 
 // --------------HOUSES------------ //
 #define HARKONNEN_HOUSE 1
 #define ATREIDES_HOUSE 2
 #define ORDOS_HOUSE 3
+
+// ---------------- UNITS -------------- //
+#define LIGHT_INFANTRY_KEY 'l'
+#define HEAVY_INFANTRY_KEY 'h'
+#define HARVESTER_KEY 'c'
+#define TRIKE_KEY 'a'
+#define RAIDER_KEY 'r'
+#define TANK_KEY 't'
+#define SARDAUKAR_KEY 's'
+#define SONIC_TANK_KEY 'n'
+#define DESVIATOR_KEY 'd'
+#define DEVASTATOR_KEY 'v'
 
 #endif //DUNE_TYPES_H

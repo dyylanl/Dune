@@ -14,6 +14,19 @@
 #include "GameObject/Button/ButtonBuild/ButtonWidtrapCL.h"
 #include "GameObject/Button/ButtonBuild/ButtonRefineryCL.h"
 #include "Animation/Animation.h"
+#include "GameObject/Button/ButtonUnit/ButtonRaiderCL.h"
+#include "GameObject/Button/ButtonUnit/ButtonTrikeCL.h"
+#include "GameObject/Button/ButtonBuild/ButtonBarrackCL.h"
+#include "GameObject/Button/ButtonBuild/ButtonConstructionYardCL.h"
+#include "GameObject/Button/ButtonBuild/ButtonHeavyFactoryCL.h"
+#include "GameObject/Button/ButtonBuild/ButtonLightFactoryCL.h"
+#include "GameObject/Button/ButtonBuild/ButtonPalaceCL.h"
+#include "GameObject/Button/ButtonBuild/ButtonSiloCL.h"
+#include "GameObject/Button/ButtonUnit/ButtonHarvesterCL.h"
+#include "GameObject/Button/ButtonUnit/ButtonHeavyInfantryCL.h"
+#include "GameObject/Button/ButtonUnit/ButtonLightInfantryCL.h"
+#include "GameObject/Button/ButtonUnit/ButtonSardaukarCL.h"
+#include "GameObject/Button/ButtonUnit/ButtonTankCL.h"
 #include <arpa/inet.h>
 
 #define HARKONNEN 1
@@ -24,11 +37,14 @@
 #define JOIN_GAME 2
 #define LIST_GAMES 3
 
+const int SCREEN_WIDTH = 1280;
+const int SCREEN_HEIGHT = 720;
+
 //-----------------------------------------------------------------------------
 
 Client::Client() {}
 
-Client::Client(std::string ip1, std::string port1) : socket(ip1,port1), protocol() {
+Client::Client(std::string ip1, std::string port1) : m_socket(ip1,port1), m_protocol() {
 }
 
 void Client::crear_partida(std::string nombre_jugador, std::string  nombre_partida){
@@ -54,7 +70,7 @@ int Client::obtener_numero_casa(const std::string& casa) {
 }
 
 void Client::enviar_nombre_jugador(std::string nombre_jugador){
- protocol.sendName(socket, nombre_jugador);
+ m_protocol.sendName(m_socket, nombre_jugador);
 }
 
 void Client::enviar_accion(std::string comando){
@@ -64,54 +80,55 @@ void Client::enviar_accion(std::string comando){
 
   if(comando == crear){
     uint16_t comando_num = 1;
-    protocol.sendResponse(socket, comando_num);
+    m_protocol.sendResponse(m_socket, comando_num);
   }
   if(comando == unirse){
     uint16_t comando_num = 2;
-    protocol.sendResponse(socket, comando_num);
+    m_protocol.sendResponse(m_socket, comando_num);
   }
   if(comando == listar){
     uint16_t comando_num = 3;
-    protocol.sendResponse(socket, comando_num);
+    m_protocol.sendResponse(m_socket, comando_num);
   }
 }
 
 void Client::enviar_nombre_y_comando(const std::string& nombre_jugador,std::string comando){
-  this->protocol.sendName(socket, nombre_jugador);
+  this->m_protocol.sendName(m_socket, nombre_jugador);
   this->enviar_accion(comando);
 }
 
 std::vector<std::vector<std::string>> Client::listar_partidas(){
-  std::vector<std::vector<std::string>> list = this->protocol.recvGameList(socket);
+  std::vector<std::vector<std::string>> list = this->m_protocol.recvGameList(m_socket);
   return list;
 }
 
 std::vector<std::vector<std::string>> Client::listar_mapas(){
-  std::vector<std::vector<std::string>> maps_ = protocol.recvMapsCreated(socket);
+  std::vector<std::vector<std::string>> maps_ = m_protocol.recvMapsCreated(m_socket);
   return maps_;
 }
 
 void Client::enviar_cant_jugadores(int cantidad){
     uint16_t cant_jugadores = cantidad;
-    protocol.sendResponse(socket, cant_jugadores);
+    m_protocol.sendResponse(m_socket, cant_jugadores);
 }
 
 
 void Client::enviar_map_id(int map_id){
-    protocol.sendResponse(socket, map_id);
+    m_protocol.sendResponse(m_socket, map_id);
 }
 
 
 void Client::enviar_nombre_partida(std::string nombre_partida){
-    protocol.sendName(socket, nombre_partida);
+    m_protocol.sendName(m_socket, nombre_partida);
 }
 
 int Client::recibir_respuesta(){
-  return (int) this->protocol.recvResponse(socket);
+  return (int) this->m_protocol.recvResponse(m_socket);
 }
 
 bool Client::conexion_exitosa(){
-  if(protocol.recvEstablishConnection(socket)) { // ACA TIENE QUE ESTAR BLOQUEADO HASTA QUE SE INICIE LA PARTIDA
+  if(this->m_protocol.recvEstablishConnection(m_socket)) {
+     // ACA TIENE QUE ESTAR BLOQUEADO HASTA QUE SE INICIE LA PARTIDA
     return true;
   }
   return false;
@@ -119,7 +136,7 @@ bool Client::conexion_exitosa(){
 
 
 bool Client::partida_iniciada(){
-  if(protocol.recvInitGame(socket)) { // ACA TIENE QUE ESTAR BLOQUEADO HASTA QUE SE INICIE LA PARTIDA
+  if(this->m_protocol.recvInitGame(m_socket)) { // ACA TIENE QUE ESTAR BLOQUEADO HASTA QUE SE INICIE LA PARTIDA
     return true;
   }
   return false;
@@ -131,25 +148,38 @@ void createGame(Protocol protocol, Socket &socket, std::vector<std::vector<char>
 void Client::initSDL(Socket &aSocket, Protocol &aProtocol,
                      std::vector<std::vector<char>> &map) const {
 
-    NonBlockingQueue<std::vector<GameObject*>> queueNb;
-    BlockingQueue<CommandCL*> queueB;
+    NBQueue<std::vector<std::unique_ptr<GameObject>>> queueNb;
+    BQueue<std::unique_ptr<CommandCL>> queueB;
     RecvThread recvThread(queueNb, aSocket, aProtocol);
     SendThread sendThread(queueB, aSocket, aProtocol);
     recvThread.start();
     sendThread.start();
 
     SDL2pp::SDL sdl(SDL_INIT_VIDEO);
-    SDL2pp::Window window("DUNE - v0.1", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
-                          1280, 720, SDL_WINDOW_RESIZABLE);
+    SDL2pp::Window window("DUNE - v0.1", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, 0);
     SDL2pp::Renderer renderer(window, -1, SDL_RENDERER_ACCELERATED);
-    Camera camera;
-    TextureManager textureManager(renderer, camera);
+    TextureManager textureManager(renderer);
 
     loadTextures(textureManager, renderer);
-    EventManager eventManager;
-    std::vector<GameObject*> objects;
+    std::vector<std::unique_ptr<ButtonCL>> menu;
+    menu.push_back(std::unique_ptr<ButtonCL>(new ButtonBarrackCL(1, 1, 10, false, false)));
+    menu.push_back(std::unique_ptr<ButtonCL>(new ButtonHeavyFactoryCL(1, 1, 10, false, false)));
+    menu.push_back(std::unique_ptr<ButtonCL>(new ButtonLightFactoryCL(1, 1, 10, false, false)));
+    menu.push_back(std::unique_ptr<ButtonCL>(new ButtonPalaceCL(1, 1, 10, false, false)));
+    menu.push_back(std::unique_ptr<ButtonCL>(new ButtonRefineryCL(1, 1, 10, false, false)));
+    menu.push_back(std::unique_ptr<ButtonCL>(new ButtonSiloCL(1, 1, 10, false, false)));
+    menu.push_back(std::unique_ptr<ButtonCL>(new ButtonWidtrapCL(1, 1, 10, false, false)));
 
-    Engine engine(map, objects, textureManager, eventManager, queueNb, queueB);
+    menu.push_back(std::unique_ptr<ButtonCL>(new ButtonHarvesterCL(1, 1, 10, false, false)));
+    menu.push_back(std::unique_ptr<ButtonCL>(new ButtonHeavyInfantryCL(1, 1, 10, false, false)));
+    menu.push_back(std::unique_ptr<ButtonCL>(new ButtonLightInfantryCL(1, 1, 10, false, false)));
+    menu.push_back(std::unique_ptr<ButtonCL>(new ButtonRaiderCL(1, 1, 10, false, false)));
+    menu.push_back(std::unique_ptr<ButtonCL>(new ButtonSardaukarCL(1, 1, 10, false, false)));
+    menu.push_back(std::unique_ptr<ButtonCL>(new ButtonTankCL(1, 1, 10, false, false)));
+    menu.push_back(std::unique_ptr<ButtonCL>(new ButtonTrikeCL(1, 1, 10, false, false)));
+
+
+    Engine engine(map, menu, textureManager, queueNb, queueB);
 
     while (engine.IsRunning()) {
         engine.Events();
@@ -247,12 +277,10 @@ void Client::listGames(Protocol protocol, Socket &socket) {
 void Client::launch() {
     std::cout << "Iniciando cliente.... \n\n";
     try {
-        std::string ip;
-        std::string port;
-        std::cout << "IP: ";
-        std::cin >> ip;
-        std::cout << "\nPORT: ";
-        std::cin >> port;
+        std::string ip = "localhost";
+        std::string port = "8082";
+        std::cout << "IP: localhost";
+        std::cout << "\nPORT: 8082\n";
         Socket socket(ip,port);
         Protocol protocol;
         std::cout << "Conexion exitosa.\n";
@@ -265,7 +293,6 @@ void Client::launch() {
         uint16_t comando;
         std::cout << "Ingrese un comando: ";
         std::cin >> comando;
-        std::vector<std::vector<char>> map;
         protocol.sendResponse(socket, comando);
         if (comando == CREATE_GAME) {
             createGame(protocol, socket);
@@ -279,12 +306,17 @@ void Client::launch() {
         std::cout << e.what() << std::endl;
         return;
     }
+
+    /*Socket socket_("localhost","8082");
+    Protocol protocol_;
+    std::vector<std::vector<char>> map(50, std::vector<char> (50, 'A') );
+    initSDL(socket_, protocol_, map);*/
 }
 
 void Client::iniciar(){
-  std::vector<std::vector<char>> map = protocol.recvMap(socket);
+  std::vector<std::vector<char>> map = m_protocol.recvMap(m_socket);
   std::cout << "Mapa recibido..." << std::endl;
-  initSDL(this->socket,this->protocol,map);
+  initSDL(this->m_socket,this->m_protocol,map);
 }
 
 
@@ -313,11 +345,11 @@ void Client::loadTextures(TextureManager &textureManager, SDL2pp::Renderer &rend
 
     textureManager.load(BTRIKE, DATA_PATH "assets/Button/Trike.gif");
     textureManager.load(BSONIC_TANK, DATA_PATH "assets/Button/SonicTank.gif");
-    textureManager.load(BRAIDER, DATA_PATH "assets/Button/Trike.gif");
+    textureManager.load(BRAIDER, DATA_PATH "assets/Button/Raider.gif");
     textureManager.load(BDESVIATOR, DATA_PATH "assets/Button/Deviator.gif");
     textureManager.load(BTANK, DATA_PATH "assets/Button/Tank.gif");
     textureManager.load(BDEVASTATOR, DATA_PATH "assets/Button/Devastator.gif");
-    textureManager.load(HARVESTER, DATA_PATH "assets/Button/Harvester.gif");
+    textureManager.load(BHARVESTER, DATA_PATH "assets/Button/Harvester.gif");
     textureManager.load(BLIGHT_INFANTRY, DATA_PATH "assets/Button/LightInfantry.gif");
     textureManager.load(BHEAVY_INFANTRY, DATA_PATH "assets/Button/HeavyInfantry.gif");
     textureManager.load(BFREMEN, DATA_PATH "assets/Button/Fremen.gif");

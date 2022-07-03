@@ -18,6 +18,6 @@ public:
                       const uint16_t pos_y);
     ~MoveUnitCommand();
 
-    void exec(Game& game) override;
+    void exec(Map &map) override;
 };
 #endif //DUNE_MOVEUNITCOMMAND_H

@@ -23,7 +23,7 @@ public:
                     const uint16_t pos_y);
     ~BuildBuildingCommand();
 
-    void exec(Game& game) override;
+    void exec(Map &map) override;
 };
 
 #endif //DUNE_BUILDBUILDINGCOMMAND_H

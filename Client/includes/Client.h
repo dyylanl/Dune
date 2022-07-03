@@ -25,8 +25,8 @@ enum TextureType: char {TRIKE, SONIC_TANK, RAIDER, DESVIATOR, TANK, DEVASTATOR, 
         MENU, ARENA, CIMA, DUNA, PRECIPICIO, ROCA};
 
 class Client {
-    Socket socket;
-    Protocol protocol;
+    Socket m_socket;
+    Protocol m_protocol;
 public:
     Client();
     Client(std::string ip1, std::string port1); 

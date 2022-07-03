@@ -11,20 +11,26 @@ Vehicle::Vehicle(char textureID, SDL2pp::Point position, SDL2pp::Point size, int
                  : GameObject(textureID, position, size), m_id(id), m_player(player), m_selectStatus(selecStatus),
                  m_posAction(posAction), m_life(life), m_action(action) {}
 
-void Vehicle::update(EventManager &eventManager, BlockingQueue<CommandCL *> &queue) {
-    if (eventManager.mouseButtonDown(LEFT)) {
-        SDL_Rect shape = SDL2pp::Rect(m_position, m_size);
-        SDL_Point point = eventManager.getMouse();
+void Vehicle::processEvent(SDL_Event &event, BQueue<std::unique_ptr<CommandCL>> &queue, Camera &camera) {
+    if (event.type == SDL_MOUSEBUTTONDOWN && event.button.button == SDL_BUTTON_LEFT) {
+        SDL2pp::Rect shape = SDL2pp::Rect(m_position, m_size);
+        SDL2pp::Point point(event.motion.x, event.motion.y);
         if (SDL_PointInRect(&point, &shape)) {
-            CommandCL *command = new SelectCL(m_id);
+            std::unique_ptr<CommandCL> command(new SelectCL(m_id));
             std::cout << "Push command Select" << std::endl;
-            queue.push(command);
+            queue.push(std::move(command));
         }
     }
 
-    if (eventManager.mouseButtonDown(RIGHT) && m_selectStatus) {
-        CommandCL *command = new MoveCL(m_id, eventManager.getMouse());
+    if (event.type == SDL_MOUSEBUTTONDOWN && event.button.button == SDL_BUTTON_RIGHT && m_selectStatus) {
+        SDL2pp::Point point(event.motion.x, event.motion.y);
+        std::unique_ptr<CommandCL> command (new MoveCL(m_id, point - camera.getPosicion()));
         std::cout << "Push command Move" << std::endl;
-        queue.push(command);
+        queue.push(std::move(command));
     }
+}
+
+void Vehicle::draw(SDL2pp::Renderer &renderer, TextureManager &textureManager) {
+    SDL2pp::Point posFrame(0,0);
+    textureManager.drawFrame(renderer, m_textureID, m_position, m_size, posFrame);
 }

@@ -5,27 +5,26 @@
 #include "TextureManager.h"
 #include "../../includes/Client.h"
 
-#define TILESIZE 50
+#define TILESIZE 30
 
 #include <map>
 #include <string>
 #include <iterator>
 
 void TextureManager::load(char id, std::string filename) {
-    SDL2pp::Texture *texture = new SDL2pp::Texture(m_renderer,SDL2pp::Surface(filename).SetColorKey(true, 0));
-    m_TextureMap.insert(std::pair{id,texture});
+    std::unique_ptr<SDL2pp::Texture> texture(new SDL2pp::Texture(m_renderer,SDL2pp::Surface(filename).SetColorKey(true, 0)));
+    m_TextureMap.insert(std::pair{id,std::move(texture)});
 }
 
-TextureManager::TextureManager(SDL2pp::Renderer &renderer, Camera &camera) : m_renderer(renderer), camera(camera){
+TextureManager::TextureManager(SDL2pp::Renderer &renderer) : m_renderer(renderer){
 }
 
 void
 TextureManager::drawFrame(SDL2pp::Renderer &renderer, char id, SDL2pp::Point position,
                           SDL2pp::Point spritSize,
                           SDL2pp::Point posFrame) {
-    //SDL2pp::Point posFrame(0,0);
     SDL2pp::Rect orig(posFrame, spritSize);
-    SDL2pp::Rect dest(position - camera.getPosicion(), spritSize);
+    SDL2pp::Rect dest(position, spritSize);
     renderer.Copy(*m_TextureMap[id],orig,dest,0,SDL2pp::NullOpt,SDL_FLIP_NONE);
 }
 
@@ -36,47 +35,37 @@ TextureManager::draw(SDL2pp::Renderer &renderer, char id, SDL2pp::Point position
     renderer.Copy(*m_TextureMap[id],orig,dest,0,SDL2pp::NullOpt);
 }
 
-Camera &TextureManager::getCamera() {
-    return camera;
-}
-
 void
 TextureManager::drawTile(SDL2pp::Renderer &renderer, char id, SDL2pp::Point position, SDL2pp::Point size) {
     SDL2pp::Rect orig(SDL2pp::Point(0,0), size);
-    SDL2pp::Rect dest(position - camera.getPosicion(), size);
+    SDL2pp::Rect dest(position, size);
     renderer.Copy(*m_TextureMap[id],orig,dest,0,SDL2pp::NullOpt,SDL_FLIP_NONE);
 }
 
-void TextureManager::drawMap(SDL2pp::Renderer &renderer, std::vector<std::vector<char>> &map) {
+void TextureManager::drawMap(SDL2pp::Renderer &renderer, std::vector<std::vector<char>> &map, Camera &camera) {
     SDL2pp::Point size(TILESIZE, TILESIZE);
     for (int i = 0; i < (int) map.size(); ++i) {
         for (int j = 0; j < (int) map[0].size(); ++j) {
             char key = map[i][j];
             switch (key) {
                 case 'A':
-                    drawTile(renderer, ARENA, SDL2pp::Point(j * TILESIZE, i * TILESIZE), size);
+                    drawTile(renderer, ARENA, SDL2pp::Point(j * TILESIZE, i * TILESIZE) + camera.getPosicion(), size);
                     break;
                 case 'P':
-                    drawTile(renderer, PRECIPICIO, SDL2pp::Point(j * TILESIZE, i * TILESIZE), size);
+                    drawTile(renderer, PRECIPICIO, SDL2pp::Point(j * TILESIZE, i * TILESIZE) + camera.getPosicion(), size);
                     break;
                 case 'R':
-                    drawTile(renderer, ROCA, SDL2pp::Point(j * TILESIZE, i * TILESIZE), size);
+                    drawTile(renderer, ROCA, SDL2pp::Point(j * TILESIZE, i * TILESIZE) + camera.getPosicion(), size);
                     break;
                 case 'D':
-                    drawTile(renderer, DUNA, SDL2pp::Point(j * TILESIZE, i * TILESIZE), size);
+                    drawTile(renderer, DUNA, SDL2pp::Point(j * TILESIZE, i * TILESIZE) + camera.getPosicion(), size);
                     break;
                 case 'C':
-                    drawTile(renderer, CIMA, SDL2pp::Point(j * TILESIZE, i * TILESIZE), size);
+                    drawTile(renderer, CIMA, SDL2pp::Point(j * TILESIZE, i * TILESIZE) + camera.getPosicion(), size);
                     break;
             }
         }
     }
 }
 
-TextureManager::~TextureManager() {
-    for(std::map<char, SDL2pp::Texture*>::iterator itr = m_TextureMap.begin(); itr != m_TextureMap.end(); itr++)
-    {
-        delete (itr->second);
-    }
-    m_TextureMap.clear();
-}
+TextureManager::~TextureManager() {}

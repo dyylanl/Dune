@@ -6,13 +6,20 @@
 #define DUNE_BUTTONCONSTRUCTIONYARDCL_H
 
 
-#include "../../ButtonCL.h"
+#include "../ButtonBuildCL.h"
+#include "../../Builds/ConstructionYardCL.h"
 
-class ButtonConstructionYardCL : public ButtonCL {
+class ButtonConstructionYardCL : public ButtonBuildCL {
+private:
+    ConstructionYardCL m_build;
 public:
     ButtonConstructionYardCL(int id, char player, int constructionTime, bool selectStatus, bool ready);
 
-    void buildBuilding(BlockingQueue<CommandCL *> &queue, SDL2pp::Point point);
+    void draw(SDL2pp::Renderer &renderer, TextureManager &textureManager);
+
+    void buildBuilding(BQueue<std::unique_ptr<CommandCL>> &queue, SDL2pp::Point point);
+
+    ~ButtonConstructionYardCL() {}
 };
 
 

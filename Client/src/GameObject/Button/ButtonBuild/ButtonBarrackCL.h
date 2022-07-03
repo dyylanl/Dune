@@ -6,13 +6,19 @@
 #define DUNE_BUTTONBARRACKCL_H
 
 
-#include "../../ButtonCL.h"
+#include "../ButtonBuildCL.h"
+#include "../../Builds/BarrackCL.h"
 
-class ButtonBarrackCL : public ButtonCL {
+class ButtonBarrackCL : public ButtonBuildCL {
+    BarrackCL m_build;
 public:
     ButtonBarrackCL(int id, char player, int constructionTime, bool selectStatus, bool ready);
 
-    void buildBuilding(BlockingQueue<CommandCL *> &queue, SDL2pp::Point point);
+    void draw(SDL2pp::Renderer &renderer, TextureManager &textureManager);
+
+    void buildBuilding(BQueue<std::unique_ptr<CommandCL>> &queue, SDL2pp::Point point);
+
+    ~ButtonBarrackCL() {}
 };
 
 

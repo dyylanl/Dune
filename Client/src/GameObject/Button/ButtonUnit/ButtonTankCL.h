@@ -6,11 +6,13 @@
 #define DUNE_BUTTONTANKCL_H
 
 
-#include "ButtonUnitCL.h"
+#include "../ButtonUnitCL.h"
 
 class ButtonTankCL : public ButtonUnitCL {
 public:
     ButtonTankCL(int id, char player, int constructionTime, bool selectStatus, bool ready);
+
+    ~ButtonTankCL() {}
 };
 
 

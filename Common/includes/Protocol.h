@@ -8,7 +8,6 @@
 #include <iostream>
 //----------------------------------------//
 #include "Socket/Socket.h"
-#include "../../Server/includes/Model/Units/Unit.h"
 #include "../../Server/includes/Model/Map.h"
 
 class Protocol {
@@ -23,12 +22,20 @@ private:
 public:
     Protocol();
     ~Protocol();
+
+
+    uint8_t recvOneByte(Socket &socket);
+    uint16_t recvTwoBytes(Socket &socket);
+
+
+
     /*
      * Envia la informacion requerida para crear una partida.
      */
     void createGame(Socket &socket, uint16_t house,
                     const std::string& name, int req);
 
+    uint8_t recvOpcode(Socket &socket);
 
     void sendInitGame(Socket &socket);
     bool recvInitGame(Socket &socket);
@@ -52,7 +59,7 @@ public:
     /*
      * Retorna el tipo de comando (unirse, listar o crear)
      */
-    uint16_t recvCommand(Socket &socket);
+    uint8_t recvCommand(Socket &socket);
     /*
      * Envia la respuesta al comando (0 exito, 1 error)
      */
@@ -77,7 +84,7 @@ public:
     /*
      * Retorna la respuesta a la ejecucion del comando (0 exito, 1 error)
      */
-    uint16_t recvResponse(Socket &socket);
+    uint8_t recvResponse(Socket &socket);
     /*
      * Envia una lista con el formato. (cantidad de elementos, (actuales, requeridos, longitud_nombre, nombre) ... ( , , , ,))
      */
@@ -127,7 +134,7 @@ public:
     static void sendMap(Socket &socket, std::vector<std::vector<char>>& map) ;
 
     static std::vector<std::vector<char>> recvMap(Socket &socket);
-    void sendName(Socket &socket, std::string name);
+    bool sendName(Socket &socket, std::string name);
 
     void
     recvUnit(Socket &socket, int &id, char &player, bool &selectStatus, int &posX, int &posY, int &posActX,
@@ -174,7 +181,11 @@ public:
     void sendEstablishConnection(Socket &socket);
 
     bool recvEstablishConnection(Socket &socket);
+    
+    void sendInitBuildings(Socket &socket, std::vector<BuildingDTO> buildings);
+    std::vector<BuildingDTO> recvInitBuildings(Socket &socket);
 
+    void sendCommandCreateUnit(Socket &socket, char &action, char &unitType);
 };
 
 

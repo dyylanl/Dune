@@ -14,6 +14,7 @@
 #include "../../includes/Model/Map.h"
 #include "ClientsConnected.h"
 #include "NewConnection.h"
+#include "Commands/Command.h"
 
 class Engine : public Thread {
 private:
@@ -56,6 +57,15 @@ public:
     *   Retorna 1 si no pudo unir el jugador a la partida (es decir, esta completa)
     */
     uint16_t addClient(NewConnection newPlayer);
+
+    /*
+    *   Devuelve una lista de todos los id's conectados.
+    */
+    std::vector<Id> getAllPlayers();
+
+    int getCurrentPlayers() {return current_players;}
+    int getMaxPlayers() {return req_players;}
+    Id getMapId() {return map_id;}
 
     
 };

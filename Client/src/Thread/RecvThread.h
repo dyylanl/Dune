@@ -10,31 +10,29 @@
 #include "../../../Common/includes/Protocol.h"
 #include "../../../Common/includes/NonBlockingQueue.h"
 #include "../Object/GameObject.h"
+#include "../../../Common/src/Queue/NBQueue.h"
 
 enum Type{UNIT, BUILD, BUTTON};
-/*enum VehicleType {TRIKE, SONIC_TANK, RAIDER, DESVIATOR, TANK, DEVASTATOR, HARVESTER};
-enum BuilType {CONSTRUCTION_YARD, LIGHT_FACTORY, HEAVY_FACTORY,WIND_TRAP, REFINERY,
-    SILO, BARRACK, PALACE};*/
 
 class RecvThread : public Thread {
 private:
-    NonBlockingQueue<std::vector<GameObject*>> &m_quene;
+    NBQueue<std::vector<std::unique_ptr<GameObject>>> &m_quene;
     Socket &m_socket;
     Protocol &m_protocol;
     std::atomic<bool> running;
 public:
-    RecvThread(NonBlockingQueue<std::vector<GameObject*>> &quene, Socket &socket, Protocol &protocol)
+    RecvThread(NBQueue<std::vector<std::unique_ptr<GameObject>>> &quene, Socket &socket, Protocol &protocol)
             : m_quene(quene), m_socket(socket), m_protocol(protocol), running(true){}
 
     void run() override;
 
-    void addVehicle(std::vector<GameObject*> &gameObjects);
+    void addVehicle(std::vector<std::unique_ptr<GameObject>> &gameObjects);
 
     void stop();
 
-    void addBuild(std::vector<GameObject *> &gameObjects);
+    void addBuild(std::vector<std::unique_ptr<GameObject>> &gameObjects);
 
-    void addButtonBuild(std::vector<GameObject *> &gameObjects);
+    void addButtonBuild(std::vector<std::unique_ptr<GameObject>> &gameObjects);
 };
 
 

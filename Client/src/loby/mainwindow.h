@@ -28,10 +28,6 @@ public:
 private slots:
     void on_button_confirmar_clicked();
 
-    void on_button_volver_clicked();
-
-
-
     void on_button_cofirmar_cant_nombre_clicked();
 
     void on_button_crear_partida_clicked();
@@ -53,6 +49,12 @@ private slots:
     void mostrar_partidas();
     
     void mostrar_mapas();
+
+    void on_button_volver_list_partidas_clicked();
+
+    void on_button_actualizar_partidas_clicked();
+
+    void on_button_volver_crear_clicked();
 
 private:
     Ui::MainWindow *ui;

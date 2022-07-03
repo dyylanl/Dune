@@ -2,8 +2,8 @@
 #define __MAP_READER_H__
 
 #include "YAMLReader.h"
-#include "../includes/Model/Buildings/Building.h"
 #include "../includes/defs.h"
+#include "../includes/Model/DTOs/BuildingDTO.h"
 
 class MapReader : public YAMLReader {
 public:
@@ -11,7 +11,7 @@ public:
     unsigned getRows() const;
     unsigned getCols() const;
     std::vector<std::vector<char>> getMap();
-    std::vector<Building> getBuildings();
+    std::vector<BuildingDTO> getBuildings();
     unsigned getReqPlayers();
     ~MapReader();
 

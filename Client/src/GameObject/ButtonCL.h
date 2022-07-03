@@ -13,19 +13,20 @@
 class ButtonCL : public GameObject{
 protected:
     int m_id;
+    char m_type;
     char m_player;
-    int m_constructionTime;
+    int m_time;
     bool m_selectStatus;
     bool m_ready;
 
 public:
-    ButtonCL(char textureID, SDL2pp::Point position, int id, char player, int constructionTime, bool selectStatus, bool ready);
+    ButtonCL(char textureID, SDL2pp::Point position, int id, char type, char player, int actionTime, bool selectStatus, bool ready);
 
-    void update(EventManager &eventManager, BlockingQueue<CommandCL *> &queue);
+    virtual void processEvent(SDL_Event &event, BQueue<std::unique_ptr<CommandCL>> &queue, Camera &camera) = 0;
 
-    virtual void draw(SDL2pp::Renderer &renderer, TextureManager &textureManager);
+    void draw(SDL2pp::Renderer &renderer, TextureManager &textureManager);
 
-    virtual void buildBuilding(BlockingQueue<CommandCL *> &queue, SDL2pp::Point point) = 0;
+    virtual ~ButtonCL() {}
 };
 
 

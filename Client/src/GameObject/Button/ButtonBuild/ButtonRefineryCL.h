@@ -6,14 +6,19 @@
 #define DUNE_BUTTONREFINERYCL_H
 
 
-#include "../../../Graphics/TextureManager.h"
-#include "../../ButtonCL.h"
+#include "../ButtonBuildCL.h"
+#include "../../Builds/RefineryCL.h"
 
-class ButtonRefineryCL : public ButtonCL {
+class ButtonRefineryCL : public ButtonBuildCL {
+    RefineryCL m_build;
 public:
     ButtonRefineryCL(int id, char player, int constructionTime, bool selectStatus, bool ready);
 
-    void buildBuilding(BlockingQueue<CommandCL *> &queue, SDL2pp::Point point);
+    void draw(SDL2pp::Renderer &renderer, TextureManager &textureManager);
+
+    void buildBuilding(BQueue<std::unique_ptr<CommandCL>> &queue, SDL2pp::Point point);
+
+    ~ButtonRefineryCL() {}
 };
 
 

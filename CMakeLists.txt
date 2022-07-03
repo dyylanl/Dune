@@ -63,12 +63,11 @@ add_library(dune-common SHARED ${common_src})
 target_link_libraries(dune-common)
 
 # Client
-add_executable(dune ${client_src} Client/src/GameObject/Builds/LightFactoryCL.cpp Client/src/GameObject/Builds/LightFactoryCL.h Client/src/GameObject/Builds/HeavyFactoryCL.cpp Client/src/GameObject/Builds/HeavyFactoryCL.h Client/src/GameObject/Builds/WindTrapCL.cpp Client/src/GameObject/Builds/WindTrapCL.h Client/src/GameObject/Builds/RefineryCL.cpp Client/src/GameObject/Builds/RefineryCL.h Client/src/GameObject/Builds/SiloCL.cpp Client/src/GameObject/Builds/SiloCL.h Client/src/GameObject/Builds/BarrackCL.cpp Client/src/GameObject/Builds/BarrackCL.h Client/src/GameObject/Builds/PalaceCL.cpp Client/src/GameObject/Builds/PalaceCL.h Client/src/GameObject/Button/ButtonBuild/ButtonLightFactoryCL.cpp Client/src/GameObject/Button/ButtonBuild/ButtonLightFactoryCL.h Client/src/GameObject/Button/ButtonBuild/ButtonHeavyFactoryCL.cpp Client/src/GameObject/Button/ButtonBuild/ButtonHeavyFactoryCL.h Client/src/GameObject/Button/ButtonBuild/ButtonSiloCL.cpp Client/src/GameObject/Button/ButtonBuild/ButtonSiloCL.h Client/src/GameObject/Button/ButtonBuild/ButtonBarrackCL.cpp Client/src/GameObject/Button/ButtonBuild/ButtonBarrackCL.h Client/src/GameObject/Button/ButtonBuild/ButtonPalaceCL.cpp Client/src/GameObject/Button/ButtonBuild/ButtonPalaceCL.h Client/src/GameObject/Button/ButtonUnit/ButtonTrikeCL.cpp Client/src/GameObject/Button/ButtonUnit/ButtonTrikeCL.h Client/src/GameObject/Button/ButtonUnit/ButtonUnitCL.cpp Client/src/GameObject/Button/ButtonUnit/ButtonUnitCL.h Client/src/GameObject/Button/ButtonUnit/ButtonRaiderCL.cpp Client/src/GameObject/Button/ButtonUnit/ButtonRaiderCL.h Client/src/GameObject/Button/ButtonUnit/ButtonTankCL.cpp Client/src/GameObject/Button/ButtonUnit/ButtonTankCL.h Client/src/GameObject/Button/ButtonUnit/ButtonHarvesterCL.cpp Client/src/GameObject/Button/ButtonUnit/ButtonHarvesterCL.h Client/src/GameObject/Button/ButtonUnit/ButtonLightInfantryCL.cpp Client/src/GameObject/Button/ButtonUnit/ButtonLightInfantryCL.h Client/src/GameObject/Button/ButtonUnit/ButtonHeavyInfantryCL.cpp Client/src/GameObject/Button/ButtonUnit/ButtonHeavyInfantryCL.h Client/src/GameObject/Button/ButtonUnit/ButtonSardaukarCL.cpp Client/src/GameObject/Button/ButtonUnit/ButtonSardaukarCL.h
-Client/src/loby/resources/resources.qrc)
+add_executable(dune ${client_src} Client/src/loby/resources/resources.qrc)
 target_link_libraries(dune dune-common SDL2 SDL2_image SDL2_ttf SDL2_mixer ${SDL2PP_LIBRARIES} Qt5::Core Qt5::Gui Qt5::Widgets Qt5::Multimedia)
 
 # Server
-add_executable(dune-server ${server_src})
+add_executable(dune-server ${server_src} Server/includes/Control/Responses/Response.h Server/src/Control/Responses/Response.cpp)
 target_link_libraries(dune-server dune-common ${YAML_CPP_LIBRARIES})
 #------------------------------------------------------------------------------
 

@@ -26,6 +26,7 @@ private:
 
     void printGames();
     void printUploadedMaps();
+    void printAllPlayers();
 
 public:
     /* Constructor */
