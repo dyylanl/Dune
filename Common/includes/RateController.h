@@ -1,7 +1,7 @@
 #ifndef DUNE_RATECONTROLLER_H
 #define DUNE_RATECONTROLLER_H
 
-#include "../../../Common/includes/Thread.h"
+#include "Thread.h"
 
 class RateController {
 private:

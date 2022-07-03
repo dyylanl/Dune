@@ -23,7 +23,7 @@ void Engine::Events() {
             for (unsigned int i = 0; i < sizeMenu; ++i) {
                 m_menu[i]->processEvent(event, m_queueB, m_camera);
             }
-            //m_camera.update(event);
+            m_camera.update(event);
         }
     }
 }

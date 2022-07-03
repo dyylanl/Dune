@@ -1,7 +1,5 @@
 #include <cmath>
-#include <unistd.h>
-#include <cstdio>
-#include "../../includes/Control/RateController.h"
+#include "../includes/RateController.h"
 
 RateController::RateController(int rate1) : rate(rate1) {
     t2 = t1;
