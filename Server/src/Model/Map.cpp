@@ -136,7 +136,6 @@ void Map::putBuilding(InstanceId id_player, char type, int x, int y) {
     build.pos_x = x;
     build.pos_y = y;
     buildingsDTO.push_back(build);
-    std::cout << "[GAME] Jugador con id " << id_player << " construyendo edificio del tipo: '"<< type << "' en: (" << x/BLOCK_HEIGHT << "," << y/BLOCK_WIDTH << ")" << std::endl;
 }
 
 Map::~Map() {}
