@@ -3,6 +3,7 @@
 
 #define SUCCESS 0
 #define ERROR 1
+#define COMMANDS_COUNT 20
 
 /*
  * 1° Popea un comando
@@ -10,18 +11,21 @@
  * 3° Pushea el resultado de ese comando en snapshot
  * 4° Vuelve a 1°
  */
-
 void Engine::_processCommands() {
     Command* cmd = nullptr;
-    while ((cmd = commands.pop())) {
-        try {
-            cmd->exec(map);
-        } catch (const std::exception& e) {
-            Response* reply = new Response(INVALID_COMMAND, e.what());
-            established_connections.notify(cmd->getCaller(), reply);
+    for (int i = 0; i < COMMANDS_COUNT; i++) {
+        while ((cmd = commands.pop())) {
+            if (cmd == nullptr) {return;}
+            try {
+                cmd->exec(map);
+            } catch (const std::exception& e) {
+                Response* reply = new Response(INVALID_COMMAND, e.what());
+                established_connections.notify(cmd->getCaller(), reply);
+            }
+            delete cmd;
         }
-        delete cmd;
     }
+    established_connections.sendSnapshot(map);
 }
 
 void Engine::_processFinishedConnections() {

@@ -1,6 +1,7 @@
 #!/bin/bash
 
-# Estructura de instalador tomada de: https://github.com/mauro7x/argentum/blob/master/installer.sh
+
+# Para la estructura del instalador se tomo como referencia a lo hecho por los autores del siguiente repo: https://github.com/mauro7x/argentum/blob/master/installer.sh 
 
 greenColour="\e[0;32m\033[1m"
 endColour="\033[0m\e[0m"

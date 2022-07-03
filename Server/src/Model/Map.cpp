@@ -127,9 +127,9 @@ void Map::putUnit(InstanceId id_player, char type, int x, int y) {
 
 void Map::putBuilding(InstanceId id_player, char type, int x, int y) {
     Position pos(x,y);
-    if (!isValid(pos)) {
+    /*if (!isValid(pos)) {
         return;
-    }
+    }*/
     BuildingDTO build;
     build.build_id = id_player;
     build.type = type;

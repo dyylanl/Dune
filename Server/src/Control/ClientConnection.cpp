@@ -124,11 +124,19 @@ void ClientConnection::sendInitGame(std::vector<std::vector<char>>& map) {
     }
 }
 
-void ClientConnection::sendInitBuildings(std::vector<BuildingDTO> buildings) {
+void ClientConnection::sendBuildings(std::vector<BuildingDTO> buildings) {
     try {
-        protocol.sendInitBuildings(peer, buildings);
+        protocol.sendBuildings(peer, buildings);
     } catch (const Exception &e) {
-        std::cout << "Error enviando el centro de construccion." << std::endl;
+        std::cout << "Error enviando construcciones." << std::endl;
+    }
+}
+
+void ClientConnection::sendUnits(std::vector<UnitDTO> units) {
+    try {
+        protocol.sendUnits(peer, units);
+    } catch (const Exception &e) {
+        std::cout << "Error enviando unidades." << std::endl;
     }
 }
 

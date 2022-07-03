@@ -25,7 +25,7 @@ void ClientLogin::run() {
         std::string name;
         name = protocol.recvName(peer);
         while (is_running) {
-            uint16_t command = protocol.recvCommand(peer); // este comando puede ser 1 2 o 3
+            uint8_t command = protocol.recvOneByte(peer); // este comando puede ser 1 2 o 3
             execute(command, name); // si devuelve 0 es porque el cliente ya se unio a una partida o la crea si devuelve 1 hay q volver a recibir el comando que indique
         }
     } catch (const std::exception& e) {
@@ -63,7 +63,7 @@ void ClientLogin::stop() {
     }
 }
 
-void ClientLogin::execute(uint16_t command, std::string name_player) {
+void ClientLogin::execute(uint8_t command, std::string name_player) {
     /*
      * Si el comando recibido es crear entonces:
      *  1° Recv Nombre de la partida
@@ -77,13 +77,13 @@ void ClientLogin::execute(uint16_t command, std::string name_player) {
         std::string name_game;
         name_game = protocol.recvName(peer/*, len_name*/); // recibo el nombre de la partida
         protocol.sendMapsCreated(peer, game.getMapsLoads()); // envio mapas que cargo el server
-        uint16_t map_id = protocol.recvCommand(peer); // recibo el mapa que eligio para crear la partida
+        uint8_t map_id = protocol.recvOneByte(peer); // recibo el mapa que eligio para crear la partida
         uint16_t flag_create = game.createGame(map_id, name_game); // pido al game que cree esa partida
         if (flag_create == SUCCESS) { // si la respuesta es 0 entonces el game me creo la partida
             game.acceptPlayer(peer, name_player, name_game); // si la partida se creo entonces le digo al game que me acepte este player
             is_running = false;
         } else {
-            protocol.sendCreateGameInvalid(peer);
+            protocol.sendOneByte(peer,ERROR);
         }
     }
     /*
@@ -97,7 +97,7 @@ void ClientLogin::execute(uint16_t command, std::string name_player) {
         if (flag_join == SUCCESS) {
             is_running = false;
         } else {
-            protocol.sendAcceptPlayerInvalid(peer);
+            protocol.sendOneByte(peer,ERROR);
         }
     }
     /*

@@ -41,6 +41,8 @@ public:
 
     void start();
 
+    void sendSnapshot(Map &map);
+
 };
 
 

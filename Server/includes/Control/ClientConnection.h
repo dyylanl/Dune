@@ -57,10 +57,12 @@ class ClientConnection {
     ~ClientConnection();
 
     void sendInitGame(std::vector<std::vector<char>>& map);
-    void sendInitBuildings(std::vector<BuildingDTO> buildings);
+    void sendBuildings(std::vector<BuildingDTO> buildings);
+    void sendUnits(std::vector<UnitDTO> units);
     InstanceId getId() {return id;}
 
     void sendEstablishConnection();
+
 
 };
 

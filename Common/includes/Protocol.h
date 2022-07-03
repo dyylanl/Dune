@@ -27,6 +27,11 @@ public:
     uint8_t recvOneByte(Socket &socket);
     uint16_t recvTwoBytes(Socket &socket);
 
+    /*
+    *   Retorna true si se pudo enviar - 
+    */
+    bool sendOneByte(Socket &socket, uint8_t data);
+    bool sendTwoBytes(Socket &socket, uint16_t data);
 
 
     /*
@@ -182,7 +187,9 @@ public:
 
     bool recvEstablishConnection(Socket &socket);
     
-    void sendInitBuildings(Socket &socket, std::vector<BuildingDTO> buildings);
+    void sendBuildings(Socket &socket, std::vector<BuildingDTO> buildings);
+    void sendUnits(Socket &socket, std::vector<UnitDTO> buildings);
+    
     std::vector<BuildingDTO> recvInitBuildings(Socket &socket);
 
     void sendCommandCreateUnit(Socket &socket, char &action, char &unitType);

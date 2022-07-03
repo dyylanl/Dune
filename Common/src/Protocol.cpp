@@ -132,6 +132,23 @@ uint16_t Protocol::recvTwoBytes(Socket &socket) {
     return resp;
 }
 
+bool Protocol::sendOneByte(Socket &socket, uint8_t data) {
+    int _send = socket.send((char *)&data, sizeof(uint8_t));
+    if (_send < int(sizeof(uint8_t))) {
+        return false;
+    }
+    return true;
+}
+
+
+bool Protocol::sendTwoBytes(Socket &socket, uint16_t data) {
+    int _send = socket.send((char *)&data, sizeof(uint16_t));
+    if (_send < int(sizeof(uint16_t))) {
+        return false;
+    }
+    return true;
+}
+
 
 void Protocol::sendGameList(Socket &skt, const std::vector<std::vector<std::string>>& list) {
     if (list.empty()) {
@@ -498,17 +515,17 @@ void Protocol::sendAcceptPlayerInvalid(Socket &socket) {
     socket.send((const char*)&flag_bad_join, sizeof(uint16_t));
 }
 
-void Protocol::sendInitBuildings(Socket &socket, std::vector<BuildingDTO> buildings) {
+void Protocol::sendBuildings(Socket &socket, std::vector<BuildingDTO> buildings) {
     uint16_t total = buildings.size();
     socket.send((const char*)&total, sizeof(uint16_t));
     for (int i = 0; i < total; i++) {
         char type = 1;
         char build_type = buildings[i].type;
-        uint16_t id = 2;
-        uint8_t player = 1;
+        uint16_t id = buildings[i].build_id;
+        uint8_t player = buildings[i].build_id;
         uint16_t pos_x = (buildings[i].pos_x - 1) * 30;
         uint16_t pos_y = (buildings[i].pos_y - 1) * 30;
-        uint16_t life = 0;
+        uint16_t life = buildings[i].life;
         socket.send((const char *)&type, sizeof(uint8_t));
         socket.send((const char *)&build_type, sizeof(uint8_t));
         socket.send((const char *)&id, sizeof(uint16_t));
@@ -517,8 +534,26 @@ void Protocol::sendInitBuildings(Socket &socket, std::vector<BuildingDTO> buildi
         socket.send((const char *)&pos_x, sizeof(uint16_t));
         socket.send((const char *)&life, sizeof(uint16_t));
     }
-    std::cout << "[PROTOCOL]: SE ENVIA EDIFICIO " << std::endl;
 }
+
+void Protocol::sendUnits(Socket &socket, std::vector<UnitDTO> units) {
+    uint16_t total = units.size();
+    socket.send((const char*)&total, sizeof(uint16_t));
+    for (int i = 0; i < total; i++) {
+        auto unit = units[i];
+        int player_id = unit.unit_id; // 2 by
+        char unit_type = unit.type; // 8 bit
+        int pos_x = unit.pos_x; // 2 by
+        int pos_y = unit.pos_y; // 2 by
+        int life = unit.life; // 2 by
+        sendOneByte(socket,unit_type);
+        sendTwoBytes(socket,player_id);
+        sendTwoBytes(socket,pos_x);
+        sendTwoBytes(socket,pos_y);
+        sendTwoBytes(socket,life);
+    }
+}
+
 
 void Protocol::sendCommandCreateUnit(Socket &socket, char &action, char &unitType) {
     socket.send(reinterpret_cast<char *>(&action), sizeof(uint8_t));
