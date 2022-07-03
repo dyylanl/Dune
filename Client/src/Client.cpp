@@ -27,6 +27,7 @@
 #include "GameObject/Button/ButtonUnit/ButtonLightInfantryCL.h"
 #include "GameObject/Button/ButtonUnit/ButtonSardaukarCL.h"
 #include "GameObject/Button/ButtonUnit/ButtonTankCL.h"
+#include "../../Common/includes/RateController.h"
 #include <arpa/inet.h>
 
 #define HARKONNEN 1
@@ -180,12 +181,15 @@ void Client::initSDL(Socket &aSocket, Protocol &aProtocol,
 
 
     Engine engine(map, menu, textureManager, queueNb, queueB);
-
+    RateController frameRate(30);
     while (engine.IsRunning()) {
+        frameRate.start();
         engine.Events();
         engine.Update();
         engine.Render(renderer);
-        usleep(FRAME_RATE);
+        int sleeptime = frameRate.finish();
+        frameRate.sleepFor(sleeptime);
+        //usleep(FRAME_RATE);
     }
 
     sendThread.stop();
