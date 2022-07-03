@@ -93,20 +93,16 @@ public:
     */
    void stop();
 
+    /*
+    *   Metodo para registrar la cantidad de jugadores en todas las partidas creadas
+    */
    std::vector<std::vector<InstanceId>> getAllPlayers();
    
-
+    /*
+    *   Elimina todas las partidas creadas
+    */
     ~Game();
 
-
-
-
-// ------------------ ESTO HAY QUE BORRARLO --------------- //
-    void selectUnitInPos(int pos_x, int pos_y);
-    void build(char build_type, int pos_x, int pos_y);
-    void moveUnitSelecteds(const uint16_t i, const uint16_t i1);
-    void createUnit(char unit_type);
-    bool fullyGame(std::string name_game);
 };
 
 

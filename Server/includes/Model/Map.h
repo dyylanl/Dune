@@ -12,13 +12,12 @@
 
 
 class Map {
+
     MapReader map_reader;
     int rows, cols;
-    bool news;
-    ////////////////// IMPLEMENTACION CON TERRENOS //////////////////
-    std::vector<std::vector<Terrain>> terrrains; // contiene el tipo de terreno en esa pos
-    std::vector<std::vector<char>> mapa; // contiene el tipo de unidad en esa posicion
 
+    std::vector<std::vector<Terrain>> terrrains; // contiene el tipo de terreno en esa pos
+    std::vector<std::vector<char>> mapa; // contiene el tipo de terreno_key para enviar a los clientes
 
 
     std::vector<BuildingDTO> buildingsDTO;
@@ -26,21 +25,22 @@ class Map {
 
 
 public:
-    ~Map();
-    bool hasNews();
-    int getRows() const {return rows;}
-    int getCols() const {return cols;}
-
-    std::vector<std::vector<char>>& getMap();
-    
-    char getTypeTerrain(int posX, int posY);
 
     /*
-     * retorna true si es una posicion dentro del mapa
-     */
-    bool isValid(Position& pos);
+    *   Recibe por parametro la ruta al archivo del mapa.yaml para inicializarse
+    */
+    explicit Map(std::string path_config);
 
+    /*
+    *   Destructor de mapa
+    */
+    ~Map();
 
+    /*
+    *   Getters del mapa
+    */
+    int getRows() const {return rows;}
+    int getCols() const {return cols;}
     int getHeight();
     int getWidth();
     int getWidthInBlocks();
@@ -48,44 +48,55 @@ public:
     int getBlockWidth();
     int getBlockHeight();
 
+    /*
+    *   Devuelve una matriz de char con cada clave del terreno
+    */
+    std::vector<std::vector<char>>& getMap();
+    
+    /*
+    *   Devuelve el tipo de terreno en la posicion indicada
+    */
+    char getTypeTerrain(int posX, int posY);
+
+    /*
+     * retorna true si es una posicion valida en el mapa creado
+     */
+    bool isValid(Position& pos);
 
     /*
      * devuelve el tipo de terreno que hay en la pos x,y
      */
     Terrain& at(int x, int y);
-    /*
-     *
-     */
-    Terrain& blockAt(int x, int y);
+
     /*
      * devuelve el tipo de terreno que hay en pos
      */
     Terrain& at(const Position& pos);
+
     /*
      * devuelve el factor de velocidad que hay en pos
      */
     int getSpeedFactorAt(Position& pos);
+
     /*
-     * setea la ruta de destino de la unidad
-     */
-    void getInitialPositions();
-    
+    *   Retorna la especia a una distancia x de la posicion indicada
+    */
     Position getClosestSpeciaPosition(Position pos, int radius);
 
+    /*
+    *   Resetea la especia al valor inicial del mapa
+    */
     void updateSpice(int x, int y);
 
-    explicit Map(std::string path_config);
-
     /*
-    *   
+    *   Retorna cada unidad que hay en el mapa
     */
     std::vector<UnitDTO> getUnits();
 
     /*
-    *
+    *   Retorna cada edificio que hay en el mapa
     */
     std::vector<BuildingDTO> getBuildings();
-
 
     /*
     *   Al player de id le asigna una unidad del type en posicion x,y

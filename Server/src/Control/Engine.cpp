@@ -1,4 +1,6 @@
 #include "../../includes/Control/Engine.h"
+#include "../../includes/Control/RateController.h"
+
 #define SUCCESS 0
 #define ERROR 1
 
@@ -12,7 +14,6 @@
 void Engine::_processCommands() {
     Command* cmd = nullptr;
     while ((cmd = commands.pop())) {
-        std::cout << "[ENGINE]: Procesando comando..." << std::endl;
         try {
             cmd->exec(map);
         } catch (const std::exception& e) {
@@ -80,30 +81,14 @@ void Engine::run() {
     fprintf(stderr, "[Engine]: Empezando ejecución.\n");
     established_connections.initGame(map.getMap());     // envio terrenos
     established_connections.sendInitBuildings(map.getBuildings());   // envio el centro de construccion de cada jugador de la partida
-    auto t1 = std::chrono::steady_clock::now();
-    auto t2 = t1;
-    std::chrono::duration<float, std::milli> diff;
-    int rest = 0;
-    int behind = 0;
-    int lost = 0;
-    int it = 1;
+    RateController rate_controller(rate);
     established_connections.start();
+    // GAME-LOOP
     while (keep_executing) {
-        _loopIteration(it);
-        it = 0;
-        t2 = std::chrono::steady_clock::now();
-        diff = t2 - t1;
-        rest = rate - std::ceil(diff.count());
-        if (rest < 0) {
-            behind = -rest;
-            lost = rate + (behind - behind % rate);
-            rest = rate - behind % rate;
-            t1 += std::chrono::milliseconds(lost);
-            it += std::floor(lost / rate);
-        }
-        std::this_thread::sleep_for(std::chrono::milliseconds(rest));
-        t1 += std::chrono::milliseconds(rate);
-        it += 1;
+        rate_controller.start();
+        _loopIteration(rate_controller.getRateLoop());
+        uint64_t sleep_time = rate_controller.finish();
+        rate_controller.sleepFor(sleep_time);
     }
     established_connections.stop();
     clearAll();

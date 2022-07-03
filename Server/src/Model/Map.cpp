@@ -32,16 +32,8 @@ char Map::getTypeTerrain(int posX, int posY) {
     return this->terrrains[posX][posY].getKey();
 }
 
-bool Map::hasNews(){
-    return this->news;
-}
-
 void Map::updateSpice(int x, int y){
     std::cout << "Volviendo a cargar la especia" << std::endl;
-}
-
-void Map::getInitialPositions() {
-    std::cout << "Leyendo del yaml para cargar los centros de construcciones de cada jugador" << std::endl;
 }
 
 int Map::getWidth() {
@@ -75,10 +67,6 @@ Terrain& Map::at(int x, int y) {
     return reinterpret_cast<Terrain &>(this->terrrains[x][y]);
 }
 
-Terrain& Map::blockAt(int x, int y) {
-    return reinterpret_cast<Terrain &>(this->terrrains[x][y]);
-}
-
 Terrain& Map::at(const Position& pos) {
     return reinterpret_cast<Terrain &>(this->terrrains[pos.getX()][pos.getY()]);
 }
@@ -101,7 +89,7 @@ Position Map::getClosestSpeciaPosition(Position pos, int radius) {
                 (cur_pos_x + i) >= 0 &&
                 (cur_pos_x + i) < rows) {
                 if ( abs(i) + abs(j) < min_distance
-                     && this->blockAt(cur_pos_x, cur_pos_y).hasFarm()) {
+                     && this->at(cur_pos_x, cur_pos_y).hasFarm()) {
                     min_distance = abs(i) + abs(j);
                     min_position = Position(cur_pos_x, cur_pos_y);
                 }

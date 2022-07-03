@@ -16,6 +16,7 @@ class Thread {
     Thread(Thread&& other);
     Thread& operator=(Thread&& other);
     void start();
+    void safe_run();
     bool joinable();
     void join();
     virtual void run() = 0;

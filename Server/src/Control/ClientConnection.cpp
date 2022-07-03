@@ -3,7 +3,6 @@
 void ClientConnection::_finishThread() {
     std::unique_lock<std::mutex> l(m);
     if ((++finished_threads) == 2) {
-        fprintf(stderr,"CLIENTE %i: _finishThread agrega conexión terminada a la cola.\n",id);
         finished_connections.push(new InstanceId(id));
     }
 }
@@ -42,7 +41,6 @@ void ClientConnection::_receiver() {
     try {
         uint8_t opcode;
         while ((opcode = protocol.recvOneByte(peer))) {
-            fprintf(stderr, "CLIENTE %i: Receiver recibe comando con opcode: %i.\n", id,opcode);
             if (opcode != 0) {
                 _receiveCommand(opcode);
             } else {
@@ -69,7 +67,6 @@ void ClientConnection::_receiveCommand(uint8_t opcode) {
         this->responses.push(reply_error);
     }
 }
-
 
 ClientConnection::ClientConnection(
         const InstanceId id, Socket& peer,
@@ -117,8 +114,6 @@ void ClientConnection::stop() {
 ClientConnection::~ClientConnection() {
     _freeNotifications();
 }
-
-
 
 void ClientConnection::sendInitGame(std::vector<std::vector<char>>& map) {
     try {

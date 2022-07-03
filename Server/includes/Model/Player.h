@@ -15,33 +15,43 @@ private:
     InstanceId id;
     std::string house;
     std::string name;
-    //YAMLReader reader;
-    bool news; // flag para controlar si ejecuto cambios
-
 public:
-    // oro y energia
     int generatedEnergy;
     int consumedEnergy;
     int gold;
     int gold_limit;
 
-
+    /*
+    *   Constructor de jugador con un id, casa y nombre otorgado
+    */
     Player(InstanceId id, std::string house, std::string name);
+
+    /*
+    *   Suma la cantidad de oro indicada por parametro al jugador
+    */
     void addGold(int gold);
+
+    /*
+    *   Resta la cantidad de oro indicada por parametro al jugador
+    */
     void subGold(int gold);
+
+    /*
+    *   Retorna la cantidad de energia que genero el jugador
+    */
     float getEnergyFactor();
+
+    /*
+    *   Operador de comparacion
+    */
     bool operator==(const Player& other) const;
 
-    // agrega a la lista de edificaciones del jugador la nueva construccion
-
-
+    /*
+    *   Getters
+    */
     std::string getName() {return name;}
-
     int getId() {return id;}
-
-    // una vez q se pregunta si tuvo novedades se setea en falso el new
-    bool hasNews();
-
+    
 };
 
 #endif //DUNE_PLAYER_H

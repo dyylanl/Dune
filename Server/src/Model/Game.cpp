@@ -1,10 +1,8 @@
 #include "../../includes/Model/Game.h"
 #include "../../config/MapReader.h"
 
-#define FIRST_ID 1
 #define SUCCESS 0
 #define ERROR 1
-
 
 bool Game::contains(const std::string& game_name) {
     //std::lock_guard<std::mutex> lock(mutex);
@@ -98,24 +96,12 @@ std::vector<std::vector<std::string>> Game::listGames() {
     return list;
 }
 
-/*
-std::vector<std::vector<char>>& Game::getMap(std::string name_game) {
-    if (contains(name_game)){
-        return this->maps_created.at(name_game)->getMap();
-    } else {
-        std::cout << "[GAME]: la partida " << name_game << " NO existe" << std::endl;
-        throw Exception("Acceso invalido a un mapa que no existe.\n");
-    }
-}*/
-
 Game::~Game() {
-    for (const auto& [id, game] : this->games) {
-            delete game;
+    for (const auto& [name, engine] : this->games) {
+            delete engine;
         }
     
 }
-
-#define INVALID_ID -1
 
 Id Game::getMapId(std::string name_game) {
     if (contains(name_game)) {
@@ -134,7 +120,6 @@ std::vector<MapDTO> Game::getMapsLoads(){
     return maps_loads;
 }
 
-
 std::vector<std::vector<InstanceId>> Game::getAllPlayers() {
     std::vector<std::vector<InstanceId>> all_players;
     for (const auto& [game_name, engine] : this->games) {
@@ -144,32 +129,9 @@ std::vector<std::vector<InstanceId>> Game::getAllPlayers() {
     return all_players;
 }
 
-
-
 void Game::stop() {
     for (const auto& [name_game, engine] : this->games) {
         engine->stop();
         engine->join();
     }
-}
-
-
-
-
-
-
-// ------------------ ESTO HAY QUE BORRARLO --------------- //
-void Game::selectUnitInPos(int pos_x, int pos_y) {
-    //this->map.selectUnit(pos_x, pos_y);
-    std::cout << "Unidad en la posicion " << pos_x << "," << pos_y << " seleccionada." << std::endl;
-}
-void Game::build(char build_type, int pos_x, int pos_y) {
-    std::cout << "Construyendo " << build_type << "en la posicion " << pos_x << "," << pos_y << std::endl;
-    //this->map.build(build_type,pos_x,pos_y);
-}
-void Game::moveUnitSelecteds(const uint16_t i, const uint16_t i1) {
-    std::cout << "Moviendo las unidades seleccionadas" << std::endl;
-}
-void Game::createUnit(char unit_type) {
-    std::cout << "Creando unidades del tipo" << unit_type << std::endl;
 }
