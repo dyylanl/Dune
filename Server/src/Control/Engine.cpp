@@ -25,7 +25,6 @@ void Engine::_processCommands() {
             delete cmd;
         }
     }
-    established_connections.sendSnapshot(map);
 }
 
 void Engine::_processFinishedConnections() {
@@ -62,6 +61,7 @@ void Engine::clearAll() {
 
 void Engine::_loopIteration(int it) {
     _processCommands();
+    established_connections.sendBuildings(map.getBuildings());   // envio el centro de construccion de cada jugador de la partida
     //map.updateSpice(it);
     //map.update(it);
     //established_connections.updateClients();
@@ -84,7 +84,6 @@ Engine::Engine(MapDTO map_dto)
 void Engine::run() {
     fprintf(stderr, "[Engine]: Empezando ejecución.\n");
     established_connections.initGame(map.getMap());     // envio terrenos
-    established_connections.sendInitBuildings(map.getBuildings());   // envio el centro de construccion de cada jugador de la partida
     RateController rate_controller(rate);
     established_connections.start();
     // GAME-LOOP

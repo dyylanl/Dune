@@ -14,6 +14,5 @@ BuildBuildingCommand::BuildBuildingCommand(const InstanceId caller,
 BuildBuildingCommand::~BuildBuildingCommand() = default;
 
 void BuildBuildingCommand::exec(Map &map) {
-    std::cout << "Jugador con id " << caller << " construyendo edificio del tipo: '"<< build_type << "' en: (" << pos_x/BLOCK_HEIGHT << "," << pos_y/BLOCK_WIDTH << ")" << std::endl;
     map.putBuilding(caller,build_type,pos_x,pos_y);
 }

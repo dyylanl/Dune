@@ -49,7 +49,7 @@ void ClientsConnected::initGame(std::vector<std::vector<char>>& map) {
     }
 }
 
-void ClientsConnected::sendInitBuildings(std::vector<BuildingDTO> buildings) {
+void ClientsConnected::sendBuildings(std::vector<BuildingDTO> buildings) {
     for (auto it = clients.begin(); it != clients.end(); it++) {
         it->second.sendBuildings(buildings);
     }
@@ -66,14 +66,5 @@ std::vector<InstanceId> ClientsConnected::getAllPlayers() {
 void ClientsConnected::start() {
     for (auto it = clients.begin(); it != clients.end(); it++) {
         it->second.start();
-    }
-}
-
-void ClientsConnected::sendSnapshot(Map &map) {
-    for (auto it = clients.begin(); it != clients.end(); it++) {
-        it->second.sendBuildings(map.getBuildings());
-    }
-    for (auto it = clients.begin(); it != clients.end(); it++) {
-        it->second.sendUnits(map.getUnits());
     }
 }
