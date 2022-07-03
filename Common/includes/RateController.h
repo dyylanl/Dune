@@ -18,8 +18,7 @@ public:
     void stop();
 
     int getRateLoop();
-    uint64_t finish();
-    void sleepFor(uint64_t sleep_time);
+    void finish();
 
     ~RateController();
 };

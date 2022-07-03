@@ -1,11 +1,8 @@
 #include <cmath>
+#include <cstdio>
 #include "../includes/RateController.h"
 
-RateController::RateController(int rate1) : rate(rate1) {
-    t2 = t1;
-    rest = 0, behind = 0, lost = 0;
-    it = 1;
-}
+RateController::RateController(int rate1) : rate(rate1) {}
 
 RateController::~RateController() {
 }
@@ -13,13 +10,17 @@ RateController::~RateController() {
 void RateController::start() {
     t1 = std::chrono::steady_clock::now();
     t2 = t1;
+    rest = 0;
+    behind = 0;
+    lost = 0;
+    it = 1;
 }
 
 int RateController::getRateLoop() {
     return it;
 }
 
-uint64_t RateController::finish() {
+void RateController::finish() {
     it = 0;
     t2 = std::chrono::steady_clock::now();
     diff = t2 - t1;
@@ -31,13 +32,8 @@ uint64_t RateController::finish() {
         t1 += std::chrono::milliseconds(lost);
         it += std::floor(lost / rate);
     }
-    return rest;
-}
-
-void RateController::sleepFor(uint64_t sleep_time) {
-    std::this_thread::sleep_for(std::chrono::milliseconds(sleep_time));
+    std::this_thread::sleep_for(std::chrono::milliseconds(rest));
     t1 += std::chrono::milliseconds(rate);
     it += 1;
 }
-
 

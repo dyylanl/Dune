@@ -182,13 +182,13 @@ void Client::initSDL(Socket &aSocket, Protocol &aProtocol,
 
     Engine engine(map, menu, textureManager, queueNb, queueB);
     RateController frameRate(30);
+    frameRate.start();
     while (engine.IsRunning()) {
-        frameRate.start();
         engine.Events();
         engine.Update();
         engine.Render(renderer);
-        int sleeptime = frameRate.finish();
-        frameRate.sleepFor(sleeptime);
+        frameRate.finish();
+        //frameRate.sleepFor(sleeptime);
         //usleep(FRAME_RATE);
     }
 

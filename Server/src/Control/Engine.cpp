@@ -86,12 +86,11 @@ void Engine::run() {
     established_connections.initGame(map.getMap());     // envio terrenos
     RateController rate_controller(rate);
     established_connections.start();
+    rate_controller.start();
     // GAME-LOOP
     while (keep_executing) {
-        rate_controller.start();
         _loopIteration(rate_controller.getRateLoop());
-        uint64_t sleep_time = rate_controller.finish();
-        rate_controller.sleepFor(sleep_time);
+        rate_controller.finish();
     }
     established_connections.stop();
     clearAll();
