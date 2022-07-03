@@ -5,7 +5,6 @@
 
 class RateController {
 private:
-    bool keep_running;
     int rate;
     std::chrono::duration<float, std::milli> diff;
     int rest,lost,behind,it;
