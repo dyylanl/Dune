@@ -34,6 +34,8 @@ public:
     Client& operator=(const Client&) = delete;
     Client(Client&& other) = delete;
     Client& operator=(Client&& other) = delete;
+    
+    void iniciar();
 
     void createGame(Protocol protocol, Socket &socket);
     void joinGame(Protocol protocol, Socket &socket);

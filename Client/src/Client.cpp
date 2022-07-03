@@ -281,6 +281,12 @@ void Client::launch() {
     }
 }
 
+void Client::iniciar(){
+  std::vector<std::vector<char>> map = protocol.recvMap(socket);
+  std::cout << "Mapa recibido..." << std::endl;
+  initSDL(this->socket,this->protocol,map);
+}
+
 
 
 void Client::loadTextures(TextureManager &textureManager, SDL2pp::Renderer &renderer) const {

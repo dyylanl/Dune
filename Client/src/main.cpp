@@ -18,6 +18,9 @@ int main(int argc, char** argv){
     std::cout << "bug 3" << std::endl;
     a.exec();
     std::cout << "bug 4" << std::endl;    
+    Client* cliente = w.get_cliente();
+    cliente->iniciar();
+    /*
     try {
         Client client;
         client.launch();
@@ -27,7 +30,7 @@ int main(int argc, char** argv){
     } catch (...) {
         fprintf(stderr, "Unknown error.\n");
         return ERROR;
-    }
+    }*/
 
     return SUCCESS;
 }

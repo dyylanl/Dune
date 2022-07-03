@@ -23,7 +23,7 @@ public:
     MainWindow(QWidget *parent = nullptr);
     std::string get_nombre();
     ~MainWindow();
-    //Client* get_cliente()const;
+    Client* get_cliente()const;
 
 private slots:
     void on_button_confirmar_clicked();

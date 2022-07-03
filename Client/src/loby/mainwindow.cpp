@@ -147,10 +147,10 @@ void MainWindow::on_button_unirse_partida_clicked()
     std::cout << "PASO MOSTRAR NO ERROR" << std::endl;
     //AGREGAR CURRENITEM DE LA LISTA PARA SELECIONAR
 }
-/*
+
 Client* MainWindow::get_cliente()const{
     return this->cliente;
-}*/
+}
 
 void MainWindow::mostrar_partidas(){
     this->ui->lista_partidas->clear();
@@ -214,22 +214,8 @@ void MainWindow::on_button_confirmar_unirse_clicked()
         
         std::cout << "ERROR UNIENDOME A LA PARTIDA "<< std::endl;
         return;
-  }
-
-    /*int respuesta_unirse_partida = this->cliente->recibir_respuesta();
-    if(respuesta_unirse_partida == 9){
-        QMessageBox msgBox;
-        msgBox.setText("Se unio con exito");
-        msgBox.exec();
     }
 
-    //this->ui->stackedWidget->setCurrentIndex(5);
-    if(this->cliente->partida_iniciada()){
-        QMessageBox msgBox;
-        msgBox.setText("La partida va a empezar");
-        msgBox.exec();
-        QApplication::quit();
-    }*/
 
 }
 
@@ -269,26 +255,9 @@ void MainWindow::on_button_confirmar_mapa_clicked()
         this->ui->stackedWidget->setCurrentIndex(2);
         return;
         std::cout << "ERROR UNIENDOME A LA PARTIDA "<< std::endl;
-  }
+       
+    }
 
-/*
-    int respuesta_crear_partida = this->cliente->recibir_respuesta();
-    if(respuesta_crear_partida == 9){
-        QMessageBox msgBox;
-        msgBox.setText("Partida creada con exito");
-        msgBox.exec();
-    }
-    
-    this->ui->stackedWidget->setCurrentIndex(5);
-    std::cout << "PASO EL" << std::endl;
-    if(this->cliente->partida_iniciada()){
-        std::cout << "EMPIEZA LA PARTIDA" << std::endl;
-        QMessageBox msgBox;
-        msgBox.setText("La partida va a empezar");
-        msgBox.exec();
-        QApplication::quit();
-    }
-*/
 }
 
 void MainWindow::actualizar_lista_partidas(){
