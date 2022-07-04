@@ -20,12 +20,6 @@ private:
     std::map<Id,MapDTO> maps_dto_init;
 
     /*
-    *   Contiene la informacion de cada partida
-    *   Estructura:     {... ,game_nameN : [current_playersN, req_playersN, map_idN], ...}
-    */
-    std::map<std::string, std::vector<int>> info_games;
-
-    /*
     * Cada vez que se cree una partida se iniciara un Engine para manejar esa partida y unir los jugadores a esa partida
     */
     std::map<std::string,Engine*> games;
