@@ -6,16 +6,16 @@
 
 bool Game::contains(const std::string& game_name) {
     //std::lock_guard<std::mutex> lock(mutex);
-    return (this->info_games.find(game_name)!= this->info_games.end());
+    return (this->games.find(game_name)!= this->games.end());
 }
 
 std::vector<int> Game::get(const std::string& game_name) {
     std::lock_guard<std::mutex> lock(mutex);
     if (contains(game_name)) {
-        std::vector<int> game_info;
-        game_info.push_back(info_games[game_name][0]); // current players
-        game_info.push_back(info_games[game_name][1]); // req players
-        return game_info;
+        std::vector<int> info;
+        info.push_back(games[game_name]->getCurrentPlayers()); // current players
+        info.push_back(games[game_name]->getMaxPlayers()); // req players
+        return info;
     } else {
         throw Exception("Se desea obtener una partida inexistente.\n");
     }
@@ -25,7 +25,6 @@ std::vector<int> Game::get(const std::string& game_name) {
 
 Game::Game(std::string path_config_game) :
         maps_dto_init(),
-        info_games(),
         games(),
         game_config(path_config_game)
 
@@ -60,7 +59,6 @@ uint16_t Game::createGame(Id id_map, const std::string& name_game) {
     map.max_players = maps_dto_init[id_map].max_players;
     map.name_map = name_game;
     games[name_game] = (new Engine(map));
-    this->info_games[name_game] = {0,maps_dto_init[id_map].max_players,(int)id_map}; // currents:0 , max_players: dto.max_players, id_map
     return SUCCESS;
 }
 
@@ -85,11 +83,11 @@ std::vector<std::vector<std::string>> Game::listGames() {
     std::vector<std::vector<std::string>> list = {};
     if (!this->games.empty()) {
         for (const auto& [game_name, engine] : this->games) {
-            std::vector<std::string> info_game = {};
-            info_game.push_back(std::to_string(engine->getCurrentPlayers()));
-            info_game.push_back(std::to_string(engine->getMaxPlayers()));
-            info_game.push_back(game_name);
-            list.push_back(info_game);
+            std::vector<std::string> info = {};
+            info.push_back(std::to_string(engine->getCurrentPlayers()));
+            info.push_back(std::to_string(engine->getMaxPlayers()));
+            info.push_back(game_name);
+            list.push_back(info);
         }
     }
     return list;

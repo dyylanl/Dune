@@ -19,7 +19,7 @@ void Server::printUploadedMaps() {
     std::vector<MapDTO> maps = game.getMapsLoads();
     int total = (int)maps.size();
     for (int i = 0; i < total; i++) {
-        std::cout << "Id: " << maps[i].map_id << "\n Max players: " << maps[i].max_players << "\nRuta: " << maps[i].path << std::endl;
+        std::cout << "Id: " << maps[i].map_id << "\nMax players: " << maps[i].max_players << "\nRuta: " << maps[i].path << std::endl;
     }
 }
 

@@ -15,6 +15,9 @@ private:
     int max_players;
     bool finished;
 public:
+    /*
+    *   Recibe por parametro la ruta del mapa que se usara en la partida
+    */
     Model(const std::string& path_to_map_config);
     int getMaxPlayers();
     int getCurrentPlayers();

@@ -11,8 +11,8 @@
 #define ROCK_KEY 'R'
 #define SAND_KEY 'A'
 #define SUMMIT_KEY 'C'
-#define BLOCK_HEIGHT 30
-#define BLOCK_WIDTH 30
+#define BLOCK_HEIGHT 28
+#define BLOCK_WIDTH 28
 // -------- PLAYER -------------- //
 #define PLAYER_KEY 'C'
 

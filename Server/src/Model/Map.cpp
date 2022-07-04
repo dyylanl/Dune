@@ -128,7 +128,8 @@ void Map::putUnit(InstanceId id_player, char type, int x, int y) {
 }
 // todo: usar la clase building
 void Map::putBuilding(char type, int x, int y) {
-    Position pos(x/35,y/35);
+    Position pos(x,y);
+    pos.normalize();
     if (!isValid(pos)) {
         std::cout << "Poner construccion en posicion invalida: " << pos.x << "," << pos.y << std::endl;
         return;
@@ -144,6 +145,7 @@ void Map::putBuilding(char type, int x, int y) {
 Map::~Map() {}
 
 void Map::putUnit(Position pos, char unit_type) {
+    pos.normalize();
     if (isValid(pos)) {
         std::cout << "Poner unidad en posicion invalida: " << pos.x << "," << pos.y << std::endl;
         return;

@@ -97,8 +97,7 @@ void ClientConnection::join() {
     try {
         peer.shutdown();
     } catch (const Exception& e) {
-        fprintf(stderr, "CLIENTE %i: Error apagando el socket.\n",
-                id);
+        //fprintf(stderr, "CLIENTE %i: Error en el join: %s.\n", id, e.what());
     }
 }
 
@@ -107,7 +106,7 @@ void ClientConnection::stop() {
     try {
         peer.shutdown();
     } catch (const Exception& e) {
-        fprintf(stderr, "CLIENTE %i: Error apagando el socket.\n",id);
+        fprintf(stderr, "CLIENTE %i: Error apagando en el stop: %s.\n", id, e.what());
     }
 }
 
