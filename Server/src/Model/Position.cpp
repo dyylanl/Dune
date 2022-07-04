@@ -32,3 +32,8 @@ bool Position::operator<(const Position &other) const {
 int Position::sqrtDistance(const Position &pos) const {
     return (this->x - pos.x) * (this->x - pos.x) + (this->y - pos.y) * (this->y - pos.y);
 }
+
+void Position::normalize() {
+    this->x = (this->x/BLOCK_HEIGHT);
+    this->y = (this->y/BLOCK_WIDTH);
+}
