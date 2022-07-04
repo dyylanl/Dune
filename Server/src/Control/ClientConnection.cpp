@@ -69,7 +69,7 @@ void ClientConnection::_receiveCommand(uint8_t opcode) {
 }
 
 ClientConnection::ClientConnection(
-        const InstanceId id, Socket& peer,
+        const InstanceId id, Socket peer,
         NonBlockingQueue<InstanceId*>& finished_connections,
         NonBlockingQueue<Command*>& commands)
         : id(id),

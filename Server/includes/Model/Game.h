@@ -70,7 +70,7 @@ public:
      * retorna 0 si lo pudo unir
      * retorna 1 si no lo pudo unir (es decir, esta completa esa partida o bien no existe)
      */
-    uint16_t acceptPlayer(Socket &peer, std::string name_player, std::string name_game);
+    uint16_t acceptPlayer(Socket peer, std::string name_player, std::string name_game);
 
 
     /*
@@ -97,6 +97,11 @@ public:
     *   Metodo para registrar la cantidad de jugadores en todas las partidas creadas
     */
    std::vector<std::vector<InstanceId>> getAllPlayers();
+
+    /*
+    *   Retorna false si la partida indicada esta empezada o aka completa, sino true.
+    */
+   bool acceptNewPlayer(std::string name_game);
    
     /*
     *   Elimina todas las partidas creadas

@@ -41,7 +41,7 @@ class ClientConnection {
    public:
     /* Constructor */
     ClientConnection(const InstanceId id,
-                     Socket& peer,
+                     Socket peer,
                      NonBlockingQueue<InstanceId*>& finished_connections,
                      NonBlockingQueue<Command*>& commands
                      );

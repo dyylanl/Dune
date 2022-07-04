@@ -26,6 +26,7 @@ private:
     int req_players;
     int map_id;
     std::string name_game;
+    bool started;
 
     // jugadores que se desconectaron
     NonBlockingQueue<InstanceId*> finished_connections;
@@ -66,6 +67,7 @@ public:
     int getCurrentPlayers() {return current_players;}
     int getMaxPlayers() {return req_players;}
     Id getMapId() {return map_id;}
+    bool isStarted() {return started;}
 
     
 };

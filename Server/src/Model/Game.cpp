@@ -64,13 +64,12 @@ uint16_t Game::createGame(Id id_map, const std::string& name_game) {
     return SUCCESS;
 }
 
-uint16_t Game::acceptPlayer(Socket &peer, std::string name_player, std::string name_game) {
+uint16_t Game::acceptPlayer(Socket peer, std::string name_player, std::string name_game) {
     std::lock_guard<std::mutex> lock(this->mutex);
     int ret = ERROR;
     if (contains(name_game)) { // si existe una partida con ese nombre entonces entro
         Id map_id1 = (Id)games[name_game]->getMapId();
-        ret = games[name_game]->addClient(NewConnection(peer,name_player,name_game,map_id1)); // chequea si la partida no esta completa para unir el nuevo player
-
+        ret = games[name_game]->addClient(NewConnection((peer),name_player,name_game,map_id1)); // chequea si la partida no esta completa para unir el nuevo player
     }
     return ret;
 }
@@ -127,6 +126,19 @@ std::vector<std::vector<InstanceId>> Game::getAllPlayers() {
         all_players.push_back(players);
     }
     return all_players;
+}
+
+bool Game::acceptNewPlayer(std::string name_game) {
+    std::unique_lock<std::mutex> lock(mutex);
+    int currents = games[name_game]->getCurrentPlayers();
+    int req = games[name_game]->getMaxPlayers();
+    if (!(currents < req)) {
+        return false;
+    }
+    if (games[name_game]->isStarted()) {
+        return false;
+    }
+    return true;
 }
 
 void Game::stop() {
