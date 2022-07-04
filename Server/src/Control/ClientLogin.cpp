@@ -8,8 +8,8 @@
 #define SUCCESS 0
 #define ERROR 1
 
-ClientLogin::ClientLogin(Game& game1, Socket& peer) : 
-        is_running(true), 
+ClientLogin::ClientLogin(Game& game1, Socket& peer) :
+        is_running(true),
         peer(std::move(peer)),
         protocol(),
         game(game1) {}
@@ -87,11 +87,11 @@ void ClientLogin::execute(uint8_t command, std::string name_player) {
             return;
         }
     }
-    /*
-     * Si el comando es join entonces:
-     *  1° Le pido el nombre a la partida que desea unirse
-     *  2° Envio la respuesta si se pudo unir o no
-     */
+        /*
+         * Si el comando es join entonces:
+         *  1° Le pido el nombre a la partida que desea unirse
+         *  2° Envio la respuesta si se pudo unir o no
+         */
     else if (command == JOIN_GAME) {
         std::string name_game = protocol.recvName(peer);
         if (game.acceptNewPlayer(name_game)) {
@@ -102,9 +102,9 @@ void ClientLogin::execute(uint8_t command, std::string name_player) {
             return;
         }
     }
-    /*
-     * Envio la lista de partidas actuales
-     */
+        /*
+         * Envio la lista de partidas actuales
+         */
     else if (command == LIST_GAMES) {
         protocol.sendGameList(peer, game.listGames());
         return;

@@ -69,7 +69,7 @@ public:
     Id getMapId() {return map_id;}
     bool isStarted() {return started;}
 
-    
+
 };
 
 

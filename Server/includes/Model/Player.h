@@ -1,57 +1,65 @@
-//
-// Created by dypa on 19/06/22.
-//
+#ifndef __PLAYER_H__
+#define __PLAYER_H__
 
-#ifndef DUNE_PLAYER_H
-#define DUNE_PLAYER_H
-
+#include <vector>
 #include <string>
-#include "../defs.h"
+#include <functional>
+#include "Buildings/ConstructionCenter.h"
+#include "Map.h"
+#include "Units/Unit.h"
 
-class Building;
 
 class Player {
 private:
-    InstanceId id;
+    const int id;
     std::string house;
-    std::string name;
-public:
-    int generatedEnergy;
-    int consumedEnergy;
-    int gold;
-    int gold_limit;
+    std::string playerName;
+    bool news;
 
-    /*
-    *   Constructor de jugador con un id, casa y nombre otorgado
-    */
-    Player(InstanceId id, std::string house, std::string name);
+public:     // El cliente sólo debería tenerse a su propio player disponible
+    int generatedEnergy; // Se sumara durante el constructor de la trampa de viento y se restara durante su destructor
+    int consumedEnergy; // se suma cuando se construye un edificio, se resta cuando se destruye
+    int gold;   // Se restara durante los constructores
+    int gold_limit; // Se sumara dentro del constructor de la refineria o el silo
 
-    /*
-    *   Suma la cantidad de oro indicada por parametro al jugador
-    */
-    void addGold(int gold);
+    std::vector<Building*> buildings;
+    ConstructionCenter* construction_center;
 
-    /*
-    *   Resta la cantidad de oro indicada por parametro al jugador
-    */
-    void subGold(int gold);
+    std::vector<Unit*>& getTrainedUnits(Map& map);
 
-    /*
-    *   Retorna la cantidad de energia que genero el jugador
-    */
+    explicit Player(int id, ConstructionCenter &construction_center,
+                    const std::string& house, const std::string& playerName);
+
+    void addGold(int gold_to_add);
+    void subGold(int gold_to_sub);
     float getEnergyFactor();
 
-    /*
-    *   Operador de comparacion
-    */
+    void addBuilding(Building* building);
+    void cleanDeadBuildings();
+
+    Building * getClosestBuilding(Position pos, Building::BuildingType type);
+    bool hasBuilding(Building& building);
+    bool hasBuilding(Building::BuildingType buildingType);
+
+    ConstructionCenter& getConstructionYard();
+
+    bool lose();
+
+    bool isDefeated();
+
+    void trainUnits();
+    void constructBuildings();
+
+    int getId() const;
+    std::string& getHouse();
+
     bool operator==(const Player& other) const;
 
-    /*
-    *   Getters
-    */
-    std::string getName() {return name;}
-    int getId() {return id;}
-    
+    void sellBuilding(Building* building);
+
+    bool hasNews();
+
+    Position getBarrackPosition();
 };
 
-#endif //DUNE_PLAYER_H
+#endif  // __PLAYER_H__
