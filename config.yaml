@@ -1,4 +1,4 @@
-ticks_per_sec: 60
+ticks_per_sec: 30
 total_maps: 4
 maps:
   0: "/home/dypa/Dune/mapa1.yaml"

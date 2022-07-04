@@ -9,10 +9,11 @@
 #include "../../includes/Model/Terrains/Rock.h"
 
 
-Map::Map(std::string config_path) : 
-                            map_reader(config_path),
+Map::Map(std::string map_path) :
+                            map_reader(map_path),
                             rows(map_reader.getRows()),
                             cols(map_reader.getCols()),
+                            max_players(map_reader.getReqPlayers()),
                             mapa(map_reader.getMap()),
                             buildingsDTO(map_reader.getBuildings())
 {
@@ -26,6 +27,7 @@ Map::Map(std::string config_path) :
             terrrains[i][j] = Terrain(type);
         }
     }
+    std::cout << "Mapa cargado desde: " << map_path << std::endl;
 }
 
 char Map::getTypeTerrain(int posX, int posY) {
@@ -124,14 +126,15 @@ void Map::putUnit(InstanceId id_player, char type, int x, int y) {
     unit.unit_id = id_player;
     unitsDTO.push_back(unit);
 }
-
-void Map::putBuilding(InstanceId id_player, char type, int x, int y) {
-    Position pos(x,y);
-    /*if (!isValid(pos)) {
+// todo: usar la clase building
+void Map::putBuilding(char type, int x, int y) {
+    Position pos(x/35,y/35);
+    if (!isValid(pos)) {
+        std::cout << "Poner construccion en posicion invalida: " << pos.x << "," << pos.y << std::endl;
         return;
-    }*/
+    }
     BuildingDTO build;
-    build.build_id = id_player;
+    //build.build_id = id_player;
     build.type = type;
     build.pos_x = x;
     build.pos_y = y;
@@ -139,3 +142,15 @@ void Map::putBuilding(InstanceId id_player, char type, int x, int y) {
 }
 
 Map::~Map() {}
+
+void Map::putUnit(Position pos, char unit_type) {
+    if (isValid(pos)) {
+        std::cout << "Poner unidad en posicion invalida: " << pos.x << "," << pos.y << std::endl;
+        return;
+    }
+    UnitDTO unit{};
+    unit.type = unit_type;
+    unit.pos_x = pos.x;
+    unit.pos_y = pos.y;
+    unitsDTO.push_back(unit);
+}

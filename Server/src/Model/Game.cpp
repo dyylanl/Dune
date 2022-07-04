@@ -97,9 +97,9 @@ std::vector<std::vector<std::string>> Game::listGames() {
 
 Game::~Game() {
     for (const auto& [name, engine] : this->games) {
-            delete engine;
-        }
-    
+        delete engine;
+    }
+
 }
 
 Id Game::getMapId(std::string name_game) {
