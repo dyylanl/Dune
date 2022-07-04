@@ -27,20 +27,14 @@ public:
         queue.push(std::move(t));
     }
 
-    T&& front() {
+    bool pop(T &&t) {
         std::unique_lock<std::mutex> l(m);
         if (queue.empty()) {
-            throw EmptyQueue("front into a empty queue");
+            return false;
         }
-        return std::move(queue.front());
-    }
-
-    void pop() {
-        std::unique_lock<std::mutex> l(m);
-        if (queue.empty()) {
-            throw EmptyQueue("pop into a empty queue");
-        }
+        t = std::move(queue.front());
         queue.pop();
+        return true;
     }
 
     ~NBQueue() = default;

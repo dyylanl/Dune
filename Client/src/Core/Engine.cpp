@@ -29,18 +29,11 @@ void Engine::Events() {
 }
 
 void Engine::Update() {
-    try {
-        m_objects = m_queueNb.front();
-        m_queueNb.pop();
-
+        while (m_queueNb.pop(std::move(m_objects))) {}
         unsigned int sizeObjects = m_objects.size();
         for (unsigned int i = 0; i < sizeObjects; ++i) {
             m_objects[i]->cameraOffset(m_camera);
         }
-
-    } catch (EmptyQueue & e) {
-        //std::cerr << e.what() << std::endl;
-    }
 }
 
 void Engine::Render(SDL2pp::Renderer &m_Renderer) {
