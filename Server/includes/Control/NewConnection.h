@@ -19,13 +19,11 @@ struct NewConnection {
     std::string name_player;
     std::string name_game;
     int house;
-    Id map_id;
-    NewConnection(Socket& peer, std::string name_player1, std::string name_game1, Id map_id1) :
+    NewConnection(Socket& peer, std::string name_player1, std::string name_game1) :
                     peer(std::move(peer)),
                     name_player(std::move(name_player1)),
                     name_game(std::move(name_game1)),
-                    house(0),
-                    map_id(map_id1) {}
+                    house(0) {}
 };
 
 #endif  // __NEW_CONNECTION_H__

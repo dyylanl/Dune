@@ -26,7 +26,7 @@ private:
 
 
     std::mutex mutex;
-    ConfigurationReader game_config;
+    ConfigurationReader config;
 
 
     // ---------- METODOS ------------- //
@@ -71,11 +71,6 @@ public:
      * Retorna una lista con formato [actuales, req, name_game]
      */
     std::vector<std::vector<std::string>> listGames();
-
-    /*
-    * Retorna el id de mapa asociado a esa partida
-    */
-    Id getMapId(std::string name_game);
 
     /*
     * Retorna todos los MapDTO que se cargaron en el servidor.

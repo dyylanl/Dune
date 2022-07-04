@@ -15,6 +15,7 @@
 #include "ClientsConnected.h"
 #include "NewConnection.h"
 #include "Commands/Command.h"
+#include "../../config/ConfigReader.h"
 
 class Engine : public Thread {
 private:
@@ -24,8 +25,6 @@ private:
     Map map;
     int current_players;
     int req_players;
-    int map_id;
-    std::string name_game;
     bool started;
 
     // jugadores que se desconectaron
@@ -39,13 +38,16 @@ private:
     //      clientes conectados a esta partida
     ClientsConnected established_connections;
 
+    ConfigurationReader& config;
+
     void _processFinishedConnections();
     void _processCommands();
     void _loopIteration(int it);
     void clearAll();
 public:
     // el mapDTO que recibe solo tiene la ruta al yaml y el nombre que se eligio para crearlo
-    Engine(MapDTO map);
+    //Engine(MapDTO map);
+    Engine(ConfigurationReader& config, std::string map_path);
     Engine(const Engine&) = delete;
     Engine& operator=(const Engine&) = delete;
     Engine(Engine&& other) = delete;
@@ -66,7 +68,7 @@ public:
 
     int getCurrentPlayers() {return current_players;}
     int getMaxPlayers() {return req_players;}
-    Id getMapId() {return map_id;}
+    //Id getMapId() {return map_id;}
     bool isStarted() {return started;}
 
 
