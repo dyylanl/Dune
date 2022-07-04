@@ -83,7 +83,7 @@ void ClientLogin::execute(uint8_t command, std::string name_player) {
             game.acceptPlayer(peer, name_player, name_game); // si la partida se creo entonces le digo al game que me acepte este player
             is_running = false;
         } else {
-            protocol.sendOneByte(peer,ERROR);
+            protocol.sendTwoBytes(peer,ERROR);
         }
     }
     /*
@@ -97,7 +97,7 @@ void ClientLogin::execute(uint8_t command, std::string name_player) {
         if (flag_join == SUCCESS) {
             is_running = false;
         } else {
-            protocol.sendOneByte(peer,ERROR);
+            protocol.sendTwoBytes(peer,ERROR);
         }
     }
     /*

@@ -15,14 +15,14 @@ MainWindow::MainWindow(QWidget *parent)
     ui->atreides_pic_label->setPixmap(pic_atreides.scaled(100,100,Qt::KeepAspectRatio));
     ui->harkonnen_pic_label->setPixmap(pic_harkonnen.scaled(100,100,Qt::KeepAspectRatio));
     ui->ordos_pic_label->setPixmap(pic_ordos.scaled(100,100,Qt::KeepAspectRatio));
-    ui->titulo_label->setPixmap(pic_titulo.scaled(100,100,Qt::KeepAspectRatio));
+    ui->titulo_label->setPixmap(pic_titulo.scaled(200,100,Qt::KeepAspectRatio));
     std::cout << "rompo en Index" << std::endl;
     ui->stackedWidget->setCurrentIndex(0);
     std::cout << "ROMPI" << std::endl;
     //connect(this->reloj,SIGNAL(timeout()),this,SLOT(actualizar_lista_partidas()));
     std::cout << "ROMPE EL RELOJ" << std::endl;
 
-
+    
     this->ui->button_unirse_partida->setFixedSize(200,100);
     this->ui->button_crear_partida->setFixedSize(200,100);
     this->ui->button_confirmar->setFixedSize(150,75);
