@@ -26,10 +26,10 @@ std::vector<int> Game::get(const std::string& game_name) {
 Game::Game(std::string path_config_game) :
         maps_dto_init(),
         games(),
-        game_config(path_config_game)
+        config(path_config_game)
 
 {
-    std::list<std::string> map_paths = game_config.getAllPaths();
+    std::list<std::string> map_paths = config.getAllPaths();
     int map_id = 1;
     for (auto path : map_paths) {
         MapReader mapReader(path);
@@ -58,7 +58,7 @@ uint16_t Game::createGame(Id id_map, const std::string& name_game) {
     map.path = maps_dto_init[id_map].path;
     map.max_players = maps_dto_init[id_map].max_players;
     map.name_map = name_game;
-    games[name_game] = (new Engine(map));
+    games[name_game] = (new Engine(config,maps_dto_init[id_map].path));
     return SUCCESS;
 }
 
@@ -66,8 +66,8 @@ uint16_t Game::acceptPlayer(Socket peer, std::string name_player, std::string na
     std::lock_guard<std::mutex> lock(this->mutex);
     int ret = ERROR;
     if (contains(name_game)) { // si existe una partida con ese nombre entonces entro
-        Id map_id1 = (Id)games[name_game]->getMapId();
-        ret = games[name_game]->addClient(NewConnection((peer),name_player,name_game,map_id1)); // chequea si la partida no esta completa para unir el nuevo player
+        //Id map_id1 = (Id)games[name_game]->getMapId();
+        ret = games[name_game]->addClient(NewConnection((peer),name_player,name_game)); // chequea si la partida no esta completa para unir el nuevo player
     }
     return ret;
 }
@@ -98,14 +98,6 @@ Game::~Game() {
         delete engine;
     }
 
-}
-
-Id Game::getMapId(std::string name_game) {
-    if (contains(name_game)) {
-        return games[name_game]->getMapId();
-    } else {
-        throw Exception("Invalid get map id.\n");
-    }
 }
 
 std::vector<MapDTO> Game::getMapsLoads(){

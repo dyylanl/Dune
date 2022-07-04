@@ -2,6 +2,7 @@
 *.cfg
 .vs
 .vscode
+cmake
 .idea
 .dump
 build

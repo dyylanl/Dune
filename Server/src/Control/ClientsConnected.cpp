@@ -8,7 +8,7 @@ ClientsConnected::ClientsConnected(
         finished_connections(finished_connections),
         clients() {}
 
-void ClientsConnected::add(const InstanceId id, const Id map_id, Socket peer) {
+void ClientsConnected::add(const InstanceId id, Socket peer) {
     if (clients.count(id) > 0) {
         throw Exception("[ClientsConnected]: Este jugador ya existe.\n");
     }

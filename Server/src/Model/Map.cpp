@@ -27,7 +27,7 @@ Map::Map(std::string map_path) :
             terrrains[i][j] = Terrain(type);
         }
     }
-    std::cout << "Mapa cargado desde: " << map_path << std::endl;
+    std::cout << "[MAP]: Map path: " << map_path << std::endl;
 }
 
 char Map::getTypeTerrain(int posX, int posY) {
