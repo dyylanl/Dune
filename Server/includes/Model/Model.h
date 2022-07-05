@@ -26,6 +26,7 @@ public:
 
     std::vector<std::vector<char>>& getMap();
     std::vector<BuildingDTO> getBuildings();
+    std::vector<UnitDTO> getUnits();
 
     void addPlayer(InstanceId player_id);
 

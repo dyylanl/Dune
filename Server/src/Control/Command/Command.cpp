@@ -43,7 +43,8 @@ Command* CommandFactory::newCommand(InstanceId caller, uint8_t opcode,
         }
 
         case CREATE_UNIT_COMMAND: {  // 8
-            char unit_type = protocol.recvResponse(socket);
+            char unit_type = protocol.recvOneByte(socket);
+            std::cout << "Tipo de unidad recibido: " << unit_type << std::endl;
             return new CreateUnitCommand(caller, unit_type);
         }
 

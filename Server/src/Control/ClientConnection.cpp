@@ -60,7 +60,7 @@ void ClientConnection::_receiver() {
 
 void ClientConnection::_receiveCommand(uint8_t opcode) {
     try {
-        std::cout << "Ejecutando comando con opcode: " << opcode << std::endl;
+        std::cout << "Ejecutando comando con opcode: " << std::to_string(opcode) << std::endl;
         Command* cmd = CommandFactory::newCommand(id, opcode, peer);
         commands.push(cmd);
     } catch (const UnknownCommandException& e) {

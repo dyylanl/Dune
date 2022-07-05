@@ -212,10 +212,6 @@ void Map::putUnit(Position pos, char unit_type) {
     unitsDTO.push_back(unit1);
 }
 
-ConstructionCenter* Map::getConstructionCenterFor(InstanceId player_id) {
-    return map_reader.getConstructionCenterFor(player_id);
-}
-
 void Map::loadConstructionsCenter() {
 
 }

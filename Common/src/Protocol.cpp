@@ -537,7 +537,7 @@ void Protocol::sendBuildings(Socket &socket, std::vector<BuildingDTO> buildings)
 }
 
 void Protocol::sendUnits(Socket &socket, std::vector<UnitDTO> units) {
-    uint16_t total = units.size();
+    uint16_t total = units.size(); // 2by 
     socket.send((const char*)&total, sizeof(uint16_t));
     for (int i = 0; i < total; i++) {
         auto unit = units[i];
@@ -546,11 +546,18 @@ void Protocol::sendUnits(Socket &socket, std::vector<UnitDTO> units) {
         int pos_x = unit.pos_x; // 2 by
         int pos_y = unit.pos_y; // 2 by
         int life = unit.life; // 2 by
+        uint8_t unit_code = 0;
+        sendOneByte(socket,unit_code);
         sendOneByte(socket,unit_type);
         sendTwoBytes(socket,player_id);
+        sendOneByte(socket,player_id);
+        sendOneByte(socket,player_id);
+        sendTwoBytes(socket,pos_x);
+        sendTwoBytes(socket,pos_y);
         sendTwoBytes(socket,pos_x);
         sendTwoBytes(socket,pos_y);
         sendTwoBytes(socket,life);
+        sendOneByte(socket,unit_code);
     }
 }
 

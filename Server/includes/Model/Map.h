@@ -125,8 +125,6 @@ public:
     void putBuilding(char type, int x, int y);
 
 
-    ConstructionCenter* getConstructionCenterFor(InstanceId player_id);
-
     Building* getBuilding(char type, int x, int y);
 
     Unit* getUnit(char type, int x, int y);

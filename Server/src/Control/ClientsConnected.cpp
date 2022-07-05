@@ -55,6 +55,12 @@ void ClientsConnected::sendBuildings(std::vector<BuildingDTO> buildings) {
     }
 }
 
+void ClientsConnected::sendUnits(std::vector<UnitDTO> units) {
+    for (auto it = clients.begin(); it != clients.end(); it++) {
+        it->second.sendUnits(units);
+    }
+}
+
 std::vector<InstanceId> ClientsConnected::getAllPlayers() {
     std::vector<InstanceId> players;
     for (auto it = clients.begin(); it != clients.end(); it++) {
