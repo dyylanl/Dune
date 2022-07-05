@@ -7,7 +7,7 @@
 BarrackCL::BarrackCL(int id, int player, SDL2pp::Point position, int life)
         : BuildCL(BARRACK,position, SDL2pp::Point(73,73), id, player, life) {}
 
-void BarrackCL::draw(SDL2pp::Renderer &renderer, TextureManager &textureManager) {
+void BarrackCL::draw(SDL2pp::Renderer &renderer, TextureManager &textureManager, Camera &camera) {
     SDL2pp::Point posFrame(0,0);
-    textureManager.drawFrame(renderer, m_textureID, m_position, m_size, posFrame);
+    textureManager.drawFrame(renderer, m_textureID, m_position, m_size, posFrame, camera);
 }

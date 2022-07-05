@@ -180,7 +180,8 @@ void Client::initSDL(Socket &aSocket, Protocol &aProtocol,
     menu.push_back(std::unique_ptr<ButtonCL>(new ButtonTrikeCL(1, 1, 10, false, false)));
 
 
-    Engine engine(map, menu, textureManager, queueNb, queueB);
+    Camera camera(SDL2pp::Point(0, 0));
+    Engine engine(camera, map, menu, textureManager, queueNb, queueB);
     RateController frameRate(30);
     frameRate.start();
     while (engine.IsRunning()) {

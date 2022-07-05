@@ -20,12 +20,12 @@ TextureManager::TextureManager(SDL2pp::Renderer &renderer) : m_renderer(renderer
 }
 
 void
-TextureManager::drawFrame(SDL2pp::Renderer &renderer, char id, SDL2pp::Point position,
-                          SDL2pp::Point spritSize,
-                          SDL2pp::Point posFrame) {
+TextureManager::drawFrame(SDL2pp::Renderer &renderer, char id, SDL2pp::Point position, SDL2pp::Point spritSize,
+                          SDL2pp::Point posFrame,
+                          Camera &camera) {
     SDL2pp::Rect orig(posFrame, spritSize);
     SDL2pp::Rect dest(position, spritSize);
-    renderer.Copy(*m_TextureMap[id],orig,dest,0,SDL2pp::NullOpt,SDL_FLIP_NONE);
+    renderer.Copy(*m_TextureMap[id],orig,dest + camera.getPosicion(),0,SDL2pp::NullOpt,SDL_FLIP_NONE);
 }
 
 void
