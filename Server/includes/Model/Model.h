@@ -5,6 +5,7 @@
 #include <vector>
 #include "Map.h"
 #include "Player.h"
+#include "../../config/ConfigReader.h"
 
 class Model {
 private:
@@ -14,22 +15,30 @@ private:
     int current_players;
     int max_players;
     bool finished;
+    ConfigurationReader& config;
 public:
     /*
     *   Recibe por parametro la ruta del mapa que se usara en la partida
     */
-    Model(const std::string& path_to_map_config);
+    Model(ConfigurationReader& config, const std::string& path_to_map_config);
     int getMaxPlayers();
     int getCurrentPlayers();
 
     std::vector<std::vector<char>>& getMap();
-
-    void putBuilding(InstanceId id_player, char build_type, int x, int y);
     std::vector<BuildingDTO> getBuildings();
 
-    void putUnit(InstanceId id_player, char unit_type);
-
     void addPlayer(InstanceId player_id);
+
+    void deletePlayer(InstanceId player_id);
+
+    // --------- COMANDOS ---------- //
+    void selectUnit(InstanceId player, int x, int y);
+
+    void moveUnit(InstanceId player, int x, int y); // posicion destino
+
+    void buildBuilding(InstanceId player, char build_type, int x, int y);
+
+    void putUnit(InstanceId player, char unit_type);
 
 };
 

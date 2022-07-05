@@ -4,6 +4,7 @@
 #include "YAMLReader.h"
 #include "../includes/defs.h"
 #include "../includes/Model/DTOs/BuildingDTO.h"
+#include "../includes/Model/Buildings/ConstructionCenter.h"
 
 class MapReader : public YAMLReader {
 public:
@@ -12,7 +13,9 @@ public:
     unsigned getCols() const;
     std::vector<std::vector<char>> getMap();
     std::vector<BuildingDTO> getBuildings();
+    ConstructionCenter* getConstructionCenterFor(InstanceId id);
     unsigned getReqPlayers();
+    int getTotalBuildings();
     ~MapReader();
 
 };

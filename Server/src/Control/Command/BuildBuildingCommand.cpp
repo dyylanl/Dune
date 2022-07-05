@@ -13,6 +13,6 @@ BuildBuildingCommand::BuildBuildingCommand(const InstanceId caller,
 
 BuildBuildingCommand::~BuildBuildingCommand() = default;
 
-void BuildBuildingCommand::exec(Map &map) {
-    map.putBuilding(/*caller,*/build_type,pos_x,pos_y);
+void BuildBuildingCommand::exec(Model &model) {
+    model.buildBuilding(caller, build_type, pos_x, pos_y);
 }

@@ -9,6 +9,7 @@
 #include "DTOs/MapDTO.h"
 #include "DTOs/BuildingDTO.h"
 #include "DTOs/UnitDTO.h"
+#include "Buildings/ConstructionCenter.h"
 
 
 class Map {
@@ -23,6 +24,10 @@ class Map {
 
     std::vector<BuildingDTO> buildingsDTO;
     std::vector<UnitDTO> unitsDTO;
+
+    std::vector<Building*> buildings;
+
+    void loadConstructionsCenter();
 
 
 public:
@@ -115,6 +120,11 @@ public:
     *   Le asigna una building al player del type en la pos x,y
     */
     void putBuilding(char type, int x, int y);
+
+
+    ConstructionCenter* getConstructionCenterFor(InstanceId player_id);
+
+    Building* getBuilding(char type, int x, int y);
 
 };
 

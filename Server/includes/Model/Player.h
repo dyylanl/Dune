@@ -23,12 +23,12 @@ public:     // El cliente sólo debería tenerse a su propio player disponible
     int gold_limit; // Se sumara dentro del constructor de la refineria o el silo
 
     std::vector<Building*> buildings;
+    std::vector<Unit*> units;
     ConstructionCenter* construction_center;
 
     std::vector<Unit*>& getTrainedUnits(Map& map);
 
-    explicit Player(int id, ConstructionCenter &construction_center,
-                    const std::string& house, const std::string& playerName);
+    explicit Player(InstanceId id, ConstructionCenter &construction_center);
 
     void addGold(int gold_to_add);
     void subGold(int gold_to_sub);
@@ -41,7 +41,7 @@ public:     // El cliente sólo debería tenerse a su propio player disponible
     bool hasBuilding(Building& building);
     bool hasBuilding(Building::BuildingType buildingType);
 
-    ConstructionCenter& getConstructionYard();
+    ConstructionCenter& getConstructionCenter();
 
     bool lose();
 
@@ -60,6 +60,8 @@ public:     // El cliente sólo debería tenerse a su propio player disponible
     bool hasNews();
 
     Position getBarrackPosition();
+
+    void clean();
 };
 
 #endif  // __PLAYER_H__

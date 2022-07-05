@@ -39,14 +39,14 @@ buildings:
     hitPoints: 1500
     width: 4
     height: 4
-  spiceRefinery:
+  refinery:
     energy: 400
     cost: 500
     hitPoints: 500
     spiceCapacity: 5000
     width: 3
     height: 3
-  spiceSilo:
+  silo:
     energy: 100
     cost: 200
     hitPoints: 200
