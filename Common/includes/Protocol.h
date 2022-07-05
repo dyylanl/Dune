@@ -35,8 +35,8 @@ public:
 
 
 
-    void sendUnit(Socket &socket, char type, int pos_x, int pos_y);
-    void sendBuild(Socket &socket, BuildingDTO* build);
+    void sendUnit(Socket &socket, UnitDTO unit);
+    void sendBuild(Socket &socket, BuildingDTO build);
 
     uint16_t recvPosition(Socket &socket);
 

@@ -34,7 +34,7 @@ void Model::buildBuilding(InstanceId id_player, char build_type, int x, int y) {
 }
 
 void Model::putUnit(InstanceId id_player, char unit_type) {
-    map.putUnit(id_player, unit_type,5, 5);
+    map.putUnit(id_player, unit_type,5*(int)id_player, 5*(int)id_player);
 }
 
 void Model::addPlayer(InstanceId player_id) {

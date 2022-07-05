@@ -11,6 +11,7 @@ struct UnitDTO {
     char type;
     int life;
     float speed;
+    int selected = 0;
 };
 
 

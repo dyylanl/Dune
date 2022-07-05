@@ -19,8 +19,7 @@ void Engine::_processCommands() {
             try {
                 cmd->exec(model);
             } catch (const std::exception& e) {
-                /*Response* reply = new Response(INVALID_COMMAND, e.what());
-                established_connections.notify(cmd->getCaller(), reply);*/
+                std::cout << "Ejecuto comando invalido" << std::endl;
             }
             delete cmd;
         }

@@ -10,35 +10,37 @@ void ClientConnection::_finishThread() {
 void ClientConnection::_freeNotifications() {
     buildings.close();
     units.close();
-    BuildingDTO* buildsDTO = nullptr;
+    /*BuildingDTO* buildsDTO = nullptr;
     while ((buildsDTO = buildings.pop())) {
         delete buildsDTO;
     }
     UnitDTO* unitsDTO = nullptr;
     while ((unitsDTO = units.pop())) {
         delete unitsDTO;
-    }
+    }*/
 }
 
 void ClientConnection::_sender() {
     try {
         BuildingDTO* build = nullptr;
         while ((build = buildings.pop())) {
-            protocol.sendBuild(peer, build);
-            delete build;
+            protocol.sendBuild(peer, *build);
         }
+        delete build;
         UnitDTO* unit = nullptr;
         while ((unit = units.pop())) {
-            protocol.sendUnit(peer, unit->type, unit->pos_x, unit->pos_y);
-            delete unit;
+            protocol.sendUnit(peer, *unit);
         }
+        delete unit;
     } catch (const std::exception& e) {
         stop();
-        fprintf(stderr, "[ClientConnection]: Error en el hilo sender: %s\n", e.what());
+        //fprintf(stderr, "[ClientConnection]: Error en el hilo sender: %s\n", e.what()); ya esta cerrado el socket no se puede hacer un send
     } catch (...) {
         stop();
         fprintf(stderr, "[ClientConnection]: Error desconocido.\n");
     }
+    this->buildings.close();
+    this->units.close();
     _finishThread(); // TODO DESCOMENTAR ESTO
 }
 
@@ -59,8 +61,6 @@ void ClientConnection::_receiver() {
         stop();
         fprintf(stderr, "[ClientConnection] Error desconocido.\n");
     }
-    this->buildings.close();
-    this->units.close();
     _finishThread();
 }
 
@@ -106,6 +106,7 @@ void ClientConnection::join() {
     try {
         peer.shutdown();
     } catch (const Exception& e) {
+        // si el cliente se va el socket se apaga
         //fprintf(stderr, "CLIENTE %i: Error en el join: %s.\n", id, e.what());
     }
 }
@@ -116,7 +117,7 @@ void ClientConnection::stop() {
     try {
         peer.shutdown();
     } catch (const Exception& e) {
-        fprintf(stderr, "CLIENTE %i: Error apagando en el stop: %s.\n", id, e.what());
+        //fprintf(stderr, "CLIENTE %i: Error apagando en el stop: %s.\n", id, e.what());
     }
 }
 

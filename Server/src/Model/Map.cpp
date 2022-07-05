@@ -136,7 +136,11 @@ std::vector<std::vector<char>> &Map::getMap() {
 }
 
 std::vector<UnitDTO*> Map::getUnits() {
+    if (units.empty()) {
+        return {};
+    }
     std::vector<UnitDTO*> retUnitsDto{};
+    //todo: comentado hasta que el cliente pueda poner unidades
     for (auto &unit : units) {
         auto* dto = new UnitDTO;
         dto->pos_x = unit->getPosition().x;
@@ -151,7 +155,7 @@ std::vector<UnitDTO*> Map::getUnits() {
 std::vector<BuildingDTO*> Map::getBuildings() {
     std::vector<BuildingDTO*> retBuildingsDto;
     for (auto &build : buildings) {
-        auto* dto = new BuildingDTO;
+        auto* dto = new BuildingDTO; // es elimianado en el hilo sender
         dto->pos_x = build->getPosition().x;
         dto->pos_y = build->getPosition().y;
         dto->life = build->getLife();
