@@ -5,6 +5,7 @@
 #include "YAMLReader.h"
 #include "../includes/Model/Buildings/Building.h"
 #include "../includes/Model/Units/Unit.h"
+#include "../includes/defs.h"
 
 class ConfigurationReader : public YAMLReader {
 private:

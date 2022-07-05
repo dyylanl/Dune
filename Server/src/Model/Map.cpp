@@ -201,3 +201,39 @@ ConstructionCenter* Map::getConstructionCenterFor(InstanceId player_id) {
 void Map::loadConstructionsCenter() {
 
 }
+
+void Map::setDestiny(Unit &unit, int x_dest, int y_dest) {
+    AStar algorithm(*this);
+    Position p_destiny(x_dest, y_dest);
+    std::stack<Position> path = algorithm.makePath(unit, p_destiny);
+    if (!path.empty()) {
+        this->at(unit.getPosition()).free();
+    }
+    unit.setPath(path, p_destiny);
+}
+
+Attackable *Map::getClosestAttackable(Position &position, int limitRadius, Player& player) {
+    Attackable* closest_attackable = nullptr;
+    int closest_unit_distance = limitRadius;
+    for (auto& current_unit : units) {
+        int distance = current_unit->getPosition().sqrtDistance(position);
+        if ((distance < limitRadius) && (distance < closest_unit_distance)) {
+            closest_attackable = current_unit;
+            closest_unit_distance = distance;
+        }
+    }
+    for (auto& current_building : buildings) {
+        Position& pos = current_building->getClosestPosition(position);
+        int distance = pos.sqrtDistance(position);
+        if (distance < limitRadius && distance < closest_unit_distance) {
+            closest_attackable = current_building;
+            closest_unit_distance = distance;
+        }
+    }
+    return closest_attackable;
+}
+
+bool Map::canMove(Unit& unit, Position pos) {
+    return unit.canMoveAboveTerrain(this->at(pos)) && !this->at(pos).isOccupied();
+}
+
