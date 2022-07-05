@@ -3,7 +3,7 @@
 
 Silo::Silo(const int x, const int y,
            int blockWidth, int blockHeight) :
-        Building(x, y, blockWidth, blockHeight,
+        Building(SILO_KEY,x, y, blockWidth, blockHeight,
                  GameConfiguration::getConfig().spiceSiloEnergy,
                  GameConfiguration::getConfig().spiceSiloCost,
                  GameConfiguration::getConfig().spiceSiloHitPoints,

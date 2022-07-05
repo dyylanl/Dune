@@ -5,7 +5,7 @@
 #include "../../../includes/Model/Terrains/Rock.h"
 
 Tank::Tank(int x, int y) :
-        Unit(x, y,
+        Unit(TANK_KEY,x, y,
              GameConfiguration::getConfig().tankHitPoints,
              GameConfiguration::getConfig().tankSpeed,
              GameConfiguration::getConfig().tankCost)

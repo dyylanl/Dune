@@ -3,7 +3,7 @@
 
 Refinery::Refinery(const int x, const int y,
                    int blockWidth, int blockHeight) :
-        Building(x, y, blockWidth, blockHeight,
+        Building(REFINERY_KEY,x, y, blockWidth, blockHeight,
                  GameConfiguration::getConfig().spiceRefineryEnergy,
                  GameConfiguration::getConfig().spiceRefineryCost,
                  GameConfiguration::getConfig().spiceRefineryHitPoints,

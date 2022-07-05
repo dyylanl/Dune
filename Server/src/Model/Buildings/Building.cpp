@@ -3,10 +3,11 @@
 
 int Building::counter = 0;
 
-Building::Building(const int x, const int y, int blockWidth, int blockHeight,
+Building::Building(char type1,const int x, const int y, int blockWidth, int blockHeight,
                    const int energy, const int cost, const int hitPoints,
                    const int width, const int height, BuildingType type):
         Attackable(hitPoints, x, y),
+        type(type1),
         id(counter),
         width(width),
         height(height),

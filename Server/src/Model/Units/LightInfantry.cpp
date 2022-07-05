@@ -8,7 +8,7 @@
 #include "../../../includes/Model/Weapons/Weapons.h"
 
 LightInfantry::LightInfantry(int x, int y) :
-        Unit(x, y, GameConfiguration::getConfig().lightInfantryHitPoints,
+        Unit(LIGHT_INFANTRY_KEY,x, y, GameConfiguration::getConfig().lightInfantryHitPoints,
                       GameConfiguration::getConfig().lightInfantrySpeed,
                       GameConfiguration::getConfig().lightInfantryCost)
 {

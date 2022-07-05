@@ -526,6 +526,7 @@ void Protocol::sendBuildings(Socket &socket, std::vector<BuildingDTO> buildings)
         uint16_t pos_x = (buildings[i].pos_x);
         uint16_t pos_y = (buildings[i].pos_y);
         uint16_t life = buildings[i].life;
+        std::cout << "[PROTOCOL]: Enviando edificio: " << build_type << " en la pos: " << pos_x << "," << pos_y << " con vida " << life << std::endl;
         socket.send((const char *)&type, sizeof(uint8_t));
         socket.send((const char *)&build_type, sizeof(uint8_t));
         socket.send((const char *)&id, sizeof(uint16_t));

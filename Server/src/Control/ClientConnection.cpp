@@ -125,6 +125,7 @@ void ClientConnection::sendInitGame(std::vector<std::vector<char>>& map) {
 }
 
 void ClientConnection::sendBuildings(std::vector<BuildingDTO> buildings) {
+    
     try {
         protocol.sendBuildings(peer, buildings);
     } catch (const Exception &e) {

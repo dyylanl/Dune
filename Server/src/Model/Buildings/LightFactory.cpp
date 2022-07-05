@@ -2,7 +2,7 @@
 #include "../../../config/GameConfiguration.h"
 
 LightFactory::LightFactory(const int x, const int y, int blockWidth, int blockHeight) :
-        Building(x, y, blockWidth, blockHeight,
+        Building(LIGHT_FACTORY_KEY ,x, y, blockWidth, blockHeight,
                  GameConfiguration::getConfig().lightFactoryEnergy,
                  GameConfiguration::getConfig().lightFactoryCost,
                  GameConfiguration::getConfig().lightFactoryHitPoints,

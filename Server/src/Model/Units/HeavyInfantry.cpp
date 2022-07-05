@@ -5,7 +5,7 @@
 #include "../../../includes/Model/Terrains/Summit.h"
 #include "../../../config/GameConfiguration.h"
 
-HeavyInfantry::HeavyInfantry(int x, int y) : Unit(x,y,
+HeavyInfantry::HeavyInfantry(int x, int y) : Unit(HEAVY_INFANTRY_KEY,x,y,
                                                   GameConfiguration::getConfig().heavyInfantryHitPoints,
                                                   GameConfiguration::getConfig().heavyInfantrySpeed,
                                                   GameConfiguration::getConfig().heavyInfantryCost){}

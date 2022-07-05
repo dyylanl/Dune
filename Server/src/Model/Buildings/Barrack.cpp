@@ -2,7 +2,7 @@
 #include "../../../config/GameConfiguration.h"
 
 Barracks::Barracks(const int x, const int y, int blockWidth, int blockHeight) :
-        Building(x, y, blockWidth, blockHeight,
+        Building(BARRACKS_KEY, x, y, blockWidth, blockHeight,
                  GameConfiguration::getConfig().barracksEnergy,
                  GameConfiguration::getConfig().barracksCost,
                  GameConfiguration::getConfig().barracksHitPoints,

@@ -5,7 +5,7 @@
 #include "../../../includes/Model/Terrains/Rock.h"
 
 Harvester::Harvester(int x, int y) :
-        Unit(x, y,
+        Unit(HARVESTER_KEY,x, y,
              GameConfiguration::getConfig().harvesterHitPoints,
              GameConfiguration::getConfig().harvesterSpeed,
              GameConfiguration::getConfig().harvesterCost),
@@ -34,7 +34,7 @@ void Harvester::actionOnPosition(Map &map, Position &pos) {
 }
 
 #include <iostream>
-void *Harvester::makeFarming(Map &map) {
+void Harvester::makeFarming(Map &map) {
     if (actual_farm_speed++ < farm_speed) {
         std::cout << "Cosechadora farmeando especia." << std::endl;
     } else {
@@ -62,7 +62,7 @@ void *Harvester::makeFarming(Map &map) {
         this->refinery = (Refinery*)player->getClosestBuilding(this->pos, Building::REFINERY);
         if (this->refinery == nullptr) {
             // Si no encontro ninguna refineria, se queda en el lugar
-            return nullptr;
+            return;
         }
     }
 
@@ -70,7 +70,7 @@ void *Harvester::makeFarming(Map &map) {
     map.setDestiny(*this, refinery->getPosition().x, refinery->getPosition().y);
     map.occupy(refinery);
 
-    return nullptr;
+    return;
 }
 
 void Harvester::makeLoading(Map &map) {

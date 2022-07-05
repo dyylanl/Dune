@@ -33,7 +33,7 @@ private:
     int load_speed;
     int actual_load_speed;
 
-    void *makeFarming(Map &map);
+    void makeFarming(Map &map);
     void makeLoading(Map &map);
 
 };

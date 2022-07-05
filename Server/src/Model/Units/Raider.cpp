@@ -6,7 +6,7 @@
 #include "../../../includes/Model/Terrains/Rock.h"
 
 Raider::Raider(int x, int y) :
-        Unit(x, y, GameConfiguration::getConfig().raiderHitPoints,
+        Unit(RAIDER_KEY,x, y, GameConfiguration::getConfig().raiderHitPoints,
              GameConfiguration::getConfig().raiderSpeed,
              GameConfiguration::getConfig().raiderCost)
 {

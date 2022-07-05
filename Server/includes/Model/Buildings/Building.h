@@ -7,6 +7,7 @@
 class Player;
 
 class Building : public Attackable {
+    char type;
 public:
     enum BuildingType {
         BARRACKS,
@@ -18,11 +19,12 @@ public:
         WIND_TRAP
     };
 
-    Building(const int x, const int y, int blockWidth, int blockHeight, const int energy, const int cost,
+    Building(char type1,const int x, const int y, int blockWidth, int blockHeight, const int energy, const int cost,
              const int hitPoints, const int width,
              const int height, BuildingType type);
 
     virtual ~Building();
+    char getType() {return type;};
 
     bool operator==(const Building& other);
 

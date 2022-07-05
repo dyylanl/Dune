@@ -5,7 +5,7 @@
 #include "../../../config/GameConfiguration.h"
 
 Palace::Palace(const int x, const int y, int blockWidth, int blockHeight) :
-        Building(x, y, blockWidth, blockHeight,
+        Building(PALACE_KEY, x, y, blockWidth, blockHeight,
                  GameConfiguration::getConfig().barracksEnergy,
                  GameConfiguration::getConfig().barracksCost,
                  GameConfiguration::getConfig().barracksHitPoints,

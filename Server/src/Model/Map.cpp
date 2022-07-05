@@ -46,12 +46,12 @@ Map::Map(std::string map_path) :
     for (int i = 0; i < total_buildings; ++i) {
         auto* construction_center = map_reader.getConstructionCenterFor((InstanceId)i);
         buildings.push_back(construction_center);
-        BuildingDTO centerDto;
+        /*BuildingDTO centerDto;
         centerDto.type = CONSTRUCTION_CENTER_KEY;
         centerDto.life = construction_center->getLife();
         centerDto.pos_x = construction_center->getPosition().x*BLOCK_WIDTH;
         centerDto.pos_y = construction_center->getPosition().y*BLOCK_HEIGHT;
-        buildingsDTO.push_back(centerDto);
+        buildingsDTO.push_back(centerDto);*/
 
     }
 }
@@ -136,11 +136,30 @@ std::vector<std::vector<char>> &Map::getMap() {
 }
 
 std::vector<UnitDTO> Map::getUnits() {
-    return unitsDTO;
+    std::vector<UnitDTO> retUnitsDto;
+    for (auto &unit : units) {
+        UnitDTO dto;
+        dto.pos_x = unit->getPosition().x;
+        dto.pos_y = unit->getPosition().y;
+        dto.life = unit->getLife();
+        dto.type = unit->getType();
+        retUnitsDto.push_back(dto);
+
+    }
+    return retUnitsDto;
 }
  
 std::vector<BuildingDTO> Map::getBuildings() {
-    return buildingsDTO;
+    std::vector<BuildingDTO> retBuildingsDto;
+    for (auto &build : buildings) {
+        BuildingDTO dto;
+        dto.pos_x = build->getPosition().x;
+        dto.pos_y = build->getPosition().y;
+        dto.life = build->getLife();
+        dto.type = build->getType();
+        retBuildingsDto.push_back(dto);
+    }
+    return retBuildingsDto;
 }
 
 Building* Map::getBuilding(char type, int x, int y) {

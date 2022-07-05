@@ -5,7 +5,7 @@
 #include "../../../includes/Model/Terrains/Rock.h"
 
 Trike::Trike(int x, int y) :
-        Unit(x, y,
+        Unit(TRIKE_KEY,x, y,
                       GameConfiguration::getConfig().trikeHitPoints,
                       GameConfiguration::getConfig().trikeSpeed,
                       GameConfiguration::getConfig().trikeCost)

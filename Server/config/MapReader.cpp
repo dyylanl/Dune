@@ -53,7 +53,7 @@ unsigned MapReader::getReqPlayers() {
 ConstructionCenter* MapReader::getConstructionCenterFor(InstanceId id) {
     int x = this->config["Estructuras"][std::to_string(id)]["Pos_x"].as<int>();
     int y = this->config["Estructuras"][std::to_string(id)]["Pos_y"].as<int>();
-    return new ConstructionCenter(x,y,BLOCK_WIDTH,BLOCK_HEIGHT);
+    return new ConstructionCenter(x*BLOCK_HEIGHT,y*BLOCK_WIDTH,BLOCK_WIDTH,BLOCK_HEIGHT);
 }
 
 int MapReader::getTotalBuildings() {

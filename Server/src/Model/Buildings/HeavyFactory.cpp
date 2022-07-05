@@ -2,7 +2,7 @@
 #include "../../../config/GameConfiguration.h"
 
 HeavyFactory::HeavyFactory(const int x, const int y, int blockWidth, int blockHeight) :
-        Building(x, y, blockWidth, blockHeight,
+        Building(HEAVY_FACTORY_KEY,x, y, blockWidth, blockHeight,
                  GameConfiguration::getConfig().heavyFactoryEnergy,
                  GameConfiguration::getConfig().heavyFactoryCost,
                  GameConfiguration::getConfig().heavyFactoryHitPoints,

@@ -9,6 +9,8 @@ class Terrain;
 class Player;
 
 class Unit : public Attackable {
+    private:
+    char type;
 public:
 
     enum UnitType {
@@ -26,22 +28,19 @@ public:
     };
 
 
-    Unit(const int x, const int y, const int hitPoints, const int speed, const int cost);
+    Unit(char type, const int x, const int y, const int hitPoints, const int speed, const int cost);
     virtual ~Unit();
     bool operator==(const Unit& other);
-
     void setPath(std::stack<Position> path, Position destiny);
     bool move(Map &map);
     virtual void actionOnPosition(Map& map, Position& pos);
-    //virtual bool canMoveAboveTerrain(Terrain& terrain) = 0;
     Player& getPlayer();
-
     virtual void makeAttack(Map &map);
     virtual bool shotARocket();
     virtual Rocket* getRocket();
     virtual bool hasNews();
-
     virtual bool canMoveAboveTerrain(Terrain &terrain);
+    char getType() {return type;}
 
 public:
     const int id;

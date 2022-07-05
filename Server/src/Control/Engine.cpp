@@ -61,24 +61,13 @@ void Engine::clearAll() {
 void Engine::_loopIteration(int it) {
     _processCommands();
     established_connections.sendBuildings(model.getBuildings());   // envio el centro de construccion de cada jugador de la partida
-    established_connections.sendUnits(model.getUnits());
+    //established_connections.sendUnits(model.getUnits());
     //map.updateSpice(it);
     //map.update(it);
     //established_connections.updateClients();
     _processFinishedConnections();
 }
-/*
-Engine::Engine(MapDTO map_dto)
-        : keep_executing(true),
-          rate(30),
-          map(map_dto.path),
-          current_players(0),
-          req_players(map_dto.max_players),
-          started(false),
-          finished_connections(),
-          commands(),
-          established_connections(commands, finished_connections) {}
-*/
+
 
 void Engine::run() {
     fprintf(stderr, "[Engine]: Empezando ejecución.\n");

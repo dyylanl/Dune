@@ -3,8 +3,9 @@
 #include "../../../includes/Model/Map.h"
 
 int Unit::counter = 0;
-Unit::Unit(const int x, const int y, const int hitPoints, const int speed, const int cost) :
+Unit::Unit(char type1, const int x, const int y, const int hitPoints, const int speed, const int cost) :
         Attackable(hitPoints, x, y),
+        type(type1),
         id(counter),
         pos(x,y),
         speed(speed),
