@@ -42,7 +42,6 @@ void Model::addPlayer(InstanceId player_id) {
 }
 
 void Model::deletePlayer(InstanceId player_id) {
-    players.at(player_id).clean();
     players.erase(player_id);
     current_players -= 1;
 }

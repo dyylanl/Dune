@@ -61,6 +61,7 @@ void Engine::clearAll() {
 void Engine::_loopIteration(int it) {
     _processCommands();
     established_connections.sendBuildings(model.getBuildings());   // envio el centro de construccion de cada jugador de la partida
+    //established_connections.sendUnits(model.getUnits());
     //map.updateSpice(it);
     //map.update(it);
     //established_connections.updateClients();

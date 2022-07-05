@@ -46,24 +46,6 @@ std::vector<std::vector<char>> MapReader::getMap() {
     return map;
 }
 
-std::vector<BuildingDTO> MapReader::getBuildings() {
-    std::vector<BuildingDTO> builds;
-    int total = this->config["Estructuras"]["Cantidad"].as<unsigned>();
-    for (int i = 0; i < total; ++i) {
-        const int pos_x = this->config["Estructuras"][std::to_string(i)]["Pos_x"].as<int>();
-        const int pos_y = this->config["Estructuras"][std::to_string(i)]["Pos_y"].as<int>();
-        BuildingDTO center;
-        center.pos_x = pos_x;
-        center.pos_y = pos_y; 
-        center.height = 3;
-        center.width = 3;
-        center.life = 500;
-        center.type = CONSTRUCTION_CENTER_KEY;
-        builds.push_back(center);
-    }
-    return builds;
-}
-
 unsigned MapReader::getReqPlayers() {
     return this->config["Cantidad Jugadores"].as<unsigned>();
 }
@@ -71,7 +53,6 @@ unsigned MapReader::getReqPlayers() {
 ConstructionCenter* MapReader::getConstructionCenterFor(InstanceId id) {
     int x = this->config["Estructuras"][std::to_string(id)]["Pos_x"].as<int>();
     int y = this->config["Estructuras"][std::to_string(id)]["Pos_y"].as<int>();
-    std::cout << "[READER]: Construction center para el player " << id << " en: " << x << "," << y << std::endl;
     return new ConstructionCenter(x,y,BLOCK_WIDTH,BLOCK_HEIGHT);
 }
 

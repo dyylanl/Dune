@@ -29,7 +29,7 @@ Map::Map(std::string map_path) :
                             cols(map_reader.getCols()),
                             max_players(map_reader.getReqPlayers()),
                             mapa(map_reader.getMap()),
-                            buildingsDTO(map_reader.getBuildings()),
+                            buildingsDTO(),
                             buildings()
 {
     std::vector <std::vector<Terrain>> terrain_init((uint16_t) rows, std::vector<Terrain>((uint16_t) cols, Terrain('A')));
@@ -49,7 +49,10 @@ Map::Map(std::string map_path) :
         BuildingDTO centerDto;
         centerDto.type = CONSTRUCTION_CENTER_KEY;
         centerDto.life = construction_center->getLife();
+        centerDto.pos_x = construction_center->getPosition().x;
+        centerDto.pos_y = construction_center->getPosition().y;
         buildingsDTO.push_back(centerDto);
+
     }
 }
 
@@ -185,7 +188,14 @@ void Map::putBuilding(char type, int x, int y) {
     buildingsDTO.push_back(buildDTO);
 }
 
-Map::~Map() {}
+Map::~Map() {
+    for (auto* unit : units) {
+        delete unit;
+    }
+    for (auto* build : buildings) {
+        delete build;
+    }
+}
 
 void Map::putUnit(Position pos, char unit_type) {
     pos.normalize();
