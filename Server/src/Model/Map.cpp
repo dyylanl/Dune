@@ -281,3 +281,31 @@ Unit *Map::getUnit(char type, int x, int y) {
     }
 }
 
+/*
+bool Map::canWeBuild(Position& pos, int width, int height) {
+    for (int i = 0; i < height; i++) {
+        for (int j = 0; j < width; j++) {
+            Position aux(pos.getX() + j * BLOCK_WIDTH, pos.getY() + i * BLOCK_HEIGHT);
+            if (isValid(aux)) {
+                if ((terrains.at(aux).getKey() != Rocks().getKey()) || this->at(aux).isOccupied()) {
+                    return false;
+                }
+            } else {
+                return false;
+            }
+        }
+    }
+
+    for (int i = -5; i <= height + 5; i++) {
+        for (int j = -5; j <= width + 5; j++) {
+            Position aux(pos.getX() + j * BLOCK_WIDTH, pos.getY() + i * BLOCK_HEIGHT);
+            if (isValid(aux)) {
+                if (terrains.at(aux).isBuiltOn()) {
+                    return true;
+                }
+            }
+        }
+    }
+    return false;
+}
+*/
