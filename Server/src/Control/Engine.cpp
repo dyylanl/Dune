@@ -19,8 +19,8 @@ void Engine::_processCommands() {
             try {
                 cmd->exec(model);
             } catch (const std::exception& e) {
-                Response* reply = new Response(INVALID_COMMAND, e.what());
-                established_connections.notify(cmd->getCaller(), reply);
+                /*Response* reply = new Response(INVALID_COMMAND, e.what());
+                established_connections.notify(cmd->getCaller(), reply);*/
             }
             delete cmd;
         }
@@ -33,35 +33,34 @@ void Engine::_processFinishedConnections() {
         model.deletePlayer(*finished_connection);
         established_connections.remove(*finished_connection);
         delete finished_connection;
-        fprintf(stderr, "Se ha desconectado un jugador.\n");
+        fprintf(stderr, "[Engine]: Se ha desconectado un jugador.\n");
     }
 }
 
 void Engine::clearAll() {
     {
-        InstanceId* p = nullptr;
-        while ((p = finished_connections.pop())) {
-            delete p;
+        InstanceId* client = nullptr;
+        while ((client = finished_connections.pop())) {
+            delete client;
         }
     }
     {
-        InstanceId* p = nullptr;
-        while ((p = finished_connections.pop())) {
-            //map.deleteCharacter(*p); TODO: BORRAR JUGADOR
+        InstanceId* client = nullptr;
+        while ((client = finished_connections.pop())) {
+            model.deletePlayer(*client);
         }
     }
     {
-        Command* p = nullptr;
-        while ((p = commands.pop())) {
-            delete p;
+        Command* command = nullptr;
+        while ((command = commands.pop())) {
+            delete command;
         }
     }
 }
 
 void Engine::_loopIteration(int it) {
     _processCommands();
-    established_connections.sendBuildings(model.getBuildings());   // envio el centro de construccion de cada jugador de la partida
-    //established_connections.sendUnits(model.getUnits());
+    established_connections.sendSnapshot(model.getBuildings(), model.getUnits());
     //map.updateSpice(it);
     //map.update(it);
     //established_connections.updateClients();

@@ -36,28 +36,22 @@ void ClientsConnected::stop() {
 
 ClientsConnected::~ClientsConnected() = default;
 
-void ClientsConnected::notify(const InstanceId id, Response* notification) {
-    if (clients.count(id) == 0) {
-        throw Exception("ActiveClients::notify: invalid client id.");
-    }
-    clients.at(id).push(notification);
-}
-
 void ClientsConnected::initGame(std::vector<std::vector<char>>& map) {
     for (auto it = clients.begin(); it != clients.end(); it++) {
         it->second.sendInitGame(map);
     }
 }
 
-void ClientsConnected::sendBuildings(std::vector<BuildingDTO> buildings) {
+void ClientsConnected::sendSnapshot(std::vector<BuildingDTO*> buildings, std::vector<UnitDTO*> units) {
     for (auto it = clients.begin(); it != clients.end(); it++) {
-        it->second.sendBuildings(buildings);
-    }
-}
-
-void ClientsConnected::sendUnits(std::vector<UnitDTO> units) {
-    for (auto it = clients.begin(); it != clients.end(); it++) {
-        it->second.sendUnits(units);
+        int total_builds = buildings.size();
+        for (int i = 0; i < total_builds; i++) {
+            it->second.pushBuilding(buildings.at(i));
+        }
+        int total_units = units.size();
+        for (int i = 0; i < total_units; i++) {
+            it->second.pushUnit(units.at(i));
+        }
     }
 }
 

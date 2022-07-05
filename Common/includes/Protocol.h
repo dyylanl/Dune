@@ -34,6 +34,9 @@ public:
     bool sendTwoBytes(Socket &socket, uint16_t data);
 
 
+
+    void sendUnit(Socket &socket, char type, int pos_x, int pos_y);
+    void sendBuild(Socket &socket, char build, int posX, int posY);
     /*
      * Envia la informacion requerida para crear una partida.
      */

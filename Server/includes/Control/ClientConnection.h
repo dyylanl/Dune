@@ -24,7 +24,8 @@ class ClientConnection {
     int finished_threads;
 
     std::thread sender;
-    BlockingQueue<Response*> responses;
+    BlockingQueue<BuildingDTO*> buildings;
+    BlockingQueue<UnitDTO*> units;
 
     std::thread receiver;
     NonBlockingQueue<Command*>& commands;
@@ -43,27 +44,25 @@ class ClientConnection {
     ClientConnection(const InstanceId id,
                      Socket peer,
                      NonBlockingQueue<InstanceId*>& finished_connections,
-                     NonBlockingQueue<Command*>& commands
-                     );
+                     NonBlockingQueue<Command*>& commands);
 
     ClientConnection(const ClientConnection&) = delete;
     ClientConnection& operator=(const ClientConnection&) = delete;
     ClientConnection(ClientConnection&& other) = delete;
     ClientConnection& operator=(ClientConnection&& other) = delete;
     void start();
-    void push(Response* notification);
+
+
+    void pushBuilding(BuildingDTO* building);
+    void pushUnit(UnitDTO* unit);
+
+
     void join();
     void stop();
     ~ClientConnection();
-
     void sendInitGame(std::vector<std::vector<char>>& map);
-    void sendBuildings(std::vector<BuildingDTO> buildings);
-    void sendUnits(std::vector<UnitDTO> units);
     InstanceId getId() {return id;}
-
     void sendEstablishConnection();
-
-
 };
 
 

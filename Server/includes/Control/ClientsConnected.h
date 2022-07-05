@@ -34,8 +34,7 @@ public:
 
     void initGame(std::vector<std::vector<char>>& map);
 
-    void sendBuildings(std::vector<BuildingDTO> buildings);
-    void sendUnits(std::vector<UnitDTO> units);
+    void sendSnapshot(std::vector<BuildingDTO*> buildings, std::vector<UnitDTO*> units);
 
     std::vector<InstanceId> getAllPlayers();
 

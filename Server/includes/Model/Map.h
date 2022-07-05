@@ -102,12 +102,12 @@ public:
     /*
     *   Retorna cada unidad que hay en el mapa
     */
-    std::vector<UnitDTO> getUnits();
+    std::vector<UnitDTO*> getUnits();
 
     /*
     *   Retorna cada edificio que hay en el mapa
     */
-    std::vector<BuildingDTO> getBuildings();
+    std::vector<BuildingDTO*> getBuildings();
 
     /*
     *   Al player de id le asigna una unidad del type en posicion x,y

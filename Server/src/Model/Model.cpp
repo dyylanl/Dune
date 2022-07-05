@@ -21,11 +21,11 @@ std::vector<std::vector<char>> &Model::getMap() {
     return map.getMap();
 }
 
-std::vector<BuildingDTO> Model::getBuildings() {
+std::vector<BuildingDTO*> Model::getBuildings() {
     return map.getBuildings();
 }
 
-std::vector<UnitDTO> Model::getUnits() {
+std::vector<UnitDTO*> Model::getUnits() {
     return map.getUnits();
 }
 

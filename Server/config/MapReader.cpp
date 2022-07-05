@@ -23,23 +23,19 @@ std::vector<std::vector<char>> MapReader::getMap() {
             key_i_j << i << "," << j;
             std::string tipo = config["Tablero"][key_i_j.str()]["Tipo"].as<std::string>();
             if (tipo == "Arena") {
-                map[i][j] = 'A';
+                map[i][j] = SAND_KEY;
             }
             else if (tipo == "Roca") {
-                map[i][j] = 'R';
-
+                map[i][j] = ROCK_KEY;
             }
             else if (tipo == "Duna") {
-                map[i][j] = 'D';
-
+                map[i][j] = DUNE_KEY;
             }
             else if (tipo == "Precipicio") {
-                map[i][j] = 'P';
-
+                map[i][j] = PRECIPICE_KEY;
             }
             else if (tipo == "Cimas") {
-                map[i][j] = 'C';
-
+                map[i][j] = SUMMIT_KEY;
             }
         }
     }

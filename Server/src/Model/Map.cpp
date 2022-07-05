@@ -135,28 +135,27 @@ std::vector<std::vector<char>> &Map::getMap() {
     return this->mapa;
 }
 
-std::vector<UnitDTO> Map::getUnits() {
-    std::vector<UnitDTO> retUnitsDto;
+std::vector<UnitDTO*> Map::getUnits() {
+    std::vector<UnitDTO*> retUnitsDto{};
     for (auto &unit : units) {
-        UnitDTO dto;
-        dto.pos_x = unit->getPosition().x;
-        dto.pos_y = unit->getPosition().y;
-        dto.life = unit->getLife();
-        dto.type = unit->getType();
+        auto* dto = new UnitDTO;
+        dto->pos_x = unit->getPosition().x;
+        dto->pos_y = unit->getPosition().y;
+        dto->life = unit->getLife();
+        dto->type = unit->getType();
         retUnitsDto.push_back(dto);
-
     }
     return retUnitsDto;
 }
  
-std::vector<BuildingDTO> Map::getBuildings() {
-    std::vector<BuildingDTO> retBuildingsDto;
+std::vector<BuildingDTO*> Map::getBuildings() {
+    std::vector<BuildingDTO*> retBuildingsDto;
     for (auto &build : buildings) {
-        BuildingDTO dto;
-        dto.pos_x = build->getPosition().x;
-        dto.pos_y = build->getPosition().y;
-        dto.life = build->getLife();
-        dto.type = build->getType();
+        auto* dto = new BuildingDTO;
+        dto->pos_x = build->getPosition().x;
+        dto->pos_y = build->getPosition().y;
+        dto->life = build->getLife();
+        dto->type = build->getType();
         retBuildingsDto.push_back(dto);
     }
     return retBuildingsDto;

@@ -8,24 +8,29 @@ void ClientConnection::_finishThread() {
 }
 
 void ClientConnection::_freeNotifications() {
-    responses.close();
-    Response* notification = NULL;
-    while ((notification = responses.pop())) {
-        delete notification;
+    buildings.close();
+    units.close();
+    BuildingDTO* buildsDTO = nullptr;
+    while ((buildsDTO = buildings.pop())) {
+        delete buildsDTO;
+    }
+    UnitDTO* unitsDTO = nullptr;
+    while ((unitsDTO = units.pop())) {
+        delete unitsDTO;
     }
 }
 
 void ClientConnection::_sender() {
     try {
-        Response* notification = nullptr;
-        bool socket_valid = true;
-        while ((notification = responses.pop())) {
-            fprintf(stderr, "CLIENTE %i: Sender popeo una respuesta.\n", id);
-            socket_valid = notification->send(this->id, peer);
-            delete notification;
-            if (!socket_valid) {
-                break;
-            }
+        BuildingDTO* build = nullptr;
+        while ((build = buildings.pop())) {
+            protocol.sendBuild(peer, build->type, build->pos_x, build->pos_y);
+            delete build;
+        }
+        UnitDTO* unit = nullptr;
+        while ((unit = units.pop())) {
+            protocol.sendUnit(peer, unit->type, unit->pos_x, unit->pos_y);
+            delete unit;
         }
     } catch (const std::exception& e) {
         stop();
@@ -54,7 +59,8 @@ void ClientConnection::_receiver() {
         stop();
         fprintf(stderr, "[ClientConnection] Error desconocido.\n");
     }
-    this->responses.close();
+    this->buildings.close();
+    this->units.close();
     _finishThread();
 }
 
@@ -64,8 +70,7 @@ void ClientConnection::_receiveCommand(uint8_t opcode) {
         Command* cmd = CommandFactory::newCommand(id, opcode, peer);
         commands.push(cmd);
     } catch (const UnknownCommandException& e) {
-        Response* reply_error = new Response(INVALID_COMMAND, e.what());
-        this->responses.push(reply_error);
+        return;
     }
 }
 
@@ -84,8 +89,12 @@ void ClientConnection::start() {
     receiver = std::thread(&ClientConnection::_sender, this);
 }
 
-void ClientConnection::push(Response* notification) {
-    responses.push(notification);
+void ClientConnection::pushBuilding(BuildingDTO* building1) {
+    buildings.push(building1);
+}
+
+void ClientConnection::pushUnit(UnitDTO* unit1) {
+    units.push(unit1);
 }
 
 void ClientConnection::join() {
@@ -103,7 +112,8 @@ void ClientConnection::join() {
 }
 
 void ClientConnection::stop() {
-    responses.close();
+    this->buildings.close();
+    this->units.close();
     try {
         peer.shutdown();
     } catch (const Exception& e) {
@@ -124,22 +134,6 @@ void ClientConnection::sendInitGame(std::vector<std::vector<char>>& map) {
     }
 }
 
-void ClientConnection::sendBuildings(std::vector<BuildingDTO> buildings) {
-    
-    try {
-        protocol.sendBuildings(peer, buildings);
-    } catch (const Exception &e) {
-        std::cout << "Error enviando construcciones." << std::endl;
-    }
-}
-
-void ClientConnection::sendUnits(std::vector<UnitDTO> units) {
-    try {
-        protocol.sendUnits(peer, units);
-    } catch (const Exception &e) {
-        std::cout << "Error enviando unidades." << std::endl;
-    }
-}
 
 void ClientConnection::sendEstablishConnection() {
     protocol.sendEstablishConnection(peer);

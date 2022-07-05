@@ -202,6 +202,12 @@ void Protocol::sendUnit(Socket &socket, int type) {
     socket.send(reinterpret_cast<const char *>(&aux), sizeof(uint8_t));
 }
 
+void Protocol::sendUnit(Socket &socket, char type, int pos_x, int pos_y) {
+    this->sendOneByte(socket, type);
+    this->sendTwoBytes(socket, pos_x);
+    this->sendTwoBytes(socket, pos_y);
+}
+
 void Protocol::sendPosition(Socket &socket, unsigned int x, unsigned int y) {
     std::cout << "Se envia Posicion: " << x << "," << y << std::endl;
     socket.send(reinterpret_cast<const char *>(&x), sizeof(uint16_t));
@@ -230,6 +236,13 @@ void Protocol::sendBuild(Socket &socket, int build, int posX, int posY) {
     socket.send(reinterpret_cast<const char *>(&posX), sizeof(uint16_t));
     socket.send(reinterpret_cast<const char *>(&posY), sizeof(uint16_t));
 }
+
+void Protocol::sendBuild(Socket &socket, char build, int posX, int posY) {
+    this->sendOneByte(socket, build);
+    this->sendTwoBytes(socket, posX);
+    this->sendTwoBytes(socket, posY);
+}
+
 
 void Protocol::operationRecv(Socket &socket, char &operation) {
     socket.recv(reinterpret_cast<char *>(&operation), sizeof(uint8_t));
