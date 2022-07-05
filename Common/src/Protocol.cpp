@@ -340,8 +340,8 @@ Protocol::recvUnit(Socket &socket, int &id, char &player, bool &selectStatus, in
 void Protocol::recvBuild(Socket &socket, int &id, char &player, int &posX, int &posY, int &life) {
     socket.recv(reinterpret_cast<char *>(&id), sizeof(uint16_t));
     socket.recv(reinterpret_cast<char *>(&player), sizeof(uint8_t));
-    socket.recv(reinterpret_cast<char *>(&posX), sizeof(uint16_t));
     socket.recv(reinterpret_cast<char *>(&posY), sizeof(uint16_t));
+    socket.recv(reinterpret_cast<char *>(&posX), sizeof(uint16_t));
     socket.recv(reinterpret_cast<char *>(&life), sizeof(uint16_t));
     std::cout << "Se recibe un edificio en la posicion: " << posX << "," << posY << std::endl;
 
@@ -410,12 +410,12 @@ void Protocol::sendCommandMove(Socket &socket, char &action, int &id, int &posX,
 void Protocol::sendCommandBuildBuilding(Socket &socket, char &action, char &build, int &posX, int &posY) {
     socket.send(reinterpret_cast<char *>(&action), sizeof(uint8_t));
     socket.send(reinterpret_cast<char *>(&build), sizeof(uint8_t));
-    socket.send(reinterpret_cast<char *>(&posX), sizeof(uint16_t));
     socket.send(reinterpret_cast<char *>(&posY), sizeof(uint16_t));
+    socket.send(reinterpret_cast<char *>(&posX), sizeof(uint16_t));
     std::cout << "action(uint8_t) : " << (int)action << std::endl;
     std::cout << "build type(uint8_t) : " << build << std::endl;
-    std::cout << "posX(uint16_t) : " << posX << std::endl;
     std::cout << "posY(uint16_t) : " << posY << std::endl;
+    std::cout << "posX(uint16_t) : " << posX << std::endl;
 }
 
 std::vector<std::string> Protocol::recvMapsId(Socket &socket) {
