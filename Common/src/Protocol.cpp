@@ -71,9 +71,7 @@ void Protocol::createGame(Socket &skt, uint16_t house,
 }
 
 uint8_t Protocol::recvCommand(Socket &skt) {
-    uint8_t command = 0;
-    skt.recv(reinterpret_cast<char *>(&command), sizeof(uint8_t));
-    return command;
+    return recvOneByte(skt);
 }
 
 uint8_t Protocol::recvOpcode(Socket &socket) {
@@ -129,7 +127,7 @@ uint8_t Protocol::recvOneByte(Socket &socket) {
 uint16_t Protocol::recvTwoBytes(Socket &socket) {
     uint16_t resp = 0;
     socket.recv((char*)&resp, sizeof(uint16_t));
-    return resp;
+    return ntohs(resp);
 }
 
 bool Protocol::sendOneByte(Socket &socket, uint8_t data) {
@@ -142,8 +140,9 @@ bool Protocol::sendOneByte(Socket &socket, uint8_t data) {
 
 
 bool Protocol::sendTwoBytes(Socket &socket, uint16_t data) {
-    int _send = socket.send((char *)&data, sizeof(uint16_t));
-    if (_send < int(sizeof(uint16_t))) {
+    uint16_t data_send = htons(data);
+    int bytes_send = socket.send((char *)&data_send, sizeof(uint16_t));
+    if (bytes_send < int(sizeof(uint16_t))) {
         return false;
     }
     return true;
@@ -215,9 +214,7 @@ void Protocol::sendPosition(Socket &socket, unsigned int x, unsigned int y) {
 }
 
 uint16_t Protocol::recvPosition(Socket &socket) {
-    uint16_t pos = 0;
-    pos = this->recvTwoBytes(socket);
-    return ntohs(pos);
+    return this->recvTwoBytes(socket);
 }
 
 char Protocol::recvUnitType(Socket &socket) {
@@ -233,10 +230,18 @@ void Protocol::sendBuild(Socket &socket, int build, int posX, int posY) {
     socket.send(reinterpret_cast<const char *>(&posY), sizeof(uint16_t));
 }
 
-void Protocol::sendBuild(Socket &socket, char build, int posX, int posY) {
-    this->sendOneByte(socket, build);
-    this->sendTwoBytes(socket, posX);
-    this->sendTwoBytes(socket, posY);
+#define OBJECT_BUILDING 1
+
+void Protocol::sendBuild(Socket &socket, BuildingDTO* build) {
+    uint16_t total = 1; // esto es porque el cliente lo necesita asi \_(*-*)_/
+    this->sendTwoBytes(socket,total);
+    this->sendOneByte(socket,OBJECT_BUILDING);
+    this->sendOneByte(socket, build->type);
+    this->sendTwoBytes(socket, build->build_id);
+    this->sendOneByte(socket, build->build_id); // player id
+    this->sendTwoBytes(socket, build->pos_x);
+    this->sendTwoBytes(socket, build->pos_y);
+    this->sendTwoBytes(socket, build->life);
 }
 
 
@@ -256,15 +261,17 @@ int Protocol::idUnidRecv(Socket &socket) {
     return id;
 }
 
+#define INIT_GAME 10
+
 void Protocol::sendInitGame(Socket &socket) {
-    uint16_t flag_init = 10;
-    socket.send((const char*)&flag_init, sizeof(uint16_t));
-    std::cout << "[PROTOCOL]: SE ENVIA INIT_GAME: " << flag_init << std::endl;
+    this->sendTwoBytes(socket,INIT_GAME);
+    std::cout << "[PROTOCOL]: SE ENVIA INIT_GAME" << std::endl;
 }
 
 bool Protocol::recvInitGame(Socket &socket) {
     uint16_t flag_recv = 0;
     socket.recv((char*)&flag_recv, sizeof(uint16_t));
+    flag_recv = ntohs(flag_recv);
     std::cout << "[PROTOCOL]: SE RECV INIT_GAME: " << flag_recv << std::endl;
     uint16_t flag_init = 10;
     if (flag_recv == flag_init) {
@@ -352,6 +359,10 @@ void Protocol::recvBuild(Socket &socket, int &id, char &player, int &posX, int &
     socket.recv(reinterpret_cast<char *>(&posY), sizeof(uint16_t));
     socket.recv(reinterpret_cast<char *>(&posX), sizeof(uint16_t));
     socket.recv(reinterpret_cast<char *>(&life), sizeof(uint16_t));
+    id = ntohs(id);
+    posY = ntohs(posY);
+    posX = ntohs(posX);
+    life = ntohs(life);
     std::cout << "Se recibe un edificio en la posicion: " << posX << "," << posY << std::endl;
 
 }
@@ -419,6 +430,8 @@ void Protocol::sendCommandMove(Socket &socket, char &action, int &id, int &posX,
 void Protocol::sendCommandBuildBuilding(Socket &socket, char &action, char &build, int &posX, int &posY) {
     socket.send(reinterpret_cast<char *>(&action), sizeof(uint8_t));
     socket.send(reinterpret_cast<char *>(&build), sizeof(uint8_t));
+    posY = htons(posY);
+    posX = htons(posX);
     socket.send(reinterpret_cast<char *>(&posY), sizeof(uint16_t));
     socket.send(reinterpret_cast<char *>(&posX), sizeof(uint16_t));
     std::cout << "action(uint8_t) : " << (int)action << std::endl;
@@ -508,6 +521,7 @@ void Protocol::sendEstablishConnection(Socket &socket) {
 bool Protocol::recvEstablishConnection(Socket &socket) {
     uint16_t connect = 0;
     socket.recv((char*)&connect, sizeof(uint16_t));
+    connect = htons(connect);
     std::cout << "[PROTOCOL]: SE RECV ESTAB_CONNECT: " << connect << std::endl;
     if (connect == ESTABLISH_CONNECTION) {
         return true;

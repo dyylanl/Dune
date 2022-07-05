@@ -25,7 +25,7 @@ void ClientLogin::run() {
         std::string name;
         name = protocol.recvName(peer);
         while (is_running) {
-            uint8_t command = protocol.recvOneByte(peer); // este comando puede ser 1 2 o 3
+            uint8_t command = protocol.recvCommand(peer); // este comando puede ser 1 2 o 3
             execute(command, name); // si devuelve 0 es porque el cliente ya se unio a una partida o la crea si devuelve 1 hay q volver a recibir el comando que indique
         }
     } catch (const std::exception& e) {

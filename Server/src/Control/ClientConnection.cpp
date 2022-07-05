@@ -24,7 +24,7 @@ void ClientConnection::_sender() {
     try {
         BuildingDTO* build = nullptr;
         while ((build = buildings.pop())) {
-            protocol.sendBuild(peer, build->type, build->pos_x, build->pos_y);
+            protocol.sendBuild(peer, build);
             delete build;
         }
         UnitDTO* unit = nullptr;

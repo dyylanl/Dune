@@ -191,19 +191,21 @@ void Map::putUnit(InstanceId id_player, char type, int x, int y) {
 }
 // todo: usar la clase building
 void Map::putBuilding(char type, int x, int y) {
+    std::cout << " [1][Map] Construyendo un edificio del tipo " << type << " en " << x << "," << y << std::endl; 
     Position pos(x,y);
     pos.normalize();
     if (!isValid(pos)) {
         std::cout << "Poner construccion en posicion invalida: " << pos.x << "," << pos.y << std::endl;
         return;
     }
-    Building* build = getBuilding(type,x,y);
+    Building* build = getBuilding(type,pos.x,pos.y);
     buildings.push_back(build);
     BuildingDTO buildDTO;
     buildDTO.type = type;
-    buildDTO.pos_x = x;
-    buildDTO.pos_y = y;
+    buildDTO.pos_x = pos.x;
+    buildDTO.pos_y = pos.y;
     buildingsDTO.push_back(buildDTO);
+    std::cout << " [2][Map] Se construyo un edificio del tipo " << type << " en " << pos.x << "," << pos.y << std::endl; 
 }
 
 Map::~Map() {

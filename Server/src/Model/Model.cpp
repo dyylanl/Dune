@@ -30,7 +30,6 @@ std::vector<UnitDTO*> Model::getUnits() {
 }
 
 void Model::buildBuilding(InstanceId id_player, char build_type, int x, int y) {
-    std::cout << "[Model] Jugador " << id_player << " puso construccion del tipo " << build_type << " en la posicion " << x << "," << y << std::endl;
     map.putBuilding(build_type,x,y);
 }
 
