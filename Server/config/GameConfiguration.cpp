@@ -120,7 +120,7 @@ void GameConfiguration::init(const char *string) {
 
 GameConfiguration& GameConfiguration::getConfig() {
     if (instance == nullptr) {
-        std::string path = "*/config.yaml";
+        std::string path = "../config.yaml";
         ConfigurationReader config(path);
         instance = std::unique_ptr<GameConfiguration>(new GameConfiguration(config));
     }

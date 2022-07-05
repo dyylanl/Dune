@@ -18,6 +18,6 @@ public:
                       const uint16_t pos_y);
     ~MoveUnitCommand();
 
-    void exec(Map &map) override;
+    void exec(Model &model) override;
 };
 #endif //DUNE_MOVEUNITCOMMAND_H

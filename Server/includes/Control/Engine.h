@@ -22,7 +22,6 @@ private:
 
     std::atomic_bool keep_executing;
     int rate;
-    Map map;
     int current_players;
     int req_players;
     bool started;
@@ -39,6 +38,7 @@ private:
     ClientsConnected established_connections;
 
     ConfigurationReader& config;
+    Model model;
 
     void _processFinishedConnections();
     void _processCommands();
@@ -47,7 +47,7 @@ private:
 public:
     // el mapDTO que recibe solo tiene la ruta al yaml y el nombre que se eligio para crearlo
     //Engine(MapDTO map);
-    Engine(ConfigurationReader& config, std::string map_path);
+    Engine(ConfigurationReader& config, std::string map_path, int total_players);
     Engine(const Engine&) = delete;
     Engine& operator=(const Engine&) = delete;
     Engine(Engine&& other) = delete;
@@ -66,9 +66,8 @@ public:
     */
     std::vector<Id> getAllPlayers();
 
-    int getCurrentPlayers() {return current_players;}
-    int getMaxPlayers() {return req_players;}
-    //Id getMapId() {return map_id;}
+    int getCurrentPlayers() {return model.getCurrentPlayers();}
+    int getMaxPlayers() {return model.getMaxPlayers();}
     bool isStarted() {return started;}
 
 

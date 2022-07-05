@@ -53,12 +53,7 @@ uint16_t Game::createGame(Id id_map, const std::string& name_game) {
     if (maps_dto_init.count(id_map) == 0) {
         return ERROR;
     }
-    MapDTO map;
-    map.map_id = id_map;
-    map.path = maps_dto_init[id_map].path;
-    map.max_players = maps_dto_init[id_map].max_players;
-    map.name_map = name_game;
-    games[name_game] = (new Engine(config,maps_dto_init[id_map].path));
+    games[name_game] = new Engine(config,maps_dto_init[id_map].path, maps_dto_init[id_map].max_players);
     return SUCCESS;
 }
 
@@ -66,7 +61,6 @@ uint16_t Game::acceptPlayer(Socket peer, std::string name_player, std::string na
     std::lock_guard<std::mutex> lock(this->mutex);
     int ret = ERROR;
     if (contains(name_game)) { // si existe una partida con ese nombre entonces entro
-        //Id map_id1 = (Id)games[name_game]->getMapId();
         ret = games[name_game]->addClient(NewConnection((peer),name_player,name_game)); // chequea si la partida no esta completa para unir el nuevo player
     }
     return ret;

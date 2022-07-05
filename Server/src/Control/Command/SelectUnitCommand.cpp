@@ -14,6 +14,6 @@ SelectUnitCommand::SelectUnitCommand(const InstanceId caller,
 
 SelectUnitCommand::~SelectUnitCommand() = default;
 
-void SelectUnitCommand::exec(Map &map) {
-    std::cout << "Seleccionando unidad en: " << pos_x << pos_y << std::endl;
+void SelectUnitCommand::exec(Model &model) {
+    model.selectUnit(caller,pos_x,pos_y);
 }

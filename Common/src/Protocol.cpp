@@ -493,8 +493,8 @@ std::vector<std::vector<std::string>> Protocol::recvMapsCreated(Socket &socket) 
 #define BAD_JOIN 1
 
 void Protocol::sendEstablishConnection(Socket &socket) {
-    uint16_t connect = ESTABLISH_CONNECTION;
-    socket.send((const char*)&connect, sizeof(uint16_t));
+    this->sendTwoBytes(socket,ESTABLISH_CONNECTION);
+    std::cout << "[PROTOCOL] Enviando conexion aceptada." << std::endl;
 }
 
 bool Protocol::recvEstablishConnection(Socket &socket) {
@@ -508,13 +508,11 @@ bool Protocol::recvEstablishConnection(Socket &socket) {
 }
 
 void Protocol::sendCreateGameInvalid(Socket &socket) {
-    uint16_t flag_bad_connection = BAD_CONNECTION;
-    socket.send((const char*)&flag_bad_connection, sizeof(uint16_t));
+    this->sendTwoBytes(socket,BAD_CONNECTION);
 }
 
 void Protocol::sendAcceptPlayerInvalid(Socket &socket) {
-    uint16_t flag_bad_join = BAD_JOIN;
-    socket.send((const char*)&flag_bad_join, sizeof(uint16_t));
+    this->sendTwoBytes(socket,BAD_JOIN);
 }
 
 void Protocol::sendBuildings(Socket &socket, std::vector<BuildingDTO> buildings) {
