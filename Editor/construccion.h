@@ -19,6 +19,7 @@ public:
     void asignar_jugador(int jugador);
     void mousePressEvent(QGraphicsSceneMouseEvent *event);
     int get_jugador();
+    ~Construccion();
 
 public slots:
     void verifcar_jugador(int jugador);

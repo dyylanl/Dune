@@ -13,5 +13,7 @@
         <file>centros_construccion.png</file>
         <file>centro_1.png</file>
         <file>tile_especia.png</file>
+        <file>play.png</file>
+        <file>pause.png</file>
     </qresource>
 </RCC>

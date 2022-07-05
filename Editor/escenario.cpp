@@ -129,6 +129,7 @@ void Escenario::guardar(QString file_name){
         out << YAML::EndMap;
     }
     out << YAML::EndMap;
+    out << YAML::EndMap;
     //const char *path="/home/fede/Desktop/Taller_1/qt/prueba_9/test.yaml";
     std::ofstream fout(file_name.toStdString());
     fout << out.c_str() << std::endl;
@@ -137,13 +138,14 @@ void Escenario::guardar(QString file_name){
 void Escenario::cargar(QString file_name)
 {
     //this->eliminar_celdas_actuales();
-    this->eliminar_todas_estructuras();
+
     YAML::Node node = YAML::LoadFile(file_name.toStdString());
     int filas = node["Tablero"]["Filas"].as<int>();
     int columnas= node["Tablero"]["Columnas"].as<int>();
     std::cout << filas << std::endl;
     std::cout << columnas << std::endl;
     this->eliminar_celdas_actuales();
+    this->eliminar_todas_estructuras();
 
     this->tableroQT.resize(filas);
     for(int i = 0; i < filas; i++){
@@ -216,7 +218,7 @@ bool Escenario::verificar_celdas(int x, int y)
  std::cout << "llego a verificar" <<std::endl;
     for(int i = x - 1; i < x + 2; i++){
         for(int j = y -1; j < y+ 2;j++){
-            if((i > this->filas) ||( j > this->columnas)){
+            if((i >= this->filas) ||( j >= this->columnas)){
                 return false;
 
             }
@@ -262,10 +264,13 @@ int Escenario::get_cantidad_jugadores()
 
 void Escenario::eliminar_estructura(Construccion *estructura,int x, int y)
 {
+    int id_jugador = estructura->get_jugador();
     this->removeItem(estructura);
+    std::cout << "remove item pasa" << std::endl;
     this->desocupar_celdas(x,y);
     this->cant_construcciones -= 1;
-
+    this->jugadores.erase(std::remove(this->jugadores.begin(), this->jugadores.end(), id_jugador), this->jugadores.end());
+    this->construcciones.erase(std::remove(this->construcciones.begin(),this->construcciones.end(),estructura),construcciones.end());
 }
 
 void Escenario::desocupar_celdas(int x, int y){
@@ -280,6 +285,8 @@ void Escenario::desocupar_celdas(int x, int y){
 void Escenario::eliminar_todas_estructuras()
 {
  for(int i = 0; i < this->cant_construcciones; i++){
+     int id_jugador = this->construcciones[i]->get_jugador();
+     this->jugadores.erase(std::remove(this->jugadores.begin(), this->jugadores.end(), id_jugador), this->jugadores.end());
      delete(this->construcciones[i]);
  }
 }
@@ -311,6 +318,12 @@ void Escenario::agregar_jugador(int jugador){
 
 void Escenario::cambiar_cantidad_jugadores(int cantidad)
 {
+    if(cantidad < this->cant_construcciones){
+        QMessageBox msgBox;
+        msgBox.setText("La cantidad de jugadores asiganados es Menor a la cantidad de construcciones");
+        msgBox.exec();
+        return;
+    }
     this->cant_jugadores = cantidad;
     std::cout << this->cant_jugadores << std::endl;
 }

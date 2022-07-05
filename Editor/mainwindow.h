@@ -39,13 +39,9 @@ private slots:
 
     void on_button_precipicio_clicked();
 
-    void on_button_vacio_clicked();
-
     void on_button_agregar_fila_clicked();
 
     void on_button_columna_clicked();
-
-    void on_button_mute_clicked();
 
     void on_actionSave_triggered();
 
@@ -53,15 +49,11 @@ private slots:
 
     void on_button_tiles_clicked();
 
-    void on_button_unidades_clicked();
 
     void on_button_construcciones_clicked();
 
     void on_button_cambiar_forma_clicked();
 
-
-
-    void on_button_const_ordos_clicked();
 
     void on_button_cant_jugadores_clicked();
 
@@ -76,6 +68,12 @@ private slots:
     void on_button_especia_clicked();
 
     void on_button_asignar_especia_clicked();
+
+    void on_button_play_clicked();
+
+    void on_button_pausa_clicked();
+
+    void on_button_opciones_clicked();
 
 private:
     Ui::MainWindow *ui;
