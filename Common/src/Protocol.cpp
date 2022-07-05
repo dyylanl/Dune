@@ -523,8 +523,8 @@ void Protocol::sendBuildings(Socket &socket, std::vector<BuildingDTO> buildings)
         char build_type = buildings[i].type;
         uint16_t id = buildings[i].build_id;
         uint8_t player = buildings[i].build_id;
-        uint16_t pos_x = (buildings[i].pos_x);
-        uint16_t pos_y = (buildings[i].pos_y);
+        uint16_t pos_x = (buildings[i].pos_x)*BLOCK_HEIGHT;
+        uint16_t pos_y = (buildings[i].pos_y)*BLOCK_WIDTH;
         uint16_t life = buildings[i].life;
         socket.send((const char *)&type, sizeof(uint8_t));
         socket.send((const char *)&build_type, sizeof(uint8_t));

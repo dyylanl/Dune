@@ -42,8 +42,6 @@ Map::Map(std::string map_path) :
         buildings.push_back(construction_center);
         BuildingDTO centerDto;
         centerDto.type = CONSTRUCTION_CENTER_KEY;
-        centerDto.pos_x = construction_center->getPosition().x;
-        centerDto.pos_y = construction_center->getPosition().y;
         centerDto.life = construction_center->getLife();
         buildingsDTO.push_back(centerDto);
     }
