@@ -57,11 +57,8 @@ void Celda::setImagen(QString tipo){
     QString especia = "Especia";
     QString asignar_especia = "Asignar Especia";
 
-    if(tipo == especia && this->estado_actual == "Vacio"){
-        this->estado_actual = tipo;
-        this->imagen.load(":/resources/tile_especia.png");
-        this->imagen = this->imagen.scaled(32, 32);
-        this->setPixmap(imagen);
+    if(this->ocupada == true){
+        return;
     }
 
     if(tipo == asignar_especia && this->estado_actual == especia){

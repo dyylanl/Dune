@@ -67,11 +67,6 @@ void MainWindow::on_button_precipicio_clicked()
 }
 
 
-void MainWindow::on_button_vacio_clicked()
-{
-    this->escenario->change_last_clicked("Vacio");
-}
-
 
 void MainWindow::on_button_agregar_fila_clicked()
 {
@@ -85,27 +80,23 @@ void MainWindow::on_button_columna_clicked()
 }
 
 
-void MainWindow::on_button_mute_clicked()
-{
-    this->music_player->pause();
-
-
-
-}
-
 
 void MainWindow::on_actionSave_triggered()
 {
     int cant_construcciones = this->escenario->get_cantidad_construcciones();
     int cant_jugadores = this->escenario->get_cantidad_jugadores();
+    std::string str_cant_construcciones = std::to_string(cant_construcciones);
+    std::string str_cant_jugaadores = std::to_string(cant_jugadores);
     if(cant_construcciones < cant_jugadores){
+        std::string mensaje = "La cantidad de construcciones(" + str_cant_construcciones + ")" + " es Menor a la cantidad de jugadores(" + str_cant_jugaadores + ")";
         QMessageBox msgBox;
-        msgBox.setText("La cantidad de construcciones es Menor a la cantidad de jugadores");
+        msgBox.setText(QString::fromStdString(mensaje));
         msgBox.exec();
         return;
     }
     if(cant_construcciones > cant_jugadores){
         QMessageBox msgBox;
+        std::string mensaje = "La cantidad de construcciones(" + str_cant_construcciones + ")" + "es Mayor a la cantidad de jugadores(" + str_cant_jugaadores + ")";
         msgBox.setText("La cantidad de construcciones es Mayor a la cantidad de jugadores");
         msgBox.exec();
         return;
@@ -119,6 +110,9 @@ void MainWindow::on_actionSave_triggered()
     }
     QString extension = ".yaml";
     QString save_name = file_manager->getSaveFileName(this,"Sava a File",QDir::homePath());
+    if(save_name == ""){
+        return;
+    }
     QString full_path = save_name + extension;
     std::cout << full_path.toStdString() << std::endl;
     this->escenario->guardar(full_path);
@@ -129,7 +123,9 @@ void MainWindow::on_actionLoadd_triggered()
 {
     QString filter = "yaml (*.yaml)";
     QString file_name = this->file_manager->getOpenFileName(this,"Open a file",QDir::homePath(),filter);
-
+    if(file_name == ""){
+        return;
+    }
     this->escenario->cargar(file_name);
 }
 
@@ -139,11 +135,6 @@ void MainWindow::on_button_tiles_clicked()
     this->ui->stackedWidget->setCurrentIndex(0);
 }
 
-
-void MainWindow::on_button_unidades_clicked()
-{
-    this->ui->stackedWidget->setCurrentIndex(1);
-}
 
 
 void MainWindow::on_button_construcciones_clicked()
@@ -171,13 +162,6 @@ void MainWindow::mostrar_dialog_asignar_jugador()
  this->dialog_asignar_jugadores.show();
 }
 
-
-void MainWindow::on_button_const_ordos_clicked()
-{
-    this->escenario->change_last_clicked("CC_Ordos");
-
-
-}
 
 
 void MainWindow::on_button_cant_jugadores_clicked()
@@ -217,5 +201,23 @@ void MainWindow::on_button_especia_clicked()
 void MainWindow::on_button_asignar_especia_clicked()
 {
     this->escenario->change_last_clicked("Asignar Especia");
+}
+
+
+void MainWindow::on_button_play_clicked()
+{
+    this->music_player->play();
+}
+
+
+void MainWindow::on_button_pausa_clicked()
+{
+    this->music_player->pause();
+}
+
+
+void MainWindow::on_button_opciones_clicked()
+{
+    this->ui->stackedWidget->setCurrentIndex(3);
 }
 

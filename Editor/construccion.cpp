@@ -70,3 +70,6 @@ void Construccion::verifcar_jugador(int jugador){
         this->escenario->agregar_jugador(jugador);
         this->jugador = jugador;    }
 }
+
+Construccion::~Construccion(){
+}
