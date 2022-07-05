@@ -24,21 +24,21 @@ Command* CommandFactory::newCommand(InstanceId caller, uint8_t opcode,
     Protocol protocol;
     switch (opcode) {
         case SELECT_UNIT_COMMAND: { //5
-            uint16_t pos_x = protocol.recvResponse(socket);
-            uint16_t pos_y = protocol.recvResponse(socket);
+            uint16_t pos_x = protocol.recvPosition(socket);
+            uint16_t pos_y = protocol.recvPosition(socket);
             return new SelectUnitCommand(caller, pos_x, pos_y);
         }
 
         case MOVE_UNIT_COMMAND: { // 6
-            uint16_t pos_x = protocol.recvResponse(socket);
-            uint16_t pos_y = protocol.recvResponse(socket);
+            uint16_t pos_x = protocol.recvPosition(socket);
+            uint16_t pos_y = protocol.recvPosition(socket);
             return new MoveUnitCommand(caller, pos_x, pos_y);
         }
 
         case BUILD_BUILDING_COMMAND: {  // 7
             char building_type = protocol.recvOneByte(socket);
-            uint16_t pos_x = protocol.recvTwoBytes(socket);
-            uint16_t pos_y = protocol.recvTwoBytes(socket);
+            uint16_t pos_x = protocol.recvPosition(socket);
+            uint16_t pos_y = protocol.recvPosition(socket);
             return new BuildBuildingCommand(caller, building_type, pos_x, pos_y);
         }
 

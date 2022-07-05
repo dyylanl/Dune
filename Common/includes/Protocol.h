@@ -37,6 +37,9 @@ public:
 
     void sendUnit(Socket &socket, char type, int pos_x, int pos_y);
     void sendBuild(Socket &socket, char build, int posX, int posY);
+
+    uint16_t recvPosition(Socket &socket);
+
     /*
      * Envia la informacion requerida para crear una partida.
      */
@@ -125,8 +128,6 @@ public:
     /*
      * Retorna una posicion
      */
-    static std::vector<int> recvPosition(Socket &skt);
-
     void sendBuild(Socket &socket, int build, int posX, int posY);
 
     void operationRecv(Socket &socket, char &operation);

@@ -214,14 +214,10 @@ void Protocol::sendPosition(Socket &socket, unsigned int x, unsigned int y) {
     socket.send(reinterpret_cast<const char *>(&y), sizeof(uint16_t));
 }
 
-std::vector<int> Protocol::recvPosition(Socket &socket) {
-    int x,y=0;
-    std::vector<int> pos;
-    socket.recv(reinterpret_cast<char *>(&x), sizeof(uint16_t));
-    socket.recv(reinterpret_cast<char *>(&y), sizeof(uint16_t));
-    pos.emplace_back(x);
-    pos.emplace_back(y);
-    return pos;
+uint16_t Protocol::recvPosition(Socket &socket) {
+    uint16_t pos = 0;
+    pos = this->recvTwoBytes(socket);
+    return ntohs(pos);
 }
 
 char Protocol::recvUnitType(Socket &socket) {
@@ -507,7 +503,6 @@ std::vector<std::vector<std::string>> Protocol::recvMapsCreated(Socket &socket) 
 
 void Protocol::sendEstablishConnection(Socket &socket) {
     this->sendTwoBytes(socket,ESTABLISH_CONNECTION);
-    std::cout << "[PROTOCOL] Enviando conexion aceptada." << std::endl;
 }
 
 bool Protocol::recvEstablishConnection(Socket &socket) {
