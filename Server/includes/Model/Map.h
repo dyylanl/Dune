@@ -145,6 +145,10 @@ public:
 
     bool canMove(Unit& unit, Position pos);
 
+    Unit* getUnit(char type);
+
+    void occupy(Building* building);
+    void free(Building& building);
 
 
 };

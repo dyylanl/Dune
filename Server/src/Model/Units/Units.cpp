@@ -87,3 +87,11 @@ bool Unit::hasNews() {
 bool Unit::operator==(const Unit &other) {
     return this->id == other.id;
 }
+
+bool Unit::canMoveAboveTerrain(Terrain &terrain) {
+    return true;
+}
+
+void Unit::makeAttack(Map &map) {
+    return;
+}

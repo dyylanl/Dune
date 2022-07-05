@@ -237,3 +237,19 @@ bool Map::canMove(Unit& unit, Position pos) {
     return unit.canMoveAboveTerrain(this->at(pos)) && !this->at(pos).isOccupied();
 }
 
+void Map::free(Building &building) {
+    for (int i = 0; i < building.height; i++) {
+        for (int j = 0; j < building.width; j++) {
+            this->at(building.getPosition().x + j * BLOCK_WIDTH, building.getPosition().y + i * BLOCK_HEIGHT).free();
+        }
+    }
+}
+
+void Map::occupy(Building* building) {
+    for (int i = 0; i < building->height; i++) {
+        for (int j = 0; j < building->width; j++) {
+            this->at(building->getPosition().x + j, building->getPosition().y + i).buildOn(building);
+        }
+    }
+}
+
