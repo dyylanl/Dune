@@ -23,9 +23,6 @@ class Map {
     std::vector<std::vector<char>> mapa; // contiene el tipo de terreno_key para enviar a los clientes
 
 
-    std::vector<BuildingDTO> buildingsDTO;
-    std::vector<UnitDTO> unitsDTO;
-
     std::vector<Building*> buildings;
     std::vector<Unit*> units;
 
@@ -113,11 +110,6 @@ public:
     *   Al player de id le asigna una unidad del type en posicion x,y
     */
     void putUnit(InstanceId id_player, char type, int x, int y);
-
-    /*
-     *
-     */
-    void putUnit(Position pos, char unit_type);
 
     /*
     *   Le asigna una building al player del type en la pos x,y

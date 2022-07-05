@@ -29,8 +29,8 @@ Map::Map(std::string map_path) :
                             cols(map_reader.getCols()),
                             max_players(map_reader.getReqPlayers()),
                             mapa(map_reader.getMap()),
-                            buildingsDTO(),
-                            buildings()
+                            buildings(),
+                            units()
 {
     std::vector <std::vector<Terrain>> terrain_init((uint16_t) rows, std::vector<Terrain>((uint16_t) cols, Terrain('A')));
     this->terrrains = terrain_init;
@@ -182,16 +182,13 @@ Building* Map::getBuilding(char type, int x, int y) {
 }
 
 void Map::putUnit(InstanceId id_player, char type, int x, int y) {
-    UnitDTO unit;
-    unit.type = type;
-    unit.pos_x = x;
-    unit.pos_y = y;
-    unit.unit_id = id_player;
-    unitsDTO.push_back(unit);
+    Unit* unit = getUnit(type,x,y);
+    units.push_back(unit);
+    std::cout << "[Map] Jugador: " << id_player << " puso una unidad del tipo: " << type << " en " << x << "," << y << std::endl; 
+
 }
-// todo: usar la clase building
+
 void Map::putBuilding(char type, int x, int y) {
-    std::cout << " [1][Map] Construyendo un edificio del tipo " << type << " en " << x << "," << y << std::endl; 
     Position pos(x,y);
     pos.normalize();
     if (!isValid(pos)) {
@@ -200,12 +197,7 @@ void Map::putBuilding(char type, int x, int y) {
     }
     Building* build = getBuilding(type,pos.x,pos.y);
     buildings.push_back(build);
-    BuildingDTO buildDTO;
-    buildDTO.type = type;
-    buildDTO.pos_x = pos.x;
-    buildDTO.pos_y = pos.y;
-    buildingsDTO.push_back(buildDTO);
-    std::cout << " [2][Map] Se construyo un edificio del tipo " << type << " en " << pos.x << "," << pos.y << std::endl; 
+    std::cout << "[Map] Se construyo un edificio del tipo " << type << " en " << pos.x << "," << pos.y << std::endl; 
 }
 
 Map::~Map() {
@@ -217,21 +209,6 @@ Map::~Map() {
     }
 }
 
-void Map::putUnit(Position pos, char unit_type) {
-    //pos.normalize();
-    /*if (isValid(pos)) {
-        std::cout << "Poner unidad en posicion invalida: " << pos.x << "," << pos.y << std::endl;
-        return;
-    }*/
-    Unit* unit = getUnit(unit_type, pos.x, pos.y);
-    units.push_back(unit);
-    UnitDTO unit1{};
-    unit1.type = unit_type;
-    unit1.pos_x = pos.x;
-    unit1.pos_y = pos.y;
-    unitsDTO.push_back(unit1);
-    std::cout << "Unidad del tipo " << unit_type << " creada en la posicion " << pos.x << "," << pos.y << std::endl;
-}
 
 void Map::loadConstructionsCenter() {
 
