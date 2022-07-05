@@ -18,7 +18,6 @@ Response& Response::operator=(const Response& other) {
 }
 
 bool Response::send(const InstanceId sender, const Socket& peer) {
-    // Enviamos la notificación según el protocolo
     if (!(protocol.sendResponse((Socket &)(peer), message_type))) {
         return false;
     }

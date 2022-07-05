@@ -6,8 +6,6 @@ YAMLReader::YAMLReader(const std::string filename) :
 
 
 /*
-
-
 std::string YAMLReader::getPort() {
     return this->config["port"].as<std::string>();
 }

@@ -34,7 +34,6 @@ void ClientConnection::_sender() {
         delete unit;
     } catch (const std::exception& e) {
         stop();
-        //fprintf(stderr, "[ClientConnection]: Error en el hilo sender: %s\n", e.what()); ya esta cerrado el socket no se puede hacer un send
     } catch (...) {
         stop();
         fprintf(stderr, "[ClientConnection]: Error desconocido.\n");

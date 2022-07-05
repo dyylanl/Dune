@@ -1,6 +1,6 @@
 #include "GameConfiguration.h"
 
-std::unique_ptr<GameConfiguration> GameConfiguration::instance(nullptr);
+std::shared_ptr<GameConfiguration> GameConfiguration::instance(nullptr);
 
 GameConfiguration::GameConfiguration(const ConfigurationReader& config) :
         speedFactor(config.getSpeedFactor()),
@@ -111,10 +111,12 @@ GameConfiguration::GameConfiguration(const ConfigurationReader& config) :
         tankConstructionTime(config.getTrainingTimeFor(Unit::UnitType::TANK) * timeFactor),
         tankCost(config.getCostFor(Unit::UnitType::TANK)) {}
 
+
+
 void GameConfiguration::init(const char *string) {
     if (instance == nullptr) {
         ConfigurationReader config(string);
-        instance = std::unique_ptr<GameConfiguration>(new GameConfiguration(config));
+        instance = std::shared_ptr<GameConfiguration>(new GameConfiguration(config));
     }
 }
 
@@ -122,7 +124,7 @@ GameConfiguration& GameConfiguration::getConfig() {
     if (instance == nullptr) {
         std::string path = "../config.yaml";
         ConfigurationReader config(path);
-        instance = std::unique_ptr<GameConfiguration>(new GameConfiguration(config));
+        instance = std::shared_ptr<GameConfiguration>(new GameConfiguration(config));
     }
     return *instance;
 }

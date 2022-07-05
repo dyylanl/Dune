@@ -16,51 +16,36 @@ private:
     std::string playerName;
     bool news;
 
-public:     // El cliente sólo debería tenerse a su propio player disponible
-    int generatedEnergy; // Se sumara durante el constructor de la trampa de viento y se restara durante su destructor
-    int consumedEnergy; // se suma cuando se construye un edificio, se resta cuando se destruye
-    int gold;   // Se restara durante los constructores
-    int gold_limit; // Se sumara dentro del constructor de la refineria o el silo
+public:
+    int generatedEnergy;
+    int consumedEnergy;
+    int gold;
+    int gold_limit;
 
     std::vector<Building*> buildings;
     std::vector<Unit*> units;
     ConstructionCenter* construction_center;
-
     std::vector<Unit*>& getTrainedUnits(Map& map);
-
     explicit Player(InstanceId id, ConstructionCenter &construction_center);
-
     void addGold(int gold_to_add);
     void subGold(int gold_to_sub);
     float getEnergyFactor();
-
     void addBuilding(Building* building);
     void cleanDeadBuildings();
-
     Building * getClosestBuilding(Position pos, Building::BuildingType type);
     bool hasBuilding(Building& building);
     bool hasBuilding(Building::BuildingType buildingType);
-
     ConstructionCenter& getConstructionCenter();
-
     bool lose();
-
     bool isDefeated();
-
     void trainUnits();
     void constructBuildings();
-
     int getId() const;
     std::string& getHouse();
-
     bool operator==(const Player& other) const;
-
     void sellBuilding(Building* building);
-
     bool hasNews();
-
     Position getBarrackPosition();
-
     void clean();
 };
 

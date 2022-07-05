@@ -39,7 +39,6 @@ void Model::putUnit(InstanceId id_player, char unit_type) {
 
 void Model::addPlayer(InstanceId player_id) {
     current_players += 1;
-    std::cout << "[MODEL]: Jugador agregado" << std::endl;
     //ConstructionCenter* center = map.getConstructionCenterFor(player_id);
     //Player player(player_id, *center);
     //players[player_id] = player;
