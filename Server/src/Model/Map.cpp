@@ -216,11 +216,11 @@ Map::~Map() {
 }
 
 void Map::putUnit(Position pos, char unit_type) {
-    pos.normalize();
-    if (isValid(pos)) {
+    //pos.normalize();
+    /*if (isValid(pos)) {
         std::cout << "Poner unidad en posicion invalida: " << pos.x << "," << pos.y << std::endl;
         return;
-    }
+    }*/
     Unit* unit = getUnit(unit_type, pos.x, pos.y);
     units.push_back(unit);
     UnitDTO unit1{};
@@ -228,6 +228,7 @@ void Map::putUnit(Position pos, char unit_type) {
     unit1.pos_x = pos.x;
     unit1.pos_y = pos.y;
     unitsDTO.push_back(unit1);
+    std::cout << "Unidad del tipo " << unit_type << " creada en la posicion " << pos.x << "," << pos.y << std::endl;
 }
 
 void Map::loadConstructionsCenter() {

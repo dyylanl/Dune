@@ -35,8 +35,7 @@ void Model::buildBuilding(InstanceId id_player, char build_type, int x, int y) {
 }
 
 void Model::putUnit(InstanceId id_player, char unit_type) {
-    std::cout << "[Model] Jugador " << id_player << " puso unidad del tipo " << unit_type << std::endl;
-    map.putUnit(players.at(id_player).getBarrackPosition(), unit_type);
+    map.putUnit(Position(5,5), unit_type);
 }
 
 void Model::addPlayer(InstanceId player_id) {

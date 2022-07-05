@@ -16,5 +16,4 @@ CreateUnitCommand::~CreateUnitCommand() = default;
 
 void CreateUnitCommand::exec(Model &model) {
     model.putUnit(caller, unit_type);  // todo: posicion harcodeada para probar
-    std::cout << "[COMMAND]: Creando unidad del tipo " << unit_type <<std::endl;
 }
