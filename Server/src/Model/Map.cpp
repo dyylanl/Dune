@@ -15,6 +15,12 @@
 #include "../../includes/Model/Buildings/WindTrap.h"
 #include "../../includes/Model/Buildings/Palace.h"
 #include "../../../Common/includes/Exceptions/Exception.h"
+#include "../../includes/Model/Units/LightInfantry.h"
+#include "../../includes/Model/Units/HeavyInfantry.h"
+#include "../../includes/Model/Units/Harvester.h"
+#include "../../includes/Model/Units/Trike.h"
+#include "../../includes/Model/Units/Raider.h"
+#include "../../includes/Model/Units/Tank.h"
 
 
 Map::Map(std::string map_path) :
@@ -187,11 +193,13 @@ void Map::putUnit(Position pos, char unit_type) {
         std::cout << "Poner unidad en posicion invalida: " << pos.x << "," << pos.y << std::endl;
         return;
     }
-    UnitDTO unit{};
-    unit.type = unit_type;
-    unit.pos_x = pos.x;
-    unit.pos_y = pos.y;
-    unitsDTO.push_back(unit);
+    Unit* unit = getUnit(unit_type, pos.x, pos.y);
+    units.push_back(unit);
+    UnitDTO unit1{};
+    unit1.type = unit_type;
+    unit1.pos_x = pos.x;
+    unit1.pos_y = pos.y;
+    unitsDTO.push_back(unit1);
 }
 
 ConstructionCenter* Map::getConstructionCenterFor(InstanceId player_id) {
@@ -250,6 +258,18 @@ void Map::occupy(Building* building) {
         for (int j = 0; j < building->width; j++) {
             this->at(building->getPosition().x + j, building->getPosition().y + i).buildOn(building);
         }
+    }
+}
+
+Unit *Map::getUnit(char type, int x, int y) {
+    switch (type) {
+        case LIGHT_INFANTRY_KEY: return new LightInfantry(x,y);
+        case HEAVY_INFANTRY_KEY: return new HeavyInfantry(x,y);
+        case HARVESTER_KEY: return new Harvester(x,y);
+        case TRIKE_KEY: return new Trike(x,y);
+        case RAIDER_KEY: return new Raider(x,y);
+        case TANK_KEY: return new Tank(x,y);
+        default: throw Exception("Invalid get unit type");
     }
 }
 

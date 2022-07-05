@@ -1,5 +1,6 @@
 #include "../../includes/Model/Player.h"
 #include "../../config/GameConfiguration.h"
+#include "../../includes/Model/Buildings/Barrack.h"
 
 Player::Player(InstanceId id1, ConstructionCenter &construction_center):
         id(id1),
@@ -153,7 +154,7 @@ bool Player::isDefeated(){
 }
 
 Position Player::getBarrackPosition() {
-    return buildings.at(BARRACKS_KEY)->getPosition();
+    return Position(10,10);
 }
 
 void Player::clean() {
