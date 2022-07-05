@@ -2,6 +2,7 @@
 #define __POSITION_H__
 
 #include <vector>
+#include "../types.h"
 
 class Position {
 
@@ -14,6 +15,7 @@ public:
     bool operator==(const Position& other) const;
     bool operator<(const Position& other) const;
     int sqrtDistance(const Position &pos) const;
+    void normalize();
 };
 
 #endif //__POSITION_H__

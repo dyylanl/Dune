@@ -7,6 +7,7 @@
 #include "../../../../Common/includes/Protocol.h"
 #include "../../../../Common/includes/Socket/Socket.h"
 #include "../../../../Server/includes/defs.h"
+#include "../../Model/Model.h"
 //-----------------------------------------------------------------------------
 
 

@@ -22,7 +22,7 @@ public:
     ClientsConnected(ClientsConnected&& other) = delete;
     ClientsConnected& operator=(ClientsConnected&& other) = delete;
 
-    void add(const InstanceId id, const Id map, Socket& peer);
+    void add(const InstanceId id, Socket peer);
     void remove(const InstanceId id);
     /*
      * [WARNING] CIERRE FORZOSO
@@ -31,7 +31,6 @@ public:
     ~ClientsConnected();
 
     void notify(Id player_id, Response* resp);
-
 
     void initGame(std::vector<std::vector<char>>& map);
 

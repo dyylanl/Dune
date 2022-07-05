@@ -35,23 +35,17 @@ public:
 
     // Retorna el elemento de la cola y si esta vacia deja en wait al
     // hilo q solicita dicho elemento.
-    T &&front() {
+    bool pop(T &&t) {
         std::unique_lock<std::mutex> l(m);
         while (queue.empty()) {
             if (permanently_closed) {
-                throw ClosedQueue("blocking queue is closed");
+                return false;
             }
             cv.wait(l);
         }
-        return std::move(queue.front());
-    }
-
-    void pop() {
-        std::unique_lock<std::mutex> l(m);
-        if (queue.empty()) {
-            throw EmptyQueue("pop into a empty blocking queue");
-        }
+        t = std::move(queue.front());
         queue.pop();
+        return true;
     }
 
     // cierra la cola y le avisa a todos los hilos.

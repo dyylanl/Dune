@@ -8,8 +8,8 @@
 #define SUCCESS 0
 #define ERROR 1
 
-ClientLogin::ClientLogin(Game& game1, Socket& peer) : 
-        is_running(true), 
+ClientLogin::ClientLogin(Game& game1, Socket& peer) :
+        is_running(true),
         peer(std::move(peer)),
         protocol(),
         game(game1) {}
@@ -80,31 +80,32 @@ void ClientLogin::execute(uint8_t command, std::string name_player) {
         uint8_t map_id = protocol.recvOneByte(peer); // recibo el mapa que eligio para crear la partida
         uint16_t flag_create = game.createGame(map_id, name_game); // pido al game que cree esa partida
         if (flag_create == SUCCESS) { // si la respuesta es 0 entonces el game me creo la partida
-            game.acceptPlayer(peer, name_player, name_game); // si la partida se creo entonces le digo al game que me acepte este player
+            game.acceptPlayer(std::move(peer), name_player, name_game); // si la partida se creo entonces le digo al game que me acepte este player
             is_running = false;
         } else {
             protocol.sendTwoBytes(peer,ERROR);
         }
     }
-    /*
-     * Si el comando es join entonces:
-     *  1° Le pido el nombre a la partida que desea unirse
-     *  2° Envio la respuesta si se pudo unir o no
-     */
+        /*
+         * Si el comando es join entonces:
+         *  1° Le pido el nombre a la partida que desea unirse
+         *  2° Envio la respuesta si se pudo unir o no
+         */
     else if (command == JOIN_GAME) {
         std::string name_game = protocol.recvName(peer);
-        uint16_t  flag_join = game.acceptPlayer(peer, name_player, name_game);
-        if (flag_join == SUCCESS) {
+        if (game.acceptNewPlayer(name_game)) {
+            game.acceptPlayer(std::move(peer), name_player, name_game);
             is_running = false;
         } else {
             protocol.sendTwoBytes(peer,ERROR);
         }
     }
-    /*
-     * Envio la lista de partidas actuales
-     */
+        /*
+         * Envio la lista de partidas actuales
+         */
     else if (command == LIST_GAMES) {
         protocol.sendGameList(peer, game.listGames());
+        return;
     }
 }
 

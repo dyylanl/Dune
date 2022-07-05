@@ -20,19 +20,13 @@ private:
     std::map<Id,MapDTO> maps_dto_init;
 
     /*
-    *   Contiene la informacion de cada partida
-    *   Estructura:     {... ,game_nameN : [current_playersN, req_playersN, map_idN], ...}
-    */
-   std::map<std::string, std::vector<int>> info_games;
-
-    /*
     * Cada vez que se cree una partida se iniciara un Engine para manejar esa partida y unir los jugadores a esa partida
     */
     std::map<std::string,Engine*> games;
-    
+
 
     std::mutex mutex;
-    ConfigurationReader game_config;
+    ConfigurationReader config;
 
 
     // ---------- METODOS ------------- //
@@ -70,7 +64,7 @@ public:
      * retorna 0 si lo pudo unir
      * retorna 1 si no lo pudo unir (es decir, esta completa esa partida o bien no existe)
      */
-    uint16_t acceptPlayer(Socket &peer, std::string name_player, std::string name_game);
+    uint16_t acceptPlayer(Socket peer, std::string name_player, std::string name_game);
 
 
     /*
@@ -79,25 +73,25 @@ public:
     std::vector<std::vector<std::string>> listGames();
 
     /*
-    * Retorna el id de mapa asociado a esa partida
+    * Retorna todos los MapDTO que se cargaron en el servidor.
     */
-    Id getMapId(std::string name_game);
-   
-   /*
-   * Retorna todos los MapDTO que se cargaron en el servidor.
-   */
-   std::vector<MapDTO> getMapsLoads();
+    std::vector<MapDTO> getMapsLoads();
 
     /*
     *   Termina todas las partidas corriendo en el servidor-
     */
-   void stop();
+    void stop();
 
     /*
     *   Metodo para registrar la cantidad de jugadores en todas las partidas creadas
     */
-   std::vector<std::vector<InstanceId>> getAllPlayers();
-   
+    std::vector<std::vector<InstanceId>> getAllPlayers();
+
+    /*
+    *   Retorna false si la partida indicada esta empezada o aka completa, sino true.
+    */
+    bool acceptNewPlayer(std::string name_game);
+
     /*
     *   Elimina todas las partidas creadas
     */

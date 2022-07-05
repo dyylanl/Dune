@@ -67,19 +67,18 @@ void Engine::_loopIteration(int it) {
     //established_connections.updateClients();
     _processFinishedConnections();
 }
-
+/*
 Engine::Engine(MapDTO map_dto)
         : keep_executing(true),
           rate(30),
           map(map_dto.path),
           current_players(0),
           req_players(map_dto.max_players),
-          map_id(map_dto.map_id),
-          name_game(map_dto.name_map),
+          started(false),
           finished_connections(),
           commands(),
           established_connections(commands, finished_connections) {}
-
+*/
 
 void Engine::run() {
     fprintf(stderr, "[Engine]: Empezando ejecución.\n");
@@ -87,6 +86,7 @@ void Engine::run() {
     RateController rate_controller(rate);
     established_connections.start();
     rate_controller.start();
+    started = (true);
     // GAME-LOOP
     while (keep_executing) {
         _loopIteration(rate_controller.getRateLoop());
@@ -112,7 +112,7 @@ uint16_t Engine::addClient(NewConnection client) {
     uint16_t ret = ERROR;
     if (current_players < req_players) {
         current_players += 1;
-        established_connections.add((InstanceId)current_players,client.map_id,client.peer);
+        established_connections.add((InstanceId)current_players,std::move(client.peer));
         if (current_players == req_players) {
             this->start();
         }
@@ -127,3 +127,15 @@ std::vector<InstanceId> Engine::getAllPlayers() {
 }
 
 Engine::~Engine() {}
+
+Engine::Engine(ConfigurationReader &config, std::string map_path) :
+                                    keep_executing(true),
+                                    rate(30),
+                                    map(map_path),
+                                    current_players(0),
+                                    req_players(map.getMaxPlayers()),
+                                    started(false),
+                                    finished_connections(),
+                                    commands(),
+                                    established_connections(commands, finished_connections),
+                                    config(config) {}

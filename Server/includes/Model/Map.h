@@ -15,6 +15,7 @@ class Map {
 
     MapReader map_reader;
     int rows, cols;
+    int max_players;
 
     std::vector<std::vector<Terrain>> terrrains; // contiene el tipo de terreno en esa pos
     std::vector<std::vector<char>> mapa; // contiene el tipo de terreno_key para enviar a los clientes
@@ -30,6 +31,8 @@ public:
     *   Recibe por parametro la ruta al archivo del mapa.yaml para inicializarse
     */
     explicit Map(std::string path_config);
+
+    int getMaxPlayers() {return max_players;}
 
     /*
     *   Destructor de mapa
@@ -104,9 +107,14 @@ public:
     void putUnit(InstanceId id_player, char type, int x, int y);
 
     /*
+     *
+     */
+    void putUnit(Position pos, char unit_type);
+
+    /*
     *   Le asigna una building al player del type en la pos x,y
     */
-    void putBuilding(InstanceId id_player, char type, int x, int y);
+    void putBuilding(char type, int x, int y);
 
 };
 

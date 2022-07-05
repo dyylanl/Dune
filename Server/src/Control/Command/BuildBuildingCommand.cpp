@@ -14,5 +14,5 @@ BuildBuildingCommand::BuildBuildingCommand(const InstanceId caller,
 BuildBuildingCommand::~BuildBuildingCommand() = default;
 
 void BuildBuildingCommand::exec(Map &map) {
-    map.putBuilding(caller,build_type,pos_x,pos_y);
+    map.putBuilding(/*caller,*/build_type,pos_x,pos_y);
 }
