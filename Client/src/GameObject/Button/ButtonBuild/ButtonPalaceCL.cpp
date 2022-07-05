@@ -15,10 +15,11 @@ void ButtonPalaceCL::buildBuilding(BQueue<std::unique_ptr<CommandCL>> &queue, SD
     queue.push(std::move(command));
 }
 
-void ButtonPalaceCL::draw(SDL2pp::Renderer &renderer, TextureManager &textureManager) {
-    ButtonCL::draw(renderer, textureManager);
+void ButtonPalaceCL::draw(SDL2pp::Renderer &renderer, TextureManager &textureManager, Camera &camera) {
+    Camera cam(SDL2pp::Point(0,0));
+    ButtonCL::draw(renderer, textureManager, cam);
     if(m_selectStatus && m_ready) {
         m_build.setPosition(m_positionBuild);
-        m_build.draw(renderer, textureManager);
+        m_build.draw(renderer, textureManager, cam);
     }
 }

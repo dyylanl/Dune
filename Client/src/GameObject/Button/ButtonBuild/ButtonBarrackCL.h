@@ -14,7 +14,7 @@ class ButtonBarrackCL : public ButtonBuildCL {
 public:
     ButtonBarrackCL(int id, char player, int constructionTime, bool selectStatus, bool ready);
 
-    void draw(SDL2pp::Renderer &renderer, TextureManager &textureManager);
+    void draw(SDL2pp::Renderer &renderer, TextureManager &textureManager, Camera &camera);
 
     void buildBuilding(BQueue<std::unique_ptr<CommandCL>> &queue, SDL2pp::Point point);
 

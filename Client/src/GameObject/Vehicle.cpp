@@ -30,7 +30,7 @@ void Vehicle::processEvent(SDL_Event &event, BQueue<std::unique_ptr<CommandCL>> 
     }
 }
 
-void Vehicle::draw(SDL2pp::Renderer &renderer, TextureManager &textureManager) {
+void Vehicle::draw(SDL2pp::Renderer &renderer, TextureManager &textureManager, Camera &camera) {
     SDL2pp::Point posFrame(0,0);
-    textureManager.drawFrame(renderer, m_textureID, m_position, m_size, posFrame);
+    textureManager.drawFrame(renderer, m_textureID, m_position, m_size, posFrame, camera);
 }
