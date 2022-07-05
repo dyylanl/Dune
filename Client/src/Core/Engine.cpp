@@ -30,10 +30,10 @@ void Engine::Events() {
 
 void Engine::Update() {
         while (m_queueNb.pop(std::move(m_objects))) {}
-        unsigned int sizeObjects = m_objects.size();
+        /*unsigned int sizeObjects = m_objects.size();
         for (unsigned int i = 0; i < sizeObjects; ++i) {
             m_objects[i]->cameraOffset(m_camera);
-        }
+        }*/
 }
 
 void Engine::Render(SDL2pp::Renderer &m_Renderer) {
@@ -41,18 +41,18 @@ void Engine::Render(SDL2pp::Renderer &m_Renderer) {
     m_TextureManager.drawMap(m_Renderer, m_mapa, m_camera);
     m_TextureManager.draw(m_Renderer, MENU, SDL2pp::Point(1089, 0), SDL2pp::Point(191, 720));
     for (int i = 0; i < (int) m_objects.size(); ++i) {
-        m_objects[i]->draw(m_Renderer, m_TextureManager);
+        m_objects[i]->draw(m_Renderer, m_TextureManager, m_camera);
     }
 
     for (int i = 0; i < (int) m_menu.size(); ++i) {
-        m_menu[i]->draw(m_Renderer, m_TextureManager);
+        m_menu[i]->draw(m_Renderer, m_TextureManager, m_camera);
     }
     m_Renderer.Present();
 }
 
-Engine::Engine(std::vector<std::vector<char>> &mapa, std::vector<std::unique_ptr<ButtonCL>> &menu,TextureManager &textureManager,
+Engine::Engine(Camera &camera, std::vector<std::vector<char>> &mapa, std::vector<std::unique_ptr<ButtonCL>> &menu,TextureManager &textureManager,
                NBQueue<std::vector<std::unique_ptr<GameObject>>> &queueNb, BQueue<std::unique_ptr<CommandCL>> &queueB)
-               : m_mapa (mapa), m_menu(std::move(menu)), m_TextureManager(textureManager),
+               : m_camera(camera), m_mapa (mapa), m_menu(std::move(menu)), m_TextureManager(textureManager),
                  m_queueNb(queueNb), m_queueB(queueB){
     m_Running = true;
 }

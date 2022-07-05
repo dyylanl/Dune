@@ -9,6 +9,8 @@
 #include "DTOs/MapDTO.h"
 #include "DTOs/BuildingDTO.h"
 #include "DTOs/UnitDTO.h"
+#include "Buildings/ConstructionCenter.h"
+#include "Units/Unit.h"
 
 
 class Map {
@@ -23,6 +25,12 @@ class Map {
 
     std::vector<BuildingDTO> buildingsDTO;
     std::vector<UnitDTO> unitsDTO;
+
+    std::vector<Building*> buildings;
+    std::vector<Unit*> units;
+
+
+    void loadConstructionsCenter();
 
 
 public:
@@ -115,6 +123,33 @@ public:
     *   Le asigna una building al player del type en la pos x,y
     */
     void putBuilding(char type, int x, int y);
+
+
+    Building* getBuilding(char type, int x, int y);
+
+    Unit* getUnit(char type, int x, int y);
+
+
+
+
+
+
+
+
+
+
+    //-----------------------------------//
+    void setDestiny(Unit& unit, int x_dest, int y_dest);
+
+    Attackable * getClosestAttackable(Position &position, int limitRadius, Player& player);
+
+    bool canMove(Unit& unit, Position pos);
+
+    Unit* getUnit(char type);
+
+    void occupy(Building* building);
+    void free(Building& building);
+
 
 };
 

@@ -13,10 +13,10 @@
 
 class Camera {
 private:
-    SDL2pp::Point m_position;
     SDL2pp::Rect m_viewBox;
+
 public:
-    Camera() : m_viewBox(SDL2pp::Point(0, 0),SDL2pp::Point(GAME_WIDTH, GAME_HEIGHT)) {}
+    Camera(SDL2pp::Point corner) : m_viewBox(corner,SDL2pp::Point(GAME_WIDTH, GAME_HEIGHT)) {}
     void update(SDL_Event &event);
     SDL2pp::Point getPosicion();
 };

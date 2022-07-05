@@ -1,7 +1,5 @@
 #include "../../../includes/Model/Terrains/Terrain.h"
 
-Terrain::Terrain() : key('.'), occupied(false), speed_factor(1) {}
-
 Terrain::Terrain(char key) : key(key), occupied(false), builtOn(false), speed_factor(1) {}
 
 char Terrain::getKey() {
@@ -16,6 +14,14 @@ void Terrain::occupy(){
     occupied = true;
 }
 
+Building* Terrain::getBuilding(){
+    return nullptr;
+}
+
+void Terrain::free(){
+    occupied = false;
+    builtOn = false;
+}
 
 bool Terrain::isOccupied(){
     return occupied || builtOn;
@@ -37,6 +43,10 @@ bool Terrain::hasFarm() {
     return false;
 }
 
-int Terrain::getSpeedFactor() const {
+int Terrain::getSpeedFactor() {
     return this->speed_factor;
+}
+
+void Terrain::buildOn(Building *building) {
+
 }

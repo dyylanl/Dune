@@ -18,6 +18,6 @@ public:
                    uint16_t pos_y);
     ~SelectUnitCommand() override;
 
-    void exec(Map &map) override;
+    void exec(Model &model) override;
 };
 #endif //DUNE_SELECTUNITCOMMAND_H

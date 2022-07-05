@@ -12,7 +12,7 @@ class LightFactoryCL : public BuildCL {
 public:
     LightFactoryCL(int id, int player, SDL2pp::Point position, int life);
 
-    void draw(SDL2pp::Renderer &renderer, TextureManager &textureManager);
+    void draw(SDL2pp::Renderer &renderer, TextureManager &textureManager, Camera &camera);
 
     ~LightFactoryCL() {}
 };

@@ -25,7 +25,7 @@ public:
 
     //-------------------------------------------------------------------------
 
-    virtual void exec(Map &map) = 0;
+    virtual void exec(Model &model) = 0;
 
     virtual ~Command();
 };

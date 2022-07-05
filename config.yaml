@@ -1,10 +1,10 @@
 ticks_per_sec: 30
 total_maps: 4
 maps:
-  0: "/home/fede/Desktop/Taller_1/tp_final_11/Dune/mapa1.yaml"
-  1: "/home/fede/Desktop/Taller_1/tp_final_11/Dune/mapa2.yaml"
-  2: "/home/fede/Desktop/Taller_1/tp_final_11/Dune/mapa3.yaml"
-  3: "/home/fede/Desktop/Taller_1/tp_final_11/Dune/mapa4.yaml"
+  0: "../mapa1.yaml"
+  1: "../mapa2.yaml"
+  2: "../mapa3.yaml"
+  3: "../mapa4.yaml"
 speedFactor: 50
 blockMovement: 2
 rangeFactor: 2000
@@ -39,14 +39,14 @@ buildings:
     hitPoints: 1500
     width: 4
     height: 4
-  spiceRefinery:
+  refinery:
     energy: 400
     cost: 500
     hitPoints: 500
     spiceCapacity: 5000
     width: 3
     height: 3
-  spiceSilo:
+  silo:
     energy: 100
     cost: 200
     hitPoints: 200

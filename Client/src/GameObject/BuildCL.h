@@ -19,7 +19,7 @@ public:
 
     void processEvent(SDL_Event &event, BQueue<std::unique_ptr<CommandCL>> &queue, Camera &camera) {}
 
-    virtual void draw(SDL2pp::Renderer &renderer, TextureManager &textureManager) = 0;
+    virtual void draw(SDL2pp::Renderer &renderer, TextureManager &textureManager, Camera &camera) = 0;
 
     void setPosition(SDL2pp::Point position);
 

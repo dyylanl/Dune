@@ -1,11 +1,9 @@
 #include "../../includes/Model/Player.h"
 #include "../../config/GameConfiguration.h"
+#include "../../includes/Model/Buildings/Barrack.h"
 
-Player::Player(int id, ConstructionCenter &construction_center,
-               const std::string& house, const std::string& playerName):
-        id(id),
-        house(house),
-        playerName(playerName),
+Player::Player(InstanceId id1, ConstructionCenter &construction_center):
+        id(id1),
         news(true),
         generatedEnergy(GameConfiguration::getConfig().initialMaxEnergy),
         consumedEnergy(GameConfiguration::getConfig().initialEnergy),
@@ -82,7 +80,7 @@ int Player::getId() const {
 std::string& Player::getHouse() {
     return this->house;
 }
-ConstructionCenter &Player::getConstructionYard() {
+ConstructionCenter &Player::getConstructionCenter() {
     return *construction_center;
 }
 
@@ -156,5 +154,15 @@ bool Player::isDefeated(){
 }
 
 Position Player::getBarrackPosition() {
-    return buildings.at(BARRACKS_KEY)->getPosition();
+    return Position(10,10);
+}
+
+void Player::clean() {
+    delete construction_center;
+    for (auto* build : buildings) {
+        delete build;
+    }
+    for (auto* unit : units) {
+        delete unit;
+    }
 }

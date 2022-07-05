@@ -29,7 +29,7 @@ private:
     NBQueue<std::vector<std::unique_ptr<GameObject>>> &m_queueNb;
     BQueue<std::unique_ptr<CommandCL>> &m_queueB;
 public:
-    Engine(std::vector<std::vector<char>>& mapa, std::vector<std::unique_ptr<ButtonCL>> &menu, TextureManager &manager, NBQueue<std::vector<std::unique_ptr<GameObject>>> &queue_nb, BQueue<std::unique_ptr<CommandCL>> &queueB);
+    Engine(Camera &camera, std::vector<std::vector<char>> &mapa, std::vector<std::unique_ptr<ButtonCL>> &menu, TextureManager &manager, NBQueue<std::vector<std::unique_ptr<GameObject>>> &queue_nb, BQueue<std::unique_ptr<CommandCL>> &queueB);
 
     bool IsRunning();
 

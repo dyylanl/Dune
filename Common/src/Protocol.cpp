@@ -340,8 +340,8 @@ Protocol::recvUnit(Socket &socket, int &id, char &player, bool &selectStatus, in
 void Protocol::recvBuild(Socket &socket, int &id, char &player, int &posX, int &posY, int &life) {
     socket.recv(reinterpret_cast<char *>(&id), sizeof(uint16_t));
     socket.recv(reinterpret_cast<char *>(&player), sizeof(uint8_t));
-    socket.recv(reinterpret_cast<char *>(&posX), sizeof(uint16_t));
     socket.recv(reinterpret_cast<char *>(&posY), sizeof(uint16_t));
+    socket.recv(reinterpret_cast<char *>(&posX), sizeof(uint16_t));
     socket.recv(reinterpret_cast<char *>(&life), sizeof(uint16_t));
     std::cout << "Se recibe un edificio en la posicion: " << posX << "," << posY << std::endl;
 
@@ -410,12 +410,12 @@ void Protocol::sendCommandMove(Socket &socket, char &action, int &id, int &posX,
 void Protocol::sendCommandBuildBuilding(Socket &socket, char &action, char &build, int &posX, int &posY) {
     socket.send(reinterpret_cast<char *>(&action), sizeof(uint8_t));
     socket.send(reinterpret_cast<char *>(&build), sizeof(uint8_t));
-    socket.send(reinterpret_cast<char *>(&posX), sizeof(uint16_t));
     socket.send(reinterpret_cast<char *>(&posY), sizeof(uint16_t));
+    socket.send(reinterpret_cast<char *>(&posX), sizeof(uint16_t));
     std::cout << "action(uint8_t) : " << (int)action << std::endl;
     std::cout << "build type(uint8_t) : " << build << std::endl;
-    std::cout << "posX(uint16_t) : " << posX << std::endl;
     std::cout << "posY(uint16_t) : " << posY << std::endl;
+    std::cout << "posX(uint16_t) : " << posX << std::endl;
 }
 
 std::vector<std::string> Protocol::recvMapsId(Socket &socket) {
@@ -493,8 +493,8 @@ std::vector<std::vector<std::string>> Protocol::recvMapsCreated(Socket &socket) 
 #define BAD_JOIN 1
 
 void Protocol::sendEstablishConnection(Socket &socket) {
-    uint16_t connect = ESTABLISH_CONNECTION;
-    socket.send((const char*)&connect, sizeof(uint16_t));
+    this->sendTwoBytes(socket,ESTABLISH_CONNECTION);
+    std::cout << "[PROTOCOL] Enviando conexion aceptada." << std::endl;
 }
 
 bool Protocol::recvEstablishConnection(Socket &socket) {
@@ -508,13 +508,11 @@ bool Protocol::recvEstablishConnection(Socket &socket) {
 }
 
 void Protocol::sendCreateGameInvalid(Socket &socket) {
-    uint16_t flag_bad_connection = BAD_CONNECTION;
-    socket.send((const char*)&flag_bad_connection, sizeof(uint16_t));
+    this->sendTwoBytes(socket,BAD_CONNECTION);
 }
 
 void Protocol::sendAcceptPlayerInvalid(Socket &socket) {
-    uint16_t flag_bad_join = BAD_JOIN;
-    socket.send((const char*)&flag_bad_join, sizeof(uint16_t));
+    this->sendTwoBytes(socket,BAD_JOIN);
 }
 
 void Protocol::sendBuildings(Socket &socket, std::vector<BuildingDTO> buildings) {
@@ -539,7 +537,7 @@ void Protocol::sendBuildings(Socket &socket, std::vector<BuildingDTO> buildings)
 }
 
 void Protocol::sendUnits(Socket &socket, std::vector<UnitDTO> units) {
-    uint16_t total = units.size();
+    uint16_t total = units.size(); // 2by 
     socket.send((const char*)&total, sizeof(uint16_t));
     for (int i = 0; i < total; i++) {
         auto unit = units[i];
@@ -548,11 +546,18 @@ void Protocol::sendUnits(Socket &socket, std::vector<UnitDTO> units) {
         int pos_x = unit.pos_x; // 2 by
         int pos_y = unit.pos_y; // 2 by
         int life = unit.life; // 2 by
+        uint8_t unit_code = 0;
+        sendOneByte(socket,unit_code);
         sendOneByte(socket,unit_type);
         sendTwoBytes(socket,player_id);
+        sendOneByte(socket,player_id);
+        sendOneByte(socket,player_id);
+        sendTwoBytes(socket,pos_x);
+        sendTwoBytes(socket,pos_y);
         sendTwoBytes(socket,pos_x);
         sendTwoBytes(socket,pos_y);
         sendTwoBytes(socket,life);
+        sendOneByte(socket,unit_code);
     }
 }
 

@@ -17,7 +17,7 @@ void Engine::_processCommands() {
         while ((cmd = commands.pop())) {
             if (cmd == nullptr) {return;}
             try {
-                cmd->exec(map);
+                cmd->exec(model);
             } catch (const std::exception& e) {
                 Response* reply = new Response(INVALID_COMMAND, e.what());
                 established_connections.notify(cmd->getCaller(), reply);
@@ -30,11 +30,10 @@ void Engine::_processCommands() {
 void Engine::_processFinishedConnections() {
     InstanceId* finished_connection = nullptr;
     while ((finished_connection = finished_connections.pop())) {
-        //map.delete(*finished_connection); TODO: BORRAR JUGADOR
+        model.deletePlayer(*finished_connection);
         established_connections.remove(*finished_connection);
         delete finished_connection;
         fprintf(stderr, "Se ha desconectado un jugador.\n");
-        current_players -= 1;
     }
 }
 
@@ -61,7 +60,8 @@ void Engine::clearAll() {
 
 void Engine::_loopIteration(int it) {
     _processCommands();
-    established_connections.sendBuildings(map.getBuildings());   // envio el centro de construccion de cada jugador de la partida
+    established_connections.sendBuildings(model.getBuildings());   // envio el centro de construccion de cada jugador de la partida
+    established_connections.sendUnits(model.getUnits());
     //map.updateSpice(it);
     //map.update(it);
     //established_connections.updateClients();
@@ -82,7 +82,7 @@ Engine::Engine(MapDTO map_dto)
 
 void Engine::run() {
     fprintf(stderr, "[Engine]: Empezando ejecución.\n");
-    established_connections.initGame(map.getMap());     // envio terrenos
+    established_connections.initGame(model.getMap());     // envio terrenos
     RateController rate_controller(rate);
     established_connections.start();
     rate_controller.start();
@@ -111,8 +111,9 @@ void Engine::stop() {
 uint16_t Engine::addClient(NewConnection client) {
     uint16_t ret = ERROR;
     if (current_players < req_players) {
-        current_players += 1;
         established_connections.add((InstanceId)current_players,std::move(client.peer));
+        model.addPlayer((InstanceId)current_players);
+        current_players += 1;
         if (current_players == req_players) {
             this->start();
         }
@@ -128,14 +129,16 @@ std::vector<InstanceId> Engine::getAllPlayers() {
 
 Engine::~Engine() {}
 
-Engine::Engine(ConfigurationReader &config, std::string map_path) :
+Engine::Engine(ConfigurationReader &config1, std::string map_path, int total_players) :
                                     keep_executing(true),
-                                    rate(30),
-                                    map(map_path),
+                                    rate(config1.getFPS()),
                                     current_players(0),
-                                    req_players(map.getMaxPlayers()),
+                                    req_players(total_players),
                                     started(false),
                                     finished_connections(),
                                     commands(),
                                     established_connections(commands, finished_connections),
-                                    config(config) {}
+                                    config(config1),
+                                    model(config, map_path)
+                                    {
+                                    }
