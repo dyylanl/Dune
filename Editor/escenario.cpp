@@ -130,20 +130,16 @@ void Escenario::guardar(QString file_name){
     }
     out << YAML::EndMap;
     out << YAML::EndMap;
-    //const char *path="/home/fede/Desktop/Taller_1/qt/prueba_9/test.yaml";
     std::ofstream fout(file_name.toStdString());
     fout << out.c_str() << std::endl;
 }
 
 void Escenario::cargar(QString file_name)
 {
-    //this->eliminar_celdas_actuales();
 
     YAML::Node node = YAML::LoadFile(file_name.toStdString());
     int filas = node["Tablero"]["Filas"].as<int>();
     int columnas= node["Tablero"]["Columnas"].as<int>();
-    std::cout << filas << std::endl;
-    std::cout << columnas << std::endl;
     this->eliminar_celdas_actuales();
     this->eliminar_todas_estructuras();
 
@@ -160,13 +156,13 @@ void Escenario::cargar(QString file_name)
                  celda_cargada->setPos(j*32,i*32);
                  this->addItem(celda_cargada);
                  this->tableroQT [i][j] = celda_cargada;
-                 std::cout <<tipo << std::endl;
                 }
     }
     this->jugadores.erase(this->jugadores.begin(),this->jugadores.end());
     int cantidad_jugadores = node["Cantidad Jugadores"].as<int>();
     this->cant_jugadores = cantidad_jugadores;
     int cant_estructuras = node["Estructuras"]["Cantidad"].as<int>();
+    this->cant_construcciones = cant_estructuras;
     for(int i = 0; i< cant_estructuras; i ++){
         std::stringstream key_constr;
         key_constr << i;
@@ -200,12 +196,8 @@ void Escenario::colocar_estructura(int x, int y){
     }
     this->ocupar_celdas(x,y);
 
-    std::cout << "llego a colocar en x:"<<x<<"en y:"<<y << std::endl;
-    //QGraphicsPixmapItem* cc_ordos = new QGraphicsPixmapItem();
     Construccion* estructura = new Construccion(x,y,this->last_clicked,this);
-    std::cout << "Rompo 1" << std::endl;
     this->construcciones.append(estructura);
-    //->setPixmap(imagen);
     estructura ->setPos(y*32,x*32);
     estructura->setOffset(-32,-32);
     estructura->setZValue(1);
@@ -215,7 +207,6 @@ void Escenario::colocar_estructura(int x, int y){
 
 bool Escenario::verificar_celdas(int x, int y)
 {
- std::cout << "llego a verificar" <<std::endl;
     for(int i = x - 1; i < x + 2; i++){
         for(int j = y -1; j < y+ 2;j++){
             if((i >= this->filas) ||( j >= this->columnas)){
@@ -226,15 +217,12 @@ bool Escenario::verificar_celdas(int x, int y)
                 return false;
 
             }
-            std::cout << "i:" << i << " j:"<<j << std::endl;
             Celda* celda = this->tableroQT[i][j];
             QString suelo = celda->get_tipo_suelo();
-            std::cout << suelo.toStdString() << std::endl;
             if(suelo != "Roca"){
                 return false;
             }
             bool ocupada = celda->get_ocupacion();
-            std::cout<< ocupada <<std::endl;
             if(ocupada == true){
                 return false;
             }
@@ -266,7 +254,6 @@ void Escenario::eliminar_estructura(Construccion *estructura,int x, int y)
 {
     int id_jugador = estructura->get_jugador();
     this->removeItem(estructura);
-    std::cout << "remove item pasa" << std::endl;
     this->desocupar_celdas(x,y);
     this->cant_construcciones -= 1;
     this->jugadores.erase(std::remove(this->jugadores.begin(), this->jugadores.end(), id_jugador), this->jugadores.end());
@@ -297,6 +284,9 @@ bool Escenario::verificar_jugadores_asignados(){
         if(id_jugador == 0){
             return false;
         }
+        if(id_jugador > this->cant_jugadores){
+            return false;
+        }
     }
     return true;
 }
@@ -325,7 +315,6 @@ void Escenario::cambiar_cantidad_jugadores(int cantidad)
         return;
     }
     this->cant_jugadores = cantidad;
-    std::cout << this->cant_jugadores << std::endl;
 }
 
 void Escenario::mostrar_dialog_asignar_jugador(){

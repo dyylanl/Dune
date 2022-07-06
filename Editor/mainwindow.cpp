@@ -104,7 +104,7 @@ void MainWindow::on_actionSave_triggered()
     bool todos_jugadores_asignados = this->escenario->verificar_jugadores_asignados();
     if(todos_jugadores_asignados == false){
         QMessageBox msgBox;
-        msgBox.setText("Asignele un jugador a cada construccion");
+        msgBox.setText("Asignele un jugador válido a cada construccion");
         msgBox.exec();
         return;
     }
@@ -114,7 +114,6 @@ void MainWindow::on_actionSave_triggered()
         return;
     }
     QString full_path = save_name + extension;
-    std::cout << full_path.toStdString() << std::endl;
     this->escenario->guardar(full_path);
 }
 
@@ -149,9 +148,6 @@ void MainWindow::on_button_cambiar_forma_clicked()
 }
 
 void MainWindow::cambiar_forma_tablero_acepted(int new_filas,int new_columnas){
-    //std::cout << new_filas <<std::endl;
-    //std::cout << new_columnas<< std::endl;
-    //checquear que sea removido de la escena
     delete(this->escenario);
     this->escenario = new Escenario(new_filas,new_columnas);
     this->ui->graphicsView->setScene(this->escenario);

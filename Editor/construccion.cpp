@@ -35,7 +35,6 @@ void Construccion::mousePressEvent(QGraphicsSceneMouseEvent *event)
 
     }
     if(tipo == "Eliminar"){
-        std::cout << "LLEGO A ELIMINAR" <<std::endl;
         this->escenario->eliminar_estructura(this,pos_x,pos_y);
     }
 

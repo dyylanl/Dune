@@ -8,7 +8,6 @@ Estado_last_clicked::Estado_last_clicked()
 }
 
 void Estado_last_clicked::cambiar_estado(QString nuevo_estado){
-    //std::cout << nuevo_estado.toStdString() << std::endl;
     this->estado = nuevo_estado;
 }
 

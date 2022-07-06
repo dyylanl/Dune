@@ -4,26 +4,6 @@
 #include <string>
 #include "escenario.h"
 
-/*Celda::Celda(Estado_last_clicked* last_clicked,int x, int y):imagen(":/resources/tile_vacio.jpg")
-{
-    this->estado_actual = "Vacio";
-    this->estado_last_clicked = last_clicked;
-    this->imagen = this->imagen.scaled(32, 32);
-    this->setPixmap(imagen);
-    this->pos_x = x;
-    this->pos_y = y;
-}
-
-Celda::Celda(std::string tipo,Estado_last_clicked* last_clicked, int x, int y)
-{
-    this->estado_actual = QString::fromStdString(tipo);
-    this->setImagen(QString::fromStdString(tipo));
-    this->estado_last_clicked = last_clicked;
-    this->pos_x = x;
-    this->pos_y = y;
-
-
-}*/
 
 
 Celda::Celda(Escenario* escenario, std::string tipo,Estado_last_clicked* last_clicked, int x, int y): dialogo_asignar_especia(new Dialog_asignar_especia)
