@@ -48,7 +48,7 @@ void RecvThread::run() {
                 default: std::cout << "Tipo invalido" << std::endl;
             }
         }
-        m_quene.push(std::move(gameObjects));
+        m_quene.push(gameObjects);
     }
 }
 

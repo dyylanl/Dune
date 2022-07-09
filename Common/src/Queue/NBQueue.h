@@ -22,12 +22,12 @@ public:
     NBQueue(NBQueue&& other) = delete;
     NBQueue& operator=(NBQueue&& other) = delete;
 
-    void push(T &&t) {
+    void push(T &t) {
         std::unique_lock<std::mutex> l(m);
         queue.push(std::move(t));
     }
 
-    bool pop(T &&t) {
+    bool pop(T &t) {
         std::unique_lock<std::mutex> l(m);
         if (queue.empty()) {
             return false;

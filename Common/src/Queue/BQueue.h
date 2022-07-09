@@ -27,7 +27,7 @@ public:
     BQueue& operator=(BQueue&& other) = delete;
 
     // Inserta t y notifica a todos los hilos.
-    void push(T &&t) {
+    void push(T &t) {
         std::unique_lock<std::mutex> l(m);
         queue.push(std::move(t));
         cv.notify_all();
@@ -35,11 +35,11 @@ public:
 
     // Retorna el elemento de la cola y si esta vacia deja en wait al
     // hilo q solicita dicho elemento.
-    bool pop(T &&t) {
+    bool pop(T &t) {
         std::unique_lock<std::mutex> l(m);
         while (queue.empty()) {
             if (permanently_closed) {
-                return false;
+                throw ClosedQueue("Cola cerrada");
             }
             cv.wait(l);
         }

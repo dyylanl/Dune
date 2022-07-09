@@ -29,7 +29,7 @@ void Engine::Events() {
 }
 
 void Engine::Update() {
-        while (m_queueNb.pop(std::move(m_objects))) {}
+        while (m_queueNb.pop(m_objects)){}
         /*unsigned int sizeObjects = m_objects.size();
         for (unsigned int i = 0; i < sizeObjects; ++i) {
             m_objects[i]->cameraOffset(m_camera);

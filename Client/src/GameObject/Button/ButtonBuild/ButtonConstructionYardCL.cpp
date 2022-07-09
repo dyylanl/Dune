@@ -12,7 +12,7 @@ ButtonConstructionYardCL::ButtonConstructionYardCL(int id, char player, int cons
 void ButtonConstructionYardCL::buildBuilding(BQueue<std::unique_ptr<CommandCL>> &queue, SDL2pp::Point point) {
     std::unique_ptr<CommandCL> command(new BuildBuilding(m_type, point));
     std::cout << "Push command BuildBuilding" << std::endl;
-    queue.push(std::move(command));
+    queue.push(command);
 }
 
 void ButtonConstructionYardCL::draw(SDL2pp::Renderer &renderer, TextureManager &textureManager, Camera &camera) {

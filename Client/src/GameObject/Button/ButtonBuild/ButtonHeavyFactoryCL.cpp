@@ -12,7 +12,7 @@ ButtonHeavyFactoryCL::ButtonHeavyFactoryCL(int id, char player, int construction
 void ButtonHeavyFactoryCL::buildBuilding(BQueue<std::unique_ptr<CommandCL>> &queue, SDL2pp::Point point) {
     std::unique_ptr<CommandCL> command(new BuildBuilding(m_type, point));
     std::cout << "Push command BuildBuilding" << std::endl;
-    queue.push(std::move(command));
+    queue.push(command);
 }
 
 void ButtonHeavyFactoryCL::draw(SDL2pp::Renderer &renderer, TextureManager &textureManager, Camera &camera) {

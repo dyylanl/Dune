@@ -7,7 +7,7 @@
 void SendThread::run() {
     while (running) {
         std::unique_ptr<CommandCL> action;
-        if (m_quene.pop(std::move(action))) {
+        if (m_quene.pop(action)) {
             action->execute(m_protocol, m_socket);
         }
     }

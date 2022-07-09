@@ -18,7 +18,7 @@ void Vehicle::processEvent(SDL_Event &event, BQueue<std::unique_ptr<CommandCL>> 
         if (SDL_PointInRect(&point, &shape)) {
             std::unique_ptr<CommandCL> command(new SelectCL(m_id));
             std::cout << "Push command Select" << std::endl;
-            queue.push(std::move(command));
+            queue.push(command);
         }
     }
 
@@ -26,7 +26,7 @@ void Vehicle::processEvent(SDL_Event &event, BQueue<std::unique_ptr<CommandCL>> 
         SDL2pp::Point point(event.motion.x, event.motion.y);
         std::unique_ptr<CommandCL> command (new MoveCL(m_id, point - camera.getPosicion()));
         std::cout << "Push command Move" << std::endl;
-        queue.push(std::move(command));
+        queue.push(command);
     }
 }
 

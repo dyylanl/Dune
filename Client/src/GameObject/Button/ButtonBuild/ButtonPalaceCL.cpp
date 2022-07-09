@@ -12,7 +12,7 @@ ButtonPalaceCL::ButtonPalaceCL(int id, char player, int constructionTime, bool s
 void ButtonPalaceCL::buildBuilding(BQueue<std::unique_ptr<CommandCL>> &queue, SDL2pp::Point point) {
     std::unique_ptr<CommandCL> command(new BuildBuilding(m_type, point));
     std::cout << "Push command BuildBuilding" << std::endl;
-    queue.push(std::move(command));
+    queue.push(command);
 }
 
 void ButtonPalaceCL::draw(SDL2pp::Renderer &renderer, TextureManager &textureManager, Camera &camera) {
