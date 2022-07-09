@@ -46,6 +46,7 @@ Map::Map(std::string map_path) :
     for (int i = 0; i < total_buildings; ++i) {
         auto* construction_center = map_reader.getConstructionCenterFor((InstanceId)i);
         buildings.push_back(construction_center);
+        centers.emplace(i, construction_center);
         /*BuildingDTO centerDto;
         centerDto.type = CONSTRUCTION_CENTER_KEY;
         centerDto.life = construction_center->getLife();
@@ -145,6 +146,7 @@ std::vector<UnitDTO*> Map::getUnits() {
         auto* dto = new UnitDTO;
         dto->pos_x = unit->getPosition().x;
         dto->pos_y = unit->getPosition().y;
+        dto->player_id = unit->getPlayer().getId();
         dto->life = unit->getLife();
         dto->type = unit->getType();
         retUnitsDto.push_back(dto);
@@ -158,6 +160,9 @@ std::vector<BuildingDTO*> Map::getBuildings() {
         auto* dto = new BuildingDTO; // es elimianado en el hilo sender
         dto->pos_x = build->getPosition().x;
         dto->pos_y = build->getPosition().y;
+
+        dto->player_id = build->getPlayer()->getId();
+
         dto->life = build->getLife();
         dto->type = build->getType();
         retBuildingsDto.push_back(dto);
@@ -279,6 +284,10 @@ Unit *Map::getUnit(char type, int x, int y) {
         case TANK_KEY: return new Tank(x,y);
         default: throw Exception("Invalid get unit type");
     }
+}
+
+ConstructionCenter *Map::getConstructionCenterFor(InstanceId i) {
+    return this->centers.at(i);
 }
 
 /*

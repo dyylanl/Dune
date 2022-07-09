@@ -13,6 +13,7 @@
 #include "../../../Common/includes/Protocol.h"
 #include "../../../Server/includes/Control/Commands/Command.h"
 #include "Responses/Response.h"
+#include "../Model/DTOs/snapshot.h"
 
 class ClientConnection {
    private:
@@ -24,8 +25,7 @@ class ClientConnection {
     int finished_threads;
 
     std::thread sender;
-    BlockingQueue<BuildingDTO*> buildings;
-    BlockingQueue<UnitDTO*> units;
+    BlockingQueue<Snapshot *> snapshots;
 
     std::thread receiver;
     NonBlockingQueue<Command*>& commands;
@@ -53,8 +53,7 @@ class ClientConnection {
     void start();
 
 
-    void pushBuilding(BuildingDTO* building);
-    void pushUnit(UnitDTO* unit);
+    void push(Snapshot *snap);
 
 
     void join();

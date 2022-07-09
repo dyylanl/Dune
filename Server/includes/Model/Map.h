@@ -18,7 +18,7 @@ class Map {
     MapReader map_reader;
     int rows, cols;
     int max_players;
-
+    std::map<int, ConstructionCenter*> centers;
     std::vector<std::vector<Terrain>> terrrains; // contiene el tipo de terreno en esa pos
     std::vector<std::vector<char>> mapa; // contiene el tipo de terreno_key para enviar a los clientes
 
@@ -143,6 +143,7 @@ public:
     void free(Building& building);
 
 
+    ConstructionCenter *getConstructionCenterFor(InstanceId i);
 };
 
 #endif //__MAP_H__

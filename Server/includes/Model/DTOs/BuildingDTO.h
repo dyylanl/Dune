@@ -7,6 +7,7 @@
 
 struct BuildingDTO {
     Id build_id;
+    uint8_t player_id;
     int pos_x, pos_y;
     int width, height;
     char type;

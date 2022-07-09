@@ -26,7 +26,7 @@ public:
     std::vector<Unit*> units;
     ConstructionCenter* construction_center;
     std::vector<Unit*>& getTrainedUnits(Map& map);
-    explicit Player(InstanceId id, ConstructionCenter &construction_center);
+    explicit Player(InstanceId id, ConstructionCenter *construction_center);
     void addGold(int gold_to_add);
     void subGold(int gold_to_sub);
     float getEnergyFactor();

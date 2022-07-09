@@ -230,18 +230,6 @@ void Protocol::sendBuild(Socket &socket, int build, int posX, int posY) {
 
 #define OBJECT_BUILDING 1
 
-void Protocol::sendBuild(Socket &socket, BuildingDTO build) {
-    uint16_t total = 1; // esto es porque el cliente lo necesita asi \_(*-*)_/
-    this->sendTwoBytes(socket,total);
-    this->sendOneByte(socket,OBJECT_BUILDING);
-    this->sendOneByte(socket, build.type);
-    this->sendTwoBytes(socket, build.build_id);
-    this->sendOneByte(socket, build.build_id); // player id
-    this->sendTwoBytes(socket, build.pos_x);
-    this->sendTwoBytes(socket, build.pos_y);
-    this->sendTwoBytes(socket, build.life);
-}
-
 
 void Protocol::operationRecv(Socket &socket, char &operation) {
     socket.recv(reinterpret_cast<char *>(&operation), sizeof(uint8_t));
@@ -330,6 +318,23 @@ void Protocol::recvCountObject(Socket &socket, int &size) {
     socket.recv(reinterpret_cast<char *>(&size), sizeof(uint16_t));
 }
 
+void Protocol::sendUnit(Socket &socket, UnitDTO unit) {
+    //uint16_t cantObj = 1; //Cant de Objetos
+    uint8_t type = 0;  //Tipo De Objeto
+    //this->sendTwoBytes(socket, cantObj);
+    this->sendOneByte(socket, type);
+    this->sendOneByte(socket, unit.type);
+    this->sendTwoBytes(socket, unit.unit_id);
+    this->sendOneByte(socket, unit.player_id);
+    this->sendOneByte(socket, unit.selected);
+    this->sendTwoBytes(socket, unit.pos_x);
+    this->sendTwoBytes(socket, unit.pos_y);
+    this->sendTwoBytes(socket, unit.pos_x);
+    this->sendTwoBytes(socket, unit.pos_y);
+    this->sendTwoBytes(socket, unit.life);
+    this->sendOneByte(socket, true);
+}
+
 void
 Protocol::recvUnit(Socket &socket, int &id, char &player, bool &selectStatus, int &posX, int &posY, int &posActX,
                    int &posActY, int &life, bool &action) {
@@ -342,6 +347,18 @@ Protocol::recvUnit(Socket &socket, int &id, char &player, bool &selectStatus, in
     socket.recv(reinterpret_cast<char *>(&posActY), sizeof(uint16_t));
     socket.recv(reinterpret_cast<char *>(&life), sizeof(uint16_t));
     socket.recv(reinterpret_cast<char *>(&action), sizeof(uint8_t));
+}
+
+void Protocol::sendBuild(Socket &socket, BuildingDTO build) {
+    //uint16_t total = 1; // esto es porque el cliente lo necesita asi \_(*-*)_/
+    //this->sendTwoBytes(socket,total);
+    this->sendOneByte(socket,OBJECT_BUILDING);
+    this->sendOneByte(socket, build.type);
+    this->sendTwoBytes(socket, build.build_id);
+    this->sendOneByte(socket, build.player_id); // player id
+    this->sendTwoBytes(socket, build.pos_y);
+    this->sendTwoBytes(socket, build.pos_x);
+    this->sendTwoBytes(socket, build.life);
 }
 
 void Protocol::recvBuild(Socket &socket, int &id, char &player, int &posX, int &posY, int &life) {
@@ -515,17 +532,17 @@ void Protocol::sendAcceptPlayerInvalid(Socket &socket) {
     this->sendTwoBytes(socket,BAD_JOIN);
 }
 
-void Protocol::sendBuildings(Socket &socket, std::vector<BuildingDTO> buildings) {
+void Protocol::sendBuildings(Socket &socket, std::vector<BuildingDTO *> buildings) {
     uint16_t total = buildings.size();
-    socket.send((const char*)&total, sizeof(uint16_t));
+    //socket.send((const char*)&total, sizeof(uint16_t));
     for (int i = 0; i < total; i++) {
         char type = 1;
-        char build_type = buildings[i].type;
-        uint16_t id = buildings[i].build_id;
-        uint8_t player = buildings[i].build_id;
-        uint16_t pos_x = (buildings[i].pos_x);
-        uint16_t pos_y = (buildings[i].pos_y);
-        uint16_t life = buildings[i].life;
+        char build_type = buildings[i]->type;
+        uint16_t id = buildings[i]->build_id;
+        uint8_t player = buildings[i]->build_id;
+        uint16_t pos_x = (buildings[i]->pos_x);
+        uint16_t pos_y = (buildings[i]->pos_y);
+        uint16_t life = buildings[i]->life;
         socket.send((const char *)&type, sizeof(uint8_t));
         socket.send((const char *)&build_type, sizeof(uint8_t));
         socket.send((const char *)&id, sizeof(uint16_t));
@@ -536,16 +553,16 @@ void Protocol::sendBuildings(Socket &socket, std::vector<BuildingDTO> buildings)
     }
 }
 
-void Protocol::sendUnits(Socket &socket, std::vector<UnitDTO> units) {
+void Protocol::sendUnits(Socket &socket, std::vector<UnitDTO *> units) {
     uint16_t total = units.size(); // 2by 
-    socket.send((const char*)&total, sizeof(uint16_t));
+    //socket.send((const char*)&total, sizeof(uint16_t));
     for (int i = 0; i < total; i++) {
         auto unit = units[i];
-        int player_id = unit.unit_id; // 2 by
-        char unit_type = unit.type; // 8 bit
-        int pos_x = unit.pos_x; // 2 by
-        int pos_y = unit.pos_y; // 2 by
-        int life = unit.life; // 2 by
+        int player_id = unit->unit_id; // 2 by
+        char unit_type = unit->type; // 8 bit
+        int pos_x = unit->pos_x; // 2 by
+        int pos_y = unit->pos_y; // 2 by
+        int life = unit->life; // 2 by
         uint8_t unit_code = 0;
         sendOneByte(socket,unit_code);
         sendOneByte(socket,unit_type);
@@ -565,21 +582,4 @@ void Protocol::sendUnits(Socket &socket, std::vector<UnitDTO> units) {
 void Protocol::sendCommandCreateUnit(Socket &socket, char &action, char &unitType) {
     socket.send(reinterpret_cast<char *>(&action), sizeof(uint8_t));
     socket.send(reinterpret_cast<char *>(&unitType), sizeof(uint8_t));
-}
-
-void Protocol::sendUnit(Socket &socket, UnitDTO unit) {
-    uint16_t cantObj = 1; //Cant de Objetos
-    uint8_t type = 0;  //Tipo De Objeto
-    this->sendTwoBytes(socket, cantObj);
-    this->sendOneByte(socket, type);
-    this->sendOneByte(socket, unit.type);
-    this->sendTwoBytes(socket, unit.unit_id);
-    this->sendOneByte(socket, unit.unit_id);
-    this->sendOneByte(socket, unit.selected);
-    this->sendTwoBytes(socket, unit.pos_x);
-    this->sendTwoBytes(socket, unit.pos_y);
-    this->sendTwoBytes(socket, unit.pos_x);
-    this->sendTwoBytes(socket, unit.pos_y);
-    this->sendTwoBytes(socket, unit.life);
-    this->sendOneByte(socket, unit.speed);
 }

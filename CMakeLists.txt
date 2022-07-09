@@ -50,9 +50,9 @@ include_directories(${SDL2PP_INCLUDE_DIRS})
 
 #------------------------------------------------------------------------------
 # ARCHIVOS FUENTE
-FILE(GLOB_RECURSE common_src "Common/*.cpp")
-FILE(GLOB_RECURSE client_src "Client/*.cpp")
-FILE(GLOB_RECURSE server_src "Server/*.cpp")
+FILE(GLOB_RECURSE common_src "Common/*.cpp" "Common/*.h")
+FILE(GLOB_RECURSE client_src "Client/*.cpp" "Client/*.h")
+FILE(GLOB_RECURSE server_src "Server/*.cpp" "Server/*.h")
 #------------------------------------------------------------------------------
 
 #------------------------------------------------------------------------------

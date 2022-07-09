@@ -7,6 +7,7 @@
 
 struct UnitDTO {
     Id unit_id;
+    uint8_t player_id;
     int pos_x, pos_y;
     char type;
     int life;

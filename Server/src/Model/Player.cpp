@@ -2,16 +2,16 @@
 #include "../../config/GameConfiguration.h"
 #include "../../includes/Model/Buildings/Barrack.h"
 
-Player::Player(InstanceId id1, ConstructionCenter &construction_center):
+Player::Player(InstanceId id1, ConstructionCenter *construction_center):
         id(id1),
         news(true),
         generatedEnergy(GameConfiguration::getConfig().initialMaxEnergy),
         consumedEnergy(GameConfiguration::getConfig().initialEnergy),
         gold(GameConfiguration::getConfig().initialGold),
         gold_limit(GameConfiguration::getConfig().initialGold),
-        construction_center(&construction_center)
+        construction_center(construction_center)
         {
-            construction_center.setPlayer(this);
+            construction_center->setPlayer(this);
         }
 
 bool Player::operator==(const Player &other) const {

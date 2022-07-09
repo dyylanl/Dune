@@ -13,16 +13,14 @@
  */
 void Engine::_processCommands() {
     Command* cmd = nullptr;
-    for (int i = 0; i < COMMANDS_COUNT; i++) {
-        while ((cmd = commands.pop())) {
-            if (cmd == nullptr) {return;}
-            try {
-                cmd->exec(model);
-            } catch (const std::exception& e) {
-                std::cout << "Ejecuto comando invalido" << std::endl;
-            }
-            delete cmd;
+    while ((cmd = commands.pop())) {
+        if (cmd == nullptr) {return;}
+        try {
+            cmd->exec(model);
+        } catch (const std::exception& e) {
+            std::cout << "Ejecuto comando invalido" << std::endl;
         }
+        delete cmd;
     }
 }
 

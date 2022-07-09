@@ -40,8 +40,9 @@ void Model::putUnit(InstanceId id_player, char unit_type) {
 void Model::addPlayer(InstanceId player_id) {
     current_players += 1;
     //ConstructionCenter* center = map.getConstructionCenterFor(player_id);
-    //Player player(player_id, *center);
-    //players[player_id] = player;
+    //ConstructionCenter* center = map.getConstructionCenterFor(player_id);
+    Player player(player_id, map.getConstructionCenterFor(player_id));
+    players.emplace(player_id, std::move(player));
 }
 
 void Model::deletePlayer(InstanceId player_id) {

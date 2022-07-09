@@ -1,4 +1,5 @@
 #include "../../includes/Control/ClientConnection.h"
+#include "../../includes/Model/DTOs/snapshot.h"
 
 void ClientConnection::_finishThread() {
     std::unique_lock<std::mutex> l(m);
@@ -8,8 +9,6 @@ void ClientConnection::_finishThread() {
 }
 
 void ClientConnection::_freeNotifications() {
-    buildings.close();
-    units.close();
     /*BuildingDTO* buildsDTO = nullptr;
     while ((buildsDTO = buildings.pop())) {
         delete buildsDTO;
@@ -22,24 +21,26 @@ void ClientConnection::_freeNotifications() {
 
 void ClientConnection::_sender() {
     try {
-        BuildingDTO* build = nullptr;
-        while ((build = buildings.pop())) {
-            protocol.sendBuild(peer, *build);
+        Snapshot* snap = nullptr;
+        while ((snap = snapshots.pop())) {
+            int count = snap->buildings.size() + snap->units.size();
+            protocol.sendCountObject(peer, count);
+            for (auto &b: snap->buildings) {
+                protocol.sendBuild(peer, *b);
+            }
+            for (auto &u: snap->units) {
+                protocol.sendUnit(peer, *u);
+            }
+            delete snap;
+
         }
-        delete build;
-        UnitDTO* unit = nullptr;
-        while ((unit = units.pop())) {
-            protocol.sendUnit(peer, *unit);
-        }
-        delete unit;
     } catch (const std::exception& e) {
         stop();
     } catch (...) {
         stop();
         fprintf(stderr, "[ClientConnection]: Error desconocido.\n");
     }
-    this->buildings.close();
-    this->units.close();
+   this->snapshots.close();
     _finishThread(); // TODO DESCOMENTAR ESTO
 }
 
@@ -87,12 +88,8 @@ void ClientConnection::start() {
     receiver = std::thread(&ClientConnection::_sender, this);
 }
 
-void ClientConnection::pushBuilding(BuildingDTO* building1) {
-    buildings.push(building1);
-}
-
-void ClientConnection::pushUnit(UnitDTO* unit1) {
-    units.push(unit1);
+void ClientConnection::push(Snapshot *snap) {
+    snapshots.push(snap);
 }
 
 void ClientConnection::join() {
@@ -111,8 +108,7 @@ void ClientConnection::join() {
 }
 
 void ClientConnection::stop() {
-    this->buildings.close();
-    this->units.close();
+    this->snapshots.close();
     try {
         peer.shutdown();
     } catch (const Exception& e) {

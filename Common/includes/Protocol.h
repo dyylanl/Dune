@@ -191,8 +191,8 @@ public:
 
     bool recvEstablishConnection(Socket &socket);
     
-    void sendBuildings(Socket &socket, std::vector<BuildingDTO> buildings);
-    void sendUnits(Socket &socket, std::vector<UnitDTO> buildings);
+    void sendBuildings(Socket &socket, std::vector<BuildingDTO *> buildings);
+    void sendUnits(Socket &socket, std::vector<UnitDTO*> buildings);
     
     std::vector<BuildingDTO> recvInitBuildings(Socket &socket);
 
