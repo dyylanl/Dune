@@ -9,11 +9,11 @@
 Celda::Celda(Escenario* escenario, std::string tipo,Estado_last_clicked* last_clicked, int x, int y): dialogo_asignar_especia(new Dialog_asignar_especia)
 {
     this->escenario = escenario;
-    this->setImagen(QString::fromStdString(tipo));
     this->estado_last_clicked = last_clicked;
     this->pos_x = x;
     this->pos_y = y;
     this->ocupada = false;
+    this->setImagen(QString::fromStdString(tipo));
     connect(&this->dialogo_asignar_especia,SIGNAL(especia_asignada(int)),this,SLOT(cambiar_cantidad_especia(int)));
 }
 

@@ -8,7 +8,10 @@
 
 ButtonBuildCL::ButtonBuildCL(char textureID, SDL2pp::Point position, int id, char type, char player, int actionTime,
                              bool selectStatus, bool ready) : ButtonCL(textureID, position, id, type, player, actionTime,
-                                                                     selectStatus, ready) {}
+                                                                     selectStatus, ready) {
+    m_selectStatus = false;
+    m_ready = false;
+}
 
 void ButtonBuildCL::processEvent(SDL_Event &event, BQueue<std::unique_ptr<CommandCL>> &queue, Camera &camera) {
     if(event.button.button == SDL_BUTTON_LEFT && !m_selectStatus && !m_ready) {
