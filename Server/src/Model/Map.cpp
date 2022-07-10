@@ -146,6 +146,7 @@ std::vector<UnitDTO*> Map::getUnits() {
         auto* dto = new UnitDTO;
         dto->pos_x = unit->getPosition().x;
         dto->pos_y = unit->getPosition().y;
+        dto->unit_id = unit->id;
         dto->player_id = unit->getPlayer().getId();
         dto->life = unit->getLife();
         dto->type = unit->getType();
@@ -160,7 +161,7 @@ std::vector<BuildingDTO*> Map::getBuildings() {
         auto* dto = new BuildingDTO; // es elimianado en el hilo sender
         dto->pos_x = build->getPosition().x;
         dto->pos_y = build->getPosition().y;
-
+        dto->build_id = build->id;
         dto->player_id = build->getPlayer()->getId();
 
         dto->life = build->getLife();
