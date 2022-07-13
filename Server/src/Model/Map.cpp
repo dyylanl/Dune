@@ -48,13 +48,6 @@ Map::Map(std::string map_path) :
         buildings.push_back(construction_center);
         centers.emplace(i, construction_center);
         occupy(construction_center);
-        /*BuildingDTO centerDto;
-        centerDto.type = CONSTRUCTION_CENTER_KEY;
-        centerDto.life = construction_center->getLife();
-        centerDto.pos_x = construction_center->getPosition().x*BLOCK_WIDTH;
-        centerDto.pos_y = construction_center->getPosition().y*BLOCK_HEIGHT;
-        buildingsDTO.push_back(centerDto);*/
-
     }
 }
 
@@ -296,7 +289,7 @@ ConstructionCenter *Map::getConstructionCenterFor(InstanceId i) {
 void Map::selectUnit(InstanceId player, int x, int y) {
     Position pos(x,y);
     pos.normalize();
-    std::cout << "Jugador " << player << " selecciono una unidad en la posicion " << x << "," << y << std::endl;
+    std::cout << "Jugador " << player << " selecciono una unidad en la posicion " << pos.getX() << "," << pos.getY() << std::endl;
 }
 
 
@@ -315,4 +308,12 @@ bool Map::canWeBuild(Position pos, int width, int height) {
         }
     }
     return true;
+}
+
+void Map::moveUnit(InstanceId player, int x, int y) {
+    Position pos(x,y);
+    pos.normalize();
+    if (isValid(pos)) {
+        std::cout << "[Map] Jugador " << player << " moviendo unidades a la posicion " << pos.getX() << "," << pos.getY() << std::endl;
+    }
 }

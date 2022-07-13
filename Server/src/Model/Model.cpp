@@ -55,7 +55,7 @@ void Model::selectUnit(InstanceId player, int x, int y) {
 }
 
 void Model::moveUnit(InstanceId player, int x, int y) {
-    std::cout << "Jugador: " << player << " moviendo unidad a la posicion " << x << "," << y << std::endl;
+    map.moveUnit(player,x,y);
 }
 
 

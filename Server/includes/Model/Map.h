@@ -156,6 +156,11 @@ public:
     *   Bloquea los terrenos indicados a partir de 'pos'
     */
    void blockTerrains(Position pos, int width, int height);
+
+   /*
+    * Mueve las unidades seleccionadas por el jugador a la posicion indicada
+    */
+   void moveUnit(InstanceId player, int x, int y);
    
 };
 
