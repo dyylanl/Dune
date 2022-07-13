@@ -151,6 +151,12 @@ public:
     *   Verifica que se pueda construir en la posicion indicada un edificio de width x height
     */
     bool canWeBuild(Position pos, int width, int height);
+
+    /*
+    *   Bloquea los terrenos indicados a partir de 'pos'
+    */
+   void blockTerrains(Position pos, int width, int height);
+   
 };
 
 #endif //__MAP_H__

@@ -6,6 +6,7 @@
 class Summit : public Terrain {
 public:
     Summit();
+    void buildOn(Building* building) override;
 };
 
 #endif	//__SUMMIT_H__

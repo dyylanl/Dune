@@ -47,6 +47,7 @@ Map::Map(std::string map_path) :
         auto* construction_center = map_reader.getConstructionCenterFor((InstanceId)i);
         buildings.push_back(construction_center);
         centers.emplace(i, construction_center);
+        occupy(construction_center);
         /*BuildingDTO centerDto;
         centerDto.type = CONSTRUCTION_CENTER_KEY;
         centerDto.life = construction_center->getLife();
@@ -204,9 +205,10 @@ void Map::putBuilding(char type, int x, int y) {
     Building* build = getBuilding(type,pos.x,pos.y);
     if (canWeBuild(pos,build->width,build->height)) {
             buildings.push_back(build);
+            occupy(build);
             std::cout << "[Map] Se construyo un edificio del tipo " << type << " en " << pos.x << "," << pos.y << std::endl; 
     } else {
-        std::cout << "Construccion en posicion invalida." << std::endl;
+        std::cout << "[Map] Construccion en posicion invalida." << std::endl;
     }
 }
 
@@ -270,7 +272,7 @@ void Map::free(Building &building) {
 void Map::occupy(Building* building) {
     for (int i = 0; i < building->height; i++) {
         for (int j = 0; j < building->width; j++) {
-            this->at(building->getPosition().x + j, building->getPosition().y + i).buildOn(building);
+            this->at(building->getPosition().x + i, building->getPosition().y + j).buildOn(building);
         }
     }
 }

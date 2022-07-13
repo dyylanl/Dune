@@ -11,6 +11,7 @@ public:
     virtual int getSpice() override;
     virtual bool hasFarm() override;
     virtual char getKey() override;
+    void buildOn(Building* building) override;
 private:
     int availableFarm;
 };
