@@ -23,7 +23,9 @@ public:
     Protocol();
     ~Protocol();
 
-
+    /*
+     * Retorna 1 o 2 bytes respectivamente
+     */
     uint8_t recvOneByte(Socket &socket);
     uint16_t recvTwoBytes(Socket &socket);
 
@@ -33,20 +35,26 @@ public:
     bool sendOneByte(Socket &socket, uint8_t data);
     bool sendTwoBytes(Socket &socket, uint16_t data);
 
-
-
+    /*
+     * Envio de DTO's
+     */
     void sendUnit(Socket &socket, UnitDTO unit);
     void sendBuild(Socket &socket, BuildingDTO build);
 
-    uint16_t recvPosition(Socket &socket);
+    /*
+     * Metodos q usa el run del client
+     */
+    uint16_t recvCountObject(Socket &socket);
+    uint8_t recvType(Socket &socket);
+
+    void recvBuild(Socket &socket, int &id, char &player, int &posX, int &posY, int &life);
+    void recvUnit(Socket &socket, int &id, char &player, bool &selectStatus, int &posX, int &posY, int &posActX,
+                  int &posActY, int &life, bool &action);
 
     /*
-     * Envia la informacion requerida para crear una partida.
+     * Recibe una posicion
      */
-    void createGame(Socket &socket, uint16_t house,
-                    const std::string& name, int req);
-
-    uint8_t recvOpcode(Socket &socket);
+    uint16_t recvPosition(Socket &socket);
 
     void sendInitGame(Socket &socket);
     bool recvInitGame(Socket &socket);
@@ -55,86 +63,54 @@ public:
 
 
     /*
-     * Envia la informacion requerida para unirse una partida.
-     */
-    void joinGame(Socket &socket, uint16_t house,
-                  const std::string& name);
-    /*
-     * Envia la informacion requerida para listar la/s partida/s.
-     */
-    void listGames(Socket &socket);
-    /*
      * Finaliza la comunicacion con el protocolo.
      */
     void close();
+
     /*
      * Retorna el tipo de comando (unirse, listar o crear)
      */
     uint8_t recvCommand(Socket &socket);
+
     /*
      * Envia la respuesta al comando (0 exito, 1 error)
      */
     bool sendResponse(Socket &socket, int resp);
+
     /*
      * Retorna un string de longitud name_long.
      */
     std::string recvName(Socket &socket);
+
     /*
      * Retorna el tipo de casa (0 Harkonnen, 1 Atreides y 2 Ordos)
      */
-    uint16_t recvHouse(Socket &socket);
+    uint8_t recvHouse(Socket &socket);
     
     /*
      * Retorna la cantidad de jugadores actuales (1 byte)
      */
     uint16_t recvCurrent(Socket &socket);
+
     /*
      * Retorna la cantidad de jugadores requeridos (1 byte)
      */
     uint16_t recvReq(Socket &socket);
+
     /*
      * Retorna la respuesta a la ejecucion del comando (0 exito, 1 error)
      */
     uint8_t recvResponse(Socket &socket);
+
     /*
      * Envia una lista con el formato. (cantidad de elementos, (actuales, requeridos, longitud_nombre, nombre) ... ( , , , ,))
      */
     void sendGameList(Socket &socket, const std::vector<std::vector<std::string>>& list);
+
     /*
      * Retorna una lista con el formato (actuales, requeridos, nombre).
      */
     std::vector<std::vector<std::string>> recvGameList(Socket &socket);
-    /*
-     *
-     */
-    void recvCreate(Socket &socket, int &house, int &req, std::string &name);
-    /*
-     *
-     */
-    void recvJoin(Socket &socket, std::string &name);
-
-    /*
-     * Envia el tipo de unidad
-     */
-    void sendUnit(Socket &socket, int type);
-    /*
-     * Envia la posicion en orden x y luego y
-     */
-    void sendPosition(Socket &socket, unsigned x, unsigned y);
-    /*
-     * Retorna el tipo de unidad (char)
-     */
-    char recvUnitType(Socket &skt);
-    /*
-     * Retorna una posicion
-     */
-    void sendBuild(Socket &socket, int build, int posX, int posY);
-
-    void operationRecv(Socket &socket, char &operation);
-
-    char typeUnidRecv(Socket &socket);
-
-    int idUnidRecv(Socket &socket);
 
     /*
      * Se envia una sola vez, con cada cliente nuevo.
@@ -143,44 +119,18 @@ public:
     static void sendMap(Socket &socket, std::vector<std::vector<char>>& map) ;
 
     static std::vector<std::vector<char>> recvMap(Socket &socket);
+
     bool sendName(Socket &socket, std::string name);
-
-    void
-    recvUnit(Socket &socket, int &id, char &player, bool &selectStatus, int &posX, int &posY, int &posActX,
-             int &posActY, int &life, bool &action);
-
-    void recvType(Socket &socket, char &type);
-
-    void sendType(Socket &socket, int &actionType);
-
-    void sendAction(Socket &socket, int &id, int &posX, int &posY);
-
-    void sendId(Socket &socket, int &id);
-
-    void recvCountObject(Socket &socket, int &size);
-
-    void recvBuild(Socket &socket, int &id, char &player, int &posX, int &posY, int &life);
 
     void sendCountObject(Socket &socket, int &countObject);
 
-    void enviar(Socket &socket);
-
     void recvObjectType(Socket &socket, char &i);
-
-    void recvBotton(Socket &socket, int &id, char &player, int &constructionTime, bool &selectStatus, bool &ready);
 
     void sendCommandSelect(Socket &socket, char &action, int &id);
 
     void sendCommandMove(Socket &socket, char &action, int &id, int &posX, int &posY);
 
     void sendCommandBuildBuilding(Socket &socket, char &action, char &build, int &posX, int &posY);
-
-    /*
-     *
-     */
-    std::vector<std::string> recvMapsId(Socket &socket);
-
-    void sendMapsId(Socket &socket, std::vector<std::string> maps_id);
 
     void sendMapsCreated(Socket &socket, std::vector<MapDTO> maps);
 
@@ -190,13 +140,9 @@ public:
     void sendEstablishConnection(Socket &socket);
 
     bool recvEstablishConnection(Socket &socket);
-    
-    void sendBuildings(Socket &socket, std::vector<BuildingDTO *> buildings);
-    void sendUnits(Socket &socket, std::vector<UnitDTO*> buildings);
-    
-    std::vector<BuildingDTO> recvInitBuildings(Socket &socket);
 
     void sendCommandCreateUnit(Socket &socket, char &action, char &unitType);
+
 };
 
 
