@@ -45,9 +45,12 @@ void MainWindow::on_button_confirmar_clicked()
     this->text_nombre = this->ui->nombre_text_input->text();
     this->ui->stackedWidget->setCurrentIndex(1);
     
-    this->cliente = new Client(this->text_IP.toStdString(),this->text_puerto.toStdString());
+    
+    //this->cliente = new Client(this->text_IP.toStdString(),this->text_puerto.toStdString());
+    this->cliente = new Client("localhost","8082");
     //Socket skt(this->text_IP.toStdString(),this->text_puerto.toStdString());
-    this->cliente->enviar_nombre_jugador(this->text_nombre.toStdString());
+    //this->cliente->enviar_nombre_jugador(this->text_nombre.toStdString());
+    this->cliente->enviar_nombre_jugador("juan");
     
 
 }
