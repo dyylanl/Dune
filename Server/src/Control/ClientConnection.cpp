@@ -31,8 +31,7 @@ void ClientConnection::_sender() {
             for (auto &u: snap->units) {
                 protocol.sendUnit(peer, *u);
             }
-            delete snap;
-
+            //delete snap; #TODO: esto lanza sigsegv cuando hay 2 players
         }
     } catch (const std::exception& e) {
         stop();
@@ -56,7 +55,7 @@ void ClientConnection::_receiver() {
         }
     } catch (const std::exception& e) {
         stop();
-        fprintf(stderr, "[ClientConnection] Error en el hilo _receiver %s\n", e.what());
+        fprintf(stderr, "[ClientConnection] Error en el hilo receiver %s\n", e.what());
     } catch (...) {
         stop();
         fprintf(stderr, "[ClientConnection] Error desconocido.\n");

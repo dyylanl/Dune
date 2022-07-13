@@ -74,7 +74,7 @@ bool Player::lose() {
 }
 
 int Player::getId() const {
-    return this->id;
+    return 1; // TODO: TERMINAR ID PLAYER
 }
 
 std::string& Player::getHouse() {

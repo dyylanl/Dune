@@ -57,7 +57,6 @@ void Server::run() {
     while (input != "q") {
         std::cin >> input;
 
-        
         if (input == "l") {
             printGames();
         }
@@ -68,7 +67,7 @@ void Server::run() {
 
         if (input == "c") {
             int ret = system("clear");
-            ret += 1;
+            ret++;
         }
 
         if (input == "p") {
@@ -77,13 +76,9 @@ void Server::run() {
         
 
     }
-
     game.stop();
-
     accepter.stop();
     accepter.join();
-
-
 }
 
 Server::~Server() {}

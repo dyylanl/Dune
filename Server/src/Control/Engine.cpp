@@ -31,6 +31,10 @@ void Engine::_processFinishedConnections() {
         established_connections.remove(*finished_connection);
         delete finished_connection;
         fprintf(stderr, "[Engine]: Se ha desconectado un jugador.\n");
+        if (model.getCurrentPlayers() == 0) {
+            keep_executing = false;
+            fprintf(stderr, "[Engine]: Partida finalizada.\n");
+        }
     }
 }
 
@@ -127,3 +131,4 @@ Engine::Engine(ConfigurationReader &config1, std::string map_path, int total_pla
                                     model(config, map_path)
                                     {
                                     }
+
