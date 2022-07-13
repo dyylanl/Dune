@@ -144,6 +144,8 @@ public:
 
 
     ConstructionCenter *getConstructionCenterFor(InstanceId i);
+
+    void selectUnit(InstanceId player, int x, int y);
 };
 
 #endif //__MAP_H__

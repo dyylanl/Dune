@@ -51,7 +51,7 @@ void Model::deletePlayer(InstanceId player_id) {
 }
 
 void Model::selectUnit(InstanceId player, int x, int y) {
-    std::cout << "Jugador: " << player << " selecciona unidad en " << x << "," << y << std::endl;
+    map.selectUnit(player,x,y);
 }
 
 void Model::moveUnit(InstanceId player, int x, int y) {

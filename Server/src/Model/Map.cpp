@@ -291,6 +291,12 @@ ConstructionCenter *Map::getConstructionCenterFor(InstanceId i) {
     return this->centers.at(i);
 }
 
+void Map::selectUnit(InstanceId player, int x, int y) {
+    Position pos(x,y);
+    pos.normalize();
+    std::cout << "Jugador " << player << " selecciono una unidad en la posicion " << x << "," << y << std::endl;
+}
+
 /*
 bool Map::canWeBuild(Position& pos, int width, int height) {
     for (int i = 0; i < height; i++) {
