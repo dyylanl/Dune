@@ -30,3 +30,5 @@ char Sand::getKey() {
         return key;
     }
 }
+
+void Sand::buildOn(Building* building) {}

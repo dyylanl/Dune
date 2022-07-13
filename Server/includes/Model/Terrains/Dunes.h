@@ -6,6 +6,7 @@
 class Dunes : public Terrain {
 public:
     Dunes();
+    void buildOn(Building* building) override;
 };
 
 #endif	//__DUNES_H__

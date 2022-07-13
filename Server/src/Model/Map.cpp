@@ -33,13 +33,13 @@ Map::Map(std::string map_path) :
                             units()
 {
     std::vector <std::vector<Terrain>> terrain_init((uint16_t) rows, std::vector<Terrain>((uint16_t) cols, Terrain('A')));
-    this->terrrains = terrain_init;
+    this->terrains = terrain_init;
     int rows_ = mapa.size();
     int cols_ = mapa[0].size();
     for (int i = 0; i < rows_; ++i) {
         for (int j = 0; j < cols_; ++j) {
             char type = this->mapa[i][j];
-            terrrains[i][j] = Terrain(type);
+            terrains[i][j] = Terrain(type);
         }
     }
     int total_buildings = map_reader.getTotalBuildings();
@@ -47,18 +47,12 @@ Map::Map(std::string map_path) :
         auto* construction_center = map_reader.getConstructionCenterFor((InstanceId)i);
         buildings.push_back(construction_center);
         centers.emplace(i, construction_center);
-        /*BuildingDTO centerDto;
-        centerDto.type = CONSTRUCTION_CENTER_KEY;
-        centerDto.life = construction_center->getLife();
-        centerDto.pos_x = construction_center->getPosition().x*BLOCK_WIDTH;
-        centerDto.pos_y = construction_center->getPosition().y*BLOCK_HEIGHT;
-        buildingsDTO.push_back(centerDto);*/
-
+        occupy(construction_center);
     }
 }
 
 char Map::getTypeTerrain(int posX, int posY) {
-    return this->terrrains[posX][posY].getKey();
+    return this->terrains[posX][posY].getKey();
 }
 
 void Map::updateSpice(int x, int y){
@@ -93,14 +87,14 @@ Terrain& Map::at(int x, int y) {
     if ((x < 0) || (y < 0)) {
         throw std::out_of_range("Out of range");
     }
-    return reinterpret_cast<Terrain &>(this->terrrains[x][y]);
+    return reinterpret_cast<Terrain &>(this->terrains[x][y]);
 }
 
 Terrain& Map::at(const Position& pos) {
-    return reinterpret_cast<Terrain &>(this->terrrains[pos.getX()][pos.getY()]);
+    return reinterpret_cast<Terrain &>(this->terrains[pos.getX()][pos.getY()]);
 }
 
-bool Map::isValid(Position &pos) {
+bool Map::isValid(Position pos) {
     return (pos.getX() >= 0 && pos.getY() >= 0 && pos.getX() < rows && pos.getY() < cols);
 }
 
@@ -201,13 +195,14 @@ void Map::putUnit(InstanceId id_player, char type, int x, int y) {
 void Map::putBuilding(char type, int x, int y) {
     Position pos(x,y);
     pos.normalize();
-    if (!isValid(pos)) {
-        std::cout << "Poner construccion en posicion invalida: " << pos.x << "," << pos.y << std::endl;
-        return;
-    }
     Building* build = getBuilding(type,pos.x,pos.y);
-    buildings.push_back(build);
-    std::cout << "[Map] Se construyo un edificio del tipo " << type << " en " << pos.x << "," << pos.y << std::endl; 
+    if (canWeBuild(pos,build->width,build->height)) {
+            buildings.push_back(build);
+            occupy(build);
+            std::cout << "[Map] Se construyo un edificio del tipo " << type << " en " << pos.x << "," << pos.y << std::endl; 
+    } else {
+        std::cout << "[Map] Construccion en posicion invalida." << std::endl;
+    }
 }
 
 Map::~Map() {
@@ -270,7 +265,7 @@ void Map::free(Building &building) {
 void Map::occupy(Building* building) {
     for (int i = 0; i < building->height; i++) {
         for (int j = 0; j < building->width; j++) {
-            this->at(building->getPosition().x + j, building->getPosition().y + i).buildOn(building);
+            this->at(building->getPosition().x + i, building->getPosition().y + j).buildOn(building);
         }
     }
 }
@@ -294,16 +289,17 @@ ConstructionCenter *Map::getConstructionCenterFor(InstanceId i) {
 void Map::selectUnit(InstanceId player, int x, int y) {
     Position pos(x,y);
     pos.normalize();
-    std::cout << "Jugador " << player << " selecciono una unidad en la posicion " << x << "," << y << std::endl;
+    std::cout << "Jugador " << player << " selecciono una unidad en la posicion " << pos.getX() << "," << pos.getY() << std::endl;
 }
 
-/*
-bool Map::canWeBuild(Position& pos, int width, int height) {
+
+
+bool Map::canWeBuild(Position pos, int width, int height) {
     for (int i = 0; i < height; i++) {
         for (int j = 0; j < width; j++) {
-            Position aux(pos.getX() + j * BLOCK_WIDTH, pos.getY() + i * BLOCK_HEIGHT);
-            if (isValid(aux)) {
-                if ((terrains.at(aux).getKey() != Rocks().getKey()) || this->at(aux).isOccupied()) {
+            Position current_pos(pos.getX() + i, pos.getY() + j);
+            if (isValid(current_pos)) {
+                if ((terrains[current_pos.x][current_pos.y].getKey() != ROCK_KEY) || this->at(current_pos).isOccupied()) {
                     return false;
                 }
             } else {
@@ -311,17 +307,13 @@ bool Map::canWeBuild(Position& pos, int width, int height) {
             }
         }
     }
-
-    for (int i = -5; i <= height + 5; i++) {
-        for (int j = -5; j <= width + 5; j++) {
-            Position aux(pos.getX() + j * BLOCK_WIDTH, pos.getY() + i * BLOCK_HEIGHT);
-            if (isValid(aux)) {
-                if (terrains.at(aux).isBuiltOn()) {
-                    return true;
-                }
-            }
-        }
-    }
-    return false;
+    return true;
 }
-*/
+
+void Map::moveUnit(InstanceId player, int x, int y) {
+    Position pos(x,y);
+    pos.normalize();
+    if (isValid(pos)) {
+        std::cout << "[Map] Jugador " << player << " moviendo unidades a la posicion " << pos.getX() << "," << pos.getY() << std::endl;
+    }
+}

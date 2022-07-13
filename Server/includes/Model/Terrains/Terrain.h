@@ -9,6 +9,7 @@ protected:
     bool occupied;
     bool builtOn;
     int speed_factor;
+    Building* building;
 
 public:
     /*

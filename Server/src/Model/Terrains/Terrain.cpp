@@ -1,3 +1,4 @@
+#include <iostream>
 #include "../../../includes/Model/Terrains/Terrain.h"
 
 Terrain::Terrain(char key) : key(key), occupied(false), builtOn(false), speed_factor(1) {}
@@ -47,6 +48,8 @@ int Terrain::getSpeedFactor() {
     return this->speed_factor;
 }
 
-void Terrain::buildOn(Building *building) {
-
+void Terrain::buildOn(Building* building1) {
+    this->occupied = true;
+    this->builtOn = true;
+    this->building = building1;
 }

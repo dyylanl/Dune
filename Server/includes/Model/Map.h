@@ -19,7 +19,7 @@ class Map {
     int rows, cols;
     int max_players;
     std::map<int, ConstructionCenter*> centers;
-    std::vector<std::vector<Terrain>> terrrains; // contiene el tipo de terreno en esa pos
+    std::vector<std::vector<Terrain>> terrains; // contiene el tipo de terreno en esa pos
     std::vector<std::vector<char>> mapa; // contiene el tipo de terreno_key para enviar a los clientes
 
 
@@ -69,7 +69,7 @@ public:
     /*
      * retorna true si es una posicion valida en el mapa creado
      */
-    bool isValid(Position& pos);
+    bool isValid(Position pos);
 
     /*
      * devuelve el tipo de terreno que hay en la pos x,y
@@ -146,6 +146,22 @@ public:
     ConstructionCenter *getConstructionCenterFor(InstanceId i);
 
     void selectUnit(InstanceId player, int x, int y);
+
+    /*
+    *   Verifica que se pueda construir en la posicion indicada un edificio de width x height
+    */
+    bool canWeBuild(Position pos, int width, int height);
+
+    /*
+    *   Bloquea los terrenos indicados a partir de 'pos'
+    */
+   void blockTerrains(Position pos, int width, int height);
+
+   /*
+    * Mueve las unidades seleccionadas por el jugador a la posicion indicada
+    */
+   void moveUnit(InstanceId player, int x, int y);
+   
 };
 
 #endif //__MAP_H__
