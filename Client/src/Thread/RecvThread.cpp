@@ -43,8 +43,6 @@ void RecvThread::run() {
                     break;
                 case BUILD: addBuild(gameObjects);
                     break;
-                case BUTTON: addButtonBuild(gameObjects);
-                    break;
                 default: std::cout << "Tipo invalido" << std::endl;
             }
         }
@@ -161,79 +159,5 @@ void RecvThread::addBuild(std::vector<std::unique_ptr<GameObject>> &gameObjects)
             gameObjects.push_back(std::unique_ptr<GameObject>(new PalaceCL(id, player, SDL2pp::Point(posX, posY), life)));
             break;
         default: std::cout << "Tipo de edificio invalido" << std::endl;
-    }
-}
-
-void RecvThread::addButtonBuild(std::vector<std::unique_ptr<GameObject>> &gameObjects) {
-    char objectType = 0;
-    int id = 0;
-    char player = 0;
-    int constructionTime = 0;
-    bool selectStatus = false;
-    bool ready = false;
-
-    m_protocol.recvObjectType(m_socket, objectType);
-    switch (objectType) {
-        case BTRIKE:
-            m_protocol.recvBotton(m_socket, id, player, constructionTime, selectStatus, ready);
-            gameObjects.push_back(std::unique_ptr<GameObject>(new ButtonTrikeCL(id, player, constructionTime, selectStatus, ready)));
-            break;
-        case BRAIDER:
-            m_protocol.recvBotton(m_socket, id, player, constructionTime, selectStatus, ready);
-            gameObjects.push_back(std::unique_ptr<GameObject>(new ButtonRaiderCL(id, player, constructionTime, selectStatus, ready)));
-            break;
-        case BTANK:
-            m_protocol.recvBotton(m_socket, id, player, constructionTime, selectStatus, ready);
-            gameObjects.push_back(std::unique_ptr<GameObject>(new ButtonTankCL(id, player, constructionTime, selectStatus, ready)));
-            break;
-        case BHARVESTER:
-            m_protocol.recvBotton(m_socket, id, player, constructionTime, selectStatus, ready);
-            gameObjects.push_back(std::unique_ptr<GameObject>(new ButtonHarvesterCL(id, player, constructionTime, selectStatus, ready)));
-            break;
-        case BLIGHT_INFANTRY:
-            m_protocol.recvBotton(m_socket, id, player, constructionTime, selectStatus, ready);
-            gameObjects.push_back(std::unique_ptr<GameObject>(new ButtonLightInfantryCL(id, player, constructionTime, selectStatus, ready)));
-            break;
-        case BHEAVY_INFANTRY:
-            m_protocol.recvBotton(m_socket, id, player, constructionTime, selectStatus, ready);
-            gameObjects.push_back(std::unique_ptr<GameObject>(new ButtonHeavyInfantryCL(id, player, constructionTime, selectStatus, ready)));
-            break;
-        case BSARDAUKAR:
-            m_protocol.recvBotton(m_socket, id, player, constructionTime, selectStatus, ready);
-            gameObjects.push_back(std::unique_ptr<GameObject>(new ButtonSardaukarCL(id, player, constructionTime, selectStatus, ready)));
-            break;
-        case BCONSTRUCTION_YARD:
-            m_protocol.recvBotton(m_socket, id, player, constructionTime, selectStatus, ready);
-            gameObjects.push_back(std::unique_ptr<GameObject>(new ButtonConstructionYardCL(id, player, constructionTime, selectStatus, ready)));
-            break;
-        case BLIGHT_FACTORY:
-            m_protocol.recvBotton(m_socket, id, player, constructionTime, selectStatus, ready);
-            gameObjects.push_back(std::unique_ptr<GameObject>(new ButtonLightFactoryCL(id, player, constructionTime, selectStatus, ready)));
-            break;
-        case BHEAVY_FACTORY:
-            m_protocol.recvBotton(m_socket, id, player, constructionTime, selectStatus, ready);
-            gameObjects.push_back(std::unique_ptr<GameObject>(new ButtonHeavyFactoryCL(id, player, constructionTime, selectStatus, ready)));
-            break;
-        case BWIND_TRAP:
-            m_protocol.recvBotton(m_socket, id, player, constructionTime, selectStatus, ready);
-            gameObjects.push_back(std::unique_ptr<GameObject>(new ButtonWidtrapCL(id, player, constructionTime, selectStatus, ready)));
-            break;
-        case BREFINERY:
-            m_protocol.recvBotton(m_socket, id, player, constructionTime, selectStatus, ready);
-            gameObjects.push_back(std::unique_ptr<GameObject>(new ButtonRefineryCL(id, player, constructionTime, selectStatus, ready)));
-            break;
-        case BSILO:
-            m_protocol.recvBotton(m_socket, id, player, constructionTime, selectStatus, ready);
-            gameObjects.push_back(std::unique_ptr<GameObject>(new ButtonSiloCL(id, player, constructionTime, selectStatus, ready)));
-            break;
-        case BBARRACK:
-            m_protocol.recvBotton(m_socket, id, player, constructionTime, selectStatus, ready);
-            gameObjects.push_back(std::unique_ptr<GameObject>(new ButtonBarrackCL(id, player, constructionTime, selectStatus, ready)));
-            break;
-        case BPALACE:
-            m_protocol.recvBotton(m_socket, id, player, constructionTime, selectStatus, ready);
-            gameObjects.push_back(std::unique_ptr<GameObject>(new ButtonPalaceCL(id, player, constructionTime, selectStatus, ready)));
-            break;
-        default: std::cout << "Tipo de button edificio invalido" << std::endl;
     }
 }
