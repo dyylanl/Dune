@@ -28,6 +28,9 @@
 #include "GameObject/Button/ButtonUnit/ButtonSardaukarCL.h"
 #include "GameObject/Button/ButtonUnit/ButtonTankCL.h"
 #include "../../Common/includes/RateController.h"
+#include "GameObject/Button/ButtonUnit/ButtonSonicTankCL.h"
+#include "GameObject/Button/ButtonUnit/ButtonDesviatorCL.h"
+#include "GameObject/Button/ButtonUnit/ButtonDevastatorCL.h"
 #include <arpa/inet.h>
 
 #define HARKONNEN 1
@@ -172,10 +175,10 @@ void Client::initSDL(Socket &aSocket, Protocol &aProtocol,
     menu.push_back(std::unique_ptr<ButtonCL>(new ButtonWidtrapCL(1, 1, 10, false, false)));
 
     menu.push_back(std::unique_ptr<ButtonCL>(new ButtonHarvesterCL(1, 1, 10, false, false)));
-    menu.push_back(std::unique_ptr<ButtonCL>(new ButtonHeavyInfantryCL(1, 1, 10, false, false)));
-    menu.push_back(std::unique_ptr<ButtonCL>(new ButtonLightInfantryCL(1, 1, 10, false, false)));
+    //menu.push_back(std::unique_ptr<ButtonCL>(new ButtonSonicTankCL(1, 1, 10, false, false)));
+    //menu.push_back(std::unique_ptr<ButtonCL>(new ButtonDesviatorCL(1, 1, 10, false, false)));
     menu.push_back(std::unique_ptr<ButtonCL>(new ButtonRaiderCL(1, 1, 10, false, false)));
-    menu.push_back(std::unique_ptr<ButtonCL>(new ButtonSardaukarCL(1, 1, 10, false, false)));
+    //menu.push_back(std::unique_ptr<ButtonCL>(new ButtonDevastatorCL(1, 1, 10, false, false)));
     menu.push_back(std::unique_ptr<ButtonCL>(new ButtonTankCL(1, 1, 10, false, false)));
     menu.push_back(std::unique_ptr<ButtonCL>(new ButtonTrikeCL(1, 1, 10, false, false)));
 

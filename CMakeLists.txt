@@ -63,7 +63,7 @@ add_library(dune-common SHARED ${common_src})
 target_link_libraries(dune-common)
 
 # Client
-add_executable(dune ${client_src} Client/src/loby/resources/resources.qrc)
+add_executable(dune ${client_src} Client/src/loby/resources/resources.qrc Client/src/GameObject/Button/ButtonUnit/ButtonSonicTankCL.cpp Client/src/GameObject/Button/ButtonUnit/ButtonSonicTankCL.h Client/src/GameObject/Button/ButtonUnit/ButtonDesviatorCL.cpp Client/src/GameObject/Button/ButtonUnit/ButtonDesviatorCL.h Client/src/GameObject/Button/ButtonUnit/ButtonDevastatorCL.cpp Client/src/GameObject/Button/ButtonUnit/ButtonDevastatorCL.h)
 target_link_libraries(dune dune-common SDL2 SDL2_image SDL2_ttf SDL2_mixer ${SDL2PP_LIBRARIES} Qt5::Core Qt5::Gui Qt5::Widgets Qt5::Multimedia)
 
 # Server
