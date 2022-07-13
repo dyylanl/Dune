@@ -360,10 +360,10 @@ void Protocol::sendCommandCreateUnit(Socket &socket, char &action, char &unitTyp
     socket.send(reinterpret_cast<char *>(&unitType), sizeof(uint8_t));
 }
 
-uint16_t Protocol::recvCountObject(Socket &socket) {
-    return recvTwoBytes(socket);
+void Protocol::recvCountObject(Socket &socket, int &size) {
+    socket.recv(reinterpret_cast<char *>(&size), sizeof(uint16_t));
 }
 
-uint8_t Protocol::recvType(Socket &socket) {
-    return recvOneByte(socket);
+void Protocol::recvType(Socket &socket, char &type) {
+    socket.recv(reinterpret_cast<char *>(&type), sizeof(uint8_t));
 }

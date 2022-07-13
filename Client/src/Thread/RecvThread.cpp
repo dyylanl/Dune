@@ -35,9 +35,9 @@ void RecvThread::run() {
         int size = 0;
         std::vector<std::unique_ptr<GameObject>> gameObjects;
 
-        size = m_protocol.recvCountObject(m_socket);
+        m_protocol.recvCountObject(m_socket, size);
         for (int i = 0; i < size; ++i) {
-            type = m_protocol.recvType(m_socket);
+            m_protocol.recvType(m_socket, type);
             switch (type) {
                 case UNIT: addVehicle(gameObjects);
                     break;

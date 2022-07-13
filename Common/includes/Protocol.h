@@ -44,8 +44,8 @@ public:
     /*
      * Metodos q usa el run del client
      */
-    uint16_t recvCountObject(Socket &socket);
-    uint8_t recvType(Socket &socket);
+    void recvCountObject(Socket &socket, int &size);
+    void recvType(Socket &socket, char &type);
 
     void recvBuild(Socket &socket, int &id, char &player, int &posX, int &posY, int &life);
     void recvUnit(Socket &socket, int &id, char &player, bool &selectStatus, int &posX, int &posY, int &posActX,
