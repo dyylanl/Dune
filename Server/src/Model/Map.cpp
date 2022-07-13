@@ -144,6 +144,11 @@ std::vector<UnitDTO*> Map::getUnits() {
         dto->player_id = unit->getPlayer().getId();
         dto->life = unit->getLife();
         dto->type = unit->getType();
+        if (unit->isSelected()) {
+            dto->selected = 1;
+        } else {
+            dto->selected = 0;
+        }
         retUnitsDto.push_back(dto);
     }
     return retUnitsDto;
@@ -257,7 +262,7 @@ bool Map::canMove(Unit& unit, Position pos) {
 void Map::free(Building &building) {
     for (int i = 0; i < building.height; i++) {
         for (int j = 0; j < building.width; j++) {
-            this->at(building.getPosition().x + j * BLOCK_WIDTH, building.getPosition().y + i * BLOCK_HEIGHT).free();
+            this->at(building.getPosition().x + j, building.getPosition().y + i).free();
         }
     }
 }
@@ -289,10 +294,12 @@ ConstructionCenter *Map::getConstructionCenterFor(InstanceId i) {
 void Map::selectUnit(InstanceId player, int x, int y) {
     Position pos(x,y);
     pos.normalize();
-    std::cout << "Jugador " << player << " selecciono una unidad en la posicion " << pos.getX() << "," << pos.getY() << std::endl;
+    for (auto& unit : units) {
+        if (pos.getX() == unit->getPosition().getX() && pos.getY() == unit->getPosition().getY()) {
+            unit->select();
+        }
+    }
 }
-
-
 
 bool Map::canWeBuild(Position pos, int width, int height) {
     for (int i = 0; i < height; i++) {
@@ -314,6 +321,20 @@ void Map::moveUnit(InstanceId player, int x, int y) {
     Position pos(x,y);
     pos.normalize();
     if (isValid(pos)) {
-        std::cout << "[Map] Jugador " << player << " moviendo unidades a la posicion " << pos.getX() << "," << pos.getY() << std::endl;
+        for (auto& unit : units) {
+            if (unit->isSelected()) {
+                if (canMove(*unit,pos)) {
+                    setDestiny(*unit,pos.getX(),pos.getY());
+                }
+            }
+        }
+    }
+}
+
+void Map::moveUnits(int it) {
+    for (auto &unit : units) {
+        if (unit->isSelected()) {
+            unit->move(*this);
+        }
     }
 }

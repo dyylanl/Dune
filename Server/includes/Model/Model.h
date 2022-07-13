@@ -60,6 +60,7 @@ public:
     void actionOnPosition(Position &pos, Unit &unit);
     bool canWeBuild(Position& pos, int width, int height, int cost, Player& player);
     int numberOfPlayers();
+    void moveUnits(int it);
 };
 
 #endif //DUNE_MODEL_H

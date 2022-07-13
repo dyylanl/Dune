@@ -41,6 +41,8 @@ public:
     virtual bool hasNews();
     virtual bool canMoveAboveTerrain(Terrain &terrain);
     char getType() {return type;}
+    void select();
+    bool isSelected() {return selected;}
 
 public:
     const int id;
@@ -57,6 +59,7 @@ protected:
     Position next_pos;
     Player* player;
     bool news;
+    bool selected;
 };
 
 #endif //__UNIT_H__

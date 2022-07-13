@@ -161,6 +161,8 @@ public:
     * Mueve las unidades seleccionadas por el jugador a la posicion indicada
     */
    void moveUnit(InstanceId player, int x, int y);
+
+   void moveUnits(int it);
    
 };
 

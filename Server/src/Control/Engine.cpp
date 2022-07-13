@@ -62,6 +62,7 @@ void Engine::clearAll() {
 void Engine::_loopIteration(int it) {
     _processCommands();
     established_connections.sendSnapshot(model.getBuildings(), model.getUnits());
+    model.moveUnits(it);
     //map.updateSpice(it);
     //map.update(it);
     //established_connections.updateClients();
