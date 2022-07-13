@@ -2,6 +2,7 @@
 #include <stack>
 #include <algorithm>
 #include <vector>
+#include <iostream>
 #include "../../includes/Model/AStar.h"
 
 
@@ -10,7 +11,6 @@ AStar::AStar(Map &map) : map(map) {}
 std::stack<Position> AStar::reconstructPath(const std::map<Position, Position> &best_path, const Position &start) {
     std::stack<Position> total_path;
     Position current(start);
-
     total_path.push(current);
     while (best_path.find(current) != best_path.end()) {
         current = best_path.at(current);
@@ -21,10 +21,6 @@ std::stack<Position> AStar::reconstructPath(const std::map<Position, Position> &
 }
 
 std::stack<Position> AStar::makePath(Unit &unit, Position end) {
-    if (!map.canMove(unit, end)) {
-        return (std::stack<Position>());
-    }
-
     std::map<Position, Position> best_path;
     AStarNode n_end(end);
     AStarNode n_start(unit.getPosition());
@@ -45,7 +41,7 @@ std::stack<Position> AStar::makePath(Unit &unit, Position end) {
         std::vector<AStarNode> children = curr_node_itr->getAdjacents(this->map);
         for (AStarNode& child : children) {
             auto child_cl_itr = std::find(closeList.begin(), closeList.end(), child);
-            if (child_cl_itr != closeList.end() || !map.canMove(unit, child.pos)) {
+            if (child_cl_itr != closeList.end()/* || !map.canMove(unit, child.pos)*/) {
                 continue;
             }
             child.g = curr_node_itr->g + 1;
@@ -64,5 +60,6 @@ std::stack<Position> AStar::makePath(Unit &unit, Position end) {
             best_path[child.pos] = curr_node_itr->pos;
         }
     }
+    std::cout << "[AStar] No se encontro una ruta" << std::endl;
     return (std::stack<Position>());
 }

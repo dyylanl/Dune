@@ -147,3 +147,7 @@ bool Model::canWeBuild(Position& pos, int width, int height, int cost, Player& p
 int Model::numberOfPlayers() {
     return players.size();
 }
+
+void Model::moveUnits(int it) {
+    map.moveUnits(it);
+}
