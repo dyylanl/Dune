@@ -27,3 +27,7 @@ void Camera::update(SDL_Event &event) {
 SDL2pp::Point Camera::getPosicion() {
     return m_viewBox.GetTopLeft();
 }
+
+SDL2pp::Rect Camera::getViewBox() {
+    return m_viewBox;
+}

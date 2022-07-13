@@ -36,9 +36,10 @@ void ButtonBuildCL::processEvent(SDL_Event &event, BQueue<std::unique_ptr<Comman
         m_positionBuild = SDL2pp::Point(event.motion.x, event.motion.y);;
     }
 
-    if (event.button.button == SDL_BUTTON_RIGHT && m_selectStatus && m_ready) {
+    SDL2pp::Point point(event.motion.x, event.motion.y);
+    SDL2pp::Rect box = camera.getViewBox();
+    if (event.button.button == SDL_BUTTON_LEFT && m_selectStatus && m_ready && SDL_PointInRect(&point, &box)) {
         m_selectStatus = false;
-        SDL2pp::Point point(event.motion.x, event.motion.y);
         buildBuilding(queue, point - camera.getPosicion());
     }
 }

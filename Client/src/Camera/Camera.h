@@ -19,6 +19,7 @@ public:
     Camera(SDL2pp::Point corner) : m_viewBox(corner,SDL2pp::Point(GAME_WIDTH, GAME_HEIGHT)) {}
     void update(SDL_Event &event);
     SDL2pp::Point getPosicion();
+    SDL2pp::Rect getViewBox();
 };
 
 
