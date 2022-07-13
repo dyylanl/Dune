@@ -4,6 +4,7 @@
 
 #include "Engine.h"
 #include "../GameObject/Button/ButtonUnit/ButtonRaiderCL.h"
+#include "../Action/MoveCL.h"
 
 bool Engine::IsRunning() {
     return m_Running;
@@ -15,6 +16,12 @@ void Engine::Events() {
         if(event.type == SDL_QUIT) {
             m_Running = false;
         } else{
+            if (event.type == SDL_MOUSEBUTTONDOWN && event.button.button == SDL_BUTTON_RIGHT) {
+                SDL2pp::Point point(event.motion.x, event.motion.y);
+                std::unique_ptr<CommandCL> command (new MoveCL(point - m_camera.getPosicion()));
+                std::cout << "Push command Move or Attack" << std::endl;
+                m_queueB.push(command);
+            }
             unsigned int sizeObjects = m_objects.size();
             for (unsigned int i = 0; i < sizeObjects; ++i) {
                 m_objects[i]->processEvent(event, m_queueB, m_camera);

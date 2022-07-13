@@ -10,10 +10,9 @@
 
 class MoveCL : public CommandCL{
 private:
-    int m_id;
     SDL2pp::Point m_position;
 public:
-    MoveCL(int id, SDL2pp::Point position) : m_id(id), m_position(position) {}
+    MoveCL(SDL2pp::Point position) : m_position(position) {}
 
     void execute(Protocol &protocol, Socket &socket);
 

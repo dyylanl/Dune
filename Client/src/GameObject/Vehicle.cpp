@@ -21,13 +21,6 @@ void Vehicle::processEvent(SDL_Event &event, BQueue<std::unique_ptr<CommandCL>> 
             queue.push(command);
         }
     }
-
-    if (event.type == SDL_MOUSEBUTTONDOWN && event.button.button == SDL_BUTTON_RIGHT && m_selectStatus) {
-        SDL2pp::Point point(event.motion.x, event.motion.y);
-        std::unique_ptr<CommandCL> command (new MoveCL(m_id, point - camera.getPosicion()));
-        std::cout << "Push command Move" << std::endl;
-        queue.push(command);
-    }
 }
 
 void Vehicle::draw(SDL2pp::Renderer &renderer, TextureManager &textureManager, Camera &camera) {
