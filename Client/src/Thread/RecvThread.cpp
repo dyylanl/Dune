@@ -30,23 +30,30 @@
 #include "../GameObject/Button/ButtonUnit/ButtonSardaukarCL.h"
 
 void RecvThread::run() {
-    while (running) {
-        char type = ' ';
-        int size = 0;
-        std::vector<std::unique_ptr<GameObject>> gameObjects;
+    try {
+        while (running) {
+            char type = ' ';
+            int size = 0;
+            std::vector<std::unique_ptr<GameObject>> gameObjects;
 
-        m_protocol.recvCountObject(m_socket, size);
-        for (int i = 0; i < size; ++i) {
-            m_protocol.recvType(m_socket, type);
-            switch (type) {
-                case UNIT: addVehicle(gameObjects);
-                    break;
-                case BUILD: addBuild(gameObjects);
-                    break;
-                default: std::cout << "Tipo invalido" << std::endl;
+            m_protocol.recvCountObject(m_socket, size);
+            for (int i = 0; i < size; ++i) {
+                m_protocol.recvType(m_socket, type);
+                switch (type) {
+                    case UNIT:
+                        addVehicle(gameObjects);
+                        break;
+                    case BUILD:
+                        addBuild(gameObjects);
+                        break;
+                    default:
+                        std::cout << "Tipo invalido" << std::endl;
+                }
             }
+            m_quene.push(gameObjects);
         }
-        m_quene.push(gameObjects);
+    } catch (Exception &e) {
+        stop();
     }
 }
 

@@ -5,11 +5,15 @@
 #include "SendThread.h"
 
 void SendThread::run() {
-    while (running) {
-        std::unique_ptr<CommandCL> action;
-        if (m_quene.pop(action)) {
-            action->execute(m_protocol, m_socket);
+    try {
+        while (running) {
+            std::unique_ptr<CommandCL> action;
+            if (m_quene.pop(action)) {
+                action->execute(m_protocol, m_socket);
+            }
         }
+    } catch (Exception &e) {
+        stop();
     }
 }
 
