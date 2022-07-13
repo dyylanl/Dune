@@ -77,11 +77,13 @@ std::vector<std::vector<std::string>> Game::listGames() {
     std::vector<std::vector<std::string>> list = {};
     if (!this->games.empty()) {
         for (const auto& [game_name, engine] : this->games) {
-            std::vector<std::string> info = {};
-            info.push_back(std::to_string(engine->getCurrentPlayers()));
-            info.push_back(std::to_string(engine->getMaxPlayers()));
-            info.push_back(game_name);
-            list.push_back(info);
+            if (engine->getCurrentPlayers() != 0) {
+                std::vector<std::string> info = {};
+                info.push_back(std::to_string(engine->getCurrentPlayers()));
+                info.push_back(std::to_string(engine->getMaxPlayers()));
+                info.push_back(game_name);
+                list.push_back(info);
+            }
         }
     }
     return list;
