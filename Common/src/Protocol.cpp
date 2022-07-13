@@ -275,9 +275,15 @@ void Protocol::recvObjectType(Socket &socket, char &unitType) {
     socket.recv(reinterpret_cast<char *>(&unitType), sizeof(uint8_t));
 }
 
-void Protocol::sendCommandSelect(Socket &socket, char &action, int &id) {
+void Protocol::sendCommandSelect(Socket &socket, char &action, int &posX, int &posY) {
+    std::cout << (int)action << std::endl;
+    std::cout << posX << std::endl;
+    std::cout << posY << std::endl;
     socket.send(reinterpret_cast<char *>(&action), sizeof(uint8_t));
-    socket.send(reinterpret_cast<char *>(&id), sizeof(uint16_t));
+    posY = htons(posY);
+    posX = htons(posX);
+    socket.send(reinterpret_cast<char *>(&posX), sizeof(uint16_t));
+    socket.send(reinterpret_cast<char *>(&posY), sizeof(uint16_t));
 }
 
 void Protocol::sendCommandMove(Socket &socket, char &action, int &id, int &posX, int &posY) {

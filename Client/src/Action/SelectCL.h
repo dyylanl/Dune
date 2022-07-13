@@ -10,10 +10,10 @@
 
 class SelectCL : public CommandCL{
 private:
-    int m_id;
+    SDL2pp::Point m_position;
 
 public:
-    SelectCL(int id) : m_id(id) {}
+    SelectCL(SDL2pp::Point position) : m_position(position) {}
 
     void execute(Protocol &protocol, Socket &socket);
 

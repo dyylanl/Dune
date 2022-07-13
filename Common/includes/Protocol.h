@@ -126,7 +126,7 @@ public:
 
     void recvObjectType(Socket &socket, char &i);
 
-    void sendCommandSelect(Socket &socket, char &action, int &id);
+    void sendCommandSelect(Socket &socket, char &action, int &posX, int &posY);
 
     void sendCommandMove(Socket &socket, char &action, int &id, int &posX, int &posY);
 

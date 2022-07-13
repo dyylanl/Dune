@@ -6,5 +6,7 @@
 
 void SelectCL::execute(Protocol &protocol, Socket &socket) {
     char action = 5;
-    protocol.sendCommandSelect(socket, action, m_id);
+    int posX = m_position.GetX();
+    int posY = m_position.GetY();
+    protocol.sendCommandSelect(socket, action, posX, posY);
 }
