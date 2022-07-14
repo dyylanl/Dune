@@ -240,8 +240,8 @@ Protocol::recvUnit(Socket &socket, int &id, char &player, bool &selectStatus, in
     socket.recv(reinterpret_cast<char *>(&posActY), sizeof(uint16_t));
     socket.recv(reinterpret_cast<char *>(&life), sizeof(uint16_t));
     socket.recv(reinterpret_cast<char *>(&action), sizeof(uint8_t));
-    posX = ntohs(posX) * 30;
-    posY = ntohs(posY) * 30;
+    posX = ntohs(posX) * BLOCK_WIDTH;
+    posY = ntohs(posY) * BLOCK_HEIGHT;
 }
 
 void Protocol::sendBuild(Socket &socket, BuildingDTO build) {
@@ -251,8 +251,8 @@ void Protocol::sendBuild(Socket &socket, BuildingDTO build) {
     this->sendOneByte(socket, build.type);
     this->sendTwoBytes(socket, build.build_id);
     this->sendOneByte(socket, build.player_id); // player id
-    this->sendTwoBytes(socket, build.pos_x*BLOCK_HEIGHT);
-    this->sendTwoBytes(socket, build.pos_y*BLOCK_WIDTH);
+    this->sendTwoBytes(socket, build.pos_x*BLOCK_WIDTH);
+    this->sendTwoBytes(socket, build.pos_y*BLOCK_HEIGHT);
     this->sendTwoBytes(socket, build.life);
 }
 
