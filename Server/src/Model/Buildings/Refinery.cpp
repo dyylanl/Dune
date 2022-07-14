@@ -4,13 +4,13 @@
 Refinery::Refinery(const int x, const int y,
                    int blockWidth, int blockHeight) :
         Building(REFINERY_KEY,x, y, blockWidth, blockHeight,
-                 GameConfiguration::getConfig().spiceRefineryEnergy,
-                 GameConfiguration::getConfig().spiceRefineryCost,
-                 GameConfiguration::getConfig().spiceRefineryHitPoints,
-                 GameConfiguration::getConfig().spiceRefineryWidth,
-                 GameConfiguration::getConfig().spiceRefineryHeight,
+                 GameConfiguration::getConfig().refineryEnergy,
+                 GameConfiguration::getConfig().refineryCost,
+                 GameConfiguration::getConfig().refineryHitPoints,
+                 GameConfiguration::getConfig().refineryWidth,
+                 GameConfiguration::getConfig().refineryHeight,
                  REFINERY),
-        capacity(GameConfiguration::getConfig().spiceRefinerySpiceCapacity) {}
+        capacity(GameConfiguration::getConfig().refinerySpiceCapacity) {}
 
 Refinery::~Refinery() {}
 

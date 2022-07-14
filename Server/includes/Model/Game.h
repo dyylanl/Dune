@@ -52,12 +52,12 @@ public:
     Game(std::string path_game_config);
 
     /*
-     * Crea una partida con el id y nombre solicitado
+     * Crea una partida con el id y nombre solicitado y agrega al jugador creador de la partida
      * retorna 0 si se pudo crear
      * retorna 1 si no se pudo (es decir, ya existe una partida con ese nombre)
      *
      */
-    uint16_t createGame(Id id_map, const std::string& name);
+    uint16_t createGameAndAcceptPlayer(Id id_map, const std::string& name_game, Socket peer, std::string name_player);
 
     /*
      * Inserta un jugador a la partida que eligio.

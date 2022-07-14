@@ -4,13 +4,13 @@
 Silo::Silo(const int x, const int y,
            int blockWidth, int blockHeight) :
         Building(SILO_KEY,x, y, blockWidth, blockHeight,
-                 GameConfiguration::getConfig().spiceSiloEnergy,
-                 GameConfiguration::getConfig().spiceSiloCost,
-                 GameConfiguration::getConfig().spiceSiloHitPoints,
-                 GameConfiguration::getConfig().spiceSiloWidth,
-                 GameConfiguration::getConfig().spiceSiloHeight,
+                 GameConfiguration::getConfig().siloEnergy,
+                 GameConfiguration::getConfig().siloCost,
+                 GameConfiguration::getConfig().siloHitPoints,
+                 GameConfiguration::getConfig().siloWidth,
+                 GameConfiguration::getConfig().siloHeight,
                  SILO),
-        capacity(GameConfiguration::getConfig().spiceSiloSpiceCapacity) {}
+        capacity(GameConfiguration::getConfig().siloSpiceCapacity) {}
 
 Silo::~Silo() {}
 

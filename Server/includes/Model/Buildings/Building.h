@@ -16,7 +16,8 @@ public:
         LIGHT_FACTORY,
         REFINERY,
         SILO,
-        WIND_TRAP
+        WIND_TRAP,
+        PALACE
     };
 
     Building(char type1,const int x, const int y, int blockWidth, int blockHeight, const int energy, const int cost,

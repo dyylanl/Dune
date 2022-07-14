@@ -57,6 +57,12 @@ buildings:
     hitPoints: 300
     width: 3
     height: 2
+  palace:
+    energy: 800
+    cost: 2000
+    hitPoints: 1000
+    width: 3
+    height: 3
 weaponry:
   assaultRifle:
     damage: 2

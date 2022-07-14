@@ -148,6 +148,9 @@ std::string ConfigurationReader::parseType(const Building::BuildingType building
         case Building::BuildingType::WIND_TRAP:
             buildingName = "windTrap";
             break;
+        case Building::BuildingType::PALACE:
+            buildingName = "palace";
+            break;
         default:
             throw Exception("Tipo de edificio no reconocido");
     }

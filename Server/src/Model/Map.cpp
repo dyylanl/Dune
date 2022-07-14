@@ -157,13 +157,9 @@ std::vector<UnitDTO*> Map::getUnits() {
 std::vector<BuildingDTO*> Map::getBuildings() {
     std::vector<BuildingDTO*> retBuildingsDto;
     for (auto &build : buildings) {
-        auto* dto = new BuildingDTO; // es elimianado en el hilo sender
-        dto->pos_x = build->getPosition().x;
-        dto->pos_y = build->getPosition().y;
-        dto->build_id = build->id;
-        dto->player_id = build->getPlayer()->getId();
-        dto->life = build->getLife();
-        dto->type = build->getType();
+        auto* dto = new BuildingDTO(build->id, build->getPlayer()->getId(), 
+        build->getPosition().getX(),build->getPosition().getY(),
+        build->getType(),build->getLife());
         retBuildingsDto.push_back(dto);
     }
     return retBuildingsDto;
@@ -172,19 +168,19 @@ std::vector<BuildingDTO*> Map::getBuildings() {
 Building* Map::getBuilding(char type, int x, int y) {
     switch (type) {
         case BARRACKS_KEY:
-            return new Barracks(x,y,BLOCK_WIDTH,BLOCK_HEIGHT);
+            return new Barracks(x,y,GameConfiguration::getConfig().barracksWidth,GameConfiguration::getConfig().barracksHeight);
         case HEAVY_FACTORY_KEY:
-            return new HeavyFactory(x,y,BLOCK_WIDTH,BLOCK_HEIGHT);
+            return new HeavyFactory(x,y,GameConfiguration::getConfig().heavyFactoryWidth,GameConfiguration::getConfig().heavyFactoryHeight);
         case LIGHT_FACTORY_KEY:
-            return new LightFactory(x,y,BLOCK_WIDTH,BLOCK_HEIGHT);
+            return new LightFactory(x,y,GameConfiguration::getConfig().lightFactoryWidth,GameConfiguration::getConfig().lightFactoryHeight);
         case REFINERY_KEY:
-            return new Refinery(x,y,BLOCK_WIDTH,BLOCK_HEIGHT);
+            return new Refinery(x,y,GameConfiguration::getConfig().refineryWidth,GameConfiguration::getConfig().refineryHeight);
         case SILO_KEY:
-            return new Silo(x,y,BLOCK_WIDTH,BLOCK_HEIGHT);
+            return new Silo(x,y,GameConfiguration::getConfig().siloWidth,GameConfiguration::getConfig().siloHeight);
         case WIND_TRAP_KEY:
-            return new WindTrap(x,y,BLOCK_WIDTH,BLOCK_HEIGHT);
+            return new WindTrap(x,y,GameConfiguration::getConfig().windTrapWidth,GameConfiguration::getConfig().windTrapHeight);
         case PALACE_KEY:
-            return new Palace(x,y,BLOCK_WIDTH,BLOCK_HEIGHT);
+            return new Palace(x,y,GameConfiguration::getConfig().palaceWidth,GameConfiguration::getConfig().palaceHeight);
         default: throw Exception("Invalid get build.\n");
     }
 }

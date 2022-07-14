@@ -16,7 +16,7 @@ void ClientsConnected::add(const InstanceId id, Socket peer) {
     clients.emplace(
             std::piecewise_construct, std::forward_as_tuple(id),
             std::forward_as_tuple(id, std::move(peer), finished_connections,commands));
-    clients.at(id).sendEstablishConnection();
+    clients.at(id).sendEstablishConnection(); // l aviso al cliente q lo acepte
 }
 
 void ClientsConnected::remove(const InstanceId id) {

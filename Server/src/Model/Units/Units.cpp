@@ -25,6 +25,7 @@ Unit::Unit(char type1, const int x, const int y, const int hitPoints, const int 
 Unit::~Unit() {}
 
 bool Unit::move(Map &map) {
+    map.at(pos).occupy();
     bool moved = true;
     int terrain_factor = map.getSpeedFactorAt(pos);
     int counter_limit = terrain_factor * GameConfiguration::getConfig().speedFactor;
@@ -34,14 +35,17 @@ bool Unit::move(Map &map) {
         if (pos == next_pos && !pathToDestiny.empty()) {
             next_pos = pathToDestiny.top();
             pathToDestiny.pop();
-            if (map.at(next_pos).isOccupied()) { // me fijo si el mapa no fue modificado
+            if (map.at(next_pos).isOccupied()) { // me fijo si el mapa fue modificado
                 map.setDestiny(*this, destiny.getX(), destiny.getY()); // si fue modificado recalculo A*
             }
         }
         if (!(pos == next_pos)) {
+            map.at(pos).free(); // significa q se va a mover entonces libero su posicion actual
             int block_movement = GameConfiguration::getConfig().blockMovement;
             pos.x += (next_pos.x < pos.x) ? -block_movement : ((next_pos.x > pos.x) ? +block_movement : 0);
             pos.y += (next_pos.y < pos.y) ? -block_movement : ((next_pos.y > pos.y) ? +block_movement : 0);
+            map.at(next_pos).occupy(); // ocupo la nueva posicion de la unidad
+            map.at(pos).occupy();
             moved = true;
             this->news = true;
         } else {
@@ -91,5 +95,9 @@ void Unit::makeAttack(Map &map) {
 }
 
 void Unit::select() {
-    this->selected = true;
+    if (selected) { // si esta seleccionada y la vuelve a seleccionar => deselecciono
+        selected = false;
+    } else {
+        this->selected = true;
+    }
 }

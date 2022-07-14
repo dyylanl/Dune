@@ -45,16 +45,18 @@ Game::Game(std::string path_config_game) :
     }
 }
 
-uint16_t Game::createGame(Id id_map, const std::string& name_game) {
+uint16_t Game::createGameAndAcceptPlayer(Id id_map, const std::string& name_game, Socket peer, std::string name_player) {
     std::lock_guard<std::mutex> lock(this->mutex);
+    int ret = ERROR;
     if (contains(name_game)) {
-        return ERROR;
+        return ret;
     }
     if (maps_dto_init.count(id_map) == 0) {
-        return ERROR;
+        return ret;
     }
     games[name_game] = new Engine(config,maps_dto_init[id_map].path, maps_dto_init[id_map].max_players);
-    return SUCCESS;
+    ret = games[name_game]->addClient(NewConnection((peer),name_player,name_game)); // chequea si la partida no esta completa para unir el nuevo player
+    return ret;
 }
 
 uint16_t Game::acceptPlayer(Socket peer, std::string name_player, std::string name_game) {
@@ -106,6 +108,7 @@ std::vector<MapDTO> Game::getMapsLoads(){
 }
 
 std::vector<std::vector<InstanceId>> Game::getAllPlayers() {
+    std::unique_lock<std::mutex> lock(mutex);
     std::vector<std::vector<InstanceId>> all_players;
     for (const auto& [game_name, engine] : this->games) {
         std::vector<InstanceId> players = engine->getAllPlayers();

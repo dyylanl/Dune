@@ -46,23 +46,31 @@ public:
     const int heavyFactoryHitPoints;
     const int heavyFactoryWidth;
     const int heavyFactoryHeight;
-    const int spiceRefineryEnergy;
-    const int spiceRefineryCost;
-    const int spiceRefineryHitPoints;
-    const int spiceRefinerySpiceCapacity;
-    const int spiceRefineryWidth;
-    const int spiceRefineryHeight;
-    const int spiceSiloEnergy;
-    const int spiceSiloCost;
-    const int spiceSiloHitPoints;
-    const int spiceSiloSpiceCapacity;
-    const int spiceSiloWidth;
-    const int spiceSiloHeight;
+    const int refineryEnergy;
+    const int refineryCost;
+    const int refineryHitPoints;
+    const int refinerySpiceCapacity;
+    const int refineryWidth;
+    const int refineryHeight;
+    const int siloEnergy;
+    const int siloCost;
+    const int siloHitPoints;
+    const int siloSpiceCapacity;
+    const int siloWidth;
+    const int siloHeight;
+
     const int barracksEnergy;
     const int barracksCost;
     const int barracksHitPoints;
     const int barracksWidth;
     const int barracksHeight;
+
+    const int palaceEnergy;
+    const int palaceCost;
+    const int palaceHitPoints;
+    const int palaceWidth;
+    const int palaceHeight;
+
     const int assaultRifleDamage;
     const int assaultRifleShootingRate;
     const int assaultRifleBonus;

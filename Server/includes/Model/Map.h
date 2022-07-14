@@ -11,7 +11,7 @@
 #include "DTOs/UnitDTO.h"
 #include "Buildings/ConstructionCenter.h"
 #include "Units/Unit.h"
-
+#include "../../config/GameConfiguration.h"
 
 class Map {
 
