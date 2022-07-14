@@ -1,10 +1,11 @@
-ticks_per_sec: 30
-total_maps: 4
+ticks_per_sec: 60
+total_maps: 5
 maps:
   0: "../mapa1.yaml"
   1: "../mapa2.yaml"
   2: "../mapa3.yaml"
   3: "../mapa4.yaml"
+  4: "../mapa5.yaml"
 speedFactor: 1
 blockMovement: 1
 rangeFactor: 2000

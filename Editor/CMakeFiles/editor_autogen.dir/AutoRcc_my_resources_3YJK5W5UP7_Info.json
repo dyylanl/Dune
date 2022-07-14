@@ -1,0 +1,36 @@
+{
+	"BUILD_DIR" : "/home/dypa/Dune/Editor/editor_autogen",
+	"CMAKE_BINARY_DIR" : "/home/dypa/Dune/Editor",
+	"CMAKE_CURRENT_BINARY_DIR" : "/home/dypa/Dune/Editor",
+	"CMAKE_CURRENT_SOURCE_DIR" : "/home/dypa/Dune/Editor",
+	"CMAKE_SOURCE_DIR" : "/home/dypa/Dune/Editor",
+	"INCLUDE_DIR" : "/home/dypa/Dune/Editor/editor_autogen/include",
+	"INPUTS" : 
+	[
+		"/home/dypa/Dune/Editor/resources/tile_arena.png",
+		"/home/dypa/Dune/Editor/resources/music.ogg",
+		"/home/dypa/Dune/Editor/resources/arena.png",
+		"/home/dypa/Dune/Editor/resources/tile_dunas.png",
+		"/home/dypa/Dune/Editor/resources/tile_especia.png",
+		"/home/dypa/Dune/Editor/resources/play.png",
+		"/home/dypa/Dune/Editor/resources/mute_icon.png",
+		"/home/dypa/Dune/Editor/resources/tile_cimas.png",
+		"/home/dypa/Dune/Editor/resources/centro_1.png",
+		"/home/dypa/Dune/Editor/resources/tile_roca.png",
+		"/home/dypa/Dune/Editor/resources/tile_precipicio.png",
+		"/home/dypa/Dune/Editor/resources/centros_construccion.png",
+		"/home/dypa/Dune/Editor/resources/tile_vacio.jpg",
+		"/home/dypa/Dune/Editor/resources/roca.png",
+		"/home/dypa/Dune/Editor/resources/pause.png"
+	],
+	"LOCK_FILE" : "/home/dypa/Dune/Editor/CMakeFiles/editor_autogen.dir/AutoRcc_my_resources_3YJK5W5UP7_Lock.lock",
+	"MULTI_CONFIG" : false,
+	"OPTIONS" : [ "-name", "my_resources" ],
+	"OUTPUT_CHECKSUM" : "3YJK5W5UP7",
+	"OUTPUT_NAME" : "qrc_my_resources.cpp",
+	"RCC_EXECUTABLE" : "/usr/lib/qt5/bin/rcc",
+	"RCC_LIST_OPTIONS" : [ "--list" ],
+	"SETTINGS_FILE" : "/home/dypa/Dune/Editor/CMakeFiles/editor_autogen.dir/AutoRcc_my_resources_3YJK5W5UP7_Used.txt",
+	"SOURCE" : "/home/dypa/Dune/Editor/resources/my_resources.qrc",
+	"VERBOSITY" : 0
+}

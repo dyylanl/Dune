@@ -41,7 +41,7 @@ std::stack<Position> AStar::makePath(Unit &unit, Position end) {
         std::vector<AStarNode> children = curr_node_itr->getAdjacents(this->map);
         for (AStarNode& child : children) {
             auto child_cl_itr = std::find(closeList.begin(), closeList.end(), child);
-            if (child_cl_itr != closeList.end()/* || !map.canMove(unit, child.pos)*/) {
+            if (child_cl_itr != closeList.end() || !map.canMove(unit, child.pos)) {
                 continue;
             }
             child.g = curr_node_itr->g + 1;
@@ -60,6 +60,5 @@ std::stack<Position> AStar::makePath(Unit &unit, Position end) {
             best_path[child.pos] = curr_node_itr->pos;
         }
     }
-    std::cout << "[AStar] No se encontro una ruta" << std::endl;
     return (std::stack<Position>());
 }

@@ -1,0 +1,4 @@
+/home/dypa/Dune/Editor/CMakeFiles/rebuild_cache.dir
+/home/dypa/Dune/Editor/CMakeFiles/edit_cache.dir
+/home/dypa/Dune/Editor/CMakeFiles/editor.dir
+/home/dypa/Dune/Editor/CMakeFiles/editor_autogen.dir

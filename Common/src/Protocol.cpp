@@ -221,7 +221,7 @@ void Protocol::sendUnit(Socket &socket, UnitDTO unit) {
     this->sendOneByte(socket, unit.selected);
     this->sendTwoBytes(socket, unit.pos_x);
     this->sendTwoBytes(socket, unit.pos_y);
-    std::cout << "[Protocol] Enviando unidad en pos " << unit.pos_x << "," << unit.pos_y << std::endl;
+    //std::cout << "[Protocol] Enviando unidad en pos " << unit.pos_x << "," << unit.pos_y << std::endl;
     this->sendTwoBytes(socket, unit.pos_x);
     this->sendTwoBytes(socket, unit.pos_y);
     this->sendTwoBytes(socket, unit.life);
