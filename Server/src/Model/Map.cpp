@@ -301,11 +301,11 @@ void Map::selectUnit(InstanceId player, int x, int y) {
 }
 
 bool Map::canWeBuild(Position pos, int width, int height) {
-    for (int i = 0; i < height; i++) {
-        for (int j = 0; j < width; j++) {
+    for (int i = 0; i < width; i++) {
+        for (int j = 0; j < height; j++) {
             Position current_pos(pos.getX() + i, pos.getY() + j);
             if (isValid(current_pos)) {
-                if ((terrains[current_pos.x][current_pos.y].getKey() != ROCK_KEY) || this->at(current_pos).isOccupied()) {
+                if ((terrains[current_pos.y][current_pos.x].getKey() != ROCK_KEY) || this->at(current_pos).isOccupied()) {
                     return false;
                 }
             } else {
