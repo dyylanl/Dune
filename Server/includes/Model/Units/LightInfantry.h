@@ -5,7 +5,7 @@
 
 class LightInfantry : public Unit {
 public:
-    LightInfantry(int x, int y);
+    LightInfantry(int x, int y, int player_id);
 
     ~LightInfantry();
 

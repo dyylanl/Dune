@@ -218,7 +218,3 @@ std::list<std::string> ConfigurationReader::getAllPaths() const {
 int ConfigurationReader::getFPS() {
     return this->config["ticks_per_sec"].as<int>();
 }
-
-std::string ConfigurationReader::getPathWithId(Id map_id) {
-    return this->config["maps"][map_id].as<std::string>();
-}

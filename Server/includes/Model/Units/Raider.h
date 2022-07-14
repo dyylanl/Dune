@@ -5,7 +5,7 @@
 
 class Raider : public Unit {
 public:
-    Raider(int x, int y);
+    Raider(int x, int y, int player_id);
     ~Raider();
     bool canMoveAboveTerrain(Terrain &terrain) override;
 

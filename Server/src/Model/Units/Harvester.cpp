@@ -4,11 +4,11 @@
 #include "../../../includes/Model/Terrains/Dunes.h"
 #include "../../../includes/Model/Terrains/Rock.h"
 
-Harvester::Harvester(int x, int y) :
+Harvester::Harvester(int x, int y, int player_id) :
         Unit(HARVESTER_KEY,x, y,
              GameConfiguration::getConfig().harvesterHitPoints,
              GameConfiguration::getConfig().harvesterSpeed,
-             GameConfiguration::getConfig().harvesterCost),
+             GameConfiguration::getConfig().harvesterCost, player_id),
         spiceCapacity(GameConfiguration::getConfig().harvesterSpiceCapacity),
         spiceCollected(0),
         refinery(nullptr),

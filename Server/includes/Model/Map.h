@@ -119,7 +119,7 @@ public:
 
     Building* getBuilding(char type, int x, int y);
 
-    Unit* getUnit(char type, int x, int y);
+    Unit* getUnit(char type, int x, int y, int player_id);
 
 
 

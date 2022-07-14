@@ -245,8 +245,6 @@ Protocol::recvUnit(Socket &socket, int &id, char &player, bool &selectStatus, in
 }
 
 void Protocol::sendBuild(Socket &socket, BuildingDTO build) {
-    //uint16_t total = 1; // esto es porque el cliente lo necesita asi \_(X*X)_/
-    //this->sendTwoBytes(socket,total);
     this->sendOneByte(socket,OBJECT_BUILDING);
     this->sendOneByte(socket, build.type);
     this->sendTwoBytes(socket, build.build_id);

@@ -1,3 +1,4 @@
+#include <iostream>
 #include "../../includes/Model/Player.h"
 #include "../../config/GameConfiguration.h"
 #include "../../includes/Model/Buildings/Barrack.h"
@@ -73,8 +74,8 @@ bool Player::lose() {
     return this->construction_center == nullptr;
 }
 
-int Player::getId() const {
-    return 1; // TODO: TERMINAR ID PLAYER
+InstanceId Player::getId() const {
+    return id;
 }
 
 std::string& Player::getHouse() {
@@ -128,7 +129,7 @@ void Player::cleanDeadBuildings() {
         }
     }
 }
-
+/*
 void Player::sellBuilding(Building* building) {
     std::vector<Building*>::iterator it = buildings.begin();
     while (it != buildings.end()) {
@@ -141,7 +142,7 @@ void Player::sellBuilding(Building* building) {
             it++;
         }
     }
-}
+}*/
 
 bool Player::hasNews() {
     return ( news);
@@ -154,7 +155,14 @@ bool Player::isDefeated(){
 }
 
 Position Player::getBarrackPosition() {
-    return Position(10,10);
+    Position pos(-1,-1);
+    for(auto& build : buildings) {
+        if (build->getType() == BARRACKS_KEY) {
+            pos.x = build->getPosition().y;
+            pos.y = build->getPosition().x;
+        }
+    }
+    return pos;
 }
 
 void Player::clean() {
@@ -165,4 +173,13 @@ void Player::clean() {
     for (auto* unit : units) {
         delete unit;
     }
+}
+
+bool Player::canTrainUnits() {
+    for(auto& build : buildings) {
+        if (build->getType() == BARRACKS_KEY) {
+            return true;
+        }
+    }
+    return false;
 }

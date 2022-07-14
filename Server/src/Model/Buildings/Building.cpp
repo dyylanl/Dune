@@ -1,4 +1,3 @@
-
 #include "../../../includes/Model/Buildings/Building.h"
 
 int Building::counter = 0;
@@ -8,7 +7,7 @@ Building::Building(char type1,const int x, const int y, int blockWidth, int bloc
                    const int width, const int height, BuildingType type):
         Attackable(hitPoints, x, y),
         type(type1),
-        id(counter),
+        build_id(counter),
         width(width),
         height(height),
         energy(energy),
@@ -31,8 +30,8 @@ void Building::reciveBonusDammage(const Weapon &weapon) {
     life -= weapon.getBuildingBonus();
 }
 
-bool Building::is(Building::BuildingType type) {
-    return this->key == type;
+bool Building::is(Building::BuildingType type1) {
+    return this->key == type1;
 }
 
 void Building::setPlayer(Player* player1) {
@@ -68,5 +67,5 @@ int Building::getCapacity() {
 }
 
 bool Building::operator==(const Building &other) {
-    return this->id == other.id;
+    return this->build_id == other.build_id;
 }

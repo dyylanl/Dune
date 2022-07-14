@@ -4,10 +4,11 @@
 #include "../../../includes/Model/Map.h"
 
 int Unit::counter = 0;
-Unit::Unit(char type1, const int x, const int y, const int hitPoints, const int speed, const int cost) :
+Unit::Unit(char type1, const int x, const int y, const int hitPoints, const int speed, const int cost, int player_id1) :
         Attackable(hitPoints, x, y),
         type(type1),
-        id(counter),
+        unit_id(counter),
+        player_id(player_id1),
         pos(x,y),
         speed(speed),
         cost(cost),
@@ -18,7 +19,7 @@ Unit::Unit(char type1, const int x, const int y, const int hitPoints, const int 
         prev_foll_unit_pos(),
         next_pos(x, y),
         news(true),
-        selected(false) {
+        selected(false){
     counter += 1;
 }
 
@@ -76,7 +77,7 @@ bool Unit::hasNews() {
 }
 
 bool Unit::operator==(const Unit &other) {
-    return this->id == other.id;
+    return this->unit_id == other.unit_id;
 }
 
 bool Unit::canMoveAboveTerrain(Terrain &terrain) {

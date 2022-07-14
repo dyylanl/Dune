@@ -13,6 +13,9 @@ class Unit : public Attackable {
     char type;
 public:
 
+    const int unit_id;
+    int player_id;
+
     enum UnitType {
         LIGHT_INFANTRY,
         FREMEN,
@@ -27,7 +30,7 @@ public:
         HARVESTER
     };
 
-    Unit(char type, const int x, const int y, const int hitPoints, const int speed, const int cost);
+    Unit(char type, const int x, const int y, const int hitPoints, const int speed, const int cost, int player_id);
     virtual ~Unit();
     bool operator==(const Unit& other);
     void setPath(std::stack<Position> path, Position destiny);
@@ -43,9 +46,9 @@ public:
     void select();
     bool isSelected() {return selected;}
     Position getPosition() {return pos;}
+    Position getNextPosition() {return next_pos;}
+    int getCost() {return cost;}
 
-public:
-    const int id;
 protected:
     Position pos;
     static int counter;

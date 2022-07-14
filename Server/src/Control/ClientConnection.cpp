@@ -31,8 +31,8 @@ void ClientConnection::_sender() {
             for (auto &u: snap->units) {
                 protocol.sendUnit(peer, *u);
             }
-            //delete snap; #TODO: esto lanza sigsegv cuando hay 2 players
         }
+        delete snap;
     } catch (const std::exception& e) {
         stop();
     } catch (...) {
