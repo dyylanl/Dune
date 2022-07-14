@@ -27,7 +27,6 @@ public:
         HARVESTER
     };
 
-
     Unit(char type, const int x, const int y, const int hitPoints, const int speed, const int cost);
     virtual ~Unit();
     bool operator==(const Unit& other);
@@ -43,6 +42,7 @@ public:
     char getType() {return type;}
     void select();
     bool isSelected() {return selected;}
+    Position getPosition() {return pos;}
 
 public:
     const int id;

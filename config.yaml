@@ -5,8 +5,8 @@ maps:
   1: "../mapa2.yaml"
   2: "../mapa3.yaml"
   3: "../mapa4.yaml"
-speedFactor: 50
-blockMovement: 2
+speedFactor: 1
+blockMovement: 1
 rangeFactor: 2000
 timeFactor: 1
 initialGold: 10000

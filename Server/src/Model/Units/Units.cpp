@@ -26,31 +26,30 @@ Unit::~Unit() {}
 
 bool Unit::move(Map &map) {
     bool moved = true;
-    //int terrain_factor = map.getSpeedFactorAt(pos);
-    //int counter_limit = terrain_factor * GameConfiguration::getConfig().speedFactor;
-    //int speed_counter = actual_speed;
+    int terrain_factor = map.getSpeedFactorAt(pos);
+    int counter_limit = terrain_factor * GameConfiguration::getConfig().speedFactor;
+    int speed_counter = actual_speed;
     actual_speed += speed;
-    while (!pathToDestiny.empty()) {
+    /*while (!pathToDestiny.empty()) {
         next_pos = pathToDestiny.top();
         pathToDestiny.pop();
-        setPosition(next_pos);
+        this->setPosition(next_pos);
         std::cout << "Moviendo unidad a " << next_pos.getX() << "," << next_pos.getY() << std::endl;
     }
-    return moved;
-    /*
+    return moved;*/
     if (speed_counter >= counter_limit) {
         if (pos == next_pos && !pathToDestiny.empty()) {
             next_pos = pathToDestiny.top();
-            if ( map.at(next_pos).isOccupied() ) {
-                map.setDestiny(*this, destiny.x, destiny.y);
-            } else {
-                pathToDestiny.pop();
+            pathToDestiny.pop();
+            if (map.at(next_pos).isOccupied()) { // me fijo si el mapa no fue modificado
+                map.setDestiny(*this, destiny.x, destiny.y); // si fue modificado recalculo A*
             }
         }
         if (!(pos == next_pos)) {
             int block_movement = GameConfiguration::getConfig().blockMovement;
             pos.x += (next_pos.x < pos.x) ? -block_movement : ((next_pos.x > pos.x) ? +block_movement : 0);
             pos.y += (next_pos.y < pos.y) ? -block_movement : ((next_pos.y > pos.y) ? +block_movement : 0);
+            std::cout << "[UNIT]: " << pos.x << "," << pos.y << std::endl;
             moved = true;
             this->news = true;
         } else {
@@ -59,7 +58,7 @@ bool Unit::move(Map &map) {
         }
         actual_speed = speed_counter - counter_limit;
     }
-    return moved;*/
+    return moved;
 }
 
 void Unit::setPath(std::stack<Position> path, Position destiny1) {
@@ -68,9 +67,7 @@ void Unit::setPath(std::stack<Position> path, Position destiny1) {
     if (!path.empty()) {
         next_pos = pathToDestiny.top();
         pathToDestiny.pop();
-        std::cout << "[Unit] Ruta setada" << std::endl;
     } else {
-        std::cout << "[Unit] Ruta no encontrada" << std::endl;
         next_pos = pos;
     }
 }
@@ -109,5 +106,4 @@ void Unit::makeAttack(Map &map) {
 
 void Unit::select() {
     this->selected = true;
-    std::cout << "Unidad en la posicion " << pos.getX() << "," << pos.getY() << " seleccionada" << std::endl;
 }

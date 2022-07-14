@@ -138,8 +138,8 @@ std::vector<UnitDTO*> Map::getUnits() {
     //todo: comentado hasta que el cliente pueda poner unidades
     for (auto &unit : units) {
         auto* dto = new UnitDTO;
-        dto->pos_x = unit->getPosition().x;
-        dto->pos_y = unit->getPosition().y;
+        dto->pos_x = unit->getPosition().getX();
+        dto->pos_y = unit->getPosition().getY();
         dto->unit_id = unit->id;
         dto->player_id = unit->getPlayer().getId();
         dto->life = unit->getLife();
@@ -162,7 +162,6 @@ std::vector<BuildingDTO*> Map::getBuildings() {
         dto->pos_y = build->getPosition().y;
         dto->build_id = build->id;
         dto->player_id = build->getPlayer()->getId();
-
         dto->life = build->getLife();
         dto->type = build->getType();
         retBuildingsDto.push_back(dto);
