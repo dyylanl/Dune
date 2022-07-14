@@ -6,11 +6,11 @@
 
 Palace::Palace(const int x, const int y, int blockWidth, int blockHeight) :
         Building(PALACE_KEY, x, y, blockWidth, blockHeight,
-                 GameConfiguration::getConfig().barracksEnergy,
-                 GameConfiguration::getConfig().barracksCost,
-                 GameConfiguration::getConfig().barracksHitPoints,
-                 GameConfiguration::getConfig().barracksWidth,
-                 GameConfiguration::getConfig().barracksHeight,
-                 BARRACKS) {}
+                 GameConfiguration::getConfig().palaceEnergy,
+                 GameConfiguration::getConfig().palaceCost,
+                 GameConfiguration::getConfig().palaceHitPoints,
+                 GameConfiguration::getConfig().palaceWidth,
+                 GameConfiguration::getConfig().palaceHeight,
+                 PALACE) {}
 
 Palace::~Palace() {}

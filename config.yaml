@@ -95,7 +95,7 @@ units:
     cost: 70
   harvester:
     hitPoints: 600
-    speed: 12
+    speed: 5
     trainingTime: 180
     cost: 300
     spiceCapacity: 200
@@ -104,13 +104,13 @@ units:
   trike:
     hitPoints: 80
     range: 4
-    speed: 64
+    speed: 70
     trainingTime: 120
     cost: 100
   raider:
     hitPoints: 80
     range: 4
-    speed: 84
+    speed: 100
     trainingTime: 120
     cost: 100
   tank:

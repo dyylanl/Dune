@@ -186,10 +186,11 @@ Building* Map::getBuilding(char type, int x, int y) {
 }
 
 void Map::putUnit(InstanceId id_player, char type, int x, int y) {
-    Unit* unit = getUnit(type,x,y);
+    Position pos(x,y);
+    pos.normalize();
+    Unit* unit = getUnit(type,pos.getX(),pos.getY());
     units.push_back(unit);
-    std::cout << "[Map] Jugador: " << id_player << " puso una unidad del tipo: " << type << " en " << x << "," << y << std::endl; 
-
+    this->at(pos).occupy();
 }
 
 void Map::putBuilding(char type, int x, int y) {
@@ -199,9 +200,7 @@ void Map::putBuilding(char type, int x, int y) {
     if (canWeBuild(pos,build->width,build->height)) {
             buildings.push_back(build);
             occupy(build);
-            std::cout << "[Map] Se construyo un edificio del tipo " << type << " en " << pos.x << "," << pos.y << std::endl; 
     } else {
-        std::cout << "[Map] Construccion en posicion invalida." << std::endl;
     }
 }
 
@@ -286,7 +285,7 @@ ConstructionCenter *Map::getConstructionCenterFor(InstanceId i) {
     return this->centers.at(i);
 }
 
-void Map::selectUnit(InstanceId player, int x, int y) {
+void Map::selectUnit(InstanceId player_id, int x, int y) {
     Position pos(x,y);
     pos.normalize();
     for (auto& unit : units) {
@@ -299,9 +298,9 @@ void Map::selectUnit(InstanceId player, int x, int y) {
 bool Map::canWeBuild(Position pos, int width, int height) {
     for (int i = 0; i < width; i++) {
         for (int j = 0; j < height; j++) {
-            Position current_pos(pos.getX() + i, pos.getY() + j);
+            Position current_pos(pos.getY() + i, pos.getX() + j);
             if (isValid(current_pos)) {
-                if ((terrains[current_pos.y][current_pos.x].getKey() != ROCK_KEY) || this->at(current_pos).isOccupied()) {
+                if ((terrains[current_pos.getX()][current_pos.getY()].getKey() != ROCK_KEY) || this->at(current_pos).isOccupied()) {
                     return false;
                 }
             } else {

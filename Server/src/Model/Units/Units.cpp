@@ -24,37 +24,30 @@ Unit::Unit(char type1, const int x, const int y, const int hitPoints, const int 
 
 Unit::~Unit() {}
 
-bool Unit::move(Map &map) {
-    map.at(pos).occupy();
-    bool moved = true;
+void Unit::move(Map &map) {
     int terrain_factor = map.getSpeedFactorAt(pos);
     int counter_limit = terrain_factor * GameConfiguration::getConfig().speedFactor;
     int speed_counter = actual_speed;
     actual_speed += speed;
-    if (speed_counter >= counter_limit) {
-        if (pos == next_pos && !pathToDestiny.empty()) {
-            next_pos = pathToDestiny.top();
-            pathToDestiny.pop();
+    if (speed_counter >= counter_limit) { // manejo velocidad del terreno
+        if (pos == next_pos && !pathToDestiny.empty()) { // si la pos actual es igual a la sig y la ruta no esta vacia
+            next_pos = pathToDestiny.top(); // actualizo la nueva pos
+            pathToDestiny.pop(); // popeo de la ruta
             if (map.at(next_pos).isOccupied()) { // me fijo si el mapa fue modificado
                 map.setDestiny(*this, destiny.getX(), destiny.getY()); // si fue modificado recalculo A*
             }
         }
-        if (!(pos == next_pos)) {
+        if (!(pos == next_pos)) { // si la pos actual es distinta a la sig me muevo
             map.at(pos).free(); // significa q se va a mover entonces libero su posicion actual
-            int block_movement = GameConfiguration::getConfig().blockMovement;
-            pos.x += (next_pos.x < pos.x) ? -block_movement : ((next_pos.x > pos.x) ? +block_movement : 0);
+            float block_movement = GameConfiguration::getConfig().blockMovement;
+            pos.x += (next_pos.x < pos.x) ? -block_movement : ((next_pos.x > pos.x) ? +block_movement : 0); // deltas
             pos.y += (next_pos.y < pos.y) ? -block_movement : ((next_pos.y > pos.y) ? +block_movement : 0);
-            map.at(next_pos).occupy(); // ocupo la nueva posicion de la unidad
-            map.at(pos).occupy();
-            moved = true;
-            this->news = true;
+            map.at(pos).occupy(); // ocupo la nueva posicion de la unidad
         } else {
             map.at(pos).occupy();
-            moved = false;
         }
         actual_speed = speed_counter - counter_limit;
     }
-    return moved;
 }
 
 void Unit::setPath(std::stack<Position> path, Position destiny1) {

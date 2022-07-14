@@ -1,4 +1,5 @@
 #include "../../includes/Model/Model.h"
+#include "../../../Common/includes/Exceptions/Exception.h"
 
 Model::Model(ConfigurationReader& config1, const std::string& map_path) :
         map(map_path),
@@ -30,7 +31,17 @@ std::vector<UnitDTO*> Model::getUnits() {
 }
 
 void Model::buildBuilding(InstanceId id_player, char build_type, int x, int y) {
-    map.putBuilding(build_type,x,y);
+    int gold = players.at(id_player).gold;
+    int energy = players.at(id_player).generatedEnergy;
+    Building* build = map.getBuilding(build_type,x,y);
+    int gold_req = build->cost;
+    int energy_req = build->energy;
+    if (gold >= gold_req && energy >= energy_req) {
+        players.at(id_player).gold -= gold_req;
+        players.at(id_player).generatedEnergy -= energy_req;
+        players.at(id_player).addBuilding(build);
+        map.putBuilding(build_type,x,y);
+    }
 }
 
 void Model::putUnit(InstanceId id_player, char unit_type) {
@@ -39,8 +50,6 @@ void Model::putUnit(InstanceId id_player, char unit_type) {
 
 void Model::addPlayer(InstanceId player_id) {
     current_players += 1;
-    //ConstructionCenter* center = map.getConstructionCenterFor(player_id);
-    //ConstructionCenter* center = map.getConstructionCenterFor(player_id);
     Player player(player_id, map.getConstructionCenterFor(player_id));
     players.emplace(player_id, std::move(player));
 }
