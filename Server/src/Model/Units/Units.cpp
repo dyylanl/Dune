@@ -50,7 +50,6 @@ bool Unit::move(Map &map) {
         }
         actual_speed = speed_counter - counter_limit;
     }
-    std::cout << "[Unit] Pos actual " << pos.x << "," << pos.y << " destino " << destiny.x << "," << destiny.y << std::endl;
     return moved;
 }
 
@@ -64,7 +63,7 @@ Player &Unit::getPlayer() {
 }
 
 void Unit::actionOnPosition(Map &map, Position &pos1) {
-            map.setDestiny(*this, pos1.x, pos1.y);
+    map.setDestiny(*this, pos1.x, pos1.y);
 }
 
 bool Unit::shotARocket() {

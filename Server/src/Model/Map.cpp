@@ -269,7 +269,7 @@ void Map::free(Building &building) {
 void Map::occupy(Building* building) {
     for (int i = 0; i < building->height; i++) {
         for (int j = 0; j < building->width; j++) {
-            this->at(building->getPosition().x + i, building->getPosition().y + j).buildOn(building);
+            this->at(building->getPosition().y + j, building->getPosition().x + i).buildOn(building);
         }
     }
 }
