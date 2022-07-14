@@ -38,7 +38,7 @@ Map::Map(std::string map_path) :
     int cols_ = mapa[0].size();
     for (int i = 0; i < rows_; ++i) {
         for (int j = 0; j < cols_; ++j) {
-            char type = this->mapa[i][j];
+            char type = this->mapa[j][i];
             terrains[i][j] = Terrain(type);
         }
     }
