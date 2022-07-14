@@ -7,6 +7,7 @@
 
 
 #include "../Object/GameObject.h"
+#include <math.h>
 
 class Vehicle : public GameObject{
 protected:
@@ -22,7 +23,7 @@ public:
 
     void processEvent(SDL_Event &event, BQueue<std::unique_ptr<CommandCL>> &queue, Camera &camera);
 
-    void draw(SDL2pp::Renderer &renderer, TextureManager &textureManager, Camera &camera);
+    virtual void draw(SDL2pp::Renderer &renderer, TextureManager &textureManager, Camera &camera) = 0;
 
     virtual ~Vehicle() {}
 };

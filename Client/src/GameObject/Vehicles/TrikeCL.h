@@ -9,13 +9,17 @@
 #include "../Vehicle.h"
 
 class TrikeCL : public Vehicle{
+private:
+    int frames_size;
 public:
     TrikeCL(int id, int player, bool selecStatus, SDL2pp::Point position, SDL2pp::Point posAction, int life,
             bool action);
 
-    //void draw(SDL2pp::Renderer &renderer, TextureManager &textureManager);
+    void draw(SDL2pp::Renderer &renderer, TextureManager &textureManager, Camera &camera);
 
     ~TrikeCL() {}
+
+    SDL2pp::Point posFrame();
 };
 
 
