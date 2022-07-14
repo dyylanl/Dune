@@ -88,35 +88,7 @@ public:
 
     void putUnit(InstanceId player, char unit_type);
 
-    Harvester& createHarvester(int x, int y, int player);
-
-    HeavyInfantry& createHeavyInfantry(int x, int y, int player);
-
-    LightInfantry& createLightInfantry(int x, int y, int player);
-
-    Raider& createRaider(int x, int y, int player);
-
-    Tank& createTank(int x, int y, int player);
-
-    Trike& createTrike(int x, int y, int player);
-
-    Barracks& createBarracks(int x, int y, int player);
-
-    ConstructionCenter& createConstructionCenter(int x, int y, int player);
-
-    HeavyFactory& createHeavyFactory(int x, int y, int player);
-
-    LightFactory& createLightFactory(int x, int y, int player);
-
-    Refinery& createSpiceRefinery(int x, int y, int player);
-
-    Silo& createSpiceSilo(int x, int y, int player);
-
-    WindTrap& createWindTrap(int x, int y, int player);
-
     void actionOnPosition(Position &pos, Unit &unit);
-
-    bool canWeBuild(Position& pos, int width, int height, int cost, Player& player);
 
     int numberOfPlayers();
 

@@ -19,10 +19,8 @@ public:
     // map paths
     std::list<std::string> getAllPaths() const;
 
-    int getFPS();
-    std::string getPathWithId(Id map_id);
-
     // game
+    int getFPS();
     unsigned getSpeedFactor() const;
     unsigned getBlockMovement() const;
     unsigned getRangeFactor() const;

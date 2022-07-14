@@ -37,15 +37,25 @@ void Model::buildBuilding(InstanceId id_player, char build_type, int x, int y) {
     int gold_req = build->cost;
     int energy_req = build->energy;
     if (gold >= gold_req && energy >= energy_req) {
-        players.at(id_player).gold -= gold_req;
+        players.at(id_player).subGold(gold_req);
         players.at(id_player).generatedEnergy -= energy_req;
         players.at(id_player).addBuilding(build);
         map.putBuilding(build_type,x,y);
     }
+    delete build;
 }
 
 void Model::putUnit(InstanceId id_player, char unit_type) {
-    map.putUnit(id_player, unit_type,5*(int)id_player, 5*(int)id_player);
+    if (players.at(id_player).canTrainUnits()) {
+        int gold = players.at(id_player).gold;
+        Unit* unit = map.getUnit(unit_type,1,1, id_player);
+        int gold_req = unit->getCost();
+        if (gold >= gold_req) {
+            players.at(id_player).subGold(gold_req);
+            map.putUnit(id_player, unit_type, players.at(id_player).getBarrackPosition().getX(), players.at(id_player).getBarrackPosition().getY());
+        }
+        delete unit;
+    }
 }
 
 void Model::addPlayer(InstanceId player_id) {
@@ -67,90 +77,8 @@ void Model::moveUnit(InstanceId player, int x, int y) {
     map.moveUnit(player,x,y);
 }
 
-
-
-Harvester& Model::createHarvester(int x, int y, int player) {
-    Harvester* harvester = new Harvester(x, y);
-    return *harvester;
-}
-
-HeavyInfantry& Model::createHeavyInfantry(int x, int y, int player) {
-    HeavyInfantry* heavyInfantry = new HeavyInfantry(x, y);
-    return *heavyInfantry;
-}
-
-LightInfantry& Model::createLightInfantry(int x, int y, int player) {
-    LightInfantry* lightInfantry = new LightInfantry(x, y);
-    return *lightInfantry;
-}
-
-Raider& Model::createRaider(int x, int y, int player) {
-    Raider* raider = new Raider(x, y);
-    return (*raider);
-}
-
-Tank& Model::createTank(int x, int y, int player) {
-    Tank* tank = new Tank(x, y);
-    return *tank;
-}
-
-Trike& Model::createTrike(int x, int y, int player) {
-    Trike* trike = new Trike(x, y);
-    return *trike;
-}
-
-// Se deben crear las vistas de cada edificio (o la fabrica de vistas para los edificios)
-Barracks& Model::createBarracks(int x, int y, int player) {
-    Position pos(x, y);
-    Barracks* building = new Barracks(pos.x, pos.y, map.getBlockWidth(), map.getBlockHeight());
-    return *(building);
-}
-
-ConstructionCenter& Model::createConstructionCenter(int x, int y, int player) {
-    Position pos(x, y);
-    ConstructionCenter* building = new ConstructionCenter(pos.x, pos.y, map.getBlockWidth(), map.getBlockHeight());
-    return *(building);
-}
-
-HeavyFactory& Model::createHeavyFactory(int x, int y, int player) {
-    Position pos(x, y);
-    HeavyFactory* building = new HeavyFactory(pos.x, pos.y, map.getBlockWidth(), map.getBlockHeight());
-    return *(building);
-}
-
-LightFactory& Model::createLightFactory(int x, int y, int player) {
-    Position pos(x, y);
-    LightFactory* building = new LightFactory(pos.x, pos.y, map.getBlockWidth(), map.getBlockHeight());
-    return *(building);
-}
-
-Refinery& Model::createSpiceRefinery(int x, int y, int player) {
-    Position pos(x, y);
-    Refinery* building = new Refinery(pos.x, pos.y, map.getBlockWidth(), map.getBlockHeight());
-    return *(building);
-}
-
-Silo& Model::createSpiceSilo(int x, int y, int player) {
-    Position pos(x, y);
-    Silo* building = new Silo(pos.x, pos.y, map.getBlockWidth(), map.getBlockHeight());
-    return *(building);
-}
-
-WindTrap& Model::createWindTrap(int x, int y, int player) {
-    Position pos(x, y);
-    WindTrap* building = new WindTrap(pos.x, pos.y, map.getBlockWidth(), map.getBlockHeight());
-    return *(building);
-}
-
 void Model::actionOnPosition(Position &pos, Unit &unit) {
     unit.actionOnPosition(map, pos);
-}
-
-bool Model::canWeBuild(Position& pos, int width, int height, int cost, Player& player) {
-    if ( cost > player.gold ) {
-        return false;
-    }
-    return false;
 }
 
 int Model::numberOfPlayers() {

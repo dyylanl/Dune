@@ -131,19 +131,15 @@ std::vector<std::vector<char>> &Map::getMap() {
 }
 
 std::vector<UnitDTO*> Map::getUnits() {
+    std::vector<UnitDTO*> retUnitsDto = {};
     if (units.empty()) {
-        return {};
+        return retUnitsDto;
     }
-    std::vector<UnitDTO*> retUnitsDto{};
-    //todo: comentado hasta que el cliente pueda poner unidades
     for (auto &unit : units) {
-        auto* dto = new UnitDTO;
-        dto->pos_x = unit->getPosition().getX();
-        dto->pos_y = unit->getPosition().getY();
-        dto->unit_id = unit->id;
-        dto->player_id = unit->getPlayer().getId();
-        dto->life = unit->getLife();
-        dto->type = unit->getType();
+        auto* dto = new UnitDTO(1,1, // por que el cliente necesita los id's?
+                                unit->getPosition().getX(),unit->getPosition().getY(),
+                                unit->getNextPosition().getX(),unit->getNextPosition().getY(),
+                                unit->getType(),unit->getLife(),0);
         if (unit->isSelected()) {
             dto->selected = 1;
         } else {
@@ -157,7 +153,7 @@ std::vector<UnitDTO*> Map::getUnits() {
 std::vector<BuildingDTO*> Map::getBuildings() {
     std::vector<BuildingDTO*> retBuildingsDto;
     for (auto &build : buildings) {
-        auto* dto = new BuildingDTO(build->id, build->getPlayer()->getId(), 
+        auto* dto = new BuildingDTO(1, 1, // por que el cliente necesita los id's?
         build->getPosition().getX(),build->getPosition().getY(),
         build->getType(),build->getLife());
         retBuildingsDto.push_back(dto);
@@ -188,7 +184,7 @@ Building* Map::getBuilding(char type, int x, int y) {
 void Map::putUnit(InstanceId id_player, char type, int x, int y) {
     Position pos(x,y);
     pos.normalize();
-    Unit* unit = getUnit(type,pos.getX(),pos.getY());
+    Unit* unit = getUnit(type,pos.getX(),pos.getY(), id_player);
     units.push_back(unit);
     this->at(pos).occupy();
 }
@@ -198,15 +194,16 @@ void Map::putBuilding(char type, int x, int y) {
     pos.normalize();
     Building* build = getBuilding(type,pos.x,pos.y);
     if (canWeBuild(pos,build->width,build->height)) {
-            buildings.push_back(build);
-            occupy(build);
-    } else {
+        buildings.push_back(build);
+        occupy(build);
     }
 }
 
 Map::~Map() {
-    for (auto* unit : units) {
-        delete unit;
+    if (!units.empty()) {
+        for (auto* unit : units) {
+            delete unit;
+        }
     }
     for (auto* build : buildings) {
         delete build;
@@ -269,14 +266,14 @@ void Map::occupy(Building* building) {
     }
 }
 
-Unit *Map::getUnit(char type, int x, int y) {
+Unit *Map::getUnit(char type, int x, int y, int player_id) {
     switch (type) {
-        case LIGHT_INFANTRY_KEY: return new LightInfantry(x,y);
-        case HEAVY_INFANTRY_KEY: return new HeavyInfantry(x,y);
-        case HARVESTER_KEY: return new Harvester(x,y);
-        case TRIKE_KEY: return new Trike(x,y);
-        case RAIDER_KEY: return new Raider(x,y);
-        case TANK_KEY: return new Tank(x,y);
+        case LIGHT_INFANTRY_KEY: return new LightInfantry(x,y,player_id);
+        case HEAVY_INFANTRY_KEY: return new HeavyInfantry(x,y,player_id);
+        case HARVESTER_KEY: return new Harvester(x,y,player_id);
+        case TRIKE_KEY: return new Trike(x,y,player_id);
+        case RAIDER_KEY: return new Raider(x,y,player_id);
+        case TANK_KEY: return new Tank(x,y,player_id);
         default: throw Exception("Invalid get unit type");
     }
 }
@@ -290,7 +287,9 @@ void Map::selectUnit(InstanceId player_id, int x, int y) {
     pos.normalize();
     for (auto& unit : units) {
         if (pos.getX() == unit->getPosition().getX() && pos.getY() == unit->getPosition().getY()) {
-            unit->select();
+            if (unit->player_id == (int)player_id) {
+                unit->select();
+            }
         }
     }
 }
@@ -326,6 +325,9 @@ void Map::moveUnit(InstanceId player, int x, int y) {
 }
 
 void Map::moveUnits(int it) {
+    if (units.empty()) {
+        return;
+    }
     for (auto &unit : units) {
         if (unit->isSelected()) {
             unit->move(*this);

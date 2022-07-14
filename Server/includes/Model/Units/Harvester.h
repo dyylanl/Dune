@@ -8,11 +8,11 @@
 
 class Harvester : public Unit {
 public:
-    Harvester(int x, int y);
+    Harvester(int x, int y, int player_id);
 
     ~Harvester();
 
-    bool canMoveAboveTerrain(Terrain &terrain);
+    bool canMoveAboveTerrain(Terrain &terrain) override;
 
     virtual void reciveBonusDammage(const Weapon &weapon) override;
 

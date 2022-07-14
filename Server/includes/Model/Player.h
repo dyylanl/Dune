@@ -11,7 +11,7 @@
 
 class Player {
 private:
-    const int id;
+    InstanceId id;
     std::string house;
     std::string playerName;
     bool news;
@@ -50,7 +50,7 @@ public:
     void trainUnits();
     void constructBuildings();
 
-    int getId() const;
+    InstanceId getId() const;
 
     std::string& getHouse();
 
@@ -62,6 +62,9 @@ public:
     Position getBarrackPosition();
     
     void clean();
+
+    bool canTrainUnits();
+
 };
 
 #endif  // __PLAYER_H__

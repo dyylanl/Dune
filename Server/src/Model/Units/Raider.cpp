@@ -5,10 +5,10 @@
 #include "../../../includes/Model/Terrains/Dunes.h"
 #include "../../../includes/Model/Terrains/Rock.h"
 
-Raider::Raider(int x, int y) :
+Raider::Raider(int x, int y,int player_id1) :
         Unit(RAIDER_KEY,x, y, GameConfiguration::getConfig().raiderHitPoints,
              GameConfiguration::getConfig().raiderSpeed,
-             GameConfiguration::getConfig().raiderCost)
+             GameConfiguration::getConfig().raiderCost,player_id1)
 {
 }
 

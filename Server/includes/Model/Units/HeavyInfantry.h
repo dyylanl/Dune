@@ -6,7 +6,7 @@
 
 class HeavyInfantry : public Unit{
 public:
-    HeavyInfantry(int x, int y);
+    HeavyInfantry(int x, int y, int player_id);
     ~HeavyInfantry();
     virtual bool canMoveAboveTerrain(Terrain &terrain);
 

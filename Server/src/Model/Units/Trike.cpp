@@ -4,11 +4,11 @@
 #include "../../../includes/Model/Terrains/Dunes.h"
 #include "../../../includes/Model/Terrains/Rock.h"
 
-Trike::Trike(int x, int y) :
+Trike::Trike(int x, int y,int player_id1) :
         Unit(TRIKE_KEY,x, y,
                       GameConfiguration::getConfig().trikeHitPoints,
                       GameConfiguration::getConfig().trikeSpeed,
-                      GameConfiguration::getConfig().trikeCost)
+                      GameConfiguration::getConfig().trikeCost,player_id1)
 {
 }
 

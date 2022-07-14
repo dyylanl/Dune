@@ -7,7 +7,6 @@
 class Player;
 
 class Building : public Attackable {
-    char type;
 public:
     enum BuildingType {
         BARRACKS,
@@ -19,40 +18,32 @@ public:
         WIND_TRAP,
         PALACE
     };
-
     Building(char type1,const int x, const int y, int blockWidth, int blockHeight, const int energy, const int cost,
              const int hitPoints, const int width,
              const int height, BuildingType type);
-
     virtual ~Building();
     char getType() {return type;};
-
     bool operator==(const Building& other);
-
     virtual void reciveBonusDammage(const Weapon &weapon) override;
     virtual int getCapacity();
-
     bool is(BuildingType type);
     void setPlayer(Player* player);
     Player* getPlayer();
-
     Position& getClosestPosition(Position& position) override;
-
     void demolish();
-
     bool hasNews();
 
-    const int id;
+    char type;
+    int player_id;
+    int build_id;
     const int width, height;
     const int energy;
     const int cost;
-
 private:
     static int counter;
     Player* player;
     BuildingType key;
     std::vector<Position> all_positions;
-
 protected:
     bool news;
 };

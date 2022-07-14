@@ -4,11 +4,11 @@
 #include "../../../includes/Model/Terrains/Dunes.h"
 #include "../../../includes/Model/Terrains/Rock.h"
 
-Tank::Tank(int x, int y) :
+Tank::Tank(int x, int y,int player_id1) :
         Unit(TANK_KEY,x, y,
              GameConfiguration::getConfig().tankHitPoints,
              GameConfiguration::getConfig().tankSpeed,
-             GameConfiguration::getConfig().tankCost)
+             GameConfiguration::getConfig().tankCost, player_id1)
 {
 }
 
