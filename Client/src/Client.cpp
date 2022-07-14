@@ -379,6 +379,8 @@ void Client::loadTextures(TextureManager &textureManager, SDL2pp::Renderer &rend
     textureManager.load(PRECIPICIO, DATA_PATH "assets/Terrain/tile_precipicio.png");
     textureManager.load(ROCA, DATA_PATH "assets/Terrain/tile_roca.png");
 
+    textureManager.load(LIFE, DATA_PATH "assets/Other/lp_small.png");
+
 }
 
 Client::~Client() = default;
