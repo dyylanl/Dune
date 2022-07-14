@@ -315,12 +315,11 @@ void Map::moveUnit(InstanceId player, int x, int y) {
     pos.normalize();
     if (isValid(pos)) {
         for (auto& unit : units) {
-            if (unit->player_id != (int)player) {
-                return;
-            }
-            if (unit->isSelected()) {
-                if (canMove(*unit,pos)) {
-                    setDestiny(*unit,pos.getX(),pos.getY());
+            if (unit->player_id == (int)player) {
+                if (unit->isSelected()) {
+                    if (canMove(*unit,pos)) {
+                        setDestiny(*unit,pos.getX(),pos.getY());
+                    }
                 }
             }
         }
