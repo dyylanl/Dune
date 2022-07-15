@@ -9,7 +9,7 @@
 
 int main(int argc, char** argv){
 
-    /*QApplication a(argc,argv);
+    QApplication a(argc,argv);
     MainWindow w(nullptr);
     w.show();
     int exit_code = a.exec();
@@ -17,8 +17,8 @@ int main(int argc, char** argv){
         return ERROR;
     }   
     Client* cliente = w.get_cliente();
-    cliente->iniciar();*/
-
+    cliente->iniciar();
+    /*
     try {
         Client client;
         client.launch();
@@ -28,8 +28,8 @@ int main(int argc, char** argv){
     } catch (...) {
         fprintf(stderr, "Unknown error.\n");
         return ERROR;
-    }
-    //delete cliente;
+    }*/
+    delete cliente;
 
     return SUCCESS;
 }
