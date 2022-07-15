@@ -160,6 +160,7 @@ uint16_t Protocol::recvPosition(Socket &socket) {
 }
 
 #define OBJECT_BUILDING 1
+#define PLAYER_INFO 25
 #define INIT_GAME 10
 
 void Protocol::sendInitGame(Socket &socket) {
@@ -221,9 +222,8 @@ void Protocol::sendUnit(Socket &socket, UnitDTO unit) {
     this->sendOneByte(socket, unit.selected);
     this->sendTwoBytes(socket, unit.pos_x);
     this->sendTwoBytes(socket, unit.pos_y);
-    //std::cout << "[Protocol] Enviando unidad en pos " << unit.pos_x << "," << unit.pos_y << std::endl;
-    this->sendTwoBytes(socket, unit.pos_x);
-    this->sendTwoBytes(socket, unit.pos_y);
+    this->sendTwoBytes(socket, unit.next_x);
+    this->sendTwoBytes(socket, unit.next_y);
     this->sendTwoBytes(socket, unit.life);
     this->sendOneByte(socket, true);
 }
@@ -267,6 +267,17 @@ void Protocol::recvBuild(Socket &socket, int &id, char &player, int &posX, int &
     posX = ntohs(posX);
     life = ntohs(life);
 
+}
+
+void Protocol::sendPlayer(Socket &socket, PlayerDTO player) {
+    sendOneByte(socket, PLAYER_INFO);
+    sendTwoBytes(socket, player.gold);
+    sendTwoBytes(socket, player.energy);
+}
+
+void Protocol::recvPlayer(Socket &socket, int &gold, int &energy) {
+    gold = recvTwoBytes(socket);
+    energy = recvTwoBytes(socket);
 }
 
 void Protocol::sendCountObject(Socket &socket, int &countObject) {

@@ -6,6 +6,7 @@
 #include "../../../Common/includes/NonBlockingQueue.h"
 #include "../../../Common/includes/Socket/Socket.h"
 #include "ClientConnection.h"
+#include "../Model/DTOs/PlayerDTO.h"
 
 class Command;
 
@@ -30,15 +31,14 @@ public:
     void stop();
     ~ClientsConnected();
 
-    void notify(Id player_id, Response* resp);
-
     void initGame(std::vector<std::vector<char>>& map);
 
-    void sendSnapshot(std::vector<BuildingDTO*> buildings, std::vector<UnitDTO*> units);
+    void sendSnapshot(std::vector<BuildingDTO*> buildings, std::vector<UnitDTO*> units, std::vector<PlayerDTO*> players);
 
     std::vector<InstanceId> getAllPlayers();
 
     void start();
+
 };
 
 

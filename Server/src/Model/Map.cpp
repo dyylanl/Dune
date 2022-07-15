@@ -278,8 +278,8 @@ Unit *Map::getUnit(char type, int x, int y, int player_id) {
     }
 }
 
-ConstructionCenter *Map::getConstructionCenterFor(InstanceId i) {
-    return this->centers.at(i);
+ConstructionCenter *Map::getConstructionCenterFor(InstanceId player_id) {
+    return this->centers.at(player_id);
 }
 
 void Map::selectUnit(InstanceId player_id, int x, int y) {
@@ -315,12 +315,11 @@ void Map::moveUnit(InstanceId player, int x, int y) {
     pos.normalize();
     if (isValid(pos)) {
         for (auto& unit : units) {
-            if (unit->player_id != (int)player) {
-                return;
-            }
-            if (unit->isSelected()) {
-                if (canMove(*unit,pos)) {
-                    setDestiny(*unit,pos.getX(),pos.getY());
+            if (unit->player_id == (int)player) {
+                if (unit->isSelected()) {
+                    if (canMove(*unit,pos)) {
+                        setDestiny(*unit,pos.getX(),pos.getY());
+                    }
                 }
             }
         }
