@@ -48,7 +48,6 @@ void ClientsConnected::sendSnapshot(std::vector<BuildingDTO*> buildings, std::ve
     for (auto it = clients.begin(); it != clients.end(); it++) {
         it->second.push(snap);
     }
-    //delete snap;
 }
 
 std::vector<InstanceId> ClientsConnected::getAllPlayers() {

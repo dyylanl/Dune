@@ -32,8 +32,8 @@ void ClientConnection::_sender() {
                 protocol.sendUnit(peer, *u);
             }
             protocol.sendPlayer(peer, snap->getPlayer(this->id));
+            delete snap;
         }
-        delete snap;
     } catch (const std::exception& e) {
         stop();
     } catch (...) {

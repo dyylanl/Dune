@@ -205,11 +205,11 @@ void Map::putBuilding(char type, int x, int y) {
 
 Map::~Map() {
     if (!units.empty()) {
-        for (auto* unit : units) {
+        for (Unit* unit : units) {
             delete unit;
         }
     }
-    for (auto* build : buildings) {
+    for (Building* build : buildings) {
         delete build;
     }
 }

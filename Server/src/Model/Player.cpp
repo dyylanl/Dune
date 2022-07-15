@@ -165,13 +165,17 @@ Position Player::getBarrackPosition() {
     return pos;
 }
 
-void Player::clean() {
+void Player::clean(Map &map) {
     delete construction_center;
-    for (auto* build : buildings) {
-        delete build;
+    if (!buildings.empty()) {
+        for (Building *build: buildings) {
+            build->demolish();
+        }
     }
-    for (auto* unit : units) {
-        delete unit;
+    if (!units.empty()) {
+        for (Unit *unit: units) {
+            delete unit;
+        }
     }
 }
 

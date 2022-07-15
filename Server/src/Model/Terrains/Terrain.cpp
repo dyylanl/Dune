@@ -21,6 +21,7 @@ Building* Terrain::getBuilding(){
 
 void Terrain::free(){
     occupied = false;
+    builtOn = false;
 }
 
 bool Terrain::isOccupied(){
