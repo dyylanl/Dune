@@ -212,9 +212,7 @@ std::vector<std::vector<char>> Protocol::recvMap(Socket &socket) {
 
 
 void Protocol::sendUnit(Socket &socket, UnitDTO unit) {
-    //uint16_t cantObj = 1; //Cant de Objetos
-    uint8_t type = 0;  //Tipo De Objeto
-    //this->sendTwoBytes(socket, cantObj);
+    uint8_t type = 0;  //Tipo De Objeto (unidad)
     this->sendOneByte(socket, type);
     this->sendOneByte(socket, unit.type);
     this->sendTwoBytes(socket, unit.unit_id);
@@ -225,11 +223,7 @@ void Protocol::sendUnit(Socket &socket, UnitDTO unit) {
     this->sendTwoBytes(socket, unit.next_x);
     this->sendTwoBytes(socket, unit.next_y);
     this->sendTwoBytes(socket, unit.life);
-    this->sendOneByte(socket, true);
-    std::cout <<  "posX: " << unit.pos_x << std::endl;
-    std::cout <<  "posY: " << unit.pos_y << std::endl;
-    std::cout << "posActX: " << unit.next_x << std::endl;
-    std::cout << "posActY: " << unit.next_y << std::endl;
+    this->sendOneByte(socket, true); // sabe dios
 }
 
 void
@@ -248,10 +242,6 @@ Protocol::recvUnit(Socket &socket, int &id, char &player, bool &selectStatus, in
     posY = ntohs(posY) * BLOCK_HEIGHT;
     posActX = ntohs(posActX) * BLOCK_WIDTH;
     posActY = ntohs(posActY) * BLOCK_HEIGHT;
-    std::cout <<  "posX: " << posX << std::endl;
-    std::cout <<  "posY: " << posY << std::endl;
-    std::cout << "posActX: " << posActX << std::endl;
-    std::cout << "posActY: " << posActY << std::endl;
 }
 
 void Protocol::sendBuild(Socket &socket, BuildingDTO build) {
