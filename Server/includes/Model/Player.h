@@ -61,7 +61,7 @@ public:
 
     Position getBarrackPosition();
     
-    void clean(Map &map);
+    void clean();
 
     bool canTrainUnits();
 

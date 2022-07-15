@@ -26,10 +26,6 @@ class Map {
     std::vector<Building*> buildings;
     std::vector<Unit*> units;
 
-
-    void loadConstructionsCenter();
-
-
 public:
 
     /*

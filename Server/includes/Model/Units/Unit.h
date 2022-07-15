@@ -47,6 +47,7 @@ public:
     Position getPosition() {return pos;}
     Position getNextPosition() {return next_pos;}
     int getCost() {return cost;}
+    void kill() {life = 0;}
 
 protected:
     Position pos;

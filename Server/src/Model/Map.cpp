@@ -209,14 +209,11 @@ Map::~Map() {
             delete unit;
         }
     }
-    for (Building* build : buildings) {
-        delete build;
+    if (!buildings.empty()) {
+        for (Building *build: buildings) {
+            delete build;
+        }
     }
-}
-
-
-void Map::loadConstructionsCenter() {
-
 }
 
 void Map::setDestiny(Unit &unit, int x_dest, int y_dest) {
