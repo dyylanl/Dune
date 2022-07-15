@@ -380,6 +380,8 @@ void Client::loadTextures(TextureManager &textureManager, SDL2pp::Renderer &rend
     textureManager.load(ROCA, DATA_PATH "assets/Terrain/tile_roca.png");
 
     textureManager.load(LIFE, DATA_PATH "assets/Other/lp_small.png");
+    textureManager.load(ENERGY, DATA_PATH "assets/Other/energy.png");
+    textureManager.load(GOLD, DATA_PATH "assets/Other/gold.png");
 
 }
 

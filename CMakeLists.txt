@@ -63,7 +63,7 @@ add_library(dune-common SHARED ${common_src})
 target_link_libraries(dune-common)
 
 # Client
-add_executable(dune ${client_src})
+add_executable(dune ${client_src} Client/src/Thread/InfoPlayer.cpp Client/src/Thread/InfoPlayer.h)
 target_link_libraries(dune dune-common SDL2 SDL2_image SDL2_ttf SDL2_mixer ${SDL2PP_LIBRARIES} Qt5::Core Qt5::Gui Qt5::Widgets Qt5::Multimedia)
 
 # Server

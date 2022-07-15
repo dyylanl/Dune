@@ -28,6 +28,7 @@
 #include "../GameObject/Button/ButtonUnit/ButtonLightInfantryCL.h"
 #include "../GameObject/Button/ButtonUnit/ButtonHeavyInfantryCL.h"
 #include "../GameObject/Button/ButtonUnit/ButtonSardaukarCL.h"
+#include "InfoPlayer.h"
 
 void RecvThread::run() {
     try {
@@ -50,17 +51,22 @@ void RecvThread::run() {
                         std::cout << "Tipo invalido" << std::endl;
                 }
             }
-            m_quene.push(gameObjects);
+
 
             uint8_t opcode = 0;
+            int gold = 0;
+            int energy = 0;
             opcode = m_protocol.recvResponse(m_socket);
             if (opcode == 25) {
-                int gold = 0;
-                int energy = 0;
                 m_protocol.recvPlayer(m_socket, gold, energy);
                 /*std::cout << "oro: " << gold << std::endl;
                 std::cout << "energia: " << energy << std::endl;*/
             }
+
+            gameObjects.push_back(std::unique_ptr<GameObject>(new InfoPlayer(gold, energy)));
+
+            m_quene.push(gameObjects);
+
         }
     } catch (Exception &e) {
         stop();

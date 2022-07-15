@@ -47,6 +47,9 @@ void Engine::Render(SDL2pp::Renderer &m_Renderer) {
     m_Renderer.Clear();
     m_TextureManager.drawMap(m_Renderer, m_mapa, m_camera);
     m_TextureManager.draw(m_Renderer, MENU, SDL2pp::Point(1089, 0), SDL2pp::Point(191, 720));
+
+
+
     for (int i = 0; i < (int) m_objects.size(); ++i) {
         m_objects[i]->draw(m_Renderer, m_TextureManager, m_camera);
     }
@@ -54,6 +57,10 @@ void Engine::Render(SDL2pp::Renderer &m_Renderer) {
     for (int i = 0; i < (int) m_menu.size(); ++i) {
         m_menu[i]->draw(m_Renderer, m_TextureManager, m_camera);
     }
+
+    m_TextureManager.draw(m_Renderer, ENERGY, SDL2pp::Point(1110, 30), SDL2pp::Point(20, 20));
+    m_TextureManager.draw(m_Renderer, GOLD, SDL2pp::Point(1110, 60), SDL2pp::Point(16, 17));
+
     m_Renderer.Present();
 }
 
