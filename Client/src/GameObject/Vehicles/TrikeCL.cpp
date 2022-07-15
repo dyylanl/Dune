@@ -25,7 +25,7 @@ SDL2pp::Point TrikeCL::posFrame() {
         return SDL2pp::Point(0,0);
     }
     double theta = 0;
-    if(diff.GetX() > 0) {
+    if(diff.GetX() >= 0) {
         theta = atan2(diff.GetX(), -diff.GetY()) * 180/M_PI;
     } else {
         theta = atan2(diff.GetX(), -diff.GetY()) * 180/M_PI + 360;
@@ -33,7 +33,8 @@ SDL2pp::Point TrikeCL::posFrame() {
     double delta_theta = 360.0 / m_framesSize;
     double aux = theta/delta_theta;
     int row = (int)trunc(aux/m_cantCol);
-    int col = (int)trunc((aux/m_cantCol - row) * 10) - 1;
+    int col = (int)trunc((aux/m_cantCol - row) * 10);
+    //std::cout << col << "," << row << std::endl;
     SDL2pp::Point pos(col * m_size.GetX(),row * m_size.GetY());
     return pos;
 }
