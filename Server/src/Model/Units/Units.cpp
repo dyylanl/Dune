@@ -26,6 +26,7 @@ Unit::~Unit() {}
 
 void Unit::move(Map &map) {
 
+    map.at(pos).occupy();
 
     // Verifico si la posicion de destino esta ocupada
     if (next_pos == destiny) {
@@ -66,6 +67,8 @@ void Unit::move(Map &map) {
         }
         actual_speed = speed_counter - counter_limit;
     }
+
+    map.at(pos).occupy();
 }
 
 
