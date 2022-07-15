@@ -51,6 +51,16 @@ void RecvThread::run() {
                 }
             }
             m_quene.push(gameObjects);
+
+            uint8_t opcode = 0;
+            opcode = m_protocol.recvResponse(m_socket);
+            if (opcode == 25) {
+                int gold = 0;
+                int energy = 0;
+                m_protocol.recvPlayer(m_socket, gold, energy);
+                std::cout << "oro: " << gold << std::endl;
+                std::cout << "energia: " << energy << std::endl;
+            }
         }
     } catch (Exception &e) {
         stop();

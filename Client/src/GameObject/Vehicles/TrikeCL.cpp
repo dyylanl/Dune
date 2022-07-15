@@ -20,7 +20,7 @@ void TrikeCL::draw(SDL2pp::Renderer &renderer, TextureManager &textureManager, C
 }
 
 SDL2pp::Point TrikeCL::posFrame() {
-    SDL2pp::Point diff = m_posAction-m_position;
+    /*SDL2pp::Point diff = m_posAction-m_position;
     float theta = 0;
     if(diff.GetX() > 0) {
         theta = atan2(diff.GetY(), diff.GetX()) * 180/M_PI;
@@ -28,7 +28,7 @@ SDL2pp::Point TrikeCL::posFrame() {
         theta = atan2(diff.GetY(), diff.GetX()) * 180/M_PI - 180;
     }
     std::cout << diff << std::endl;
-    std::cout << theta << std::endl;
+    std::cout << theta << std::endl;*/
     /*float theta = atan2(diff.GetX(), -diff.GetY());
     float delta_theta = 2 * M_PI / m_framesSize;
     float aux = (theta / delta_theta) / cantCol;
