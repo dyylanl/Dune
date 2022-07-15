@@ -1,7 +1,7 @@
 #include <iostream>
 #include "../../../includes/Model/Terrains/Terrain.h"
 
-Terrain::Terrain(char key) : key(key), occupied(false), builtOn(false), speed_factor(1) {}
+Terrain::Terrain(char key) : key(key), occupied(false), builtOn(false), speed_factor(1), spice(0) {}
 
 char Terrain::getKey() {
     return key;
@@ -21,7 +21,6 @@ Building* Terrain::getBuilding(){
 
 void Terrain::free(){
     occupied = false;
-    builtOn = false;
 }
 
 bool Terrain::isOccupied(){
@@ -33,11 +32,16 @@ bool Terrain::isBuiltOn(){
 }
 
 int Terrain::getSpice(){
-    return 0;
+    return this->spice;
+}
+
+void Terrain::setSpice(int spice1) {
+    this->spice = spice1;
 }
 
 int Terrain::farm() {
-    return 0;
+    this->spice -= 1;
+    return 1;
 }
 
 bool Terrain::hasFarm() {

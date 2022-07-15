@@ -33,13 +33,17 @@ Map::Map(std::string map_path) :
                             units()
 {
     std::vector <std::vector<Terrain>> terrain_init((uint16_t) rows, std::vector<Terrain>((uint16_t) cols, Terrain('A')));
+    std::vector <std::vector<int>> spice_init((uint16_t) rows, std::vector<int>((uint16_t) cols, 0));
     this->terrains = terrain_init;
+    spice_init = map_reader.getSpice();
     int rows_ = mapa.size();
     int cols_ = mapa[0].size();
+
     for (int i = 0; i < rows_; ++i) {
         for (int j = 0; j < cols_; ++j) {
             char type = this->mapa[j][i];
             terrains[i][j] = Terrain(type);
+            terrains[i][j].setSpice(spice_init[i][j]);
         }
     }
     int total_buildings = map_reader.getTotalBuildings();

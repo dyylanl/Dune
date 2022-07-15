@@ -40,7 +40,6 @@ public:
     virtual void makeAttack(Map &map);
     virtual bool shotARocket();
     virtual Rocket* getRocket();
-    virtual bool hasNews();
     virtual bool canMoveAboveTerrain(Terrain &terrain);
     char getType() {return type;}
     void select();
@@ -56,12 +55,9 @@ protected:
     const int cost;
     int actual_speed;
     std::stack<Position> pathToDestiny;
-    Attackable* foll_unit;
     Position destiny;
-    Position prev_foll_unit_pos;
     Position next_pos;
     Player* player;
-    bool news;
     bool selected;
 };
 
