@@ -20,19 +20,22 @@ Unit::Unit(char type1, const int x, const int y, const int hitPoints, const int 
     counter += 1;
 }
 
+
 Unit::~Unit() {}
 
+
 void Unit::move(Map &map) {
-    map.at(pos).occupy(); // ocupo la nueva posicion de la unidad
+
+
+    // Verifico si la posicion de destino esta ocupada
     if (next_pos == destiny) {
         if (map.at(destiny).isOccupied()){
             return;
         }
     }
-    int terrain_factor = map.getSpeedFactorAt(pos);
-    int counter_limit = terrain_factor * GameConfiguration::getConfig().speedFactor;
-    int speed_counter = actual_speed;
-    actual_speed += speed;
+
+
+    // Actualizo la nueva posicion de la unidad
     if (pos == next_pos && !pathToDestiny.empty()) { // si la pos actual es igual a la sig y la ruta no esta vacia
         next_pos = pathToDestiny.top(); // actualizo la nueva pos
         pathToDestiny.pop(); // popeo de la ruta
@@ -41,7 +44,17 @@ void Unit::move(Map &map) {
             return;
         }
     }
-    if (speed_counter >= counter_limit) { // manejo velocidad del terreno
+
+
+    // Manejo la velocidad sobre el terreno
+    int terrain_factor = map.getSpeedFactorAt(pos);
+    int counter_limit = terrain_factor * GameConfiguration::getConfig().speedFactor;
+    int speed_counter = actual_speed;
+    actual_speed += speed;
+
+
+    
+    if (speed_counter >= counter_limit) {
         if (!(pos == next_pos)) { // si la pos actual es distinta a la sig me muevo
             map.at(pos).free(); // significa q se va a mover entonces libero su posicion actual
             int block_movement = GameConfiguration::getConfig().blockMovement;  // config de movimiento en el yaml
@@ -53,8 +66,8 @@ void Unit::move(Map &map) {
         }
         actual_speed = speed_counter - counter_limit;
     }
-    map.at(pos).occupy();
 }
+
 
 void Unit::setPath(std::stack<Position> path, Position destiny1) {
     pathToDestiny = path;
