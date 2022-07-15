@@ -8,6 +8,7 @@
 
 #include "../Object/GameObject.h"
 #include <math.h>
+#include <cmath>
 
 class Vehicle : public GameObject{
 protected:

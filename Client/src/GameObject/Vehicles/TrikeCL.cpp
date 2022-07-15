@@ -8,7 +8,7 @@ TrikeCL::TrikeCL(int id, int player, bool selecStatus, SDL2pp::Point position, S
                  bool action) : Vehicle(TRIKE, position,
                                     SDL2pp::Point(32,25), id, player,
                                     selecStatus, posAction,
-                                    life, action) {}
+                                    life, action),  m_framesSize(32), cantCol(8), cantFil(4){}
 
 void TrikeCL::draw(SDL2pp::Renderer &renderer, TextureManager &textureManager, Camera &camera) {
     SDL2pp::Point posFrame;
@@ -20,8 +20,26 @@ void TrikeCL::draw(SDL2pp::Renderer &renderer, TextureManager &textureManager, C
 }
 
 SDL2pp::Point TrikeCL::posFrame() {
-    //SDL2pp::Point diff = m_posAction-m_position;
-    //float theta = atan2(diff.GetX(), -diff.GetY());
-    //float delta_theta = 2 * M_PI/frames_size;
+    SDL2pp::Point diff = m_posAction-m_position;
+    float theta = 0;
+    if(diff.GetX() > 0) {
+        theta = atan2(diff.GetY(), diff.GetX()) * 180/M_PI;
+    } else {
+        theta = atan2(diff.GetY(), diff.GetX()) * 180/M_PI - 180;
+    }
+    std::cout << diff << std::endl;
+    std::cout << theta << std::endl;
+    /*float theta = atan2(diff.GetX(), -diff.GetY());
+    float delta_theta = 2 * M_PI / m_framesSize;
+    float aux = (theta / delta_theta) / cantCol;
+    int row = trunc(aux);
+    int col = trunc(aux * 10) -1;
+    //std::cout << "posAct: " << m_posAction << std::endl;
+    //std::cout <<  "pos: " << m_position << std::endl;
+    //std::cout << diff << std::endl;
+    //std::cout << theta << std::endl;
+    //std::cout << theta / delta_theta << std::endl;
+    std::cout << "row: " << row << std::endl;
+    std::cout << "col: " << col << std::endl;*/
     return SDL2pp::Point(0,0);
 }

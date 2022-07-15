@@ -10,7 +10,9 @@
 
 class TrikeCL : public Vehicle{
 private:
-    int frames_size;
+    int m_framesSize;
+    int cantCol;
+    int cantFil;
 public:
     TrikeCL(int id, int player, bool selecStatus, SDL2pp::Point position, SDL2pp::Point posAction, int life,
             bool action);

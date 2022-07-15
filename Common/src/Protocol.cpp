@@ -242,6 +242,8 @@ Protocol::recvUnit(Socket &socket, int &id, char &player, bool &selectStatus, in
     socket.recv(reinterpret_cast<char *>(&action), sizeof(uint8_t));
     posX = ntohs(posX) * BLOCK_WIDTH;
     posY = ntohs(posY) * BLOCK_HEIGHT;
+    posActX = ntohs(posActX) * BLOCK_WIDTH;
+    posActY = ntohs(posActY) * BLOCK_HEIGHT;
 }
 
 void Protocol::sendBuild(Socket &socket, BuildingDTO build) {
