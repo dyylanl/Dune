@@ -14,11 +14,8 @@ Unit::Unit(char type1, const int x, const int y, const int hitPoints, const int 
         cost(cost),
         actual_speed(0),
         pathToDestiny(),
-        foll_unit(nullptr),
         destiny(x, y),
-        prev_foll_unit_pos(),
         next_pos(x, y),
-        news(true),
         selected(false){
     counter += 1;
 }
@@ -26,6 +23,7 @@ Unit::Unit(char type1, const int x, const int y, const int hitPoints, const int 
 Unit::~Unit() {}
 
 void Unit::move(Map &map) {
+    map.at(pos).occupy();
     int terrain_factor = map.getSpeedFactorAt(pos);
     int counter_limit = terrain_factor * GameConfiguration::getConfig().speedFactor;
     int speed_counter = actual_speed;
@@ -36,6 +34,7 @@ void Unit::move(Map &map) {
             pathToDestiny.pop(); // popeo de la ruta
             if (map.at(next_pos).isOccupied()) { // me fijo si el mapa fue modificado
                 map.setDestiny(*this, destiny.getX(), destiny.getY()); // si fue modificado recalculo A*
+                return;
             }
         }
         if (!(pos == next_pos)) { // si la pos actual es distinta a la sig me muevo
@@ -44,12 +43,12 @@ void Unit::move(Map &map) {
             pos.x += (next_pos.x < pos.x) ? -block_movement : ((next_pos.x > pos.x) ? +block_movement : 0); // deltas
             pos.y += (next_pos.y < pos.y) ? -block_movement : ((next_pos.y > pos.y) ? +block_movement : 0);
             map.at(pos).occupy(); // ocupo la nueva posicion de la unidad
-            map.at(next_pos).occupy();
         } else {
             map.at(pos).occupy();
         }
         actual_speed = speed_counter - counter_limit;
     }
+    map.at(pos).occupy();
 }
 
 void Unit::setPath(std::stack<Position> path, Position destiny1) {
@@ -71,10 +70,6 @@ bool Unit::shotARocket() {
 
 Rocket* Unit::getRocket() {
     return nullptr;
-}
-
-bool Unit::hasNews() {
-    return (news);
 }
 
 bool Unit::operator==(const Unit &other) {

@@ -42,6 +42,21 @@ std::vector<std::vector<char>> MapReader::getMap() {
     return map;
 }
 
+std::vector<std::vector<int>> MapReader::getSpice() {
+    int rows = getRows();
+    int cols = getCols();
+    std::vector <std::vector<int>> map_spice((int) rows, std::vector<int>((int) cols, 0));
+    for (int i = 0; i < rows; ++i) {
+        for (int j = 0; j < cols; ++j) {
+            std::stringstream key_i_j;
+            key_i_j << i << "," << j;
+            int spice = config["Tablero"][key_i_j.str()]["Cantidad Especia"].as<int>();
+            map_spice[i][j] = spice;
+        }
+    }
+    return map_spice;
+}
+
 unsigned MapReader::getReqPlayers() {
     return this->config["Cantidad Jugadores"].as<unsigned>();
 }

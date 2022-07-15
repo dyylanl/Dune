@@ -10,6 +10,7 @@ protected:
     bool builtOn;
     int speed_factor;
     Building* building;
+    int spice;
 
 public:
     /*
@@ -49,6 +50,10 @@ public:
      * Retorna true si se puede cosechar
      */
     virtual bool hasFarm();
+    /*
+    *   Setea la especia del terreno
+    */
+    void setSpice(int spice);
     virtual Building* getBuilding();
     int getSpeedFactor();
     bool operator==(const Terrain& terrain);

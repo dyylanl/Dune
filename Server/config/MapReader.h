@@ -12,6 +12,7 @@ public:
     unsigned getRows() const;
     unsigned getCols() const;
     std::vector<std::vector<char>> getMap();
+    std::vector<std::vector<int>> getSpice();
     ConstructionCenter* getConstructionCenterFor(InstanceId id);
     unsigned getReqPlayers();
     int getTotalBuildings();
