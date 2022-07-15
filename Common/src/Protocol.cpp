@@ -226,6 +226,10 @@ void Protocol::sendUnit(Socket &socket, UnitDTO unit) {
     this->sendTwoBytes(socket, unit.next_y);
     this->sendTwoBytes(socket, unit.life);
     this->sendOneByte(socket, true);
+    std::cout <<  "posX: " << unit.pos_x << std::endl;
+    std::cout <<  "posY: " << unit.pos_y << std::endl;
+    std::cout << "posActX: " << unit.next_x << std::endl;
+    std::cout << "posActY: " << unit.next_y << std::endl;
 }
 
 void
@@ -244,6 +248,10 @@ Protocol::recvUnit(Socket &socket, int &id, char &player, bool &selectStatus, in
     posY = ntohs(posY) * BLOCK_HEIGHT;
     posActX = ntohs(posActX) * BLOCK_WIDTH;
     posActY = ntohs(posActY) * BLOCK_HEIGHT;
+    std::cout <<  "posX: " << posX << std::endl;
+    std::cout <<  "posY: " << posY << std::endl;
+    std::cout << "posActX: " << posActX << std::endl;
+    std::cout << "posActY: " << posActY << std::endl;
 }
 
 void Protocol::sendBuild(Socket &socket, BuildingDTO build) {

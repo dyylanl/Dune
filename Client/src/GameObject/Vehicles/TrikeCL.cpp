@@ -21,6 +21,9 @@ void TrikeCL::draw(SDL2pp::Renderer &renderer, TextureManager &textureManager, C
 
 SDL2pp::Point TrikeCL::posFrame() {
     SDL2pp::Point diff = m_posAction - m_position;
+    if (diff.GetX() == 0 && diff.GetY() == 0) {
+        return SDL2pp::Point(0,0);
+    }
     double theta = 0;
     if(diff.GetX() > 0) {
         theta = atan2(diff.GetX(), -diff.GetY()) * 180/M_PI;

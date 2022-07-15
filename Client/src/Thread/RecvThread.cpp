@@ -58,8 +58,8 @@ void RecvThread::run() {
                 int gold = 0;
                 int energy = 0;
                 m_protocol.recvPlayer(m_socket, gold, energy);
-                std::cout << "oro: " << gold << std::endl;
-                std::cout << "energia: " << energy << std::endl;
+                /*std::cout << "oro: " << gold << std::endl;
+                std::cout << "energia: " << energy << std::endl;*/
             }
         }
     } catch (Exception &e) {
