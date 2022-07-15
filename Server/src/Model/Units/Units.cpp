@@ -40,10 +40,11 @@ void Unit::move(Map &map) {
         }
         if (!(pos == next_pos)) { // si la pos actual es distinta a la sig me muevo
             map.at(pos).free(); // significa q se va a mover entonces libero su posicion actual
-            float block_movement = GameConfiguration::getConfig().blockMovement;
+            int block_movement = GameConfiguration::getConfig().blockMovement;
             pos.x += (next_pos.x < pos.x) ? -block_movement : ((next_pos.x > pos.x) ? +block_movement : 0); // deltas
             pos.y += (next_pos.y < pos.y) ? -block_movement : ((next_pos.y > pos.y) ? +block_movement : 0);
             map.at(pos).occupy(); // ocupo la nueva posicion de la unidad
+            map.at(next_pos).occupy();
         } else {
             map.at(pos).occupy();
         }

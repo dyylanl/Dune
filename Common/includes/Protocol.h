@@ -9,6 +9,7 @@
 //----------------------------------------//
 #include "Socket/Socket.h"
 #include "../../Server/includes/Model/Map.h"
+#include "../../Server/includes/Model/DTOs/PlayerDTO.h"
 
 class Protocol {
 private:
@@ -40,6 +41,7 @@ public:
      */
     void sendUnit(Socket &socket, UnitDTO unit);
     void sendBuild(Socket &socket, BuildingDTO build);
+    void sendPlayer(Socket &socket, PlayerDTO player);
 
     /*
      * Metodos q usa el run del client
@@ -50,6 +52,7 @@ public:
     void recvBuild(Socket &socket, int &id, char &player, int &posX, int &posY, int &life);
     void recvUnit(Socket &socket, int &id, char &player, bool &selectStatus, int &posX, int &posY, int &posActX,
                   int &posActY, int &life, bool &action);
+    void recvPlayer(Socket &socket, int &gold, int &energy);
 
     /*
      * Recibe una posicion

@@ -65,6 +65,7 @@ void Model::addPlayer(InstanceId player_id) {
 }
 
 void Model::deletePlayer(InstanceId player_id) {
+    players.at(player_id).clean();
     players.erase(player_id);
     current_players -= 1;
 }
@@ -88,3 +89,14 @@ int Model::numberOfPlayers() {
 void Model::moveUnits(int it) {
     map.moveUnits(it);
 }
+
+std::vector<PlayerDTO*> Model::getPlayers() {
+    std::vector<PlayerDTO*> players_ret;
+    for (auto& [id,player] : players) {
+        auto* dto = new PlayerDTO(id, player.gold, player.generatedEnergy);
+        players_ret.push_back(dto);
+    }
+    return players_ret;
+}
+
+

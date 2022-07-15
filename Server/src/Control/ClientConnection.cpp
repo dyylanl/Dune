@@ -23,7 +23,7 @@ void ClientConnection::_sender() {
     try {
         Snapshot* snap = nullptr;
         while ((snap = snapshots.pop())) {
-            int count = snap->buildings.size() + snap->units.size();
+            int count = (int)(snap->buildings.size() + snap->units.size());
             protocol.sendCountObject(peer, count);
             for (auto &b: snap->buildings) {
                 protocol.sendBuild(peer, *b);
@@ -31,6 +31,7 @@ void ClientConnection::_sender() {
             for (auto &u: snap->units) {
                 protocol.sendUnit(peer, *u);
             }
+            protocol.sendPlayer(peer, snap->getPlayer(this->id));
         }
         delete snap;
     } catch (const std::exception& e) {
@@ -40,7 +41,7 @@ void ClientConnection::_sender() {
         fprintf(stderr, "[ClientConnection]: Error desconocido.\n");
     }
    this->snapshots.close();
-    _finishThread(); // TODO DESCOMENTAR ESTO
+    _finishThread();
 }
 
 void ClientConnection::_receiver() {
@@ -88,7 +89,7 @@ void ClientConnection::start() {
 }
 
 void ClientConnection::push(Snapshot *snap) {
-    snapshots.push(snap);
+    snapshots.push(snap); //queue
 }
 
 void ClientConnection::join() {

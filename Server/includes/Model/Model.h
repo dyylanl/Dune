@@ -17,6 +17,7 @@
 #include "Buildings/LightFactory.h"
 #include "Buildings/Silo.h"
 #include "Buildings/WindTrap.h"
+#include "DTOs/PlayerDTO.h"
 
 class Model {
 private:
@@ -93,6 +94,8 @@ public:
     int numberOfPlayers();
 
     void moveUnits(int it);
+
+    std::vector<PlayerDTO*> getPlayers();
 
 };
 

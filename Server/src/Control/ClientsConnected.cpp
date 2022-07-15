@@ -43,8 +43,8 @@ void ClientsConnected::initGame(std::vector<std::vector<char>>& map) {
     }
 }
 
-void ClientsConnected::sendSnapshot(std::vector<BuildingDTO*> buildings, std::vector<UnitDTO*> units) {
-    Snapshot *snap = new Snapshot(buildings, units);
+void ClientsConnected::sendSnapshot(std::vector<BuildingDTO*> buildings, std::vector<UnitDTO*> units, std::vector<PlayerDTO*> players) {
+    Snapshot *snap = new Snapshot(buildings, units, players);
     for (auto it = clients.begin(); it != clients.end(); it++) {
         it->second.push(snap);
     }

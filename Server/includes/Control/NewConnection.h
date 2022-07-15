@@ -12,7 +12,6 @@
     * Mapa en el que jugara
     * Id de conexion
     * Socket para el envio/recibo de paquetes
-    *  todo: terminar la casa (esta harcodeado en 0 = Harkonnen)
 */
 struct NewConnection {
     Socket peer;
