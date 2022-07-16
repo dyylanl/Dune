@@ -10,7 +10,22 @@ Animation::Animation(int frameCount, int colCount, SDL2pp::Point size, SDL2pp::P
 
 void Animation::draw(SDL2pp::Renderer &renderer, TextureManager &textureManager, char textureID, Camera &camera) {
     if(m_selectStatus) {
-        textureManager.drawFrame(renderer, LIFE, m_position - SDL2pp::Point(0,10), SDL2pp::Point(40,8), SDL2pp::Point(0,0), camera);
+        if(m_life > 85) {
+            textureManager.drawFrame(renderer, LIFE, m_position - SDL2pp::Point(0,10), SDL2pp::Point(40,8), SDL2pp::Point(0,0), camera);
+        } else if (m_life >= 71 && m_life < 85) {
+            textureManager.drawFrame(renderer, LIFE, m_position - SDL2pp::Point(0,10), SDL2pp::Point(40,8), SDL2pp::Point(0,8), camera);
+        } else if (m_life >= 57 && m_life < 71) {
+            textureManager.drawFrame(renderer, LIFE, m_position - SDL2pp::Point(0,10), SDL2pp::Point(40,8), SDL2pp::Point(0,16), camera);
+        } else if (m_life >= 42 && m_life < 57) {
+            textureManager.drawFrame(renderer, LIFE, m_position - SDL2pp::Point(0,10), SDL2pp::Point(40,8), SDL2pp::Point(0,25), camera);
+        } else if (m_life >= 28 && m_life < 42) {
+            textureManager.drawFrame(renderer, LIFE, m_position - SDL2pp::Point(0,10), SDL2pp::Point(40,8), SDL2pp::Point(0,34), camera);
+        } else if (m_life >= 14 && m_life < 28) {
+            textureManager.drawFrame(renderer, LIFE, m_position - SDL2pp::Point(0,10), SDL2pp::Point(40,8), SDL2pp::Point(0,42), camera);
+        } else {
+            textureManager.drawFrame(renderer, LIFE, m_position - SDL2pp::Point(0,10), SDL2pp::Point(40,8), SDL2pp::Point(0,51), camera);
+        }
+
     }
 
     SDL2pp::Point posFrame;
