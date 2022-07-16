@@ -9,14 +9,10 @@ void ClientConnection::_finishThread() {
 }
 
 void ClientConnection::_freeNotifications() {
-    /*BuildingDTO* buildsDTO = nullptr;
-    while ((buildsDTO = buildings.pop())) {
-        delete buildsDTO;
+    Snapshot* snap = nullptr;
+    while ((snap = snapshots.pop())) {
+        delete snap;
     }
-    UnitDTO* unitsDTO = nullptr;
-    while ((unitsDTO = units.pop())) {
-        delete unitsDTO;
-    }*/
 }
 
 void ClientConnection::_sender() {
@@ -32,7 +28,6 @@ void ClientConnection::_sender() {
                 protocol.sendUnit(peer, *u);
             }
             protocol.sendPlayer(peer, snap->getPlayer(this->id));
-            snap->free();
             delete snap;
         }
     } catch (const std::exception& e) {
@@ -89,8 +84,8 @@ void ClientConnection::start() {
     receiver = std::thread(&ClientConnection::_sender, this);
 }
 
-void ClientConnection::push(Snapshot *snap) {
-    snapshots.push(snap); //queue
+void ClientConnection::push(std::vector<BuildingDTO*> buildings, std::vector<UnitDTO*> units, std::vector<PlayerDTO*> players) {
+    snapshots.push(new Snapshot(buildings,units,players)); //queue
 }
 
 void ClientConnection::join() {

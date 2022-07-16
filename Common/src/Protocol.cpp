@@ -224,8 +224,6 @@ void Protocol::sendUnit(Socket &socket, UnitDTO unit) {
     this->sendTwoBytes(socket, unit.next_y);
     this->sendTwoBytes(socket, unit.life);
     this->sendOneByte(socket, true); // sabe dios
-    std::cout << "pos: " << "(" << unit.pos_x << ", " << unit.pos_y << ")" << " | ";
-    std::cout << "nextPos: " << "(" << unit.next_x << ", " << unit.next_y << ")" << std::endl;
 }
 
 void
