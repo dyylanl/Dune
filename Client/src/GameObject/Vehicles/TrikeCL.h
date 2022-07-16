@@ -7,11 +7,13 @@
 
 
 #include "../Vehicle.h"
+#include "../../Animation/Animation.h"
 
 class TrikeCL : public Vehicle{
 private:
-    int m_framesSize;
-    int m_cantCol;
+    int m_frameCount;
+    int m_colCount;
+    Animation m_animation;
 public:
     TrikeCL(int id, int player, bool selecStatus, SDL2pp::Point position, SDL2pp::Point posAction, int life,
             bool action);
@@ -20,7 +22,7 @@ public:
 
     ~TrikeCL() {}
 
-    SDL2pp::Point posFrame();
+    SDL2pp::Point selectFrame();
 };
 
 
