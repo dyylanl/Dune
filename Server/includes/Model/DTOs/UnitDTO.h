@@ -13,8 +13,9 @@ struct UnitDTO {
     char type;
     int life;
     int selected;
+    int attacking;
 
-    UnitDTO(Id unit_id1, InstanceId player_id1, int x1, int y1, int next_x1, int next_y1, char unit_type, int life1, int selected1) :
+    UnitDTO(Id unit_id1, InstanceId player_id1, int x1, int y1, int next_x1, int next_y1, char unit_type, int life1, int selected1, int attacking1) :
     unit_id(unit_id1),
     player_id(player_id1),
     pos_x(x1),
@@ -23,7 +24,8 @@ struct UnitDTO {
     next_y(next_y1),
     type(unit_type),
     life(life1),
-    selected(selected1)
+    selected(selected1),
+    attacking(attacking1)
     {}
 
 };

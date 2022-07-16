@@ -23,3 +23,7 @@ bool LightInfantry::canMoveAboveTerrain(Terrain &terrain) {
 void LightInfantry::reciveBonusDammage(const Weapon &weapon) {
     life -= weapon.getInfantryBonus();
 }
+
+void LightInfantry::attack(Attackable* enemy) {
+    enemy->reciveAttack(AssaultRifle());
+}

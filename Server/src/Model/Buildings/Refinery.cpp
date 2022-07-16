@@ -15,8 +15,7 @@ Refinery::Refinery(const int x, const int y,
 Refinery::~Refinery() {}
 
 bool Refinery::load(Player &player) {
-    this->news = true;
-    return news;
+    return true;
 }
 
 int Refinery::getCapacity() {

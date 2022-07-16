@@ -223,11 +223,10 @@ void Protocol::sendUnit(Socket &socket, UnitDTO unit) {
     this->sendTwoBytes(socket, unit.next_x);
     this->sendTwoBytes(socket, unit.next_y);
     this->sendTwoBytes(socket, unit.life);
-    this->sendOneByte(socket, true); // sabe dios
+    this->sendOneByte(socket, unit.attacking);
 }
 
-void
-Protocol::recvUnit(Socket &socket, int &id, char &player, bool &selectStatus, int &posX, int &posY, int &posActX,
+void Protocol::recvUnit(Socket &socket, int &id, char &player, bool &selectStatus, int &posX, int &posY, int &posActX,
                    int &posActY, int &life, bool &action) {
     socket.recv(reinterpret_cast<char *>(&id), sizeof(uint16_t));
     socket.recv(reinterpret_cast<char *>(&player), sizeof(uint8_t));

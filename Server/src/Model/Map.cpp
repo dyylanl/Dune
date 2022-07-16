@@ -60,7 +60,8 @@ char Map::getTypeTerrain(int posX, int posY) {
 }
 
 void Map::updateSpice(int x, int y){
-    std::cout << "Volviendo a cargar la especia" << std::endl;
+    int spice = this->at(x,y).getSpice();
+    this->at(x,y).setSpice(spice-1);
 }
 
 int Map::getWidth() {
@@ -143,11 +144,16 @@ std::vector<UnitDTO*> Map::getUnits() {
         auto* dto = new UnitDTO(1,1, // por que el cliente necesita los id's?
                                 unit->getPosition().getX(),unit->getPosition().getY(),
                                 unit->getNextPosition().getX(),unit->getNextPosition().getY(),
-                                unit->getType(),unit->getLife(),0);
+                                unit->getType(),unit->getLife(),0,0); // los ultimos 2 ceros son ataque y seleccion
         if (unit->isSelected()) {
             dto->selected = 1;
         } else {
             dto->selected = 0;
+        }
+        if (unit->isAttacking()) {
+            dto->attacking = 1;
+        } else {
+            dto->attacking = 0;
         }
         retUnitsDto.push_back(dto);
     }
@@ -218,22 +224,24 @@ void Map::setDestiny(Unit &unit, int x_dest, int y_dest) {
     unit.setPath(path, p_destiny);
 }
 
-Attackable *Map::getClosestAttackable(Position &position, int limitRadius, Player& player) {
+Attackable *Map::getClosestAttackable(Position &position, int limitRadius, int player_id) {
     Attackable* closest_attackable = nullptr;
     int closest_unit_distance = limitRadius;
-    for (auto& current_unit : units) {
+    for (auto& current_unit : units) { // miro las unidades
         int distance = current_unit->getPosition().sqrtDistance(position);
-        if ((distance < limitRadius) && (distance < closest_unit_distance)) {
+        if ((distance < limitRadius) && (distance < closest_unit_distance) && !(player_id == current_unit->player_id)) {
             closest_attackable = current_unit;
             closest_unit_distance = distance;
+            std::cout << "[Map] Unidad detecto unidad enemiga" << std::endl;
         }
     }
-    for (auto& current_building : buildings) {
+    for (auto& current_building : buildings) { // miro las construcciones
         Position& pos = current_building->getClosestPosition(position);
         int distance = pos.sqrtDistance(position);
-        if (distance < limitRadius && distance < closest_unit_distance) {
+        if (distance < limitRadius && distance < closest_unit_distance && !(player_id == current_building->player_id)) {
             closest_attackable = current_building;
             closest_unit_distance = distance;
+            std::cout << "[Map] Unidad detecto construccion enemiga" << std::endl;
         }
     }
     return closest_attackable;

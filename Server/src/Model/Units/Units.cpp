@@ -16,7 +16,8 @@ Unit::Unit(char type1, const int x, const int y, const int hitPoints, const int 
         pathToDestiny(),
         destiny(x, y),
         next_pos(x, y),
-        selected(false){
+        selected(false),
+        attacking(false) {
     counter += 1;
 }
 
@@ -55,6 +56,11 @@ void Unit::move(Map &map) {
                 actual_speed = speed_counter - counter_limit;
             }
         }
+    }
+    attacking = false;
+    if (map.getClosestAttackable(pos,1,player_id) != nullptr) {
+        attacking = true;
+        attack(map.getClosestAttackable(pos,1,player_id));
     }
 }
 

@@ -89,8 +89,6 @@ public:
 
     void putUnit(InstanceId player, char unit_type);
 
-    void actionOnPosition(Position &pos, Unit &unit);
-
     int numberOfPlayers();
 
     void moveUnits(int it);

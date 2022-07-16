@@ -3,9 +3,9 @@ total_maps: 2
 maps:
   0: "../mapa1.yaml"
   1: "../mapa2.yaml"
-speedFactor: 1
+speedFactor: 10
 blockMovement: 1
-rangeFactor: 2000
+rangeFactor: 2
 timeFactor: 1
 initialGold: 10000
 initialEnergy: 2500

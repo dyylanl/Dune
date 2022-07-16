@@ -15,6 +15,9 @@ public:
     Rocket* viewRocket();
     virtual Rocket* getRocket();
     virtual void reciveBonusDammage(const Weapon &weapon);
+
+    virtual void attack(Attackable* enemy);
+
 private:
     Position pos;
     int life;

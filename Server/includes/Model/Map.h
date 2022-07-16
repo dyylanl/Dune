@@ -119,17 +119,10 @@ public:
 
 
 
-
-
-
-
-
-
-
     //-----------------------------------//
     void setDestiny(Unit& unit, int x_dest, int y_dest);
 
-    Attackable * getClosestAttackable(Position &position, int limitRadius, Player& player);
+    Attackable * getClosestAttackable(Position &position, int limitRadius, int player_id);
 
     bool canMove(Unit& unit, Position pos);
 

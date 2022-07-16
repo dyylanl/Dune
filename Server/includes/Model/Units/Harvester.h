@@ -1,10 +1,15 @@
 #ifndef __HARVESTER_H__
 #define __HARVESTER_H__
 
+#include <iostream>
 #include "Unit.h"
 #include "../Buildings/Refinery.h"
+#include "../Terrains/Sand.h"
+#include "../Terrains/Rock.h"
+#include "../Terrains/Dunes.h"
 #include "../Map.h"
 #include "../Player.h"
+
 
 class Harvester : public Unit {
 public:
@@ -13,15 +18,14 @@ public:
     ~Harvester();
 
     bool canMoveAboveTerrain(Terrain &terrain) override;
-
     virtual void reciveBonusDammage(const Weapon &weapon) override;
-
     virtual void actionOnPosition(Map& map, Position& pos) override;
-
     void makeAttack(Map &map) override;
-
     bool farm(Map& map);
     bool isFull();
+    
+    virtual void attack(Attackable* enemy) override;
+
 
 private:
     const int spiceCapacity;
@@ -32,6 +36,8 @@ private:
     int actual_farm_speed;
     int load_speed;
     int actual_load_speed;
+    bool farming;
+    bool loading;
 
     void makeFarming(Map &map);
     void makeLoading(Map &map);

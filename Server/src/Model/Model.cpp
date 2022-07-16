@@ -40,8 +40,6 @@ void Model::buildBuilding(InstanceId id_player, char build_type, int x, int y) {
     int energy_req = build->energy;
     if (gold >= gold_req && energy >= energy_req) {
         if (map.canWeBuild(pos, build->width, build->height)) {
-            players.at(id_player).subGold(gold_req);
-            players.at(id_player).generatedEnergy -= energy_req;
             players.at(id_player).addBuilding(build);
             map.putBuilding(build);
         }
@@ -67,6 +65,7 @@ void Model::addPlayer(InstanceId player_id) {
 }
 
 void Model::deletePlayer(InstanceId player_id) {
+    players.at(player_id).cleanDeadBuildings();
     players.at(player_id).clean();
     players.erase(player_id);
     current_players -= 1;
@@ -78,10 +77,6 @@ void Model::selectUnit(InstanceId player, int x, int y) {
 
 void Model::moveUnit(InstanceId player, int x, int y) {
     map.moveUnit(player,x,y);
-}
-
-void Model::actionOnPosition(Position &pos, Unit &unit) {
-    unit.actionOnPosition(map, pos);
 }
 
 int Model::numberOfPlayers() {
@@ -100,5 +95,4 @@ std::vector<PlayerDTO*> Model::getPlayers() {
     }
     return players_ret;
 }
-
 

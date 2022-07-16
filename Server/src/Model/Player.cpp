@@ -5,11 +5,11 @@
 
 Player::Player(InstanceId id1, ConstructionCenter *construction_center):
         id(id1),
-        news(true),
         generatedEnergy(GameConfiguration::getConfig().initialMaxEnergy),
         consumedEnergy(GameConfiguration::getConfig().initialEnergy),
         gold(GameConfiguration::getConfig().initialGold),
         gold_limit(GameConfiguration::getConfig().initialGold),
+        can_train(false),
         construction_center(construction_center)
         {
             construction_center->setPlayer(this);
@@ -21,13 +21,11 @@ bool Player::operator==(const Player &other) const {
 
 void Player::addGold(int gold_to_add) {
     gold += gold_to_add;
-    this->news = true;
 }
 
 void Player::subGold(int gold_to_sub) {
     // if (gold_to_sub > gold ) throw error -> Ver que hacer
     gold -= gold_to_sub;
-    this->news = true;
 }
 
 float Player::getEnergyFactor() {
@@ -43,13 +41,13 @@ void Player::addBuilding(Building *building) {
     } else {
         this->consumedEnergy += building->energy;
     }
+    if (building->is(Building::BARRACKS)) {
+        can_train = true;
+    }
     this->gold_limit += building->getCapacity();
     this->subGold(building->cost);
 }
 
-//bool Player::hasBuilding(Building *building) {
-//    return std::find(buildings.begin(), buildings.end(), building) != buildings.end();
-//}
 
 Building *Player::getClosestBuilding(Position pos, Building::BuildingType type) {
     for (auto& b : buildings) {
@@ -59,19 +57,9 @@ Building *Player::getClosestBuilding(Position pos, Building::BuildingType type) 
     }
     return nullptr;
 }
-/*
-void Player::trainUnits() {
-    trainingCenter.trainUnits(buildings);
-}
-
-void Player::constructBuildings() {
-    buildingCenter.construct();
-}
-*/
 
 bool Player::lose() {
-//    return this->lose;
-    return this->construction_center == nullptr;
+    return (this->construction_center == nullptr);
 }
 
 InstanceId Player::getId() const {
@@ -81,6 +69,7 @@ InstanceId Player::getId() const {
 std::string& Player::getHouse() {
     return this->house;
 }
+
 ConstructionCenter &Player::getConstructionCenter() {
     return *construction_center;
 }
@@ -122,30 +111,11 @@ void Player::cleanDeadBuildings() {
                 this->consumedEnergy -= (*it)->energy;
             }
             this->gold_limit -= (*it)->getCapacity();
-            news = true;
             it = buildings.erase(it);
         } else {
             it++;
         }
     }
-}
-/*
-void Player::sellBuilding(Building* building) {
-    std::vector<Building*>::iterator it = buildings.begin();
-    while (it != buildings.end()) {
-        if ((*it) == building) {
-            gold += building->cost * float(building->getLife()) / float(building->getInitialLife()) * 0.9;
-            building->demolish();
-            news = true;
-            break;
-        } else {
-            it++;
-        }
-    }
-}*/
-
-bool Player::hasNews() {
-    return ( news);
 }
 
 bool Player::isDefeated(){
@@ -175,10 +145,5 @@ void Player::clean() {
 }
 
 bool Player::canTrainUnits() {
-    for(auto& build : buildings) {
-        if (build->getType() == BARRACKS_KEY) {
-            return true;
-        }
-    }
-    return false;
+    return can_train;
 }

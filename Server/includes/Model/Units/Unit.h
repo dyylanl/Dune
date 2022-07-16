@@ -44,10 +44,13 @@ public:
     char getType() {return type;}
     void select();
     bool isSelected() {return selected;}
+    bool isAttacking() {return attacking;}
     Position getPosition() {return pos;}
     Position getNextPosition() {return next_pos;}
     int getCost() {return cost;}
     void kill() {life = 0;}
+
+    virtual void attack(Attackable* enemy) = 0;
 
 protected:
     Position pos;
@@ -60,6 +63,7 @@ protected:
     Position next_pos;
     Player* player;
     bool selected;
+    bool attacking;
 };
 
 #endif //__UNIT_H__

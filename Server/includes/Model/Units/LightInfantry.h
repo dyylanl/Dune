@@ -12,6 +12,8 @@ public:
     bool canMoveAboveTerrain(Terrain &terrain) override;
 
     virtual void reciveBonusDammage(const Weapon &weapon) override;
+
+    virtual void attack(Attackable* enemy);
 };
 
 #endif

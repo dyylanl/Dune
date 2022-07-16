@@ -3,6 +3,8 @@
 #include "../../../includes/Model/Terrains/Sand.h"
 #include "../../../includes/Model/Terrains/Dunes.h"
 #include "../../../includes/Model/Terrains/Rock.h"
+#include "../../../includes/Model/Weapons/Cannon.h"
+
 
 Tank::Tank(int x, int y,int player_id1) :
         Unit(TANK_KEY,x, y,
@@ -22,4 +24,8 @@ bool Tank::canMoveAboveTerrain(Terrain &terrain) {
 
 void Tank::reciveBonusDammage(const Weapon &weapon) {
     life -= weapon.getVehicleBonus();
+}
+
+void Tank::attack(Attackable* enemy) {
+    enemy->reciveAttack(Cannon());
 }

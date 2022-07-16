@@ -3,8 +3,8 @@
 #include "../../../includes/Model/Terrains/Dunes.h"
 #include "../../../includes/Model/Terrains/Rock.h"
 #include "../../../includes/Model/Terrains/Summit.h"
+#include "../../../includes/Model/Weapons/RocketLauncher.h"
 #include "../../../config/GameConfiguration.h"
-
 HeavyInfantry::HeavyInfantry(int x, int y, int player_id1) : Unit(HEAVY_INFANTRY_KEY,x,y,
                                                   GameConfiguration::getConfig().heavyInfantryHitPoints,
                                                   GameConfiguration::getConfig().heavyInfantrySpeed,
@@ -37,4 +37,8 @@ Rocket* HeavyInfantry::getRocket(){
 
 void HeavyInfantry::reciveBonusDammage(const Weapon &weapon) {
     life -= weapon.getInfantryBonus();
+}
+
+void HeavyInfantry::attack(Attackable* enemy) {
+    enemy->reciveAttack(RocketLauncher());
 }
