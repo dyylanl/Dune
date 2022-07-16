@@ -22,4 +22,7 @@ void InfoPlayer::draw(SDL2pp::Renderer &renderer, TextureManager &textureManager
             font.RenderText_Blended(std::to_string(m_energy), SDL_Color{255, 255, 255, 255})
     );
     renderer.Copy(text_sprite2, SDL2pp::NullOpt, SDL2pp::Rect(1130, 60, text_sprite2.GetWidth(), text_sprite2.GetHeight()));
+
+    textureManager.draw(renderer, ENERGY, SDL2pp::Point(1110, 30), SDL2pp::Point(20, 20));
+    textureManager.draw(renderer, GOLD, SDL2pp::Point(1110, 60), SDL2pp::Point(16, 17));
 }
