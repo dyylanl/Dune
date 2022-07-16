@@ -16,11 +16,13 @@ private:
     SDL2pp::Point m_size;
     SDL2pp::Point m_position;
     SDL2pp::Point m_posAction;
-
+    int m_player;
+    int m_life;
+    bool m_selectStatus;
     bool m_action;
 
 public:
-    Animation(int frameCount, int colCount, SDL2pp::Point size, SDL2pp::Point position, SDL2pp::Point posAction, bool action);
+    Animation(int frameCount, int colCount, SDL2pp::Point size, SDL2pp::Point position, SDL2pp::Point posAction, int player, int life, bool selectStatus, bool action);
     ~Animation() {}
 
     void draw(SDL2pp::Renderer &renderer, TextureManager &textureManager,char textureID, Camera &camera);
