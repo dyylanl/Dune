@@ -83,10 +83,6 @@ int Model::numberOfPlayers() {
     return players.size();
 }
 
-void Model::moveUnits(int it) {
-    map.moveUnits(it);
-}
-
 std::vector<PlayerDTO*> Model::getPlayers() {
     std::vector<PlayerDTO*> players_ret;
     for (auto& [id,player] : players) {
@@ -96,3 +92,8 @@ std::vector<PlayerDTO*> Model::getPlayers() {
     return players_ret;
 }
 
+
+void Model::updateModel() {
+    map.moveUnits();
+    map.updateMap();
+}

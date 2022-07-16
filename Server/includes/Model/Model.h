@@ -91,9 +91,9 @@ public:
 
     int numberOfPlayers();
 
-    void moveUnits(int it);
-
     std::vector<PlayerDTO*> getPlayers();
+
+    void updateModel();
 
 };
 

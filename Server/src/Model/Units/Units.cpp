@@ -58,9 +58,11 @@ void Unit::move(Map &map) {
         }
     }
     attacking = false;
-    if (map.getClosestAttackable(pos,1,player_id) != nullptr) {
+    Attackable* enemy = map.getClosestAttackable(pos,1,player_id);
+    if (enemy != nullptr) {
         attacking = true;
-        attack(map.getClosestAttackable(pos,1,player_id));
+        attack(enemy);
+        //map.setDestiny(*this,enemy->getPosition().getX(), enemy->getPosition().getY());
     }
 }
 
