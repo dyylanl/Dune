@@ -185,22 +185,14 @@ Building* Map::getBuilding(char type, int x, int y) {
     }
 }
 
-void Map::putUnit(InstanceId id_player, char type, int x, int y) {
-    Position pos(x,y);
-    pos.normalize();
-    Unit* unit = getUnit(type,pos.getX(),pos.getY(), id_player);
+void Map::putUnit(Unit* unit) {
     units.push_back(unit);
-    this->at(pos).occupy();
+    this->at(unit->getPosition()).occupy();
 }
 
-void Map::putBuilding(char type, int x, int y) {
-    Position pos(x,y);
-    pos.normalize();
-    Building* build = getBuilding(type,pos.x,pos.y);
-    if (canWeBuild(pos,build->width,build->height)) {
-        buildings.push_back(build);
-        occupy(build);
-    }
+void Map::putBuilding(Building* building) {
+    buildings.push_back(building);
+    occupy(building);
 }
 
 Map::~Map() {

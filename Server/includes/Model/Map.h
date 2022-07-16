@@ -105,12 +105,12 @@ public:
     /*
     *   Al player de id le asigna una unidad del type en posicion x,y
     */
-    void putUnit(InstanceId id_player, char type, int x, int y);
+    void putUnit(Unit* unit);
 
     /*
-    *   Le asigna una building al player del type en la pos x,y
+    *   Ocupa en el mapa con la construccion indicada
     */
-    void putBuilding(char type, int x, int y);
+    void putBuilding(Building* building);
 
 
     Building* getBuilding(char type, int x, int y);

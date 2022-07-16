@@ -25,27 +25,7 @@ Unit::~Unit() {}
 
 
 void Unit::move(Map &map) {
-
     map.at(pos).occupy();
-
-    // Verifico si la posicion de destino esta ocupada
-    if (next_pos == destiny) {
-        if (map.at(destiny).isOccupied()){
-            return;
-        }
-    }
-
-
-    // Actualizo la nueva posicion de la unidad
-    if (pos == next_pos && !pathToDestiny.empty()) { // si la pos actual es igual a la sig y la ruta no esta vacia
-        next_pos = pathToDestiny.top(); // actualizo la nueva pos
-        pathToDestiny.pop(); // popeo de la ruta
-        if (map.at(next_pos).isOccupied()) { // me fijo si el mapa fue modificado
-            map.setDestiny(*this, destiny.getX(), destiny.getY()); // si fue modificado recalculo A*
-            return;
-        }
-    }
-
 
     // Manejo la velocidad sobre el terreno
     int terrain_factor = map.getSpeedFactorAt(pos);
@@ -53,24 +33,30 @@ void Unit::move(Map &map) {
     int speed_counter = actual_speed;
     actual_speed += speed;
 
-
-    
-    if (speed_counter >= counter_limit) {
-        if (!(pos == next_pos)) { // si la pos actual es distinta a la sig me muevo
-            map.at(pos).free(); // significa q se va a mover entonces libero su posicion actual
-            int block_movement = GameConfiguration::getConfig().blockMovement;  // config de movimiento en el yaml
-            pos.x += (next_pos.x < pos.x) ? -block_movement : ((next_pos.x > pos.x) ? +block_movement : 0); // deltas
-            pos.y += (next_pos.y < pos.y) ? -block_movement : ((next_pos.y > pos.y) ? +block_movement : 0);
-            map.at(pos).occupy(); // ocupo la nueva posicion de la unidad
+    // Actualizo la nueva pos y me fijo si hay q recalcular el camino
+    if (!pathToDestiny.empty()) {
+        next_pos = pathToDestiny.top();
+        pathToDestiny.pop();
+        if (map.at(next_pos).isOccupied()) { // me fijo si el mapa fue modificado
+            map.setDestiny(*this, destiny.getX(), destiny.getY()); // si fue modificado recalculo A*
+            return; // como fue modificado ahora no me muevo
         } else {
-            map.at(pos).occupy();
+            if (speed_counter >= counter_limit) {
+                if (!(pos == next_pos)) { // si la pos actual es distinta a la sig me muevo
+                    map.at(pos).free(); // entonces libero su posicion actual
+                    int block_movement = GameConfiguration::getConfig().blockMovement;  // config de movimiento en el yaml
+                    pos.x += (next_pos.x < pos.x) ? -block_movement : ((next_pos.x > pos.x) ? +block_movement : 0); // deltas
+                    pos.y += (next_pos.y < pos.y) ? -block_movement : ((next_pos.y > pos.y) ? +block_movement : 0);
+                    map.at(pos).occupy(); // ocupo la nueva posicion de la unidad
+                    if (!pathToDestiny.empty()) {
+                        next_pos = pathToDestiny.top();
+                    }
+                }
+                actual_speed = speed_counter - counter_limit;
+            }
         }
-        actual_speed = speed_counter - counter_limit;
     }
-
-    map.at(pos).occupy();
 }
-
 
 void Unit::setPath(std::stack<Position> path, Position destiny1) {
     pathToDestiny = path;

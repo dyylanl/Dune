@@ -6,12 +6,17 @@
 
 int main(int argc, char* argv[]) {
     std::string config_path = "../config.yaml";
-    if (argc == 2) {
-        fprintf(stderr, "Usage: ./server <port> <config_path> \nCargando configuracion por default...\n");
-    } else {
+    std::string port = "8082";
+    if (argc == 3) {
+        std::string port = argv[1];
         config_path = argv[2];
+    } else if (argc == 2) {
+        fprintf(stderr, ">>> Cargando configuracion por default.\n");
+        port = argv[1];
+    } else {
+        fprintf(stderr, ">>> Cargando configuracion por default.\n");
+        fprintf(stderr, ">>> Escuchando en puerto 8082.\n");
     }
-    std::string port = argv[1];
     try {
         Server server(config_path, port, MAX_CLIENTS_QUEUED);
         server.run();

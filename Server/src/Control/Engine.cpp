@@ -42,13 +42,8 @@ void Engine::clearAll() {
     {
         InstanceId* client = nullptr;
         while ((client = finished_connections.pop())) {
-            delete client;
-        }
-    }
-    {
-        InstanceId* client = nullptr;
-        while ((client = finished_connections.pop())) {
             model.deletePlayer(*client);
+            delete client;
         }
     }
     {

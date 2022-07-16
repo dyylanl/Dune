@@ -31,30 +31,32 @@ std::vector<UnitDTO*> Model::getUnits() {
 }
 
 void Model::buildBuilding(InstanceId id_player, char build_type, int x, int y) {
+    Position pos(x,y);
+    pos.normalize();
     int gold = players.at(id_player).gold;
     int energy = players.at(id_player).generatedEnergy;
-    Building* build = map.getBuilding(build_type,x,y);
+    Building* build = map.getBuilding(build_type,pos.getX(),pos.getY());
     int gold_req = build->cost;
     int energy_req = build->energy;
     if (gold >= gold_req && energy >= energy_req) {
-        players.at(id_player).subGold(gold_req);
-        players.at(id_player).generatedEnergy -= energy_req;
-        players.at(id_player).addBuilding(build);
-        map.putBuilding(build_type,x,y);
+        if (map.canWeBuild(pos, build->width, build->height)) {
+            players.at(id_player).subGold(gold_req);
+            players.at(id_player).generatedEnergy -= energy_req;
+            players.at(id_player).addBuilding(build);
+            map.putBuilding(build);
+        }
     }
-    delete build;
 }
 
 void Model::putUnit(InstanceId id_player, char unit_type) {
     if (players.at(id_player).canTrainUnits()) {
+        Unit* unit = map.getUnit(unit_type,players.at(id_player).getBarrackPosition().getX(),players.at(id_player).getBarrackPosition().getY(), id_player);
         int gold = players.at(id_player).gold;
-        Unit* unit = map.getUnit(unit_type,1,1, id_player);
         int gold_req = unit->getCost();
         if (gold >= gold_req) {
             players.at(id_player).subGold(gold_req);
-            map.putUnit(id_player, unit_type, players.at(id_player).getBarrackPosition().getX(), players.at(id_player).getBarrackPosition().getY());
+            map.putUnit(unit);
         }
-        delete unit;
     }
 }
 

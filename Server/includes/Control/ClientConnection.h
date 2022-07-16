@@ -53,7 +53,7 @@ class ClientConnection {
     void start();
 
 
-    void push(Snapshot *snap);
+    void push(std::vector<BuildingDTO*> buildings, std::vector<UnitDTO*> units, std::vector<PlayerDTO*> players);
 
 
     void join();
