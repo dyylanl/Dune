@@ -11,6 +11,7 @@ void ClientConnection::_finishThread() {
 void ClientConnection::_freeNotifications() {
     Snapshot* snap = nullptr;
     while ((snap = snapshots.pop())) {
+        snap->free();
         delete snap;
     }
 }
