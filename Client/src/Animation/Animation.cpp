@@ -25,7 +25,6 @@ void Animation::draw(SDL2pp::Renderer &renderer, TextureManager &textureManager,
         } else {
             textureManager.drawFrame(renderer, LIFE, m_position - SDL2pp::Point(0,10), SDL2pp::Point(40,8), SDL2pp::Point(0,51), camera);
         }
-
     }
 
     SDL2pp::Point posFrame;
@@ -48,7 +47,6 @@ SDL2pp::Point Animation::selectFrame() {
     double aux = theta/delta_theta;
     int row = (int)trunc(aux / m_colCount);
     int col = (int)trunc((aux / m_colCount - row) * 10);
-    //std::cout << col << "," << row << std::endl;
     SDL2pp::Point pos(col * m_size.GetX(),row * m_size.GetY());
     return pos;
 }
