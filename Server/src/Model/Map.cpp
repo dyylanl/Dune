@@ -144,7 +144,7 @@ std::vector<UnitDTO*> Map::getUnits() {
         auto* dto = new UnitDTO(1,1, // por que el cliente necesita los id's?
                                 unit->getPosition().getX(),unit->getPosition().getY(),
                                 unit->getNextPosition().getX(),unit->getNextPosition().getY(),
-                                unit->getType(),unit->getLife(),0,0); // los ultimos 2 ceros son ataque y seleccion
+                                unit->getType(),unit->getLife(),0,0,unit->getInitialLife()); // los ultimos 2 ceros son ataque y seleccion
         if (unit->isSelected()) {
             dto->selected = 1;
         } else {
@@ -229,10 +229,9 @@ Attackable *Map::getClosestAttackable(Position &position, int limitRadius, int p
     int closest_unit_distance = limitRadius;
     for (auto& current_unit : units) { // miro las unidades
         int distance = current_unit->getPosition().sqrtDistance(position);
-        if ((distance < limitRadius) && (distance < closest_unit_distance) && !(player_id == current_unit->player_id)) {
+        if ((distance <= limitRadius+25) && (distance <= closest_unit_distance+25) && !(player_id == current_unit->player_id)) {
             closest_attackable = current_unit;
             closest_unit_distance = distance;
-            std::cout << "[Map] Unidad detecto unidad enemiga" << std::endl;
         }
     }
     for (auto& current_building : buildings) { // miro las construcciones
@@ -241,7 +240,6 @@ Attackable *Map::getClosestAttackable(Position &position, int limitRadius, int p
         if (distance < limitRadius && distance < closest_unit_distance && !(player_id == current_building->player_id)) {
             closest_attackable = current_building;
             closest_unit_distance = distance;
-            std::cout << "[Map] Unidad detecto construccion enemiga" << std::endl;
         }
     }
     return closest_attackable;
@@ -327,7 +325,7 @@ void Map::moveUnit(InstanceId player, int x, int y) {
     }
 }
 
-void Map::moveUnits(int it) {
+void Map::moveUnits() {
     if (units.empty()) {
         return;
     }
@@ -336,4 +334,21 @@ void Map::moveUnits(int it) {
             unit->move(*this);
         }
     }
+}
+
+
+void Map::updateMap() {
+
+    // muevo y ataco las unidades
+    this->moveUnits();
+
+    // chequeo si hay unidades muertas
+    std::vector<Unit*>::iterator itr;
+
+    for (itr = units.begin(); itr < units.end(); itr++) {
+        if ((*itr)->getLife() <= 0) {
+            units.erase(itr);
+        }
+    }
+    
 }

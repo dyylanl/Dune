@@ -17,7 +17,8 @@ Unit::Unit(char type1, const int x, const int y, const int hitPoints, const int 
         destiny(x, y),
         next_pos(x, y),
         selected(false),
-        attacking(false) {
+        attacking(false),
+        initial_life(life) {
     counter += 1;
 }
 
@@ -58,9 +59,11 @@ void Unit::move(Map &map) {
         }
     }
     attacking = false;
-    if (map.getClosestAttackable(pos,1,player_id) != nullptr) {
+    Attackable* enemy = map.getClosestAttackable(pos,1,player_id);
+    if (enemy != nullptr) {
         attacking = true;
-        attack(map.getClosestAttackable(pos,1,player_id));
+        attack(enemy);
+        //map.setDestiny(*this,enemy->getPosition().getX(), enemy->getPosition().getY());
     }
 }
 

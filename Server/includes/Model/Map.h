@@ -151,7 +151,9 @@ public:
     */
    void moveUnit(InstanceId player, int x, int y);
 
-   void moveUnits(int it);
+   void moveUnits();
+
+   void updateMap();
    
 };
 
