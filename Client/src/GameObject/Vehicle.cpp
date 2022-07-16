@@ -7,9 +7,10 @@
 #include "../Action/MoveCL.h"
 
 Vehicle::Vehicle(char textureID, SDL2pp::Point position, SDL2pp::Point size, int id, int player, bool selecStatus,
-                 SDL2pp::Point posAction, int life, bool action)
+                 SDL2pp::Point posAction, int life, bool action, int frameCount, int colCount)
                  : GameObject(textureID, position, size), m_id(id), m_player(player), m_selectStatus(selecStatus),
-                 m_posAction(posAction), m_life(life), m_action(action) {}
+                 m_posAction(posAction), m_life(life), m_action(action),
+                 m_animation(frameCount, colCount, m_size, m_position, m_posAction, m_player, m_life, m_selectStatus, m_action){}
 
 void Vehicle::processEvent(SDL_Event &event, BQueue<std::unique_ptr<CommandCL>> &queue, Camera &camera) {
     if (event.type == SDL_MOUSEBUTTONDOWN && event.button.button == SDL_BUTTON_LEFT) {
@@ -21,4 +22,8 @@ void Vehicle::processEvent(SDL_Event &event, BQueue<std::unique_ptr<CommandCL>> 
             queue.push(command);
         }
     }
+}
+
+void Vehicle::draw(SDL2pp::Renderer &renderer, TextureManager &textureManager, Camera &camera) {
+    m_animation.draw(renderer, textureManager, m_textureID, camera);
 }

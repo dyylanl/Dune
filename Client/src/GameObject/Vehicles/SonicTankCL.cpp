@@ -7,14 +7,7 @@
 SonicTankCL::SonicTankCL(int id, int player, bool selecStatus, SDL2pp::Point position, SDL2pp::Point posAction,
                          int life,
                          bool action) : Vehicle(SONIC_TANK, position,
-                                            SDL2pp::Point(32,25), id, player,
+                                            SDL2pp::Point(31,37), id, player,
                                             selecStatus, posAction,
-                                            life, action) {}
+                                            life, action, 30, 10) {}
 
-void SonicTankCL::draw(SDL2pp::Renderer &renderer, TextureManager &textureManager, Camera &camera) {
-    SDL2pp::Point posFrame(0,0);
-    if(m_selectStatus) {
-        textureManager.drawFrame(renderer, LIFE, m_position - SDL2pp::Point(0,10), SDL2pp::Point(40,8), SDL2pp::Point(0,0), camera);
-    }
-    textureManager.drawFrame(renderer, m_textureID, m_position, m_size, posFrame, camera);
-}
