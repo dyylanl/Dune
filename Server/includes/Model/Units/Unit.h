@@ -49,6 +49,7 @@ public:
     Position getNextPosition() {return next_pos;}
     int getCost() {return cost;}
     void kill() {life = 0;}
+    int getInitialLife() {return initial_life;}
 
     virtual void attack(Attackable* enemy) = 0;
 
@@ -64,6 +65,7 @@ protected:
     Player* player;
     bool selected;
     bool attacking;
+    int initial_life;
 };
 
 #endif //__UNIT_H__

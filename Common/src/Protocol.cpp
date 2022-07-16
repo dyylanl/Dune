@@ -223,11 +223,12 @@ void Protocol::sendUnit(Socket &socket, UnitDTO unit) {
     this->sendTwoBytes(socket, unit.next_x);
     this->sendTwoBytes(socket, unit.next_y);
     this->sendTwoBytes(socket, unit.life);
+    this->sendTwoBytes(socket, unit.initial_life);
     this->sendOneByte(socket, unit.attacking);
 }
 
 void Protocol::recvUnit(Socket &socket, int &id, char &player, bool &selectStatus, int &posX, int &posY, int &posActX,
-                   int &posActY, int &life, bool &action) {
+                   int &posActY, int &life, int &initial_life, bool &action) {
     socket.recv(reinterpret_cast<char *>(&id), sizeof(uint16_t));
     socket.recv(reinterpret_cast<char *>(&player), sizeof(uint8_t));
     socket.recv(reinterpret_cast<char *>(&selectStatus), sizeof(uint8_t));
@@ -236,6 +237,7 @@ void Protocol::recvUnit(Socket &socket, int &id, char &player, bool &selectStatu
     socket.recv(reinterpret_cast<char *>(&posActX), sizeof(uint16_t));
     socket.recv(reinterpret_cast<char *>(&posActY), sizeof(uint16_t));
     socket.recv(reinterpret_cast<char *>(&life), sizeof(uint16_t));
+    socket.recv(reinterpret_cast<char* >(&initial_life),sizeof(uint16_t));
     socket.recv(reinterpret_cast<char *>(&action), sizeof(uint8_t));
     posX = ntohs(posX) * BLOCK_WIDTH;
     posY = ntohs(posY) * BLOCK_HEIGHT;

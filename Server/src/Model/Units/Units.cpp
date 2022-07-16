@@ -17,7 +17,8 @@ Unit::Unit(char type1, const int x, const int y, const int hitPoints, const int 
         destiny(x, y),
         next_pos(x, y),
         selected(false),
-        attacking(false) {
+        attacking(false),
+        initial_life(life) {
     counter += 1;
 }
 

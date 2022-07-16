@@ -144,7 +144,7 @@ std::vector<UnitDTO*> Map::getUnits() {
         auto* dto = new UnitDTO(1,1, // por que el cliente necesita los id's?
                                 unit->getPosition().getX(),unit->getPosition().getY(),
                                 unit->getNextPosition().getX(),unit->getNextPosition().getY(),
-                                unit->getType(),unit->getLife(),0,0); // los ultimos 2 ceros son ataque y seleccion
+                                unit->getType(),unit->getLife(),0,0,unit->getInitialLife()); // los ultimos 2 ceros son ataque y seleccion
         if (unit->isSelected()) {
             dto->selected = 1;
         } else {

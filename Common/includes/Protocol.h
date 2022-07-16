@@ -51,7 +51,7 @@ public:
 
     void recvBuild(Socket &socket, int &id, char &player, int &posX, int &posY, int &life);
     void recvUnit(Socket &socket, int &id, char &player, bool &selectStatus, int &posX, int &posY, int &posActX,
-                  int &posActY, int &life, bool &action);
+                  int &posActY, int &life, int &initial_life, bool &action);
     void recvPlayer(Socket &socket, int &gold, int &energy);
 
     /*
