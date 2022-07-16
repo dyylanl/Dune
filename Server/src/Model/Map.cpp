@@ -343,11 +343,18 @@ void Map::updateMap() {
     this->moveUnits();
 
     // chequeo si hay unidades muertas
-    std::vector<Unit*>::iterator itr;
+    std::vector<Unit*>::iterator itrU;
+    for (itrU = units.begin(); itrU < units.end(); itrU++) {
+        if ((*itrU)->getLife() <= 0) {
+            units.erase(itrU);
+        }
+    }
 
-    for (itr = units.begin(); itr < units.end(); itr++) {
-        if ((*itr)->getLife() <= 0) {
-            units.erase(itr);
+    // chequeo si hay construcciones muertas
+    std::vector<Building*>::iterator itrB;
+    for (itrB = buildings.begin(); itrB < buildings.end(); itrB++) {
+        if ((*itrB)->getLife() <= 0) {
+            buildings.erase(itrB);
         }
     }
     
