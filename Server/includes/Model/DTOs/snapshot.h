@@ -37,6 +37,19 @@ struct Snapshot {
     }
 
 
+    void free() {
+        for (BuildingDTO* build : buildings) {
+            delete build;
+        }
+        for (UnitDTO* unit : units) {
+            delete unit;
+        }
+        for (PlayerDTO* player : players) {
+            delete player;
+        }
+    }
+
+
     Snapshot(Snapshot &copy) = delete;
     Snapshot& operator=(Snapshot &copy) = delete;
     Snapshot& operator=(Snapshot &&other) = delete;
