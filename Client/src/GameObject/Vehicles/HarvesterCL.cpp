@@ -7,6 +7,6 @@
 HarvesterCL::HarvesterCL(int id, int player, bool selecStatus, SDL2pp::Point position, SDL2pp::Point posAction,
                          int life,
                          bool action) : Vehicle(HARVESTER, position,
-                                                          SDL2pp::Point(56,47), id, player,
+                                                          SDL2pp::Point(52,47), id, player,
                                                           selecStatus, posAction,
                                                           life, action, 34, 8) {}
