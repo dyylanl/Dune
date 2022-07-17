@@ -18,7 +18,7 @@ public:
         WIND_TRAP,
         PALACE
     };
-    Building(char type1,const int x, const int y, int blockWidth, int blockHeight, const int energy, const int cost,
+    Building(int player_id, char type1,const int x, const int y, int blockWidth, int blockHeight, const int energy, const int cost,
              const int hitPoints, const int width,
              const int height, BuildingType type);
     virtual ~Building();
@@ -32,6 +32,7 @@ public:
     Position& getClosestPosition(Position& position) override;
     void demolish();
     bool hasNews();
+    int getPlayerId() {return player_id;}
 
     char type;
     int player_id;

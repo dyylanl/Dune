@@ -5,7 +5,7 @@
 
 class Barracks : public Building {
 public:
-	Barracks(const int x, const int y, int blockWidth, int blockHeight);
+	Barracks(int player_id, const int x, const int y, int blockWidth, int blockHeight);
 	~Barracks();
 };
 

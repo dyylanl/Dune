@@ -5,7 +5,7 @@
 
 class Refinery : public Building {
 public:
-    Refinery(const int x, const int y, int blockWidth, int blockHeight);
+    Refinery(int player_id, const int x, const int y, int blockWidth, int blockHeight);
     ~Refinery();
 
     bool load(Player &player);

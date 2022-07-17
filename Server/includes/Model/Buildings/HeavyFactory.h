@@ -5,7 +5,7 @@
 
 class HeavyFactory : public Building {
 public:
-    HeavyFactory(const int x, const int y, int blockWidth, int blockHeight);
+    HeavyFactory(int player_id, const int x, const int y, int blockWidth, int blockHeight);
     ~HeavyFactory();
 };
 

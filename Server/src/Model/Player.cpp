@@ -24,8 +24,7 @@ void Player::addGold(int gold_to_add) {
 }
 
 void Player::subGold(int gold_to_sub) {
-    // if (gold_to_sub > gold ) throw error -> Ver que hacer
-    gold -= gold_to_sub;
+    gold -= gold_to_sub; // no hace falta lanzar excepcion pq se chequea q el player tenga oro > gold_to_sub
 }
 
 float Player::getEnergyFactor() {

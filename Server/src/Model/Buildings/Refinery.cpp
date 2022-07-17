@@ -1,9 +1,9 @@
 #include "../../../includes/Model/Buildings/Refinery.h"
 #include "../../../config/GameConfiguration.h"
 
-Refinery::Refinery(const int x, const int y,
+Refinery::Refinery(int player_id, const int x, const int y,
                    int blockWidth, int blockHeight) :
-        Building(REFINERY_KEY,x, y, blockWidth, blockHeight,
+        Building(player_id,REFINERY_KEY,x, y, blockWidth, blockHeight,
                  GameConfiguration::getConfig().refineryEnergy,
                  GameConfiguration::getConfig().refineryCost,
                  GameConfiguration::getConfig().refineryHitPoints,

@@ -9,7 +9,7 @@
 
 class Palace : public Building {
 public:
-    Palace(const int x, const int y, int blockWidth, int blockHeight);
+    Palace(int player_id,const int x, const int y, int blockWidth, int blockHeight);
     ~Palace();
 };
 

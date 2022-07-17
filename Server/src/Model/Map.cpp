@@ -163,7 +163,7 @@ std::vector<UnitDTO*> Map::getUnits() {
 std::vector<BuildingDTO*> Map::getBuildings() {
     std::vector<BuildingDTO*> retBuildingsDto;
     for (auto &build : buildings) {
-        auto* dto = new BuildingDTO(1, 1, // por que el cliente necesita los id's?
+        auto* dto = new BuildingDTO(1, build->getPlayerId(),
         build->getPosition().getX(),build->getPosition().getY(),
         build->getType(),build->getLife());
         retBuildingsDto.push_back(dto);
@@ -171,22 +171,22 @@ std::vector<BuildingDTO*> Map::getBuildings() {
     return retBuildingsDto;
 }
 
-Building* Map::getBuilding(char type, int x, int y) {
+Building* Map::getBuilding(int player_id, char type, int x, int y) {
     switch (type) {
         case BARRACKS_KEY:
-            return new Barracks(x,y,GameConfiguration::getConfig().barracksWidth,GameConfiguration::getConfig().barracksHeight);
+            return new Barracks(player_id, x, y, GameConfiguration::getConfig().barracksWidth,GameConfiguration::getConfig().barracksHeight);
         case HEAVY_FACTORY_KEY:
-            return new HeavyFactory(x,y,GameConfiguration::getConfig().heavyFactoryWidth,GameConfiguration::getConfig().heavyFactoryHeight);
+            return new HeavyFactory(player_id, x , y, GameConfiguration::getConfig().heavyFactoryWidth,GameConfiguration::getConfig().heavyFactoryHeight);
         case LIGHT_FACTORY_KEY:
-            return new LightFactory(x,y,GameConfiguration::getConfig().lightFactoryWidth,GameConfiguration::getConfig().lightFactoryHeight);
+            return new LightFactory(player_id,x,y,GameConfiguration::getConfig().lightFactoryWidth,GameConfiguration::getConfig().lightFactoryHeight);
         case REFINERY_KEY:
-            return new Refinery(x,y,GameConfiguration::getConfig().refineryWidth,GameConfiguration::getConfig().refineryHeight);
+            return new Refinery(player_id,x,y,GameConfiguration::getConfig().refineryWidth,GameConfiguration::getConfig().refineryHeight);
         case SILO_KEY:
-            return new Silo(x,y,GameConfiguration::getConfig().siloWidth,GameConfiguration::getConfig().siloHeight);
+            return new Silo(player_id,x,y,GameConfiguration::getConfig().siloWidth,GameConfiguration::getConfig().siloHeight);
         case WIND_TRAP_KEY:
-            return new WindTrap(x,y,GameConfiguration::getConfig().windTrapWidth,GameConfiguration::getConfig().windTrapHeight);
+            return new WindTrap(player_id,x,y,GameConfiguration::getConfig().windTrapWidth,GameConfiguration::getConfig().windTrapHeight);
         case PALACE_KEY:
-            return new Palace(x,y,GameConfiguration::getConfig().palaceWidth,GameConfiguration::getConfig().palaceHeight);
+            return new Palace(player_id,x,y,GameConfiguration::getConfig().palaceWidth,GameConfiguration::getConfig().palaceHeight);
         default: throw Exception("Invalid get build.\n");
     }
 }
@@ -229,7 +229,7 @@ Attackable *Map::getClosestAttackable(Position &position, int limitRadius, int p
     int closest_unit_distance = limitRadius;
     for (auto& current_unit : units) { // miro las unidades
         int distance = current_unit->getPosition().sqrtDistance(position);
-        if ((distance <= limitRadius+8) && (distance <= closest_unit_distance+8) && !(player_id == current_unit->player_id)) {
+        if ((distance <= limitRadius+4) && (distance <= closest_unit_distance+4) && !(player_id == current_unit->player_id)) {
             closest_attackable = current_unit;
             closest_unit_distance = distance;
         }
@@ -237,7 +237,7 @@ Attackable *Map::getClosestAttackable(Position &position, int limitRadius, int p
     for (auto& current_building : buildings) { // miro las construcciones
         Position& pos = current_building->getClosestPosition(position);
         int distance = pos.sqrtDistance(position);
-        if ((distance < limitRadius+8) && (distance < closest_unit_distance+8) && !(player_id == current_building->player_id)) {
+        if ((distance < limitRadius+6) && (distance < closest_unit_distance+6) && !(player_id == current_building->player_id)) {
             closest_attackable = current_building;
             closest_unit_distance = distance;
         }
@@ -357,5 +357,5 @@ void Map::updateMap() {
             buildings.erase(itrB);
         }
     }
-    
+
 }

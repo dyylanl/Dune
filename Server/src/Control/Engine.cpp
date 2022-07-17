@@ -94,8 +94,9 @@ uint16_t Engine::addClient(NewConnection client) {
     uint16_t ret = ERROR;
     if (current_players < req_players) {
         established_connections.add((InstanceId)current_players,std::move(client.peer));
-        model.addPlayer((InstanceId)current_players);
+        model.addPlayer(current_players); // le asigno el id = numero de conexion
         current_players += 1;
+        std::cout << "[Engine] New player with id: " << (int)current_players << std::endl; 
         if (current_players == req_players) {
             this->start();
         }

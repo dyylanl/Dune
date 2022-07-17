@@ -5,7 +5,7 @@
 
 class ConstructionCenter : public Building {
 public:
-    ConstructionCenter(const int x, const int y, int blockWidth, int blockHeight);
+    ConstructionCenter(int player_id,const int x, const int y, int blockWidth, int blockHeight);
     ~ConstructionCenter();
 };
 

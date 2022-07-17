@@ -2,11 +2,12 @@
 
 int Building::counter = 0;
 
-Building::Building(char type1,const int x, const int y, int blockWidth, int blockHeight,
+Building::Building(int player_id1, char type1,const int x, const int y, int blockWidth, int blockHeight,
                    const int energy, const int cost, const int hitPoints,
                    const int width, const int height, BuildingType type):
         Attackable(hitPoints, x, y),
         type(type1),
+        player_id(player_id1),
         build_id(counter),
         width(width),
         height(height),
@@ -46,6 +47,7 @@ void Building::demolish() {
     this->life = 0;
 }
 
+// retorna la posicion mas cerca de la construccion a 'position'
 Position& Building::getClosestPosition(Position& position) {
     int distance = position.sqrtDistance(all_positions[0]);
     Position& closest = all_positions[0];

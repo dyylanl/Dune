@@ -1,8 +1,8 @@
 #include "../../../includes/Model/Buildings/WindTrap.h"
 #include "../../../config/GameConfiguration.h"
 
-WindTrap::WindTrap(const int x, const int y, int blockWidth, int blockHeight) :
-        Building(WIND_TRAP_KEY,x, y, blockWidth, blockHeight,
+WindTrap::WindTrap(int player_id,const int x, const int y, int blockWidth, int blockHeight) :
+        Building(player_id,WIND_TRAP_KEY,x, y, blockWidth, blockHeight,
                  GameConfiguration::getConfig().windTrapEnergy,
                  GameConfiguration::getConfig().windTrapCost,
                  GameConfiguration::getConfig().windTrapHitPoints,

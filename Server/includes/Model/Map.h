@@ -113,7 +113,7 @@ public:
     void putBuilding(Building* building);
 
 
-    Building* getBuilding(char type, int x, int y);
+    Building* getBuilding(int player_id, char type, int x, int y);
 
     Unit* getUnit(char type, int x, int y, int player_id);
 

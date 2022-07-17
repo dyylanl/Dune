@@ -4,8 +4,8 @@
 #include "../../../includes/Model/Buildings/Palace.h"
 #include "../../../config/GameConfiguration.h"
 
-Palace::Palace(const int x, const int y, int blockWidth, int blockHeight) :
-        Building(PALACE_KEY, x, y, blockWidth, blockHeight,
+Palace::Palace(int player_id,const int x, const int y, int blockWidth, int blockHeight) :
+        Building(player_id,PALACE_KEY, x, y, blockWidth, blockHeight,
                  GameConfiguration::getConfig().palaceEnergy,
                  GameConfiguration::getConfig().palaceCost,
                  GameConfiguration::getConfig().palaceHitPoints,

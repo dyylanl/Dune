@@ -1,9 +1,9 @@
 #include "../../../includes/Model/Buildings/Silo.h"
 #include "../../../config/GameConfiguration.h"
 
-Silo::Silo(const int x, const int y,
+Silo::Silo(int player_id, const int x, const int y,
            int blockWidth, int blockHeight) :
-        Building(SILO_KEY,x, y, blockWidth, blockHeight,
+        Building(player_id, SILO_KEY,x, y, blockWidth, blockHeight,
                  GameConfiguration::getConfig().siloEnergy,
                  GameConfiguration::getConfig().siloCost,
                  GameConfiguration::getConfig().siloHitPoints,

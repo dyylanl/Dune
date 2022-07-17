@@ -35,7 +35,7 @@ void Model::buildBuilding(InstanceId id_player, char build_type, int x, int y) {
     pos.normalize();
     int gold = players.at(id_player).gold;
     int energy = players.at(id_player).generatedEnergy;
-    Building* build = map.getBuilding(build_type,pos.getX(),pos.getY());
+    Building* build = map.getBuilding(id_player, build_type,pos.getX(),pos.getY());
     int gold_req = build->cost;
     int energy_req = build->energy;
     if (gold >= gold_req && energy >= energy_req) {
@@ -94,6 +94,9 @@ std::vector<PlayerDTO*> Model::getPlayers() {
 
 
 void Model::updateModel() {
+    for (auto [id,player] : players) {
+        player.cleanDeadBuildings();
+    }
     map.moveUnits();
     map.updateMap();
 }
