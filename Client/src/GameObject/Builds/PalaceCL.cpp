@@ -9,5 +9,5 @@ PalaceCL::PalaceCL(int id, int player, SDL2pp::Point position, int life)
 
 void PalaceCL::draw(SDL2pp::Renderer &renderer, TextureManager &textureManager, Camera &camera) {
     SDL2pp::Point posFrame(0,0);
-    textureManager.drawFrame(renderer, m_textureID, m_position, m_size, posFrame, camera);
+    textureManager.drawFrame(renderer, m_textureID, m_position, m_size, posFrame, camera, m_player);
 }

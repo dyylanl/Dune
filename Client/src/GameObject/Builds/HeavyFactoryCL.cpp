@@ -9,8 +9,8 @@ HeavyFactoryCL::HeavyFactoryCL(int id, int player, SDL2pp::Point position, int l
 
 void HeavyFactoryCL::draw(SDL2pp::Renderer &renderer, TextureManager &textureManager, Camera &camera) {
     SDL2pp::Point posFrame1(98,0);
-    textureManager.drawFrame(renderer, m_textureID, m_position, m_size, posFrame1, camera);
+    textureManager.drawFrame(renderer, m_textureID, m_position, m_size, posFrame1, camera, m_player);
     SDL2pp::Point posFrame2(0,0);
     textureManager.drawFrame(renderer, m_textureID, m_position + SDL2pp::Point(-20, 5), m_size, posFrame2,
-                             camera);
+                             camera, m_player);
 }

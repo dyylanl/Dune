@@ -22,8 +22,7 @@ public:
     void load(char id, std::string filename);
 
     void drawFrame(SDL2pp::Renderer &renderer, char id, SDL2pp::Point position, SDL2pp::Point spritSize,
-                   SDL2pp::Point posFrame,
-                   Camera &camera);
+                   SDL2pp::Point posFrame, Camera &camera, int &player);
 
     void draw(SDL2pp::Renderer &renderer, char id, SDL2pp::Point position, SDL2pp::Point size);
 

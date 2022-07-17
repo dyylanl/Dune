@@ -21,10 +21,21 @@ TextureManager::TextureManager(SDL2pp::Renderer &renderer) : m_renderer(renderer
 
 void
 TextureManager::drawFrame(SDL2pp::Renderer &renderer, char id, SDL2pp::Point position, SDL2pp::Point spritSize,
-                          SDL2pp::Point posFrame,
-                          Camera &camera) {
+                          SDL2pp::Point posFrame, Camera &camera, int &player) {
     SDL2pp::Rect orig(posFrame, spritSize);
     SDL2pp::Rect dest(position, spritSize);
+    if (player == 0) {
+        m_TextureMap[id]->SetColorMod(255,255,0);
+    }
+    switch (player) {
+        case 0: m_TextureMap[id]->SetColorMod(0,0,255);
+            break;
+        case 1: m_TextureMap[id]->SetColorMod(255,0,0);
+            break;
+        case 2: m_TextureMap[id]->SetColorMod(0,255,0);
+            break;
+        default: m_TextureMap[id]->SetColorMod(255,255,255);
+    }
     renderer.Copy(*m_TextureMap[id],orig,dest + camera.getPosicion(),0,SDL2pp::NullOpt,SDL_FLIP_NONE);
 }
 

@@ -9,8 +9,8 @@ LightFactoryCL::LightFactoryCL(int id, int player, SDL2pp::Point position, int l
 
 void LightFactoryCL::draw(SDL2pp::Renderer &renderer, TextureManager &textureManager, Camera &camera) {
     SDL2pp::Point posFrame1(0,0);
-    textureManager.drawFrame(renderer, m_textureID, m_position, m_size, posFrame1, camera);
+    textureManager.drawFrame(renderer, m_textureID, m_position, m_size, posFrame1, camera, m_player);
     SDL2pp::Point posFrame2(100,0);
     textureManager.drawFrame(renderer, m_textureID, m_position + SDL2pp::Point(0, 0), m_size, posFrame2,
-                             camera);
+                             camera, m_player);
 }

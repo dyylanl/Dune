@@ -7,7 +7,7 @@
 
 ButtonWidtrapCL::ButtonWidtrapCL(int id, char player, int constructionTime, bool selectStatus, bool ready)
 : ButtonBuildCL(BWIND_TRAP, SDL2pp::Point(1114, 292), id, WIND_TRAP_KEY,player, constructionTime, selectStatus, ready),
-  m_build(0,0,SDL2pp::Point(0, 0),0){}
+  m_build(0,-1,SDL2pp::Point(0, 0),0){}
 
 void ButtonWidtrapCL::buildBuilding(BQueue<std::unique_ptr<CommandCL>> &queue, SDL2pp::Point point) {
     std::unique_ptr<CommandCL> command(new BuildBuilding(m_type, point));

@@ -10,7 +10,7 @@ RefineryCL::RefineryCL(int id, int player, SDL2pp::Point position, int life)
 void RefineryCL::draw(SDL2pp::Renderer &renderer, TextureManager &textureManager, Camera &camera) {
     SDL2pp::Point posFrame1(0,0);
     textureManager.drawFrame(renderer, m_textureID, m_position + SDL2pp::Point(-6, 20), m_size, posFrame1,
-                             camera);
+                             camera, m_player);
     SDL2pp::Point posFrame2(106,0);
-    textureManager.drawFrame(renderer, m_textureID, m_position, m_size, posFrame2, camera);
+    textureManager.drawFrame(renderer, m_textureID, m_position, m_size, posFrame2, camera, m_player);
 }
