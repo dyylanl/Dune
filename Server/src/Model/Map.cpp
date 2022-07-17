@@ -141,7 +141,7 @@ std::vector<UnitDTO*> Map::getUnits() {
         return retUnitsDto;
     }
     for (auto &unit : units) {
-        auto* dto = new UnitDTO(1,1, // por que el cliente necesita los id's?
+        auto* dto = new UnitDTO(1,unit->player_id, // por que el cliente necesita los id's?
                                 unit->getPosition().getX(),unit->getPosition().getY(),
                                 unit->getNextPosition().getX(),unit->getNextPosition().getY(),
                                 unit->getType(),unit->getLife(),0,0,unit->getInitialLife()); // los ultimos 2 ceros son ataque y seleccion
