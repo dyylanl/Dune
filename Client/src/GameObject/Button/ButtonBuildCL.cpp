@@ -37,7 +37,7 @@ void ButtonBuildCL::processEvent(SDL_Event &event, BQueue<std::unique_ptr<Comman
     }
 
     SDL2pp::Point point(event.motion.x, event.motion.y);
-    SDL2pp::Rect box = camera.getViewBox();
+    SDL2pp::Rect box(SDL2pp::Point(0, 0),SDL2pp::Point(GAME_WIDTH, GAME_HEIGHT));
     if (event.button.button == SDL_BUTTON_LEFT && m_selectStatus && m_ready && SDL_PointInRect(&point, &box)) {
         m_selectStatus = false;
         buildBuilding(queue, point - camera.getPosicion());

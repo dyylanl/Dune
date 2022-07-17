@@ -243,9 +243,6 @@ void Protocol::recvUnit(Socket &socket, int &id, char &player, bool &selectStatu
     posY = ntohs(posY) * BLOCK_HEIGHT;
     posActX = ntohs(posActX) * BLOCK_WIDTH;
     posActY = ntohs(posActY) * BLOCK_HEIGHT;
-    /*std::cout << "pos: " << "(" << posX << ", " << posY << ")" << " | ";
-    std::cout << "nextPos: " << "(" << posActX << ", " << posActY << ")" << std::endl;*/
-    std::cout << id << "," << (int)player << std::endl;
 }
 
 void Protocol::sendBuild(Socket &socket, BuildingDTO build) {
@@ -268,7 +265,6 @@ void Protocol::recvBuild(Socket &socket, int &id, char &player, int &posX, int &
     posY = ntohs(posY);
     posX = ntohs(posX);
     life = ntohs(life);
-    std::cout << id << "," << (int)player << std::endl;
 }
 
 void Protocol::sendPlayer(Socket &socket, PlayerDTO player) {
