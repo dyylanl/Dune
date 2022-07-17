@@ -229,7 +229,7 @@ Attackable *Map::getClosestAttackable(Position &position, int limitRadius, int p
     int closest_unit_distance = limitRadius;
     for (auto& current_unit : units) { // miro las unidades
         int distance = current_unit->getPosition().sqrtDistance(position);
-        if ((distance <= limitRadius+25) && (distance <= closest_unit_distance+25) && !(player_id == current_unit->player_id)) {
+        if ((distance <= limitRadius+8) && (distance <= closest_unit_distance+8) && !(player_id == current_unit->player_id)) {
             closest_attackable = current_unit;
             closest_unit_distance = distance;
         }
@@ -237,7 +237,7 @@ Attackable *Map::getClosestAttackable(Position &position, int limitRadius, int p
     for (auto& current_building : buildings) { // miro las construcciones
         Position& pos = current_building->getClosestPosition(position);
         int distance = pos.sqrtDistance(position);
-        if (distance < limitRadius && distance < closest_unit_distance && !(player_id == current_building->player_id)) {
+        if ((distance < limitRadius+8) && (distance < closest_unit_distance+8) && !(player_id == current_building->player_id)) {
             closest_attackable = current_building;
             closest_unit_distance = distance;
         }

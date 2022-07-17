@@ -63,7 +63,7 @@ void Unit::move(Map &map) {
     if (enemy != nullptr) {
         attacking = true;
         attack(enemy);
-        //map.setDestiny(*this,enemy->getPosition().getX(), enemy->getPosition().getY());
+        map.setDestiny(*this,enemy->getPosition().getX(), enemy->getPosition().getY());
     }
 }
 
