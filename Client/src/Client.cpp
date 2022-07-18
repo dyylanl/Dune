@@ -135,6 +135,12 @@ int Client::recibir_respuesta(){
 
 bool Client::conexion_exitosa(){
   if(this->m_protocol.recvEstablishConnection(m_socket)) {
+      uint16_t posX = 0;
+      uint16_t posY = 0;
+      posX = m_protocol.recvPosition(m_socket);
+      posY = m_protocol.recvPosition(m_socket);
+      m_initialPos.SetX(-posX*15);
+      m_initialPos.SetY(-posY*15);
      // ACA TIENE QUE ESTAR BLOQUEADO HASTA QUE SE INICIE LA PARTIDA
     return true;
   }
@@ -154,7 +160,6 @@ void createGame(Protocol protocol, Socket &socket) {}
 void createGame(Protocol protocol, Socket &socket, std::vector<std::vector<char>> &map) {}
 void Client::initSDL(Socket &aSocket, Protocol &aProtocol,
                      std::vector<std::vector<char>> &map) const {
-
     NBQueue<std::vector<std::unique_ptr<GameObject>>> queueNb;
     BQueue<std::unique_ptr<CommandCL>> queueB;
     RecvThread recvThread(queueNb, aSocket, aProtocol);
@@ -189,7 +194,7 @@ void Client::initSDL(Socket &aSocket, Protocol &aProtocol,
     SoundManager soundManager;
     soundManager.playMusik("atreides");
 
-    Camera camera(SDL2pp::Point(0, 0));
+    Camera camera(m_initialPos);
     Engine engine(camera, map, menu, textureManager, soundManager, queueNb, queueB);
     RateController frameRate(30);
     frameRate.start();
@@ -328,9 +333,9 @@ void Client::launch() {
 }
 
 void Client::iniciar(){
-  std::vector<std::vector<char>> map = m_protocol.recvMap(m_socket);
-  std::cout << "Mapa recibido..." << std::endl;
-  initSDL(this->m_socket,this->m_protocol,map);
+    std::vector<std::vector<char>> map = m_protocol.recvMap(m_socket);
+    std::cout << "Mapa recibido..." << std::endl;
+    initSDL(this->m_socket,this->m_protocol,map);
 }
 
 

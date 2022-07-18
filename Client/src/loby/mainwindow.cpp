@@ -228,7 +228,7 @@ void MainWindow::on_button_confirmar_mapa_clicked()
     this->cliente->enviar_map_id(map_id_cast);
 
 
-    if(this->cliente->conexion_exitosa()) { 
+    if(this->cliente->conexion_exitosa()) {
       std::cout << "Creacion exitosa" << std::endl;
         QMessageBox msgBox;
         msgBox.setText("Partida creada con exito");
