@@ -39,8 +39,9 @@ ADD_DEFINITIONS(-DDATA_PATH="${PROJECT_SOURCE_DIR}/Client/")
 
 #------------------------------------------------------------------------------
 #Agrego la libreria SDL2pp habilitando manejo de imagenes y de letras
-SET(SDL2PP_WITH_IMAGE YES)
-SET(SDL2PP_WITH_TTF YES)
+SET(SDL2PP_WITH_IMAGE ON)
+SET(SDL2PP_WITH_MIXER ON)
+SET(SDL2PP_WITH_TTF ON)
 ADD_SUBDIRECTORY(Client/libs/libSDL2pp)
 
 #Agrega la carpeta con los headers autogenerados a los includes
@@ -63,7 +64,7 @@ add_library(dune-common SHARED ${common_src})
 target_link_libraries(dune-common)
 
 # Client
-add_executable(dune ${client_src} Client/src/Thread/InfoPlayer.cpp Client/src/Thread/InfoPlayer.h  Client/src/loby/resources/resources.qrc)
+add_executable(dune ${client_src} Client/src/GameObject/InfoPlayer.cpp Client/src/GameObject/InfoPlayer.h Client/src/loby/resources/resources.qrc Client/src/Sounds/SoundManager.cpp Client/src/Sounds/SoundManager.h)
 target_link_libraries(dune dune-common SDL2 SDL2_image SDL2_ttf SDL2_mixer ${SDL2PP_LIBRARIES} Qt5::Core Qt5::Gui Qt5::Widgets Qt5::Multimedia)
 
 # Server

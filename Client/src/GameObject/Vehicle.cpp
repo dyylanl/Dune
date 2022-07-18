@@ -12,7 +12,8 @@ Vehicle::Vehicle(char textureID, SDL2pp::Point position, SDL2pp::Point size, int
                  m_posAction(posAction), m_life(life), m_action(action),
                  m_animation(frameCount, colCount, m_size, m_position, m_posAction, m_player, m_life, m_selectStatus, m_action){}
 
-void Vehicle::processEvent(SDL_Event &event, BQueue<std::unique_ptr<CommandCL>> &queue, Camera &camera) {
+void Vehicle::processEvent(SDL_Event &event, BQueue<std::unique_ptr<CommandCL>> &queue, Camera &camera,
+                           SoundManager &soundManager) {
     if (event.type == SDL_MOUSEBUTTONDOWN && event.button.button == SDL_BUTTON_LEFT) {
         SDL2pp::Rect shape = SDL2pp::Rect(m_position, m_size);
         SDL2pp::Point point(event.motion.x - camera.getPosicion().GetX(), event.motion.y - camera.getPosicion().GetY());
@@ -20,6 +21,7 @@ void Vehicle::processEvent(SDL_Event &event, BQueue<std::unique_ptr<CommandCL>> 
             std::unique_ptr<CommandCL> command(new SelectCL(point));
             std::cout << "Push command Select" << std::endl;
             queue.push(command);
+            soundManager.playEffect("unit_selected");
         }
     }
 }

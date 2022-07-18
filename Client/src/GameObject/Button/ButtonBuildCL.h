@@ -16,7 +16,8 @@ protected:
 public:
     ButtonBuildCL(char textureID, SDL2pp::Point position, int id, char type, char player, int actionTime, bool selectStatus, bool ready);
 
-    void processEvent(SDL_Event &event, BQueue<std::unique_ptr<CommandCL>> &queue, Camera &camera);
+    void processEvent(SDL_Event &event, BQueue<std::unique_ptr<CommandCL>> &queue, Camera &camera,
+                      SoundManager &soundManager);
 
     void draw(SDL2pp::Renderer &renderer, TextureManager &textureManager, Camera &camera) = 0;
 

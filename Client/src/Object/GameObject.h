@@ -20,7 +20,8 @@ public:
     GameObject(char textureID, SDL2pp::Point position, SDL2pp::Point size)
     : m_textureID(textureID), m_position(position), m_size(size) {}
 
-    virtual void processEvent(SDL_Event &eventManager, BQueue<std::unique_ptr<CommandCL>> &queue, Camera &camera) = 0;
+    virtual void processEvent(SDL_Event &eventManager, BQueue<std::unique_ptr<CommandCL>> &queue, Camera &camera,
+                              SoundManager &soundManager) = 0;
 
     virtual void draw(SDL2pp::Renderer &renderer, TextureManager &textureManager, Camera &camera) = 0;
 

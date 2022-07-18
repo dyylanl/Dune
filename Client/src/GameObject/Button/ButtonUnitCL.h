@@ -12,7 +12,8 @@ class ButtonUnitCL : public ButtonCL{
 public:
     ButtonUnitCL(char textureID, SDL2pp::Point position, int id, char type, char player, int actionTime, bool selectStatus, bool ready);
 
-    void processEvent(SDL_Event &event, BQueue<std::unique_ptr<CommandCL>> &queue, Camera &camera);
+    void processEvent(SDL_Event &event, BQueue<std::unique_ptr<CommandCL>> &queue, Camera &camera,
+                      SoundManager &soundManager);
 
     virtual ~ButtonUnitCL() {}
 };

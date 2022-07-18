@@ -31,6 +31,9 @@
 #include "GameObject/Button/ButtonUnit/ButtonSonicTankCL.h"
 #include "GameObject/Button/ButtonUnit/ButtonDesviatorCL.h"
 #include "GameObject/Button/ButtonUnit/ButtonDevastatorCL.h"
+#include "SDL2pp/Mixer.hh"
+#include "SDL2pp/Music.hh"
+#include "Sounds/SoundManager.h"
 #include <arpa/inet.h>
 
 #define HARKONNEN 1
@@ -159,7 +162,8 @@ void Client::initSDL(Socket &aSocket, Protocol &aProtocol,
     recvThread.start();
     sendThread.start();
 
-    SDL2pp::SDL sdl(SDL_INIT_VIDEO);
+    SDL2pp::SDL sdl(SDL_INIT_VIDEO | SDL_INIT_AUDIO);
+    SDL2pp::SDLMixer mix(MIX_INIT_OGG);
     SDL2pp::Window window("DUNE - v0.1", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, 0);
     SDL2pp::Renderer renderer(window, -1, SDL_RENDERER_ACCELERATED);
     TextureManager textureManager(renderer);
@@ -182,9 +186,11 @@ void Client::initSDL(Socket &aSocket, Protocol &aProtocol,
     menu.push_back(std::unique_ptr<ButtonCL>(new ButtonTankCL(1, 1, 10, false, false)));
     menu.push_back(std::unique_ptr<ButtonCL>(new ButtonTrikeCL(1, 1, 10, false, false)));
 
+    SoundManager soundManager;
+    soundManager.playMusik("atreides");
 
     Camera camera(SDL2pp::Point(0, 0));
-    Engine engine(camera, map, menu, textureManager, queueNb, queueB);
+    Engine engine(camera, map, menu, textureManager, soundManager, queueNb, queueB);
     RateController frameRate(30);
     frameRate.start();
     while (engine.IsRunning()) {
@@ -192,9 +198,9 @@ void Client::initSDL(Socket &aSocket, Protocol &aProtocol,
         engine.Update();
         engine.Render(renderer);
         frameRate.finish();
-        //frameRate.sleepFor(sleeptime);
-        //usleep(FRAME_RATE);
     }
+
+    soundManager.clean();
 
     sendThread.stop();
     recvThread.stop();

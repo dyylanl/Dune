@@ -21,14 +21,15 @@ void Engine::Events() {
                 std::unique_ptr<CommandCL> command (new MoveCL(point - m_camera.getPosicion()));
                 std::cout << "Push command Move or Attack" << std::endl;
                 m_queueB.push(command);
+                m_SoundManager.playEffect("unit_moved");
             }
             unsigned int sizeObjects = m_objects.size();
             for (unsigned int i = 0; i < sizeObjects; ++i) {
-                m_objects[i]->processEvent(event, m_queueB, m_camera);
+                m_objects[i]->processEvent(event, m_queueB, m_camera, m_SoundManager);
             }
             unsigned int sizeMenu = m_menu.size();
             for (unsigned int i = 0; i < sizeMenu; ++i) {
-                m_menu[i]->processEvent(event, m_queueB, m_camera);
+                m_menu[i]->processEvent(event, m_queueB, m_camera, m_SoundManager);
             }
             m_camera.update(event);
         }
@@ -59,9 +60,9 @@ void Engine::Render(SDL2pp::Renderer &m_Renderer) {
     m_Renderer.Present();
 }
 
-Engine::Engine(Camera &camera, std::vector<std::vector<char>> &mapa, std::vector<std::unique_ptr<ButtonCL>> &menu,TextureManager &textureManager,
+Engine::Engine(Camera &camera, std::vector<std::vector<char>> &mapa, std::vector<std::unique_ptr<ButtonCL>> &menu,TextureManager &textureManager, SoundManager &soundManager,
                NBQueue<std::vector<std::unique_ptr<GameObject>>> &queueNb, BQueue<std::unique_ptr<CommandCL>> &queueB)
-               : m_camera(camera), m_mapa (mapa), m_menu(std::move(menu)), m_TextureManager(textureManager),
+               : m_camera(camera), m_mapa (mapa), m_menu(std::move(menu)), m_TextureManager(textureManager), m_SoundManager(soundManager),
                  m_queueNb(queueNb), m_queueB(queueB){
     m_Running = true;
 }

@@ -24,7 +24,8 @@ protected:
 public:
     Vehicle(char textureID, SDL2pp::Point position, SDL2pp::Point size, int id, int player, bool selecStatus, SDL2pp::Point posAction, int life, bool action, int frameCount, int colCount);
 
-    void processEvent(SDL_Event &event, BQueue<std::unique_ptr<CommandCL>> &queue, Camera &camera);
+    void processEvent(SDL_Event &event, BQueue<std::unique_ptr<CommandCL>> &queue, Camera &camera,
+                      SoundManager &soundManager);
 
     void draw(SDL2pp::Renderer &renderer, TextureManager &textureManager, Camera &camera);
 

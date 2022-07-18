@@ -17,6 +17,7 @@
 #include "../GameObject/Button/ButtonBuild/ButtonWidtrapCL.h"
 #include "../../../Common/src/Queue/NBQueue.h"
 #include "../../../Common/src/Queue/BQueue.h"
+#include "../Sounds/SoundManager.h"
 
 class Engine {
 private:
@@ -25,11 +26,12 @@ private:
     std::vector<std::unique_ptr<GameObject>> m_objects;
     std::vector<std::unique_ptr<ButtonCL>> m_menu;
     TextureManager &m_TextureManager;
+    SoundManager &m_SoundManager;
     bool m_Running;
     NBQueue<std::vector<std::unique_ptr<GameObject>>> &m_queueNb;
     BQueue<std::unique_ptr<CommandCL>> &m_queueB;
 public:
-    Engine(Camera &camera, std::vector<std::vector<char>> &mapa, std::vector<std::unique_ptr<ButtonCL>> &menu, TextureManager &manager, NBQueue<std::vector<std::unique_ptr<GameObject>>> &queue_nb, BQueue<std::unique_ptr<CommandCL>> &queueB);
+    Engine(Camera &camera, std::vector<std::vector<char>> &mapa, std::vector<std::unique_ptr<ButtonCL>> &menu, TextureManager &manager, SoundManager &soundManager,NBQueue<std::vector<std::unique_ptr<GameObject>>> &queue_nb, BQueue<std::unique_ptr<CommandCL>> &queueB);
 
     bool IsRunning();
 

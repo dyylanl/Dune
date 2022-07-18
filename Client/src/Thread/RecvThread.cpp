@@ -28,7 +28,7 @@
 #include "../GameObject/Button/ButtonUnit/ButtonLightInfantryCL.h"
 #include "../GameObject/Button/ButtonUnit/ButtonHeavyInfantryCL.h"
 #include "../GameObject/Button/ButtonUnit/ButtonSardaukarCL.h"
-#include "InfoPlayer.h"
+#include "../GameObject/InfoPlayer.h"
 
 void RecvThread::run() {
     try {
