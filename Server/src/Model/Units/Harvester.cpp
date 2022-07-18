@@ -84,6 +84,8 @@ bool Harvester::farm(Map &map) {
     int farm = map.at(farming_position).farm();
     if (farm != 0) {
         spiceCollected += farm;
+        makeFarming(map);
+        makeLoading(map);
         map.updateSpice(farming_position.x, farming_position.y);
         return true;
     } else {

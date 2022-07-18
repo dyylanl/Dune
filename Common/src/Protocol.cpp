@@ -155,9 +155,11 @@ void Protocol::sendUnit(Socket &socket, char type, int pos_x, int pos_y) {
 }
 */
 
+
 uint16_t Protocol::recvPosition(Socket &socket) {
     return this->recvTwoBytes(socket);
 }
+
 
 #define OBJECT_BUILDING 1
 #define PLAYER_INFO 25
@@ -382,4 +384,9 @@ void Protocol::recvCountObject(Socket &socket, int &size) {
 
 void Protocol::recvType(Socket &socket, char &type) {
     socket.recv(reinterpret_cast<char *>(&type), sizeof(uint8_t));
+}
+
+void Protocol::sendPosition(Socket& socket, int x, int y) {
+    this->sendTwoBytes(socket, x);
+    this->sendTwoBytes(socket, y);
 }

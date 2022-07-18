@@ -23,7 +23,7 @@ public:
     ClientsConnected(ClientsConnected&& other) = delete;
     ClientsConnected& operator=(ClientsConnected&& other) = delete;
 
-    void add(const InstanceId id, Socket peer);
+    void add(const InstanceId id, Socket peer, Position inital_pos);
     void remove(const InstanceId id);
     /*
      * [WARNING] CIERRE FORZOSO

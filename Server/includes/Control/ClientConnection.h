@@ -61,7 +61,7 @@ class ClientConnection {
     ~ClientConnection();
     void sendInitGame(std::vector<std::vector<char>>& map);
     InstanceId getId() {return id;}
-    void sendEstablishConnection();
+    void sendEstablishConnection(Position initial_pos);
 };
 
 

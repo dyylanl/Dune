@@ -100,3 +100,7 @@ void Model::updateModel() {
     map.moveUnits();
     map.updateMap();
 }
+
+Position Model::getInitialPosition(InstanceId player_id) {
+    return players.at(player_id).getConstructionCenter().getPosition();
+}

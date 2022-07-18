@@ -64,7 +64,7 @@ void Engine::_loopIteration(int it) {
 
 void Engine::run() {
     fprintf(stderr, "[Engine]: Empezando ejecución.\n");
-    established_connections.initGame(model.getMap());     // envio terrenos
+    established_connections.initGame(model.getMap());     // envio mapa
     RateController rate_controller(rate);
     established_connections.start();
     rate_controller.start();
@@ -93,10 +93,9 @@ void Engine::stop() {
 uint16_t Engine::addClient(NewConnection client) {
     uint16_t ret = ERROR;
     if (current_players < req_players) {
-        established_connections.add((InstanceId)current_players,std::move(client.peer));
         model.addPlayer(current_players); // le asigno el id = numero de conexion
+        established_connections.add((InstanceId)current_players, std::move(client.peer), model.getInitialPosition((InstanceId)current_players));
         current_players += 1;
-        std::cout << "[Engine] New player with id: " << (int)current_players << std::endl; 
         if (current_players == req_players) {
             this->start();
         }

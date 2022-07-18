@@ -13,6 +13,10 @@ void ClientConnection::_freeNotifications() {
     while ((snap = snapshots.pop())) {
         delete snap;
     }
+    Command* cmd = nullptr;
+    while ((cmd = commands.pop())) {
+        delete cmd;
+    }
 }
 
 void ClientConnection::_sender() {
@@ -85,7 +89,7 @@ void ClientConnection::start() {
 }
 
 void ClientConnection::push(std::vector<BuildingDTO> buildings, std::vector<UnitDTO> units, std::vector<PlayerDTO> players) {
-    snapshots.push(new Snapshot(buildings,units,players)); //queue
+    snapshots.push(new Snapshot(buildings,units,players)); //este new Snap es eliminado en cada ciclo del _sender
 }
 
 void ClientConnection::join() {
@@ -126,6 +130,7 @@ void ClientConnection::sendInitGame(std::vector<std::vector<char>>& map) {
 }
 
 
-void ClientConnection::sendEstablishConnection() {
+void ClientConnection::sendEstablishConnection(Position initial_pos) {
     protocol.sendEstablishConnection(peer);
+    protocol.sendPosition(peer, initial_pos.getX(),initial_pos.getY());
 }

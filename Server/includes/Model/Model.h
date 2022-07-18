@@ -95,6 +95,8 @@ public:
 
     void updateModel();
 
+    Position getInitialPosition(InstanceId player_id);
+
 };
 
 #endif //DUNE_MODEL_H

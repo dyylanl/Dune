@@ -54,6 +54,9 @@ public:
                   int &posActY, int &life, int &initial_life, bool &action);
     void recvPlayer(Socket &socket, int &gold, int &energy);
 
+
+    void sendPosition(Socket& socket, int x, int y);
+
     /*
      * Recibe una posicion
      */

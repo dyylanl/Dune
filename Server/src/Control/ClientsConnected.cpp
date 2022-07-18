@@ -9,14 +9,14 @@ ClientsConnected::ClientsConnected(
         finished_connections(finished_connections),
         clients() {}
 
-void ClientsConnected::add(const InstanceId id, Socket peer) {
+void ClientsConnected::add(const InstanceId id, Socket peer, Position initial_pos) {
     if (clients.count(id) > 0) {
         throw Exception("[ClientsConnected]: Este jugador ya existe.\n");
     }
     clients.emplace(
             std::piecewise_construct, std::forward_as_tuple(id),
             std::forward_as_tuple(id, std::move(peer), finished_connections,commands));
-    clients.at(id).sendEstablishConnection(); // l aviso al cliente q lo acepte
+    clients.at(id).sendEstablishConnection(initial_pos); // l aviso al cliente q lo acepte
 }
 
 void ClientsConnected::remove(const InstanceId id) {

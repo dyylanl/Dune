@@ -15,16 +15,16 @@ class Harvester : public Unit {
 public:
     Harvester(int x, int y, int player_id);
 
-    ~Harvester();
+    ~Harvester() override;
 
     bool canMoveAboveTerrain(Terrain &terrain) override;
-    virtual void reciveBonusDammage(const Weapon &weapon) override;
-    virtual void actionOnPosition(Map& map, Position& pos) override;
+    void reciveBonusDammage(const Weapon &weapon) override;
+    void actionOnPosition(Map& map, Position& pos) override;
     void makeAttack(Map &map) override;
     bool farm(Map& map);
     bool isFull();
     
-    virtual void attack(Attackable* enemy) override;
+    void attack(Attackable* enemy) override;
 
 
 private:

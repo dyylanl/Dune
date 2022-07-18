@@ -41,8 +41,12 @@ void Terrain::setSpice(int spice1) {
 }
 
 int Terrain::farm() {
-    this->spice -= 1;
-    return 1;
+    if (this->spice != 0) {
+        this->spice -= 1;
+        return 1;
+    } else {
+        return 0;
+    }
 }
 
 bool Terrain::hasFarm() {
