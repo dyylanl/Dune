@@ -52,12 +52,12 @@ public:
     /*
     *   Retorna un vector de edificios dtos para ser enviados
     */
-    std::vector<BuildingDTO*> getBuildings();
+    std::vector<BuildingDTO> getBuildings();
 
     /*
     *   Retorna un vector de unidades dtos para ser enviado
     */
-    std::vector<UnitDTO*> getUnits();
+    std::vector<UnitDTO> getUnits();
 
     /*
     *   Agrega un jugador a la partida
@@ -91,7 +91,7 @@ public:
 
     int numberOfPlayers();
 
-    std::vector<PlayerDTO*> getPlayers();
+    std::vector<PlayerDTO> getPlayers();
 
     void updateModel();
 

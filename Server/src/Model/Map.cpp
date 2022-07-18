@@ -43,7 +43,7 @@ Map::Map(std::string map_path) :
         for (int j = 0; j < cols_; ++j) {
             char type = this->mapa[j][i];
             terrains[i][j] = Terrain(type);
-            terrains[i][j].setSpice(spice_init[i][j]);
+            terrains[i][j].setSpice(spice_init[j][i]);
         }
     }
     int total_buildings = map_reader.getTotalBuildings();
@@ -135,35 +135,35 @@ std::vector<std::vector<char>> &Map::getMap() {
     return this->mapa;
 }
 
-std::vector<UnitDTO*> Map::getUnits() {
-    std::vector<UnitDTO*> retUnitsDto = {};
+std::vector<UnitDTO> Map::getUnits() {
+    std::vector<UnitDTO> retUnitsDto = {};
     if (units.empty()) {
         return retUnitsDto;
     }
     for (auto &unit : units) {
-        auto* dto = new UnitDTO(1,unit->player_id, // por que el cliente necesita los id's?
+        auto dto = UnitDTO(1,unit->player_id, // por que el cliente necesita los id's?
                                 unit->getPosition().getX(),unit->getPosition().getY(),
                                 unit->getNextPosition().getX(),unit->getNextPosition().getY(),
                                 unit->getType(),unit->getLife(),0,0,unit->getInitialLife()); // los ultimos 2 ceros son ataque y seleccion
         if (unit->isSelected()) {
-            dto->selected = 1;
+            dto.selected = 1;
         } else {
-            dto->selected = 0;
+            dto.selected = 0;
         }
         if (unit->isAttacking()) {
-            dto->attacking = 1;
+            dto.attacking = 1;
         } else {
-            dto->attacking = 0;
+            dto.attacking = 0;
         }
         retUnitsDto.push_back(dto);
     }
     return retUnitsDto;
 }
  
-std::vector<BuildingDTO*> Map::getBuildings() {
-    std::vector<BuildingDTO*> retBuildingsDto;
+std::vector<BuildingDTO> Map::getBuildings() {
+    std::vector<BuildingDTO> retBuildingsDto;
     for (auto &build : buildings) {
-        auto* dto = new BuildingDTO(1, build->getPlayerId(),
+        auto dto = BuildingDTO(1, build->getPlayerId(),
         build->getPosition().getX(),build->getPosition().getY(),
         build->getType(),build->getLife());
         retBuildingsDto.push_back(dto);
@@ -171,22 +171,28 @@ std::vector<BuildingDTO*> Map::getBuildings() {
     return retBuildingsDto;
 }
 
+Unit *Map::getUnit(char type, int x, int y, int player_id) {
+    switch (type) {
+        case LIGHT_INFANTRY_KEY: return new LightInfantry(x,y,player_id);
+        case HEAVY_INFANTRY_KEY: return new HeavyInfantry(x,y,player_id);
+        case HARVESTER_KEY: return new Harvester(x,y,player_id);
+        case TRIKE_KEY: return new Trike(x,y,player_id);
+        case RAIDER_KEY: return new Raider(x,y,player_id);
+        case TANK_KEY: return new Tank(x,y,player_id);
+        default: throw Exception("Invalid get unit type");
+    }
+}
+
+
 Building* Map::getBuilding(int player_id, char type, int x, int y) {
     switch (type) {
-        case BARRACKS_KEY:
-            return new Barracks(player_id, x, y, GameConfiguration::getConfig().barracksWidth,GameConfiguration::getConfig().barracksHeight);
-        case HEAVY_FACTORY_KEY:
-            return new HeavyFactory(player_id, x , y, GameConfiguration::getConfig().heavyFactoryWidth,GameConfiguration::getConfig().heavyFactoryHeight);
-        case LIGHT_FACTORY_KEY:
-            return new LightFactory(player_id,x,y,GameConfiguration::getConfig().lightFactoryWidth,GameConfiguration::getConfig().lightFactoryHeight);
-        case REFINERY_KEY:
-            return new Refinery(player_id,x,y,GameConfiguration::getConfig().refineryWidth,GameConfiguration::getConfig().refineryHeight);
-        case SILO_KEY:
-            return new Silo(player_id,x,y,GameConfiguration::getConfig().siloWidth,GameConfiguration::getConfig().siloHeight);
-        case WIND_TRAP_KEY:
-            return new WindTrap(player_id,x,y,GameConfiguration::getConfig().windTrapWidth,GameConfiguration::getConfig().windTrapHeight);
-        case PALACE_KEY:
-            return new Palace(player_id,x,y,GameConfiguration::getConfig().palaceWidth,GameConfiguration::getConfig().palaceHeight);
+        case BARRACKS_KEY: return new Barracks(player_id, x, y, GameConfiguration::getConfig().barracksWidth,GameConfiguration::getConfig().barracksHeight);
+        case HEAVY_FACTORY_KEY: return new HeavyFactory(player_id, x , y, GameConfiguration::getConfig().heavyFactoryWidth,GameConfiguration::getConfig().heavyFactoryHeight);
+        case LIGHT_FACTORY_KEY: return new LightFactory(player_id,x,y,GameConfiguration::getConfig().lightFactoryWidth,GameConfiguration::getConfig().lightFactoryHeight);
+        case REFINERY_KEY: return new Refinery(player_id,x,y,GameConfiguration::getConfig().refineryWidth,GameConfiguration::getConfig().refineryHeight);
+        case SILO_KEY: return new Silo(player_id,x,y,GameConfiguration::getConfig().siloWidth,GameConfiguration::getConfig().siloHeight);
+        case WIND_TRAP_KEY: return new WindTrap(player_id,x,y,GameConfiguration::getConfig().windTrapWidth,GameConfiguration::getConfig().windTrapHeight);
+        case PALACE_KEY: return new Palace(player_id,x,y,GameConfiguration::getConfig().palaceWidth,GameConfiguration::getConfig().palaceHeight);
         default: throw Exception("Invalid get build.\n");
     }
 }
@@ -237,7 +243,7 @@ Attackable *Map::getClosestAttackable(Position &position, int limitRadius, int p
     for (auto& current_building : buildings) { // miro las construcciones
         Position& pos = current_building->getClosestPosition(position);
         int distance = pos.sqrtDistance(position);
-        if ((distance < limitRadius+6) && (distance < closest_unit_distance+6) && !(player_id == current_building->player_id)) {
+        if ((distance < limitRadius+1) && (distance < closest_unit_distance+1) && !(player_id == current_building->player_id)) {
             closest_attackable = current_building;
             closest_unit_distance = distance;
         }
@@ -262,18 +268,6 @@ void Map::occupy(Building* building) {
         for (int j = 0; j < building->width; j++) {
             this->at(building->getPosition().y + j, building->getPosition().x + i).buildOn(building);
         }
-    }
-}
-
-Unit *Map::getUnit(char type, int x, int y, int player_id) {
-    switch (type) {
-        case LIGHT_INFANTRY_KEY: return new LightInfantry(x,y,player_id);
-        case HEAVY_INFANTRY_KEY: return new HeavyInfantry(x,y,player_id);
-        case HARVESTER_KEY: return new Harvester(x,y,player_id);
-        case TRIKE_KEY: return new Trike(x,y,player_id);
-        case RAIDER_KEY: return new Raider(x,y,player_id);
-        case TANK_KEY: return new Tank(x,y,player_id);
-        default: throw Exception("Invalid get unit type");
     }
 }
 
@@ -348,12 +342,18 @@ void Map::updateMap() {
         if ((*itrU)->getLife() <= 0) {
             units.erase(itrU);
         }
+        if ((*itrU) == nullptr) {
+            units.erase(itrU);
+        }
     }
 
     // chequeo si hay construcciones muertas
     std::vector<Building*>::iterator itrB;
     for (itrB = buildings.begin(); itrB < buildings.end(); itrB++) {
         if ((*itrB)->getLife() <= 0) {
+            buildings.erase(itrB);
+        }
+        if ((*itrB) == nullptr) {
             buildings.erase(itrB);
         }
     }

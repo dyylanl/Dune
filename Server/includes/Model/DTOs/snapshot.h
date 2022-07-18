@@ -9,12 +9,12 @@
 
 struct Snapshot {
 
-    std::vector<BuildingDTO*> buildings;
-    std::vector<UnitDTO*> units;
-    std::vector<PlayerDTO*> players;
+    std::vector<BuildingDTO> buildings;
+    std::vector<UnitDTO> units;
+    std::vector<PlayerDTO> players;
 
 
-    Snapshot(std::vector<BuildingDTO*> &buildings, std::vector<UnitDTO*> &units, std::vector<PlayerDTO*> &players):
+    Snapshot(std::vector<BuildingDTO> &buildings, std::vector<UnitDTO> &units, std::vector<PlayerDTO> &players):
         buildings(std::move(buildings)),
         units(std::move(units)),
         players(std::move(players)) {}
@@ -28,25 +28,12 @@ struct Snapshot {
 
     PlayerDTO getPlayer(InstanceId player_id1) {
         PlayerDTO player_ret(0,0,0);
-        for (auto* player : players) {
-            if (player->player_id == player_id1) {
-                return *player;
+        for (auto player : players) {
+            if (player.player_id == player_id1) {
+                return player;
             }
         }
         return player_ret;
-    }
-
-
-    void free() {
-        for (BuildingDTO* build : buildings) {
-            delete build;
-        }
-        for (UnitDTO* unit : units) {
-            delete unit;
-        }
-        for (PlayerDTO* player : players) {
-            delete player;
-        }
     }
 
 

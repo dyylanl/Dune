@@ -47,6 +47,11 @@ void Player::addBuilding(Building *building) {
     this->subGold(building->cost);
 }
 
+// todo: aca chequear si tiene el edificio correspondiente a esa unidad
+void Player::addUnit(Unit* unit) {
+    units.push_back(unit);
+}
+
 
 Building *Player::getClosestBuilding(Position pos, Building::BuildingType type) {
     for (auto& b : buildings) {
@@ -97,7 +102,7 @@ bool Player::hasBuilding(Building::BuildingType buildingType) {
     return buildingTypeFound;
 }
 
-void Player::cleanDeadBuildings() {
+void Player::cleanDeads() {
     if (Attackable::isDead(this->construction_center)) {
         this->construction_center = nullptr;
     }
@@ -113,6 +118,15 @@ void Player::cleanDeadBuildings() {
             it = buildings.erase(it);
         } else {
             it++;
+        }
+    }
+
+    std::vector<Unit*>::iterator itrU = units.begin();
+    while (itrU != units.end()) {
+        if (Attackable::isDead(*itrU)) {
+            itrU = units.erase(itrU);
+        } else {
+            itrU++;
         }
     }
 }

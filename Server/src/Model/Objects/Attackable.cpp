@@ -16,10 +16,8 @@ int Attackable::getInitialLife() {
 
 
 void Attackable::reciveAttack(const Weapon &weapon) {
-    std::cout << "Vida antes del ataque: " << life << std::endl;
     life -= weapon.getDammage();
     this->reciveBonusDammage(weapon);
-    std::cout << "Vida despues del ataque: " << life << std::endl;
 }
 
 bool Attackable::isDead(const Attackable *unit) {

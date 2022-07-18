@@ -11,7 +11,6 @@ void ClientConnection::_finishThread() {
 void ClientConnection::_freeNotifications() {
     Snapshot* snap = nullptr;
     while ((snap = snapshots.pop())) {
-        snap->free();
         delete snap;
     }
 }
@@ -23,10 +22,10 @@ void ClientConnection::_sender() {
             int count = (int)(snap->buildings.size() + snap->units.size());
             protocol.sendCountObject(peer, count);
             for (auto &b: snap->buildings) {
-                protocol.sendBuild(peer, *b);
+                protocol.sendBuild(peer, b);
             }
             for (auto &u: snap->units) {
-                protocol.sendUnit(peer, *u);
+                protocol.sendUnit(peer, u);
             }
             protocol.sendPlayer(peer, snap->getPlayer(this->id));
             delete snap;
@@ -85,7 +84,7 @@ void ClientConnection::start() {
     receiver = std::thread(&ClientConnection::_sender, this);
 }
 
-void ClientConnection::push(std::vector<BuildingDTO*> buildings, std::vector<UnitDTO*> units, std::vector<PlayerDTO*> players) {
+void ClientConnection::push(std::vector<BuildingDTO> buildings, std::vector<UnitDTO> units, std::vector<PlayerDTO> players) {
     snapshots.push(new Snapshot(buildings,units,players)); //queue
 }
 

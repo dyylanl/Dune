@@ -22,11 +22,11 @@ std::vector<std::vector<char>> &Model::getMap() {
     return map.getMap();
 }
 
-std::vector<BuildingDTO*> Model::getBuildings() {
+std::vector<BuildingDTO> Model::getBuildings() {
     return map.getBuildings();
 }
 
-std::vector<UnitDTO*> Model::getUnits() {
+std::vector<UnitDTO> Model::getUnits() {
     return map.getUnits();
 }
 
@@ -52,7 +52,7 @@ void Model::putUnit(InstanceId id_player, char unit_type) {
         int gold = players.at(id_player).gold;
         int gold_req = unit->getCost();
         if (gold >= gold_req) {
-            players.at(id_player).subGold(gold_req);
+            players.at(id_player).addUnit(unit);
             map.putUnit(unit);
         }
     }
@@ -65,7 +65,7 @@ void Model::addPlayer(InstanceId player_id) {
 }
 
 void Model::deletePlayer(InstanceId player_id) {
-    players.at(player_id).cleanDeadBuildings();
+    players.at(player_id).cleanDeads();
     players.at(player_id).clean();
     players.erase(player_id);
     current_players -= 1;
@@ -83,10 +83,10 @@ int Model::numberOfPlayers() {
     return players.size();
 }
 
-std::vector<PlayerDTO*> Model::getPlayers() {
-    std::vector<PlayerDTO*> players_ret;
+std::vector<PlayerDTO> Model::getPlayers() {
+    std::vector<PlayerDTO> players_ret;
     for (auto& [id,player] : players) {
-        auto* dto = new PlayerDTO(id, player.gold, player.generatedEnergy);
+        auto dto = PlayerDTO(id, player.gold, player.generatedEnergy);
         players_ret.push_back(dto);
     }
     return players_ret;
@@ -95,7 +95,7 @@ std::vector<PlayerDTO*> Model::getPlayers() {
 
 void Model::updateModel() {
     for (auto [id,player] : players) {
-        player.cleanDeadBuildings();
+        player.cleanDeads();
     }
     map.moveUnits();
     map.updateMap();

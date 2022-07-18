@@ -31,8 +31,11 @@ public:
     void addGold(int gold_to_add);
     void subGold(int gold_to_sub);
     float getEnergyFactor();
+
     void addBuilding(Building* building);
-    void cleanDeadBuildings();
+    void addUnit(Unit* unit);
+
+    void cleanDeads();
     Building * getClosestBuilding(Position pos, Building::BuildingType type);
     bool hasBuilding(Building& building);
     bool hasBuilding(Building::BuildingType buildingType);
