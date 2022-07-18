@@ -125,4 +125,3 @@ Engine::Engine(ConfigurationReader &config1, std::string map_path, int total_pla
                                     model(config, map_path)
                                     {
                                     }
-

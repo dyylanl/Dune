@@ -93,6 +93,7 @@ std::vector<std::vector<std::string>> Game::listGames() {
 
 Game::~Game() {
     for (const auto& [name, engine] : this->games) {
+        engine->stop();
         delete engine;
     }
 
