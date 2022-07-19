@@ -1,5 +1,5 @@
 #include "../../../includes/Model/Buildings/Building.h"
-
+#include <iostream>
 int Building::counter = 0;
 
 Building::Building(int player_id1, char type1,const int x, const int y, int blockWidth, int blockHeight,
@@ -19,7 +19,7 @@ Building::Building(int player_id1, char type1,const int x, const int y, int bloc
         news(true) {
     for (int i = 0 ; i < height ; i++) {
         for (int j = 0 ; j < width ; j++) {
-            all_positions.emplace_back(x + j * blockWidth, y + i * blockHeight);
+            all_positions.emplace_back(x + j, y + i);
         }
     }
     counter += 1;

@@ -183,7 +183,6 @@ Unit *Map::getUnit(char type, int x, int y, int player_id) {
     }
 }
 
-
 Building* Map::getBuilding(int player_id, char type, int x, int y) {
     switch (type) {
         case BARRACKS_KEY: return new Barracks(player_id, x, y, GameConfiguration::getConfig().barracksWidth,GameConfiguration::getConfig().barracksHeight);
@@ -243,9 +242,10 @@ Attackable *Map::getClosestAttackable(Position &position, int limitRadius, int p
     for (auto& current_building : buildings) { // miro las construcciones
         Position& pos = current_building->getClosestPosition(position);
         int distance = pos.sqrtDistance(position);
-        if ((distance < limitRadius+1) && (distance < closest_unit_distance+1) && !(player_id == current_building->player_id)) {
+        if ((distance < limitRadius+4) && (distance < closest_unit_distance+4) && !(player_id == current_building->player_id)) {
             closest_attackable = current_building;
             closest_unit_distance = distance;
+            std::cout << "Atacando edificio" << std::endl;
         }
     }
     return closest_attackable;
