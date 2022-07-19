@@ -54,28 +54,6 @@ Client::Client() {}
 Client::Client(std::string ip1, std::string port1) : m_socket(ip1,port1), m_protocol() {
 }
 
-void Client::crear_partida(std::string nombre_jugador, std::string  nombre_partida){
-  this->enviar_nombre_jugador(nombre_jugador);
-  this->enviar_accion("crear");
-  this->enviar_nombre_partida(nombre_partida);
-}
-
-int Client::obtener_numero_casa(const std::string& casa) {
-  std::string Harkonnen = "Harkonnen";
-  std::string Atreides = "Atreides";
-  std::string Ordos = "Ordos";
-  if (casa == Harkonnen) {
-    return 0;
-  }
-  if (casa == Atreides) {
-    return 1;
-  }
-  if (casa == Ordos) {
-    return 2;
-  }
-  return -1;
-}
-
 void Client::enviar_nombre_jugador(std::string nombre_jugador){
  m_protocol.sendName(m_socket, nombre_jugador);
 }
@@ -99,11 +77,6 @@ void Client::enviar_accion(std::string comando){
   }
 }
 
-void Client::enviar_nombre_y_comando(const std::string& nombre_jugador,std::string comando){
-  this->m_protocol.sendName(m_socket, nombre_jugador);
-  this->enviar_accion(comando);
-}
-
 std::vector<std::vector<std::string>> Client::listar_partidas(){
   std::vector<std::vector<std::string>> list = this->m_protocol.recvGameList(m_socket);
   return list;
@@ -114,12 +87,6 @@ std::vector<std::vector<std::string>> Client::listar_mapas(){
   return maps_;
 }
 
-void Client::enviar_cant_jugadores(int cantidad){
-    uint16_t cant_jugadores = cantidad;
-    m_protocol.sendResponse(m_socket, cant_jugadores);
-}
-
-
 void Client::enviar_map_id(int map_id){
     m_protocol.sendResponse(m_socket, map_id);
 }
@@ -127,10 +94,6 @@ void Client::enviar_map_id(int map_id){
 
 void Client::enviar_nombre_partida(std::string nombre_partida){
     m_protocol.sendName(m_socket, nombre_partida);
-}
-
-int Client::recibir_respuesta(){
-  return (int) this->m_protocol.recvResponse(m_socket);
 }
 
 bool Client::conexion_exitosa(){
@@ -155,9 +118,6 @@ bool Client::partida_iniciada(){
   return false;
 }
 
-
-void createGame(Protocol protocol, Socket &socket) {}
-void createGame(Protocol protocol, Socket &socket, std::vector<std::vector<char>> &map) {}
 void Client::initSDL(Socket &aSocket, Protocol &aProtocol,
                      std::vector<std::vector<char>> &map) const {
     NBQueue<std::vector<std::unique_ptr<GameObject>>> queueNb;
@@ -211,125 +171,6 @@ void Client::initSDL(Socket &aSocket, Protocol &aProtocol,
     recvThread.stop();
     sendThread.join();
     recvThread.join();
-}
-
-void Client::createGame(Protocol protocol, Socket &socket) {
-
-
-  // SEND NOMBRE PARTIDA
-  std::cout << "\nNombre de la partida: ";
-  std::string nombre_partida;
-  std::cin >> nombre_partida;
-  protocol.sendName(socket, nombre_partida);
-
-  // RECV MAPAS CREADOS
-  std::vector<std::vector<std::string>> maps_ = protocol.recvMapsCreated(socket);
-  std::cout << "\n\n";
-  if (maps_.size() == 0) {
-    std::cout << "No hay mapas cargados en el server" << std::endl;
-  } else {
-  int total_maps_uploaded = (int)maps_.size();
-    for (int i = 0; i < total_maps_uploaded; i++) {
-    std::cout << "\nMapa " << i+1 << "\nFilas: " << maps_[i][0] << "\nColumnas: " << maps_[i][1] << "\nJugadores Requeridos: " << maps_[i][2] << std::endl;
-    }
-  }
-
-  // SEND MAP ID
-  uint16_t map_id;
-  std::cout << "\nSeleccione un mapa: ";
-  std::cin >> map_id;
-  protocol.sendResponse(socket, map_id);
-
-  
-  std::vector<std::vector<char>> map;
-
-  if(protocol.recvEstablishConnection(socket)) { 
-      std::cout << "Union exitosa" << std::endl;
-      if(protocol.recvInitGame(socket)) { // ACA TIENE QUE ESTAR BLOQUEADO HASTA QUE SE CREE LA PARTIDA
-        std::cout << "Se completo la partida..." << std::endl;
-        map = protocol.recvMap(socket);
-        std::cout << "Mapa recibido..." << std::endl;
-        initSDL(socket, protocol, map);
-      }  
-  } else {
-    std::cout << "ERROR UNIENDOME A LA PARTIDA "<< std::endl;
-  }
-
-}
-
-void Client::joinGame(Protocol protocol, Socket &socket) {
-
-  std::vector<std::vector<char>> map;
-  std::cout << "\nNombre de la partida: ";
-  std::string name_game;
-  std::cin >> name_game;
-  protocol.sendName(socket,name_game);
-
-    // RECV INIT PARTIDA
-    if(protocol.recvEstablishConnection(socket)) { 
-      std::cout << "Union exitosa" << std::endl;
-      if(protocol.recvInitGame(socket)) { // ACA TIENE QUE ESTAR BLOQUEADO HASTA QUE SE CREE LA PARTIDA
-        std::cout << "Se completo la partida..." << std::endl;
-        map = protocol.recvMap(socket);
-        std::cout << "Mapa recibido..." << std::endl;
-        initSDL(socket,protocol,map);
-      }  
-  } else {
-    std::cout << "ERROR UNIENDOME A LA PARTIDA "<< std::endl;
-  }
-}
-
-void Client::listGames(Protocol protocol, Socket &socket) {
-  std::cout << "Partidas creadas: " << std::endl;
-  std::vector<std::vector<std::string>> list = protocol.recvGameList(socket);
-  if (!list.empty()) {
-    int n = (int)list.size();
-    for (int i = 0; i < n; i++) {
-      std::cout << list[i][2] << " " << list[i][0] << "/" << list[i][1] << std::endl;
-    }
-  } else {
-    std::cout << "No hay partidas creadas..." << std::endl;
-  }
-}
-
-
-void Client::launch() {
-    std::cout << "Iniciando cliente.... \n\n";
-    try {
-        std::string ip = "localhost";
-        std::string port = "8082";
-        std::cout << "IP: localhost";
-        std::cout << "\nPORT: 8082\n";
-        Socket socket(ip,port);
-        Protocol protocol;
-        std::cout << "Conexion exitosa.\n";
-        std::string nombre;
-        std::cout << "\nNombre: ";
-        std::cin >> nombre;
-        protocol.sendName(socket, nombre);
-        std::cout << std::endl;
-        std::cout << "  * [1] Crear Partida\n  * [2] Unirse a partida\n  * [3] Listar partidas\n";
-        uint16_t comando;
-        std::cout << "Ingrese un comando: ";
-        std::cin >> comando;
-        protocol.sendResponse(socket, comando);
-        if (comando == CREATE_GAME) {
-            createGame(protocol, socket);
-            //map = joinGame(protocol, socket);
-        } else if (comando == JOIN_GAME) {
-            joinGame(protocol, socket);
-        } else if (comando == LIST_GAMES) {
-            listGames(protocol,socket);
-        }
-    } catch (std::exception& e) {
-        std::cout << e.what() << std::endl;
-        return;
-    }
-
-    /*Socket socket_("localhost","8082");
-    Protocol protocol_;
-    std::vector<std::vector<char>> map(50, std::vector<char> (50, 'A') );
-    initSDL(socket_, protocol_, map);*/
 }
 
 void Client::iniciar(){

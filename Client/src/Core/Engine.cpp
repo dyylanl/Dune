@@ -37,11 +37,11 @@ void Engine::Events() {
 }
 
 void Engine::Update() {
-        while (m_queueNb.pop(m_objects)){}
-        /*unsigned int sizeObjects = m_objects.size();
-        for (unsigned int i = 0; i < sizeObjects; ++i) {
-            m_objects[i]->cameraOffset(m_camera);
-        }*/
+    while (m_queueNb.pop(m_objects)){}
+    unsigned int sizeObjects = m_objects.size();
+    if (sizeObjects == 1) {
+        m_Running = false;
+    }
 }
 
 void Engine::Render(SDL2pp::Renderer &m_Renderer) {
