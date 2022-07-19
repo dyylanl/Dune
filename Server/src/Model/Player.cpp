@@ -10,6 +10,7 @@ Player::Player(InstanceId id1, ConstructionCenter *construction_center):
         gold(GameConfiguration::getConfig().initialGold),
         gold_limit(GameConfiguration::getConfig().initialGold),
         can_train(false),
+        status(3),
         construction_center(construction_center)
         {
             construction_center->setPlayer(this);
@@ -74,8 +75,8 @@ std::string& Player::getHouse() {
     return this->house;
 }
 
-ConstructionCenter &Player::getConstructionCenter() {
-    return *construction_center;
+ConstructionCenter* Player::getConstructionCenter() {
+    return construction_center;
 }
 
 bool Player::hasBuilding(Building& building) {
@@ -103,8 +104,8 @@ bool Player::hasBuilding(Building::BuildingType buildingType) {
 }
 
 void Player::cleanDeads() {
-    if (Attackable::isDead(this->construction_center)) {
-        this->construction_center = nullptr;
+    if (isDefeated()) {
+        this->status = 2;
     }
     std::vector<Building*>::iterator it = buildings.begin();
     while (it != buildings.end()) {
@@ -132,9 +133,12 @@ void Player::cleanDeads() {
 }
 
 bool Player::isDefeated(){
-    if (this->construction_center == nullptr)
+    if (this->construction_center == nullptr || this->construction_center->getLife() <= 0) {
+        status = 2;
         return true;
-    return (this->construction_center->getLife()<=0);
+    } else {
+        return false;
+    }
 }
 
 Position Player::getBarrackPosition() {

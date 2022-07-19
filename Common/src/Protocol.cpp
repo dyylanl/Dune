@@ -273,11 +273,13 @@ void Protocol::sendPlayer(Socket &socket, PlayerDTO player) {
     sendOneByte(socket, PLAYER_INFO);
     sendTwoBytes(socket, player.gold);
     sendTwoBytes(socket, player.energy);
+    sendOneByte(socket, player.status);
 }
 
-void Protocol::recvPlayer(Socket &socket, int &gold, int &energy) {
+void Protocol::recvPlayer(Socket &socket, int &gold, int &energy, int &status) {
     gold = recvTwoBytes(socket);
     energy = recvTwoBytes(socket);
+    status = recvOneByte(socket);
 }
 
 void Protocol::sendCountObject(Socket &socket, int &countObject) {

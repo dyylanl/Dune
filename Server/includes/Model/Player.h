@@ -21,7 +21,8 @@ public:
     int gold;
     int gold_limit;
     bool can_train;
-
+    int status; // 1:gano 2:perdio 3:sige
+    
     std::vector<Building*> buildings;
     std::vector<Unit*> units;
     ConstructionCenter* construction_center;
@@ -39,7 +40,7 @@ public:
     Building * getClosestBuilding(Position pos, Building::BuildingType type);
     bool hasBuilding(Building& building);
     bool hasBuilding(Building::BuildingType buildingType);
-    ConstructionCenter& getConstructionCenter();
+    ConstructionCenter* getConstructionCenter();
     bool lose();
     bool isDefeated();
     InstanceId getId() const;

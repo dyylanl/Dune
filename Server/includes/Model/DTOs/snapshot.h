@@ -27,7 +27,7 @@ struct Snapshot {
 
 
     PlayerDTO getPlayer(InstanceId player_id1) {
-        PlayerDTO player_ret(0,0,0);
+        PlayerDTO player_ret(0,0,0,0);
         for (auto player : players) {
             if (player.player_id == player_id1) {
                 return player;
