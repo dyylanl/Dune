@@ -44,6 +44,9 @@ Map::Map(std::string map_path) :
             char type = this->mapa[j][i];
             terrains[i][j] = Terrain(type);
             terrains[i][j].setSpice(spice_init[j][i]);
+            if (spice_init[j][i] != 0) {
+                std::cout << "se cargo especia en " << i << "," << j << std::endl;
+            }
         }
     }
     int total_buildings = map_reader.getTotalBuildings();
@@ -61,7 +64,9 @@ char Map::getTypeTerrain(int posX, int posY) {
 
 void Map::updateSpice(int x, int y){
     int spice = this->at(x,y).getSpice();
-    this->at(x,y).setSpice(spice-1);
+    if (spice != 0) {
+        this->at(x,y).setSpice(spice-1);
+    }
 }
 
 int Map::getWidth() {
@@ -242,7 +247,7 @@ Attackable *Map::getClosestAttackable(Position &position, int limitRadius, int p
     for (auto& current_building : buildings) { // miro las construcciones
         Position& pos = current_building->getClosestPosition(position);
         int distance = pos.sqrtDistance(position);
-        if ((distance < limitRadius+4) && (distance < closest_unit_distance+4) && !(player_id == current_building->player_id)) {
+        if ((distance < limitRadius+5) && (distance < closest_unit_distance+5) && !(player_id == current_building->player_id)) {
             closest_attackable = current_building;
             closest_unit_distance = distance;
             std::cout << "Atacando edificio" << std::endl;

@@ -34,7 +34,7 @@ public:
     virtual ~Unit();
     bool operator==(const Unit& other);
     void setPath(std::stack<Position> path, Position destiny);
-    void move(Map &map);
+    virtual void move(Map &map);
     virtual void actionOnPosition(Map& map, Position& pos);
     Player& getPlayer();
     virtual void makeAttack(Map &map);

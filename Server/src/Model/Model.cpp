@@ -86,7 +86,7 @@ int Model::numberOfPlayers() {
 std::vector<PlayerDTO> Model::getPlayers() {
     std::vector<PlayerDTO> players_ret;
     for (auto& [id,player] : players) {
-        auto dto = PlayerDTO(id, player.gold, player.generatedEnergy);
+        auto dto = PlayerDTO(id, player.gold, player.generatedEnergy, player.status);
         players_ret.push_back(dto);
     }
     return players_ret;
@@ -94,13 +94,20 @@ std::vector<PlayerDTO> Model::getPlayers() {
 
 
 void Model::updateModel() {
-    for (auto [id,player] : players) {
-        player.cleanDeads();
-    }
     map.moveUnits();
     map.updateMap();
+    for (auto [id,player] : players) {
+        player.cleanDeads();
+        if (player.isDefeated()) {
+            current_players -= 1;
+        }
+        if (current_players == 1 && (!player.isDefeated())){
+            player.status = 1;
+            finished = true;
+        }
+    }
 }
 
 Position Model::getInitialPosition(InstanceId player_id) {
-    return players.at(player_id).getConstructionCenter().getPosition();
+    return players.at(player_id).getConstructionCenter()->getPosition();
 }

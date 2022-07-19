@@ -56,9 +56,10 @@ void RecvThread::run() {
             uint8_t opcode = 0;
             int gold = 0;
             int energy = 0;
+            int status = 0;
             opcode = m_protocol.recvResponse(m_socket);
             if (opcode == 25) {
-                m_protocol.recvPlayer(m_socket, gold, energy);
+                m_protocol.recvPlayer(m_socket, gold, energy,status);
             }
 
             gameObjects.push_back(std::unique_ptr<GameObject>(new InfoPlayer(gold, energy)));

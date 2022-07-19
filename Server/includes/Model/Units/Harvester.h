@@ -14,19 +14,15 @@
 class Harvester : public Unit {
 public:
     Harvester(int x, int y, int player_id);
-
     ~Harvester() override;
-
     bool canMoveAboveTerrain(Terrain &terrain) override;
     void reciveBonusDammage(const Weapon &weapon) override;
     void actionOnPosition(Map& map, Position& pos) override;
-    void makeAttack(Map &map) override;
-    bool farm(Map& map);
+    //void makeAttack(Map &map) override;
+    void farm(Map& map);
     bool isFull();
-    
+    void move(Map &map) override;
     void attack(Attackable* enemy) override;
-
-
 private:
     const int spiceCapacity;
     int spiceCollected;
@@ -41,7 +37,6 @@ private:
 
     void makeFarming(Map &map);
     void makeLoading(Map &map);
-
 };
 
 #endif
