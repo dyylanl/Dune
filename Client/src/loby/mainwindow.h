@@ -66,9 +66,5 @@ private:
     QString text_cantidad_jugadores;
     QString casa;
     Client* cliente;
-    //std::vector<Socket> vector_socket;
-    //Socket* skt;
-    //Protocol protocolo;
-    QTimer* reloj;
 };
 #endif // MAINWINDOW_H

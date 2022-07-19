@@ -5,7 +5,6 @@
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
-    , reloj(new QTimer())
 {
     ui->setupUi(this);
     QPixmap pic_atreides(":/resources/atreides.png");
@@ -44,15 +43,8 @@ void MainWindow::on_button_confirmar_clicked()
     this->text_puerto = this->ui->puerto_text_input->text();
     this->text_nombre = this->ui->nombre_text_input->text();
     this->ui->stackedWidget->setCurrentIndex(1);
-    
-    
-    //this->cliente = new Client(this->text_IP.toStdString(),this->text_puerto.toStdString());
-    this->cliente = new Client("localhost","8082");
-    //Socket skt(this->text_IP.toStdString(),this->text_puerto.toStdString());
-    //this->cliente->enviar_nombre_jugador(this->text_nombre.toStdString());
-    this->cliente->enviar_nombre_jugador("juan");
-    
-
+    this->cliente = new Client(this->text_IP.toStdString(),this->text_puerto.toStdString());
+    this->cliente->enviar_nombre_jugador(this->text_nombre.toStdString());
 }
 
 
@@ -78,7 +70,6 @@ void MainWindow::on_button_cofirmar_cant_nombre_clicked()
 void MainWindow::mostrar_mapas(){
     std::vector<std::vector<std::string>> mapas = this->cliente->listar_mapas();
    std::cout << "\n\n";
-   //std::stringstream descripcion_mapa;
   if (mapas.size() == 0) {
     std::cout << "No hay mapas cargados en el server" << std::endl;
   } else {
@@ -111,8 +102,6 @@ void MainWindow::on_button_crear_partida_clicked()
 void MainWindow::on_button_atreides_clicked()
 {
     this->text_casa = "Atreides";
-    //this->ui->stackedWidget->setCurrentIndex(6);
-    //this->exit(1);
     this->close();
     QApplication::exit(1);
 }
@@ -121,7 +110,6 @@ void MainWindow::on_button_atreides_clicked()
 void MainWindow::on_button_harkonnen_clicked()
 {
     this->text_casa = "Harkonnen";
-    //this->ui->stackedWidget->setCurrentIndex(6);
     this->close();
     QApplication::exit(1);
 }
@@ -167,7 +155,6 @@ void MainWindow::mostrar_partidas(){
 void MainWindow::on_button_confirmar_unirse_clicked()
 {
     QListWidgetItem *partida_elegida =  this->ui->lista_partidas->currentItem();
-    //this->reloj->stop();
     if(partida_elegida == nullptr){
         QMessageBox msgBox;
         msgBox.setText("Elija una partida");
@@ -240,10 +227,6 @@ void MainWindow::on_button_confirmar_mapa_clicked()
         msgBox.setText("La partida va a empezar");
         msgBox.exec();
         this->ui->stackedWidget->setCurrentIndex(5);
-        //this->close();
-        //QApplication::quit();
-        /*map = protocol.recvMap(socket);
-        std::cout << "Mapa recibido..." << std::endl;*/
       }  
   } else {
         QMessageBox msgBox;
