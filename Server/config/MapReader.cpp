@@ -1,7 +1,7 @@
 #include <iostream>
 #include "MapReader.h"
 #include "../includes/types.h"
-
+#include "../config/GameConfiguration.h"
 MapReader::MapReader(std::string filename) :
     YAMLReader(filename) {}
 
@@ -64,7 +64,7 @@ unsigned MapReader::getReqPlayers() {
 ConstructionCenter* MapReader::getConstructionCenterFor(InstanceId id) {
     int x = this->config["Estructuras"][std::to_string(id)]["Pos_x"].as<int>();
     int y = this->config["Estructuras"][std::to_string(id)]["Pos_y"].as<int>();
-    return new ConstructionCenter((int)id,x,y,3,3);
+    return new ConstructionCenter((int)id,x,y,GameConfiguration::getConfig().constructionCenterWidth,GameConfiguration::getConfig().constructionCenterHeight);
 }
 
 int MapReader::getTotalBuildings() {
