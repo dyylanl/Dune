@@ -134,10 +134,10 @@ void Player::cleanDeads() {
 
 bool Player::isDefeated(){
     if (this->construction_center == nullptr) {
-        status = 2;
+        this->status = 2;
         return true;
     } if (this->construction_center->getLife() <= 0){
-        status = 2;
+        this->status = 2;
         return true;
     }
     return false;

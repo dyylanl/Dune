@@ -99,7 +99,7 @@ void Model::updateModel() {
     for (auto [id,player] : players) {
         player.cleanDeads();
         if (current_players == 1 && (!player.isDefeated())){
-            player.status = 1;
+            player.isWin();
             finished = true;
         }
     }

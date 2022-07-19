@@ -49,6 +49,7 @@ public:
     Position getBarrackPosition();
     void clean();
     bool canTrainUnits();
+    void isWin() {this->status = 1;}
 
 
 };
