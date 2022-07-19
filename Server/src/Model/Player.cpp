@@ -166,3 +166,7 @@ void Player::clean() {
 bool Player::canTrainUnits() {
     return can_train;
 }
+
+void Player::isWin() {
+    this->status = 1;
+}

@@ -21,7 +21,7 @@ public:
     int gold;
     int gold_limit;
     bool can_train;
-    int status; // 1:gano 2:perdio 3:sige
+    uint8_t status; // 1:gano 2:perdio 3:sige
     
     std::vector<Building*> buildings;
     std::vector<Unit*> units;
@@ -49,7 +49,7 @@ public:
     Position getBarrackPosition();
     void clean();
     bool canTrainUnits();
-    void isWin() {this->status = 1;}
+    void isWin();
 
 
 };

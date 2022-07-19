@@ -280,7 +280,6 @@ void Protocol::recvPlayer(Socket &socket, int &gold, int &energy, int &status) {
     gold = recvTwoBytes(socket);
     energy = recvTwoBytes(socket);
     status = recvOneByte(socket);
-    std::cout << "Status: " << status << std::endl;
 }
 
 void Protocol::sendCountObject(Socket &socket, int &countObject) {

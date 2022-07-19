@@ -102,6 +102,9 @@ void Model::updateModel() {
             player.isWin();
             finished = true;
         }
+        if(player.isDefeated()) {
+            current_players = current_players - 1;
+        }
     }
 }
 

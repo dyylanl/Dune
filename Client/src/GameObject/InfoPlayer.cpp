@@ -31,9 +31,9 @@ void InfoPlayer::draw(SDL2pp::Renderer &renderer, TextureManager &textureManager
     textureManager.draw(renderer, ENERGY, SDL2pp::Point(1110, 30), SDL2pp::Point(20, 20));
     textureManager.draw(renderer, GOLD, SDL2pp::Point(1110, 60), SDL2pp::Point(16, 17));
     if(m_status == 1) {
-        textureManager.draw(renderer, VICTORY, SDL2pp::Point(0, 0), SDL2pp::Point(562, 218));
+        textureManager.draw(renderer, VICTORY, SDL2pp::Point(263, 251), SDL2pp::Point(562, 218));
     }
     if(m_status == 2) {
-        textureManager.draw(renderer, DEFEAT, SDL2pp::Point(0, 0), SDL2pp::Point(708, 352));
+        textureManager.draw(renderer, DEFEAT, SDL2pp::Point(190, 184), SDL2pp::Point(708, 352));
     }
 }
