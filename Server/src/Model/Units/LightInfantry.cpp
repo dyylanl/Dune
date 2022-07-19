@@ -8,9 +8,9 @@
 #include "../../../includes/Model/Weapons/Weapons.h"
 
 LightInfantry::LightInfantry(int x, int y, int player_id1) :
-        Unit(LIGHT_INFANTRY_KEY,x, y, GameConfiguration::getConfig().lightInfantryHitPoints,
-                      GameConfiguration::getConfig().lightInfantrySpeed,
-                      GameConfiguration::getConfig().lightInfantryCost, player_id1)
+        Unit(SONIC_TANK_KEY, x, y, GameConfiguration::getConfig().lightInfantryHitPoints,
+             GameConfiguration::getConfig().lightInfantrySpeed,
+             GameConfiguration::getConfig().lightInfantryCost, player_id1)
 {
 }
 

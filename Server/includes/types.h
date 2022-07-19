@@ -32,15 +32,13 @@
 #define ORDOS_HOUSE 3
 
 // ---------------- UNITS -------------- //
-#define LIGHT_INFANTRY_KEY 'l'
-#define HEAVY_INFANTRY_KEY 'h'
+#define SONIC_TANK_KEY 'l'
+#define DESVIATOR_KEY 'h'
 #define HARVESTER_KEY 'c'
 #define TRIKE_KEY 'a'
 #define RAIDER_KEY 'r'
 #define TANK_KEY 't'
 #define SARDAUKAR_KEY 's'
-#define SONIC_TANK_KEY 'n'
-#define DESVIATOR_KEY 'd'
 #define DEVASTATOR_KEY 'v'
 
 #endif //DUNE_TYPES_H

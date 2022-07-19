@@ -173,8 +173,8 @@ std::vector<BuildingDTO> Map::getBuildings() {
 
 Unit *Map::getUnit(char type, int x, int y, int player_id) {
     switch (type) {
-        case LIGHT_INFANTRY_KEY: return new LightInfantry(x,y,player_id);
-        case HEAVY_INFANTRY_KEY: return new HeavyInfantry(x,y,player_id);
+        case SONIC_TANK_KEY: return new LightInfantry(x, y, player_id);
+        case DESVIATOR_KEY: return new HeavyInfantry(x, y, player_id);
         case HARVESTER_KEY: return new Harvester(x,y,player_id);
         case TRIKE_KEY: return new Trike(x,y,player_id);
         case RAIDER_KEY: return new Raider(x,y,player_id);

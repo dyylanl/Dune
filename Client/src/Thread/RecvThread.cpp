@@ -91,29 +91,29 @@ void RecvThread::addVehicle(std::vector<std::unique_ptr<GameObject>> &gameObject
 
     m_protocol.recvObjectType(m_socket, objectType);
     switch (objectType) {
-        case TRIKE_KEY:
-            m_protocol.recvUnit(m_socket, id, player, selectStatus, posX, posY, posActX,
-                                posActY, life, initial_life, action);
-            gameObjects.push_back(std::unique_ptr<GameObject>(new TrikeCL(id, player, selectStatus, SDL2pp::Point(posX, posY),
-                                                                                    SDL2pp::Point(posActX, posActY), (int)life*100/initial_life, action)));
-            break;
         case SONIC_TANK_KEY:
             m_protocol.recvUnit(m_socket, id, player, selectStatus, posX, posY, posActX,
                                 posActY, life, initial_life, action);
             gameObjects.push_back(std::unique_ptr<GameObject>(new SonicTankCL(id, player, selectStatus, SDL2pp::Point(posX, posY),
-                                                                              SDL2pp::Point(posActX, posActY), (int)life*100/initial_life, action)));
-            break;
-        case RAIDER_KEY:
-            m_protocol.recvUnit(m_socket, id, player, selectStatus, posX, posY, posActX,
-                                posActY, life, initial_life, action);
-            gameObjects.push_back(std::unique_ptr<GameObject>(new TrikeCL(id, player, selectStatus, SDL2pp::Point(posX, posY),
                                                                           SDL2pp::Point(posActX, posActY), (int)life*100/initial_life, action)));
             break;
         case DESVIATOR_KEY:
             m_protocol.recvUnit(m_socket, id, player, selectStatus, posX, posY, posActX,
                                 posActY, life, initial_life, action);
             gameObjects.push_back(std::unique_ptr<GameObject>(new DeviatorCL(id, player, selectStatus, SDL2pp::Point(posX, posY),
-                                                 SDL2pp::Point(posActX, posActY), (int)life*100/initial_life, action)));
+                                                                              SDL2pp::Point(posActX, posActY), (int)life*100/initial_life, action)));
+            break;
+        case TRIKE_KEY:
+            m_protocol.recvUnit(m_socket, id, player, selectStatus, posX, posY, posActX,
+                                posActY, life, initial_life, action);
+            gameObjects.push_back(std::unique_ptr<GameObject>(new TrikeCL(id, player, selectStatus, SDL2pp::Point(posX, posY),
+                                                                                    SDL2pp::Point(posActX, posActY), (int)life*100/initial_life, action)));
+            break;
+        case RAIDER_KEY:
+            m_protocol.recvUnit(m_socket, id, player, selectStatus, posX, posY, posActX,
+                                posActY, life, initial_life, action);
+            gameObjects.push_back(std::unique_ptr<GameObject>(new TrikeCL(id, player, selectStatus, SDL2pp::Point(posX, posY),
+                                                                          SDL2pp::Point(posActX, posActY), (int)life*100/initial_life, action)));
             break;
         case TANK_KEY:
             m_protocol.recvUnit(m_socket, id, player, selectStatus, posX, posY, posActX,

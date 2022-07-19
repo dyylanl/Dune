@@ -184,8 +184,8 @@ void Client::initSDL(Socket &aSocket, Protocol &aProtocol,
     menu.push_back(std::unique_ptr<ButtonCL>(new ButtonWidtrapCL(1, 1, 10, false, false)));
 
     menu.push_back(std::unique_ptr<ButtonCL>(new ButtonHarvesterCL(1, 1, 10, false, false)));
-    //menu.push_back(std::unique_ptr<ButtonCL>(new ButtonSonicTankCL(1, 1, 10, false, false)));
-    //menu.push_back(std::unique_ptr<ButtonCL>(new ButtonDesviatorCL(1, 1, 10, false, false)));
+    menu.push_back(std::unique_ptr<ButtonCL>(new ButtonSonicTankCL(1, 1, 10, false, false)));
+    menu.push_back(std::unique_ptr<ButtonCL>(new ButtonDesviatorCL(1, 1, 10, false, false)));
     menu.push_back(std::unique_ptr<ButtonCL>(new ButtonRaiderCL(1, 1, 10, false, false)));
     //menu.push_back(std::unique_ptr<ButtonCL>(new ButtonDevastatorCL(1, 1, 10, false, false)));
     menu.push_back(std::unique_ptr<ButtonCL>(new ButtonTankCL(1, 1, 10, false, false)));
