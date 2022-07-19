@@ -234,7 +234,8 @@ void Client::loadTextures(TextureManager &textureManager, SDL2pp::Renderer &rend
     textureManager.load(LIFE, DATA_PATH "assets/Other/lp_small.png");
     textureManager.load(ENERGY, DATA_PATH "assets/Other/energy.png");
     textureManager.load(GOLD, DATA_PATH "assets/Other/gold.png");
-
+    textureManager.load(VICTORY, DATA_PATH "assets/Status/victory.png");
+    textureManager.load(DEFEAT, DATA_PATH "assets/Status/defeat.png");
 }
 
 Client::~Client() = default;

@@ -62,7 +62,7 @@ void RecvThread::run() {
                 m_protocol.recvPlayer(m_socket, gold, energy,status);
             }
 
-            gameObjects.push_back(std::unique_ptr<GameObject>(new InfoPlayer(gold, energy)));
+            gameObjects.push_back(std::unique_ptr<GameObject>(new InfoPlayer(gold, energy, status)));
 
             m_quene.push(gameObjects);
 

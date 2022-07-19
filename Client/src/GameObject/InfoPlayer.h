@@ -12,8 +12,9 @@ class InfoPlayer : public GameObject{
 private:
     int m_gold;
     int m_energy;
+    int m_status;
 public:
-    InfoPlayer(int gold, int energy);
+    InfoPlayer(int gold, int energy, int status);
 
     void processEvent(SDL_Event &event, BQueue<std::unique_ptr<CommandCL>> &queue, Camera &camera,
                       SoundManager &soundManager);

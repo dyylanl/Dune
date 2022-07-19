@@ -23,7 +23,7 @@ enum TextureType: char {TRIKE, SONIC_TANK, RAIDER, DESVIATOR, TANK, DEVASTATOR, 
         BLIGHT_INFANTRY, BHEAVY_INFANTRY, BFREMEN, BSARDAUKAR,
         BCONSTRUCTION_YARD, BLIGHT_FACTORY, BHEAVY_FACTORY, BWIND_TRAP, BREFINERY, BSILO, BBARRACK, BPALACE,
         MENU, ARENA, CIMA, DUNA, PRECIPICIO, ROCA,
-        LIFE, ENERGY, GOLD};
+        LIFE, ENERGY, GOLD, VICTORY, DEFEAT};
 
 class Client {
     Socket m_socket;
@@ -39,18 +39,6 @@ public:
     
     void iniciar();
 
-    void createGame(Protocol protocol, Socket &socket);
-    void joinGame(Protocol protocol, Socket &socket);
-    void listGames(Protocol protocol, Socket &socket);
-
-    void launch();
-
-    void crear_partida( std::string nombre_jugador,  std::string  nombre_partida);
-
-    int obtener_numero_casa(const std::string& casa);
-
-    void enviar_cant_jugadores(int cantidad);
-
     void enviar_accion(std::string comando);
 
     void enviar_nombre_jugador(std::string nombre_jugador);
@@ -62,10 +50,6 @@ public:
     std::vector<std::vector<std::string>> listar_mapas();
 
     void enviar_map_id(int map_id);
-
-    void enviar_nombre_y_comando(const std::string& nombre_jugador,std::string comando);
-
-    int recibir_respuesta();
 
     bool partida_iniciada();
 
