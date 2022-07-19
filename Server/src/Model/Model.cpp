@@ -98,9 +98,6 @@ void Model::updateModel() {
     map.updateMap();
     for (auto [id,player] : players) {
         player.cleanDeads();
-        if (player.isDefeated()) {
-            current_players -= 1;
-        }
         if (current_players == 1 && (!player.isDefeated())){
             player.status = 1;
             finished = true;

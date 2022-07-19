@@ -133,12 +133,14 @@ void Player::cleanDeads() {
 }
 
 bool Player::isDefeated(){
-    if (this->construction_center == nullptr || this->construction_center->getLife() <= 0) {
+    if (this->construction_center == nullptr) {
         status = 2;
         return true;
-    } else {
-        return false;
+    } if (this->construction_center->getLife() <= 0){
+        status = 2;
+        return true;
     }
+    return false;
 }
 
 Position Player::getBarrackPosition() {
