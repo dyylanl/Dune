@@ -170,7 +170,7 @@ Socket Socket::accept() const {
     if (peer_socket == -1) {
         throw ClosedSocketException("Error in function: Socket::accept()");
     }
-    return std::move(Socket(peer_socket));
+    return Socket(peer_socket);
 }
 
 size_t Socket::send(const char* source, const size_t len) const {
